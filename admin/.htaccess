@@ -1,0 +1,13 @@
+RewriteEngine On
+RewriteBase /admin/
+
+# Redirect root /admin to login.php but keep the URL clean
+RewriteRule ^$ login.php [L]
+
+# Block direct access to login.php if accessed directly
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /admin/login\.php\ HTTP/ [NC]
+RewriteRule ^login\.php$ /admin [R=302,L]
+
+# Redirect HTTP to HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
