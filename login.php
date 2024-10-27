@@ -17,6 +17,16 @@ header("Cross-Origin-Resource-Policy: same-site");
 header("Permissions-Policy: geolocation=(), camera=(), microphone=(), interest-cohort=()");
 header("X-DNS-Prefetch-Control: off");
 
+// Set cookie parameters
+session_set_cookie_params([
+    'lifetime' => 0,
+    'path' => '/',
+    'domain' => 'lawishomeresidences.com',  // Ilisi ini sa imo domain
+    'secure' => true,  // Set to true if using HTTPS
+    'httponly' => true,
+    'samesite' => 'Strict'  // or 'Lax', depende sa imo kinahanglan
+]);
+
 session_start();
 $error = false;
 $login_success = false;
