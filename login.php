@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
+// Set cookie parameters before starting the session
+session_set_cookie_params([
+    'lifetime' => 0,              // Session cookie
+    'path' => '/',                // Available across the entire domain
+    'domain' => 'lawishomeresidences.com', // Change this to your domain
+    'secure' => true,             // Set to true if using HTTPS
+    'httponly' => true,           // Prevent JavaScript access to the cookie
+    'samesite' => 'Strict'        // Use 'Lax' or 'Strict' based on your needs
+]);
+
 // This should be at the very top of your PHP file
 header("X-XSS-Protection: 1; mode=block");
 // Set the Content Security Policy
@@ -16,16 +26,6 @@ header("Cross-Origin-Embedder-Policy: require-corp");
 header("Cross-Origin-Resource-Policy: same-site");
 header("Permissions-Policy: geolocation=(), camera=(), microphone=(), interest-cohort=()");
 header("X-DNS-Prefetch-Control: off");
-
-// Set cookie parameters
-session_set_cookie_params([
-    'lifetime' => 0,
-    'path' => '../',
-    'domain' => 'lawishomeresidences.com',  // Ilisi ini sa imo domain
-    'secure' => true,  // Set to true if using HTTPS
-    'HttpOnly' => true,
-    'samesite' => 'Strict'  // or 'Lax', depende sa imo kinahanglan
-]);
 
 session_start();
 $error = false;
