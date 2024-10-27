@@ -842,7 +842,7 @@ header h2 {
                 </form>
                <!-- Forgot password link -->
                <div class="forgot-password" style="margin-top: 1.9px; margin-left: 82px;">
-                    <a href="forgot_password.php?pages=forgot_password">Forgot Password?</a>
+                    <a href="../admin/forgot_password">Forgot Password?</a>
                 </div>
 
                 <!-- For Switching Login Form-->
