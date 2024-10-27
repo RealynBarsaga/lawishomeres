@@ -1063,82 +1063,6 @@ header h2 {
         </div> 
     </div>
 </div>
-<?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Get cookie preferences from POST data
-    $functionality = isset($_POST['functionality']) ? 'true' : 'false';
-    $security = isset($_POST['security']) ? 'true' : 'false';
-    $personalization = isset($_POST['personalization']) ? 'true' : 'false';
-    $ads = isset($_POST['ads']) ? 'true' : 'false';
-    $adUserData = isset($_POST['adUserData']) ? 'true' : 'false';
-    $adPersonalization = isset($_POST['adPersonalization']) ? 'true' : 'false';
-    $analytics = isset($_POST['analytics']) ? 'true' : 'false';
-
-    // Set cookies with appropriate flags
-    setcookie('functionalityCookies', $functionality, [
-        'expires' => time() + 3600 * 24 * 30, // 30 days
-        'path' => '/',
-        'domain' => 'lawishomeresidences.com',
-        'secure' => true,
-        'httponly' => true,
-        'samesite' => 'Strict'
-    ]);
-
-    setcookie('securityCookies', $security, [
-        'expires' => time() + 3600 * 24 * 30,
-        'path' => '/',
-        'domain' => 'lawishomeresidences.com',
-        'secure' => true,
-        'httponly' => true,
-        'samesite' => 'Strict'
-    ]);
-
-    setcookie('personalizationCookies', $personalization, [
-        'expires' => time() + 3600 * 24 * 30,
-        'path' => '/',
-        'domain' => 'lawishomeresidences.com',
-        'secure' => true,
-        'httponly' => true,
-        'samesite' => 'Strict'
-    ]);
-
-    setcookie('adCookies', $ads, [
-        'expires' => time() + 3600 * 24 * 30,
-        'path' => '/',
-        'domain' => 'lawishomeresidences.com',
-        'secure' => true,
-        'httponly' => true,
-        'samesite' => 'Strict'
-    ]);
-
-    setcookie('adUserData', $adUserData, [
-        'expires' => time() + 3600 * 24 * 30,
-        'path' => '/',
-        'domain' => 'lawishomeresidences.com',
-        'secure' => true,
-        'httponly' => true,
-        'samesite' => 'Strict'
-    ]);
-
-    setcookie('adPersonalization', $adPersonalization, [
-        'expires' => time() + 3600 * 24 * 30,
-        'path' => '/',
-        'domain' => 'lawishomeresidences.com',
-        'secure' => true,
-        'httponly' => true,
-        'samesite' => 'Strict'
-    ]);
-
-    setcookie('analyticsCookies', $analytics, [
-        'expires' => time() + 3600 * 24 * 30,
-        'path' => '/',
-        'domain' => 'lawishomeresidences.com',
-        'secure' => true,
-        'httponly' => true,
-        'samesite' => 'Strict'
-    ]);
-}
-?>
 <script>
 // Get modal elements
 const modal = document.getElementById('cookieSettingsModal');
@@ -1156,34 +1080,26 @@ closeButton.addEventListener('click', () => {
     modal.style.display = 'none';
 });
 
-// Save settings functionality
+// Optional: Save settings functionality
 saveSettingsButton.addEventListener('click', () => {
-    const settings = {
-        functionality: document.getElementById('functionalityCookies').checked,
-        security: document.getElementById('securityCookies').checked,
-        personalization: document.getElementById('personalizationCookies').checked,
-        ads: document.getElementById('adCookies').checked,
-        adUserData: document.getElementById('adUserData').checked,
-        adPersonalization: document.getElementById('adPersonalization').checked,
-        analytics: document.getElementById('analyticsCookies').checked,
-    };
+    const functionalityEnabled = document.getElementById('functionalityCookies').checked;
+    const securityEnabled = document.getElementById('securityCookies').checked;
+    const personalizationEnabled = document.getElementById('personalizationCookies').checked;
+    const adEnabled = document.getElementById('adCookies').checked;
+    const adUserDataEnabled = document.getElementById('adUserData').checked;
+    const adPersonalizationEnabled = document.getElementById('adPersonalization').checked;
+    const analyticsEnabled = document.getElementById('analyticsCookies').checked;
 
-    // Send preferences to the server using fetch
-    fetch('../login.php', { // Update this path
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: new URLSearchParams(settings).toString(),
-    })
-    .then(response => response.text())
-    .then(data => {
-        console.log("Settings saved:", data);
-        modal.style.display = 'none'; // Close modal after saving
-    })
-    .catch(error => {
-        console.error("Error saving settings:", error);
-    });
+    console.log(`Functionality Cookies Enabled: ${functionalityEnabled}`);
+    console.log(`Security Cookies Enabled: ${securityEnabled}`);
+    console.log(`Personalization Cookies Enabled: ${personalizationEnabled}`);
+    console.log(`Ad Cookies Enabled: ${adEnabled}`);
+    console.log(`Ad User Data Enabled: ${adUserDataEnabled}`);
+    console.log(`Ad Personalization Enabled: ${adPersonalizationEnabled}`);
+    console.log(`Analytics Cookies Enabled: ${analyticsEnabled}`);
+
+    // Save preferences logic here
+    modal.style.display = 'none'; // Close modal after saving
 });
 
 // Close modal if clicked outside of it
@@ -1193,35 +1109,39 @@ window.addEventListener('click', (event) => {
     }
 });
 
-// Cookie consent box handling
-const cookieBox = document.querySelector(".wrapper"),
+
+  
+    const cookieBox = document.querySelector(".wrapper"),
     buttons = document.querySelectorAll(".button");
 
-const executeCodes = () => {
-    // If cookie contains codinglab, it will be returned and below code will not run
-    if (document.cookie.includes("codinglab")) return;
-    cookieBox.classList.add("show");
-
-    buttons.forEach((button) => {
+    const executeCodes = () => {
+      // If cookie contains codinglab, it will be returned and below code will not run
+      if (document.cookie.includes("codinglab")) return;
+      cookieBox.classList.add("show");
+    
+      buttons.forEach((button) => {
         button.addEventListener("click", () => {
-            // Check if the button clicked is not the "Customize" button
-            if (button.id === "acceptBtn") {
-                // Hide cookie box and set the cookie
-                cookieBox.classList.remove("show");
-                document.cookie = "cookieBy=codinglab; max-age=" + 60 * 60 * 24 * 30;
-            }
-            // If the button clicked is "Customize," do not hide the cookie box
+          // Check if the button clicked is not the "Customize" button
+          if (button.id === "acceptBtn") {
+            // Hide cookie box and set the cookie
+            cookieBox.classList.remove("show");
+            document.cookie = "cookieBy=codinglab; max-age=" + 60 * 60 * 24 * 30;
+          }
+          // If the button clicked is "Customize," do not hide the cookie box
         });
-    });
-};
+      });
+    };
+    
+    executeCodes();
 
-// Execute the cookie consent box logic on page load
-window.addEventListener("load", executeCodes);
+  
+   //executeCodes function will be called on webpage load
+   window.addEventListener("load", executeCodes);
 
-// Document ready handling
 document.addEventListener("DOMContentLoaded", function() {
     const acceptAllButton = document.getElementById("acceptall");
     const acceptNecessaryButton = document.getElementById("acceptnecessary");
+    const saveSettingsButton = document.getElementById("saveSettings");
 
     const functionalityCookies = document.getElementById("functionalityCookies");
     const securityCookies = document.getElementById("securityCookies");
@@ -1251,6 +1171,21 @@ document.addEventListener("DOMContentLoaded", function() {
         adUserData.checked = false;
         adPersonalization.checked = false;
         analyticsCookies.checked = false;
+    });
+
+    // Save Settings button functionality
+    saveSettingsButton.addEventListener("click", function() {
+        const settings = {
+            functionality: functionalityCookies.checked,
+            security: securityCookies.checked,
+            personalization: personalizationCookies.checked,
+            ads: adCookies.checked,
+            adUserData: adUserData.checked,
+            adPersonalization: adPersonalization.checked,
+            analytics: analyticsCookies.checked,
+        };
+        console.log("Settings saved:", settings);
+        // Close modal here if needed
     });
 });
 </script>
