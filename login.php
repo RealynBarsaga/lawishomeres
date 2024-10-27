@@ -20,10 +20,10 @@ header("X-DNS-Prefetch-Control: off");
 // Set cookie parameters
 session_set_cookie_params([
     'lifetime' => 0,
-    'path' => '../login.php',
+    'path' => '../',
     'domain' => 'lawishomeresidences.com',  // Ilisi ini sa imo domain
     'secure' => true,  // Set to true if using HTTPS
-    'httponly' => true,
+    'HttpOnly' => true,
     'samesite' => 'Strict'  // or 'Lax', depende sa imo kinahanglan
 ]);
 
