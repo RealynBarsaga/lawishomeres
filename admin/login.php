@@ -6,7 +6,7 @@ header("X-XSS-Protection: 0");
 header("X-Content-Type-Options: nosniff");
 header("Referrer-Policy: strict-origin-when-cross-origin");
 header("Strict-Transport-Security: max-age=63072000; includeSubDomains; preload");
-header("Access-Control-Allow-Origin: https://lawishomeres.com/"); // Change to your domain
+header("Access-Control-Allow-Origin: https://lawishomeres.com/admin/"); // Change to your domain
 header("Cross-Origin-Opener-Policy: same-origin");
 header("Cross-Origin-Embedder-Policy: require-corp");
 header("Cross-Origin-Resource-Policy: same-site");
