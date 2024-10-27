@@ -10,7 +10,7 @@ header("X-Frame-Options: DENY");
 header("X-Content-Type-Options: nosniff");
 header("Referrer-Policy: strict-origin-when-cross-origin");
 header("Strict-Transport-Security: max-age=63072000; includeSubDomains; preload");
-header("Access-Control-Allow-Origin: https://lawishomeresidences.com/"); // Change to your domain
+header("Access-Control-Allow-Origin: https://lawishomeresidences.com"); // Change to your domain
 header("Cross-Origin-Opener-Policy: same-origin");
 header("Cross-Origin-Embedder-Policy: require-corp");
 header("Cross-Origin-Resource-Policy: same-site");
