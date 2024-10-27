@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
+// This should be at the very top of your PHP file
+header("X-XSS-Protection: 1; mode=block");
+// Other headers can be added here as well
 header("X-Frame-Options: DENY");
-header("X-XSS-Protection: 0");
 header("X-Content-Type-Options: nosniff");
 header("Referrer-Policy: strict-origin-when-cross-origin");
 header("Strict-Transport-Security: max-age=63072000; includeSubDomains; preload");
-header("Access-Control-Allow-Origin: https://lawishomeres.com/admin/"); // Change to your domain
+header("Access-Control-Allow-Origin: https://lawishomeresidences.com/admin/"); // Change to your domain
 header("Cross-Origin-Opener-Policy: same-origin");
 header("Cross-Origin-Embedder-Policy: require-corp");
 header("Cross-Origin-Resource-Policy: same-site");
