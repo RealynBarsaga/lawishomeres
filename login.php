@@ -4,7 +4,7 @@
 // Set cookie parameters before starting the session
 session_set_cookie_params([
     'lifetime' => 0,              // Session cookie
-    'path' => '../',                // Available across the entire domain
+    'path' => '/',                // Available across the entire domain
     'domain' => 'lawishomeresidences.com', // Change this to your domain
     'secure' => true,             // Set to true if using HTTPS
     'httponly' => true,           // Prevent JavaScript access to the cookie
