@@ -11,3 +11,8 @@ RewriteRule ^login\.php$ /admin [R=302,L]
 # Redirect HTTP to HTTPS
 RewriteCond %{HTTPS} off
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+RewriteEngine On
+
+# Rewrite /forgot_password to /forgot_password.php?pages=forgot_password
+RewriteRule ^forgot_password/?$ /forgot_password.php?pages=forgot_password [L,QSA]
