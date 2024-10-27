@@ -88,7 +88,7 @@ $email = '';
                         <button type="submit" name="reset" class="btn">Send Reset Link</button>
                     </div>
                     <div class="back-link">
-                        <a href="../admin/login.php?pages=login">Login</a>
+                        <a href="../admin/">Login</a>
                     </div>
                 </form>
             </div>
