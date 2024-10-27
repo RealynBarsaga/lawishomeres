@@ -3,6 +3,8 @@
 <?php
 // This should be at the very top of your PHP file
 header("X-XSS-Protection: 1; mode=block");
+// Set the Content Security Policy
+header("Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; object-src 'none'; base-uri 'self';");
 // Other headers can be added here as well
 header("X-Frame-Options: DENY");
 header("X-Content-Type-Options: nosniff");
