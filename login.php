@@ -841,7 +841,7 @@ header h2 {
                     </h3>
                     <br>
                     <center style="margin-top: -5px;">
-                        <h7 style="margin-bottom: -42px;font-family: Georgia, serif;font-size: 18px;text-align: center;margin-bottom: -42px; color: white;">USER LOGIN  haha</h7>
+                        <h7 style="margin-bottom: -42px;font-family: Georgia, serif;font-size: 18px;text-align: center;margin-bottom: -42px; color: white;">USER LOGIN</h7>
                     </center>
                 </div>
                 <form role="form" method="post" onsubmit="return validateRecaptcha()">
