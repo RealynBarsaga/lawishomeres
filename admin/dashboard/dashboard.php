@@ -3,62 +3,72 @@
 <?php
     session_start();
     if (!isset($_SESSION['userid'])) {
-        header('Location: ../../admin/login.php');
+        header('Location: ../admin/login.php');
         exit; // Ensure no further execution after redirect
     }
-    include('../../admin/head_css.php');
-    include("../../admin/connection.php");
+    include('../admin/head_css.php'); 
 ?>
 <head>
-<!-- Include Chart.js Library -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <style>
-    .info-box {
-        display: block;
-        min-height: 125px;
-        background: #fff;
-        width: 92%;
-        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-        border-radius: 2px;
-        margin-bottom: 15px;
-    }
-    .info-box-text {
-        text-transform: none;
-        font-weight: 100;
-    }
-    .chart-container {
-        width: 80%;
-        margin: auto;
-    }
+.info-box {
+    display: block;
+    min-height: 125px;
+    background: #fff;
+    width: 92%;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+    margin-bottom: 15px;
+}
+.info-box-text {
+    text-transform: none;
+    font-weight: 100;
+}
+.chart-container {
+    margin-left: 400px;
+    margin-top: 100px; /* Adjust as needed */
+}
+.chart-containers {
+    margin-left: 403px;
+    margin-top: -322px;
+    display: flex;
+    align-items: center;
+    width: 28%;
+    height: 300px;
+    background: rgb(255, 255, 255);
+    box-sizing: border-box;
+}
+.canvas#myPieChart {
+    display: block;
+    box-sizing: border-box;
+    height: 307px;
+    width: 380px;
+}
+.chart-contain {
+    margin-left: 715px;
+    margin-top: -322px;
+    display: flex;
+    align-items: center;
+    width: 28%;
+    height: 300px;
+    background: rgb(255, 255, 255);
+    box-sizing: border-box;
+}
+.canvas#PieChart {
+    display: block;
+    box-sizing: border-box;
+    height: 307px;
+    width: 380px;
+}
 </style>
 <body class="skin-black">
-    <?php 
-      include('../../admin/header.php'); 
+    <?php
+    include "../admin/connection.php";
+    include('../admin/header.php');
     ?>
-
-    <style>
-        .info-box {
-            display: block;
-            min-height: 125px;
-            background: #fff;
-            width: 92%;
-            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-            border-radius: 2px;
-            margin-bottom: 15px;
-        }
-        .info-box-text {
-            text-transform: none;
-            font-weight: 100;
-        }
-        .chart-container {
-            width: 80%;
-            margin: auto;
-        }
-    </style>
-
     <div class="wrapper row-offcanvas row-offcanvas-left">
-    <?php include('../../admin/sidebar-left.php'); ?>
+        <?php include('../admin/sidebar-left.php'); ?>
 
         <aside class="right-side">
             <section class="content-header">
@@ -91,11 +101,12 @@
                                     <?= $num_rows ?>
                                     <span class="info-box-text"><?= $box['label'] ?></span>
                                 </span>
-                                <div class="info-box-footer" style="margin-top: 35px; text-align: center; background-color: rgba(0, 0, 0, 0.1); padding: 5px; pointer; z-index: 999; cursor: pointer;">
+                                <div class="info-box-footer" style="margin-top: 35px; text-align: center; background-color: rgba(0, 0, 0, 0.1); padding: 5px; cursor: pointer; z-index: 999; position: relative;">
                                     <a href="<?= $box['link'] ?>" style="color: #fff; text-decoration: none; font-weight: 100; font-family: 'Source Sans Pro', sans-serif;">
                                         More Info <i class="fa fa-arrow-circle-right"></i>
                                     </a>
                                 </div>
+
                             </div>
                         </div>
                         <?php } ?>
@@ -114,7 +125,12 @@
                     <div class="chart-contain" style="box-shadow: 2px 5px 9px #888888;">
                         <canvas id="PieChart"></canvas>
                     </div>
-                    <?php
+                </div><!-- /.row -->
+            </section><!-- /.content -->
+        </aside><!-- /.right-side -->
+    </div><!-- ./wrapper -->
+    
+    <?php
     // Query to count data for each barangay
     $barangays = ['Tabagak', 'Bunakan', 'Kodia', 'Talangnan', 'Poblacion', 'Maalat', 'Pili', 'Kaongkod', 'Mancilang', 'Kangwayan', 'Tugas', 'Malbago', 'Tarong', 'San Agustin'];
     $counts = [];
@@ -286,10 +302,6 @@ const PieChart = new Chart(pieCtxFemale, {
     }
 });
 </script>
-                </div><!-- /.row -->
-            </section><!-- /.content -->
-        </aside><!-- /.right-side -->
-    </div><!-- ./wrapper -->    
-    <?php include "../../admin/footer.php"; ?>
+<?php include "../admin/footer.php"; ?>
 </body>
 </html>
