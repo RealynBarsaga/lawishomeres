@@ -4,7 +4,7 @@
     <?php
     session_start();
     if (!isset($_SESSION['userid'])) {
-        header('Location: ../../admin/login.php');
+        header('Location: ../');
         exit; // Ensure no further execution after redirect
     }
     include('../../admin/head_css.php'); // Removed ob_start() since it's not needed here
