@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-// Set cookie parameters before starting the session
-session_set_cookie_params([
-    'lifetime' => 0,              // Session cookie
-    'path' => '/',                // Available across the entire domain
-    'domain' => 'lawishomeresidences.com', // Change this to your domain
-    'secure' => true,             // Set to true if using HTTPS
-    'httponly' => true,           // Prevent JavaScript access to the cookie
-    'samesite' => 'Strict'        // Use 'Lax' or 'Strict' based on your needs
-]);
+if (isset($_POST['acceptBtn'])) {
+    // Set the cookie with HttpOnly and Secure flags
+    setcookie('cookieBy', 'codinglab', [
+        'expires' => time() + (60 * 60 * 24 * 30), // 30 days
+        'path' => '/',
+        'secure' => true, // Only sent over HTTPS
+        'httponly' => true, // Accessible only through the HTTP protocol
+        'samesite' => 'Lax' // Helps prevent CSRF attacks
+    ]);
+    // Optionally, you can redirect to the same page to avoid form resubmission
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit();
+}
 
 // This should be at the very top of your PHP file
 header("X-XSS-Protection: 1; mode=block");
