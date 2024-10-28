@@ -50,7 +50,7 @@ include('../../admin/head_css.php');
 <body class="skin-black">
     <?php
     include "admin/connection.php";
-    include('admin/header.php');
+    include('../../admin/header.php');
     ?>
     <div class="wrapper row-offcanvas row-offcanvas-left">
         <?php include('admin/sidebar-left.php'); ?>
