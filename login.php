@@ -1,19 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-if (isset($_POST['acceptBtn'])) {
-    // Set the cookie with HttpOnly and Secure flags
-    setcookie('cookieBy', 'codinglab', [
-        'expires' => time() + (60 * 60 * 24 * 30), // 30 days
-        'path' => '/',
-        'secure' => true, // Only sent over HTTPS
-        'httponly' => true, // Accessible only through the HTTP protocol
-        'samesite' => 'Lax' // Helps prevent CSRF attacks
-    ]);
-    // Optionally, you can redirect to the same page to avoid form resubmission
-    header("Location: " . $_SERVER['PHP_SELF']);
-    exit();
-}
+// Set cookie parameters before starting the session
+session_set_cookie_params([
+    'lifetime' => 0,              // Session cookie
+    'path' => '/',                // Available across the entire domain
+    'domain' => 'lawishomeresidences.com', // Change this to your domain
+    'secure' => true,             // Set to true if using HTTPS
+    'httponly' => true,           // Prevent JavaScript access to the cookie
+    'samesite' => 'Strict'        // Use 'Lax' or 'Strict' based on your needs
+]);
 
 // This should be at the very top of your PHP file
 header("X-XSS-Protection: 1; mode=block");
@@ -1077,6 +1073,21 @@ header h2 {
         </div> 
     </div>
 </div>
+<?php
+if (isset($_POST['acceptBtn'])) {
+    // Set the cookie with HttpOnly and Secure flags
+    setcookie('cookieBy', 'codinglab', [
+        'expires' => time() + (60 * 60 * 24 * 30), // 30 days
+        'path' => '/',
+        'secure' => true, // Only sent over HTTPS
+        'httponly' => true, // Accessible only through the HTTP protocol
+        'samesite' => 'Lax' // Helps prevent CSRF attacks
+    ]);
+    // Optionally, you can redirect to the same page to avoid form resubmission
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit();
+}
+?>
 <script>
     // Get modal elements
     const modal = document.getElementById('cookieSettingsModal');
@@ -1125,7 +1136,6 @@ header h2 {
 
 
   
-    
     const cookieBox = document.querySelector(".wrapper"),
     buttons = document.querySelectorAll(".button");
 
@@ -1136,21 +1146,23 @@ header h2 {
     
       buttons.forEach((button) => {
         button.addEventListener("click", () => {
-          // Check if the button clicked is not the "Customize" button
           if (button.id === "acceptBtn") {
-            // Hide cookie box and set the cookie
+            // Hide cookie box and send a request to set the cookie
             cookieBox.classList.remove("show");
-            document.cookie = "cookieBy=codinglab; max-age=" + 60 * 60 * 24 * 30;
+    
+            // You can use fetch or XMLHttpRequest to send the request
+            fetch('login.php', {
+              method: 'POST',
+              body: new URLSearchParams('acceptBtn=true'),
+              credentials: 'same-origin'
+            });
           }
-          // If the button clicked is "Customize," do not hide the cookie box
         });
       });
     };
     
     executeCodes();
 
-
-  
     //executeCodes function will be called on webpage load
     window.addEventListener("load", executeCodes);
 
