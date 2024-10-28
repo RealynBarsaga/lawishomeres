@@ -34,7 +34,6 @@
 </style>
 <body class="skin-black">
     <?php 
-      include "../connection.php"; 
       include('../header.php'); 
     ?>
 
