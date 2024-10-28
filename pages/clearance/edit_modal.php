@@ -46,25 +46,14 @@
                     <input name="txt_edit_purok" class="form-control input-sm input-size" type="text" value="'.$row['purok'].'"/>
                 </div>
                 <div class="form-group">
-                    <label class="control-label">Birth Place:</label>
-                    <input name="txt_edit_bplace" class="form-control input-sm input-size" type="text" value="'.$row['bplace'].'"/>
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Civil Status:</label>
-                    <select name="txt_edit_cstatus" class="form-control input-sm">
-                        <option value="Single" '.($row['civilstatus'] == 'Single' ? 'selected' : '').'>Single</option>
-                        <option value="Married" '.($row['civilstatus'] == 'Married' ? 'selected' : '').'>Married</option>
-                        <option value="Widowed" '.($row['civilstatus'] == 'Widowed' ? 'selected' : '').'>Widowed</option>
-                    </select>
-                </div>
-                <div class="form-group">
                     <label>OR Number : </label>
                     <input name="txt_edit_ornum" class="form-control input-sm" type="text" value="'.$row['orNo'].'" />
                 </div>
                 <div class="form-group">
                     <label>Amount : </label>
                     <input name="txt_edit_amount" class="form-control input-sm" type="text" value="'.$row['samount'].'" />
-                </div
+                </div>
+
             </div>
         </div>
         </div>
