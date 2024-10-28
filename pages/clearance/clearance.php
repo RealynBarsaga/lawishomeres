@@ -7,7 +7,7 @@
         header('Location: ../../login.php');
         exit; // Ensure no further execution after redirect
     }
-    include('../head_css.php'); // Removed ob_start() since it's not needed here
+    include('../head_css.php'); 
     ?>
     <style>
         .nav-tabs li a {
@@ -16,27 +16,21 @@
     </style>
 </head>
 <body class="skin-black">
-    <!-- header logo: style can be found in header.less -->
     <?php
     include "../connection.php";
     include('../header.php');
     ?>
 
     <div class="wrapper row-offcanvas row-offcanvas-left">
-        <!-- Left side column. contains the logo and sidebar -->
         <?php include('../sidebar-left.php'); ?>
 
-        <!-- Right side column. Contains the navbar and content of the page -->
         <aside class="right-side">
-            <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>Barangay Clearance</h1>
             </section>
 
-            <!-- Main content -->
             <section class="content">
                 <div class="row">
-                    <!-- left column -->
                     <div class="box">
                         <div class="box-header">
                             <div style="padding:10px;">
@@ -66,15 +60,14 @@
                                                     <th>Purpose</th>
                                                     <th>OR Number</th>
                                                     <th>Amount</th>
-                                                    <th style="width: 15% !important;">Option</th>
+                                                    <th style="width: 15%;">Option</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php
-                                                    // Assuming you're storing the logged-in barangay in a session
-                                                    $off_barangay = $_SESSION['barangay']; // e.g., "Tabagak", "Bunakan", etc.
-                                                    
-                                                    // Map barangays to their corresponding clearance form files
+                                                    $off_barangay = $_SESSION['barangay']; 
+
+                                                        // Map barangays to their corresponding clearance form files
                                                     $barangay_forms = [
                                                         "Tabagak" => "tabagak_clearance_form.php",
                                                         "Bunakan" => "bunakan_clearance_form.php",
@@ -91,8 +84,7 @@
                                                        /*  "Tarong" => "tarong_clearance_form.php", */
                                                         /* "San Agustin" => "san_agustin_clearance_form.php" */
                                                     ];
-                                                    
-                                                    // Fetch approved clearances from database
+
                                                     $squery = mysqli_query($con, " 
                                                         SELECT
                                                             p.name, 
@@ -102,6 +94,7 @@
                                                             p.samount,
                                                             p.id
                                                         FROM tblclearance AS p WHERE p.barangay = '$off_barangay'");
+                                                    
                                                     while ($row = mysqli_fetch_array($squery)) {
                                                         echo '
                                                             <tr>
@@ -115,7 +108,6 @@
                                                                     <button class="btn btn-primary btn-sm" data-target="#editModal' . htmlspecialchars($row['id']) . '" data-toggle="modal">
                                                                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
                                                                     </button>
-                                                                    <!-- Link to generate clearance form -->
                                                                     <a style="width: 80px;" href="' . $barangay_forms[$off_barangay] . '?resident=' . urlencode($row['name']) .'&purpose=' . urlencode($row['purpose']) .'&clearance=' . urlencode($row['clearanceNo']) .'&val=' . urlencode(base64_encode($row['clearanceNo'] . '|' . $row['name'])) . '" class="btn btn-primary btn-sm">
                                                                         <i class="fa fa-print" aria-hidden="true"></i> Print
                                                                     </a>
