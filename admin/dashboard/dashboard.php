@@ -1,15 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-session_start();
-if (!isset($_SESSION['userid'])) {
-    header('Location: ../../admin/login.php');
-    exit; // Ensure no further execution after redirect
-}
-include('../../admin/head_css.php');
+    session_start();
+    if (!isset($_SESSION['userid'])) {
+        header('Location: ../admin/login.php');
+        exit; // Ensure no further execution after redirect
+    }
+    include('../admin/head_css.php');
 ?>
 <head>
+    <!-- Include Chart.js Library -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="skin-black">
+    <?php
+    include "../admin/connection.php";
+    include('../admin/header.php');
+    ?>
+
     <style>
         .info-box {
             display: block;
@@ -24,32 +32,14 @@ include('../../admin/head_css.php');
             text-transform: none;
             font-weight: 100;
         }
-        .chart-container, .chart-containers, .chart-contain {
-            margin: 100px 0 0 22px;
-            display: flex;
-            align-items: center;
-            width: 28%;
-            height: 300px;
-            background: rgb(255, 255, 255);
-            box-sizing: border-box;
-            box-shadow: 2px 5px 9px #888888;
-        }
-        .canvas {
-            display: block;
-            box-sizing: border-box;
-            height: 307px;
-            width: 380px;
+        .chart-container {
+            width: 80%;
+            margin: auto;
         }
     </style>
-</head>
-<body class="skin-black">
-    <?php  
-    include "../../admin/connection.php";
-    include('../../admin/header.php'); 
-    ?>
 
     <div class="wrapper row-offcanvas row-offcanvas-left">
-        <?php include('../../admin/sidebar-left.php'); ?>
+    <?php include('../admin/sidebar-left.php'); ?>
 
         <aside class="right-side">
             <section class="content-header">
@@ -74,15 +64,15 @@ include('../../admin/head_css.php');
                         ?>
                         <div class="col-md-3 col-sm-6 col-xs-12">
                             <br>
-                            <div class="info-box" style="background-color: <?= $box['color'] ?>;">
-                                <span style="position: absolute; top: 47%; left: 77%; transform: translate(-50%, -50%); font-size: 40px; color: #eeeeeeba; z-index: 1;">
+                            <div class="info-box" style="margin-left: 9px; background-color: <?= $box['color'] ?> !important;">
+                                <span style="background: transparent; position: absolute; top: 47%; left: 77%; transform: translate(-50%, -50%); font-size: 40px; color: #eeeeeeba; z-index: 1;">
                                     <i class="fa <?= $box['icon'] ?>"></i>
                                 </span>
                                 <span class="info-box-number" style="font-size: 30px; color: #fff; margin-left: 15px; font-family: 'Source Sans Pro', sans-serif; font-weight: bold;">
                                     <?= $num_rows ?>
                                     <span class="info-box-text"><?= $box['label'] ?></span>
                                 </span>
-                                <div class="info-box-footer" style="margin-top: 35px; text-align: center; background-color: rgba(0, 0, 0, 0.1); padding: 5px; cursor: pointer;">
+                                <div class="info-box-footer" style="margin-top: 35px; text-align: center; background-color: rgba(0, 0, 0, 0.1); padding: 5px; pointer; z-index: 999; cursor: pointer;">
                                     <a href="<?= $box['link'] ?>" style="color: #fff; text-decoration: none; font-weight: 100; font-family: 'Source Sans Pro', sans-serif;">
                                         More Info <i class="fa fa-arrow-circle-right"></i>
                                     </a>
@@ -91,51 +81,45 @@ include('../../admin/head_css.php');
                         </div>
                         <?php } ?>
                     </div><!-- /.box -->
-
                     <!-- Bar Chart -->
-                    <div class="chart-container">
-                        <canvas id="myBarChart"></canvas>
+                    <div class="chart-container" style="margin-left: 22px;">
+                        <canvas id="myBarChart" width="100" height="30" style="max-width: 35%;background: #fff; box-shadow: 2px 5px 9px #888888;"></canvas>
                     </div>
 
-                    <!-- Pie Charts -->
-                    <div class="chart-containers">
+                    <!-- Pie Chart -->
+                    <div class="chart-containers" style="box-shadow: 2px 5px 9px #888888;">
                         <canvas id="myPieChart"></canvas>
                     </div>
-                    <div class="chart-contain">
+
+                    <!-- Pie Chart -->
+                    <div class="chart-contain" style="box-shadow: 2px 5px 9px #888888;">
                         <canvas id="PieChart"></canvas>
                     </div>
-
                     <?php
-                    // Query to count data for each barangay
-                    $barangays = ['Tabagak', 'Bunakan', 'Kodia', 'Talangnan', 'Poblacion', 'Maalat', 'Pili', 'Kaongkod', 'Mancilang', 'Kangwayan', 'Tugas', 'Malbago', 'Tarong', 'San Agustin'];
-                    $counts = [];
-                    $maleCounts = [];
-                    $femaleCounts = [];
-
-                    foreach ($barangays as $barangay) {
-                        $q = mysqli_query($con, "SELECT * FROM tbltabagak WHERE barangay = '$barangay'");
-                        $counts[] = mysqli_num_rows($q);
-
-                        // Count males and females
-                        $q_male = mysqli_query($con, "SELECT * FROM tbltabagak WHERE barangay = '$barangay' AND gender = 'Male'");
-                        $maleCounts[] = mysqli_num_rows($q_male);                    
-
-                        $q_female = mysqli_query($con, "SELECT * FROM tbltabagak WHERE barangay = '$barangay' AND gender = 'Female'");
-                        $femaleCounts[] = mysqli_num_rows($q_female);
-                    }
+                        // Query to count data for each barangay
+                        $barangays = ['Tabagak', 'Bunakan', 'Kodia', 'Talangnan', 'Poblacion', 'Maalat', 'Pili', 'Kaongkod', 'Mancilang', 'Kangwayan', 'Tugas', 'Malbago', 'Tarong', 'San Agustin'];
+                        $counts = [];
+                    
+                        foreach ($barangays as $barangay) {
+                            $q = mysqli_query($con, "SELECT * FROM tbltabagak WHERE barangay = '$barangay'");
+                            $counts[] = mysqli_num_rows($q);
+                        }
                     ?>
-
                     <script>
                         const barCtx = document.getElementById('myBarChart').getContext('2d');
-                        new Chart(barCtx, {
+                        const myBarChart = new Chart(barCtx, {
                             type: 'bar',
                             data: {
                                 labels: <?= json_encode($barangays) ?>,
                                 datasets: [{
                                     label: 'Count',
                                     data: <?= json_encode($counts) ?>,
-                                    backgroundColor: '#4CB5F5',
-                                    borderColor: '#4CB5F5',
+                                    backgroundColor: [
+                                        '#4CB5F5',
+                                    ],
+                                    borderColor: [
+                                        '#4CB5F5',
+                                    ],
                                     borderWidth: 1
                                 }]
                             },
@@ -145,29 +129,53 @@ include('../../admin/head_css.php');
                                     title: {
                                         display: true,
                                         text: 'Household Overview',
-                                        font: { size: 18 }
+                                        font: {
+                                            size: 18
+                                        }
                                     }
                                 },
                                 scales: {
                                     y: {
                                         beginAtZero: true,
-                                        ticks: { stepSize: 1 }
+                                        ticks: {
+                                            stepSize: 1
+                                        }
                                     }
                                 }
                             }
                         });
-
-                        // Male Distribution Pie Chart
+                    </script>
+                    <?php
+                        // Count males and females per barangay
+                        $barangays = ['Tabagak', 'Bunakan', 'Kodia', 'Talangnan', 'Poblacion', 'Maalat', 'Pili', 'Kaongkod', 'Mancilang', 'Kangwayan', 'Tugas', 'Malbago', 'Tarong', 'San Agustin'];
+                        $maleCounts = [];
+                        $femaleCounts = [];
+                        
+                        // Assuming you also want to count females
+                        foreach ($barangays as $barangay) {
+                            // Count males
+                            $q_male = mysqli_query($con, "SELECT * FROM tbltabagak WHERE barangay = '$barangay' AND gender = 'Male'");
+                            $maleCounts[] = mysqli_num_rows($q_male);
+                        
+                            // Count females
+                            $q_female = mysqli_query($con, "SELECT * FROM tbltabagak WHERE barangay = '$barangay' AND gender = 'Female'");
+                            $femaleCounts[] = mysqli_num_rows($q_female);
+                        }
+                    ?>  
+                    <script>
+                        // Pie chart for Male Distribution
                         const pieCtxMale = document.getElementById('myPieChart').getContext('2d');
-                        new Chart(pieCtxMale, {
+                        const myPieChart = new Chart(pieCtxMale, {
                             type: 'pie',
                             data: {
                                 labels: <?= json_encode($barangays) ?>,
-                                datasets: [{
-                                    label: 'Male',
-                                    data: <?= json_encode($maleCounts) ?>,
-                                    backgroundColor: '#36A2EB',
-                                }]
+                                datasets: [
+                                    {
+                                        label: 'Male',
+                                        data: <?= json_encode($maleCounts) ?>, // Male counts
+                                        backgroundColor: '#36A2EB',
+                                    }
+                                ]
                             },
                             options: {
                                 responsive: true,
@@ -175,8 +183,12 @@ include('../../admin/head_css.php');
                                     title: {
                                         display: true,
                                         text: 'Male Distribution by Barangay',
-                                        font: { size: 17 },
-                                        padding: { top: 2 }
+                                        font: {
+                                            size: 17
+                                        },
+                                        padding: {
+                                           top: 2 // Adjust top padding as needed
+                                        }
                                     },
                                     legend: {
                                         position: 'left',
@@ -184,24 +196,37 @@ include('../../admin/head_css.php');
                                             boxWidth: 15,
                                             usePointStyle: true,
                                             padding: 6,
-                                            font: { size: 10 }
+                                            font: {
+                                                size: 10
+                                            }
                                         }
+                                    }
+                                },
+                                onClick: (evt) => {
+                                    const activePoints = myPieChart.getElementsAtEventForMode(evt, 'nearest', { intersect: true }, false);
+                                    if (activePoints.length) {
+                                        const chartIndex = activePoints[0].index;
+                                        const barangay = <?= json_encode($barangays) ?>[chartIndex];
+                                        const maleCount = <?= json_encode($maleCounts) ?>[chartIndex];
+                                        // Optionally, handle click event here (e.g., display alert)
                                     }
                                 }
                             }
                         });
-
-                        // Female Distribution Pie Chart
+                        
+                        // Pie chart for Female Distribution
                         const pieCtxFemale = document.getElementById('PieChart').getContext('2d');
-                        new Chart(pieCtxFemale, {
+                        const PieChart = new Chart(pieCtxFemale, {
                             type: 'pie',
                             data: {
                                 labels: <?= json_encode($barangays) ?>,
-                                datasets: [{
-                                    label: 'Female',
-                                    data: <?= json_encode($femaleCounts) ?>,
-                                    backgroundColor: '#FF6384',
-                                }]
+                                datasets: [
+                                    {
+                                        label: 'Female',
+                                        data: <?= json_encode($femaleCounts) ?>, // Female counts
+                                        backgroundColor: '#FF6384',
+                                    }
+                                ]
                             },
                             options: {
                                 responsive: true,
@@ -209,8 +234,12 @@ include('../../admin/head_css.php');
                                     title: {
                                         display: true,
                                         text: 'Female Distribution by Barangay',
-                                        font: { size: 17 },
-                                        padding: { top: 2 }
+                                        font: {
+                                            size: 17
+                                        },
+                                        padding: {
+                                           top: 2 // Adjust top padding as needed
+                                        }
                                     },
                                     legend: {
                                         position: 'left',
@@ -218,8 +247,19 @@ include('../../admin/head_css.php');
                                             boxWidth: 15,
                                             usePointStyle: true,
                                             padding: 6,
-                                            font: { size: 10 }
+                                            font: {
+                                                size: 10
+                                            }
                                         }
+                                    }
+                                },
+                                onClick: (evt) => {
+                                    const activePoints = PieChart.getElementsAtEventForMode(evt, 'nearest', { intersect: true }, false);
+                                    if (activePoints.length) {
+                                        const chartIndex = activePoints[0].index;
+                                        const barangay = <?= json_encode($barangays) ?>[chartIndex];
+                                        const femaleCount = <?= json_encode($femaleCounts) ?>[chartIndex];
+                                        // Optionally, handle click event here (e.g., display alert)
                                     }
                                 }
                             }
@@ -228,16 +268,7 @@ include('../../admin/head_css.php');
                 </div><!-- /.row -->
             </section><!-- /.content -->
         </aside><!-- /.right-side -->
-    </div><!-- ./wrapper -->
-
-    <?php include "../../admin/footer.php"; ?>
-    <script type="text/javascript">
-        $(function() {
-            $("#table").dataTable({
-                "aoColumnDefs": [{ "bSortable": false, "aTargets": [0, 5] }],
-                "aaSorting": []
-            });
-        });
-    </script>
+    </div><!-- ./wrapper -->    
+    <?php include "../admin/footer.php"; ?>
 </body>
 </html>
