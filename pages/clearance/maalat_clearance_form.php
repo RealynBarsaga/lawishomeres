@@ -38,7 +38,7 @@
     <script>
         window.print();
         onafterprint = () => {
-            window.location.href = "brgyclearance.php?page=brgyclearance";
+            window.location.href = "clearance.php?page=clearance";
         }
     </script>
 </head>
@@ -79,7 +79,7 @@
             <hr style="border: 1px solid black; width: 264%; margin: 1px auto; position: relative; right: 210px;" />
         </div>
         <center>
-            <p style="margin-left: 65px;">OFFICE OF THE BARANGAY CAPTAIN<p>
+            <p style="margin-left: 65px;">OFFICE OF THE PUNONG BARANGAY<p>
         </center>
     </div>
     <div class="col-xs-4 col-sm-3 col-md-2" style="background: white; margin-left: -82px; position: relative; left: 85px; padding: 10px;">
@@ -96,31 +96,35 @@
                 while($row=mysqli_fetch_array($qry)){
                     if($row['sPosition'] == "Captain"){
                         echo '
-                            <p>
-                            <b style="font-size:10.5px; color: dodgerblue !important;">HON. '.strtoupper($row['completeName']).'</b><br>
+                            <p style="text-align: justify;">
+                            <b style="font-size:10.5px; color: dodgerblue !important;">HON.'.strtoupper($row['completeName']).'</b><br>
                             <span style="font-size:12px;">Punong Barangay</span>
                             </p><br>
                         ';
                     }elseif($row['sPosition'] == "Kagawad"){
                         echo '
-                        <b style="font-size:10.5px;  color: dodgerblue !important;">HON. '.strtoupper($row['completeName']).'</b><br>
+                        <p style="text-align: justify;">
+                        <b style="font-size:10.5px;  color: dodgerblue !important;">HON.'.strtoupper($row['completeName']).'</b><br>
                         <span style="font-size:12px;">Barangay Kagawad</span><br>
-                        ';
+                        </p>';
                     }elseif($row['sPosition'] == "SK Chairman/Chairperson"){
                         echo '
-                        <b style="font-size:10.5px; color: dodgerblue !important;">HON. '.strtoupper($row['completeName']).'</b><br>
-                        <span style="font-size:12px;">SK Chairman</span><br>
-                        ';
-                    }elseif($row['sPosition'] == "Secretary"){
+                        <div style="text-align: justify;"><br>
+                            <span style="font-size:12px;">SK Chairperson:</span><br>
+                            <b style="font-size:10.5px; color: dodgerblue !important;">'.strtoupper($row['completeName']).'</b><br>
+                        </div>';
+                    }elseif($row['sPosition'] == "Secretary") {
                         echo '
-                        <b style="font-size:10.5px; color: dodgerblue !important;">'.strtoupper($row['completeName']).'</b><br>
-                        <span style="font-size:12px;">Barangay Secretary</span><br>
-                        ';
-                    }elseif($row['sPosition'] == "Treasurer"){
+                        <div style="text-align: justify;"><br>
+                            <span style="font-size:12px;">Barangay Secretary:</span><br>
+                            <b style="font-size:10.5px; color: dodgerblue !important;">'.strtoupper($row['completeName']).'</b><br>
+                        </div>';
+                    } elseif($row['sPosition'] == "Treasurer") {
                         echo '
-                        <b style="font-size:10.5px; color: dodgerblue !important;">'.strtoupper($row['completeName']).'</b><br>
-                        <span style="font-size:12px;">Barangay Treasurer</span><br>
-                        ';
+                        <div style="text-align: justify;">
+                            <span style="font-size:12px;">Barangay Treasurer:</span><br>
+                            <b style="font-size:10.5px; color: dodgerblue !important;">'.strtoupper($row['completeName']).'</b>
+                        </div><br>';
                     }
                 }
             ?>
@@ -129,13 +133,12 @@
     <!-- Main Content -->
     <div class="main-content col-xs-12 col-md-12">
         <br><br>
-        <p class="text-center" style="font-size: 20px; font-weight: bold; margin-left: 100px;margin-top:-665px;">
+        <p class="text-center" style="font-size: 20px; font-weight: bold; margin-left: 100px;margin-top:-750px;">
             <b style="font-size: 28px;">BARANGAY CLEARANCE</b>
         </p>
         <p style="margin-left: 220px;font-size: 12px; font-family: 'Courier New', Courier;">TO WHOM IT MAY CONCERN:</p>
         <p style="margin-left: 220px; margin-right: 60px; text-indent:15px; text-align: justify;font-family: 'Courier New', Courier;">
-            &nbsp;&nbsp;This is to certify according to the records available in this barangay the applicant whose details are indicated
-            below,
+            &nbsp;&nbsp;This is to certify that the person whose name, picture, thumb mark and signature appear hereon has requested a <strong>CLEARANCE</strong> from this office.
         </p>
         <br>
         <p>
@@ -156,57 +159,27 @@
             if ($row = mysqli_fetch_array($squery)) {
                 // Prepare data for display
                 $fullName = strtoupper($row['Name']);
-                $address = "" . $row['purok'] . "," . $row['barangay'] . ",Madridejos,Cebu";
+                $address = "" . strtoupper($row['purok']) . "," . strtoupper($row['barangay']) . ",MADRIDEJOS,CEBU";
 
                 // Convert birth date to DateTime and format it
                 $birthDate = new DateTime($row['bdate']);
-                $formattedBirthDate = $birthDate->format('F j, Y'); // e.g., January 1, 2000
+                $formattedBirthDate = strtoupper($birthDate->format('F j, Y')); // e.g., JANUARY 1, 2000
 
-                $birthPlace = "" . $row['bplace'] . ""; // Assuming birth place is always Madridejos, adjust as needed
-                $civilStatus = $row['civilstatus']; // Adjust according to your database field for civil status
+                $birthPlace = "" . strtoupper($row['bplace']) . ""; // Assuming birth place is always Madridejos, adjust as needed
+                $civilStatus = strtoupper($row['civilstatus']); // Adjust according to your database field for civil status
+                $purpose = strtoupper($row['purpose']);
             
                 // Display information
                 echo "<p style='font-family: \"Courier New\"; font-size: 15px;'>
-                        <strong  style='margin-left: 210px;'&nbsp;>&nbsp;Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {$fullName}</strong><br>
-                        <strong style='margin-left: 210px;'>&nbsp;Address&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {$address}</strong><br>
-                        <strong style='margin-left: 210px;'>&nbsp;Birth Date&nbsp;&nbsp;&nbsp;: {$formattedBirthDate}</strong><br>
-                        <strong style='margin-left: 210px;'>&nbsp;Birth Place&nbsp;&nbsp;: {$birthPlace}</strong><br>
-                        <strong style='margin-left: 210px;'>&nbsp;Civil Status&nbsp;: {$civilStatus}</strong>
+                        <strong  style='margin-left: 210px;'>&nbsp;NAME&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: </strong>{$fullName}<br>
+                        <strong style='margin-left: 210px;'>&nbsp;ADDRESS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: </strong>{$address}<br>
+                        <strong style='margin-left: 210px;'>&nbsp;BIRTH DATE&nbsp;&nbsp;&nbsp;: </strong>{$formattedBirthDate}<br>
+                        <strong style='margin-left: 210px;'>&nbsp;BIRTH PLACE&nbsp;&nbsp;: </strong>{$birthPlace}<br>
+                        <strong style='margin-left: 210px;'>&nbsp;CIVIL STATUS&nbsp;: </strong>{$civilStatus}<br>
+                        <strong style='margin-left: 210px;'>&nbsp;PURPOSE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: </strong>{$purpose}
                       </p>";
             }
         ?>
-        <p style="margin-left: 220px; margin-right: 60px; text-indent:15px; text-align: justify; font-family: 'Courier New', Courier;">
-            &nbsp;&nbsp;Is known to me of good moral character based on our Barangay records has not been charged of any crime neither imputed of any social misdemeanor.
-        </p>
-        <p style="margin-left: 220px; margin-right: 60px; text-indent:15px; text-align: justify; font-family: 'Courier New', Courier; margin-top:-10px;">
-            &nbsp;&nbsp;This Barangay Clearance is being issued upon the request of above-mentioned applicant in connection with his/her.
-        </p>
-        </p>
-        <p>
-            <?php
-            $name = $_GET['resident'];
-            $squery = mysqli_query($con, "SELECT * FROM tblclearance WHERE name = '$name' LIMIT 1");
-
-            if ($row = mysqli_fetch_array($squery)) {
-                echo "<p style='margin-left: 220px;font-family: \"Courier New\"; font-size: 17px;'>PURPOSES: <strong>" . strtoupper($row['purpose']) . "</strong></p>";
-            }
-            ?> 
-        </p>
-        <p style="margin-left: 220px; margin-right: 60px; font-family: 'Courier New', Courier; text-indent:15px; text-align: justify;">
-            <?php
-                $name = $_GET['resident'];
-                $squery = mysqli_query($con, "SELECT * FROM tblclearance WHERE name = '$name' LIMIT 1");
-            
-                if ($row = mysqli_fetch_array($squery)) {
-                    $dateRecorded = $row['dateRecorded'];
-                    echo "<span style='font-family: \"Courier New\", Courier, monospace; text-align: justify; font-size: 15px;'>
-                        &nbsp;&nbsp;Given this <strong>". date('j', strtotime($dateRecorded)) ."<sup>". date('S', strtotime($dateRecorded)) ."</sup></strong> day of 
-                        <strong>" . date('F', strtotime($dateRecorded)) . "</strong>, <strong>" . date('Y', strtotime($dateRecorded)) . "</strong> 
-                        at <strong>" . $row['barangay'] . ", Madridejos</strong><strong> Cebu, Philippines.</strong>
-                    </span>";
-                }
-            ?>
-        </p>
         <p style="margin-top: 70px;">
         <?php
           // Assuming a session has already been started somewhere in your code
@@ -216,15 +189,37 @@
 
           if ($row = mysqli_fetch_array($squery)) {
             echo '
-              <strong style="margin-top: -350px;font-size: 17px; margin-left: 370px;">'.strtoupper($row['Name']).'</strong><br>
-              <hr style="border: 0.1px solid black; width: 27%; margin-left: 361px;margin-top: -15px;" />
-              <p style="margin-left: 390px;margin-top: -20px;">Signature of Applicant</p>
+              <strong style="margin-top: -350px;font-size: 13px; margin-left: 520px;">'.strtoupper($row['Name']).'</strong><br>
+              <hr style="border: 0.1px solid black; width: 24%; margin-left:  510px;margin-top: -11px;" />
+              <p style="margin-left: 540px;margin-top: -20px;font-size: 12px;">Signature of Applicant</p>
             ';
           }
         ?>
+        <br>
+        <br>
+        <p style="margin-left: 220px; margin-right: 60px; text-indent:15px; text-align: justify; font-family: 'Courier New', Courier; margin-top:-10px;">
+            &nbsp;&nbsp;This is to certify further that he/she has no pending case or derogatory record in this office and found to be of good moral character, law abiding and peace loving citizen.
+        </p>
+        </p>
+        <p style="margin-left: 220px; margin-right: 60px; font-family: 'Courier New', Courier; text-indent:15px; text-align: justify;">
+            <?php
+                $name = $_GET['resident'];
+                $squery = mysqli_query($con, "SELECT * FROM tblclearance WHERE name = '$name' LIMIT 1");
+            
+                if ($row = mysqli_fetch_array($squery)) {
+                    $dateRecorded = $row['dateRecorded'];
+                    echo "<span style='font-family: \"Courier New\", Courier, monospace; text-align: justify; font-size: 15px;'>
+                        &nbsp;&nbsp;Issued this <strong>". date('j', strtotime($dateRecorded)) ."<sup>". date('S', strtotime($dateRecorded)) ."</sup></strong> day of 
+                        <strong>" . date('F', strtotime($dateRecorded)) . "</strong>, <strong>" . date('Y', strtotime($dateRecorded)) . "</strong> 
+                        <strong>" . $row['barangay'] . ", Madridejos</strong><strong> Cebu, Philippines.</strong>
+                    </span>";
+                }
+            ?>
+        </p>
     </p>
-    </div> 
-    <div class="col-xs-offset-6 col-xs-5 col-md-offset-6 col-md-4" style="top: 30px;">
+    </p>
+    </div>
+    <div class="col-xs-offset-6 col-xs-5 col-md-offset-6 col-md-4" style="top: 10px;">
         <p style="text-align: center;">
             <?php
                 // Assuming a session has already been started somewhere in your code
@@ -235,7 +230,7 @@
                     if($row['sPosition'] == "Captain"){
                         echo '
                         <strong style="font-size: 17px; margin-left: 40px;">HON.'.strtoupper($row['completeName']).'</strong>
-                        <hr style="border: 0.1px solid black; width: 85%; margin-left: 40px;margin-top: -15px;"/>
+                        <hr style="border: 0.1px solid black; width: 63%; margin-left: 75px;margin-top: -15px;"/>
                         <p style="margin-left: 110px; margin-top: -20px;">Punong Barangay</p>
                         ';
                     }
@@ -243,9 +238,14 @@
             ?>
         </p>
     </div>
-    <div class="col-md-5 col-xs-4" style="float:left;margin-top: -150px;margin-left: 250px;">
+    <div class="col-md-5 col-xs-4" style="float:left;margin-top: -420px;margin-left: 250px;">
         <div style="height:100px; width:130px; border: 1px solid black;">
-            <center><span style="text-align: center; line-height: 160px;">Right Thumb Mark</span></center>
+            <center><span style="text-align: center; line-height: 90px;">Left Thumb Mark</span></center>
+        </div>
+    </div>
+    <div class="col-md-5 col-xs-4" style="float:left;margin-top: -420px;margin-left: 400px;">
+        <div style="height:100px; width:130px; border: 1px solid black;">
+            <center><span style="text-align: center; line-height: 90px;">Right Thumb Mark</span></center>
         </div>
     </div>
 </body>
