@@ -7,7 +7,7 @@
         exit; // Ensure no further execution after redirect
     }
     include('../../admin/head_css.php');
-    include("../connection.php");
+    include("../../admin/connection.php");
 ?>
 <head>
 <!-- Include Chart.js Library -->
