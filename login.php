@@ -1125,9 +1125,10 @@ header h2 {
 
 
   
-    const cookieBox = document.querySelector(".wrapper"),
-        buttons = document.querySelectorAll(".button");
     
+    const cookieBox = document.querySelector(".wrapper"),
+    buttons = document.querySelectorAll(".button");
+
     const executeCodes = () => {
       // If cookie contains codinglab, it will be returned and below code will not run
       if (document.cookie.includes("codinglab")) return;
@@ -1139,9 +1140,7 @@ header h2 {
           if (button.id === "acceptBtn") {
             // Hide cookie box and set the cookie
             cookieBox.classList.remove("show");
-            
-            // Set the cookie with HttpOnly and Secure flags
-            document.cookie = "cookieBy=codinglab; max-age=" + 60 * 60 * 24 * 30 + "; path=/; Secure; HttpOnly";
+            document.cookie = "cookieBy=codinglab; max-age=" + 60 * 60 * 24 * 30;
           }
           // If the button clicked is "Customize," do not hide the cookie box
         });
