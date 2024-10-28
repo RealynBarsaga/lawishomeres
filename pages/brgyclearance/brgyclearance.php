@@ -141,17 +141,5 @@
     </div><!-- ./wrapper -->
 
     <?php include "../footer.php"; ?>
-
-<script type="text/javascript">
-$(function() {
-    $("#table").dataTable({
-        "aoColumnDefs": [{
-            "bSortable": false,
-            "aTargets": [0, 6]
-        }],
-        "aaSorting": []
-    });
-});
-</script>
 </body>
 </html>
