@@ -3,10 +3,10 @@
 <?php
     session_start();
     if (!isset($_SESSION['userid'])) {
-        header('Location: ../admin/login.php');
+        header('Location: ../../admin/login.php');
         exit; // Ensure no further execution after redirect
     }
-    include('../admin/head_css.php');
+    include('../../admin/head_css.php');
 ?>
 <head>
     <!-- Include Chart.js Library -->
@@ -15,7 +15,7 @@
 <body class="skin-black">
     <?php
     include "../connection.php";
-    include('../admin/header.php');
+    include('../header.php');
     ?>
 
     <style>
@@ -39,7 +39,7 @@
     </style>
 
     <div class="wrapper row-offcanvas row-offcanvas-left">
-    <?php include('../admin/sidebar-left.php'); ?>
+    <?php include('../sidebar-left.php'); ?>
 
         <aside class="right-side">
             <section class="content-header">
@@ -269,6 +269,6 @@
             </section><!-- /.content -->
         </aside><!-- /.right-side -->
     </div><!-- ./wrapper -->    
-    <?php include "../admin/footer.php"; ?>
+    <?php include "../footer.php"; ?>
 </body>
 </html>
