@@ -158,6 +158,6 @@
             </section><!-- /.content -->
         </aside><!-- /.right-side -->
     </div><!-- ./wrapper -->    
-    <?php include "../footer.php"; ?>
+    <?php include "../../admin/footer.php"; ?>
 </body>
 </html>
