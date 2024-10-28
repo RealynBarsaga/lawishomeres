@@ -3,7 +3,7 @@
 <?php
     session_start();
     if (!isset($_SESSION['userid'])) {
-        header('Location: ../admin');
+        header('Location: ../admin/');
         exit; // Ensure no further execution after redirect
     }
     include('../admin/head_css.php'); 
