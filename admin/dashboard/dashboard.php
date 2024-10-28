@@ -6,7 +6,7 @@ if (!isset($_SESSION['userid'])) {
     header('Location: ../../admin/login.php');
     exit; // Ensure no further execution after redirect
 }
-include('../../admin/head_css.php'); 
+include('admin/head_css.php'); 
 ?>
 <head>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -49,11 +49,11 @@ include('../../admin/head_css.php');
 </head>
 <body class="skin-black">
     <?php
-    include "../../admin/connection.php";
-    include('../../admin/header.php');
+    include "admin/connection.php";
+    include('admin/header.php');
     ?>
     <div class="wrapper row-offcanvas row-offcanvas-left">
-        <?php include('../../admin/sidebar-left.php'); ?>
+        <?php include('admin/sidebar-left.php'); ?>
 
         <aside class="right-side">
             <section class="content-header">
@@ -251,6 +251,6 @@ include('../../admin/head_css.php');
             }
         });
     </script>
-    <?php include "../../admin/footer.php"; ?>
+    <?php include "admin/footer.php"; ?>
 </body>
 </html>
