@@ -34,7 +34,7 @@
 </style>
 <body class="skin-black">
     <?php 
-      include('../header.php'); 
+      include('../../admin/header.php'); 
     ?>
 
     <style>
