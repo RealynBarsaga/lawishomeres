@@ -1,15 +1,16 @@
-<?php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <?php
     session_start();
     if (!isset($_SESSION['userid'])) {
         header('Location: ../../admin/login.php');
         exit; // Ensure no further execution after redirect
     }
     include('../../admin/head_css.php'); 
+    include("../connection.php");
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <style>
 .info-box {
@@ -63,12 +64,9 @@
 }
 </style>
 <body class="skin-black">
-    <?php
-    include('../../admin/connection.php');
-    include('../../admin/header.php');
-    ?>
+    <?php include('../header.php'); ?>
     <div class="wrapper row-offcanvas row-offcanvas-left">
-        <?php include('../../admin/sidebar-left.php'); ?>
+        <?php include('../sidebar-left.php'); ?>
 
         <aside class="right-side">
             <section class="content-header">
@@ -301,6 +299,6 @@ const PieChart = new Chart(pieCtxFemale, {
     }
 });
 </script>
-<?php include "../../admin/footer.php"; ?>
+<?php include "../footer.php"; ?>
 </body>
 </html>
