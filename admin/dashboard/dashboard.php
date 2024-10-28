@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
 <?php
     session_start();
     if (!isset($_SESSION['userid'])) {
@@ -8,6 +6,8 @@
     }
     include('../../admin/head_css.php'); 
 ?>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -64,7 +64,7 @@
 </style>
 <body class="skin-black">
     <?php
-    include "../admin/connection.php";
+    include('../../admin/connection.php');
     include('../../admin/header.php');
     ?>
     <div class="wrapper row-offcanvas row-offcanvas-left">
@@ -198,7 +198,6 @@ foreach ($barangays as $barangay) {
     $femaleCounts[] = mysqli_num_rows($q_female);
 }
 ?>
-
 <script>
 // Pie chart for Male Distribution
 const pieCtxMale = document.getElementById('myPieChart').getContext('2d');
