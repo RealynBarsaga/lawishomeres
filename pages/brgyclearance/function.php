@@ -1,8 +1,5 @@
 <?php
 if (isset($_POST['btn_add'])) {
-    // Set Content Security Policy
-    header("Content-Security-Policy: script-src 'self';");
-    
     // Sanitize inputs
     $txt_cnum = htmlspecialchars(stripslashes(trim($_POST['txt_cnum'])), ENT_QUOTES, 'UTF-8');
     $txt_name = htmlspecialchars(stripslashes(trim($_POST['txt_name'])), ENT_QUOTES, 'UTF-8');
@@ -12,9 +9,10 @@ if (isset($_POST['btn_add'])) {
     $txt_age = (int) $_POST['txt_age']; // Cast age to integer
     $txt_bdate = htmlspecialchars(stripslashes(trim($_POST['txt_bdate'])), ENT_QUOTES, 'UTF-8');
     $txt_purok = htmlspecialchars(stripslashes(trim($_POST['txt_purok'])), ENT_QUOTES, 'UTF-8');
+    $txt_bplace = htmlspecialchars(stripslashes(trim($_POST['txt_bplace'])), ENT_QUOTES, 'UTF-8');
+    $txt_cstatus = htmlspecialchars(stripslashes(trim($_POST['txt_cstatus'])), ENT_QUOTES, 'UTF-8');
     $date = date('Y-m-d'); // Current date in 'YYYY-MM-DD' format
     $off_barangay = $_SESSION["barangay"] ?? "";
-    
 
     // Check for duplicate clearance
     $chkdup = mysqli_query($con, "SELECT * from tblclearance where name = '$txt_name'");
@@ -29,8 +27,8 @@ if (isset($_POST['btn_add'])) {
     // Insert clearance if no duplicates
     if ($rows == 0) {
         $query = mysqli_query($con, "INSERT INTO tblclearance 
-            (clearanceNo, name, purpose, orNo, samount, dateRecorded, recordedBy, barangay, age, bdate, purok, report_type) 
-            values ('$txt_cnum','$txt_name', '$txt_purpose', '$txt_ornum', '$txt_amount', '$date', '".$_SESSION['username']."', '$off_barangay', '$txt_age', '$txt_bdate', '$txt_purok', 'Clearance')") 
+            (clearanceNo, name, purpose, orNo, samount, dateRecorded, recordedBy, barangay, age, bdate, purok, bplace, civilstatus, report_type) 
+            values ('$txt_cnum','$txt_name', '$txt_purpose', '$txt_ornum', '$txt_amount', '$date', '".$_SESSION['username']."', '$off_barangay', '$txt_age', '$txt_bdate', '$txt_purok', '$txt_bplace', '$txt_cstatus', 'Clearance')") 
             or die('Error: ' . mysqli_error($con));
 
         // Handle successful insert
@@ -111,19 +109,18 @@ if(isset($_POST['btn_disapprove']))
 }
 
 if(isset($_POST['btn_save'])) {
-   // Set Content Security Policy
-   header("Content-Security-Policy: script-src 'self';");
-   
     // Sanitize inputs
-   $txt_edit_residentname = htmlspecialchars(stripslashes(trim($_POST['txt_edit_residentname'])), ENT_QUOTES, 'UTF-8');
-   $txt_id = htmlspecialchars(stripslashes(trim($_POST['hidden_id'])), ENT_QUOTES, 'UTF-8');
-   $txt_edit_cnum = htmlspecialchars(stripslashes(trim($_POST['txt_edit_cnum'])), ENT_QUOTES, 'UTF-8');
-   $txt_edit_purpose = htmlspecialchars(stripslashes(trim($_POST['txt_edit_purpose'])), ENT_QUOTES, 'UTF-8');
-   $txt_edit_ornum = htmlspecialchars(stripslashes(trim($_POST['txt_edit_ornum'])), ENT_QUOTES, 'UTF-8');
-   $txt_edit_amount = htmlspecialchars(stripslashes(trim($_POST['txt_edit_amount'])), ENT_QUOTES, 'UTF-8');
-   $txt_edit_age = (int) $_POST['txt_edit_age']; // Cast to integer
-   $txt_edit_bdate = htmlspecialchars(stripslashes(trim($_POST['txt_edit_bdate'])), ENT_QUOTES, 'UTF-8');
-   $txt_edit_purok = htmlspecialchars(stripslashes(trim($_POST['txt_edit_purok'])), ENT_QUOTES, 'UTF-8');
+    $txt_id = htmlspecialchars(stripslashes(trim($_POST['hidden_id'])), ENT_QUOTES, 'UTF-8');
+    $txt_edit_residentname = htmlspecialchars(stripslashes(trim($_POST['txt_edit_residentname'])), ENT_QUOTES, 'UTF-8');
+    $txt_edit_cnum = htmlspecialchars(stripslashes(trim($_POST['txt_edit_cnum'])), ENT_QUOTES, 'UTF-8');
+    $txt_edit_purpose = htmlspecialchars(stripslashes(trim($_POST['txt_edit_purpose'])), ENT_QUOTES, 'UTF-8');
+    $txt_edit_ornum = htmlspecialchars(stripslashes(trim($_POST['txt_edit_ornum'])), ENT_QUOTES, 'UTF-8');
+    $txt_edit_amount = htmlspecialchars(stripslashes(trim($_POST['txt_edit_amount'])), ENT_QUOTES, 'UTF-8');
+    $txt_edit_age = (int) $_POST['txt_edit_age']; // Cast to integer
+    $txt_edit_bdate = htmlspecialchars(stripslashes(trim($_POST['txt_edit_bdate'])), ENT_QUOTES, 'UTF-8');
+    $txt_edit_purok = htmlspecialchars(stripslashes(trim($_POST['txt_edit_purok'])), ENT_QUOTES, 'UTF-8');
+    $txt_edit_bplace = htmlspecialchars(stripslashes(trim($_POST['txt_edit_bplace'])), ENT_QUOTES, 'UTF-8');
+    $txt_edit_cstatus = htmlspecialchars(stripslashes(trim($_POST['txt_edit_cstatus'])), ENT_QUOTES, 'UTF-8');
    
 
     // Update query including the new fields
@@ -135,7 +132,9 @@ if(isset($_POST['btn_save'])) {
     samount = '".$txt_edit_amount."', 
     age = '".$txt_edit_age."', 
     bdate = '".$txt_edit_bdate."', 
-    purok = '".$txt_edit_purok."' 
+    purok = '".$txt_edit_purok."',
+    bplace = '".$txt_edit_bplace."',
+    civilstatus = '".$txt_edit_cstatus."' 
     WHERE id = '".$txt_id."' ") or die('Error: ' . mysqli_error($con));
 
     if(isset($_SESSION['role'])){
