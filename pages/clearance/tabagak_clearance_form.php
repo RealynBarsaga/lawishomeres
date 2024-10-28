@@ -38,7 +38,7 @@
     <script>
         window.print();
         onafterprint = () => {
-            window.location.href = "brgyclearance.php?page=brgyclearance";
+            window.location.href = "clearance.php?page=clearance";
         }
     </script>
 </head>
