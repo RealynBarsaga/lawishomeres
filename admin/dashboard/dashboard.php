@@ -58,7 +58,7 @@
     </style>
 
     <div class="wrapper row-offcanvas row-offcanvas-left">
-    <?php include('../sidebar-left.php'); ?>
+    <?php include('../admin/sidebar-left.php'); ?>
 
         <aside class="right-side">
             <section class="content-header">
@@ -101,9 +101,9 @@
                         <?php } ?>
                     </div><!-- /.box -->
                     <!-- Bar Chart -->
-                    <div class="col-md-12">
+                   <!--  <div class="col-md-12">
                         <canvas id="myBarChart" width="100" height="30" style="max-width: 35%;background: #fff;"></canvas>
-                    </div>
+                    </div> -->
                         <?php
                         // Query to count data for each barangay
                         $barangays = ['Tabagak', 'Bunakan', 'Kodia', 'Talangnan', 'Maalat', 'Pili', 'Kaongkod', 'Mancilang', 'Kangwayan', 'Tugas', 'Malbago', 'Tarong', 'San Agustin'];
