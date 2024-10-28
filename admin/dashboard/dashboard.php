@@ -6,7 +6,7 @@ if (!isset($_SESSION['userid'])) {
     header('Location: ../../admin/login.php');
     exit; // Ensure no further execution after redirect
 }
-include('../admin/head_css.php'); 
+include('../../admin/head_css.php'); 
 ?>
 <head>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
