@@ -132,18 +132,6 @@
             });
             $(".select2").select2();
         });
-/* function printRow(id) {
-    // This will fetch the specific row using the ID
-    var printContents = document.querySelector("tr input[value='"+id+"']").closest('tr').outerHTML;
-    
-    var originalContents = document.body.innerHTML;
-
-    document.body.innerHTML = '<table>' + printContents + '</table>';
-
-    window.print();
-
-    document.body.innerHTML = originalContents;
-} */
     </script>
 </body>
 </html>

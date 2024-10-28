@@ -9,11 +9,6 @@
     }
     include('../head_css.php'); // Removed ob_start() since it's not needed here
     ?>
-    <style>
-        .nav-tabs li a {
-            cursor: pointer;
-        }
-    </style>
 </head>
 <body class="skin-black">
     <!-- header logo: style can be found in header.less -->
