@@ -3,7 +3,7 @@
 <?php
     session_start();
     if (!isset($_SESSION['userid'])) {
-        header('Location: ../admin/login.php');
+        header('Location: ../../admin/login.php');
         exit; // Ensure no further execution after redirect
     }
     include('../../admin/head_css.php'); 
@@ -64,7 +64,7 @@
 </style>
 <body class="skin-black">
     <?php
-    include "../../admin/connection.php";
+    include "../admin/connection.php";
     include('../../admin/header.php');
     ?>
     <div class="wrapper row-offcanvas row-offcanvas-left">
