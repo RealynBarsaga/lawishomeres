@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
+
+// Set cookie parameters before starting the session
+session_set_cookie_params([
+    'lifetime' => 0,              // Session cookie
+    'path' => '/',                // Available across the entire domain
+    'domain' => 'lawishomeresidences.com/admin/', // Change this to your domain
+    'secure' => true,             // Set to true if using HTTPS
+    'httponly' => true,           // Prevent JavaScript access to the cookie
+    'samesite' => 'Strict'        // Use 'Lax' or 'Strict' based on your needs
+]);
+
 // This should be at the very top of your PHP file
 header("X-XSS-Protection: 1; mode=block");
 // Set the Content Security Policy

@@ -1074,56 +1074,56 @@ header h2 {
     </div>
 </div>
 <script>
-// Get modal elements
-const modal = document.getElementById('cookieSettingsModal');
-const customizeBtn = document.getElementById('customizeBtn');
-const closeButton = document.querySelector('.close-button');
-const saveSettingsButton = document.getElementById('saveSettings');
-
-// Function to open the modal
-customizeBtn.addEventListener('click', () => {
-    modal.style.display = 'block';
-});
-
-// Function to close the modal
-closeButton.addEventListener('click', () => {
-    modal.style.display = 'none';
-});
-
-// Optional: Save settings functionality
-saveSettingsButton.addEventListener('click', () => {
-    const functionalityEnabled = document.getElementById('functionalityCookies').checked;
-    const securityEnabled = document.getElementById('securityCookies').checked;
-    const personalizationEnabled = document.getElementById('personalizationCookies').checked;
-    const adEnabled = document.getElementById('adCookies').checked;
-    const adUserDataEnabled = document.getElementById('adUserData').checked;
-    const adPersonalizationEnabled = document.getElementById('adPersonalization').checked;
-    const analyticsEnabled = document.getElementById('analyticsCookies').checked;
-
-    console.log(`Functionality Cookies Enabled: ${functionalityEnabled}`);
-    console.log(`Security Cookies Enabled: ${securityEnabled}`);
-    console.log(`Personalization Cookies Enabled: ${personalizationEnabled}`);
-    console.log(`Ad Cookies Enabled: ${adEnabled}`);
-    console.log(`Ad User Data Enabled: ${adUserDataEnabled}`);
-    console.log(`Ad Personalization Enabled: ${adPersonalizationEnabled}`);
-    console.log(`Analytics Cookies Enabled: ${analyticsEnabled}`);
-
-    // Save preferences logic here
-    modal.style.display = 'none'; // Close modal after saving
-});
-
-// Close modal if clicked outside of it
-window.addEventListener('click', (event) => {
-    if (event.target === modal) {
+    // Get modal elements
+    const modal = document.getElementById('cookieSettingsModal');
+    const customizeBtn = document.getElementById('customizeBtn');
+    const closeButton = document.querySelector('.close-button');
+    const saveSettingsButton = document.getElementById('saveSettings');
+    
+    // Function to open the modal
+    customizeBtn.addEventListener('click', () => {
+        modal.style.display = 'block';
+    });
+    
+    // Function to close the modal
+    closeButton.addEventListener('click', () => {
         modal.style.display = 'none';
-    }
-});
+    });
+    
+    // Optional: Save settings functionality
+    saveSettingsButton.addEventListener('click', () => {
+        const functionalityEnabled = document.getElementById('functionalityCookies').checked;
+        const securityEnabled = document.getElementById('securityCookies').checked;
+        const personalizationEnabled = document.getElementById('personalizationCookies').checked;
+        const adEnabled = document.getElementById('adCookies').checked;
+        const adUserDataEnabled = document.getElementById('adUserData').checked;
+        const adPersonalizationEnabled = document.getElementById('adPersonalization').checked;
+        const analyticsEnabled = document.getElementById('analyticsCookies').checked;
+    
+        console.log(`Functionality Cookies Enabled: ${functionalityEnabled}`);
+        console.log(`Security Cookies Enabled: ${securityEnabled}`);
+        console.log(`Personalization Cookies Enabled: ${personalizationEnabled}`);
+        console.log(`Ad Cookies Enabled: ${adEnabled}`);
+        console.log(`Ad User Data Enabled: ${adUserDataEnabled}`);
+        console.log(`Ad Personalization Enabled: ${adPersonalizationEnabled}`);
+        console.log(`Analytics Cookies Enabled: ${analyticsEnabled}`);
+    
+        // Save preferences logic here
+        modal.style.display = 'none'; // Close modal after saving
+    });
+
+    // Close modal if clicked outside of it
+    window.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
 
 
   
     const cookieBox = document.querySelector(".wrapper"),
-    buttons = document.querySelectorAll(".button");
-
+        buttons = document.querySelectorAll(".button");
+    
     const executeCodes = () => {
       // If cookie contains codinglab, it will be returned and below code will not run
       if (document.cookie.includes("codinglab")) return;
@@ -1135,7 +1135,9 @@ window.addEventListener('click', (event) => {
           if (button.id === "acceptBtn") {
             // Hide cookie box and set the cookie
             cookieBox.classList.remove("show");
-            document.cookie = "cookieBy=codinglab; max-age=" + 60 * 60 * 24 * 30;
+            
+            // Set the cookie with HttpOnly and Secure flags
+            document.cookie = "cookieBy=codinglab; max-age=" + 60 * 60 * 24 * 30 + "; path=/; Secure; HttpOnly";
           }
           // If the button clicked is "Customize," do not hide the cookie box
         });
@@ -1144,11 +1146,12 @@ window.addEventListener('click', (event) => {
     
     executeCodes();
 
-  
-   //executeCodes function will be called on webpage load
-   window.addEventListener("load", executeCodes);
 
-document.addEventListener("DOMContentLoaded", function() {
+  
+    //executeCodes function will be called on webpage load
+    window.addEventListener("load", executeCodes);
+
+    document.addEventListener("DOMContentLoaded", function() {
     const acceptAllButton = document.getElementById("acceptall");
     const acceptNecessaryButton = document.getElementById("acceptnecessary");
     const saveSettingsButton = document.getElementById("saveSettings");
@@ -1197,50 +1200,50 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log("Settings saved:", settings);
         // Close modal here if needed
     });
-});
+    });
 </script>
 <script>
-   $(document).on('click', '#btn_login', function(){
-       var response = g-recaptcha.getResponse();
-       alert(response);
-   })  
+    $(document).on('click', '#btn_login', function(){
+        var response = g-recaptcha.getResponse();
+        alert(response);
+    })  
    
-   //executeCodes function will be called on webpage load
-   window.addEventListener("load", executeCodes);
+    //executeCodes function will be called on webpage load
+    window.addEventListener("load", executeCodes);
 
-  function validateRecaptcha() {
+    function validateRecaptcha() {
     var response = grecaptcha.getResponse();
     if (response.length === 0) {
         document.getElementById("captcha-error").style.display = "block";
         return false; // Prevent form submission
     }
     return true; // Allow form submission
-  }
+    }
 
-  document.addEventListener("DOMContentLoaded", function() {
-      document.getElementById("error-ok-button").addEventListener("click", function() {
-          document.getElementById("error-modal").style.display = 'none';
-      });
-  });
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("error-ok-button").addEventListener("click", function() {
+            document.getElementById("error-modal").style.display = 'none';
+        });
+    });
+  
+    // Wait for the DOM to load
+    document.addEventListener("DOMContentLoaded", function() {
+        // Attach a click event to the OK button
+        document.getElementById("error-ok-button1").addEventListener("click", function() {
+            // Close the error modal when OK is clicked
+            document.getElementById("error-modal1").style.display = 'none';
+        });
+    });
+    // Wait for the DOM to load
+    document.addEventListener("DOMContentLoaded", function() {
+        // Attach a click event to the OK button
+        document.getElementById("ok-button2").addEventListener("click", function() {
+            // Redirect to the dashboard after the OK button is clicked
+            window.location.href = 'pages/dashboard/dashboard.php?page=dashboard';
+        });
+    });
 
-  // Wait for the DOM to load
-  document.addEventListener("DOMContentLoaded", function() {
-      // Attach a click event to the OK button
-      document.getElementById("error-ok-button1").addEventListener("click", function() {
-          // Close the error modal when OK is clicked
-          document.getElementById("error-modal1").style.display = 'none';
-      });
-  });
-  // Wait for the DOM to load
-  document.addEventListener("DOMContentLoaded", function() {
-      // Attach a click event to the OK button
-      document.getElementById("ok-button2").addEventListener("click", function() {
-          // Redirect to the dashboard after the OK button is clicked
-          window.location.href = 'pages/dashboard/dashboard.php?page=dashboard';
-      });
-  });
-
-  function togglePassword(inputId, icon) {
+    function togglePassword(inputId, icon) {
         const input = document.getElementById(inputId);
         const iconElement = icon.querySelector('i');
         
