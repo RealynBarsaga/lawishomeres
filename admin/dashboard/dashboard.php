@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
 <?php
     session_start();
     if (!isset($_SESSION['userid'])) {
@@ -7,39 +8,37 @@
         exit; // Ensure no further execution after redirect
     }
     include('../../admin/head_css.php');
+    include("../connection.php");
 ?>
-<head>
-    <!-- Include Chart.js Library -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- Include Chart.js Library -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+<style>
+    .info-box {
+        display: block;
+        min-height: 125px;
+        background: #fff;
+        width: 92%;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+        border-radius: 2px;
+        margin-bottom: 15px;
+    }
+    .info-box-text {
+        text-transform: none;
+        font-weight: 100;
+    }
+    .chart-container {
+        width: 80%;
+        margin: auto;
+    }
+</style>
 <body class="skin-black">
-    <?php
-    include "../../admin/connection.php";
-    include('../../admin/header.php');
-    ?>
-
-    <style>
-        .info-box {
-            display: block;
-            min-height: 125px;
-            background: #fff;
-            width: 92%;
-            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-            border-radius: 2px;
-            margin-bottom: 15px;
-        }
-        .info-box-text {
-            text-transform: none;
-            font-weight: 100;
-        }
-        .chart-container {
-            width: 80%;
-            margin: auto;
-        }
-    </style>
+     <!-- header logo: style can be found in header.less -->
+     <?php include('../header.php'); ?>
 
     <div class="wrapper row-offcanvas row-offcanvas-left">
-    <?php include('../../admin/sidebar-left.php'); ?>
+     <!-- Left side column. contains the logo and sidebar -->
+     <?php include('../sidebar-left.php'); ?>
 
         <aside class="right-side">
             <section class="content-header">
