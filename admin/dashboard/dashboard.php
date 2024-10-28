@@ -14,8 +14,8 @@
 </head>
 <body class="skin-black">
     <?php
-    include "../admin/connection.php";
-    include('../admin/header.php');
+    include "../../admin/connection.php";
+    include('../../admin/header.php');
     ?>
 
     <style>
@@ -39,7 +39,7 @@
     </style>
 
     <div class="wrapper row-offcanvas row-offcanvas-left">
-    <?php include('../admin/sidebar-left.php'); ?>
+    <?php include('../../admin/sidebar-left.php'); ?>
 
         <aside class="right-side">
             <section class="content-header">
@@ -269,6 +269,6 @@
             </section><!-- /.content -->
         </aside><!-- /.right-side -->
     </div><!-- ./wrapper -->    
-    <?php include "../admin/footer.php"; ?>
+    <?php include "../../admin/footer.php"; ?>
 </body>
 </html>
