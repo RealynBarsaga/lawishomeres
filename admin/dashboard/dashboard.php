@@ -251,6 +251,6 @@ include('../../admin/head_css.php');
             }
         });
     </script>
-    <?php include "admin/footer.php"; ?>
+    <?php include "../../admin/footer.php"; ?>
 </body>
 </html>
