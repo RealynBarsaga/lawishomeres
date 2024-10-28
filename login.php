@@ -1073,21 +1073,6 @@ header h2 {
         </div> 
     </div>
 </div>
-<?php
-if (isset($_POST['acceptBtn'])) {
-    // Set the cookie with HttpOnly and Secure flags
-    setcookie('cookieBy', 'codinglab', [
-        'expires' => time() + (60 * 60 * 24 * 30), // 30 days
-        'path' => '/',
-        'secure' => true, // Only sent over HTTPS
-        'httponly' => true, // Accessible only through the HTTP protocol
-        'samesite' => 'Lax' // Helps prevent CSRF attacks
-    ]);
-    // Optionally, you can redirect to the same page to avoid form resubmission
-    header("Location: " . $_SERVER['PHP_SELF']);
-    exit();
-}
-?>
 <script>
     // Get modal elements
     const modal = document.getElementById('cookieSettingsModal');
@@ -1137,8 +1122,8 @@ if (isset($_POST['acceptBtn'])) {
 
   
     const cookieBox = document.querySelector(".wrapper"),
-    buttons = document.querySelectorAll(".button");
-
+        buttons = document.querySelectorAll(".button");
+    
     const executeCodes = () => {
       // If cookie contains codinglab, it will be returned and below code will not run
       if (document.cookie.includes("codinglab")) return;
@@ -1146,23 +1131,21 @@ if (isset($_POST['acceptBtn'])) {
     
       buttons.forEach((button) => {
         button.addEventListener("click", () => {
+          // Check if the button clicked is not the "Customize" button
           if (button.id === "acceptBtn") {
-            // Hide cookie box and send a request to set the cookie
+            // Hide cookie box and set the cookie
             cookieBox.classList.remove("show");
-    
-            // You can use fetch or XMLHttpRequest to send the request
-            fetch('login.php', {
-              method: 'POST',
-              body: new URLSearchParams('acceptBtn=true'),
-              credentials: 'same-origin'
-            });
+            document.cookie = "cookieBy=codinglab; max-age=" + 60 * 60 * 24 * 30;
           }
+          // If the button clicked is "Customize," do not hide the cookie box
         });
       });
     };
     
     executeCodes();
 
+
+  
     //executeCodes function will be called on webpage load
     window.addEventListener("load", executeCodes);
 
