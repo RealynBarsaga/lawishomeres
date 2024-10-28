@@ -15,7 +15,7 @@
 <body class="skin-black">
     <?php
     include "../connection.php";
-    include('../admin/header.php');
+    include('../../admin/header.php');
     ?>
 
     <style>
