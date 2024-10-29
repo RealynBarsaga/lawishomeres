@@ -145,7 +145,7 @@
         </aside><!-- /.right-side -->
     </div><!-- ./wrapper -->
 
-    <?php include "../../footer.php"; ?>
+    <?php include "../footer.php"; ?>
 
     <script type="text/javascript">
         $(function() {
