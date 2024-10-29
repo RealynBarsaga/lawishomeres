@@ -8,7 +8,7 @@ if (!isset($_SESSION['userid'])) {
     exit; // Ensure no further execution after redirect
 }
 include('../../admin/head_css.php'); // Removed ob_start() since it's not needed here
-include('../../connection.php');
+include('../admin/connection.php');
 ?>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
