@@ -3,7 +3,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['userid'])) {
-    header('Location: ../admin/login.php');
+    header('Location: ../../admin/login.php');
     exit; // Ensure no further execution after redirect
 }
 include('../../admin/head_css.php'); // Removed ob_start() since it's not needed here
@@ -14,7 +14,7 @@ include('../../admin/head_css.php'); // Removed ob_start() since it's not needed
 <body class="skin-black">
     <?php 
     include('../../admin/header.php');
-    include('../../connection.php');
+    include('../admin/connection.php');
     ?>
     <style>
         .info-box {
