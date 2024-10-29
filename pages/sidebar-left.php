@@ -31,7 +31,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="../clearance/clearance.php?page=clearance">
+                                <a href="../brgyclearance/brgyclearance.php?page=brgyclearance">
                                     <i class="fa fa-file"></i> <span>Barangay Clearance</span>
                                 </a>
                             </li>
