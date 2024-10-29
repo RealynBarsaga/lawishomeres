@@ -4,14 +4,11 @@ if (!isset($_SESSION['userid'])) {
     header('Location: ../../admin/login.php');
     exit; // Ensure no further execution after redirect
 }
+include('../../admin/header.php');
+include('../admin/connection.php');
 include('../../admin/head_css.php'); // Removed ob_start() since it's not needed here
 ?>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <body class="skin-black">
-    <?php 
-    include('../../admin/header.php');
-    include('../admin/connection.php');
-    ?>
     <style>
         .info-box {
             display: block;
