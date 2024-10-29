@@ -13,8 +13,8 @@ include('../../admin/head_css.php'); // Removed ob_start() since it's not needed
 </head>
 <body class="skin-black">
     <?php 
-    include('../header.php');
-    include('../connection.php');
+    include('../../header.php');
+    include('../../connection.php');
     ?>
     <style>
         .info-box {
