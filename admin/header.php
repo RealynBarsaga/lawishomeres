@@ -3,7 +3,7 @@
 ob_start();
 
 // Database connection (assuming $con is the database connection)
-require_once('connection.php');
+require_once('../admin/connection.php');
 
 // Fetch the total number of notifications
 $countQuery = mysqli_query($con, "SELECT COUNT(*) AS count FROM tbllogs");
