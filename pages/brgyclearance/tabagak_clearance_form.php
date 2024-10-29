@@ -235,7 +235,7 @@
                     if($row['sPosition'] == "Captain"){
                         echo '
                         <strong style="font-size: 15px; margin-left: 40px;">HON.'.strtoupper($row['completeName']).'</strong>
-                        <hr style="border: 0.1px solid black; width: 85%; margin-left: 40px;margin-top: -15px;"/>
+                        <hr style="border: 0.1px solid black; width: 85%; margin-left: 40px;margin-top: -10px;"/>
                         <p style="margin-left: 110px; margin-top: -20px;">Punong Barangay</p>
                         ';
                     }
