@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
 <?php
 session_start();
 if (!isset($_SESSION['userid'])) {
-    header('Location: ../../admin/login.php');
+    header('Location: ../admin/login.php');
     exit; // Ensure no further execution after redirect
 }
 include('../../admin/head_css.php'); // Removed ob_start() since it's not needed here
-include('../admin/connection.php');
 ?>
+<head>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="skin-black">
+    <?php 
+    include('../header.php');
+    include('../connection.php');
+    ?>
     <style>
         .info-box {
             display: block;
@@ -47,9 +52,6 @@ include('../admin/connection.php');
             width: 380px;
         }
     </style>
-</head>
-<body class="skin-black">
-    <?php include('../header.php');?>
     <div class="wrapper row-offcanvas row-offcanvas-left">
         <?php include('../sidebar-left.php'); ?>
 
