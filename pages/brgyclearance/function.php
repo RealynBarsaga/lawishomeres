@@ -28,7 +28,7 @@ if (isset($_POST['btn_add'])) {
     if ($rows == 0) {
         $query = mysqli_query($con, "INSERT INTO tblclearance 
             (clearanceNo, name, purpose, orNo, samount, dateRecorded, recordedBy, barangay, age, bdate, purok, bplace, civilstatus, report_type) 
-            values ('$txt_cnum','$txt_name', '$txt_purpose', '$txt_ornum', '$txt_amount', '$date', '".$_SESSION['username']."', '$off_barangay', '$txt_age', '$txt_bdate', '$txt_purok', '$txt_bplace', '$txt_cstatus', 'Clearance')") 
+            values ('$txt_cnum', '$txt_name', '$txt_purpose', '$txt_ornum', '$txt_amount', '$date', '".$_SESSION['username']."', '$off_barangay', '$txt_age', '$txt_bdate', '$txt_purok', '$txt_bplace', '$txt_cstatus', 'Clearance')") 
             or die('Error: ' . mysqli_error($con));
 
         // Handle successful insert
