@@ -12,7 +12,7 @@
 </head>
 <body class="skin-black">
     <?php
-    include "../pages/connection.php";
+    include "../../connection.php";
     include('../header.php');
     ?>
 
