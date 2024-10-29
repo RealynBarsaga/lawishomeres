@@ -229,8 +229,8 @@
                 while($row = mysqli_fetch_array($qry)){
                     if($row['sPosition'] == "Captain"){
                         echo '
-                        <strong style="font-size: 17px; margin-left: 40px;">HON.'.strtoupper($row['completeName']).'</strong>
-                        <hr style="border: 0.1px solid black; width: 63%; margin-left: 75px;margin-top: -15px;"/>
+                        <strong style="font-size: 15px; margin-left: 40px;">HON.'.strtoupper($row['completeName']).'</strong>
+                        <hr style="border: 0.1px solid black; width: 63%; margin-left: 75px;margin-top: -10px;"/>
                         <p style="margin-left: 110px; margin-top: -20px;">Punong Barangay</p>
                         ';
                     }
