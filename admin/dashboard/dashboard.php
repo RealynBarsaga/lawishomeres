@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
 <?php
 session_start();
 if (!isset($_SESSION['userid'])) {
@@ -8,9 +6,7 @@ if (!isset($_SESSION['userid'])) {
 }
 include('../../admin/head_css.php'); // Removed ob_start() since it's not needed here
 ?>
-<head>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <body class="skin-black">
     <?php 
     include('../../admin/header.php');
