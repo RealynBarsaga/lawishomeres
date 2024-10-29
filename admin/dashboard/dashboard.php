@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
 <?php
 session_start();
 if (!isset($_SESSION['userid'])) {
@@ -7,9 +8,8 @@ if (!isset($_SESSION['userid'])) {
     exit; // Ensure no further execution after redirect
 }
 include('../../admin/head_css.php'); // Removed ob_start() since it's not needed here
-include "admin/connection.php";
+include "../connection.php";
 ?>
-<head>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         .info-box {
@@ -68,14 +68,10 @@ include "admin/connection.php";
                             ['label' => 'Total Barangay', 'icon' => 'fa-university', 'color' => '#007256', 'query' => "SELECT * FROM tblstaff", 'link' => '../staff/staff.php'],
                             ['label' => 'Total Permit', 'icon' => 'fa-file', 'color' => '#bd1e24', 'query' => "SELECT * FROM tblpermit", 'link' => '../permit/permit.php'],
                             ['label' => 'Total Household', 'icon' => 'fa-users', 'color' => '#e5c707', 'query' => "SELECT * FROM tblhousehold", 'link' => '../householdlist/householdlist.php']
-                        ];                    
+                        ];
 
                         foreach ($info_boxes as $box) {
                             $q = mysqli_query($con, $box['query']);
-                            if (!$q) {
-                                echo "Query Error: " . mysqli_error($con);
-                                continue;
-                            }
                             $num_rows = mysqli_num_rows($q);
                         ?>
                         <div class="col-md-3 col-sm-6 col-xs-12">
