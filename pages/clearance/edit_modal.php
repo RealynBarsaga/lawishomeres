@@ -1,36 +1,27 @@
-<?php echo '<div id="editModal'.$row['id'].'" class="modal fade">
+<?php echo '<div id="editModal'.$row['pid'].'" class="modal fade">
 <form method="post">
   <div class="modal-dialog modal-sm" style="width:300px !important;">
     <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">Edit Clearance</h4>
+            <h4 class="modal-title">Edit Certificate</h4>
         </div>
         <div class="modal-body">';
-
-        $edit_query = mysqli_query($con,"SELECT * from tblclearance where id = '".$row['id']."' ");
-        $row = mysqli_fetch_array($edit_query);
-
-         // Calculate age based on birthdate
-        $birthdate = new DateTime($row['bdate']);
-        $today = new DateTime();
-        $age = $today->diff($birthdate)->y;
-
-        echo '
+                $edit_query = mysqli_query($con,"SELECT * from tblcertificate where id = '".$row['pid']."' ");
+                $row = mysqli_fetch_array($edit_query);
+        
+                 // Calculate age based on birthdate
+                $birthdate = new DateTime($row['bdate']);
+                $today = new DateTime();
+                $age = $today->diff($birthdate)->y;
+        echo '        
         <div class="row">
             <div class="col-md-12">
                 <input type="hidden" value="'.$row['id'].'" name="hidden_id" id="hidden_id"/>
-               
                 <div class="form-group">
                     <label>Resident Name: </label>
-                    <input name="txt_edit_residentname" class="form-control input-sm" type="text" value="'.$row['Name'].'"/>
+                    <input name="txt_edit_resident" class="form-control input-sm" type="text" value="'.$row['Name'].'" readonly/>
                 </div>
-
-                <div class="form-group">
-                    <label>Clearance #: </label>
-                    <input name="txt_edit_cnum" class="form-control input-sm" type="text" value="'.$row['clearanceNo'].'" readonly/>
-                </div>
-
                 <div class="form-group">
                     <label>Purpose : </label>
                     <input name="txt_edit_purpose" class="form-control input-sm" type="text" value="'.$row['purpose'].'" />
@@ -42,18 +33,17 @@
                     <input name="txt_edit_bdate" id="txt_edit_bdate" class="form-control input-sm" type="date" value="'.$row['bdate'].'" onchange="calculateAge()" min="1924-01-01" max="'.date('Y-m-d').'"/>
                 </div>
                 <div class="form-group">
-                    <label class="control-label">Purok:</label>
-                    <input name="txt_edit_purok" class="form-control input-sm input-size" type="text" value="'.$row['purok'].'"/>
+                    <label>Purok: </label>
+                    <input name="txt_edit_purok" class="form-control input-sm" type="text" value="'.$row['purok'].'" />
                 </div>
                 <div class="form-group">
-                    <label>OR Number : </label>
-                    <input name="txt_edit_ornum" class="form-control input-sm" type="text" value="'.$row['orNo'].'" />
+                    <label class="control-label">Civil Status:</label>
+                    <select name="txt_edit_cstatus" class="form-control input-sm">
+                        <option value="Single" '.($row['civilstatus'] == 'Single' ? 'selected' : '').'>Single</option>
+                        <option value="Married" '.($row['civilstatus'] == 'Married' ? 'selected' : '').'>Married</option>
+                        <option value="Widowed" '.($row['civilstatus'] == 'Widowed' ? 'selected' : '').'>Widowed</option>
+                    </select>
                 </div>
-                <div class="form-group">
-                    <label>Amount : </label>
-                    <input name="txt_edit_amount" class="form-control input-sm" type="text" value="'.$row['samount'].'" />
-                </div>
-
             </div>
         </div>
         </div>
