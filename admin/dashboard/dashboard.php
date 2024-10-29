@@ -49,9 +49,9 @@ include "../../connection.php";
     </style>
 </head>
 <body class="skin-black">
-    <?php include('../../header.php');?>
+    <?php include('../admin/header.php');?>
     <div class="wrapper row-offcanvas row-offcanvas-left">
-        <?php include('../../sidebar-left.php'); ?>
+        <?php include('../admin/sidebar-left.php'); ?>
 
         <aside class="right-side">
             <section class="content-header">
