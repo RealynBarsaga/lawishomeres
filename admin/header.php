@@ -259,12 +259,6 @@ if (isset($_POST['btn_saveeditProfile'])) {
             }
         }
     };
-
-    // Initialize Bootstrap modal
-    $('.modal').modal({
-        backdrop: 'static',
-        keyboard: false
-    });
 </script>
 <?php
 if (isset($_POST['btn_saveeditProfile'])) {
