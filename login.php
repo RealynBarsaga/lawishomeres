@@ -1,16 +1,25 @@
 <?php
+
 public function handle($request, Closure $next)
 {
     $response = $next($request);
+    
+    // Set Content Security Policy and HTTP Security Headers
+    $this->setSecurityHeaders($response);
+    
+    return $response;
+}
 
+private function setSecurityHeaders($response)
+{
     // Content Security Policy (CSP)
     $csp = "default-src 'self'; ";
     $csp .= "script-src 'self' https://lawishomeresidences.com; ";
     $csp .= "object-src 'none'; ";
     $csp .= "base-uri 'self'; ";
-    $csp .= "frame-ancestors 'none'; "; // Prevents embedding in frames
-    $csp .= "form-action 'self'; "; // Restricts form submissions
-    $csp .= "upgrade-insecure-requests;"; // Upgrade HTTP to HTTPS
+    $csp .= "frame-ancestors 'none'; ";
+    $csp .= "form-action 'self'; ";
+    $csp .= "upgrade-insecure-requests;";
 
     $response->headers->set('Content-Security-Policy', $csp);
 
@@ -22,43 +31,40 @@ public function handle($request, Closure $next)
     $response->headers->set('Referrer-Policy', 'strict-origin-when-cross-origin');
     $response->headers->set('Permissions-Policy', 'geolocation=(), camera=(), microphone=(), interest-cohort=()');
     $response->headers->set('X-DNS-Prefetch-Control', 'off');
-
-    return $response;
 }
+
 // Set cookie parameters before starting the session
 session_set_cookie_params([
-    'lifetime' => 0,                                    // Session cookie
-    'path' => '/',                                      // Available across the entire domain
-    'domain' => env('SESSION_DOMAIN', 'lawishomeresidences.com'), // Change this to your domain
-    'secure' => env('SESSION_SECURE_COOKIE', true),    // Enforces cookies over HTTPS
-    'httponly' => true,                                 // Makes cookies inaccessible to JavaScript
-    'samesite' => env('SESSION_SAME_SITE', 'Strict'),  // Limits cookies to same-site requests
+    'lifetime' => 0,
+    'path' => '/',
+    'domain' => env('SESSION_DOMAIN', 'lawishomeresidences.com'),
+    'secure' => env('SESSION_SECURE_COOKIE', true),
+    'httponly' => true,
+    'samesite' => env('SESSION_SAME_SITE', 'Strict'),
 ]);
 
 session_start();
+
 $error = false;
 $login_success = false;
 $error_attempts = false;
 
 $username_or_email = "";
-
-// Set a limit for the number of allowed attempts and lockout time (in seconds)
 $max_attempts = 3;
-$lockout_time = 300; // 5 minutes (300 seconds)
+$lockout_time = 300; // 5 minutes
 
-// Check if the user has been locked out
+// Check for lockout
 if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) {
     $remaining_lockout = $_SESSION['lockout_time'] - time();
     $error_attempts = "Too many failed attempts. Please try again in " . ceil($remaining_lockout / 60) . " minute(s).";
 } else {
-    // Reset attempts after lockout period ends
-    if (isset($_SESSION['lockout_time']) && time() > $_SESSION['lockout_time']) {
-        unset($_SESSION['login_attempts']);
-        unset($_SESSION['lockout_time']);
+    // Reset attempts after lockout
+    if (isset($_SESSION['lockout_time'])) {
+        unset($_SESSION['login_attempts'], $_SESSION['lockout_time']);
     }
 
     // Process login attempt
-    if (isset($_POST['btn_login'])) {
+    if (!empty($_POST['btn_login'])) {
         include "pages/connection.php";
 
         // Retrieve input values
@@ -70,19 +76,16 @@ if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) {
             $_SESSION['login_attempts'] = 0;
         }
 
-        // Modify the query to allow login using either username or email
+        // Query to allow login using either username or email
         $stmt = $con->prepare("SELECT * FROM tblstaff WHERE username = ? OR email = ?");
         $stmt->bind_param("ss", $username_or_email, $username_or_email);
         $stmt->execute();
         $result = $stmt->get_result();
-        $numrow_staff = $result->num_rows;
 
-        if ($numrow_staff > 0) {
-            $row = $result->fetch_assoc();
+        if ($row = $result->fetch_assoc()) {
             if (password_verify($password, $row['password'])) {
-                // Reset login attempts upon successful login
-                $_SESSION['login_attempts'] = 0;
-
+                // Successful login
+                $_SESSION['login_attempts'] = 0; // Reset attempts
                 $_SESSION['role'] = "Staff";
                 $_SESSION['staff'] = $row['name'];
                 $_SESSION['userid'] = $row['id'];
@@ -90,38 +93,32 @@ if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) {
                 $_SESSION["barangay"] = $row["name"];
                 $_SESSION['logo'] = $row['logo'];
                 
-                // Set login success flag to true
                 $login_success = true;
             } else {
-                // Increment login attempts
-                $_SESSION['login_attempts']++;
-                if ($_SESSION['login_attempts'] < $max_attempts) {
-                    $error = true;
-                }
+                $this->incrementLoginAttempts();
             }
         } else {
-            // Increment login attempts for invalid username
-            $_SESSION['login_attempts']++;
-            if ($_SESSION['login_attempts'] < $max_attempts) {
-                $error = true;
-            }
-        }
-
-        // Lock out the user after the max number of attempts
-        if ($_SESSION['login_attempts'] >= $max_attempts) {
-            $_SESSION['lockout_time'] = time() + $lockout_time;
-            $error_attempts = "Too many failed attempts. Please try again in 5 minute(s).";
-            $error = false; // Stop showing the "Invalid account" message
+            $this->incrementLoginAttempts();
         }
     }
 }
 
-// Optional: Clear the error after showing it to avoid repetition on refresh
-if ($error || $error_attempts) {
-    $error_message = "Invalid account. Please try again.";
-} else {
-    $error_message = ""; // Reset error message if login attempt is successful
+// Function to handle login attempt increments and lockout
+private function incrementLoginAttempts()
+{
+    $_SESSION['login_attempts']++;
+    if ($_SESSION['login_attempts'] >= $max_attempts) {
+        $_SESSION['lockout_time'] = time() + $lockout_time;
+        $error_attempts = "Too many failed attempts. Please try again in 5 minute(s).";
+        $error = false; // Stop showing the "Invalid account" message
+    } else {
+        $error = true; // Indicate login error
+    }
 }
+
+// Optional: Clear the error after showing it
+$error_message = ($error || $error_attempts) ? "Invalid account. Please try again." : "";
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
