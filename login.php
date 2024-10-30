@@ -1,14 +1,4 @@
 <?php
-// Set cookie parameters before starting the session
-session_set_cookie_params([
-    'lifetime' => 0,                                    // Session cookie
-    'path' => '/',                                      // Available across the entire domain
-    'domain' => env('SESSION_DOMAIN', 'lawishomeresidences.com'), // Change this to your domain
-    'secure' => env('SESSION_SECURE_COOKIE', true),    // Enforces cookies over HTTPS
-    'httponly' => true,                                 // Makes cookies inaccessible to JavaScript
-    'samesite' => env('SESSION_SAME_SITE', 'Strict'),  // Limits cookies to same-site requests
-]);
-
 public function handle($request, Closure $next)
 {
     $response = $next($request);
@@ -35,6 +25,15 @@ public function handle($request, Closure $next)
 
     return $response;
 }
+// Set cookie parameters before starting the session
+session_set_cookie_params([
+    'lifetime' => 0,                                    // Session cookie
+    'path' => '/',                                      // Available across the entire domain
+    'domain' => env('SESSION_DOMAIN', 'lawishomeresidences.com'), // Change this to your domain
+    'secure' => env('SESSION_SECURE_COOKIE', true),    // Enforces cookies over HTTPS
+    'httponly' => true,                                 // Makes cookies inaccessible to JavaScript
+    'samesite' => env('SESSION_SAME_SITE', 'Strict'),  // Limits cookies to same-site requests
+]);
 
 session_start();
 $error = false;
