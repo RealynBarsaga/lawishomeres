@@ -113,22 +113,22 @@ include "../connection.php";
     </div><!-- ./wrapper -->
     
     <?php
-    // Query to count data for each barangay
-    $barangays = ['Tabagak', 'Bunakan', 'Kodia', 'Talangnan', 'Poblacion', 'Maalat', 'Pili', 'Kaongkod', 'Mancilang', 'Kangwayan', 'Tugas', 'Malbago', 'Tarong', 'San Agustin'];
-    $counts = $maleCounts = $femaleCounts = [];
-
-    foreach ($barangays as $barangay) {
-        $q = mysqli_query($con, "SELECT * FROM tbltabagak WHERE barangay = '$barangay'");
-        $counts[] = mysqli_num_rows($q);
-
-        // Count males
-        $q_male = mysqli_query($con, "SELECT * FROM tbltabagak WHERE barangay = '$barangay' AND gender = 'Male'");
-        $maleCounts[] = mysqli_num_rows($q_male);
-
-        // Count females
-        $q_female = mysqli_query($con, "SELECT * FROM tbltabagak WHERE barangay = '$barangay' AND gender = 'Female'");
-        $femaleCounts[] = mysqli_num_rows($q_female);
-    }
+        // Query to count data for each barangay
+        $barangays = ['Tabagak', 'Bunakan', 'Kodia', 'Talangnan', 'Poblacion', 'Maalat', 'Pili', 'Kaongkod', 'Mancilang', 'Kangwayan', 'Tugas', 'Malbago', 'Tarong', 'San Agustin'];
+        $counts = $maleCounts = $femaleCounts = [];
+    
+        foreach ($barangays as $barangay) {
+            $q = mysqli_query($con, "SELECT * FROM tbltabagak WHERE barangay = '$barangay'");
+            $counts[] = mysqli_num_rows($q);
+    
+            // Count males
+            $q_male = mysqli_query($con, "SELECT * FROM tbltabagak WHERE barangay = '$barangay' AND gender = 'Male'");
+            $maleCounts[] = mysqli_num_rows($q_male);
+    
+            // Count females
+            $q_female = mysqli_query($con, "SELECT * FROM tbltabagak WHERE barangay = '$barangay' AND gender = 'Female'");
+            $femaleCounts[] = mysqli_num_rows($q_female);
+        }
     ?>
 
     <script>
