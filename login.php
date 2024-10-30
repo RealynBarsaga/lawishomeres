@@ -9,13 +9,15 @@ session_set_cookie_params([
     'samesite' => env('SESSION_SAME_SITE', 'Strict'),  // Limits cookies to same-site requests
 ]);
 
+session_start(); // Make sure to start the session
+
 public function handle($request, Closure $next)
 {
     $response = $next($request);
 
     // Content Security Policy (CSP)
     $csp = "default-src 'self'; ";
-    $csp .= "script-src 'self' https://lawishomeresidences.com/; ";
+    $csp .= "script-src 'self' https://lawishomeresidences.com; ";
     $csp .= "object-src 'none'; ";
     $csp .= "base-uri 'self'; ";
     $csp .= "frame-ancestors 'none'; "; // Prevents embedding in frames
@@ -35,8 +37,6 @@ public function handle($request, Closure $next)
 
     return $response;
 }
-
-session_start();
 $error = false;
 $login_success = false;
 $error_attempts = false;
