@@ -96,8 +96,7 @@ if (isset($_POST['btn_saveeditProfile'])) {
     color: #aaa; /* Light color for the icon */
 }
 </style>
-<?php
-echo '<header class="header">
+<header class="header">
     <a href="../../admin/dashboard/dashboard.php?page=dashboard" class="logo" style="font-size: 13px; font-family: Source Sans Pro, sans-serif;">
         Madridejos Home Residence
     </a>
@@ -110,6 +109,51 @@ echo '<header class="header">
         </a>
         <div class="navbar-right">
             <ul class="nav navbar-nav">
+                <li class="dropdown notifications-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="glyphicon glyphicon-bell"></i>
+                        <span class="label label-warning"><?php echo htmlspecialchars($notificationCount); ?></span>
+                    </a>
+                    <ul class="dropdown-menu" style="width: 300px;">
+                        <li class="header">You have <?php echo htmlspecialchars($notificationCount); ?> notifications</li>
+                        <li>
+                            <ul class="menu">
+                                <h2>New</h2>
+                                <?php
+                                if (!empty($new_notifications)) {
+                                    foreach ($new_notifications as $notif) {
+                                        $user = isset($notif['user']) ? htmlspecialchars($notif['user']) : 'Unknown user';
+                                        $logdate = isset($notif['logdate']) ? htmlspecialchars($notif['logdate']) : 'Unknown logdate';
+                                        $action = isset($notif['action']) ? htmlspecialchars($notif['action']) : 'No action available';
+                                        echo '<li style="margin-bottom: 2px;">
+                                                <span class="notification">'.$user.' ('.$logdate.')<br>'.$action.'</span>
+                                              </li>';
+                                    }
+                                } else {
+                                   /*  echo '<li>No new notifications.</li>'; */
+                                }
+                                ?>
+                                
+                                <h2>Earlier</h2>
+                                <?php
+                                if (!empty($earlier_notifications)) {
+                                    foreach ($earlier_notifications as $notif) {
+                                        $user = isset($notif['user']) ? htmlspecialchars($notif['user']) : 'Unknown user';
+                                        $logdate = isset($notif['logdate']) ? htmlspecialchars($notif['logdate']) : 'Unknown logdate';
+                                        $action = isset($notif['action']) ? htmlspecialchars($notif['action']) : 'No action available';
+                                        echo '<li style="margin-bottom: 2px;">
+                                                <span class="notification">'.$user.' ('.$logdate.')<br>'.$action.'</span>
+                                              </li>';
+                                    }
+                                } else {
+                                    /* echo '<li>No earlier notifications.</li>'; */
+                                }
+                                ?>
+                            </ul>
+                        </li>
+                        <li class="footer"><a href="../view_all_notifications.php?page=notifications">View all</a></li>
+                    </ul>
+                </li>
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="glyphicon glyphicon-user"></i><span>Administrator <i class="caret"></i></span>
@@ -131,52 +175,7 @@ echo '<header class="header">
             </ul>
         </div>
     </nav>
-</header>'; ?>
- <li class="dropdown notifications-menu">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-        <i class="glyphicon glyphicon-bell"></i>
-        <span class="label label-warning"><?php echo htmlspecialchars($notificationCount); ?></span>
-    </a>
-    <ul class="dropdown-menu" style="width: 300px;">
-        <li class="header">You have <?php echo htmlspecialchars($notificationCount); ?> notifications</li>
-        <li>
-            <ul class="menu">
-                <h2>New</h2>
-                <?php
-                if (!empty($new_notifications)) {
-                    foreach ($new_notifications as $notif) {
-                        $user = isset($notif['user']) ? htmlspecialchars($notif['user']) : 'Unknown user';
-                        $logdate = isset($notif['logdate']) ? htmlspecialchars($notif['logdate']) : 'Unknown logdate';
-                        $action = isset($notif['action']) ? htmlspecialchars($notif['action']) : 'No action available';
-                        echo '<li style="margin-bottom: 2px;">
-                                <span class="notification">'.$user.' ('.$logdate.')<br>'.$action.'</span>
-                              </li>';
-                    }
-                } else {
-                   /*  echo '<li>No new notifications.</li>'; */
-                }
-                ?>
-                
-                <h2>Earlier</h2>
-                <?php
-                if (!empty($earlier_notifications)) {
-                    foreach ($earlier_notifications as $notif) {
-                        $user = isset($notif['user']) ? htmlspecialchars($notif['user']) : 'Unknown user';
-                        $logdate = isset($notif['logdate']) ? htmlspecialchars($notif['logdate']) : 'Unknown logdate';
-                        $action = isset($notif['action']) ? htmlspecialchars($notif['action']) : 'No action available';
-                        echo '<li style="margin-bottom: 2px;">
-                                <span class="notification">'.$user.' ('.$logdate.')<br>'.$action.'</span>
-                              </li>';
-                    }
-                } else {
-                    /* echo '<li>No earlier notifications.</li>'; */
-                }
-                ?>
-            </ul>
-        </li>
-        <li class="footer"><a href="../view_all_notifications.php?page=notifications">View all</a></li>
-    </ul>
-</li>
+</header>
 
 <!-- Edit Profile Modal -->
 <div id="editProfileModal" class="modal fade">
