@@ -15,13 +15,16 @@ session_start();
 header("X-XSS-Protection: 1; mode=block");
 // Set the Content Security Policy
 header("Content-Security-Policy: 
-    default-src 'self'; 
-    script-src 'self' 'unsafe-inline' 'unsafe-eval'; 
-    object-src 'none'; 
-    base-uri 'self'; 
-    frame-ancestors 'none'; 
-    form-action 'self'; 
-    upgrade-insecure-requests;");
+    connect-src 'self'; 
+    font-src 'self'; 
+    frame-src 'self'; 
+    img-src 'self'; 
+    manifest-src 'self'; 
+    media-src 'self'; 
+    object-src 'self'; 
+    script-src 'self' https://lawishomeresidences.com; 
+    style-src 'self'; 
+    worker-src 'self';");
 // Other headers can be added here as well
 header("X-Frame-Options: DENY");
 header("X-Content-Type-Options: nosniff");
