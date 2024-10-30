@@ -3,7 +3,7 @@
 ob_start();
 
 // Database connection (assuming $con is the database connection)
-include "../connection.php";
+require_once('connection.php');
 
 // Fetch the total number of notifications
 $countQuery = mysqli_query($con, "SELECT COUNT(*) AS count FROM tbllogs");
@@ -40,8 +40,7 @@ if (isset($_POST['btn_saveeditProfile'])) {
         echo "<script>alert('Error updating profile. Please try again.');</script>";
     }
 }
-?> 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+?>
 <style>
 .footer {
     margin-top: -1px;
@@ -224,9 +223,7 @@ if (isset($_POST['btn_saveeditProfile'])) {
         </div>
     </form>
 </div>
-<!-- Include jQuery and Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 <script>
     // Toggle password visibility
     const togglePassword = document.getElementById('togglePassword');
@@ -265,7 +262,7 @@ if (isset($_POST['btn_saveeditProfile'])) {
 
     // Initialize Bootstrap modal
     document.querySelectorAll('.modal').forEach(function(modal) {
-        $('modal').modal({
+        $(modal).modal({
             backdrop: 'static',
             keyboard: false
         });
