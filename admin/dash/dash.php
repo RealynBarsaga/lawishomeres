@@ -69,35 +69,41 @@
                     <div class="box">
                         <!-- Info Boxes -->
                         <?php
-                        $info_boxes = [
-                            ['label' => 'Madridejos Officials', 'icon' => 'fa-user', 'color' => '#00c0ef', 'query' => "SELECT * FROM tblMadofficial", 'link' => '../officials/officials.php'],
-                            ['label' => 'Total Barangay', 'icon' => 'fa-university', 'color' => '#007256', 'query' => "SELECT * FROM tblstaff", 'link' => '../staff/staff.php'],
-                            ['label' => 'Total Permit', 'icon' => 'fa-file', 'color' => '#bd1e24', 'query' => "SELECT * FROM tblpermit", 'link' => '../permit/permit.php'],
-                            ['label' => 'Total Household', 'icon' => 'fa-users', 'color' => '#e5c707', 'query' => "SELECT * FROM tblhousehold", 'link' => '../householdlist/householdlist.php']
-                        ];
-
-                        foreach ($info_boxes as $box) {
-                            $q = mysqli_query($con, $box['query']);
-                            $num_rows = mysqli_num_rows($q);
-                        ?>
-                        <div class="col-md-3 col-sm-6 col-xs-12">
-                            <br>
-                            <div class="info-box" style="background-color: <?= $box['color'] ?> !important;">
-                                <span style="position: absolute; top: 47%; left: 77%; transform: translate(-50%, -50%); font-size: 40px; color: #eeeeeeba; z-index: 1;">
-                                    <i class="fa <?= $box['icon'] ?>"></i>
-                                </span>
-                                <span class="info-box-number" style="font-size: 30px; color: #fff; margin-left: 15px; font-family: 'Source Sans Pro', sans-serif; font-weight: bold;">
-                                    <?= $num_rows ?>
-                                    <span class="info-box-text"><?= $box['label'] ?></span>
-                                </span>
-                                <div class="info-box-footer" style="text-align: center; background-color: rgba(0, 0, 0, 0.1); padding: 5px;">
-                                    <a href="<?= $box['link'] ?>" style="color: #fff; text-decoration: none; font-weight: 100; font-family: 'Source Sans Pro', sans-serif;">
-                                        More Info <i class="fa fa-arrow-circle-right"></i>
-                                    </a>
+                            $info_boxes = [
+                                ['label' => 'Madridejos Officials', 'icon' => 'fa-user', 'color' => '#00c0ef', 'query' => "SELECT * FROM tblMadofficial", 'link' => '../officials/officials.php'],
+                                ['label' => 'Total Barangay', 'icon' => 'fa-university', 'color' => '#007256', 'query' => "SELECT * FROM tblstaff", 'link' => '../staff/staff.php'],
+                                ['label' => 'Total Permit', 'icon' => 'fa-file', 'color' => '#bd1e24', 'query' => "SELECT * FROM tblpermit", 'link' => '../permit/permit.php'],
+                                ['label' => 'Total Household', 'icon' => 'fa-users', 'color' => '#e5c707', 'query' => "SELECT * FROM tblhousehold", 'link' => '../householdlist/householdlist.php']
+                            ];
+                            
+                            foreach ($info_boxes as $box) {
+                                $q = mysqli_query($con, $box['query']);
+                                
+                                if ($q) {
+                                    $num_rows = mysqli_num_rows($q);
+                                } else {
+                                    // Handle query error
+                                    $num_rows = 0; // Fallback in case of an error
+                                }
+                            ?>
+                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                    <br>
+                                    <div class="info-box" style="background-color: <?= htmlspecialchars($box['color']) ?> !important;">
+                                        <span style="position: absolute; top: 47%; left: 77%; transform: translate(-50%, -50%); font-size: 40px; color: #eeeeeeba; z-index: 1;">
+                                            <i class="fa <?= htmlspecialchars($box['icon']) ?>"></i>
+                                        </span>
+                                        <span class="info-box-number" style="font-size: 30px; color: #fff; margin-left: 15px; font-family: 'Source Sans Pro', sans-serif; font-weight: bold;">
+                                            <?= htmlspecialchars($num_rows) ?>
+                                            <span class="info-box-text"><?= htmlspecialchars($box['label']) ?></span>
+                                        </span>
+                                        <div class="info-box-footer" style="text-align: center; background-color: rgba(0, 0, 0, 0.1); padding: 5px;">
+                                            <a href="<?= htmlspecialchars($box['link']) ?>" style="color: #fff; text-decoration: none; font-weight: 100; font-family: 'Source Sans Pro', sans-serif;">
+                                                More Info <i class="fa fa-arrow-circle-right"></i>
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <?php } ?>
+                            <?php } ?>
                     </div><!-- /.box -->
                     <!-- Bar Chart -->
                     <div class="chart-container">
