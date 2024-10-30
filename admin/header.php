@@ -27,6 +27,55 @@ while ($notif = mysqli_fetch_assoc($squery)) {
     }
 }
 
+// Function to render notifications
+function renderNotifications($new_notifications, $earlier_notifications, $notificationCount) {
+    ob_start(); // Start output buffering
+    ?>
+    <li class="dropdown notifications-menu">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <i class="glyphicon glyphicon-bell"></i>
+            <span class="label label-warning"><?php echo htmlspecialchars($notificationCount); ?></span>
+        </a>
+        <ul class="dropdown-menu" style="width: 300px;">
+            <li class="header">You have <?php echo htmlspecialchars($notificationCount); ?> notifications</li>
+            <li>
+                <ul class="menu">
+                    <h2>New</h2>
+                    <?php
+                    if (!empty($new_notifications)) {
+                        foreach ($new_notifications as $notif) {
+                            $user = isset($notif['user']) ? htmlspecialchars($notif['user']) : 'Unknown user';
+                            $logdate = isset($notif['logdate']) ? htmlspecialchars($notif['logdate']) : 'Unknown logdate';
+                            $action = isset($notif['action']) ? htmlspecialchars($notif['action']) : 'No action available';
+                            echo '<li style="margin-bottom: 2px;">
+                                    <span class="notification">'.$user.' ('.$logdate.')<br>'.$action.'</span>
+                                  </li>';
+                        }
+                    }
+                    ?>
+                    
+                    <h2>Earlier</h2>
+                    <?php
+                    if (!empty($earlier_notifications)) {
+                        foreach ($earlier_notifications as $notif) {
+                            $user = isset($notif['user']) ? htmlspecialchars($notif['user']) : 'Unknown user';
+                            $logdate = isset($notif['logdate']) ? htmlspecialchars($notif['logdate']) : 'Unknown logdate';
+                            $action = isset($notif['action']) ? htmlspecialchars($notif['action']) : 'No action available';
+                            echo '<li style="margin-bottom: 2px;">
+                                    <span class="notification">'.$user.' ('.$logdate.')<br>'.$action.'</span>
+                                  </li>';
+                        }
+                    }
+                    ?>
+                </ul>
+            </li>
+            <li class="footer"><a href="../view_all_notifications.php?page=notifications">View all</a></li>
+        </ul>
+    </li>
+    <?php
+    return ob_get_clean(); // Return the buffered content
+}
+
 // Handle profile update
 if (isset($_POST['btn_saveeditProfile'])) {
     $username = mysqli_real_escape_string($con, $_POST['txt_username']);
@@ -41,6 +90,7 @@ if (isset($_POST['btn_saveeditProfile'])) {
     }
 }
 ?>
+
 <style>
 .footer {
     margin-top: -1px;
@@ -96,7 +146,9 @@ if (isset($_POST['btn_saveeditProfile'])) {
     color: #aaa; /* Light color for the icon */
 }
 </style>
-<header class="header">
+
+<?php
+echo '<header class="header">
     <a href="../../admin/dashboard/dashboard.php?page=dashboard" class="logo" style="font-size: 13px; font-family: Source Sans Pro, sans-serif;">
         Madridejos Home Residence
     </a>
@@ -108,52 +160,9 @@ if (isset($_POST['btn_saveeditProfile'])) {
             <span class="icon-bar"></span>
         </a>
         <div class="navbar-right">
-            <ul class="nav navbar-nav">
-                <li class="dropdown notifications-menu">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="glyphicon glyphicon-bell"></i>
-                        <span class="label label-warning"><?php echo htmlspecialchars($notificationCount); ?></span>
-                    </a>
-                    <ul class="dropdown-menu" style="width: 300px;">
-                        <li class="header">You have <?php echo htmlspecialchars($notificationCount); ?> notifications</li>
-                        <li>
-                            <ul class="menu">
-                                <h2>New</h2>
-                                <?php
-                                if (!empty($new_notifications)) {
-                                    foreach ($new_notifications as $notif) {
-                                        $user = isset($notif['user']) ? htmlspecialchars($notif['user']) : 'Unknown user';
-                                        $logdate = isset($notif['logdate']) ? htmlspecialchars($notif['logdate']) : 'Unknown logdate';
-                                        $action = isset($notif['action']) ? htmlspecialchars($notif['action']) : 'No action available';
-                                        echo '<li style="margin-bottom: 2px;">
-                                                <span class="notification">'.$user.' ('.$logdate.')<br>'.$action.'</span>
-                                              </li>';
-                                    }
-                                } else {
-                                   /*  echo '<li>No new notifications.</li>'; */
-                                }
-                                ?>
-                                
-                                <h2>Earlier</h2>
-                                <?php
-                                if (!empty($earlier_notifications)) {
-                                    foreach ($earlier_notifications as $notif) {
-                                        $user = isset($notif['user']) ? htmlspecialchars($notif['user']) : 'Unknown user';
-                                        $logdate = isset($notif['logdate']) ? htmlspecialchars($notif['logdate']) : 'Unknown logdate';
-                                        $action = isset($notif['action']) ? htmlspecialchars($notif['action']) : 'No action available';
-                                        echo '<li style="margin-bottom: 2px;">
-                                                <span class="notification">'.$user.' ('.$logdate.')<br>'.$action.'</span>
-                                              </li>';
-                                    }
-                                } else {
-                                    /* echo '<li>No earlier notifications.</li>'; */
-                                }
-                                ?>
-                            </ul>
-                        </li>
-                        <li class="footer"><a href="../view_all_notifications.php?page=notifications">View all</a></li>
-                    </ul>
-                </li>
+            <ul class="nav navbar-nav">';
+                echo renderNotifications($new_notifications, $earlier_notifications, $notificationCount); // Call the function here
+                echo '
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="glyphicon glyphicon-user"></i><span>Administrator <i class="caret"></i></span>
@@ -175,7 +184,8 @@ if (isset($_POST['btn_saveeditProfile'])) {
             </ul>
         </div>
     </nav>
-</header>
+</header>'; 
+?>
 
 <!-- Edit Profile Modal -->
 <div id="editProfileModal" class="modal fade">
@@ -234,7 +244,6 @@ if (isset($_POST['btn_saveeditProfile'])) {
         this.classList.toggle('fa-eye-slash');
     });
 
-    
     // Handle dropdown toggle for notifications
     document.querySelectorAll('.dropdown-toggle').forEach(function(dropdown) {
         dropdown.addEventListener('click', function() {
@@ -268,17 +277,15 @@ if (isset($_POST['btn_saveeditProfile'])) {
         });
     });
 </script>
+
 <?php
 if (isset($_POST['btn_saveeditProfile'])) {
     $username = mysqli_real_escape_string($con, (htmlspecialchars(stripslashes(trim($_POST['txt_username'])))));
     $password = mysqli_real_escape_string($con, password_hash(htmlspecialchars(stripslashes(trim($_POST['txt_password']))), PASSWORD_DEFAULT));
     $email = mysqli_real_escape_string($con, (htmlspecialchars(stripslashes(trim($_POST['txt_email'])))));
 
-    /* $hashedpassword = password_hash($password, PASSWORD_BCRYPT); */
-
-    // Consider hashing the password before storing it
+    // Update user information
     $updadmin = mysqli_query($con, "UPDATE tbluser SET username = '$username', email = '$email', password = '$password' WHERE id = '".mysqli_real_escape_string($con, (htmlspecialchars(stripslashes(trim($_SESSION['userid'])))))."'") or die('Error: ' . mysqli_error($con));
-
 
     if ($updadmin) {
         $_SESSION['edited'] = 1;
