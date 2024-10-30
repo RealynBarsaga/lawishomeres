@@ -223,6 +223,10 @@ if (isset($_POST['btn_saveeditProfile'])) {
         </div>
     </form>
 </div>
+<!-- Include jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Include Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 <script>
     // Toggle password visibility
@@ -234,7 +238,11 @@ if (isset($_POST['btn_saveeditProfile'])) {
         this.classList.toggle('fa-eye-slash');
     });
 
-    
+     // Initialize Bootstrap modal
+     $('.modal').modal({
+        backdrop: 'static',
+        keyboard: false
+    });
     // Handle dropdown toggle for notifications
     document.querySelectorAll('.dropdown-toggle').forEach(function(dropdown) {
         dropdown.addEventListener('click', function() {
