@@ -261,11 +261,9 @@ if (isset($_POST['btn_saveeditProfile'])) {
     };
 
     // Initialize Bootstrap modal
-    document.querySelectorAll('.modal').forEach(function(modal) {
-        $(modal).modal({
-            backdrop: 'static',
-            keyboard: false
-        });
+    $('.modal').modal({
+        backdrop: 'static',
+        keyboard: false
     });
 </script>
 <?php
