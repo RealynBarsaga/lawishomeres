@@ -223,10 +223,7 @@ if (isset($_POST['btn_saveeditProfile'])) {
         </div>
     </form>
 </div>
-<!-- Include jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- Include Bootstrap JS -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 <script>
     // Toggle password visibility
     const togglePassword = document.getElementById('togglePassword');
@@ -262,12 +259,6 @@ if (isset($_POST['btn_saveeditProfile'])) {
             }
         }
     };
-
-    // Initialize Bootstrap modal
-    $('.modal').modal({
-        backdrop: 'static',
-        keyboard: false
-    });
 </script>
 <?php
 if (isset($_POST['btn_saveeditProfile'])) {
