@@ -263,12 +263,13 @@ if (isset($_POST['btn_saveeditProfile'])) {
         }
     };
 
-    $(document).ready(function() {
-    $('.modal').modal({
-        backdrop: 'static',
-        keyboard: false
+    // Initialize Bootstrap modal
+    document.querySelectorAll('.modal').forEach(function(modal) {
+        $('modal').modal({
+            backdrop: 'static',
+            keyboard: false
+        });
     });
-});
 </script>
 <?php
 if (isset($_POST['btn_saveeditProfile'])) {
