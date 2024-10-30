@@ -1,21 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
 <?php
-
 // Set cookie parameters before starting the session
 session_set_cookie_params([
     'lifetime' => 0,              // Session cookie
     'path' => '/',                // Available across the entire domain
-    'domain' => 'lawishomeresidences.com/admin/', // Change this to your domain
+    'domain' => 'lawishomeresidences.com/admin/', // Use the base domain, not a subdirectory
     'secure' => true,             // Set to true if using HTTPS
     'httponly' => true,           // Prevent JavaScript access to the cookie
     'samesite' => 'Strict'        // Use 'Lax' or 'Strict' based on your needs
 ]);
 
+// Start the session
+session_start();
+
 // This should be at the very top of your PHP file
 header("X-XSS-Protection: 1; mode=block");
-// Start your PHP script
 header("Content-Security-Policy: 
+    default-src 'self'; 
     connect-src 'self'; 
     font-src 'self'; 
     frame-src 'self'; 
@@ -23,22 +23,22 @@ header("Content-Security-Policy:
     manifest-src 'self'; 
     media-src 'self'; 
     object-src 'self'; 
-    script-src 'self' https://lawishomeresidences.com/admin/; 
+    script-src 'self' https://lawishomeresidences.com; 
     style-src 'self'; 
-    worker-src 'self';");
-// Other headers can be added here as well
+    worker-src 'self';
+");
 header("X-Frame-Options: DENY");
 header("X-Content-Type-Options: nosniff");
 header("Referrer-Policy: strict-origin-when-cross-origin");
 header("Strict-Transport-Security: max-age=63072000; includeSubDomains; preload");
-header("Access-Control-Allow-Origin: https://lawishomeresidences.com/admin"); // Change to your domain
+header("Access-Control-Allow-Origin: https://lawishomeresidences.com/admin/"); // Use base domain
 header("Cross-Origin-Opener-Policy: same-origin");
 header("Cross-Origin-Embedder-Policy: require-corp");
 header("Cross-Origin-Resource-Policy: same-site");
 header("Permissions-Policy: geolocation=(), camera=(), microphone=(), interest-cohort=()");
 header("X-DNS-Prefetch-Control: off");
 
-session_start();
+// Rest of your PHP script goes here
 $error = false;
 $login_success = false;
 $error_attempts = false;
@@ -120,6 +120,8 @@ if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) {
     }
 }
 ?>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Madridejos Home Residence Management System</title>
