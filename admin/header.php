@@ -101,7 +101,6 @@ if (isset($_POST['btn_saveeditProfile'])) {
         }
     </style>
 </head>
-<body>
 <header class="header">
     <a href="../../admin/dashboard/dashboard.php?page=dashboard" class="logo" style="font-size: 13px; font-family: Source Sans Pro, sans-serif;">
         Madridejos Home Residence
@@ -293,4 +292,3 @@ if (isset($_POST['btn_saveeditProfile'])) {
     }
 }
 ?>
-</body>
