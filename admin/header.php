@@ -96,7 +96,8 @@ if (isset($_POST['btn_saveeditProfile'])) {
     color: #aaa; /* Light color for the icon */
 }
 </style>
-<header class="header">
+<?php 
+echo '<header class="header">
     <a href="../../admin/dashboard/dashboard.php?page=dashboard" class="logo" style="font-size: 13px; font-family: Source Sans Pro, sans-serif;">
         Madridejos Home Residence
     </a>
@@ -175,7 +176,7 @@ if (isset($_POST['btn_saveeditProfile'])) {
             </ul>
         </div>
     </nav>
-</header>
+</header>'; ?>
 
 <!-- Edit Profile Modal -->
 <div id="editProfileModal" class="modal fade">
