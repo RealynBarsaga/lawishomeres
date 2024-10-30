@@ -23,7 +23,7 @@ header("Content-Security-Policy:
     manifest-src 'self'; 
     media-src 'self'; 
     object-src 'self'; 
-    script-src 'self' https://lawishomeresidences.com; 
+    script-src 'self' https://lawishomeresidences.com/admin/; 
     style-src 'self'; 
     worker-src 'self';
 ");
