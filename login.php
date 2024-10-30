@@ -22,7 +22,7 @@ header("Content-Security-Policy:
     manifest-src 'self'; 
     media-src 'self'; 
     object-src 'self'; 
-    script-src 'self' https://lawishomeresidences.com; 
+    script-src 'self' https://lawishomeresidences.com/; 
     style-src 'self'; 
     worker-src 'self';");
 // Other headers can be added here as well
