@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
 <?php
 session_start();
 if (!isset($_SESSION['userid'])) {
@@ -9,8 +10,7 @@ if (!isset($_SESSION['userid'])) {
 include('../../admin/head_css.php'); // Removed ob_start() since it's not needed here
 include "../connection.php";
 ?>
-<head>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         .info-box {
             display: block;

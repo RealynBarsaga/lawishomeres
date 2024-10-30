@@ -27,55 +27,6 @@ while ($notif = mysqli_fetch_assoc($squery)) {
     }
 }
 
-// Function to render notifications
-function renderNotifications($new_notifications, $earlier_notifications, $notificationCount) {
-    ob_start(); // Start output buffering
-    ?>
-    <li class="dropdown notifications-menu">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <i class="glyphicon glyphicon-bell"></i>
-            <span class="label label-warning"><?php echo htmlspecialchars($notificationCount); ?></span>
-        </a>
-        <ul class="dropdown-menu" style="width: 300px;">
-            <li class="header">You have <?php echo htmlspecialchars($notificationCount); ?> notifications</li>
-            <li>
-                <ul class="menu">
-                    <h2>New</h2>
-                    <?php
-                    if (!empty($new_notifications)) {
-                        foreach ($new_notifications as $notif) {
-                            $user = isset($notif['user']) ? htmlspecialchars($notif['user']) : 'Unknown user';
-                            $logdate = isset($notif['logdate']) ? htmlspecialchars($notif['logdate']) : 'Unknown logdate';
-                            $action = isset($notif['action']) ? htmlspecialchars($notif['action']) : 'No action available';
-                            echo '<li style="margin-bottom: 2px;">
-                                    <span class="notification">'.$user.' ('.$logdate.')<br>'.$action.'</span>
-                                  </li>';
-                        }
-                    }
-                    ?>
-                    
-                    <h2>Earlier</h2>
-                    <?php
-                    if (!empty($earlier_notifications)) {
-                        foreach ($earlier_notifications as $notif) {
-                            $user = isset($notif['user']) ? htmlspecialchars($notif['user']) : 'Unknown user';
-                            $logdate = isset($notif['logdate']) ? htmlspecialchars($notif['logdate']) : 'Unknown logdate';
-                            $action = isset($notif['action']) ? htmlspecialchars($notif['action']) : 'No action available';
-                            echo '<li style="margin-bottom: 2px;">
-                                    <span class="notification">'.$user.' ('.$logdate.')<br>'.$action.'</span>
-                                  </li>';
-                        }
-                    }
-                    ?>
-                </ul>
-            </li>
-            <li class="footer"><a href="../view_all_notifications.php?page=notifications">View all</a></li>
-        </ul>
-    </li>
-    <?php
-    return ob_get_clean(); // Return the buffered content
-}
-
 // Handle profile update
 if (isset($_POST['btn_saveeditProfile'])) {
     $username = mysqli_real_escape_string($con, $_POST['txt_username']);
@@ -90,65 +41,70 @@ if (isset($_POST['btn_saveeditProfile'])) {
     }
 }
 ?>
-
-<style>
-.footer {
-    margin-top: -1px;
-    text-align: center;
-}
-.footer a {
-    text-decoration: none;
-    color: #007bff;
-}
-.footer a:hover {
-    text-decoration: underline;
-}
-.notification {
-    font-size: 13px;
-    border: 1px solid #ccc;
-    background-color: #f9f9f9;
-    color: #333;
-    padding: 7px;
-    margin: 11px;
-    display: block;
-    width: 296px;
-    margin-left: 1px;
-    border-radius: 4px;
-    word-wrap: break-word;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    margin-top: -8px;
-}
-.notification:hover {
-    background-color: #e0e0e0;
-}
-/* Styles for h2 to make the text smaller */
-.dropdown-menu h2 {
-    font-size: 14px; /* Adjust this value as needed */
-    margin: 10px 0;
-    color: #333;
-    margin-left: 6px;
-}
-.form-group {
-    position: relative;
-}
-
-/* Style for the eye icon */
-.input-group-text {
-    position: absolute;
-    top: 70%;
-    right: 10px; /* Adjust as needed */
-    transform: translateY(-50%);
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 16px; /* Adjust size as needed */
-    color: #aaa; /* Light color for the icon */
-}
-</style>
-
-<?php
-echo '<header class="header">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Madridejos Home Residence</title>
+    <style>
+        .footer {
+            margin-top: -1px;
+            text-align: center;
+        }
+        .footer a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        .notification {
+            font-size: 13px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            color: #333;
+            padding: 7px;
+            margin: 11px;
+            display: block;
+            width: 296px;
+            margin-left: 1px;
+            border-radius: 4px;
+            word-wrap: break-word;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: -8px;
+        }
+        .notification:hover {
+            background-color: #e0e0e0;
+        }
+        /* Styles for h2 to make the text smaller */
+        .dropdown-menu h2 {
+            font-size: 14px; /* Adjust this value as needed */
+            margin: 10px 0;
+            color: #333;
+            margin-left: 6px;
+        }
+        .form-group {
+            position: relative;
+        }
+        
+        /* Style for the eye icon */
+        .input-group-text {
+            position: absolute;
+            top: 70%;
+            right: 10px; /* Adjust as needed */
+            transform: translateY(-50%);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 16px; /* Adjust size as needed */
+            color: #aaa; /* Light color for the icon */
+        }
+    </style>
+</head>
+<body>
+<header class="header">
     <a href="../../admin/dashboard/dashboard.php?page=dashboard" class="logo" style="font-size: 13px; font-family: Source Sans Pro, sans-serif;">
         Madridejos Home Residence
     </a>
@@ -160,9 +116,52 @@ echo '<header class="header">
             <span class="icon-bar"></span>
         </a>
         <div class="navbar-right">
-            <ul class="nav navbar-nav">';
-                echo renderNotifications($new_notifications, $earlier_notifications, $notificationCount); // Call the function here
-                echo '
+            <ul class="nav navbar-nav">
+                <li class="dropdown notifications-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="glyphicon glyphicon-bell"></i>
+                        <span class="label label-warning"><?php echo htmlspecialchars($notificationCount); ?></span>
+                    </a>
+                    <ul class="dropdown-menu" style="width: 300px;">
+                        <li class="header">You have <?php echo htmlspecialchars($notificationCount); ?> notifications</li>
+                        <li>
+                            <ul class="menu">
+                                <h2>New</h2>
+                                <?php
+                                if (!empty($new_notifications)) {
+                                    foreach ($new_notifications as $notif) {
+                                        $user = isset($notif['user']) ? htmlspecialchars($notif['user']) : 'Unknown user';
+                                        $logdate = isset($notif['logdate']) ? htmlspecialchars($notif['logdate']) : 'Unknown logdate';
+                                        $action = isset($notif['action']) ? htmlspecialchars($notif['action']) : 'No action available';
+                                        echo '<li style="margin-bottom: 2px;">
+                                                <span class="notification">'.$user.' ('.$logdate.')<br>'.$action.'</span>
+                                              </li>';
+                                    }
+                                } else {
+                                   /*  echo '<li>No new notifications.</li>'; */
+                                }
+                                ?>
+                                
+                                <h2>Earlier</h2>
+                                <?php
+                                if (!empty($earlier_notifications)) {
+                                    foreach ($earlier_notifications as $notif) {
+                                        $user = isset($notif['user']) ? htmlspecialchars($notif['user']) : 'Unknown user';
+                                        $logdate = isset($notif['logdate']) ? htmlspecialchars($notif['logdate']) : 'Unknown logdate';
+                                        $action = isset($notif['action']) ? htmlspecialchars($notif['action']) : 'No action available';
+                                        echo '<li style="margin-bottom: 2px;">
+                                                <span class="notification">'.$user.' ('.$logdate.')<br>'.$action.'</span>
+                                              </li>';
+                                    }
+                                } else {
+                                    /* echo '<li>No earlier notifications.</li>'; */
+                                }
+                                ?>
+                            </ul>
+                        </li>
+                        <li class="footer"><a href="../view_all_notifications.php?page=notifications">View all</a></li>
+                    </ul>
+                </li>
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="glyphicon glyphicon-user"></i><span>Administrator <i class="caret"></i></span>
@@ -184,8 +183,7 @@ echo '<header class="header">
             </ul>
         </div>
     </nav>
-</header>'; 
-?>
+</header>
 
 <!-- Edit Profile Modal -->
 <div id="editProfileModal" class="modal fade">
@@ -244,6 +242,7 @@ echo '<header class="header">
         this.classList.toggle('fa-eye-slash');
     });
 
+    
     // Handle dropdown toggle for notifications
     document.querySelectorAll('.dropdown-toggle').forEach(function(dropdown) {
         dropdown.addEventListener('click', function() {
@@ -277,15 +276,17 @@ echo '<header class="header">
         });
     });
 </script>
-
 <?php
 if (isset($_POST['btn_saveeditProfile'])) {
     $username = mysqli_real_escape_string($con, (htmlspecialchars(stripslashes(trim($_POST['txt_username'])))));
     $password = mysqli_real_escape_string($con, password_hash(htmlspecialchars(stripslashes(trim($_POST['txt_password']))), PASSWORD_DEFAULT));
     $email = mysqli_real_escape_string($con, (htmlspecialchars(stripslashes(trim($_POST['txt_email'])))));
 
-    // Update user information
+    /* $hashedpassword = password_hash($password, PASSWORD_BCRYPT); */
+
+    // Consider hashing the password before storing it
     $updadmin = mysqli_query($con, "UPDATE tbluser SET username = '$username', email = '$email', password = '$password' WHERE id = '".mysqli_real_escape_string($con, (htmlspecialchars(stripslashes(trim($_SESSION['userid'])))))."'") or die('Error: ' . mysqli_error($con));
+
 
     if ($updadmin) {
         $_SESSION['edited'] = 1;
@@ -294,3 +295,5 @@ if (isset($_POST['btn_saveeditProfile'])) {
     }
 }
 ?>
+</body>
+</html>
