@@ -8,7 +8,7 @@
         exit; // Ensure no further execution after redirect
     }
     include('../../admin/head_css.php');
-    include("../connection.php");
+    include('../connection.php');
     ?>
 </head>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
