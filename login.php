@@ -11,6 +11,8 @@ session_set_cookie_params([
 
 session_start();
 
+// This should be at the very top of your PHP file
+header("X-XSS-Protection: 1; mode=block");
 // Start your PHP script
 header("Content-Security-Policy: 
     connect-src 'self'; 
@@ -23,9 +25,6 @@ header("Content-Security-Policy:
     script-src 'self' https://lawishomeresidences.com; 
     style-src 'self'; 
     worker-src 'self';");
-
-// This should be at the very top of your PHP file
-header("X-XSS-Protection: 1; mode=block");
 // Other headers can be added here as well
 header("X-Frame-Options: DENY");
 header("X-Content-Type-Options: nosniff");
