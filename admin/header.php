@@ -41,69 +41,61 @@ if (isset($_POST['btn_saveeditProfile'])) {
     }
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Madridejos Home Residence</title>
-    <style>
-        .footer {
-            margin-top: -1px;
-            text-align: center;
-        }
-        .footer a {
-            text-decoration: none;
-            color: #007bff;
-        }
-        .footer a:hover {
-            text-decoration: underline;
-        }
-        .notification {
-            font-size: 13px;
-            border: 1px solid #ccc;
-            background-color: #f9f9f9;
-            color: #333;
-            padding: 7px;
-            margin: 11px;
-            display: block;
-            width: 296px;
-            margin-left: 1px;
-            border-radius: 4px;
-            word-wrap: break-word;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin-top: -8px;
-        }
-        .notification:hover {
-            background-color: #e0e0e0;
-        }
-        /* Styles for h2 to make the text smaller */
-        .dropdown-menu h2 {
-            font-size: 14px; /* Adjust this value as needed */
-            margin: 10px 0;
-            color: #333;
-            margin-left: 6px;
-        }
-        .form-group {
-            position: relative;
-        }
-        
-        /* Style for the eye icon */
-        .input-group-text {
-            position: absolute;
-            top: 70%;
-            right: 10px; /* Adjust as needed */
-            transform: translateY(-50%);
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            font-size: 16px; /* Adjust size as needed */
-            color: #aaa; /* Light color for the icon */
-        }
-    </style>
-</head>
-<body>
+<style>
+.footer {
+    margin-top: -1px;
+    text-align: center;
+}
+.footer a {
+    text-decoration: none;
+    color: #007bff;
+}
+.footer a:hover {
+    text-decoration: underline;
+}
+.notification {
+    font-size: 13px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    color: #333;
+    padding: 7px;
+    margin: 11px;
+    display: block;
+    width: 296px;
+    margin-left: 1px;
+    border-radius: 4px;
+    word-wrap: break-word;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: -8px;
+}
+.notification:hover {
+    background-color: #e0e0e0;
+}
+/* Styles for h2 to make the text smaller */
+.dropdown-menu h2 {
+    font-size: 14px; /* Adjust this value as needed */
+    margin: 10px 0;
+    color: #333;
+    margin-left: 6px;
+}
+.form-group {
+    position: relative;
+}
+
+/* Style for the eye icon */
+.input-group-text {
+    position: absolute;
+    top: 70%;
+    right: 10px; /* Adjust as needed */
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px; /* Adjust size as needed */
+    color: #aaa; /* Light color for the icon */
+}
+</style>
 <header class="header">
     <a href="../../admin/dashboard/dashboard.php?page=dashboard" class="logo" style="font-size: 13px; font-family: Source Sans Pro, sans-serif;">
         Madridejos Home Residence
@@ -295,5 +287,3 @@ if (isset($_POST['btn_saveeditProfile'])) {
     }
 }
 ?>
-</body>
-</html>
