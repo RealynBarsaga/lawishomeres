@@ -11,10 +11,10 @@ session_set_cookie_params([
 
 session_start();
 
-// This should be at the very top of your PHP file
+// Security headers
 header("X-XSS-Protection: 1; mode=block");
-// Start your PHP script
 header("Content-Security-Policy: 
+    default-src 'self'; 
     connect-src 'self'; 
     font-src 'self'; 
     frame-src 'self'; 
@@ -22,10 +22,10 @@ header("Content-Security-Policy:
     manifest-src 'self'; 
     media-src 'self'; 
     object-src 'self'; 
-    script-src 'self' https://lawishomeresidences.com/; 
+    script-src 'self' https://lawishomeresidences.com; 
     style-src 'self'; 
-    worker-src 'self';");
-// Other headers can be added here as well
+    worker-src 'self'; 
+");
 header("X-Frame-Options: DENY");
 header("X-Content-Type-Options: nosniff");
 header("Referrer-Policy: strict-origin-when-cross-origin");
@@ -37,6 +37,7 @@ header("Cross-Origin-Resource-Policy: same-site");
 header("Permissions-Policy: geolocation=(), camera=(), microphone=(), interest-cohort=()");
 header("X-DNS-Prefetch-Control: off");
 
+// Rest of your PHP script goes here
 $error = false;
 $login_success = false;
 $error_attempts = false;
