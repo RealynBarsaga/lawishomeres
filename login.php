@@ -1,29 +1,40 @@
 <?php
 // Set cookie parameters before starting the session
 session_set_cookie_params([
-    'lifetime' => 0,              // Session cookie
-    'path' => '/',                // Available across the entire domain
-    'domain' => 'lawishomeresidences.com', // Change this to your domain
-    'secure' => true,             // Set to true if using HTTPS
-    'httponly' => true,           // Prevent JavaScript access to the cookie
-    'samesite' => 'Strict'        // Use 'Lax' or 'Strict' based on your needs
+    'lifetime' => 0,                                    // Session cookie
+    'path' => '/',                                      // Available across the entire domain
+    'domain' => env('SESSION_DOMAIN', 'lawishomeresidences.com'), // Change this to your domain
+    'secure' => env('SESSION_SECURE_COOKIE', true),    // Enforces cookies over HTTPS
+    'httponly' => true,                                 // Makes cookies inaccessible to JavaScript
+    'samesite' => env('SESSION_SAME_SITE', 'Strict'),  // Limits cookies to same-site requests
 ]);
 
-// This should be at the very top of your PHP file
-header("X-XSS-Protection: 1; mode=block");
-// Set the Content Security Policy
-header("Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; object-src 'none'; base-uri 'self';");
-// Other headers can be added here as well
-header("X-Frame-Options: DENY");
-header("X-Content-Type-Options: nosniff");
-header("Referrer-Policy: strict-origin-when-cross-origin");
-header("Strict-Transport-Security: max-age=63072000; includeSubDomains; preload");
-header("Access-Control-Allow-Origin: https://lawishomeresidences.com"); // Change to your domain
-header("Cross-Origin-Opener-Policy: same-origin");
-header("Cross-Origin-Embedder-Policy: require-corp");
-header("Cross-Origin-Resource-Policy: same-site");
-header("Permissions-Policy: geolocation=(), camera=(), microphone=(), interest-cohort=()");
-header("X-DNS-Prefetch-Control: off");
+public function handle($request, Closure $next)
+{
+    $response = $next($request);
+
+    // Content Security Policy (CSP)
+    $csp = "default-src 'self'; ";
+    $csp .= "script-src 'self' https://lawishomeresidences.com; ";
+    $csp .= "object-src 'none'; ";
+    $csp .= "base-uri 'self'; ";
+    $csp .= "frame-ancestors 'none'; "; // Prevents embedding in frames
+    $csp .= "form-action 'self'; "; // Restricts form submissions
+    $csp .= "upgrade-insecure-requests;"; // Upgrade HTTP to HTTPS
+
+    $response->headers->set('Content-Security-Policy', $csp);
+
+    // HTTP Security Headers
+    $response->headers->set('X-Frame-Options', 'SAMEORIGIN');
+    $response->headers->set('X-XSS-Protection', '1; mode=block');
+    $response->headers->set('X-Content-Type-Options', 'nosniff');
+    $response->headers->set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
+    $response->headers->set('Referrer-Policy', 'strict-origin-when-cross-origin');
+    $response->headers->set('Permissions-Policy', 'geolocation=(), camera=(), microphone=(), interest-cohort=()');
+    $response->headers->set('X-DNS-Prefetch-Control', 'off');
+
+    return $response;
+}
 
 session_start();
 $error = false;
