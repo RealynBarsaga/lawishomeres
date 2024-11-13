@@ -13,19 +13,6 @@ session_start();
 
 // Security headers
 header("X-XSS-Protection: 1; mode=block");
-header("Content-Security-Policy: 
-    default-src 'self'; 
-    connect-src 'self'; 
-    font-src 'self'; 
-    frame-src 'self'; 
-    img-src 'self'; 
-    manifest-src 'self'; 
-    media-src 'self'; 
-    object-src 'self'; 
-    script-src 'self' https://lawishomeresidences.com; 
-    style-src 'self'; 
-    worker-src 'self'; 
-");
 header("X-Frame-Options: DENY");
 header("X-Content-Type-Options: nosniff");
 header("Referrer-Policy: strict-origin-when-cross-origin");
@@ -131,6 +118,18 @@ if ($error || $error_attempts) {
     <meta charset="UTF-8">
     <title>Madridejos Home Residence Management System</title>
     <link rel="icon" type="x-icon" href="img/lg.png">
+    <meta http-equiv="Content-Security-Policy" 
+    content="default-src 'self'; 
+    script-src 'self';
+    style-src 'self';
+    connect-src 'self';
+    font-src 'self';
+    frame-src 'self';
+    img-src 'self';
+    manifest-src 'self';
+    media-src 'self'; 
+    object-src 'self';
+    worker-src 'self';">
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- bootstrap 3.0.2 -->
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
