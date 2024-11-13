@@ -11,32 +11,32 @@
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu">
                             <li>
-                                <a href="../dashboard/dashboard.php?page=dashboard">
+                                <a href="../dashboard/dashboard.php">
                                     <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="../officials/officials.php?page=officials">
+                                <a href="../officials/officials.php">
                                     <i class="fa fa-user"></i> <span>Madridejos Officials</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="../staff/staff.php?page=staff">
+                                <a href="../staff/staff.php">
                                     <i class="fa fa-university"></i> <span>List Of Barangay</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="../householdlist/householdlist.php?page=householdlist">
+                                <a href="../householdlist/householdlist.php">
                                     <i class="fa fa-users"></i> <span>List Of Household</span>
                                 </a>
                             </li>
                              <li>
-                                <a href="../permit/permit.php?page=permit">
+                                <a href="../permit/permit.php">
                                     <i class="fa fa-file"></i> <span>Permit</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="../generatereports/generatereports.php?page=generatereports">
+                                <a href="../generatereports/generatereports.php">
                                     <i class="fa fa-paper-plane"></i> <span>Generated Reports</span>
                                 </a>
                             </li>                  
