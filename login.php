@@ -118,23 +118,9 @@ if ($error || $error_attempts) {
     <meta charset="UTF-8">
     <title>Madridejos Home Residence Management System</title>
     <link rel="icon" type="x-icon" href="img/lg.png">
-    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <meta http-equiv="Content-Security-Policy" 
-    content="
-        default-src 'self'; 
-        script-src 'self' https://www.google.com https://ajax.googleapis.com https://www.gstatic.com; 
-        style-src 'self' 'unsafe-inline'; 
-        connect-src 'self'; 
-        font-src 'self' https://fonts.gstatic.com; 
-        frame-src 'self' https://www.google.com; 
-        img-src 'self' data: https://www.google.com; 
-        manifest-src 'self'; 
-        media-src 'self'; 
-        object-src 'none'; 
-        worker-src 'self'; 
-        base-uri 'self'; 
-        form-action 'self';
-    ">
+    content="default-src 'self'; script-src 'self' https://www.google.com https://ajax.googleapis.com https://www.gstatic.com; style-src 'self' 'unsafe-inline'; connect-src 'self'; font-src 'self' https://fonts.gstatic.com; frame-src 'self' https://www.google.com; img-src 'self' data: https://www.google.com; manifest-src 'self'; media-src 'self'; object-src 'none'; worker-src 'self'; base-uri 'self'; form-action 'self';">
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- bootstrap 3.0.2 -->
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <!-- Theme style -->
