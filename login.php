@@ -1248,7 +1248,7 @@ header h2 {
         // Attach a click event to the OK button
         document.getElementById("ok-button2").addEventListener("click", function() {
             // Redirect to the dashboard after the OK button is clicked
-            window.location.href = '../dashboard'; // Use the cleaner URL here
+            window.location.href = 'pages/dashboard'; // Use the cleaner URL here
         });
     });
 
