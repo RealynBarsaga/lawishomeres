@@ -11,42 +11,42 @@
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                         <ul class="sidebar-menu">
                             <li>
-                                <a href="../dashboard/dashboard.php?page=dashboard">
+                                <a href="../dashboard">
                                     <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="../officials/officials.php?page=officials">
+                                <a href="../officials">
                                     <i class="fa fa-user"></i> <span>Barangay Officials</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="../household/household.php?page=household">
+                                <a href="../household">
                                     <i class="fa fa-home"></i> <span>Household</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="../resident/resident.php?page=resident">
+                                <a href="../resident">
                                     <i class="fa fa-users"></i> <span>Resident</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="../brgyclearance/brgyclearance.php?page=brgyclearance">
+                                <a href="../brgyclearance">
                                     <i class="fa fa-file"></i> <span>Barangay Clearance</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="../certofresidency/certofres.php?page=certofresidency">
+                                <a href="../certofresidency">
                                     <i class="fa fa-file"></i> <span>Certificate Of Residency</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="../certofindigency/certofindigency.php?page=certofindigency">
+                                <a href="../certofindigency">
                                     <i class="fa fa-file"></i> <span>Certificate Of Indigency</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="../brgycertificate/brgycertificate.php?page=brgycertificate">
+                                <a href="../brgycertificate">
                                     <i class="fa fa-file"></i> <span>Barangay Certificate</span>
                                 </a>
                             </li>
