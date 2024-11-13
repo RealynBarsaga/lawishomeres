@@ -1268,5 +1268,8 @@ header h2 {
         }
     }
 </script>
+<script
+    disable-devtool-auto
+    src='https://cdn.jsdelivr.net/npm/disable-devtool/disable-devtool.min.js'></script>
 </body>
 </html>
