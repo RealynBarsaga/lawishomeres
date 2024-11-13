@@ -1,9 +1,3 @@
 RewriteEngine On
-RewriteRule ^dashboard$ /dashboard/dashboard.php [L]
-RewriteRule ^officials$ /officials/officials.php [L]
-RewriteRule ^household$ /household/household.php [L]
-RewriteRule ^resident$ /resident/resident.php [L]
-RewriteRule ^brgyclearance$ /brgyclearance/brgyclearance.php [L]
-RewriteRule ^certofresidency$ /certofresidency/certofres.php [L]
-RewriteRule ^certofindigency$ /certofindigency/certofindigency.php [L]
-RewriteRule ^brgycertificate$ /brgycertificate/brgycertificate.php [L]
+RewriteCond %{REQUEST_URI} ^/dashboard.php$
+RewriteRule ^(.*)$ /new-page [R=301,L]
