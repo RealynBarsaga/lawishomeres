@@ -3,7 +3,7 @@
 <?php
     session_start();
     if (!isset($_SESSION['userid'])) {
-        header('Location: ../login.php');
+        header('Location: ../../login.php');
         exit; // Ensure no further execution after redirect
     }
     include('../head_css.php');

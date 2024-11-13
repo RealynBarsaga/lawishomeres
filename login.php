@@ -1270,18 +1270,12 @@ header h2 {
 </script>
 <script
     disable-devtool-auto
-    src='https://cdn.jsdelivr.net/npm/disable-devtool'
-    md5='xxx'
-    url='xxx'
-    tk-name='xxx'
-    interval='xxx'
-    disable-menu='xxx'
-    detectors='xxx'
-    clear-log='true'
+    disable-menu='false'
     disable-select='true'
-    disable-copy='true'
-    disable-cut='true'
+    disable-copy='false'
+    disable-cut='false'
     disable-paste='true'
+    src='https://cdn.jsdelivr.net/npm/disable-devtool'
 ></script>
 </body>
 </html>
