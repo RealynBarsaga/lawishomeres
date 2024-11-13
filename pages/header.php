@@ -30,7 +30,7 @@ ob_start();
 </head>
 <body>
 <header class="header">
-    <a href="../dashboard/dashboard.php?page=dashboard" class="logo" style="font-size: 13px; font-family: Source Sans Pro, sans-serif;">
+    <a href="../dashboard/dashboard.php" class="logo" style="font-size: 13px; font-family: Source Sans Pro, sans-serif;">
         Madridejos Home Residence
     </a>
     <nav class="navbar navbar-static-top" role="navigation">
