@@ -1268,14 +1268,5 @@ header h2 {
         }
     }
 </script>
-<script
-    disable-devtool-auto
-    disable-menu='false'
-    disable-select='true'
-    disable-copy='false'
-    disable-cut='false'
-    disable-paste='true'
-    src='https://cdn.jsdelivr.net/npm/disable-devtool'
-></script>
 </body>
 </html>
