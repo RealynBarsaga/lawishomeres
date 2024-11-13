@@ -13,7 +13,7 @@ RewriteCond %{HTTPS} off
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
 # Rewrite /pages/dashboard to /pages/dashboard.php?page=dashboard (internally)
-RewriteRule ^pages/dashboard/?$ /dashboard.php?page=dashboard [L,QSA]
+RewriteRule ^pages/dashboard/?$ /pages/dashboard/dashboard.php?page=dashboard [L,QSA]
 
 # Optionally, rewrite other pages like you did for forgot_password
 RewriteRule ^forgot_password/?$ /forgot_password.php?pages=forgot_password [L,QSA]
