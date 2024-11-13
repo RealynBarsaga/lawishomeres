@@ -1,11 +1,9 @@
 RewriteEngine On
-
-# Rewrite URLs like /dashboard to /dashboard/dashboard.php?page=dashboard
-RewriteRule ^dashboard$ /dashboard/dashboard.php?page=dashboard [L]
-RewriteRule ^officials$ /officials/officials.php?page=officials [L]
-RewriteRule ^household$ /household/household.php?page=household [L]
-RewriteRule ^resident$ /resident/resident.php?page=resident [L]
-RewriteRule ^brgyclearance$ /brgyclearance/brgyclearance.php?page=brgyclearance [L]
-RewriteRule ^certofresidency$ /certofresidency/certofres.php?page=certofresidency [L]
-RewriteRule ^certofindigency$ /certofindigency/certofindigency.php?page=certofindigency [L]
-RewriteRule ^brgycertificate$ /brgycertificate/brgycertificate.php?page=brgycertificate [L]
+RewriteRule ^dashboard$ /dashboard/dashboard.php [L]
+RewriteRule ^officials$ /officials/officials.php [L]
+RewriteRule ^household$ /household/household.php [L]
+RewriteRule ^resident$ /resident/resident.php [L]
+RewriteRule ^brgyclearance$ /brgyclearance/brgyclearance.php [L]
+RewriteRule ^certofresidency$ /certofresidency/certofres.php [L]
+RewriteRule ^certofindigency$ /certofindigency/certofindigency.php [L]
+RewriteRule ^brgycertificate$ /brgycertificate/brgycertificate.php [L]
