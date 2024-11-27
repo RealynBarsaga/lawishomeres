@@ -1,9 +1,9 @@
 <?php
 // Set cookie parameters before starting the session
 session_set_cookie_params([
-    'lifetime' => 0,              // Session cookie
+    'lifetime' => 0,              // Session cookie (expires when the browser is closed)
     'path' => '/',                // Available across the entire domain
-    'domain' => 'lawishomeresidences.com/admin/', // Use the base domain, not a subdirectory
+    'domain' => 'lawishomeresidences.com/admin/', // Change this to your domain
     'secure' => true,             // Set to true if using HTTPS
     'httponly' => true,           // Prevent JavaScript access to the cookie
     'samesite' => 'Strict'        // Use 'Lax' or 'Strict' based on your needs
@@ -12,13 +12,19 @@ session_set_cookie_params([
 // Start the session
 session_start();
 
-// This should be at the very top of your PHP file
+// Regenerate session ID upon each new login to prevent session fixation
+if (!isset($_SESSION['session_created'])) {
+    session_regenerate_id(true);  // Regenerate session ID on login
+    $_SESSION['session_created'] = time();
+}
+
+// Security headers
 header("X-XSS-Protection: 1; mode=block");
 header("X-Frame-Options: DENY");
 header("X-Content-Type-Options: nosniff");
 header("Referrer-Policy: strict-origin-when-cross-origin");
 header("Strict-Transport-Security: max-age=63072000; includeSubDomains; preload");
-header("Access-Control-Allow-Origin: https://lawishomeresidences.com/admin/"); // Use base domain
+header("Access-Control-Allow-Origin: https://lawishomeresidences.com/admin/"); // Change to your domain
 header("Cross-Origin-Opener-Policy: same-origin");
 header("Cross-Origin-Embedder-Policy: require-corp");
 header("Cross-Origin-Resource-Policy: same-site");
