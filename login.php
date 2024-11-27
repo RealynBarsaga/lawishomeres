@@ -1,7 +1,7 @@
 <?php
 // Set cookie parameters before starting the session
 session_set_cookie_params([
-    'lifetime' => 0,              // Session cookie
+    'lifetime' => 0,              // Session cookie (expires when the browser is closed)
     'path' => '/',                // Available across the entire domain
     'domain' => 'lawishomeresidences.com', // Change this to your domain
     'secure' => true,             // Set to true if using HTTPS
@@ -9,7 +9,14 @@ session_set_cookie_params([
     'samesite' => 'Strict'        // Use 'Lax' or 'Strict' based on your needs
 ]);
 
+// Start the session
 session_start();
+
+// Regenerate session ID upon each new login to prevent session fixation
+if (!isset($_SESSION['session_created'])) {
+    session_regenerate_id(true);  // Regenerate session ID on login
+    $_SESSION['session_created'] = time();
+}
 
 // Security headers
 header("X-XSS-Protection: 1; mode=block");
@@ -72,6 +79,9 @@ if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) {
                 // Reset login attempts upon successful login
                 $_SESSION['login_attempts'] = 0;
 
+                // Regenerate session ID upon successful login
+                session_regenerate_id(true);
+
                 $_SESSION['role'] = "Staff";
                 $_SESSION['staff'] = $row['name'];
                 $_SESSION['userid'] = $row['id'];
@@ -115,7 +125,7 @@ if ($error || $error_attempts) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <title>Madridejos Home Residence Management System</title>
     <link rel="icon" type="x-icon" href="img/lg.png">
     <meta http-equiv="Content-Security-Policy" 
