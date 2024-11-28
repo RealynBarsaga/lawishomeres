@@ -117,11 +117,22 @@ if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Madridejos Home Residence Management System</title>
     <link rel="icon" type="x-icon" href="../img/lg.png">
-    <meta http-equiv="Content-Security-Policy" 
-    content="default-src 'self'; script-src 'self' https://www.google.com https://ajax.googleapis.com https://www.gstatic.com; style-src 'self' 'unsafe-inline'; connect-src 'self'; font-src 'self' https://fonts.gstatic.com; frame-src 'self' https://www.google.com; img-src 'self' data: https://www.google.com; manifest-src 'self'; media-src 'self'; object-src 'none'; worker-src 'self'; base-uri 'self'; form-action 'self';">
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self'; 
+    script-src 'self' https://code.jquery.com https://cdn.jsdelivr.net https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/ 'unsafe-inline'; 
+    object-src 'none'; 
+    connect-src 'self'; 
+    style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com 'unsafe-inline'; 
+    font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; 
+    img-src 'self' data: https://*.googleapis.com https://*.ggpht.com https://cdnjs.cloudflare.com; 
+    frame-src https://www.google.com/recaptcha/ https://www.google.com/maps/embed/; 
+    frame-ancestors 'self'; 
+    base-uri 'self'; 
+    form-action 'self';">
     <!-- bootstrap 3.0.2 -->
     <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <!-- Theme style -->

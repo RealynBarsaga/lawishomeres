@@ -125,12 +125,23 @@ if ($error || $error_attempts) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Madridejos Home Residence Management System</title>
     <link rel="icon" type="x-icon" href="img/lg.png">
-    <meta http-equiv="Content-Security-Policy" 
-    content="default-src 'self'; script-src 'self' https://www.google.com https://ajax.googleapis.com https://www.gstatic.com; style-src 'self' 'unsafe-inline'; connect-src 'self'; font-src 'self' https://fonts.gstatic.com; frame-src 'self' https://www.google.com; img-src 'self' data: https://www.google.com; manifest-src 'self'; media-src 'self'; object-src 'none'; worker-src 'self'; base-uri 'self'; form-action 'self';">
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self'; 
+    script-src 'self' https://code.jquery.com https://cdn.jsdelivr.net https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/ 'unsafe-inline'; 
+    object-src 'none'; 
+    connect-src 'self'; 
+    style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com 'unsafe-inline'; 
+    font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; 
+    img-src 'self' data: https://*.googleapis.com https://*.ggpht.com https://cdnjs.cloudflare.com; 
+    frame-src https://www.google.com/recaptcha/ https://www.google.com/maps/embed/; 
+    frame-ancestors 'self'; 
+    base-uri 'self'; 
+    form-action 'self';">
     <!-- bootstrap 3.0.2 -->
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <!-- Theme style -->
@@ -1085,187 +1096,251 @@ header h2 {
     </div>
 </div>
 <script>
-    // Get modal elements
-    const modal = document.getElementById('cookieSettingsModal');
-    const customizeBtn = document.getElementById('customizeBtn');
-    const closeButton = document.querySelector('.close-button');
-    const saveSettingsButton = document.getElementById('saveSettings');
-    
-    // Function to open the modal
-    customizeBtn.addEventListener('click', () => {
-        modal.style.display = 'block';
-    });
-    
-    // Function to close the modal
-    closeButton.addEventListener('click', () => {
+// Modal for cookie settings
+const modal = document.getElementById('cookieSettingsModal');
+const customizeBtn = document.getElementById('customizeBtn');
+const closeButton = document.querySelector('.close-button');
+const saveSettingsButton = document.getElementById('saveSettings');
+
+// Function to open the modal
+customizeBtn.addEventListener('click', () => {
+    modal.style.display = 'block';
+});
+
+// Function to close the modal
+closeButton.addEventListener('click', () => {
+    modal.style.display = 'none';
+});
+
+// Optional: Save settings functionality
+saveSettingsButton.addEventListener('click', () => {
+    const functionalityEnabled = document.getElementById('functionalityCookies').checked;
+    const securityEnabled = document.getElementById('securityCookies').checked;
+    const personalizationEnabled = document.getElementById('personalizationCookies').checked;
+    const adEnabled = document.getElementById('adCookies').checked;
+    const adUserDataEnabled = document.getElementById('adUserData').checked;
+    const adPersonalizationEnabled = document.getElementById('adPersonalization').checked;
+    const analyticsEnabled = document.getElementById('analyticsCookies').checked;
+
+    console.log(`Functionality Cookies Enabled: ${functionalityEnabled}`);
+    console.log(`Security Cookies Enabled: ${securityEnabled}`);
+    console.log(`Personalization Cookies Enabled: ${personalizationEnabled}`);
+    console.log(`Ad Cookies Enabled: ${adEnabled}`);
+    console.log(`Ad User Data Enabled: ${adUserDataEnabled}`);
+    console.log(`Ad Personalization Enabled: ${adPersonalizationEnabled}`);
+    console.log(`Analytics Cookies Enabled: ${analyticsEnabled}`);
+
+    // Save preferences logic here
+    modal.style.display = 'none'; // Close modal after saving
+});
+
+// Close modal if clicked outside of it
+window.addEventListener('click', (event) => {
+    if (event.target === modal) {
         modal.style.display = 'none';
-    });
-    
-    // Optional: Save settings functionality
-    saveSettingsButton.addEventListener('click', () => {
-        const functionalityEnabled = document.getElementById('functionalityCookies').checked;
-        const securityEnabled = document.getElementById('securityCookies').checked;
-        const personalizationEnabled = document.getElementById('personalizationCookies').checked;
-        const adEnabled = document.getElementById('adCookies').checked;
-        const adUserDataEnabled = document.getElementById('adUserData').checked;
-        const adPersonalizationEnabled = document.getElementById('adPersonalization').checked;
-        const analyticsEnabled = document.getElementById('analyticsCookies').checked;
-    
-        console.log(`Functionality Cookies Enabled: ${functionalityEnabled}`);
-        console.log(`Security Cookies Enabled: ${securityEnabled}`);
-        console.log(`Personalization Cookies Enabled: ${personalizationEnabled}`);
-        console.log(`Ad Cookies Enabled: ${adEnabled}`);
-        console.log(`Ad User Data Enabled: ${adUserDataEnabled}`);
-        console.log(`Ad Personalization Enabled: ${adPersonalizationEnabled}`);
-        console.log(`Analytics Cookies Enabled: ${analyticsEnabled}`);
-    
-        // Save preferences logic here
-        modal.style.display = 'none'; // Close modal after saving
-    });
+    }
+});
 
-    // Close modal if clicked outside of it
-    window.addEventListener('click', (event) => {
-        if (event.target === modal) {
-            modal.style.display = 'none';
-        }
-    });
+const cookieBox = document.querySelector(".wrapper"),
+    buttons = document.querySelectorAll(".button");
 
+// Execute cookies code
+const executeCodes = () => {
+    // If cookie contains 'codinglab', it will be returned and below code will not run
+    if (document.cookie.includes("codinglab")) return;
+    cookieBox.classList.add("show");
 
-  
-    const cookieBox = document.querySelector(".wrapper"),
-        buttons = document.querySelectorAll(".button");
-    
-    const executeCodes = () => {
-      // If cookie contains codinglab, it will be returned and below code will not run
-      if (document.cookie.includes("codinglab")) return;
-      cookieBox.classList.add("show");
-    
-      buttons.forEach((button) => {
+    buttons.forEach((button) => {
         button.addEventListener("click", () => {
-          // Check if the button clicked is not the "Customize" button
-          if (button.id === "acceptBtn") {
-            // Hide cookie box and set the cookie
-            cookieBox.classList.remove("show");
-            document.cookie = "cookieBy=codinglab; max-age=" + 60 * 60 * 24 * 30;
-          }
-          // If the button clicked is "Customize," do not hide the cookie box
+            if (button.id === "acceptBtn") {
+                // Hide cookie box and set the cookie
+                cookieBox.classList.remove("show");
+                document.cookie = "cookieBy=codinglab; max-age=" + 60 * 60 * 24 * 30;
+            }
         });
-      });
+    });
+};
+
+window.addEventListener("load", executeCodes);
+
+// Accept All button functionality
+document.getElementById("acceptall").addEventListener("click", function() {
+    document.getElementById("functionalityCookies").checked = true;
+    document.getElementById("securityCookies").checked = true;
+    document.getElementById("personalizationCookies").checked = true;
+    document.getElementById("adCookies").checked = true;
+    document.getElementById("adUserData").checked = true;
+    document.getElementById("adPersonalization").checked = true;
+    document.getElementById("analyticsCookies").checked = true;
+});
+
+// Accept Necessary button functionality
+document.getElementById("acceptnecessary").addEventListener("click", function() {
+    document.getElementById("functionalityCookies").checked = true;
+    document.getElementById("securityCookies").checked = true;
+    document.getElementById("personalizationCookies").checked = false;
+    document.getElementById("adCookies").checked = false;
+    document.getElementById("adUserData").checked = false;
+    document.getElementById("adPersonalization").checked = false;
+    document.getElementById("analyticsCookies").checked = false;
+});
+
+// Save Settings button functionality
+document.getElementById("saveSettings").addEventListener("click", function() {
+    const settings = {
+        functionality: document.getElementById("functionalityCookies").checked,
+        security: document.getElementById("securityCookies").checked,
+        personalization: document.getElementById("personalizationCookies").checked,
+        ads: document.getElementById("adCookies").checked,
+        adUserData: document.getElementById("adUserData").checked,
+        adPersonalization: document.getElementById("adPersonalization").checked,
+        analytics: document.getElementById("analyticsCookies").checked,
     };
-    
-    executeCodes();
+    console.log("Settings saved:", settings);
+    // Close modal here if needed
+    modal.style.display = 'none';
+});
 
+// reCAPTCHA validation
+$(document).on('click', '#btn_login', function() {
+    var response = grecaptcha.getResponse();
+    alert(response);
+});
 
-  
-    //executeCodes function will be called on webpage load
-    window.addEventListener("load", executeCodes);
-
-    document.addEventListener("DOMContentLoaded", function() {
-    const acceptAllButton = document.getElementById("acceptall");
-    const acceptNecessaryButton = document.getElementById("acceptnecessary");
-    const saveSettingsButton = document.getElementById("saveSettings");
-
-    const functionalityCookies = document.getElementById("functionalityCookies");
-    const securityCookies = document.getElementById("securityCookies");
-    const personalizationCookies = document.getElementById("personalizationCookies");
-    const adCookies = document.getElementById("adCookies");
-    const adUserData = document.getElementById("adUserData");
-    const adPersonalization = document.getElementById("adPersonalization");
-    const analyticsCookies = document.getElementById("analyticsCookies");
-
-    // Accept All button functionality
-    acceptAllButton.addEventListener("click", function() {
-        functionalityCookies.checked = true;
-        securityCookies.checked = true;
-        personalizationCookies.checked = true;
-        adCookies.checked = true;
-        adUserData.checked = true;
-        adPersonalization.checked = true;
-        analyticsCookies.checked = true;
-    });
-
-    // Accept Necessary button functionality
-    acceptNecessaryButton.addEventListener("click", function() {
-        functionalityCookies.checked = true;
-        securityCookies.checked = true;
-        personalizationCookies.checked = false;
-        adCookies.checked = false;
-        adUserData.checked = false;
-        adPersonalization.checked = false;
-        analyticsCookies.checked = false;
-    });
-
-    // Save Settings button functionality
-    saveSettingsButton.addEventListener("click", function() {
-        const settings = {
-            functionality: functionalityCookies.checked,
-            security: securityCookies.checked,
-            personalization: personalizationCookies.checked,
-            ads: adCookies.checked,
-            adUserData: adUserData.checked,
-            adPersonalization: adPersonalization.checked,
-            analytics: analyticsCookies.checked,
-        };
-        console.log("Settings saved:", settings);
-        // Close modal here if needed
-    });
-    });
-</script>
-<script>
-    $(document).on('click', '#btn_login', function(){
-        var response = g-recaptcha.getResponse();
-        alert(response);
-    })  
-   
-    //executeCodes function will be called on webpage load
-    window.addEventListener("load", executeCodes);
-
-    function validateRecaptcha() {
+function validateRecaptcha() {
     var response = grecaptcha.getResponse();
     if (response.length === 0) {
         document.getElementById("captcha-error").style.display = "block";
         return false; // Prevent form submission
     }
     return true; // Allow form submission
+}
+
+// Password visibility toggle function
+function togglePassword(inputId, icon) {
+    const input = document.getElementById(inputId);
+    const iconElement = icon.querySelector('i');
+
+    if (input.type === 'password') {
+        input.type = 'text';
+        iconElement.classList.remove('fa-eye');
+        iconElement.classList.add('fa-eye-slash');
+    } else {
+        input.type = 'password';
+        iconElement.classList.remove('fa-eye-slash');
+        iconElement.classList.add('fa-eye');
+    }
+}
+
+// Preloader logic based on session
+$(document).ready(function() {
+    $(".preloader-it").fadeOut(500);  // Fade out the preloader once the DOM is fully ready
+});
+
+// Check if the user is logged in based on the session variable
+<?php if (isset($_SESSION['login_success']) && $_SESSION['login_success'] == true): ?>
+    // If logged in, hide the preloader
+    document.getElementById('preloader').style.display = 'none';
+<?php else: ?>
+    // If not logged in, show the preloader (this can be customized)
+    document.getElementById('preloader').style.display = 'block';
+<?php endif; ?>
+
+// DevTools Detection
+(function() {
+    const threshold = 160;
+    let devToolsOpen = false;
+    const elementsToHide = [
+        "script[src*='bower_components']",
+        "script[src*='assets']",
+        "script[src*='dist']",
+        "script[src*='js']",
+        "link[rel='stylesheet']",
+        "style",
+        "meta",
+        "title"
+    ];
+
+    function hideElements() {
+        elementsToHide.forEach(function(selector) {
+            const elements = document.querySelectorAll(selector);
+            elements.forEach(function(element) {
+                element.setAttribute('type', 'text/plain');
+                element.setAttribute('data-original-src', element.getAttribute('src'));
+                element.removeAttribute('src');
+                element.textContent = '';
+            });
+        });
     }
 
-    document.addEventListener("DOMContentLoaded", function() {
-        document.getElementById("error-ok-button").addEventListener("click", function() {
-            document.getElementById("error-modal").style.display = 'none';
+    function showElements() {
+        elementsToHide.forEach(function(selector) {
+            const elements = document.querySelectorAll(selector);
+            elements.forEach(function(element) {
+                element.setAttribute('type', 'text/javascript');
+                const originalSrc = element.getAttribute('data-original-src');
+                if (originalSrc) {
+                    element.setAttribute('src', originalSrc);
+                    element.removeAttribute('data-original-src');
+                }
+            });
         });
-    });
-  
-    // Wait for the DOM to load
-    document.addEventListener("DOMContentLoaded", function() {
-        // Attach a click event to the OK button
-        document.getElementById("error-ok-button1").addEventListener("click", function() {
-            // Close the error modal when OK is clicked
-            document.getElementById("error-modal1").style.display = 'none';
-        });
-    });
-    // Wait for the DOM to load
-    document.addEventListener("DOMContentLoaded", function() {
-        // Attach a click event to the OK button
-        document.getElementById("ok-button2").addEventListener("click", function() {
-            // Redirect to the dashboard after the OK button is clicked
-            window.location.href = 'pages/dashboard/dashboard.php';
-        });
-    });
+    }
 
-    function togglePassword(inputId, icon) {
-        const input = document.getElementById(inputId);
-        const iconElement = icon.querySelector('i');
-        
-        if (input.type === 'password') {
-            input.type = 'text';
-            iconElement.classList.remove('fa-eye');
-            iconElement.classList.add('fa-eye-slash');
+    function hideContent() {
+        document.head.innerHTML = `
+            <style>
+                body {
+                    background-color: black;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 100vh;
+                    margin: 0;
+                    font-family: Arial, sans-serif;
+                }
+                h1 {
+                    color: #39FF14;
+                    text-shadow: 0 0 10px #39FF14, 0 0 20px #39FF14, 0 0 30px #39FF14;
+                    animation: bounce 1s infinite alternate;
+                    text-align: center;
+                }
+                @keyframes bounce {
+                    from { transform: translateY(0px); }
+                    to { transform: translateY(-20px); }
+                }
+            </style>
+        `;
+        document.body.innerHTML = '<h1>DevTools detected.</h1>';
+    }
+
+    function restoreContent() {
+        location.reload();
+    }
+
+    function checkDevTools() {
+        const widthThreshold = window.outerWidth - window.innerWidth > threshold;
+        const heightThreshold = window.outerHeight - window.innerHeight > threshold;
+
+        if (widthThreshold || heightThreshold) {
+            if (!devToolsOpen) {
+                hideContent();
+                hideElements();
+                devToolsOpen = true;
+                console.clear();
+                console.log('%cDevTools detected.', 'color: red; font-size: 24px;');
+            }
         } else {
-            input.type = 'password';
-            iconElement.classList.remove('fa-eye-slash');
-            iconElement.classList.add('fa-eye');
+            if (devToolsOpen) {
+                restoreContent();
+                showElements();
+                devToolsOpen = false;
+            }
         }
     }
+
+    setInterval(checkDevTools, 1000);
+})();
 </script>
 </body>
 </html>
