@@ -1245,9 +1245,40 @@ $(document).ready(function() {
     // If not logged in, show the preloader (this can be customized)
     document.getElementById('preloader').style.display = 'block';
 <?php endif; ?>
+</script>
 
-// DevTools Detection
-(function() {
+<script>
+  document.addEventListener('contextmenu', function(event) {
+    event.preventDefault();
+});
+
+document.addEventListener('keydown', function(event) {
+    if (event.keyCode == 123) { // F12
+        event.preventDefault();
+    }
+    if (event.ctrlKey && event.shiftKey && (event.keyCode == 73 || event.keyCode == 74)) { 
+        event.preventDefault();
+    }
+    if (event.ctrlKey && (event.keyCode == 85 || event.keyCode == 83)) { 
+        event.preventDefault();
+    }
+    if (event.ctrlKey && event.shiftKey && event.keyCode == 67) { 
+        event.preventDefault();
+    }
+});
+
+
+  document.addEventListener('dragstart', function(event) {
+    event.preventDefault();
+  });
+
+  document.addEventListener('keydown', function(event) {
+    if (event.ctrlKey && event.keyCode == 65) { 
+      event.preventDefault();
+    }
+  });
+
+  (function() {
     const threshold = 160;
     let devToolsOpen = false;
     const elementsToHide = [
@@ -1339,6 +1370,37 @@ $(document).ready(function() {
         }
     }
 
+    // Event listeners
+    window.addEventListener('load', checkDevTools);
+    window.addEventListener('resize', checkDevTools);
+
+    // Prevent keyboard shortcuts
+    window.addEventListener('keydown', function(event) {
+        if (
+            event.ctrlKey && (
+                event.keyCode === 85 || // Ctrl+U
+                event.keyCode === 83 || // Ctrl+S
+                event.keyCode === 123 || // F12
+                (event.shiftKey && (event.keyCode === 73 || event.keyCode === 74)) // Ctrl+Shift+I/J
+            )
+        ) {
+            event.preventDefault();
+            hideContent();
+            hideElements();
+        }
+    });
+
+    // Prevent right-click
+    document.addEventListener('contextmenu', function(event) {
+        event.preventDefault();
+    });
+
+    // Prevent text selection
+    document.addEventListener('selectstart', function(event) {
+        event.preventDefault();
+    });
+
+    // Check for DevTools periodically
     setInterval(checkDevTools, 1000);
 })();
 </script>
