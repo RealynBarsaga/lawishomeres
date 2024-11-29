@@ -82,7 +82,7 @@
         <!-- Centered Text Content -->
         <div class="col-xs-7 col-sm-6 col-md-8" style="text-align: center;">
             <div style="font-size: 16px; font-family: 'Courier New', Courier;">
-                <p style="margin-right: 170px;">Republic of the Philippines<br>
+                <p>Republic of the Philippines<br>
                 Province of Cebu<br>
                 <span style="font-size: 18px; font-weight: bolder;margin-left: -18px;">Municipality of Madridejos</span></p>
             </div>
