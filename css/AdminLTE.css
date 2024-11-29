@@ -102,10 +102,8 @@
 */
 html,
 body {
-  overflow-x: hidden!important;
   font-family: 'Source Sans Pro', sans-serif;
   -webkit-font-smoothing: antialiased;
-  height: 100%;
   background: #f9f9f9;
 }
 a {

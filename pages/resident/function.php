@@ -23,7 +23,6 @@ if (isset($_POST['btn_add'])) {
     // Continue with other sanitized form data
     $txt_brgy = htmlspecialchars(stripslashes(trim($_POST['txt_brgy'])), ENT_QUOTES, 'UTF-8');
     $txt_purok = htmlspecialchars(stripslashes(trim($_POST['txt_purok'])), ENT_QUOTES, 'UTF-8');
-    $txt_householdmem = htmlspecialchars(stripslashes(trim($_POST['txt_householdmem'])), ENT_QUOTES, 'UTF-8');
     $txt_cstatus = htmlspecialchars(stripslashes(trim($_POST['txt_cstatus'])), ENT_QUOTES, 'UTF-8');
     $txt_householdnum = htmlspecialchars(stripslashes(trim($_POST['txt_householdnum'])), ENT_QUOTES, 'UTF-8');
     $txt_religion = htmlspecialchars(stripslashes(trim($_POST['txt_religion'])), ENT_QUOTES, 'UTF-8');
@@ -32,7 +31,9 @@ if (isset($_POST['btn_add'])) {
     $ddl_los = htmlspecialchars(stripslashes(trim($_POST['ddl_los'])), ENT_QUOTES, 'UTF-8');
     $txt_lightning = htmlspecialchars(stripslashes(trim($_POST['txt_lightning'])), ENT_QUOTES, 'UTF-8');
     $txt_faddress = htmlspecialchars(stripslashes(trim($_POST['txt_faddress'])), ENT_QUOTES, 'UTF-8');
-
+    $txt_role = htmlspecialchars(stripslashes(trim($_POST['txt_role'])), ENT_QUOTES, 'UTF-8');
+    $txt_head_of_family = htmlspecialchars(stripslashes(trim($_POST['txt_head_of_family'])), ENT_QUOTES, 'UTF-8');
+    
     $name = basename($_FILES['txt_image']['name']);
     $temp = $_FILES['txt_image']['tmp_name'];
     $imagetype = $_FILES['txt_image']['type'];
@@ -41,10 +42,6 @@ if (isset($_POST['btn_add'])) {
     $milliseconds = round(microtime(true) * 1000);
     $txt_image = $milliseconds . '_' . $name;
 
-    if (isset($_SESSION['role'])) {
-        $action = 'Added Resident named of ' . $txt_fname . ' ' . $txt_mname . ' ' . $txt_lname;
-        $iquery = mysqli_query($con, "INSERT INTO tbllogs (user, logdate, action) VALUES ('Brgy." . $_SESSION['staff'] . "', NOW(), '" . $action . "')");
-    }
 
     $su = mysqli_query($con, "SELECT * FROM tbltabagak WHERE lname='$txt_lname' AND fname='$txt_fname' AND mname='$txt_mname'");
     $ct = mysqli_num_rows($su);
@@ -56,14 +53,14 @@ if (isset($_POST['btn_add'])) {
                     // Insert resident's data
                     $query = mysqli_query($con, "INSERT INTO tbltabagak (
                         lname, fname, mname, bdate, bplace, age, barangay, purok, 
-                        totalhousehold, civilstatus, householdnum, religion, nationality, 
+                        civilstatus, householdnum, religion, nationality, 
                         gender, houseOwnershipStatus, landOwnershipStatus, lightningFacilities, 
-                        formerAddress, image) VALUES (
+                        formerAddress, image, role, headoffamily) VALUES (
                         '$txt_lname', '$txt_fname', '$txt_mname', '$txt_bdate', '$txt_bplace', 
-                        '$txt_age', '$txt_brgy', '$txt_purok', '$txt_householdmem', 
+                        '$txt_age', '$txt_brgy', '$txt_purok', 
                         '$txt_cstatus', '$txt_householdnum', '$txt_religion', '$txt_national', 
                         '$ddl_gender', '$ddl_hos', '$ddl_los', '$txt_lightning', '$txt_faddress', 
-                        '$txt_image')") or die('Error: ' . mysqli_error($con));
+                        '$txt_image', '$txt_role', '$txt_head_of_family')") or die('Error: ' . mysqli_error($con));
                 } else {
                     // Handle file move error
                 }
@@ -76,19 +73,26 @@ if (isset($_POST['btn_add'])) {
             // Insert resident's data without image
             $query = mysqli_query($con, "INSERT INTO tbltabagak (
                 lname, fname, mname, bdate, bplace, age, barangay, purok, 
-                totalhousehold, civilstatus, householdnum, religion, nationality, 
+                civilstatus, householdnum, religion, nationality, 
                 gender, houseOwnershipStatus, landOwnershipStatus, lightningFacilities, 
-                formerAddress, image) VALUES (
+                formerAddress, image, role, headoffamily) VALUES (
                 '$txt_lname', '$txt_fname', '$txt_mname', '$txt_bdate', '$txt_bplace', 
-                '$txt_age', '$txt_brgy', '$txt_purok', '$txt_householdmem', 
+                '$txt_age', '$txt_brgy', '$txt_purok', 
                 '$txt_cstatus', '$txt_householdnum', '$txt_religion', '$txt_national', 
                 '$ddl_gender', '$ddl_hos', '$ddl_los', '$txt_lightning', '$txt_faddress', 
-                '$txt_image')") or die('Error: ' . mysqli_error($con));
+                '$txt_image', '$txt_role', '$txt_head_of_family')") or die('Error: ' . mysqli_error($con));
         }
 
         if ($query == true) {
             $_SESSION['added'] = 1;
+
+            if (isset($_SESSION['role'])) {
+                $action = 'Added Resident named of ' . $txt_fname . ' ' . $txt_mname . ' ' . $txt_lname;
+                $iquery = mysqli_query($con, "INSERT INTO tbllogs (user, logdate, action) VALUES ('Brgy." . $_SESSION['staff'] . "', NOW(), '" . $action . "')");
+            }
+            
             header("location: " . $_SERVER['REQUEST_URI']);
+            exit();
         }
     } else {
         $_SESSION['duplicateuser'] = 1;
@@ -98,8 +102,8 @@ if (isset($_POST['btn_add'])) {
 
 
 // Handle form submission for editing a resident
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['btn_save'])) {
-    // Get form data
+if (isset($_POST['btn_save'])) {
+    // Get form data with sanitization
     $id = htmlspecialchars(stripslashes(trim($_POST['hidden_id'])), ENT_QUOTES, 'UTF-8'); 
     $lname = htmlspecialchars(stripslashes(trim($_POST['txt_edit_lname'])), ENT_QUOTES, 'UTF-8');
     $fname = htmlspecialchars(stripslashes(trim($_POST['txt_edit_fname'])), ENT_QUOTES, 'UTF-8');
@@ -114,33 +118,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['btn_save'])) {
     $landOwnershipStatus = htmlspecialchars(stripslashes(trim($_POST['ddl_edit_los'])), ENT_QUOTES, 'UTF-8');
     $gender = htmlspecialchars(stripslashes(trim($_POST['ddl_edit_gender'])), ENT_QUOTES, 'UTF-8');
     $bplace = htmlspecialchars(stripslashes(trim($_POST['txt_edit_bplace'])), ENT_QUOTES, 'UTF-8');
-    $totalhousehold = (int) $_POST['txt_edit_householdmem']; // cast to integer
     $religion = htmlspecialchars(stripslashes(trim($_POST['txt_edit_religion'])), ENT_QUOTES, 'UTF-8');
     $houseOwnershipStatus = htmlspecialchars(stripslashes(trim($_POST['ddl_edit_hos'])), ENT_QUOTES, 'UTF-8');
     $lightning = htmlspecialchars(stripslashes(trim($_POST['txt_edit_lightning'])), ENT_QUOTES, 'UTF-8');
     $formerAddress = htmlspecialchars(stripslashes(trim($_POST['txt_edit_faddress'])), ENT_QUOTES, 'UTF-8');
     
-    
     // Handle image upload
     $image = $_FILES['txt_edit_image']['name'];
     if ($image) {
         $target_dir = "image/";
-        $target_file = $target_dir . basename($_FILES["txt_edit_image"]["name"]);
-        move_uploaded_file($_FILES["txt_edit_image"]["tmp_name"], $target_file);
+        $target_file = $target_dir . basename($image);
+        if (move_uploaded_file($_FILES["txt_edit_image"]["tmp_name"], $target_file)) {
+            // File upload successful
+        } else {
+            // Handle file upload error if necessary
+        }
     } else {
+        // If no new image is uploaded, retrieve the existing image
         $edit_query = mysqli_query($con, "SELECT image FROM tbltabagak WHERE id='$id'");
         $erow = mysqli_fetch_array($edit_query);
         $image = $erow['image'];
-    }
-    if ($edit_query == true) {
-        $_SESSION['edited'] = 1;
-        header("location: " . $_SERVER['REQUEST_URI']);
-    }
-
-    // Log action
-    if (isset($_SESSION['role'])) {
-        $action = 'Update Resident info of ' . $fname . ' ' . $mname . ' ' . $lname;
-        $iquery = mysqli_query($con, "INSERT INTO tbllogs (user, logdate, action) VALUES ('Brgy." . $_SESSION['staff'] . "', NOW(), '" . $action . "')");
     }
 
     // Update resident's information
@@ -157,20 +154,44 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['btn_save'])) {
               nationality= '$nationality', 
               landOwnershipStatus = '$landOwnershipStatus', 
               gender = '$gender', 
-              bplace = '$bplace', 
-              totalhousehold = '$totalhousehold', 
+              bplace = '$bplace',  
               religion = '$religion', 
               houseOwnershipStatus = '$houseOwnershipStatus', 
               lightningFacilities = '$lightning', 
               formerAddress = '$formerAddress', 
               image = '$image' 
-              WHERE id = '$id' ") or die('Error: ' . mysqli_error($con));
+              WHERE id = '$id'") or die('Error: ' . mysqli_error($con));
 
-    // Redirect after successful update
+    // Redirect after successful edited
     if ($update_query) {
-        $_SESSION['update'] = 1;
-        header("location: " . $_SERVER['REQUEST_URI']);
+        $_SESSION['edited'] = 1;
+
+        // Log action
+        if (isset($_SESSION['role'])) {
+            $action = 'Update Resident info of ' . $fname . ' ' . $mname . ' ' . $lname;
+            $iquery = mysqli_query($con, "INSERT INTO tbllogs (user, logdate, action) VALUES ('Brgy." . $_SESSION['staff'] . "', NOW(), '" . $action . "')");
+        }
+
+        header("Location: " . $_SERVER['REQUEST_URI']);
         exit();
+    }
+}
+
+if (isset($_POST['btn_del'])) {
+    if (isset($_POST['hidden_id'])) {
+        $txt_id = $_POST['hidden_id'];
+
+        $delete_query = mysqli_query($con, "DELETE FROM tbltabagak WHERE id = '$txt_id'");
+
+        if ($delete_query) {
+            $_SESSION['delete'] = 1;
+            header("Location: " . $_SERVER['REQUEST_URI']);
+            exit();
+        } else {
+            die('Error: ' . mysqli_error($con));
+        }
+    } else {
+        echo 'Error: ID not provided.';
     }
 }
 
@@ -184,6 +205,7 @@ if (isset($_POST['btn_delete'])) {
             if ($delete_query == true) {
                 $_SESSION['delete'] = 1;
                 header("location: " . $_SERVER['REQUEST_URI']);
+                exit();
             }
         }
     }

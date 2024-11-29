@@ -29,7 +29,7 @@
 
                 <div class="form-group">
                     <label>Address: </label>
-                    <input name="txt_edit_address" class="form-control input-sm" type="text" value="'.$row['paddress'].' Madridejos Cebu" />
+                    <input name="txt_edit_address" class="form-control input-sm" type="text" value="'.$row['paddress'].'" />
                 </div>
                 <div class="form-group">
                     <label>Start Term: </label>

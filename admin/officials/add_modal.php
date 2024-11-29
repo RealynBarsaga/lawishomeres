@@ -30,7 +30,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Contact #:</label>
-                                    <input name="txt_contact" id="txt_contact" class="form-control input-sm" type="text" placeholder="Contact #" maxlength="11" pattern="^\d{11}$" required />
+                                    <input name="txt_contact" id="txt_contact" class="form-control input-sm" type="text" placeholder="Contact #" maxlength="11" pattern="^09\d{9}$"
+                                    title="Contact number should start with '09' and be exactly 11 digits." required />
                                 </div>
                                 <div class="form-group">
                                     <label>Address:</label>

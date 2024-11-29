@@ -18,6 +18,7 @@
         /* General body margin */
         body {
             margin: 20px; /* Adds margin around the entire body */
+            overflow: hidden; /* Prevents body from scrolling */
         }
 
         /* Margin for the header section */
@@ -34,11 +35,24 @@
             margin-left: 40px;
             margin-right: 40px;
         }
+         /* Overlay Image Styles */
+         .overlay-image {
+            position: fixed; /* Fixed position relative to the page */
+            top: 50%; /* Position it vertically at the center */
+            left: 50%; /* Position it horizontally at the center */
+            width: 100%; /* Make the image span across the page */
+            height: 72%; /* Make the image cover the full page */
+            z-index: -1; /* Ensure the image is behind the text */
+            opacity: 0.1; /* Make the image semi-transparent */
+            pointer-events: none; /* Disable interactions with the image */
+            object-fit: cover; /* Ensures the image scales nicely */
+            transform: translate(-50%, -50%); /* Adjusts the image to be truly centered */
+        }
     </style>
     <script>
         window.print();
         onafterprint = () => {
-            window.location.href = "certofres.php?page=certofresidency";
+            window.location.href = "certofres.php";
         }
     </script>
 </head>
@@ -84,6 +98,8 @@
     <div class="col-xs-4 col-sm-3 col-md-2" style="background: white; margin-left: -82px; position: relative; left: 85px; padding: 10px;">
         <img src="../../img/lg.png" style="width:70%; height:120px;" />
     </div>
+    <!-- Overlay Image -->
+    <img src="../../admin/staff/logo/<?= $_SESSION['logo'] ?>" class="overlay-image" />
     </div>
     <div class="col-xs-4 col-sm-6 col-md-3" style="margin-top: 10px;background: white; margin-left:50px; border: 1px solid black;width: 200px;height:700px;">
         <div style="margin-top:40px; text-align: center; word-wrap: break-word;font-size:15px;">
@@ -109,7 +125,7 @@
                         <b style="font-size:12px;  color: dodgerblue !important;">HON. '.strtoupper($row['completeName']).'</b><br>
                         </p>
                         ';
-                    }elseif($row['sPosition'] == "SK Chairman/Chairperson"){
+                    }elseif($row['sPosition'] == "SK"){
                         echo'
                           <i>SK CHAIRMAN:</i>
                         ';
@@ -199,7 +215,7 @@
     </p>
     </div> 
     <div class="col-xs-offset-6 col-xs-5 col-md-offset-6 col-md-4">
-        <p style="text-align: center;margin-top: -250px; margin-left:-350px;">
+        <p style="text-align: center;margin-top: -100px; margin-left:-350px;">
         <i style="margin-left:-120px;">Prepared by:</i>
         <br>
         <br>
@@ -211,7 +227,7 @@
                 while($row = mysqli_fetch_array($qry)){
                     if($row['sPosition'] == "Secretary"){
                         echo '
-                        <strong style="font-size: 17px; margin-left: 40px;">'.strtoupper($row['completeName']).'</strong>
+                        <strong style="font-size: 17px; margin-left: 30px;">'.strtoupper($row['completeName']).'</strong>
                         <hr style="border: 0.1px solid black; width: 55%; margin-left: -90px;margin-top: -15px;"/>
                         <p style="margin-left: -73px; margin-top: -20px;">Barangay Secretary</p>
                         ';
@@ -220,7 +236,7 @@
             ?>
         </p>
     </div>
-    <div class="col-xs-offset-6 col-xs-5 col-md-offset-6 col-md-4" style="top: -50px;">
+    <div class="col-xs-offset-6 col-xs-5 col-md-offset-6 col-md-4" style="top: 70px;">
         <i>Approved by:</i>
         <br>
         <br>

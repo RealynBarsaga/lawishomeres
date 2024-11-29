@@ -18,6 +18,7 @@
         /* General body margin */
         body {
             margin: 20px; /* Adds margin around the entire body */
+            overflow: hidden; /* Prevents body from scrolling */
         }
 
         /* Margin for the header section */
@@ -34,11 +35,24 @@
             margin-left: 40px;
             margin-right: 40px;
         }
+        /* Overlay Image Styles */
+        .overlay-image {
+            position: fixed; /* Fixed position relative to the page */
+            top: 50%; /* Position it vertically at the center */
+            left: 50%; /* Position it horizontally at the center */
+            width: 100%; /* Make the image span across the page */
+            height: 72%; /* Make the image cover the full page */
+            z-index: -1; /* Ensure the image is behind the text */
+            opacity: 0.1; /* Make the image semi-transparent */
+            pointer-events: none; /* Disable interactions with the image */
+            object-fit: cover; /* Ensures the image scales nicely */
+            transform: translate(-50%, -50%); /* Adjusts the image to be truly centered */
+        }
     </style>
     <script>
         window.print();
         onafterprint = () => {
-            window.location.href = "brgyclearance.php?page=brgyclearance";
+            window.location.href = "brgyclearance.php";
         }
     </script>
 </head>
@@ -85,6 +99,8 @@
     <div class="col-xs-4 col-sm-3 col-md-2" style="background: white; margin-left: -82px; position: relative; left: 85px; padding: 10px;">
         <img src="../../img/lg.png" style="width:70%; height:120px;" />
     </div>
+    <!-- Overlay Image -->
+    <img src="../../admin/staff/logo/<?= $_SESSION['logo'] ?>" class="overlay-image" />
     </div>
     <div class="col-xs-4 col-sm-6 col-md-3" style="margin-top: 20px;background: white; margin-left:50px; border: 1px solid black;width: 200px;">
         <div style="margin-top:40px; text-align: center; word-wrap: break-word;font-size:15px;">
@@ -106,7 +122,7 @@
                         <b style="font-size:10.5px;  color: dodgerblue !important;">HON. '.strtoupper($row['completeName']).'</b><br>
                         <span style="font-size:12px;">Barangay Kagawad</span><br>
                         ';
-                    }elseif($row['sPosition'] == "SK Chairman/Chairperson"){
+                    }elseif($row['sPosition'] == "SK"){
                         echo '
                         <b style="font-size:10.5px; color: dodgerblue !important;">HON. '.strtoupper($row['completeName']).'</b><br>
                         <span style="font-size:12px;">SK Chairman</span><br>
@@ -224,7 +240,7 @@
         ?>
     </p>
     </div> 
-    <div class="col-xs-offset-6 col-xs-5 col-md-offset-6 col-md-4" style="top: 30px;">
+    <div class="col-xs-offset-6 col-xs-5 col-md-offset-6 col-md-4" style="top: 180px;">
         <p style="text-align: center;">
             <?php
                 // Assuming a session has already been started somewhere in your code
