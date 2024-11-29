@@ -163,11 +163,23 @@ h3 {
                         </div>
                     <?php } ?>
                 </div><!-- /.box -->
-                <!-- Bar Chart -->
-                <div class="col-md-12">
-                    <canvas id="myBarChart" width="100" height="30" style="max-width: 35%;background: #fff;"></canvas>
-                </div>
             </div><!-- /.row -->
+            <!-- Bar Chart -->
+            <div class="chart-wrapper">
+                <!-- Bar Chart (on the right) -->
+                <div class="chart-container bar-chart">
+                    <canvas id="myBarChart"></canvas>  <!-- Removed width/height attributes -->
+                </div>
+                 <!-- Pie Chart (on the left) -->
+                 <div class="chart-containers pie-chart">
+                    <canvas id="myPieChart"></canvas>  <!-- Removed width/height attributes -->
+                </div>
+            </div>
+            
+            <!-- Line Chart (below the Bar Chart) -->
+            <div class="chart-contain line-chart">
+                <canvas id="myLineChart"></canvas> <!-- Removed width/height attributes -->
+            </div>
         </section><!-- /.content -->
     </aside><!-- /.right-side -->
 </div><!-- ./wrapper -->
