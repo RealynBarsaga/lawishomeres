@@ -19,7 +19,7 @@
         echo '
         <div class="row">
             <div class="col-md-12">
-                <input type="hidden" value="'.$row['pid'].'" name="hidden_id" id="hidden_id"/>
+                <input type="hidden" value="'.$row['id'].'" name="hidden_id" id="hidden_id"/>
                
                 <div class="form-group">
                     <label>Resident Name: </label>
