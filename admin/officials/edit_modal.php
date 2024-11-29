@@ -22,7 +22,6 @@
                     <label>Image:</label>
                     <input name="txt_edit_image" class="form-control input-sm" type="file"/>
                 </div>
-                
                 <div class="form-group">
                     <label>Contact #:</label>
                     <input name="txt_edit_contact" id="txt_contact" class="form-control input-sm" type="text" value="'.$row['pcontact'].'" maxlength="11" pattern="^\d{11}$" required />

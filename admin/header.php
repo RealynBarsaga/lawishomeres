@@ -1,5 +1,6 @@
 <?php
-ob_start(); // Ensure output buffering is started before any output
+// Start output buffering and session
+ob_start();
 
 // Database connection (assuming $con is the database connection)
 require_once('connection.php');
@@ -26,21 +27,17 @@ while ($notif = mysqli_fetch_assoc($squery)) {
     }
 }
 
+// Handle profile update
 if (isset($_POST['btn_saveeditProfile'])) {
-    $username = mysqli_real_escape_string($con, (htmlspecialchars(stripslashes(trim($_POST['txt_username'])))));
+    $username = mysqli_real_escape_string($con, $_POST['txt_username']);
     $password = mysqli_real_escape_string($con, password_hash(htmlspecialchars(stripslashes(trim($_POST['txt_password']))), PASSWORD_DEFAULT));
-    $email = mysqli_real_escape_string($con, (htmlspecialchars(stripslashes(trim($_POST['txt_email'])))));
-
-    /* $hashedpassword = password_hash($password, PASSWORD_BCRYPT); */
-
-    // Consider hashing the password before storing it
-    $updadmin = mysqli_query($con, "UPDATE tbluser SET username = '$username', email = '$email', password = '$password' WHERE id = '".mysqli_real_escape_string($con, (htmlspecialchars(stripslashes(trim($_SESSION['userid'])))))."'") or die('Error: ' . mysqli_error($con));
-
-
+    
+    $updadmin = mysqli_query($con, "UPDATE tbluser SET username = '$username', password = '$password' WHERE id = '".mysqli_real_escape_string($con, $_SESSION['userid'])."' ");
     if ($updadmin) {
-        $_SESSION['edited'] = 1;
-        header("location: " . $_SERVER['REQUEST_URI']);
+        header("Location: " . $_SERVER['REQUEST_URI']);
         exit();
+    } else {
+        echo "<script>alert('Error updating profile. Please try again.');</script>";
     }
 }
 ?>
@@ -141,7 +138,7 @@ if (isset($_POST['btn_saveeditProfile'])) {
                                               </li>';
                                     }
                                 } else {
-                                    echo '<li style="color: #d9534f; text-align: center;">No new notifications.</li>';
+                                   /*  echo '<li>No new notifications.</li>'; */
                                 }
                                 ?>
                                 
@@ -157,7 +154,7 @@ if (isset($_POST['btn_saveeditProfile'])) {
                                               </li>';
                                     }
                                 } else {
-                                    echo '<li style="color: #d9534f; text-align: center;">No earlier notifications.</li>';
+                                    /* echo '<li>No earlier notifications.</li>'; */
                                 }
                                 ?>
                             </ul>
@@ -175,7 +172,7 @@ if (isset($_POST['btn_saveeditProfile'])) {
                         </li>
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat" data-toggle="modal" data-target="#editProfileModal">Change Password</a>
+                                <a href="#" class="btn btn-default btn-flat" data-toggle="modal" data-target="#editProfileModal">Change Account</a>
                             </div>
                             <div class="pull-right">
                                 <a href="../../admin/logout.php" class="btn btn-default btn-flat">Sign out</a>
@@ -195,7 +192,7 @@ if (isset($_POST['btn_saveeditProfile'])) {
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Change Password</h4>
+                    <h4 class="modal-title">Change Account</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -210,11 +207,11 @@ if (isset($_POST['btn_saveeditProfile'])) {
                                         </div>
                                         <div class="form-group">
                                             <label>Email:</label>
-                                            <input name="txt_email" id="txt_email" class="form-control input-sm" type="email" placeholder="Ex: juan@sample.com" required/>
+                                            <input name="txt_email" id="txt_email" class="form-control input-sm" type="email" required/>
                                         </div>
                                         <div class="form-group">
                                             <label>Password:</label>
-                                            <input name="txt_password" id="txt_password" class="form-control input-sm" type="password" placeholder="•••••••••••" required
+                                            <input name="txt_password" id="txt_password" class="form-control input-sm" type="password" required
                                             pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{10,}$" 
                                             title="Password must be at least 10 characters long, contain at least one uppercase letter, one number, and one special character."/>
                                             <span class="input-group-text">
@@ -234,7 +231,6 @@ if (isset($_POST['btn_saveeditProfile'])) {
         </div>
     </form>
 </div>
-<?php include "../edit_notif.php"; ?>
 
 <script>
     // Toggle password visibility
@@ -280,5 +276,24 @@ if (isset($_POST['btn_saveeditProfile'])) {
         });
     });
 </script>
+<?php
+if (isset($_POST['btn_saveeditProfile'])) {
+    $username = mysqli_real_escape_string($con, (htmlspecialchars(stripslashes(trim($_POST['txt_username'])))));
+    $password = mysqli_real_escape_string($con, password_hash(htmlspecialchars(stripslashes(trim($_POST['txt_password']))), PASSWORD_DEFAULT));
+    $email = mysqli_real_escape_string($con, (htmlspecialchars(stripslashes(trim($_POST['txt_email'])))));
+
+    /* $hashedpassword = password_hash($password, PASSWORD_BCRYPT); */
+
+    // Consider hashing the password before storing it
+    $updadmin = mysqli_query($con, "UPDATE tbluser SET username = '$username', email = '$email', password = '$password' WHERE id = '".mysqli_real_escape_string($con, (htmlspecialchars(stripslashes(trim($_SESSION['userid'])))))."'") or die('Error: ' . mysqli_error($con));
+
+
+    if ($updadmin) {
+        $_SESSION['edited'] = 1;
+        header("location: " . $_SERVER['REQUEST_URI']);
+        exit();
+    }
+}
+?>
 </body>
 </html>

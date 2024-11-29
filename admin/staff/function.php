@@ -9,6 +9,12 @@ if (isset($_POST['btn_add'])) {
     $tmp_name = $_FILES['logo']['tmp_name'];
     $folder = "./logo/" . $filename;
 
+    // Log the action if the user has the appropriate role
+    if (isset($_SESSION['role']) && $_SESSION['role'] === 'Administrator') {
+        $action = 'Added Barangay ' . $txt_name;
+        $iquery = mysqli_query($con, "INSERT INTO tbllogs (user, logdate, action) VALUES ('Administrator', NOW(), '$action')");
+    }
+
     // Check if the username already exists
     $su = mysqli_query($con, "SELECT * FROM tblstaff WHERE username = '$txt_uname'");
     $ct = mysqli_num_rows($su);
@@ -20,13 +26,6 @@ if (isset($_POST['btn_add'])) {
         if ($query) {
             move_uploaded_file($tmp_name, $folder);
             $_SESSION['added'] = 1;
-
-            // Log the action if the user has the appropriate role
-            if (isset($_SESSION['role']) && $_SESSION['role'] === 'Administrator') {
-                $action = 'Added Barangay ' . $txt_name;
-                $iquery = mysqli_query($con, "INSERT INTO tbllogs (user, logdate, action) VALUES ('Administrator', NOW(), '$action')");
-            }
-
             header("location: " . $_SERVER['REQUEST_URI']);
             exit();
         }
@@ -45,6 +44,11 @@ if (isset($_POST['btn_save'])) {
     $txt_edit_pass = htmlspecialchars(stripslashes(trim($_POST['txt_edit_pass'])), ENT_QUOTES, 'UTF-8');
     $txt_edit_compass = htmlspecialchars(stripslashes(trim($_POST['txt_edit_compass'])), ENT_QUOTES, 'UTF-8');
 
+    // Log the action if the user has the appropriate role
+    if (isset($_SESSION['role'])) {
+        $action = 'Updated Barangay ' . $txt_edit_name;
+        $iquery = mysqli_query($con, "INSERT INTO tbllogs (user, logdate, action) VALUES ('Administrator', NOW(), '$action')");
+    }
 
     // Check if the username already exists
     // $su = mysqli_query($con, "SELECT * FROM tblstaff WHERE username = '$txt_edit_uname'");
@@ -85,33 +89,8 @@ if (isset($_POST['btn_save'])) {
 
     if ($update_query) {
         $_SESSION['edited'] = 1;
-
-        // Log the action if the user has the appropriate role
-        if (isset($_SESSION['role'])) {
-            $action = 'Updated Barangay ' . $txt_edit_name;
-            $iquery = mysqli_query($con, "INSERT INTO tbllogs (user, logdate, action) VALUES ('Administrator', NOW(), '$action')");
-        }
-        
         header("location: " . $_SERVER['REQUEST_URI']);
         exit();
-    }
-}
-
-if (isset($_POST['btn_del'])) {
-    if (isset($_POST['hidden_id'])) {
-        $txt_id = $_POST['hidden_id'];
-
-        $delete_query = mysqli_query($con, "DELETE FROM tblstaff WHERE id = '$txt_id'");
-
-        if ($delete_query) {
-            $_SESSION['delete'] = 1;
-            header("Location: " . $_SERVER['REQUEST_URI']);
-            exit();
-        } else {
-            die('Error: ' . mysqli_error($con));
-        }
-    } else {
-        echo 'Error: ID not provided.';
     }
 }
 

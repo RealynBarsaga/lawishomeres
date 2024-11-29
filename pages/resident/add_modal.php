@@ -14,7 +14,7 @@
 
                                 <!-- Name -->
                                 <div class="form-group">
-                                    <label class="control-label">Name: <span style="color:gray; font-size: 10px;">(Lastname Firstname, Middlename)</span></label><br>
+                                    <label class="control-label">Name:</label><br>
                                     <div class="col-sm-4">
                                         <input name="txt_lname" class="form-control input-sm" type="text" placeholder="Lastname" required/>
                                     </div>
@@ -54,9 +54,20 @@
                                 $puroks = [
                                     "Tabagak" => ["Lamon-Lamon", "Tangigue", "Lawihan", "Lower-Bangus", "Upper-Bangus"],
                                     "Bunakan" => ["Bilabid", "Helinggero", "Kamaisan", "Kalubian", "Samonite"],
+                                    /* "Kodia" => ["Purok X", "Purok Y", "Purok Z"], */
+                                    /* "Talangnan" => ["",], */
+                                    /*  "Poblacion" => ["",], */
                                     "Maalat" => ["Neem Tree", "Talisay", "Kabakhawan", "Mahogany", "Gmelina"],
                                     "Pili" => ["Malinawon", "Mahigugmaon", "Matinabangun", "Maabtikon", "Malipayon", "Mauswagon"],
+                                    /* "Kaongkod" => ["Purok", "Puroks"], */
+                                    /* "Mancilang" => ["Purok", "Puroks"], */
+                                    /* "Kangwayan" => ["Purok", "Puroks"], */
+                                    /* "Kangwayan" => ["Purok", "Puroks"], */
+                                    /* "Tugas" => ["Purok", "Puroks"], */
+                                    /* "Malbago" => ["Purok", "Puroks"], */
                                     "Tarong" => ["Orchids", "Gumamela", "Santan", "Rose", "Vietnam Rose", "Kumintang", "Sunflower", "Daisy"],
+                                    /* "San Agustin" => ["Purok", "Puroks"], */
+                                    // Add purok options for other barangays
                                 ];
                                 ?>
                                 
@@ -87,10 +98,8 @@
                                 <!-- Household # -->
                                 <div class="form-group">
                                     <label class="control-label">Household #:</label>
-                                    <input name="txt_householdnum" id="txt_householdnum" class="form-control input-sm" type="number" min="1" placeholder="Household #" style="width: 419px;" required/>
+                                    <input name="txt_householdnum" class="form-control input-sm" type="number" min="1" placeholder="Household #" style="width: 419px;" required/>
                                 </div>
-                                
-
                                <!-- Civil Status -->
                                <div class="form-group">
                                    <label class="control-label">Civil Status:</label>
@@ -100,6 +109,12 @@
                                         <option value="Married">Married</option>
                                         <option value="Widowed">Widowed</option>
                                    </select>
+                                </div>
+
+                                <!-- Religion -->
+                                <div class="form-group">
+                                    <label class="control-label">Religion:</label>
+                                    <input name="txt_religion" class="form-control input-sm" type="text" placeholder="Religion" style="width: 419px;" required/>
                                 </div>
 
                                 <!-- Land Ownership Status -->
@@ -132,39 +147,25 @@
                                     <input name="txt_bplace" class="form-control input-sm" type="text" placeholder="Birthplace" required/>
                                 </div>
 
+                                <!-- Total Household Member -->
+                                <div class="form-group">
+                                    <label class="control-label">Total Household Members:</label>
+                                    <input name="txt_householdmem" class="form-control input-sm" type="number" min="1" placeholder="Total Household Members" required/>
+                                </div>
+                                <!-- Household Members Section -->
+                               <!--  <h4 style="margin-left: -13px;font-weight: bold;">Household Members</h4>
+                                <div id="members">
+                                    <div>
+                                        <input type="text" name="member_name[]" placeholder="Member Name" required style="margin-left: -13px;">
+                                        <input type="number" name="member_age[]" placeholder="Member Age" required>
+                                        <input type="text" name="member_relationship[]" placeholder="Relationship" required style="margin-left: -13px;margin-top: 10px;">
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-secondary btn-sm" onclick="addMember()" style="margin-top: 10px;margin-left: -13px;background-color: #3c8dbc;border-color: #367fa9;color:white;">Add Another Member</button> -->
                                 <!-- Nationality -->
                                 <div class="form-group">
                                     <label class="control-label">Nationality:</label>
                                     <input name="txt_national" class="form-control input-sm" type="text" placeholder="Nationality" required/>
-                                </div>
-
-                                <!-- Religion -->
-                                <div class="form-group">
-                                    <label class="control-label">Religion:</label>
-                                    <input name="txt_religion" class="form-control input-sm" type="text" placeholder="Religion" required/>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="control-label">Role:</label>
-                                    <select id="roleSelect" name="txt_role" class="form-control input-sm" required onchange="toggleHeadOfFamily()">
-                                        <option value="Head of Family">Head of Family</option>
-                                        <option value="Members">Members</option>
-                                    </select>
-                                </div>
-
-                                <!-- Head of Family Dropdown -->
-                                <div class="form-group" id="headOfFamilySelect" style="display: none;">
-                                    <label class="control-label">Select Head of Family:</label>
-                                    <select name="txt_head_of_family" class="form-control input-sm" onchange="getHouseholdNumber()">
-                                        <option value="" disabled selected>Select a head of family</option>
-                                        <?php
-                                            $su = mysqli_query($con, "SELECT * FROM tbltabagak WHERE role = 'Head of Family'");
-                                            while ($row = mysqli_fetch_assoc($su)) {
-                                                $fullName = htmlspecialchars($row['lname'] . ', ' . $row['fname'] . ' ' . $row['mname']);
-                                                echo '<option value="' . $row['id'] . '" data-household="' . $row['householdnum'] . '">' . $fullName . '</option>';
-                                            }
-                                        ?>
-                                    </select>
                                 </div>
 
                                 <!-- House Ownership Status -->
@@ -209,62 +210,38 @@
         </div>
     </form>
 </div>
-
 <script type="text/javascript">
 $(document).ready(function() {
-    // Calculate age function
-    $('#txt_bdate').change(function(){
-        var dob = new Date($(this).val());
-        var today = new Date();
-        var age = today.getFullYear() - dob.getFullYear();
-        var m = today.getMonth() - dob.getMonth();
-        if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
-            age--;
-        }
-        $('#txt_age').val(age);
-    });
-});
-
-// JavaScript to dynamically update the purok dropdown based on selected barangay
-const puroks = <?php echo json_encode($puroks); ?>; // Pass the PHP puroks array to JavaScript
-
-document.getElementById('barangay_select').addEventListener('change', function() {
-    const selectedBarangay = this.value;
-    const purokSelect = document.getElementById('purok_select');
-    
-    // Clear existing purok options
-    purokSelect.innerHTML = '<option value="" disabled selected>Select Purok</option>';
-
-    // Check if there are puroks for the selected barangay
-    if (puroks[selectedBarangay]) {
-        puroks[selectedBarangay].forEach(function(purok) {
-            const option = document.createElement('option');
-            option.value = purok;
-            option.textContent = purok;
-            purokSelect.appendChild(option);
+        // Calculate age function
+        $('#txt_bdate').change(function(){
+            var dob = new Date($(this).val());
+            var today = new Date();
+            var age = today.getFullYear() - dob.getFullYear();
+            var m = today.getMonth() - dob.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+                age--;
+            }
+            $('#txt_age').val(age);
         });
-    }
-});
-
-// Toggle Head of Family dropdown based on role selection
-function toggleHeadOfFamily() {
-    var roleSelect = document.getElementById('roleSelect');
-    var headOfFamilySelect = document.getElementById('headOfFamilySelect');
+    });
+    // JavaScript to dynamically update the purok dropdown based on selected barangay
+    const puroks = <?php echo json_encode($puroks); ?>; // Pass the PHP puroks array to JavaScript
     
-    if (roleSelect.value === 'Members') {
-        headOfFamilySelect.style.display = 'block';
-        householdNumField.readOnly = true;  // Make the Household # readonly if role is 'Members'
-    } else {
-        headOfFamilySelect.style.display = 'none';
-        document.getElementById('txt_householdnum').value = ''; // Clear household number if Head of Family is not selected
-    }
-}
-
-// Update Household Number based on selected Head of Family
-function getHouseholdNumber() {
-    var headOfFamilySelect = document.querySelector('[name="txt_head_of_family"]');
-    var selectedOption = headOfFamilySelect.options[headOfFamilySelect.selectedIndex];
-    var householdNumber = selectedOption.getAttribute('data-household');
-    document.getElementById('txt_householdnum').value = householdNumber;
-}
+    document.getElementById('barangay_select').addEventListener('change', function() {
+        const selectedBarangay = this.value;
+        const purokSelect = document.getElementById('purok_select');
+        
+        // Clear existing purok options
+        purokSelect.innerHTML = '<option value="" disabled selected>Select Purok</option>';
+    
+        // Check if there are puroks for the selected barangay
+        if (puroks[selectedBarangay]) {
+            puroks[selectedBarangay].forEach(function(purok) {
+                const option = document.createElement('option');
+                option.value = purok;
+                option.textContent = purok;
+                purokSelect.appendChild(option);
+            });
+        }
+    });
 </script>

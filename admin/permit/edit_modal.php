@@ -1,6 +1,6 @@
 <?php echo '<div id="editModal'.$row['id'].'" class="modal fade">
 <form method="post">
-  <div class="modal-dialog modal-sm" style="width:597px !important;">
+  <div class="modal-dialog modal-sm" style="width:300px !important;">
     <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -8,61 +8,40 @@
         </div>
         <div class="modal-body">
         <div class="row">
-            <div class="col-md-6 col-sm-12">
+            <div class="col-md-12">
                 <input type="hidden" value="'.$row['id'].'" name="hidden_id" id="hidden_id"/>
                 <div class="form-group">
-                    <label>Name:</label>
+                    <label>Name: </label>
                     <input name="txt_edit_name" class="form-control input-sm" type="text" value="'.$row['name'].'" readonly/>
                 </div>
                 <div class="form-group">
-                    <label>Business Name:</label>
+                    <label>Business Name: </label>
                     <input name="txt_edit_busname" class="form-control input-sm" type="text" value="'.$row['businessName'].'"/>
                 </div>
                 <div class="form-group">
-                    <label>Business Address:</label>
+                    <label>Business Address : </label>
                     <input name="txt_edit_busadd" class="form-control input-sm" type="text" value="'.$row['businessAddress'].'" />
                 </div>
                 <div class="form-group">
                     <label>Type of Business:</label>
-                    <input name="ddl_edit_tob" class="form-control input-sm" type="text" value="'.$row['typeOfBusiness'].'" />
+                    <select name="ddl_edit_tob" class="form-control input-sm">
+                        <option value="'.$row['typeOfBusiness'].'" selected>'.$row['typeOfBusiness'].'</option>
+                        <option value="Service">Option 1</option>
+                        <option value="Merchandising">Option 2</option>
+                        <option value="Manufacturing">Option 3</option>
+                        <option value="Hybrid Business">Option 4</option>
+                    </select>
                 </div>
                 <div class="form-group">
-                    <label>Permit No:</label>
-                    <input name="txt_edit_ornum" class="form-control input-sm" type="text" value="'.$row['orNo'].'" readonly/>
+                    <label>OR Number : </label>
+                    <input name="txt_edit_ornum" class="form-control input-sm" type="text" value="'.$row['orNo'].'" />
                 </div>
                 <div class="form-group">
-                    <label>Amount:</label>
+                    <label>Amount : </label>
                     <input name="txt_edit_amount" class="form-control input-sm" type="text" value="'.$row['samount'].'" />
                 </div>
             </div>
-
-            <div class="col-md-6 col-sm-12">
-                <div class="form-group">
-                    <label>Type of Application:</label>
-                    <input name="txt_edit_typeofapp" class="form-control input-sm" type="text" value="'.$row['typeofapplication'].'" required/>
-                </div>
-                <div class="form-group">
-                    <label>Line of Business:</label>
-                    <input name="txt_edit_lineofbus" class="form-control input-sm" type="text" value="'.$row['lineofbussiness'].'" required/>
-                </div>
-                <div class="form-group">
-                    <label>Payment Mode:</label>
-                    <input name="txt_edit_paymode" class="form-control input-sm" type="text" value="'.$row['paymentmode'].'" required/>
-                </div>
-
-                <div class="form-group">
-                    <label>Official Receipt No:</label>
-                    <input name="txt_edit_busidno" class="form-control input-sm" type="text" value="'.$row['offreceiptno'].'" readonly/>
-                </div>
-                <div class="form-group">
-                    <label>Business ID No:</label>
-                    <input name="txt_edit_offrecno" class="form-control input-sm" type="text" value="'.$row['bussinessidno'].'" readonly/>
-                </div>
-                <div class="form-group">
-                    <label>OR Date:</label>
-                    <input name="txt_edit_ordate" class="form-control input-sm" type="text" value="'.$row['ordate'].'" readonly/>
-                </div>
-            </div>
+        </div>
         </div>
         <div class="modal-footer">
             <input type="button" class="btn btn-default btn-sm" data-dismiss="modal" value="Cancel"/>

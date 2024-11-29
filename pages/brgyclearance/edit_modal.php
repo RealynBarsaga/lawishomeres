@@ -1,4 +1,4 @@
-<?php echo '<div id="editModal'.$row['pid'].'" class="modal fade">
+<?php echo '<div id="editModal'.$row['id'].'" class="modal fade">
 <form method="post">
   <div class="modal-dialog modal-sm" style="width:300px !important;">
     <div class="modal-content">
@@ -8,7 +8,7 @@
         </div>
         <div class="modal-body">';
 
-        $edit_query = mysqli_query($con,"SELECT * from tblclearance where id = '".$row['pid']."' ");
+        $edit_query = mysqli_query($con,"SELECT * from tblclearance where id = '".$row['id']."' ");
         $row = mysqli_fetch_array($edit_query);
 
          // Calculate age based on birthdate

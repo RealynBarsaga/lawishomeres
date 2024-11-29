@@ -52,7 +52,7 @@ ob_start();
                         </li>
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat" data-toggle="modal" data-target="#editProfileModal">Change Password</a>
+                                <a href="#" class="btn btn-default btn-flat" data-toggle="modal" data-target="#editProfileModal">Change Account</a>
                             </div>
                             <div class="pull-right">
                                 <a href="../../logout.php" class="btn btn-default btn-flat">Sign out</a>
@@ -70,7 +70,7 @@ ob_start();
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Change Password</h4>
+                    <h4 class="modal-title">Change Account</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -90,7 +90,7 @@ ob_start();
                                         </div>
                                         <div class="form-group">
                                             <label>Password:</label>
-                                            <input name="txt_password" id="txt_password" class="form-control input-sm" type="password" placeholder="•••••••••••" required
+                                            <input name="txt_password" id="txt_password" class="form-control input-sm" type="password" required
                                             pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{10,}$" 
                                             title="Password must be at least 10 characters long, contain at least one uppercase letter, one number, and one special character."/>
                                             <span class="input-group-text">
@@ -111,7 +111,6 @@ ob_start();
         </div>
     </form>
 </div>
-<?php include "../edit_notif.php"; ?>
 
 
 <script>

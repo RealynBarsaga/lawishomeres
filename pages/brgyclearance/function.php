@@ -18,24 +18,22 @@ if (isset($_POST['btn_add'])) {
     $chkdup = mysqli_query($con, "SELECT * from tblclearance where name = '$txt_name'");
     $rows = mysqli_num_rows($chkdup);
 
+    // Log the action if the session role is set
+    if (isset($_SESSION['role'])) {
+        $action = 'Added Clearance named of ' . $txt_name;
+        $iquery = mysqli_query($con, "INSERT INTO tbllogs (user, logdate, action) values ('Brgy." . $_SESSION['staff'] . "', NOW(), '" . $action . "')");
+    }
 
     // Insert clearance if no duplicates
     if ($rows == 0) {
         $query = mysqli_query($con, "INSERT INTO tblclearance 
             (clearanceNo, name, purpose, orNo, samount, dateRecorded, recordedBy, barangay, age, bdate, purok, bplace, civilstatus, report_type) 
-            values ('$txt_cnum','$txt_name', '$txt_purpose', '$txt_ornum', '$txt_amount', '$date', '".$_SESSION['username']."', '$off_barangay', '$txt_age', '$txt_bdate', '$txt_purok', '$txt_bplace', '$txt_cstatus', 'Clearance')") 
+            values ('$txt_cnum', '$txt_name', '$txt_purpose', '$txt_ornum', '$txt_amount', '$date', '".$_SESSION['username']."', '$off_barangay', '$txt_age', '$txt_bdate', '$txt_purok', '$txt_bplace', '$txt_cstatus', 'Clearance')") 
             or die('Error: ' . mysqli_error($con));
 
         // Handle successful insert
         if ($query == true) {
             $_SESSION['added'] = 1;
-
-            // Log the action if the session role is set
-            if (isset($_SESSION['role'])) {
-                $action = 'Added Clearance named of ' . $txt_name;
-                $iquery = mysqli_query($con, "INSERT INTO tbllogs (user, logdate, action) values ('Brgy." . $_SESSION['staff'] . "', NOW(), '" . $action . "')");
-            }
-
             header("location: " . $_SERVER['REQUEST_URI']);
             exit();
         }   
@@ -139,36 +137,15 @@ if(isset($_POST['btn_save'])) {
     civilstatus = '".$txt_edit_cstatus."' 
     WHERE id = '".$txt_id."' ") or die('Error: ' . mysqli_error($con));
 
+    if(isset($_SESSION['role'])){
+        $action = 'Update Clearance name of '.$txt_edit_residentname;
+        $iquery = mysqli_query($con,"INSERT INTO tbllogs (user, logdate, action) values ('Brgy.".$_SESSION['staff']."', NOW(), '".$action."')");
+    }
 
     if($update_query == true){
         $_SESSION['edited'] = 1;
-
-        if(isset($_SESSION['role'])){
-            $action = 'Update Clearance name of '.$txt_edit_residentname;
-            $iquery = mysqli_query($con,"INSERT INTO tbllogs (user, logdate, action) values ('Brgy.".$_SESSION['staff']."', NOW(), '".$action."')");
-        }
-        
         header("location: ".$_SERVER['REQUEST_URI']);
         exit();
-    }
-}
-
-if (isset($_POST['btn_del'])) {
-    if (isset($_POST['hidden_id'])) {
-        $txt_id = $_POST['hidden_id'];
-
-        // Delete the record based on the hidden_id from the modal
-        $delete_query = mysqli_query($con, "DELETE FROM tblclearance WHERE id = '$txt_id'");
-
-        if ($delete_query) {
-            $_SESSION['delete'] = 1;
-            header("Location: " . $_SERVER['REQUEST_URI']); // Reload the page to reflect the changes
-            exit();
-        } else {
-            die('Error: ' . mysqli_error($con));
-        }
-    } else {
-        echo 'Error: ID not provided.';
     }
 }
 

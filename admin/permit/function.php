@@ -7,43 +7,22 @@ if(isset($_POST['btn_add'])){
     $ddl_tob = htmlspecialchars(stripslashes(trim($_POST['ddl_tob'])), ENT_QUOTES, 'UTF-8');
     $txt_ornum = htmlspecialchars(stripslashes(trim($_POST['txt_ornum'])), ENT_QUOTES, 'UTF-8');
     $txt_amount = htmlspecialchars(stripslashes(trim($_POST['txt_amount'])), ENT_QUOTES, 'UTF-8');
-    $txt_busidno = htmlspecialchars(stripslashes(trim($_POST['txt_busidno'])), ENT_QUOTES, 'UTF-8');
-    $txt_offrecno = htmlspecialchars(stripslashes(trim($_POST['txt_offrecno'])), ENT_QUOTES, 'UTF-8');
-    $txt_ordate = htmlspecialchars(stripslashes(trim($_POST['txt_ordate'])), ENT_QUOTES, 'UTF-8');
-    $txt_typeofapp = htmlspecialchars(stripslashes(trim($_POST['txt_typeofapp'])), ENT_QUOTES, 'UTF-8');
-    $txt_lineofbus = htmlspecialchars(stripslashes(trim($_POST['txt_lineofbus'])), ENT_QUOTES, 'UTF-8');
-    $txt_paymode = htmlspecialchars(stripslashes(trim($_POST['txt_paymode'])), ENT_QUOTES, 'UTF-8');
     $date = date('Y-m-d H:i:s');
     
     
     $query = mysqli_query($con, "SELECT * FROM tblpermit WHERE name = '$txt_name'");
     $num_rows = mysqli_num_rows($query);
 
+    if(isset($_SESSION['role'])){
+        $action = 'Added Permit with name of '.$txt_name;
+        $iquery = mysqli_query($con, "INSERT INTO tbllogs (user, logdate, action) VALUES ('Administrator', NOW(), '$action')");
+    }
 
     if($num_rows == 0){
-        $query = mysqli_query($con, "INSERT INTO tblpermit (name, businessName, businessAddress, typeOfBusiness, orNo, samount, bussinessidno, offreceiptno, ordate, typeofapplication, lineofbussiness, paymentmode, dateRecorded) 
-        VALUES (
-        '$txt_name', 
-        '$txt_busname', 
-        '$txt_busadd', 
-        '$ddl_tob', 
-        '$txt_ornum', 
-        '$txt_amount', 
-        '$txt_busidno', 
-        '$txt_offrecno', 
-        '$txt_ordate', 
-        '$txt_typeofapp', 
-        '$txt_lineofbus',
-        '$txt_paymode',
-        '$date')") or die('Error: ' . mysqli_error($con));
+        $query = mysqli_query($con, "INSERT INTO tblpermit (name, businessName, businessAddress, typeOfBusiness, orNo, samount, dateRecorded, recordedBy) 
+        VALUES ('$txt_name', '$txt_busname', '$txt_busadd', '$ddl_tob', '$txt_ornum', '$txt_amount', '$date', '".$_SESSION['username']."')") or die('Error: ' . mysqli_error($con));
         if($query == true){
             $_SESSION['added'] = 1;
-
-            if(isset($_SESSION['role'])){
-                $action = 'Added Permit with name of '.$txt_name;
-                $iquery = mysqli_query($con, "INSERT INTO tbllogs (user, logdate, action) VALUES ('Administrator', NOW(), '$action')");
-            } 
-
             header("location: ".$_SERVER['REQUEST_URI']);
             exit();
         }
@@ -99,61 +78,21 @@ if(isset($_POST['btn_save'])){
     $ddl_edit_tob = htmlspecialchars(stripslashes(trim($_POST['ddl_edit_tob'])), ENT_QUOTES, 'UTF-8');
     $txt_edit_ornum = htmlspecialchars(stripslashes(trim($_POST['txt_edit_ornum'])), ENT_QUOTES, 'UTF-8');
     $txt_edit_amount = htmlspecialchars(stripslashes(trim($_POST['txt_edit_amount'])), ENT_QUOTES, 'UTF-8');
-    $txt_edit_busidno = htmlspecialchars(stripslashes(trim($_POST['txt_edit_busidno'])), ENT_QUOTES, 'UTF-8');
-    $txt_edit_offrecno = htmlspecialchars(stripslashes(trim($_POST['txt_edit_offrecno'])), ENT_QUOTES, 'UTF-8');
-    $txt_edit_ordate = htmlspecialchars(stripslashes(trim($_POST['txt_edit_ordate'])), ENT_QUOTES, 'UTF-8');
-    $txt_edit_typeofapp = htmlspecialchars(stripslashes(trim($_POST['txt_edit_typeofapp'])), ENT_QUOTES, 'UTF-8');
-    $txt_edit_lineofbus = htmlspecialchars(stripslashes(trim($_POST['txt_edit_lineofbus'])), ENT_QUOTES, 'UTF-8');
-    $txt_edit_paymode = htmlspecialchars(stripslashes(trim($_POST['txt_edit_paymode'])), ENT_QUOTES, 'UTF-8');
 
 
-    $update_query = mysqli_query($con,"UPDATE tblpermit set 
-    name = '".$txt_edit_name."',
-    businessName = '".$txt_edit_busname."', 
-    businessAddress = '".$txt_edit_busadd."', 
-    typeOfBusiness= '".$ddl_edit_tob."', 
-    bussinessidno = '".$txt_edit_busidno."',
-    offreceiptno = '".$txt_edit_offrecno."',
-    typeofapplication = '".$txt_edit_typeofapp."', 
-    lineofbussiness = '".$txt_edit_lineofbus."', 
-    paymentmode = '".$txt_edit_paymode."',
-    ordate = '".$txt_edit_ordate."',
-    orNo = '".$txt_edit_ornum."', 
-    samount = '".$txt_edit_amount."'  
-    where id = '".$txt_id."' ") or die('Error: ' . mysqli_error($con));
+    $update_query = mysqli_query($con,"UPDATE tblpermit set name = '".$txt_edit_name."', businessName = '".$txt_edit_busname."', businessAddress = '".$txt_edit_busadd."', typeOfBusiness= '".$ddl_edit_tob."', orNo = '".$txt_edit_ornum."', samount = '".$txt_edit_amount."'  where id = '".$txt_id."' ") or die('Error: ' . mysqli_error($con));
 
+    if(isset($_SESSION['role'])){
+        $action = 'Update Permit with name of '.$txt_edit_name;
+        $iquery = mysqli_query($con,"INSERT INTO tbllogs (user,logdate,action) values ('Administrator', NOW(), '".$action."')");
+    }
 
     if($update_query == true){
         $_SESSION['edited'] = 1;
-
-        if(isset($_SESSION['role'])){
-            $action = 'Update Permit with name of '.$txt_edit_name;
-            $iquery = mysqli_query($con,"INSERT INTO tbllogs (user,logdate,action) values ('Administrator', NOW(), '".$action."')");
-        }
-        
         header("location: ".$_SERVER['REQUEST_URI']);
         exit(); // Ensure no further code is executed after redirection
     }
 }
-
-if (isset($_POST['btn_del'])) {
-    if (isset($_POST['hidden_id'])) {
-        $txt_id = $_POST['hidden_id'];
-
-        $delete_query = mysqli_query($con, "DELETE FROM tblpermit WHERE id = '$txt_id'");
-
-        if ($delete_query) {
-            $_SESSION['delete'] = 1;
-            header("Location: " . $_SERVER['REQUEST_URI']);
-            exit();
-        } else {
-            die('Error: ' . mysqli_error($con));
-        }
-    } else {
-        echo 'Error: ID not provided.';
-    }
-}
-
 if(isset($_POST['btn_delete'])){
     if(isset($_POST['chk_delete'])){
         $stmt = $con->prepare("DELETE FROM tblpermit WHERE id = ?");

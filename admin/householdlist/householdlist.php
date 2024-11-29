@@ -9,25 +9,11 @@
     include('../../admin/head_css.php');
     include("../connection.php");
 ?>
-<style>
-body {
-    overflow: hidden; /* Prevents body from scrolling */
-}
-
-.wrapper {
-    overflow: hidden; /* Prevents the wrapper from scrolling */
-}
-
-.right-side {
-    overflow: auto; /* Only this part is scrollable */
-    max-height: calc(111vh - 120px); /* You already have this */
-}
-</style>
     <body class="skin-black">
         <!-- header logo: style can be found in header.less -->
         <?php include('../header.php'); ?>
 
-        <div class="row-offcanvas row-offcanvas-left">
+        <div class="wrapper row-offcanvas row-offcanvas-left">
             <!-- Left side column. contains the logo and sidebar -->
             <?php include('../sidebar-left.php'); ?>
 
@@ -60,7 +46,6 @@ body {
                                                 <th>Household #</th>
                                                 <th>Head Of Family</th>
                                                 <th>Total Members</th>
-                                                <th>Family Members</th>
                                                 <th>Barangay</th>
                                             </tr>
                                         </thead>
@@ -71,33 +56,12 @@ body {
                                                   die('MySQL Error: ' . mysqli_error($con));
                                               }
                                               while ($row = mysqli_fetch_array($squery)) {
-                                                  // Format the membersname field
-                                                  $membersname = htmlspecialchars($row['membersname'], ENT_QUOTES, 'UTF-8');
-                                                  
-                                                  // Split the names by commas and trim extra spaces
-                                                  $names = array_map('trim', explode(',', $membersname));
-                                              
-                                                  // Create an array to hold formatted names
-                                                  $formatted_names = [];
-                                              
-                                                  // Loop through the names and format each one
-                                                  for ($i = 0; $i < count($names); $i += 2) {
-                                                      $last_name = $names[$i];
-                                                      $first_and_middle = isset($names[$i + 1]) ? $names[$i + 1] : '';
-                                              
-                                                      // Format the name as "Lastname, Firstname Middlename Initial"
-                                                      $formatted_names[] = $last_name . ', ' . $first_and_middle;
-                                                  }
-                                              
-                                                  // Join the formatted names with line breaks
-                                                  $formatted_names_output = implode('<br>', $formatted_names);
                                                   echo '
                                                   <tr>
                                                       <td>'.$row['id'].'</td>
                                                       <td>'.$row['householdno'].'</td>
                                                       <td>'.$row['name'].'</td>
-                                                      <td>'.$row['totalhouseholdmembers'].'</td>
-                                                      <td>' . $formatted_names_output . '</td>
+                                                      <td>'.$row['totalhousehold'].'</td>
                                                       <td>'.$row['barangay'].'</td>
                                                   </tr>';
                                               }

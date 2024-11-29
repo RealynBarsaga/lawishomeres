@@ -18,7 +18,6 @@
         /* General body margin */
         body {
             margin: 20px; /* Adds margin around the entire body */
-            overflow: hidden; /* Prevents body from scrolling */
         }
 
         /* Margin for the header section */
@@ -36,24 +35,11 @@
             margin-left: 40px; /* Add left margin for the footer */
             margin-right: 40px; /* Add right margin for the footer */
         }
-        /* Overlay Image Styles */
-        .overlay-image {
-            position: fixed; /* Fixed position relative to the page */
-            top: 50%; /* Position it vertically at the center */
-            left: 50%; /* Position it horizontally at the center */
-            width: 100%; /* Make the image span across the page */
-            height: 72%; /* Make the image cover the full page */
-            z-index: -1; /* Ensure the image is behind the text */
-            opacity: 0.1; /* Make the image semi-transparent */
-            pointer-events: none; /* Disable interactions with the image */
-            object-fit: cover; /* Ensures the image scales nicely */
-            transform: translate(-50%, -50%); /* Adjusts the image to be truly centered */
-        }
     </style>
     <script>
         window.print();
         onafterprint = () => {
-            window.location.href = "certofres.php";
+            window.location.href = "certofres.php?page=certofresidency";
         }
     </script>
 </head>
@@ -86,15 +72,13 @@
                         <p style="font-size: 22px; font-family: 'Courier New', Courier; text-transform: uppercase;color: dodgerblue !important;">Barangay <?= $_SESSION['barangay'] ?></p>
                     </b>
                 </center>
-                <p style="text-transform: uppercase;margin-left:-10px;">OFFICE OF THE BARANGAY <?= $_SESSION['barangay'] ?></p>
+                <p style="text-transform: uppercase;">OFFICE OF THE BARANGAY <?= $_SESSION['barangay'] ?></p>
                 <hr style="border: 1px solid black; width: 245%; margin: 1px auto; position: relative; right: 220px;" />
             </div>
         </div>
         <div class="col-xs-4 col-sm-3 col-md-2" style="background: white; margin-left: -82px; position: relative; left: 85px; padding: 10px;">
             <img src="../../img/lg.png" style="width:70%; height:120px;" />
         </div>
-        <!-- Overlay Image -->
-        <img src="../../admin/staff/logo/<?= $_SESSION['logo'] ?>" class="overlay-image" />
     </div>
     <!-- Main Content -->
     <div class="main-content col-xs-12 col-md-12">
@@ -159,7 +143,7 @@
             ?>
         </p>
     </div> 
-    <div class="footer-section col-xs-offset-6 col-xs-5 col-md-offset-6 col-md-4" style="top: 380px;">
+    <div class="footer-section col-xs-offset-6 col-xs-5 col-md-offset-6 col-md-4" style="top: 250px;">
         <i>Approved by:</i>
         <br>
         <br>

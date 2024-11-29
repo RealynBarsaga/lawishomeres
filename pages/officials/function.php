@@ -24,6 +24,10 @@ if(isset($_POST['btn_add'])){
     if (($imagetype == "image/jpeg" || $imagetype == "image/png" || $imagetype == "image/bmp") && $size <= 2048000) {
         if (move_uploaded_file($temp, $target_file)) {
             // Image successfully uploaded
+            if(isset($_SESSION['role'])){
+                $action = 'Added Official named '.$txt_cname;
+                $iquery = mysqli_query($con, "INSERT INTO tbllogs (user, logdate, action) VALUES ('Brgy.".$_SESSION['staff']."', NOW(), '".$action."')");
+            }
 
             // Check if the same name already exists
             $q = mysqli_query($con, "SELECT * FROM tblbrgyofficial WHERE completeName = '".$txt_cname."'");
@@ -31,17 +35,11 @@ if(isset($_POST['btn_add'])){
 
             if($ct == 0){
                 $query = mysqli_query($con, "INSERT INTO tblbrgyofficial (sPosition, completeName, pcontact, paddress, termStart, termEnd, status, barangay, image) 
-                VALUES ('$ddl_pos', '$txt_cname', '$txt_contact', CONCAT('$txt_address', ', Madridejos Cebu'), '$txt_sterm', '$txt_eterm', 'Ongoing Term', '$off_barangay', '$image')") 
+                VALUES ('$ddl_pos', '$txt_cname', '$txt_contact', '$txt_address', '$txt_sterm', '$txt_eterm', 'Ongoing Term', '$off_barangay', '$image')") 
                 or die('Error: ' . mysqli_error($con));
                 
                 if($query == true) {
                     $_SESSION['added'] = 1;
-
-                    if(isset($_SESSION['role'])){
-                        $action = 'Added Official named '.$txt_cname;
-                        $iquery = mysqli_query($con, "INSERT INTO tbllogs (user, logdate, action) VALUES ('Brgy.".$_SESSION['staff']."', NOW(), '".$action."')");
-                    }
-                    
                     header("location: ".$_SERVER['REQUEST_URI']);
                     exit();
                 }
@@ -95,12 +93,17 @@ if (isset($_POST['btn_save'])) {
         }
     }
 
+    // Logging action
+    if (isset($_SESSION['role'])) {
+        $action = 'Update Official named ' . $completeName; // Correct variable name
+        $iquery = mysqli_query($con, "INSERT INTO tbllogs (user, logdate, action) VALUES ('Brgy." . $_SESSION['staff'] . "', NOW(), '$action')");
+    }
 
     // Update official information including image
     $update_query = mysqli_query($con, "UPDATE tblbrgyofficial SET 
         completeName = '$completeName',
         pcontact = '$pcontact', 
-        paddress = CONCAT('$paddress', ', Madridejos Cebu'), 
+        paddress = '$paddress', 
         termStart = '$termStart', 
         termEnd = '$termEnd',
         image = '$image'
@@ -108,13 +111,6 @@ if (isset($_POST['btn_save'])) {
 
     if ($update_query) {
         $_SESSION['edited'] = 1;
-
-        // Logging action
-        if (isset($_SESSION['role'])) {
-            $action = 'Update Official named ' . $completeName; // Correct variable name
-            $iquery = mysqli_query($con, "INSERT INTO tbllogs (user, logdate, action) VALUES ('Brgy." . $_SESSION['staff'] . "', NOW(), '$action')");
-        }
-
         header("Location: " . $_SERVER['REQUEST_URI']);
         exit();
     } else {
@@ -147,24 +143,6 @@ if(isset($_POST['btn_start']))
     if($start_query == true){
         $_SESSION['start'] = 1;
         header("location: ".$_SERVER['REQUEST_URI']);
-    }
-}
-
-if (isset($_POST['btn_del'])) {
-    if (isset($_POST['hidden_id'])) {
-        $txt_id = $_POST['hidden_id'];
-
-        $delete_query = mysqli_query($con, "DELETE FROM tblbrgyofficial WHERE id = '$txt_id'");
-
-        if ($delete_query) {
-            $_SESSION['delete'] = 1;
-            header("Location: " . $_SERVER['REQUEST_URI']);
-            exit();
-        } else {
-            die('Error: ' . mysqli_error($con));
-        }
-    } else {
-        echo 'Error: ID not provided.';
     }
 }
 

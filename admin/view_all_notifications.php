@@ -6,7 +6,7 @@ if (isset($_GET['delete_id'])) {
     $delete_id = intval($_GET['delete_id']);
     $delete_query = mysqli_query($con, "DELETE FROM tbllogs WHERE id = $delete_id");
     if ($delete_query) {
-        header("Location: view_all_notifications.php");
+        header("Location: view_all_notifications.php?page=notifications");
         exit();
     } else {
         echo "Error deleting notification.";
@@ -168,7 +168,7 @@ while ($notif = mysqli_fetch_assoc($squery)) {
                           </li>';
                 }
             } else {
-                echo '<li style="color: #d9534f; text-align: center;">No new notifications.</li>';
+                /* echo '<li>No new notifications.</li>'; */
             }
             ?>
         </ul>
@@ -198,13 +198,13 @@ while ($notif = mysqli_fetch_assoc($squery)) {
                           </li>';
                 }
             } else {
-                echo '<li style="color: #d9534f; text-align: center;">No earlier notifications.</li>';
+                /* echo '<li>No earlier notifications.</li>'; */
             }
             ?>
         </ul>
 
         <div class="footer">
-            <a href="dashboard/dashboard.php">Back to Home</a>
+            <a href="dashboard/dashboard.php?page=dashboard">Back to Home</a>
         </div>
     </div>
     

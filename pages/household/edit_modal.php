@@ -17,16 +17,16 @@ echo '<div id="editModal' . $row['id'] . '" class="modal fade">
                                 <input name="txt_edit_householdno" class="form-control input-sm" type="text" value="' . htmlspecialchars($row['householdno'], ENT_QUOTES, 'UTF-8') . '" readonly/>
                             </div>
                             <div class="form-group">
-                                <label>Head of Family: <span style="color:gray; font-size: 10px;"></label>
-                                 <input  id="txt_edit_name" name="txt_edit_name" class="form-control input-sm" value="' . htmlspecialchars($row['head_of_family'], ENT_QUOTES, 'UTF-8') . '" required readonly/>
-                            </div>
-                            <div class="form-group">
-                                <label>Family Members:</label>
-                                <input  id="txt_members" name="txt_members" class="form-control input-sm" value="' . htmlspecialchars($row['membersname'], ENT_QUOTES, 'UTF-8') . '" required readonly/>
+                                <label>Head of Family: <span style="color:gray; font-size: 10px;"></label>';
+                                    $q = mysqli_query($con, "SELECT *, CONCAT(lname, ', ', fname, ' ', mname) as name FROM tbltabagak WHERE id = '" . $row['headoffamily'] . "' ");
+                                    while ($row1 = mysqli_fetch_array($q)) {
+                                        echo '<input name="txt_edit_name" class="form-control input-sm" type="text" value="' . htmlspecialchars($row1['name'], ENT_QUOTES, 'UTF-8') . '" readonly/>';
+                                    }
+                                echo '
                             </div>
                             <div class="form-group">
                                 <label>Total Household Members: </label>
-                                <input id="txt_edit_totalmembers" name="txt_edit_totalmembers" class="form-control input-sm" type="number" value="' . htmlspecialchars($row['totalhouseholdmembers'], ENT_QUOTES, 'UTF-8') . '" readonly/>
+                                <input id="txt_edit_totalmembers" name="txt_edit_totalmembers" class="form-control input-sm" type="number" value="' . htmlspecialchars($row['totalhousehold'], ENT_QUOTES, 'UTF-8') . '" readonly/>
                             </div>
                             <div class="form-group">
                                 <label>Barangay: </label>

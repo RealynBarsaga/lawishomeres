@@ -15,4 +15,5 @@
     <link href="../../css/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="../../css/select2.css" rel="stylesheet" type="text/css" />
     <script src="../../js/jquery-1.12.3.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
