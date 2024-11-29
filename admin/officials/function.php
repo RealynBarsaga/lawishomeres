@@ -25,10 +25,6 @@ if (isset($_POST['btn_add'])) {
     if (($imagetype == "image/jpeg" || $imagetype == "image/png" || $imagetype == "image/bmp") && $size <= 2048000) {
         if (move_uploaded_file($temp, $target_file)) {
             // Image successfully uploaded
-            if (isset($_SESSION['role'])) {
-                $action = 'Added Official named ' . $txt_cname;
-                $iquery = mysqli_query($con, "INSERT INTO tbllogs (user, logdate, action) VALUES ('Administrator', NOW(), '$action')");
-            }
 
             // Check if the same name already exists
             $q = mysqli_query($con, "SELECT * FROM tblmadofficial WHERE completeName = '$txt_cname'");
@@ -41,6 +37,13 @@ if (isset($_POST['btn_add'])) {
 
                 if ($query == true) {
                     $_SESSION['added'] = 1;
+
+
+                    if (isset($_SESSION['role'])) {
+                        $action = 'Added Official named ' . $txt_cname;
+                        $iquery = mysqli_query($con, "INSERT INTO tbllogs (user, logdate, action) VALUES ('Administrator', NOW(), '$action')");
+                    } 
+
                     header("location: " . $_SERVER['REQUEST_URI']);
                     exit();
                 }
@@ -108,6 +111,7 @@ if (isset($_POST['btn_save'])) {
 
     // Redirect after successful update
     if ($update_query) {
+        
         // Log the action only after a successful update
         if (isset($_SESSION['role'])) {
             $action = 'Update Official named ' . $txt_edit_cname;
@@ -147,6 +151,26 @@ if(isset($_POST['btn_start']))
         exit();
     }
 }
+
+
+if (isset($_POST['btn_del'])) {
+    if (isset($_POST['hidden_id'])) {
+        $txt_id = $_POST['hidden_id'];
+
+        $delete_query = mysqli_query($con, "DELETE FROM tblmadofficial WHERE id = '$txt_id'");
+
+        if ($delete_query) {
+            $_SESSION['delete'] = 1;
+            header("Location: " . $_SERVER['REQUEST_URI']);
+            exit();
+        } else {
+            die('Error: ' . mysqli_error($con));
+        }
+    } else {
+        echo 'Error: ID not provided.';
+    }
+}
+
 
 if(isset($_POST['btn_delete']))
 {

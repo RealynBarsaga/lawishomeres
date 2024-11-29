@@ -25,17 +25,14 @@ echo '<div id="editModal'.$row['id'].'" class="modal fade" role="dialog">
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group">
                             <input type="hidden" value="'.$erow['id'].'" name="hidden_id" id="hidden_id"/>
-                            <label class="control-label">Name:</label><br>
+                            <label class="control-label">Name: <span style="color:gray; font-size: 10px;">(Lastname Firstname, Middlename)</span></label><br>
                             <div class="col-sm-4">
-                                Lastname:
                                 <input name="txt_edit_lname" class="form-control input-sm" type="text" value="'.$erow['lname'].'"/>
                             </div> 
                             <div class="col-sm-4">
-                                Firstname:
                                 <input name="txt_edit_fname" class="form-control input-sm" type="text" value="'.$erow['fname'].'"/>
                             </div> 
                             <div class="col-sm-4">
-                                Middlename:
                                 <input name="txt_edit_mname" class="form-control input-sm" type="text" value="'.$erow['mname'].'"/>
                             </div>
                         </div>
@@ -51,10 +48,23 @@ echo '<div id="editModal'.$row['id'].'" class="modal fade" role="dialog">
                             <select name="txt_edit_brgy" class="form-control input-sm" id="barangaySelect">';
                                 $barangays = ['Tabagak', 'Bunakan', 'Kodia', 'Talangnan', 'Poblacion', 'Maalat', 'Pili', 'Kaongkod', 'Mancilang', 'Kangwayan', 'Tugas', 'Malbago', 'Tarong', 'San Agustin'];
                                 // Purok options for each barangay
+                                // Purok options for each barangay
                                 $puroks = [
-                                    "Tabagak" => ["Lamon-Lamon", "Tangege", "Lawihan", "Lower-Bangus", "Upper-Bangus"],
-                                    "Bunakan" => ["Purok A", "Purok B"],
+                                    "Tabagak" => ["Lamon-Lamon", "Tangigue", "Lawihan", "Lower-Bangus", "Upper-Bangus"],
+                                    "Bunakan" => ["Bilabid", "Helinggero", "Kamaisan", "Kalubian", "Samonite"],
                                     /* "Kodia" => ["Purok X", "Purok Y", "Purok Z"], */
+                                    /* "Talangnan" => ["",], */
+                                    /*  "Poblacion" => ["",], */
+                                    "Maalat" => ["Neem Tree", "Talisay", "Kabakhawan", "Mahogany", "Gmelina"],
+                                    "Pili" => ["Malinawon", "Mahigugmaon", "Matinabangun", "Maabtikon", "Malipayon", "Mauswagon"],
+                                    /* "Kaongkod" => ["Purok", "Puroks"], */
+                                    /* "Mancilang" => ["Purok", "Puroks"], */
+                                    /* "Kangwayan" => ["Purok", "Puroks"], */
+                                    /* "Kangwayan" => ["Purok", "Puroks"], */
+                                    /* "Tugas" => ["Purok", "Puroks"], */
+                                    /* "Malbago" => ["Purok", "Puroks"], */
+                                    "Tarong" => ["Orchids", "Gumamela", "Santan", "Rose", "Vietnam Rose", "Kumintang", "Sunflower", "Daisy"],
+                                    /* "San Agustin" => ["Purok", "Puroks"], */
                                     // Add purok options for other barangays
                                 ];
                                 foreach ($barangays as $barangay) {
@@ -90,11 +100,6 @@ echo '<div id="editModal'.$row['id'].'" class="modal fade" role="dialog">
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label">Nationality:</label>
-                            <input name="txt_edit_national" class="form-control input-sm" type="text" value="'.$erow['nationality'].'"/>
-                        </div>
-
-                        <div class="form-group">
                             <label class="control-label">Land Ownership Status:</label>
                             <select name="ddl_edit_los" class="form-control input-sm">
                                 <option value="'.$erow['landOwnershipStatus'].'">'.$erow['landOwnershipStatus'].'</option>
@@ -122,13 +127,18 @@ echo '<div id="editModal'.$row['id'].'" class="modal fade" role="dialog">
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label">Total Household Member:</label>
-                            <input name="txt_edit_householdmem" class="form-control input-sm" type="number" min="1" value="'.$erow['totalhousehold'].'"/>
+                            <label class="control-label">Nationality:</label>
+                            <input name="txt_edit_national" class="form-control input-sm" type="text" value="'.$erow['nationality'].'"/>
                         </div>
-
+                        
                         <div class="form-group">
                             <label class="control-label">Religion:</label>
                             <input name="txt_edit_religion" class="form-control input-sm" type="text" value="'.$erow['religion'].'"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label">Role:</label>
+                            <input class="form-control input-sm" readonly value="'.$erow['role'].'"/>
                         </div>
 
                         <div class="form-group">
@@ -196,9 +206,21 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Define purok options for each barangay
     var puroks = {
-        'Tabagak': ['Lamon-Lamon', 'Tangege', 'Lawihan', 'Lower-Bangus', 'Upper-Bangus'],
-        'Bunakan': ['Purok A', 'Purok B', 'Purok C'],
-        // Add more barangays and their corresponding puroks here
+        'Tabagak': ['Lamon-Lamon', 'Tangigue', 'Lawihan', 'Lower-Bangus', 'Upper-Bangus'],
+        'Bunakan': ['Bilabid', 'Helinggero', 'Kamaisan', 'Kalubian', 'Samonite'],
+        'Maalat': ['Neem Tree', 'Talisay', 'Kabakhawan', 'Mahogany', 'Gmelina'],
+        'Pili': ['Malinawon', 'Mahigugmaon', 'Matinabangun', 'Maabtikon', 'Malipayon', 'Mauswagon'],
+        'Tarong': ['Orchids', 'Gumamela', 'Santan', 'Rose', 'Vietnam Rose', 'Kumintang', 'Sunflower', 'Daisy'],
+        // You can uncomment and add more barangays and their corresponding puroks here
+        // 'Kodia': ["Purok X", "Purok Y", "Purok Z"],
+        // 'Talangnan': ["Purok A", "Purok B"],
+        // 'Poblacion': ["Purok 1", "Purok 2"],
+        // 'Kaongkod': ["Purok", "Puroks"],
+        // 'Mancilang': ["Purok", "Puroks"],
+        // 'Kangwayan': ["Purok", "Puroks"],
+        // 'Tugas': ["Purok", "Puroks"],
+        // 'Malbago': ["Purok", "Puroks"],
+        // 'San Agustin': ["Purok", "Puroks"],
     };
     
     function updatePurokOptions() {

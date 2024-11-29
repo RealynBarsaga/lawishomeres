@@ -14,10 +14,6 @@ if(isset($_POST['btn_add'])){
     $chkdup = mysqli_query($con,"SELECT * from tblindigency where name = '$txt_name'");
     $rows = mysqli_num_rows($chkdup);
 
-    if(isset($_SESSION['role'])){
-        $action = 'Added certificate of residency named of '.$txt_name;
-        $iquery = mysqli_query($con,"INSERT INTO tbllogs (user,logdate,action) values ('Brgy.".$_SESSION['staff']."', NOW(), '".$action."')");
-    }
 
     if($rows == 0){
         $query = mysqli_query($con,"INSERT INTO tblindigency (Name, gender, age, bdate, purpose, purok, civilstatus, barangay, dateRecorded, report_type) 
@@ -25,6 +21,12 @@ if(isset($_POST['btn_add'])){
         if($query == true)
         {
             $_SESSION['added'] = 1;
+
+            if(isset($_SESSION['role'])){
+                $action = 'Added certificate of residency named of '.$txt_name;
+                $iquery = mysqli_query($con,"INSERT INTO tbllogs (user,logdate,action) values ('Brgy.".$_SESSION['staff']."', NOW(), '".$action."')");
+            }
+
             header ("location: ".$_SERVER['REQUEST_URI']);
             exit();
         }   
@@ -57,15 +59,35 @@ if(isset($_POST['btn_save']))
     civilstatus = '$txt_edit_cstatus' ") 
     or die('Error: ' . mysqli_error($con));
 
-    if(isset($_SESSION['role'])){
-        $action = 'Update Certificate Of Recidency named of '.$txt_edit_resident;
-        $iquery = mysqli_query($con,"INSERT INTO tbllogs (user,logdate,action) values ('Brgy.".$_SESSION['staff']."', NOW(), '".$action."')");
-    }
 
     if($update_query == true){
         $_SESSION['edited'] = 1;
+
+        if(isset($_SESSION['role'])){
+            $action = 'Update Certificate Of Recidency named of '.$txt_edit_resident;
+            $iquery = mysqli_query($con,"INSERT INTO tbllogs (user,logdate,action) values ('Brgy.".$_SESSION['staff']."', NOW(), '".$action."')");
+        }
+        
         header("location: ".$_SERVER['REQUEST_URI']);
         exit();
+    }
+}
+
+if (isset($_POST['btn_del'])) {
+    if (isset($_POST['hidden_id'])) {
+        $txt_id = $_POST['hidden_id'];
+
+        $delete_query = mysqli_query($con, "DELETE FROM tblindigency WHERE id = '$txt_id'");
+
+        if ($delete_query) {
+            $_SESSION['delete'] = 1;
+            header("Location: " . $_SERVER['REQUEST_URI']);
+            exit();
+        } else {
+            die('Error: ' . mysqli_error($con));
+        }
+    } else {
+        echo 'Error: ID not provided.';
     }
 }
 

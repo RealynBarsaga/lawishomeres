@@ -11,12 +11,25 @@
     include("../connection.php");
     ?>
 </head>
+<style>
+body {
+    overflow: hidden; /* Prevents body from scrolling */
+}
 
+.wrapper {
+    overflow: hidden; /* Prevents the wrapper from scrolling */
+}
+
+.right-side {
+    overflow: auto; /* Only this part is scrollable */
+    max-height: calc(111vh - 120px); /* You already have this */
+}
+</style>
 <body class="skin-black">
     <!-- header logo: style can be found in header.less -->
     <?php include('../header.php'); ?>
 
-    <div class="wrapper row-offcanvas row-offcanvas-left">
+    <div class="row-offcanvas row-offcanvas-left">
         <!-- Left side column. contains the logo and sidebar -->
         <?php include('../sidebar-left.php'); ?>
 

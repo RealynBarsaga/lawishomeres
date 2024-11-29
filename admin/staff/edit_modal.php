@@ -35,7 +35,7 @@
                 <div class="form-group">
                     <label>Password: </label>
                     <div class="input-group">
-                        <input id="password" name="txt_edit_pass" class="form-control input-sm" type="password" placeholder="Password"/>
+                        <input id="password" name="txt_edit_pass" class="form-control input-sm" type="password" placeholder="•••••••••••"/>
                         <span class="input-group-addon eye-icon" onclick="togglePasswordVisibility(\'password\')">
                             <i class="fa fa-eye" id="eye-password"></i>
                         </span>
@@ -44,7 +44,7 @@
                 <div class="form-group">
                     <label>Confirm Password: </label>
                     <div class="input-group">
-                        <input id="confirm-password" name="txt_confirm_pass" class="form-control input-sm" type="password" placeholder="Confirm Password"/>
+                        <input id="confirm-password" name="txt_confirm_pass" class="form-control input-sm" type="password" placeholder="•••••••••••"/>
                         <span class="input-group-addon eye-icon" onclick="togglePasswordVisibility(\'confirm-password\')">
                             <i class="fa fa-eye" id="eye-confirm-password"></i>
                         </span>

@@ -11,23 +11,28 @@
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu">
                             <li>
-                                <a href="../dashboard/dashboard.php">
+                                <a href="../../admin/dashboard/dashboard.php">
                                     <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="../officials/officials.php">
+                                <a href="../../admin/officials/officials.php">
                                     <i class="fa fa-user"></i> <span>Madridejos Officials</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="../staff/staff.php">
+                                <a href="../../admin/staff/staff.php">
                                     <i class="fa fa-university"></i> <span>List Of Barangay</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="../householdlist/householdlist.php">
                                     <i class="fa fa-users"></i> <span>List Of Household</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../residentlist/residentlist.php">
+                                    <i class="fa fa-users"></i> <span>List Of Resident</span>
                                 </a>
                             </li>
                              <li>

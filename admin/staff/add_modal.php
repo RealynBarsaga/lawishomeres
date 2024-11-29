@@ -50,7 +50,7 @@
                             <div class="form-group">
                                 <label>Password:</label>
                                 <div class="input-group">
-                                    <input name="txt_pass" class="form-control input-sm" id="txt_pass" type="password" placeholder="************" required 
+                                    <input name="txt_pass" class="form-control input-sm" id="txt_pass" type="password" placeholder="•••••••••••" required 
                                         pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{10,}$"
                                         title="Password must be at least 10 characters long, contain at least one uppercase letter, one number, and one special character." />
                                     <span class="input-group-addon eye-icon" id="togglePassword1">
@@ -62,7 +62,7 @@
                             <div class="form-group">
                                 <label>Confirm Password:</label>
                                 <div class="input-group">
-                                    <input name="txt_compass" class="form-control input-sm" type="password" id="txt_compass" placeholder="************" required 
+                                    <input name="txt_compass" class="form-control input-sm" type="password" id="txt_compass" placeholder="•••••••••••" required 
                                         pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{10,}$" 
                                         title="Password must be at least 10 characters long, contain at least one uppercase letter, one number, and one special character." />
                                     <span class="input-group-addon eye-icon" id="togglePassword2">
@@ -141,6 +141,22 @@
             const type = confirmPasswordInput.attr('type') === 'password' ? 'text' : 'password';
             confirmPasswordInput.attr('type', type);
             $(this).find('i').toggleClass('fa-eye fa-eye-slash');
+        });
+    });
+    
+    document.addEventListener('DOMContentLoaded', function () {
+        const contactInput = document.getElementById('txt_contact');
+
+        contactInput.addEventListener('input', function () {
+            // Allow only numbers
+            this.value = this.value.replace(/[^0-9]/g, '');
+
+            // Check for exactly 11 digits
+            if (this.value.length !== 11) {
+                this.setCustomValidity('Please enter exactly 11 digits.');
+            } else {
+                this.setCustomValidity('');
+            }
         });
     });
 </script>
