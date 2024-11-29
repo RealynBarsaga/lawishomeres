@@ -219,6 +219,12 @@ html, body {
         // Trigger the update function on page load to set the initial state
         updateDeleteButton();
     });
+
+    $(document).ready(function() {
+    $('a[href="#"]').click(function(event) {
+        event.preventDefault(); // Prevents default anchor behavior
+    });
+});
     </script>
 </body>
 </html>

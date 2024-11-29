@@ -105,7 +105,7 @@ body {
                                                 <td>'.htmlspecialchars($row['barangay']).'</td> 
                                                 <td>'.htmlspecialchars($row['purok']).'</td>
                                                 <td>
-                                                    <button class="btn btn-primary btn-sm" data-target="#editModal'.htmlspecialchars($row['pid']).'" data-toggle="modal">
+                                                    <button href="javascript:void(0);" class="btn btn-primary btn-sm" data-target="#editModal'.htmlspecialchars($row['pid']).'" data-toggle="modal">
                                                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
                                                     </button>
                                                     <a style="width: 80px;color: #fff;background-color: #198754;border-color: #198754;" href="' . $barangay_forms[$off_barangay] . '?resident=' . urlencode($row['Name']) .'&barangay=' . urlencode($row['barangay']) .'|' . $row['Name'] . '" class="btn btn-primary btn-sm">
