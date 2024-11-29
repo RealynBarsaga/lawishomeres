@@ -10,9 +10,6 @@
     include('../head_css.php'); // Removed ob_start() since it's not needed here
     ?>
 <style>
-.nav-tabs li a {
-    cursor: pointer;
-}
 html, body {
     overflow: hidden; /* Prevents body from scrolling */
 }
