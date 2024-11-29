@@ -44,7 +44,7 @@ body {
                         <div class="box-header">
                             <div style="padding:10px;">
                                 <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addModal">
-                                    <i class="fa fa-user-plus" aria-hidden="true"></i> Add Certificate
+                                    <i class="fa fa-user-plus" aria-hidden="true"></i> Add Clearance
                                 </button>
                                 <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" id="deleteButton" style="display:none;margin-left: 5px;color: #fff;background-color: #dc3545;border-color: #dc3545;">
                                     <i class="fa fa-trash-o" aria-hidden="true"></i> Delete (<span id="selectedCount">0</span>)
@@ -146,12 +146,14 @@ body {
     <?php include "../footer.php"; ?>
 
     <script type="text/javascript">
-        $(function() {
+          $(function() {
             $("#table").dataTable({
-                "aoColumnDefs": [{ "bSortable": false, "aTargets": [0, 4] }],
+                "aoColumnDefs": [{
+                    "bSortable": false,
+                    "aTargets": [0, 6]
+                }],
                 "aaSorting": []
             });
-            $(".select2").select2();
         });
         $(document).ready(function() {
         // Check if 'Select All' checkbox is checked or not
