@@ -79,7 +79,7 @@
             <img src="../../img/lg.png" style="width: 170px; height: 135px;" />
         </div>
         <!-- Centered Text Content -->
-        <div class="col-xs-7 col-sm-6 col-md-8" style="text-align: center;margin-bottom: 30px;">
+        <div class="col-xs-7 col-sm-6 col-md-8" style="text-align: center;margin-top: 30px;">
             <div style="font-size: 15px; font-family: 'Courier New', Courier;">
                 <p style="margin-right: 180px;">Republic of the Philippines<br>
                 Province of Cebu<br>
