@@ -8,28 +8,26 @@ $Password = "1Db_barangay";
 $MySQL_database_name = "u510162695_db_barangay";
 
 // Establishing connection with server
-$conn = mysqli_connect('localhost', $MySQL_username, $Password, $MySQL_database_name);
+$con = mysqli_connect('localhost', $MySQL_username, $Password, $MySQL_database_name);
 
 // Checking connection
-if (!$conn) {
+if (!$con) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
 // Setting the default timezone
 date_default_timezone_set("Asia/Manila");
 
-// Get barangay from session (if set)
 $off_barangay = $_SESSION["barangay"] ?? "";
 
-// Query the latest clearance number from the database
-$query = "SELECT clearanceNo FROM tblclearance WHERE barangay = ? ORDER BY id DESC LIMIT 1";
-$stmt = $conn->prepare($query);
-$stmt->bind_param("s", $off_barangay); // Bind barangay parameter to prevent SQL injection
+// Prepare statement to query the latest clearance number from the database
+$stmt = $con->prepare("SELECT clearanceNo FROM tblclearance WHERE barangay = ? ORDER BY id DESC LIMIT 1");
+$stmt->bind_param("s", $off_barangay);
 $stmt->execute();
 $result = $stmt->get_result();
 
-if ($result && $result->num_rows > 0) {
-    $row = $result->fetch_assoc();
+if ($result && mysqli_num_rows($result) > 0) {
+    $row = mysqli_fetch_assoc($result);
     // Extract the last clearance number and increment it
     $last_clearance_number = $row['clearanceNo'];
     
@@ -39,6 +37,7 @@ if ($result && $result->num_rows > 0) {
     // If no records found, start with a default clearance number
     $next_clearance_number = 1; // or any starting number
 }
+
 // Format the clearance number to be 4 digits (e.g., 0001)
 $formatted_clearance_number = str_pad($next_clearance_number, 4, '0', STR_PAD_LEFT);
 ?>
