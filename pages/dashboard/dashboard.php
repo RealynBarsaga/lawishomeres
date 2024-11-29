@@ -184,38 +184,30 @@ h3 {
     </aside><!-- /.right-side -->
 </div><!-- ./wrapper -->
 <?php
-// Initialize variables
-$maleCount = 0;
-$femaleCount = 0;
-
-// Query to count male and female residents
-$maleCountQuery = mysqli_query($con, "SELECT COUNT(*) AS male_count FROM tbltabagak WHERE gender = 'Male'");
-if ($maleCountQuery) {
-    $maleCountResult = mysqli_fetch_assoc($maleCountQuery);
-    $maleCount = $maleCountResult['male_count'];
+// Query to count data for each barangay
+$barangays = ['Tabagak', 'Bunakan', 'Kodia', 'Talangnan', 'Maalat', 'Pili', 'Kaongkod', 'Mancilang', 'Kangwayan', 'Tugas', 'Malbago', 'Tarong', 'San Agustin'];
+$counts = [];
+                    
+foreach ($barangays as $barangay) {
+    $q = mysqli_query($con, "SELECT * FROM tbltabagak WHERE barangay = '$barangay'");
+    $counts[] = mysqli_num_rows($q);
 }
-
-$femaleCountQuery = mysqli_query($con, "SELECT COUNT(*) AS female_count FROM tbltabagak WHERE gender = 'Female'");
-if ($femaleCountQuery) {
-    $femaleCountResult = mysqli_fetch_assoc($femaleCountQuery);
-    $femaleCount = $femaleCountResult['female_count'];
-}
-
-$totalCount = $maleCount + $femaleCount;
-$malePercentage = $totalCount > 0 ? ($maleCount / $totalCount) * 100 : 0;
-$femalePercentage = $totalCount > 0 ? ($femaleCount / $totalCount) * 100 : 0;
 ?>
 <script>
-    const pieCtx = document.getElementById('myPieChart').getContext('2d');
-    const myPieChart = new Chart(pieCtx, {
-        type: 'pie',
+    const ctx = document.getElementById('myBarChart').getContext('2d');
+    const myBarChart = new Chart(ctx, {
+        type: 'bar',
         data: {
-            labels: ['Male', 'Female'],
+            labels: <?= json_encode($barangays) ?>,
             datasets: [{
-                label: 'Gender Distribution',
-                data: [<?= $maleCount ?>, <?= $femaleCount ?>],
-                backgroundColor: ['#4CB5F5', '#FF6384'],
-                borderColor: ['#fff', '#fff'],
+                label: 'Count',
+                data: <?= json_encode($counts) ?>,
+                backgroundColor: [
+                    '#4CB5F5',
+                ],
+                borderColor: [
+                   '#4CB5F5',
+                ],
                 borderWidth: 1
             }]
         },
@@ -224,197 +216,23 @@ $femalePercentage = $totalCount > 0 ? ($femaleCount / $totalCount) * 100 : 0;
             plugins: {
                 title: {
                     display: true,
-                    text: '          Gender Distribution Overview',
+                    text: 'Household Overview',
                     font: {
-                        size: 16 // Adjusted font size for the title
-                    },
-                },
-                legend: {
-                    position: 'left',
-                    labels: {
-                        boxWidth: 9,  // Reduce the width of the box next to the labels (if you have colored boxes)
-                        font: {
-                            size: 10 // Smaller font size for legend labels
-                        }
+                        size: 18
                     }
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(tooltipItem) {
-                            const total = tooltipItem.dataset.data.reduce((a, b) => a + b, 0);
-                            const currentValue = tooltipItem.raw;
-                            const percentage = ((currentValue / total) * 100).toFixed(1) + '%';
-                            return currentValue + ' (' + percentage + ')'; // Show count and percentage in tooltip
-                        }
-                    },
-                    bodyFont: {
-                        size: 9 // Smaller font size for tooltip text
-                    }
-                },
-                datalabels: {
-                    formatter: (value, ctx) => {
-                        const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
-                        const percentage = ((value / total) * 100).toFixed(1) + '%'; // Calculate percentage
-                        return percentage; // Return the percentage
-                    },
-                    font: {
-                        size: 9 // Smaller font size for data labels
-                    },
-                    color: '#fff', // Text color
-                    anchor: 'center', // Center the labels on the segments
-                    align: 'center' // Align the labels to the center
                 }
             },
-            layout: {
-                padding: {
-                    right: 45
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 1
+                    }
                 }
             }
-        },
-        plugins: [ChartDataLabels] // Register the plugin
+        }
     });
-</script>
-<?php
-// Query to count data for each purok in each barangay
-$barangays = ['Tabagak', 'Bunakan', 'Kodia', 'Talangnan', 'Poblacion', 'Maalat', 'Pili', 'Kaongkod', 'Mancilang', 'Kangwayan', 'Tugas', 'Malbago', 'Tarong', 'San Agustin'];
-$purokCounts = [];
-
-// Loop through each barangay
-foreach ($barangays as $barangay) {
-    $puroks = [];  // To store purok counts for the current barangay
-    
-    // Query to get all distinct puroks for this barangay
-    $purokQuery = mysqli_query($con, "SELECT DISTINCT purok FROM tbltabagak WHERE barangay = '$barangay'");
-    while ($purokRow = mysqli_fetch_assoc($purokQuery)) {
-        $purok = $purokRow['purok'];
-        
-        // Count how many records exist for this purok
-        $countQuery = mysqli_query($con, "SELECT * FROM tbltabagak WHERE barangay = '$barangay' AND purok = '$purok'");
-        $puroks[$purok] = mysqli_num_rows($countQuery);
-    }
-    
-    // Store the purok counts for the current barangay
-    $purokCounts[$barangay] = $puroks;
-}
-?>
-
-<script>
-// Prepare data for the bar chart
-const barCtx = document.getElementById('myBarChart').getContext('2d');
-const myBarChart = new Chart(barCtx, {
-    type: 'bar',
-    data: {
-        labels: <?= json_encode($barangays) ?>,
-        datasets: [
-            <?php
-            $colors = ['#4CB5F5', '#72C93D', '#E43C29', '#F9C300', '#6A3EC1'];  // Sample colors
-            $datasetIndex = 0;
-
-            foreach ($purokCounts as $barangay => $puroks) {
-                $data = array_values($puroks);
-                $labels = array_keys($puroks);
-                $color = $colors[$datasetIndex % count($colors)];  // Rotate colors
-
-                echo "{ label: '$barangay', data: " . json_encode($data) . ", backgroundColor: '$color', borderColor: '$color', borderWidth: 1 },";
-                $datasetIndex++;
-            }
-            ?>
-        ]
-    },
-    options: {
-        responsive: true,
-        plugins: {
-            title: {
-                display: true,
-                text: 'Purok Population Overview by Barangay',
-                font: { size: 14 }
-            }
-        },
-        scales: {
-            y: {
-                beginAtZero: true,
-                ticks: { stepSize: 1, font: { size: 9 } }
-            },
-            x: {
-                ticks: { font: { size: 9 } }
-            }
-        }
-    }
-});
-</script>
-
-<?php
-// Initialize variables for age distribution (same as before)
-$ageGroups = [
-    '0-9' => 0,
-    '10-19' => 0,
-    '20-29' => 0,
-    '30-39' => 0,
-    '40-49' => 0,
-    '50-59' => 0,
-    '60+' => 0,
-];
-
-// Query to get age distribution
-$ageQuery = mysqli_query($con, "SELECT age FROM tbltabagak WHERE barangay = '$off_barangay'");
-while ($row = mysqli_fetch_assoc($ageQuery)) {
-    $age = $row['age'];
-    if ($age >= 0 && $age <= 9) {
-        $ageGroups['0-9']++;
-    } elseif ($age >= 10 && $age <= 19) {
-        $ageGroups['10-19']++;
-    } elseif ($age >= 20 && $age <= 29) {
-        $ageGroups['20-29']++;
-    } elseif ($age >= 30 && $age <= 39) {
-        $ageGroups['30-39']++;
-    } elseif ($age >= 40 && $age <= 49) {
-        $ageGroups['40-49']++;
-    } elseif ($age >= 50 && $age <= 59) {
-        $ageGroups['50-59']++;
-    } else {
-        $ageGroups['60+']++;
-    }
-}
-
-$ageLabels = array_keys($ageGroups);
-$ageCounts = array_values($ageGroups);
-?>
-<script>
-// Prepare data for the line chart (age distribution)
-const lineCtx = document.getElementById('myLineChart').getContext('2d');
-const myLineChart = new Chart(lineCtx, {
-    type: 'line',
-    data: {
-        labels: <?= json_encode($ageLabels) ?>,
-        datasets: [{
-            label: 'Age Distribution',
-            data: <?= json_encode($ageCounts) ?>,
-            backgroundColor: 'rgba(76, 181, 245, 0.2)',
-            borderColor: '#4CB5F5',
-            borderWidth: 1,
-        }]
-    },
-    options: {
-        responsive: true,
-        plugins: {
-            title: {
-                display: true,
-                text: 'Age Distribution Overview',
-                font: { size: 14 }
-            }
-        },
-        scales: {
-            y: {
-                beginAtZero: true,
-                ticks: { stepSize: 1, font: { size: 9 } }
-            },
-            x: {
-                ticks: { font: { size: 9 } }
-            }
-        }
-    }
-});
-</script>
-<?php include "../footer.php"; ?>
+</script>    
+    <?php include "../footer.php"; ?>
 </body>
 </html>
