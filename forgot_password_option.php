@@ -231,7 +231,7 @@ function showForm(method) {
     if (method === 'email_link') {
         window.location.href = '../email_link_form'; // Redirect to the email link form page
     } else if (method === 'email_otp') {
-        window.location.href = 'email_otp_form.php'; // Redirect to the email OTP form page
+        window.location.href = '../email_otp_form'; // Redirect to the email OTP form page
     }
 }
 

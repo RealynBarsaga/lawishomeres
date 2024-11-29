@@ -225,7 +225,7 @@ $email = '';
                     <div class="form-group">
                         <button type="submit" name="sendotp" class="btn">Send OTP</button>
                         <div class="back-link">
-                            <a href="forgot_password_option.php">
+                            <a href="../forgot_password_option">
                                 <button type="button" class="login-btn">Back</button>
                             </a>
                         </div>
