@@ -369,7 +369,7 @@
             2.This permit is only a privilage and not a right, subject to REVOCATION and CLOSURE <br>&nbsp;&nbsp;&nbsp;of business establishment for any violation of existing laws and ordinances and <br>&nbsp;&nbsp;&nbsp;conditions set forth in this permit.<br>
             3.This permit must be renewed on or before January 20 of the following year unless <br>&nbsp;&nbsp;&nbsp;sooner revoked for a cause. Failure to renew within the time required shall subject the <br>&nbsp;&nbsp;&nbsp;taxpayer to a surcharge of 25% to the amount of business taxes due plus an interest of 
             <br>&nbsp;&nbsp;&nbsp;2% per month of the unpaid business taxex.<br>
-            4.In case of business closure, surrender this permit to the MUNICIPAL TREASURER for the <br>&nbsp;&nbsp;&nbsp;official retirement.
+            4.In case of business closure, surrender this permit to the MUNICIPAL TREASURER for  <br>&nbsp;&nbsp;&nbsp;the official retirement.
         </strong>  
     </span>
     </p>
