@@ -1066,7 +1066,7 @@ ul li {
                 <?php if ($login_success): ?>
                 <!-- Modal structure -->
                 <div id="success-modal2" class="modal2" style="display: block;">
-                    <div class="modal-content2" style="margin-left:520px;">
+                    <div class="modal-content2" style="margin-left:523px;">
                         <span class="modal-title2">Success</span>
                         <p>Login Successfully!</p>
                         <button id="ok-button2" class="btn-ok2">OK</button>
