@@ -88,7 +88,6 @@ if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) {
                 $_SESSION['logo'] = $row['logo'];
                 
                 // Set login success flag to true
-                $_SESSION['login_success'] = true;  // Set session flag to true when login is successful
                 $login_success = true;
             } else {
                 // Increment login attempts
@@ -834,19 +833,6 @@ header h2 {
     padding: 10px; /* Optional: adds some padding */
     background-color: #f9f9f9; /* Optional: background color */
 }
-/* Preloader Styles */
-.preloader-it {
-    position: fixed;  /* Ensures it stays fixed in place while loading */
-    top: 0;           /* Aligns to the top of the screen */
-    left: 0;          /* Aligns to the left of the screen */
-    width: 100vw;     /* Full viewport width */
-    height: 100vh;    /* Full viewport height */
-    background-color: #fff; /* Semi-transparent background */
-    display: flex;    /* Uses Flexbox to center the spinner */
-    justify-content: center; /* Horizontally centers the spinner */
-    align-items: center;     /* Vertically centers the spinner */
-    z-index: 9999;    /* Ensures the preloader is on top of all other content */
-}
 /* Style for the terms-checkbox container */
 .terms-checkbox {
     display: flex;
@@ -989,10 +975,6 @@ ul li {
 }
 </style>
 <body class="skin-black">
-<!-- Preloader HTML -->
-<div id="preloader" class="preloader-it">
-    <!-- Preloader content goes here -->
-</div>
 <div class="container" style="margin-top: -5px;">
     <div class="col-md-4 col-md-offset-4">
         <div class="panel">
@@ -1470,19 +1452,6 @@ document.addEventListener("DOMContentLoaded", function() {
             iconElement.classList.add('fa-eye');
         }
     }
-</script>
-<script>
-$(document).ready(function() {
-    $(".preloader-it").fadeOut(500);  // Fade out the preloader once the DOM is fully ready
-});
-// Check if the user is logged in based on the session variable
-<?php if (isset($_SESSION['login_success']) && $_SESSION['login_success'] == true): ?>
-    // If logged in, hide the preloader
-    document.getElementById('preloader').style.display = 'none';
-<?php else: ?>
-    // If not logged in, show the preloader (this can be customized)
-    document.getElementById('preloader').style.display = 'block';
-<?php endif; ?>
 </script>
 </body>
 </html>
