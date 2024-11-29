@@ -384,7 +384,7 @@
                         echo '
                         <strong style="font-size: 17px; margin-left: 22px;">ENGR.'.strtoupper($row['completeName']).'</strong>
                         <hr style="border: 0.1px solid black; width: 92%; margin-left: 22px;margin-top: -15px;"/>
-                        <p style="margin-left: 110px; margin-top: -20px;">Municipal Mayor</p>
+                        <p style="margin-left: 100px; margin-top: -20px;">Municipal Mayor</p>
                         ';
                     }
                 }
