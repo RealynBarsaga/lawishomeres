@@ -1,54 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php
     session_start();
     if (!isset($_SESSION['userid'])) {
         header('Location: ../../login.php');
         exit; // Ensure no further execution after redirect
     }
-    include('../head_css.php'); // Removed ob_start() since it's not needed here
+    include('../head_css.php');
     ?>
-<style>
-.nav-tabs li a {
-    cursor: pointer;
-}
-body {
-    overflow: hidden; /* Prevents body from scrolling */
-}
+    <style>
+    .nav-tabs li a {
+        cursor: pointer;
+    }
+    body {
+        overflow: hidden;
+    }
 
-.wrapper {
-    overflow: hidden; /* Prevents the wrapper from scrolling */
-}
+    .wrapper {
+        overflow: hidden;
+    }
 
-.right-side {
-    overflow: auto; /* Only this part is scrollable */
-    max-height: calc(111vh - 120px); /* You already have this */
-}
-</style>
+    .right-side {
+        overflow: auto;
+        max-height: calc(111vh - 120px);
+    }
+    </style>
 </head>
 <body class="skin-black">
-    <!-- header logo: style can be found in header.less -->
     <?php
     include "../connection.php";
     include('../header.php');
     ?>
 
     <div class="row-offcanvas row-offcanvas-left">
-        <!-- Left side column. contains the logo and sidebar -->
         <?php include('../sidebar-left.php'); ?>
 
-        <!-- Right side column. Contains the navbar and content of the page -->
         <aside class="right-side">
-            <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>Barangay Clearance</h1>
             </section>
 
-            <!-- Main content -->
             <section class="content">
                 <div class="row">
-                    <!-- left column -->
                     <div class="box">
                         <div class="box-header">
                             <div style="padding:10px;">
@@ -59,7 +55,7 @@ body {
                                     <i class="fa fa-trash-o" aria-hidden="true"></i> Delete (<span id="selectedCount">0</span>)
                                 </button>
                             </div>
-                        </div><!-- /.box-header -->
+                        </div>
                         <div class="box-body table-responsive">
                             <form method="post">
                                 <div class="tab-content">
@@ -83,33 +79,23 @@ body {
                                             </thead>
                                             <tbody>
                                                 <?php
-                                                    // Assuming you're storing the logged-in barangay in a session
                                                     $off_barangay = $_SESSION['barangay']; // e.g., "Tabagak", "Bunakan", etc.
                                                     
-                                                    // Map barangays to their corresponding clearance form files
                                                     $barangay_forms = [
                                                         "Tabagak" => "tabagak_clearance_form.php",
                                                         "Bunakan" => "bunakan_clearance_form.php",
-                                                        /* "Kodia" => "kodia_clearance_form.php", */
-                                                        /* "Talangnan" => "talangnan_clearance_form.php", */
-                                                        /* "Poblacion" => "poblacion_clearance_form.php", */
                                                         "Maalat" => "maalat_clearance_form.php",
                                                         "Pili" => "pili_clearance_form.php"
-                                                        /* "Kaongkod" => "kaongkod_clearance_form.php", */
-                                                       /*  "Mancilang" => "mancilang_clearance_form.php", */
-                                                        /* "Kangwayan" => "kangwayan_clearance_form.php", */
-                                                        /* "Tugas" => "tugas_clearance_form.php", */
-                                                       /*  "Malbago" => "malbago_clearance_form.php", */
-                                                       /*  "Tarong" => "tarong_clearance_form.php", */
-                                                        /* "San Agustin" => "san_agustin_clearance_form.php" */
                                                     ];
 
-                                                    $stmt = $con->prepare("SELECT name, clearanceNo, purpose, orNo, samount, id AS pid FROM tblclearance WHERE barangay = '$off_barangay'");
+                                                    // Using prepared statement to prevent SQL injection
+                                                    $stmt = $con->prepare("SELECT name, clearanceNo, purpose, orNo, samount, id AS pid FROM tblclearance WHERE barangay = ?");
+                                                    $stmt->bind_param("s", $off_barangay);
                                                     $stmt->execute();
                                                     $result = $stmt->get_result();
-                                                    
-                                                        while ($row = $result->fetch_assoc()) {
-                                                            $deleteModalId = 'deleteModal' . $row['pid'];
+
+                                                    while ($row = $result->fetch_assoc()) {
+                                                        $deleteModalId = 'deleteModal' . $row['pid'];
                                                         echo '
                                                             <tr>
                                                                 <td><input type="checkbox" name="chk_delete[]" class="chk_delete" value="' . htmlspecialchars($row['pid']) . '" /></td>
@@ -140,8 +126,8 @@ body {
                                 <?php include "delete_modal.php"; ?>
                                 <?php include "../deleteModal.php"; ?>
                             </form>
-                        </div><!-- /.box-body -->
-                    </div><!-- /.box -->
+                        </div>
+                    </div>
 
                     <?php include "../edit_notif.php"; ?>
                     <?php include "../added_notif.php"; ?>
@@ -149,10 +135,10 @@ body {
                     <?php include "../duplicate_error.php"; ?>
                     <?php include "add_modal.php"; ?>
                     <?php include "function.php"; ?>
-                </div><!-- /.row -->
-            </section><!-- /.content -->
-        </aside><!-- /.right-side -->
-    </div><!-- ./wrapper -->
+                </div>
+            </section>
+        </aside>
+    </div>
 
     <?php include "../footer.php"; ?>
 
@@ -165,64 +151,23 @@ body {
                 }],
                 "aaSorting": []
             });
-        });
-        $(document).ready(function() {
-        // Check if 'Select All' checkbox is checked or not
-        $(".cbxMain").change(function() {
-            // If checked, show the delete button, otherwise hide it
-            if ($(this).prop("checked")) {
-                $("#deleteButton").show(); // Show delete button
-            } else {
-                $("#deleteButton").hide(); // Hide delete button
+
+            function updateDeleteButton() {
+                var selectedCount = $("input[name='chk_delete[]']:checked").length;
+                $("#selectedCount").text(selectedCount);
+                if (selectedCount > 0) {
+                    $("#deleteButton").show();
+                } else {
+                    $("#deleteButton").hide();
+                }
             }
+
+            $(".cbxMain, input[name='chk_delete[]']").change(function() {
+                updateDeleteButton();
+            });
+
+            updateDeleteButton(); // Initialize delete button state
         });
-
-        // Trigger change event on page load to set initial state
-        $(".cbxMain").trigger("change");
-    });
-    $(document).ready(function() {
-        // When any individual checkbox is changed
-        $("input[name='chk_delete[]']").change(function() {
-            // Check if any checkbox is checked
-            if ($("input[name='chk_delete[]']:checked").length > 0) {
-                $("#deleteButton").show(); // Show delete button
-            } else {
-                $("#deleteButton").hide(); // Hide delete button if no checkboxes are checked
-            }
-        });
-
-        // Trigger change event on page load to set initial state
-        $("input[name='chk_delete[]']").trigger("change");
-    });
-    $(document).ready(function() {
-        // Update 'Select All' functionality to show/hide delete button
-        $(".cbxMain").change(function() {
-            updateDeleteButton();
-        });
-
-        // Update individual checkbox change event
-        $("input[name='chk_delete[]']").change(function() {
-            updateDeleteButton();
-        });
-
-        // Function to update the count and visibility of the delete button
-        function updateDeleteButton() {
-            var selectedCount = $("input[name='chk_delete[]']:checked").length;
-
-            // Update the count in the delete button
-            $("#selectedCount").text(selectedCount);
-
-            // If there's at least one selected checkbox, show the delete button
-            if (selectedCount > 0) {
-                $("#deleteButton").show();
-            } else {
-                $("#deleteButton").hide();
-            }
-        }
-
-        // Trigger the update function on page load to set the initial state
-        updateDeleteButton();
-    });
     </script>
 </body>
 </html>
