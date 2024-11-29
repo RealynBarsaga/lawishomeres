@@ -1,17 +1,19 @@
 <?php
-// Example: Fetch the last permit number, business ID, and receipt from the database
-$host = 'localhost';
-$username = 'root';
-$password = '';
-$database = 'db_barangay';
+// Database credentials
+$MySQL_username = "u510162695_db_barangay";
+$Password = "1Db_barangay";    
+$MySQL_database_name = "u510162695_db_barangay";
 
-// Create connection
-$conn = mysqli_connect($host, $username, $password, $database);
+// Establishing connection with server
+$conn = mysqli_connect('localhost', $MySQL_username, $Password, $MySQL_database_name);
 
-// Check connection
+// Checking connection
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
+
+// Setting the default timezone
+date_default_timezone_set("Asia/Manila");
 
 // ========================= Permit No ======================= //
 $query = "SELECT orNo FROM tblpermit ORDER BY id DESC LIMIT 1"; 
