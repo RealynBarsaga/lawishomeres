@@ -1,4 +1,4 @@
-<?php 
+<?php
 // Start the session
 session_start();
 
@@ -41,6 +41,7 @@ if ($result && mysqli_num_rows($result) > 0) {
 // Format the clearance number to be 4 digits (e.g., 0001)
 $formatted_clearance_number = str_pad($next_clearance_number, 4, '0', STR_PAD_LEFT);
 ?>
+
 <!-- ========================= MODAL ======================= -->
 <div id="addModal" class="modal fade">
 <form method="post">
@@ -53,7 +54,7 @@ $formatted_clearance_number = str_pad($next_clearance_number, 4, '0', STR_PAD_LE
         <div class="modal-body">
             <div class="row">
                 <div class="col-md-12">
-                <div class="form-group">
+                    <div class="form-group">
                         <label>Resident Name:</label>
                         <input name="txt_name" class="form-control input-sm" type="text" placeholder="Name" required/>
                     </div>
@@ -83,19 +84,9 @@ $formatted_clearance_number = str_pad($next_clearance_number, 4, '0', STR_PAD_LE
                             $puroks = [
                                 "Tabagak" => ["Lamon-Lamon", "Tangigue", "Lawihan", "Lower-Bangus", "Upper-Bangus"],
                                 "Bunakan" => ["Bilabid", "Helinggero", "Kamaisan", "Kalubian", "Samonite"],
-                                /* "Kodia" => ["Purok X", "Purok Y", "Purok Z"], */
-                                /* "Talangnan" => ["",], */
-                                /*  "Poblacion" => ["",], */
                                 "Maalat" => ["Neem Tree", "Talisay", "Kabakhawan", "Mahogany", "Gmelina"],
                                 "Pili" => ["Malinawon", "Mahigugmaon", "Matinabangun", "Maabtikon", "Malipayon", "Mauswagon"],
-                                /* "Kaongkod" => ["Purok", "Puroks"], */
-                                /* "Mancilang" => ["Purok", "Puroks"], */
-                                /* "Kangwayan" => ["Purok", "Puroks"], */
-                                /* "Kangwayan" => ["Purok", "Puroks"], */
-                                /* "Tugas" => ["Purok", "Puroks"], */
-                                /* "Malbago" => ["Purok", "Puroks"], */
                                 "Tarong" => ["Orchids", "Gumamela", "Santan", "Rose", "Vietnam Rose", "Kumintang", "Sunflower", "Daisy"],
-                                // Add purok options for other barangays
                             ];
                         ?>
                         <label>Purok:</label>
@@ -133,7 +124,6 @@ $formatted_clearance_number = str_pad($next_clearance_number, 4, '0', STR_PAD_LE
                     </div>
                 </div>
             </div>
-            
         </div>
         <div class="modal-footer">
             <input type="button" class="btn btn-default btn-sm" data-dismiss="modal" value="Cancel"/>
@@ -141,7 +131,7 @@ $formatted_clearance_number = str_pad($next_clearance_number, 4, '0', STR_PAD_LE
         </div>
     </div>
   </div>
-  </form>
+</form>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
