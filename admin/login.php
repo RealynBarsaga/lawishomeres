@@ -1044,7 +1044,7 @@ ul li {
                 <?php if ($error_attempts): ?>
                 <!-- Error Modal structure -->
                 <div id="error-modal" class="modal" style="display: block;">
-                    <div class="modal-content" style="margin-left:523px;">
+                    <div class="modal-content" style="margin-left:479px;">
                         <span class="modal-title">Error</span>
                         <p><?php echo $error_attempts; ?></p>
                         <button id="error-ok-button" class="btn-ok">OK</button>
@@ -1055,7 +1055,7 @@ ul li {
                 <?php if ($error): ?>
                 <!-- Error Modal structure -->
                 <div id="error-modal1" class="modal1" style="display: block;">
-                    <div class="modal-content1" style="margin-left:523px;">
+                    <div class="modal-content1" style="margin-left:479px;">
                         <span class="modal-title1">Error</span>
                         <p>Invalid account. Please try again.</p>
                         <button id="error-ok-button1" class="btn-ok1">OK</button>
@@ -1066,7 +1066,7 @@ ul li {
                 <?php if ($login_success): ?>
                 <!-- Modal structure -->
                 <div id="success-modal2" class="modal2" style="display: block;">
-                    <div class="modal-content2" style="margin-left:523px;">
+                    <div class="modal-content2" style="margin-left:479px;">
                         <span class="modal-title2">Success</span>
                         <p>Login Successfully!</p>
                         <button id="ok-button2" class="btn-ok2">OK</button>
