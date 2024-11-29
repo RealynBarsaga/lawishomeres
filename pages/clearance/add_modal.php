@@ -137,9 +137,9 @@ $formatted_clearance_number = str_pad($next_clearance_number, 4, '0', STR_PAD_LE
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function() {
-    // Calculate age function
-    $('#txt_bdate').change(function() {
-        var dob = new Date($(this).val());
+    // Function to calculate age
+    function calculateAge() {
+        var dob = new Date($('#txt_bdate').val());
         var today = new Date();
         var age = today.getFullYear() - dob.getFullYear();
         var m = today.getMonth() - dob.getMonth();
@@ -147,6 +147,16 @@ $(document).ready(function() {
             age--;
         }
         $('#txt_age').val(age);
+    }
+
+    // Calculate age when birthdate is selected
+    $('#txt_bdate').change(function() {
+        calculateAge();
     });
+
+    // Calculate age when the page loads (if a birthdate is already selected)
+    if ($('#txt_bdate').val()) {
+        calculateAge();
+    }
 });
 </script>
