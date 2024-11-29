@@ -362,7 +362,7 @@
         </span>
     </div>
     </div><br>
-    <p class="text-left" style="margin-left: -30px;margin-top: -10px;">
+    <p class="text-left" style="margin-left: -30px;margin-top: -15px;">
     <span style="font-size: 17px;font-weight: 900; letter-spacing: -1px; line-height: 1.2;">
         <strong style="font-weight: 900; color: #FFFFFF !important; -webkit-text-stroke: 1px #000;">
             1.This permit must be displayed in a conspicuous place within the establishment.<br>
