@@ -73,7 +73,7 @@
     ?>
     
     <!-- Header Section -->
-    <div class="header-section" style="margin-bottom: 20px;">
+    <div class="header-section" style="margin-bottom: 30px;">
         <!-- Left Logo -->
         <div class="col-xs-4 col-sm-3 col-md-2" style="padding: 10px; float: left;margin-top: 20px;">
             <img src="../../img/lg.png" style="width: 170px; height: 135px;" />
