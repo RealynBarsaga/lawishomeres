@@ -383,7 +383,7 @@
                     if($row['sPosition'] == "Mayor"){
                         echo '
                         <strong style="font-size: 17px; margin-left: 22px;">ENGR.'.strtoupper($row['completeName']).'</strong>
-                        <hr style="border: 0.1px solid black; width: 88%; margin-left: 20px;margin-top: -15px;"/>
+                        <hr style="border: 0.1px solid black; width: 90%; margin-left: 20px;margin-top: -15px;"/>
                         <p style="margin-left: 110px; margin-top: -20px;">Municipal Mayor</p>
                         ';
                     }
