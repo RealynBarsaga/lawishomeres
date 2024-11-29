@@ -85,7 +85,7 @@
                 Province of Cebu<br>
                 <span style="font-size: 15px; font-weight: bolder;margin-left: -1px;">Municipality of Madridejos</span></p>
             </div>
-            <p style="font-size: 24px; font-weight: bolder; margin-left: -190px;margin-top: -5px;">OFFICE OF THE MUNICIPAL MAYOR</p>
+            <p style="font-size: 20px; font-weight: bolder; margin-left: -190px;margin-top: -5px;">OFFICE OF THE MUNICIPAL MAYOR</p>
             <p style="font-size: 10px; font-weight: bolder;margin-left: -190px;margin-top: -15px;">BUSINESS PERMIT AND LICENSING OFFICE</p>
         </div>
         <!-- Right Logo -->
