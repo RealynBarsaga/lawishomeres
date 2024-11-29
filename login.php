@@ -31,6 +31,7 @@ header("Cross-Origin-Resource-Policy: same-site");
 header("Permissions-Policy: geolocation=(), camera=(), microphone=(), interest-cohort=()");
 header("X-DNS-Prefetch-Control: off");
 
+// Rest of your PHP script goes here
 $error = false;
 $login_success = false;
 $error_attempts = false;
@@ -77,6 +78,9 @@ if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) {
             if (password_verify($password, $row['password'])) {
                 // Reset login attempts upon successful login
                 $_SESSION['login_attempts'] = 0;
+
+                // Regenerate session ID upon successful login
+                session_regenerate_id(true);
 
                 $_SESSION['role'] = "Staff";
                 $_SESSION['staff'] = $row['name'];
@@ -1027,7 +1031,7 @@ ul li {
                             </span>
                         </div>
                         <div class="form-group" style="margin-top: 5px; width: 3px; margin-left: -11px; transform: scale(0.99); transform-origin: 0 0;">
-                            <div class="g-recaptcha" data-sitekey="6Lc2slYqAAAAACs0mn07_8egSpnyY3BMELOexgRb"></div>
+                            <div class="g-recaptcha" data-sitekey="6LeI31UqAAAAAIMbElYP18m5855S0nqy2npHMUml"></div>
                         </div>
                         <p id="captcha-error" style="font-size:10px;margin-top: -17px;margin-left: -11px;color:#ed4337;display: none;">
                           Please verify that you are not a robot
@@ -1041,7 +1045,7 @@ ul li {
                 </div>
                 <!-- Forgot password link -->
                 <div class="forgot-password" style="margin-top: -2.1px;margin-left: 84px;float: left;">
-                    <a href="../forgot_password_option">Forgot Password?</a>
+                    <a href="forgot_password_option.php">Forgot Password?</a>
                 </div>
                 <!-- For Switching Login Form-->
                 <!-- <div style="margin-top: -20px;margin-left: 195px;">
