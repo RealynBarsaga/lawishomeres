@@ -1,39 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-// Set cookie parameters before starting the session
-session_set_cookie_params([
-    'lifetime' => 0,              // Session cookie (expires when the browser is closed)
-    'path' => '/',                // Available across the entire domain
-    'domain' => 'lawishomeresidences.com', // Change this to your domain
-    'secure' => true,             // Set to true if using HTTPS
-    'httponly' => true,           // Prevent JavaScript access to the cookie
-    'samesite' => 'Strict'        // Use 'Lax' or 'Strict' based on your needs
-]);
-
-// Start the session
 session_start();
-
-// Regenerate session ID upon each new login to prevent session fixation
-if (!isset($_SESSION['session_created'])) {
-    session_regenerate_id(true);  // Regenerate session ID on login
-    $_SESSION['session_created'] = time();
-}
-
-// Security headers
-header("X-XSS-Protection: 1; mode=block");
-header("X-Frame-Options: DENY");
-header("X-Content-Type-Options: nosniff");
-header("Referrer-Policy: strict-origin-when-cross-origin");
-header("Strict-Transport-Security: max-age=63072000; includeSubDomains; preload");
-header("Access-Control-Allow-Origin: https://lawishomeresidences.com"); // Change to your domain
-header("Cross-Origin-Opener-Policy: same-origin");
-header("Cross-Origin-Embedder-Policy: require-corp");
-header("Cross-Origin-Resource-Policy: same-site");
-header("Permissions-Policy: geolocation=(), camera=(), microphone=(), interest-cohort=()");
-header("X-DNS-Prefetch-Control: off");
-
-// Rest of your PHP script goes here
 $error = false;
 $login_success = false;
 $error_attempts = false;
@@ -81,9 +49,6 @@ if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) {
                 // Reset login attempts upon successful login
                 $_SESSION['login_attempts'] = 0;
 
-                // Regenerate session ID upon successful login
-                session_regenerate_id(true);
-
                 $_SESSION['role'] = "Staff";
                 $_SESSION['staff'] = $row['name'];
                 $_SESSION['userid'] = $row['id'];
@@ -92,6 +57,7 @@ if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) {
                 $_SESSION['logo'] = $row['logo'];
                 
                 // Set login success flag to true
+                $_SESSION['login_success'] = true;  // Set session flag to true when login is successful
                 $login_success = true;
             } else {
                 // Increment login attempts
@@ -125,10 +91,10 @@ if ($error || $error_attempts) {
 }
 ?>
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Madridejos Home Residence Management System</title>
-    <link rel="icon" type="x-icon" href="img/lg.png">
+    <link rel="icon" type="x-icon" href="../img/lg.png">
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <meta http-equiv="Content-Security-Policy" content="
     default-src 'self'; 
@@ -143,12 +109,13 @@ if ($error || $error_attempts) {
     base-uri 'self'; 
     form-action 'self';">
     <!-- bootstrap 3.0.2 -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <!-- Theme style -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="script.js" defer></script>
 </head>
 <style>
