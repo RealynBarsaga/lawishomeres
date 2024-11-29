@@ -27,7 +27,7 @@ body {
 <body class="skin-black">
     <?php 
     include "../connection.php"; 
-    include "../header.php"; 
+    include ('../header.php'); 
     ?>
     
     <div class="row-offcanvas row-offcanvas-left">
@@ -52,7 +52,7 @@ body {
                             </div>
                         </div>
                         <div class="box-body table-responsive">
-                            <form method="post">
+                            <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                                 <table id="table" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
@@ -74,25 +74,17 @@ body {
                                         // Assuming you're storing the logged-in barangay in a session
                                         $off_barangay = $_SESSION['barangay']; // e.g., "Tabagak", "Bunakan", etc.
                                                     
+
                                         // Map barangays to their corresponding residency form files
                                         $barangay_forms = [
                                             "Tabagak" => "tabagak_certificate_form.php",
                                             "Bunakan" => "bunakan_certificate_form.php",
-                                            /* "Kodia" => "kodia_certificate_form.php", */
-                                            /* "Talangnan" => "talangnan_certificate_form.php", */
-                                            /* "Poblacion" => "poblacion_certificate_form.php", */
                                             "Maalat" => "maalat_certificate_form.php",
                                             "Pili" => "pili_certificate_form.php"
-                                            /* "Kaongkod" => "kaongkod_certificate_form.php", */
-                                            /* "Mancilang" => "mancilang_certificate_form.php", */
-                                            /* "Kangwayan" => "kangwayan_certificate_form.php", */
-                                            /* "Tugas" => "tugas_certificate_form.php", */
-                                            /* "Malbago" => "malbago_certificate_form.php", */
-                                            /* "Tarong" => "tarong_certificate_form.php", */
-                                            /* "San Agustin" => "san_agustin_certificate_form.php" */
                                         ];
 
-                                        $stmt = $con->prepare("SELECT Name, purpose, barangay, purok, id AS pid FROM tblcertificate WHERE barangay = '$off_barangay'");
+                                        $stmt = $con->prepare("SELECT Name, purpose, barangay, purok, id AS pid FROM tblcertificate WHERE barangay = ?");
+                                        $stmt->bind_param('s', $off_barangay);
                                         $stmt->execute();
                                         $result = $stmt->get_result();
                                         while ($row = $result->fetch_assoc()) {
@@ -144,70 +136,33 @@ body {
     <?php include "../footer.php"; ?>
 
     <script type="text/javascript">
-        $(function() {
+        $(document).ready(function() {
+            // Initialize DataTable
             $("#table").dataTable({
                 "aoColumnDefs": [{ "bSortable": false, "aTargets": [0, 4] }],
                 "aaSorting": []
             });
+
             $(".select2").select2();
-        });
-        $(document).ready(function() {
-        // Check if 'Select All' checkbox is checked or not
-        $(".cbxMain").change(function() {
-            // If checked, show the delete button, otherwise hide it
-            if ($(this).prop("checked")) {
-                $("#deleteButton").show(); // Show delete button
-            } else {
-                $("#deleteButton").hide(); // Hide delete button
-            }
-        });
 
-        // Trigger change event on page load to set initial state
-        $(".cbxMain").trigger("change");
-    });
-    $(document).ready(function() {
-        // When any individual checkbox is changed
-        $("input[name='chk_delete[]']").change(function() {
-            // Check if any checkbox is checked
-            if ($("input[name='chk_delete[]']:checked").length > 0) {
-                $("#deleteButton").show(); // Show delete button
-            } else {
-                $("#deleteButton").hide(); // Hide delete button if no checkboxes are checked
-            }
-        });
+            // Handle 'Select All' functionality and toggle delete button
+            $(".cbxMain, input[name='chk_delete[]']").change(function() {
+                updateDeleteButton();
+            });
 
-        // Trigger change event on page load to set initial state
-        $("input[name='chk_delete[]']").trigger("change");
-    });
-    $(document).ready(function() {
-        // Update 'Select All' functionality to show/hide delete button
-        $(".cbxMain").change(function() {
+            function updateDeleteButton() {
+                var selectedCount = $("input[name='chk_delete[]']:checked").length;
+                $("#selectedCount").text(selectedCount);
+                if (selectedCount > 0) {
+                    $("#deleteButton").show();
+                } else {
+                    $("#deleteButton").hide();
+                }
+            }
+
+            // Trigger initial state
             updateDeleteButton();
         });
-
-        // Update individual checkbox change event
-        $("input[name='chk_delete[]']").change(function() {
-            updateDeleteButton();
-        });
-
-        // Function to update the count and visibility of the delete button
-        function updateDeleteButton() {
-            var selectedCount = $("input[name='chk_delete[]']:checked").length;
-
-            // Update the count in the delete button
-            $("#selectedCount").text(selectedCount);
-
-            // If there's at least one selected checkbox, show the delete button
-            if (selectedCount > 0) {
-                $("#deleteButton").show();
-            } else {
-                $("#deleteButton").hide();
-            }
-        }
-
-        // Trigger the update function on page load to set the initial state
-        updateDeleteButton();
-    });
     </script>
 </body>
 </html>
