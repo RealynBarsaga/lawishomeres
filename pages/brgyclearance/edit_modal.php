@@ -64,7 +64,7 @@
                 <div class="form-group">
                     <label>Amount : </label>
                     <input name="txt_edit_amount" class="form-control input-sm" type="text" value="'.$row['samount'].'" />
-                </div
+                </div>
             </div>
         </div>
         </div>
@@ -76,6 +76,7 @@
   </div>
 </form>
 </div>';?>
+
 
 <script>
 function calculateAge() {
@@ -89,7 +90,12 @@ function calculateAge() {
     document.getElementById('txt_edit_age').value = age;
 }
 
-// Set minimum date to January 1, 2024 and disable future years
+// Ensure the age is calculated on page load if the birthdate is already set
+window.onload = function() {
+    calculateAge();
+};
+
+// Set minimum date to January 1, 1924 and disable future years
 document.getElementById('txt_edit_bdate').setAttribute('min', '1924-01-01');
 document.getElementById('txt_edit_bdate').setAttribute('max', new Date().toISOString().split('T')[0]);
 </script>
