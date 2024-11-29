@@ -1,21 +1,23 @@
 <?php
-// Example: Fetch the last permit number, business ID, and receipt from the database
-$host = 'localhost';
-$username = 'root';
-$password = '';
-$database = 'db_barangay';
+// Database credentials
+$MySQL_username = "u510162695_db_barangay";
+$Password = "1Db_barangay";    
+$MySQL_database_name = "u510162695_db_barangay";
 
-// Create connection
-$conn = mysqli_connect($host, $username, $password, $database);
+// Establishing connection with server
+$con = mysqli_connect('localhost', $MySQL_username, $Password, $MySQL_database_name);
 
-// Check connection
-if (!$conn) {
+// Checking connection
+if (!$con) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
+// Setting the default timezone
+date_default_timezone_set("Asia/Manila");
+
 // ========================= Permit No ======================= //
 $query = "SELECT orNo FROM tblpermit ORDER BY id DESC LIMIT 1"; 
-$result = mysqli_query($conn, $query);
+$result = mysqli_query($con, $query);
 $lastPermit = mysqli_fetch_assoc($result);
 
 if ($lastPermit) {
@@ -42,7 +44,7 @@ $newPermitNumber = $year . '-' . $newRandomPart . '-' . $newSerial;
 
 // ========================= Business ID ======================= //
 $query = "SELECT bussinessidno FROM tblpermit ORDER BY id DESC LIMIT 1"; 
-$result = mysqli_query($conn, $query);
+$result = mysqli_query($con, $query);
 $lastBusinessID = mysqli_fetch_assoc($result);
 
 if ($lastBusinessID) {
@@ -72,7 +74,7 @@ $newBusinessID = $businessIDPrefix . '-' . $randomNumberPart . '-' . $newSerial;
 
 // ========================= Official Receipt No ======================= //
 $query = "SELECT offreceiptno FROM tblpermit ORDER BY id DESC LIMIT 1"; 
-$result = mysqli_query($conn, $query);
+$result = mysqli_query($con, $query);
 $lastReceipt = mysqli_fetch_assoc($result);
 
 if ($lastReceipt) {

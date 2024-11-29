@@ -23,16 +23,17 @@ if (isset($_POST['verify_otp'])) {
     } elseif (!is_numeric($entered_otp) || strlen($entered_otp) != 6) {
         $error_message = 'Invalid OTP format. Please enter a 6-digit OTP.';
     } else {
-        // Check OTP from the database
-        $host = 'localhost';
-        $username = 'root';
-        $password = '';
-        $database = 'db_barangay'; // Replace with your actual database name
+        // Database credentials
+        $MySQL_username = "u510162695_db_barangay";
+        $Password = "1Db_barangay";    
+        $MySQL_database_name = "u510162695_db_barangay";
 
-        $conn = new mysqli($host, $username, $password, $database);
+        // Establishing connection with server
+        $conn = mysqli_connect('localhost', $MySQL_username, $Password, $MySQL_database_name);
 
-        if ($conn->connect_error) {
-            $error_message = 'Database connection failed: ' . $conn->connect_error;
+        // Checking connection
+        if (!$conn) {
+            $error_message = 'Connection failed: ' . mysqli_connect_error();
         } else {
             // Query to check if the OTP exists and is valid
             $stmt = $conn->prepare("SELECT otp, otp_expiry FROM tbluser WHERE email = ?");
