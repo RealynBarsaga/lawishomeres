@@ -91,7 +91,7 @@
         </div>
         <!-- Right Logo -->
         <div class="col-xs-4 col-sm-3 col-md-2" style="float: right;margin-top: -109px;">
-            <img src="../../img/mayors.jfif" style="width: 170px; height: 135px;margin-left: 80px; border-radius: 50%;" />
+            <img src="../../img/mayors.jfif" style="width: 170px; height: 135px;margin-left: 90px; border-radius: 50%;" />
         </div>
 
     </div>
