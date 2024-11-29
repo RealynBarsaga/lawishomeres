@@ -78,7 +78,7 @@ body {
                                                     <th style="width: 80px !important;">Business Address</th>
                                                     <th>Permit #</th>
                                                     <th>Amount</th>
-                                                    <th style="width: 215px !important;">Option</th>
+                                                    <th style="width: 230px !important;">Option</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
