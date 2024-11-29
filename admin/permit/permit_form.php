@@ -35,17 +35,6 @@
             overflow: hidden; /* Prevents body from scrolling */
             position: relative; /* Allows positioning of absolute elements inside */
         }
-
-        /* Margin for the header section */
-        .header-section {
-            margin-bottom: 30px; /* Adds margin below the header */
-        }
-
-        /* Main content margin */
-        .main-content {
-            margin-left: 30px;
-            margin-right: 30px;
-        }
     </style>
     <script>
         window.print();
