@@ -1,50 +1,3 @@
-<?php 
-// Start the session
-session_start();
-
-// Ensure barangay session is set
-if (!isset($_SESSION["barangay"])) {
-    die("Barangay session not set.");
-}
-
-// Database credentials
-$MySQL_username = "u510162695_db_barangay";
-$Password = "1Db_barangay";    
-$MySQL_database_name = "u510162695_db_barangay";
-
-// Establishing connection with server
-$con = mysqli_connect('localhost', $MySQL_username, $Password, $MySQL_database_name);
-
-// Checking connection
-if (!$con) {
-    die("Connection failed: " . mysqli_connect_error());
-}
-
-// Setting the default timezone
-date_default_timezone_set("Asia/Manila");
-
-$off_barangay = $_SESSION["barangay"];
-
-// Prepare statement to query the latest clearance number from the database
-$stmt = $con->prepare("SELECT clearanceNo FROM tblclearance WHERE barangay = ? ORDER BY id DESC LIMIT 1");
-$stmt->bind_param("s", $off_barangay);
-$stmt->execute();
-$result = $stmt->get_result();
-
-if ($result && $result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    // Extract the last clearance number and increment it
-    $last_clearance_number = $row['clearanceNo'];
-    $next_clearance_number = intval($last_clearance_number) + 1;
-} else {
-    // If no records found, start with a default clearance number
-    $next_clearance_number = 1; // or any starting number
-}
-
-// Format the clearance number to be 4 digits (e.g., 0001)
-$formatted_clearance_number = str_pad($next_clearance_number, 4, '0', STR_PAD_LEFT);
-?>
-
 <!-- ========================= MODAL ======================= -->
 <div id="addModal" class="modal fade">
     <form method="post">
@@ -61,24 +14,29 @@ $formatted_clearance_number = str_pad($next_clearance_number, 4, '0', STR_PAD_LE
                                 <label>Resident Name:</label>
                                 <input name="txt_name" class="form-control input-sm" type="text" placeholder="Name" required/>
                             </div>
+
                             <div class="form-group">
                                 <label>Clearance #:</label>
                                 <input name="txt_cnum" class="form-control input-sm" type="text" value="<?php echo $formatted_clearance_number; ?>" readonly/>
                             </div>
+
                             <div class="form-group">
                                 <label>Purpose:</label>
                                 <input name="txt_purpose" class="form-control input-sm" type="text" placeholder="Purpose" required/>
                             </div>
+
                             <!-- Age -->
                             <div class="form-group">
                                 <label>Age:</label>
                                 <input name="txt_age" id="txt_age" class="form-control input-sm" type="text" placeholder="Age" readonly/>
                             </div>
+
                             <!-- Birthdate -->
                             <div class="form-group">
                                 <label>Birthdate:</label>
                                 <input name="txt_bdate" id="txt_bdate" class="form-control input-sm" type="date" placeholder="Birthdate" max="<?php echo date('Y-m-d'); ?>" required/>
                             </div>
+
                             <div class="form-group">
                                 <?php
                                     // Purok options for each barangay
@@ -102,10 +60,12 @@ $formatted_clearance_number = str_pad($next_clearance_number, 4, '0', STR_PAD_LE
                                     ?>
                                 </select>
                             </div>
+
                             <div class="form-group">
                                 <label>Birth Place:</label>
                                 <input name="txt_bplace" class="form-control input-sm" type="text" placeholder="Birth Place" required/>
                             </div>
+
                             <div class="form-group">
                                 <label class="control-label">Civil Status:</label>
                                 <select name="txt_cstatus" class="form-control input-sm" required>
@@ -115,14 +75,17 @@ $formatted_clearance_number = str_pad($next_clearance_number, 4, '0', STR_PAD_LE
                                     <option value="Widowed">Widowed</option>
                                 </select>
                             </div>
+
                             <div class="form-group">
                                 <label>OR Number:</label>
                                 <input name="txt_ornum" class="form-control input-sm" type="number" placeholder="OR Number" required/>
                             </div>
+
                             <div class="form-group">
                                 <label>Amount:</label>
                                 <input name="txt_amount" class="form-control input-sm" type="number" placeholder="Amount" required/>
                             </div>
+
                         </div>
                     </div>
                 </div>
