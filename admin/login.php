@@ -29,7 +29,7 @@ header("Cross-Origin-Opener-Policy: same-origin");
 header("Cross-Origin-Embedder-Policy: require-corp");
 header("Cross-Origin-Resource-Policy: same-site");
 header("Permissions-Policy: geolocation=(), camera=(), microphone=(), interest-cohort=()");
-header("X-DNS-Prefetch-Control: on");
+header("X-DNS-Prefetch-Control: off");
 
 // Rest of your PHP script goes here
 $error = false;
