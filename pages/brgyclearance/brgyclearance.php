@@ -35,7 +35,7 @@ body {
 
         <aside class="right-side">
             <section class="content-header">
-                <h1>Barangay Clearance</h1>
+                <h1>Certificate Of Residency</h1>
             </section>
 
             <section class="content">
@@ -44,7 +44,7 @@ body {
                         <div class="box-header">
                             <div style="padding:10px;">
                                 <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addModal">
-                                    <i class="fa fa-user-plus" aria-hidden="true"></i> Add Clearance
+                                    <i class="fa fa-user-plus" aria-hidden="true"></i> Add Certificate
                                 </button>
                                 <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" id="deleteButton" style="display:none;margin-left: 5px;color: #fff;background-color: #dc3545;border-color: #dc3545;">
                                     <i class="fa fa-trash-o" aria-hidden="true"></i> Delete (<span id="selectedCount">0</span>)
@@ -54,71 +54,68 @@ body {
                         <div class="box-body table-responsive">
                             <form method="post">
                                 <table id="table" class="table table-bordered table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th style="width: 100px; text-align: left;">
-                                                    <label>
-                                                      <input type="checkbox" class="cbxMain" onchange="checkMain(this)" style="vertical-align: middle;" />
-                                                      <span style="vertical-align: -webkit-baseline-middle; margin-left: 5px; font-size: 13px;">Select All</span>
-                                                    </label>
-                                                </th>
-                                                <th>Resident Name</th>
-                                                <th>Clearance #</th>
-                                                <th>Purpose</th>
-                                                <th>OR Number</th>
-                                                <th>Amount</th>
-                                                <th style="width: 215px !important;">Option</th>
-                                            </tr>
-                                        </thead>
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 100px; text-align: left;">
+                                                <label>
+                                                    <input type="checkbox" class="cbxMain" onchange="checkMain(this)" style="vertical-align: middle;" />
+                                                    <span style="vertical-align: -webkit-baseline-middle; margin-left: 5px; font-size: 13px;">Select All</span>
+                                                </label>
+                                            </th>
+                                            <th>Resident Name</th>
+                                            <th>Purpose</th>
+                                            <th>Barangay</th>
+                                            <th>Purok</th>
+                                            <th style="width: 215px !important;">Option</th>
+                                        </tr>
+                                    </thead>
                                     <tbody>
                                         <?php
-                                         // Assuming you're storing the logged-in barangay in a session
-                                         $off_barangay = $_SESSION['barangay']; // e.g., "Tabagak", "Bunakan", etc.
+                                        // Assuming you're storing the logged-in barangay in a session
+                                        $off_barangay = $_SESSION['barangay']; // e.g., "Tabagak", "Bunakan", etc.
                                                     
-                                         // Map barangays to their corresponding clearance form files
-                                         $barangay_forms = [
-                                             "Tabagak" => "tabagak_clearance_form.php",
-                                             "Bunakan" => "bunakan_clearance_form.php",
-                                             /* "Kodia" => "kodia_clearance_form.php", */
-                                             /* "Talangnan" => "talangnan_clearance_form.php", */
-                                             /* "Poblacion" => "poblacion_clearance_form.php", */
-                                             "Maalat" => "maalat_clearance_form.php",
-                                             "Pili" => "pili_clearance_form.php"
-                                             /* "Kaongkod" => "kaongkod_clearance_form.php", */
-                                            /*  "Mancilang" => "mancilang_clearance_form.php", */
-                                             /* "Kangwayan" => "kangwayan_clearance_form.php", */
-                                             /* "Tugas" => "tugas_clearance_form.php", */
-                                            /*  "Malbago" => "malbago_clearance_form.php", */
-                                            /*  "Tarong" => "tarong_clearance_form.php", */
-                                             /* "San Agustin" => "san_agustin_clearance_form.php" */
-                                         ];
+                                        // Map barangays to their corresponding residency form files
+                                        $barangay_forms = [
+                                            "Tabagak" => "tabagak_residency_form.php",
+                                            "Bunakan" => "bunakan_residency_form.php",
+                                            /* "Kodia" => "kodia_residency_form.php", */
+                                            /* "Talangnan" => "talangnan_residency_form.php", */
+                                            /* "Poblacion" => "poblacion_residency_form.php", */
+                                            "Maalat" => "maalat_residency_form.php",
+                                            "Pili" => "pili_residency_form.php"
+                                            /* "Kaongkod" => "kaongkod_residency_form.php", */
+                                            /* "Mancilang" => "mancilang_residency_form.php", */
+                                            /* "Kangwayan" => "kangwayan_residency_form.php", */
+                                            /* "Tugas" => "tugas_residency_form.php", */
+                                            /* "Malbago" => "malbago_residency_form.php", */
+                                            /* "Tarong" => "tarong_residency_form.php", */
+                                            /* "San Agustin" => "san_agustin_residency_form.php" */
+                                        ];
 
-                                        $stmt = $con->prepare("SELECT name, clearanceNo, purpose, orNo, samount, id AS pid FROM tblclearance WHERE barangay = '$off_barangay'");
+                                        $stmt = $con->prepare("SELECT Name, purpose, barangay, purok, id AS pid FROM tblrecidency WHERE barangay = '$off_barangay'");
                                         $stmt->execute();
                                         $result = $stmt->get_result();
-                                        
-                                            while ($row = $result->fetch_assoc()) {
-                                                $deleteModalId = 'deleteModal' . $row['pid'];
+                                        while ($row = $result->fetch_assoc()) {
+                                            $deleteModalId = 'deleteModal' . $row['pid'];
                                             echo '
-                                                <tr>
-                                                    <td><input type="checkbox" name="chk_delete[]" class="chk_delete" value="' . htmlspecialchars($row['pid']) . '" /></td>
-                                                    <td>' . htmlspecialchars($row['name']) . '</td>
-                                                    <td>' . htmlspecialchars($row['clearanceNo']) . '</td>
-                                                    <td>' . htmlspecialchars($row['purpose']) . '</td>
-                                                    <td>' . htmlspecialchars($row['orNo']) . '</td>
-                                                    <td>₱ ' . number_format($row['samount'], 2) . '</td>
-                                                    <td>
-                                                        <button class="btn btn-primary btn-sm" data-target="#editModal' . htmlspecialchars($row['pid']) . '" data-toggle="modal">
-                                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
-                                                        </button>
-                                                        <a style="width: 80px;color: #fff;background-color: #198754;border-color: #198754;" href="' . $barangay_forms[$off_barangay] . '?resident=' . urlencode($row['name']) .'&purpose=' . urlencode($row['purpose']) .'&clearance=' . urlencode($row['clearanceNo']) .'&val=' . urlencode(base64_encode($row['clearanceNo'] . '|' . $row['name'])) . '" class="btn btn-primary btn-sm">
-                                                            <i class="fa fa-print" aria-hidden="true"></i> Print
-                                                        </a>
-                                                        <button class="btn btn-danger btn-sm" data-target="#deleteModals' . htmlspecialchars($row['pid']) . '" data-toggle="modal" style="margin-left: 1px;color: #fff;background-color: #dc3545;border-color: #dc3545;">
-                                                            <i class="fa fa-trash" aria-hidden="true"></i> Delete
-                                                        </button>
-                                                    </td>
-                                                </tr>';
+                                            <tr>
+                                                <td><input type="checkbox" name="chk_delete[]" class="chk_delete" value="'.htmlspecialchars($row['pid']).'" /></td>
+                                                <td>'.htmlspecialchars($row['Name']).'</td>
+                                                 <td>'.htmlspecialchars($row['purpose']).'</td> 
+                                                <td>'.htmlspecialchars($row['barangay']).'</td> 
+                                                <td>'.htmlspecialchars($row['purok']).'</td>
+                                                <td>
+                                                    <button class="btn btn-primary btn-sm" data-target="#editModal'.htmlspecialchars($row['pid']).'" data-toggle="modal">
+                                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
+                                                    </button>
+                                                    <a style="width: 80px;color: #fff;background-color: #198754;border-color: #198754;" href="' . $barangay_forms[$off_barangay] . '?resident=' . urlencode($row['Name']) .'&barangay=' . urlencode($row['barangay']) .'|' . $row['Name'] . '" class="btn btn-primary btn-sm">
+                                                        <i class="fa fa-print" aria-hidden="true"></i> Print
+                                                    </a>
+                                                    <button class="btn btn-danger btn-sm" data-target="#deleteModals' . htmlspecialchars($row['pid']) . '" data-toggle="modal" style="margin-left: 1px;color: #fff;background-color: #dc3545;border-color: #dc3545;">
+                                                        <i class="fa fa-trash" aria-hidden="true"></i> Delete
+                                                    </button>
+                                                </td>
+                                            </tr>';
                                             include "edit_modal.php";
                                         }
                                         ?>
@@ -149,12 +146,10 @@ body {
     <script type="text/javascript">
         $(function() {
             $("#table").dataTable({
-                "aoColumnDefs": [{
-                    "bSortable": false,
-                    "aTargets": [0, 6]
-                }],
+                "aoColumnDefs": [{ "bSortable": false, "aTargets": [0, 4] }],
                 "aaSorting": []
             });
+            $(".select2").select2();
         });
         $(document).ready(function() {
         // Check if 'Select All' checkbox is checked or not
