@@ -9,8 +9,8 @@
     include('../head_css.php');
 ?>
 <head>
-    <!-- Include Chart.js Library -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 </head>
 <body class="skin-black">
     <?php 
@@ -94,9 +94,9 @@ body {
                     <?php } ?>
                 </div><!-- /.box -->
                 <!-- Bar Chart -->
-                <!-- <div class="col-md-12">
+                <div class="col-md-12">
                     <canvas id="myBarChart" width="100" height="30" style="max-width: 35%;background: #fff;"></canvas>
-                </div> -->
+                </div>
             </div><!-- /.row -->
         </section><!-- /.content -->
     </aside><!-- /.right-side -->
