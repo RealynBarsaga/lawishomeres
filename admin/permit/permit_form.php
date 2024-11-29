@@ -76,7 +76,7 @@
     <div class="header-section" style="margin-bottom: 30px;">
         <!-- Left Logo -->
         <div class="col-xs-4 col-sm-3 col-md-2" style="float: left;margin-top: 60px;">
-            <img src="../../img/lg.png" style="width: 170px; height: 135px;" />
+            <img src="../../img/lg.png" style="width: 150px; height: 100px;" />
         </div>
         <!-- Centered Text Content -->
         <div class="col-xs-7 col-sm-6 col-md-8" style="text-align: center;">
