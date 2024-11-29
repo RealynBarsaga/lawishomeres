@@ -28,10 +28,9 @@ html, body {
 </style>
 </head>
 <body class="skin-black">
-    <!-- header logo: style can be found in header.less -->
-    <?php
-    include "../connection.php";
-    include('../header.php');
+    <?php 
+    include "../connection.php"; 
+    include('../header.php'); 
     ?>
 
     <div class="row-offcanvas row-offcanvas-left">
