@@ -1,7 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
 <?php
+// Set cookie parameters before starting the session
+session_set_cookie_params([
+    'lifetime' => 0,              // Session cookie (expires when the browser is closed)
+    'path' => '/',                // Available across the entire domain
+    'domain' => 'lawishomeresidences.com/admin/', // Change this to your domain
+    'secure' => true,             // Set to true if using HTTPS
+    'httponly' => true,           // Prevent JavaScript access to the cookie
+    'samesite' => 'Strict'        // Use 'Lax' or 'Strict' based on your needs
+]);
+
+// Start the session
 session_start();
+
+// Regenerate session ID upon each new login to prevent session fixation
+if (!isset($_SESSION['session_created'])) {
+    session_regenerate_id(true);  // Regenerate session ID on login
+    $_SESSION['session_created'] = time();
+}
+
+// Security headers
+header("X-XSS-Protection: 1; mode=block");
+header("X-Frame-Options: DENY");
+header("X-Content-Type-Options: nosniff");
+header("Referrer-Policy: strict-origin-when-cross-origin");
+header("Strict-Transport-Security: max-age=63072000; includeSubDomains; preload");
+header("Access-Control-Allow-Origin: https://lawishomeresidences.com/admin/"); // Change to your domain
+header("Cross-Origin-Opener-Policy: same-origin");
+header("Cross-Origin-Embedder-Policy: require-corp");
+header("Cross-Origin-Resource-Policy: same-site");
+header("Permissions-Policy: geolocation=(), camera=(), microphone=(), interest-cohort=()");
+header("X-DNS-Prefetch-Control: off");
+
+// Rest of your PHP script goes here
 $error = false;
 $login_success = false;
 $error_attempts = false;
@@ -56,7 +86,6 @@ if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) {
                 $_SESSION['username'] = $row['username'];
 
                 // Set login success flag to true
-                $_SESSION['login_success'] = true;  // Set session flag to true when login is successful
                 $login_success = true;
             } else {
                 $_SESSION['login_attempts']++;
@@ -84,11 +113,26 @@ if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) {
     }
 }
 ?>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Madridejos Home Residence Management System</title>
     <link rel="icon" type="x-icon" href="../img/lg.png">
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self'; 
+    script-src 'self' https://code.jquery.com https://cdn.jsdelivr.net https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/ 'unsafe-inline'; 
+    object-src 'none'; 
+    connect-src 'self'; 
+    style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com 'unsafe-inline'; 
+    font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; 
+    img-src 'self' data: https://*.googleapis.com https://*.ggpht.com https://cdnjs.cloudflare.com; 
+    frame-src https://www.google.com/recaptcha/ https://www.google.com/maps/embed/; 
+    frame-ancestors 'self'; 
+    base-uri 'self'; 
+    form-action 'self';">
     <!-- bootstrap 3.0.2 -->
     <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <!-- Theme style -->
@@ -146,16 +190,20 @@ html {
     box-shadow: none;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
-.btns {
+.btn {
     margin-left: -9px;
     width: 300px;
     height: 40px;
-    border-radius: 5px;
-    font-weight: 600;
+    border-radius: 15px;
+    color: #000000;
     cursor: pointer;
-    background-image: url('../img/bg.jpg');
-    border: none;
-    color: #fff;
+    background: transparent;
+    border: 1px solid #000;
+}
+.btn:hover {
+    border: 1px solid #000;
+    color:  #000000;
+    cursor: pointer;
 }
 .forgot-password {
     margin-top: -89px;
@@ -263,7 +311,7 @@ header h2 {
   border-radius: 4px;
   font-size: 12px;
   cursor: pointer;
-  border: none;
+  border: 1px solid #000000;
   width: calc(100% / 2 - 10px);
 }
 #acceptBtn{
@@ -305,7 +353,7 @@ header h2 {
     position: relative;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 166px;
+    margin-top: 220px;
     animation: modalFadeIn 0.5s ease; /* Same smooth fade-in */
 }
 /* Fade-in animation */
@@ -382,7 +430,7 @@ header h2 {
     position: relative;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 166px;
+    margin-top: 220px;
     animation: modalFadeIn 0.5s ease; /* Same smooth fade-in */
 }
 /* Fade-in animation */
@@ -492,7 +540,7 @@ header h2 {
     position: relative; /* Allows for positioning of close button */
     margin-left: auto;
     margin-right: auto;
-    margin-top: 166px;
+    margin-top: 220px;
     animation: modalFadeIn 0.5s ease; /* Smooth fade-in animation */
 }
 /* Fade-in animation */
@@ -598,7 +646,7 @@ header h2 {
     opacity: 1; /* Increase opacity on hover */
 }
 /* Modal Background */
-.modal3 {
+.modal {
     position: fixed;
     background: transparent;
     display: flex;
@@ -776,165 +824,8 @@ header h2 {
     padding: 10px; /* Optional: adds some padding */
     background-color: #f9f9f9; /* Optional: background color */
 }
-/* Preloader Styles */
-.preloader-it {
-    position: fixed;  /* Ensures it stays fixed in place while loading */
-    top: 0;           /* Aligns to the top of the screen */
-    left: 0;          /* Aligns to the left of the screen */
-    width: 100vw;     /* Full viewport width */
-    height: 100vh;    /* Full viewport height */
-    background-color: #fff; /* Semi-transparent background */
-    display: flex;    /* Uses Flexbox to center the spinner */
-    justify-content: center; /* Horizontally centers the spinner */
-    align-items: center;     /* Vertically centers the spinner */
-    z-index: 9999;    /* Ensures the preloader is on top of all other content */
-}
-/* Style for the terms-checkbox container */
-.terms-checkbox {
-    display: flex;
-    align-items: center;
-    font-family: Arial, sans-serif;
-    margin-top: 2px;
-    float: left;
-    margin-left: -12px;
-}
-
-/* Style for the checkbox */
-.terms-checkbox input[type="checkbox"] {
-    margin-right: 5px;
-    width: 18px;
-    height: 13px;
-    cursor: pointer;
-    margin-top: -6px;
-}
-
-/* Style for the label text */
-.terms-checkbox label {
-    font-size: 12px;
-    color: #333;
-}
-
-/* Style for the terms link */
-.terms-checkbox .terms-link {
-    color: #0066cc;
-    cursor: pointer;
-    text-decoration: underline;
-}
-
-.terms-checkbox .terms-link:hover {
-    color: #004c99;
-}
-
-/* Style for the error message */
-.terms-checkbox .error-message {
-    display: none;
-    color: red;
-    font-size: 12px;
-    margin-left: 10px;
-}
-
-/* Style when error is displayed */
-.terms-checkbox .error-message.active {
-    display: inline;
-}
-/* Modal Styles */
-.modal4 {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    border-radius: 5px;
-    height: 100%; /* Full height */
-    background-color: rgba(0, 0, 0, 0.4); /* Black background with transparency */
-    overflow: auto; /* Enable scroll if needed */
-}
-
-/* Modal Content */
-.modal-content4 {
-    background-color: #fff;
-    margin: 10% auto; /* Center the modal */
-    padding: 20px;
-    border-radius: 8px;
-    width: 60%; /* Adjust as needed */
-    max-width: 450px; /* Maximum width */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Close Button */
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-/* Title */
-h2 {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 15px;
-}
-
-/* Content Section */
-.terms-content {
-    font-size: 16px;
-    line-height: 1.6;
-    color: #555;
-}
-
-h3 {
-    font-size: 20px;
-    margin-top: 15px;
-    color: #333;
-}
-
-/* Paragraph Styling */
-p {
-    margin: 10px 0;
-}
-
-/* List Style */
-ul {
-    padding-left: 20px;
-}
-
-ul li {
-    margin-bottom: 8px;
-    font-size: 16px;
-    color: #555;
-}
-
-/* Responsive Design for Small Screens */
-@media screen and (max-width: 768px) {
-    .modal-content4 {
-        width: 70%; /* Full width for mobile */
-    }
-    h2 {
-        font-size: 20px;
-    }
-    h3 {
-        font-size: 18px;
-    }
-    p, ul li {
-        font-size: 14px;
-    }
-}
 </style>
 <body class="skin-black">
-<!-- Preloader HTML -->
-<div id="preloader" class="preloader-it">
-    <!-- Preloader content goes here -->
-</div>
 <div class="container" style="margin-top: -5px;">
     <div class="col-md-4 col-md-offset-4">
         <div class="panel">
@@ -951,16 +842,16 @@ ul li {
                        <h7 style="margin-bottom: -42px;font-family: Georgia, serif;font-size: 18px;text-align: center;margin-bottom: -42px; color: white;">ADMIN LOGIN</h7>
                     </center>
                 </div>
-                <form role="form" method="post"  onsubmit="return validateRecaptcha() && validateForm()">
+                <form role="form" method="post"  onsubmit="return validateRecaptcha()">
                     <div class="form-group" style="border-radius:1px; border: 25px;">
                         <label for="txt_username" style="color:#fff;margin-left: -8px;font-weight: lighter;">Email</label>
                         <input type="email" class="form-control" name="txt_username"
-                               placeholder="juan@sample.com" required value="<?php echo $username_or_email ?>" style="margin-top: -5px;width: 300px;margin-left: -11px;">
+                               placeholder="jose@gmail.com" required value="<?php echo $username_or_email ?>" style="margin-top: -5px;width: 300px;margin-left: -11px;">
     
                         <label for="txt_password" style="color:#fff;margin-left: -8px;font-weight: lighter;">Password</label>
                         <div style="position: relative; width: 300px; margin-left: -11px;">
                             <input type="password" class="form-control" name="txt_password" id="txt_password"
-                                   placeholder="•••••••••••" required style="padding-right: 40px; margin-top: -4px; width: 100%;"
+                                   placeholder="************" required style="padding-right: 40px; margin-top: -4px; width: 100%;"
                                    pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{10,}$"
                                    title="Password must be at least 10 characters long, contain at least one uppercase letter, one number, and one special character.">
                             
@@ -976,25 +867,28 @@ ul li {
                           Please verify that you are not a robot
                         </p>
                     </div>
-                    <button type="submit" id="btn_login" class="btns" name="btn_login" style="margin-left: -12px;font-size: 18px;margin-top: -11px;">Login</button>
+                    <button type="submit" id="btn_login" class="btn btn-sm" name="btn_login" style="margin-left: -12px;font-size: 18px;margin-top: -11px;">Login</button>
                 </form>
-                <div class="terms-checkbox">
-                    <input type="checkbox" id="termsCheck" name="terms" required>
-                    <label for="termsCheck">I agree to the <span class="terms-link" onclick="openTerms()">Terms and Conditions</span></label>
-                </div>
                <!-- Forgot password link -->
-               <div class="forgot-password" style="margin-top: -2.1px;margin-left: 84px;float: left;">
-                    <a href="forgot_password_option.php">Forgot Password?</a>
+               <div class="forgot-password" style="margin-top: 1.9px; margin-left: 82px;">
+                    <a href="../admin/forgot_password_option">Forgot Password?</a>
                 </div>
+
+                <!-- For Switching Login Form-->
+                <!-- <div style="margin-top: -20px;margin-left: 195px;">
+                    <a href="../login.php?pages=login" style="color:white;">User Login</a>
+                </div> -->
+
                 <!-- Horizontal rule -->
-                <hr style="border: 1px solid gray; margin-top: 10px;margin-left: -9px;width: 292px;">
+                <hr style="border: 1px solid gray; margin-top: 7px;">
                 
                 
                 <!-- Error attempts message -->
-                <p id="termsError" style="font-size:12px;margin-top: -17px;margin-left: -8px;color:#ed4337;display: none;">
-                    Please accept the terms and conditions to continue
+                <p style="font-size:12px;color:white;margin-top: -17px;">
+                    <?php echo $error_attempts; ?>
                 </p>
-                <p style="font-size:12px;color:#ed4337;margin-top: -17px;">
+                <!-- Error attempts message -->
+                <p style="font-size:12px;color:white;margin-top: -9px;">
                     <?php echo $error_attempts; ?>
                 </p>
                 <?php if ($error_attempts): ?>
@@ -1031,34 +925,6 @@ ul li {
                 <?php endif; ?>
                 </div>
             </div>
-             <!-- Terms and Conditions Modal -->
-        <div id="termsModal" class="modal4" style="display:none;">
-        <div class="modal-content4">
-            <span class="close" onclick="closeTerms()">&times;</span>
-            <h2>Terms and Conditions</h2>
-            <div class="terms-content">
-                <h3>1. Introduction</h3>
-                <p>Welcome to our e-commerce platform. By accessing or using our website, you agree to these terms and conditions.</p>
-
-                <h3>2. Account Security</h3>
-                <p>You are responsible for maintaining the confidentiality of your account credentials and for all activities under your account.</p>
-
-                <h3>3. Privacy Policy</h3>
-                <p>Your use of our platform is also governed by our Privacy Policy. By using our services, you consent to our collection and use of your data as described therein.</p>
-
-                <h3>4. Prohibited Activities</h3>
-                <p>You agree not to:</p>
-                <ul>
-                    <li>Use the platform for any illegal purposes</li>
-                    <li>Attempt to gain unauthorized access to other user accounts</li>
-                    <li>Upload malicious content or viruses</li>
-                    <li>Engage in fraudulent activities</li>
-                </ul>
-
-                <h3>5. Termination</h3>
-                <p>We reserve the right to terminate or suspend your account for violations of these terms.</p>
-            </div>
-        </div>
         </div>
         <div class="wrapper">
             <div>
@@ -1195,34 +1061,6 @@ ul li {
         </div> 
     </div>
 </div>
-<script>
-function openTerms() {
-    document.getElementById("termsModal").style.display = "block";
-}
-
-function closeTerms() {
-    document.getElementById("termsModal").style.display = "none";
-}
-
-function validateForm() {
-    const termsCheck = document.getElementById("termsCheck");
-    const termsError = document.getElementById("termsError");
-    if (!termsCheck.checked) {
-        termsError.style.display = "block";
-        return false;
-    }
-    termsError.style.display = "none";
-    return true;
-}
-
-// Close modal when clicking outside of it
-window.onclick = function(event) {
-    const modal = document.getElementById("termsModal");
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-</script>
 <script>
 // Get modal elements
 const modal = document.getElementById('cookieSettingsModal');
@@ -1401,19 +1239,6 @@ document.addEventListener("DOMContentLoaded", function() {
             iconElement.classList.add('fa-eye');
         }
     }
-</script>
-<script>
-$(document).ready(function() {
-    $(".preloader-it").fadeOut(500);  // Fade out the preloader once the DOM is fully ready
-});
-// Check if the user is logged in based on the session variable
-<?php if (isset($_SESSION['login_success']) && $_SESSION['login_success'] == true): ?>
-    // If logged in, hide the preloader
-    document.getElementById('preloader').style.display = 'none';
-<?php else: ?>
-    // If not logged in, show the preloader (this can be customized)
-    document.getElementById('preloader').style.display = 'block';
-<?php endif; ?>
 </script>
 </body>
 </html>
