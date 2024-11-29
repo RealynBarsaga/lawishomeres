@@ -274,69 +274,77 @@ $femalePercentage = $totalCount > 0 ? ($femaleCount / $totalCount) * 100 : 0;
         plugins: [ChartDataLabels] // Register the plugin
     });
 </script>
-    <?php
-    // Query to count data for each barangay
-    $barangays = ['Tabagak', 'Bunakan', 'Kodia', 'Talangnan', 'Poblacion', 'Maalat', 'Pili', 'Kaongkod', 'Mancilang', 'Kangwayan', 'Tugas', 'Malbago', 'Tarong', 'San Agustin'];
-    $counts = [];
-
-    foreach ($barangays as $barangay) {
-        $q = mysqli_query($con, "SELECT * FROM tbltabagak WHERE barangay = '$barangay'");
-        $counts[] = mysqli_num_rows($q);
-    }
-    ?>
-
-    <script>
-    const barCtx = document.getElementById('myBarChart').getContext('2d');
-    const myBarChart = new Chart(barCtx, {
-        type: 'bar',
-        data: {
-            labels: <?= json_encode($barangays) ?>,
-            datasets: [{
-                label: 'Count',
-                data: <?= json_encode($counts) ?>,
-                backgroundColor: [
-                    '#4CB5F5',
-                ],
-                borderColor: [
-                    '#4CB5F5',
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Population Overview',
-                    font: {
-                        size: 14 // Adjusted font size for the title
-                    },
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        stepSize: 1,
-                        font: {
-                            size: 9 // Adjusted font size for the y-axis labels
-                        }
-                    }
-                },
-                x: {
-                    ticks: {
-                        font: {
-                            size: 9 // Adjusted font size for the x-axis labels
-                        }
-                    }
-                }
-            },
-        }
-    });
-</script>
 <?php
-// Initialize variables for age distribution
+// Query to count data for each purok in each barangay
+$barangays = ['Tabagak', 'Bunakan', 'Kodia', 'Talangnan', 'Poblacion', 'Maalat', 'Pili', 'Kaongkod', 'Mancilang', 'Kangwayan', 'Tugas', 'Malbago', 'Tarong', 'San Agustin'];
+$purokCounts = [];
+
+// Loop through each barangay
+foreach ($barangays as $barangay) {
+    $puroks = [];  // To store purok counts for the current barangay
+    
+    // Query to get all distinct puroks for this barangay
+    $purokQuery = mysqli_query($con, "SELECT DISTINCT purok FROM tbltabagak WHERE barangay = '$barangay'");
+    while ($purokRow = mysqli_fetch_assoc($purokQuery)) {
+        $purok = $purokRow['purok'];
+        
+        // Count how many records exist for this purok
+        $countQuery = mysqli_query($con, "SELECT * FROM tbltabagak WHERE barangay = '$barangay' AND purok = '$purok'");
+        $puroks[$purok] = mysqli_num_rows($countQuery);
+    }
+    
+    // Store the purok counts for the current barangay
+    $purokCounts[$barangay] = $puroks;
+}
+?>
+
+<script>
+// Prepare data for the bar chart
+const barCtx = document.getElementById('myBarChart').getContext('2d');
+const myBarChart = new Chart(barCtx, {
+    type: 'bar',
+    data: {
+        labels: <?= json_encode($barangays) ?>,
+        datasets: [
+            <?php
+            $colors = ['#4CB5F5', '#72C93D', '#E43C29', '#F9C300', '#6A3EC1'];  // Sample colors
+            $datasetIndex = 0;
+
+            foreach ($purokCounts as $barangay => $puroks) {
+                $data = array_values($puroks);
+                $labels = array_keys($puroks);
+                $color = $colors[$datasetIndex % count($colors)];  // Rotate colors
+
+                echo "{ label: '$barangay', data: " . json_encode($data) . ", backgroundColor: '$color', borderColor: '$color', borderWidth: 1 },";
+                $datasetIndex++;
+            }
+            ?>
+        ]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            title: {
+                display: true,
+                text: 'Purok Population Overview by Barangay',
+                font: { size: 14 }
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                ticks: { stepSize: 1, font: { size: 9 } }
+            },
+            x: {
+                ticks: { font: { size: 9 } }
+            }
+        }
+    }
+});
+</script>
+
+<?php
+// Initialize variables for age distribution (same as before)
 $ageGroups = [
     '0-9' => 0,
     '10-19' => 0,
@@ -348,7 +356,7 @@ $ageGroups = [
 ];
 
 // Query to get age distribution
-$ageQuery = mysqli_query($con, "SELECT age FROM tbltabagak");
+$ageQuery = mysqli_query($con, "SELECT age FROM tbltabagak WHERE barangay = '$off_barangay'");
 while ($row = mysqli_fetch_assoc($ageQuery)) {
     $age = $row['age'];
     if ($age >= 0 && $age <= 9) {
@@ -372,50 +380,40 @@ $ageLabels = array_keys($ageGroups);
 $ageCounts = array_values($ageGroups);
 ?>
 <script>
-     const lineCtx = document.getElementById('myLineChart').getContext('2d');
-    const myLineChart = new Chart(lineCtx, {
-        type: 'line',
-        data: {
-            labels: <?= json_encode($ageLabels) ?>,
-            datasets: [{
-                label: 'Age Distribution',
-                data: <?= json_encode($ageCounts) ?>,
-                backgroundColor: 'rgba(76, 181, 245, 0.2)',
-                borderColor: '#4CB5F5',
-                borderWidth: 1,
-            }]
+// Prepare data for the line chart (age distribution)
+const lineCtx = document.getElementById('myLineChart').getContext('2d');
+const myLineChart = new Chart(lineCtx, {
+    type: 'line',
+    data: {
+        labels: <?= json_encode($ageLabels) ?>,
+        datasets: [{
+            label: 'Age Distribution',
+            data: <?= json_encode($ageCounts) ?>,
+            backgroundColor: 'rgba(76, 181, 245, 0.2)',
+            borderColor: '#4CB5F5',
+            borderWidth: 1,
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            title: {
+                display: true,
+                text: 'Age Distribution Overview',
+                font: { size: 14 }
+            }
         },
-        options: {
-            responsive: true,
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Age Distribution Overview',
-                    font: {
-                        size: 14 // Reduced title font size
-                    },
-                }
+        scales: {
+            y: {
+                beginAtZero: true,
+                ticks: { stepSize: 1, font: { size: 9 } }
             },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        stepSize: 1,
-                        font: {
-                            size: 9 // Reduced font size for the y-axis labels
-                        }
-                    }
-                },
-                x: {
-                    ticks: {
-                        font: {
-                            size: 9 // Reduced font size for the x-axis labels
-                        }
-                    }
-                }
+            x: {
+                ticks: { font: { size: 9 } }
             }
         }
-    });
+    }
+});
 </script>
 <?php include "../footer.php"; ?>
 </body>
