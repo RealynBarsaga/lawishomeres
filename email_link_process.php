@@ -119,7 +119,7 @@ if (empty($error_message)) {
                     <h3 style="font-weight: bold;">Dear User,</h3>
                     <p>We received a request to reset your password.</p>
                     <p>To reset your password, please click the button below:</p>
-                    <a href="http://localhost/mhrmsystem/reset-password.php?code=' . htmlspecialchars(stripslashes(trim($code))) . '" class="button" style="color: #fff;">Reset Password</a>
+                    <a href="http://lawishomeres.com/reset-password.php?code=' . htmlspecialchars(stripslashes(trim($code))) . '" class="button" style="color: #fff;">Reset Password</a>
                     <p>If you did not request this, please ignore this email.</p>
                 </div>
             </body>
@@ -158,6 +158,6 @@ if (empty($error_message)) {
 session_start();
 $_SESSION['error_message'] = $error_message;
 $_SESSION['success_message'] = $success_message;
-header("Location: email_link_form.php");
+header("Location: ../email_link_form");
 exit();
 ?>
