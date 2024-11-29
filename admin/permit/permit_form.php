@@ -368,7 +368,7 @@
             1.This permit must be displayed in a conspicuous place within the establishment.<br>
             2.This permit is only a privilage and not a right, subject to REVOCATION and CLOSURE <br>&nbsp;&nbsp;&nbsp;of business establishment for any violation of existing laws and ordinances and <br>&nbsp;&nbsp;&nbsp;conditions set forth in this permit.<br>
             3.This permit must be renewed on or before January 20 of the following year unless <br>&nbsp;&nbsp;&nbsp;sooner revoked for a cause. Failure to renew within the time required shall subject the <br>&nbsp;&nbsp;&nbsp;taxpayer to a surcharge of 25% to the amount of business taxes due plus an interest of 
-            <br>&nbsp;&nbsp;&nbsp;2% per month of the unpaid business taxex.<br>
+            <br>&nbsp;&nbsp;&nbsp;2% per month of the unpaid business taxes.<br>
             4.In case of business closure, surrender this permit to the MUNICIPAL TREASURER for  <br>&nbsp;&nbsp;&nbsp;the official retirement.
         </strong>  
     </span>
@@ -398,26 +398,26 @@
 
         <span style="margin-left: -380px;font-size: 25px;letter-spacing: -2px;text-transform: uppercase;">VALID UP TO
         <?php
-    $name = $_GET['resident'];
-    $squery = mysqli_query($con, "SELECT * FROM tblpermit WHERE name = '$name' LIMIT 1");
-
-    // Get the current date
-    $currentDate = new DateTime();
-    
-    if ($row = mysqli_fetch_array($squery)) {
-        $dateRecorded = $row['dateRecorded'];
-
-        // Clone the current date to keep the original intact
-        $expirationDate = new DateTime($dateRecorded);
-
-        // Add 1 year to the expiration date
-        $expirationDate->modify('+1 year');
-
-        // Display the expiration date, formatted as "Month day, Year"
-        // Use $expirationDate instead of the original $dateRecorded
-        echo "<strong>" . $expirationDate->format('F j, Y') . "</strong>";
-    }
-?>
+            $name = $_GET['resident'];
+            $squery = mysqli_query($con, "SELECT * FROM tblpermit WHERE name = '$name' LIMIT 1");
+        
+            // Get the current date
+            $currentDate = new DateTime();
+            
+            if ($row = mysqli_fetch_array($squery)) {
+                $dateRecorded = $row['dateRecorded'];
+        
+                // Clone the current date to keep the original intact
+                $expirationDate = new DateTime($dateRecorded);
+        
+                // Add 1 year to the expiration date
+                $expirationDate->modify('+1 year');
+        
+                // Display the expiration date, formatted as "Month day, Year"
+                // Use $expirationDate instead of the original $dateRecorded
+                echo "<strong>" . $expirationDate->format('F j, Y') . "</strong>";
+            }
+        ?>
         </span>
     </p>
 </body>
