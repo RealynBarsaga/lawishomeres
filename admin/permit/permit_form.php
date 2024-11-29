@@ -68,8 +68,8 @@
     }
 
     ob_start(); // Start output buffering
-    include('../head_css.php'); // Include CSS file
-    include "../connection.php"; // Include database connection
+    include('../../head_css.php'); // Include CSS file
+    include "../../connection.php"; // Include database connection
     ?>
     
     <!-- Header Section -->
