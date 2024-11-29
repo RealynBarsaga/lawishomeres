@@ -1362,6 +1362,7 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("captcha-error").style.display = "block";
         return false; // Prevent form submission
     }
+    captcha-error.style.display = "none";
     return true; // Allow form submission
   }
 

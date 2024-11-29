@@ -1382,9 +1382,9 @@ document.addEventListener("DOMContentLoaded", function() {
     var response = grecaptcha.getResponse();
     if (response.length === 0) {
         document.getElementById("captcha-error").style.display = "block";
-        document.getElementById("termsError").style.display = "block";
         return false; // Prevent form submission
     }
+    captcha-error.style.display = "none";
     return true; // Allow form submission
   }
 
