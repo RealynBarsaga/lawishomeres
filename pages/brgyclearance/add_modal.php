@@ -1,30 +1,26 @@
-<?php 
-// Start the session
-session_start();
-
+<?php
 // Database credentials
 $MySQL_username = "u510162695_db_barangay";
 $Password = "1Db_barangay";    
 $MySQL_database_name = "u510162695_db_barangay";
 
 // Establishing connection with server
-$con = mysqli_connect('localhost', $MySQL_username, $Password, $MySQL_database_name);
+$conn = mysqli_connect('localhost', $MySQL_username, $Password, $MySQL_database_name);
 
 // Checking connection
-if (!$con) {
+if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
 // Setting the default timezone
 date_default_timezone_set("Asia/Manila");
 
+// Get barangay from session (if set)
 $off_barangay = $_SESSION["barangay"] ?? "";
 
-// Prepare statement to query the latest clearance number from the database
-$stmt = $con->prepare("SELECT clearanceNo FROM tblclearance WHERE barangay = ? ORDER BY id DESC LIMIT 1");
-$stmt->bind_param("s", $off_barangay);
-$stmt->execute();
-$result = $stmt->get_result();
+// Query the latest clearance number from the database
+$query = "SELECT clearanceNo FROM tblclearance WHERE barangay = '$off_barangay' ORDER BY id DESC LIMIT 1";
+$result = mysqli_query($conn, $query);
 
 if ($result && mysqli_num_rows($result) > 0) {
     $row = mysqli_fetch_assoc($result);
@@ -37,7 +33,6 @@ if ($result && mysqli_num_rows($result) > 0) {
     // If no records found, start with a default clearance number
     $next_clearance_number = 1; // or any starting number
 }
-
 // Format the clearance number to be 4 digits (e.g., 0001)
 $formatted_clearance_number = str_pad($next_clearance_number, 4, '0', STR_PAD_LEFT);
 ?>
@@ -103,13 +98,13 @@ $formatted_clearance_number = str_pad($next_clearance_number, 4, '0', STR_PAD_LE
                                 <input name="txt_bplace" class="form-control input-sm" type="text" placeholder="Birth Place" required/>
                             </div>
                             <div class="form-group">
-                                <label class="control-label">Civil Status:</label>
-                                <select name="txt_cstatus" class="form-control input-sm" required>
+                               <label class="control-label">Civil Status:</label>
+                               <select name="txt_cstatus" class="form-control input-sm" required>
                                     <option value="" disabled selected>Select Civil Status</option>
                                     <option value="Single">Single</option>
                                     <option value="Married">Married</option>
                                     <option value="Widowed">Widowed</option>
-                                </select>
+                               </select>
                             </div>
                             <div class="form-group">
                                 <label>OR Number:</label>
@@ -121,6 +116,7 @@ $formatted_clearance_number = str_pad($next_clearance_number, 4, '0', STR_PAD_LE
                             </div>
                         </div>
                     </div>
+                    
                 </div>
                 <div class="modal-footer">
                     <input type="button" class="btn btn-default btn-sm" data-dismiss="modal" value="Cancel"/>
@@ -130,20 +126,18 @@ $formatted_clearance_number = str_pad($next_clearance_number, 4, '0', STR_PAD_LE
         </div>
     </form>
 </div>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-$(document).ready(function() {
-    // Calculate age function
-    $('#txt_bdate').change(function() {
-        var dob = new Date($(this).val());
-        var today = new Date();
-        var age = today.getFullYear() - dob.getFullYear();
-        var m = today.getMonth() - dob.getMonth();
-        if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
-            age--;
-        }
-        $('#txt_age').val(age);
+    $(document).ready(function() {
+        // Calculate age function
+        $('#txt_bdate').change(function(){
+            var dob = new Date($(this).val());
+            var today = new Date();
+            var age = today.getFullYear() - dob.getFullYear();
+            var m = today.getMonth() - dob.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+                age--;
+            }
+            $('#txt_age').val(age);
+        });
     });
-});
 </script>
