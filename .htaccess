@@ -19,9 +19,3 @@ RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
 # Rewrite /forgot_password to /forgot_password.php?pages=forgot_password
 RewriteRule ^forgot_password_option/?$ /forgot_password_option.php [L,QSA]
-
-# Rewrite /forgot_password to /forgot_password.php?pages=forgot_password
-RewriteRule ^email_link_form/?$ /email_link_form.php [L,QSA]
-
-# Rewrite /forgot_password to /forgot_password.php?pages=forgot_password
-RewriteRule ^email_otp_form/?$ /email_otp_form.php [L,QSA]
