@@ -4,22 +4,6 @@ $error_message = '';
 $success_message = '';
 $email = '';
 
-// Database credentials
-$MySQL_username = "u510162695_db_barangay";
-$Password = "1Db_barangay";    
-$MySQL_database_name = "u510162695_db_barangay";
-
-// Establishing connection with the server
-$con = mysqli_connect('localhost', $MySQL_username, $Password, $MySQL_database_name);
-
-// Checking connection
-if (!$con) {
-    die("Connection failed: " . mysqli_connect_error());
-}
-
-// Setting the default timezone
-date_default_timezone_set("Asia/Manila");
-
 if (isset($_POST['sendotp'])) {
     $email = trim($_POST['email']);
     
@@ -40,7 +24,7 @@ use PHPMailer\PHPMailer\Exception;
 
 require '../PHPMailer/src/Exception.php';
 require '../PHPMailer/src/PHPMailer.php';
-require '../PHMailer/src/SMTP.php';
+require '../PHPMailer/src/SMTP.php';
 
 // Check for any error message
 if (empty($error_message)) {
@@ -129,30 +113,43 @@ if (empty($error_message)) {
             </html>
         ';
 
-        // Check if the email exists in the database
-        $stmt = $con->prepare("SELECT * FROM tbluser WHERE email = ?");
-        $stmt->bind_param("s", $email);
-        $stmt->execute();
-        $stmt->store_result();
+        // Database connection
+        $host = 'localhost';
+        $username = 'root';
+        $password = '';
+        $database = 'db_barangay';
 
-        if ($stmt->num_rows > 0) {
-            // Generate OTP and store it in the database with expiry time (5 minutes)
-            $otp_expiry = date('Y-m-d H:i:s', time() + 300);  // 5 minutes expiry
-            $stmt = $con->prepare("UPDATE tbluser SET otp = ?, otp_expiry = ? WHERE email = ?");
-            $stmt->bind_param("sss", $otp, $otp_expiry, $email);
+        $conn = new mysqli($host, $username, $password, $database);
 
-            if ($stmt->execute()) {
-                // Send OTP email
-                $mail->send();
-                $success_message = 'OTP has been sent to your email - ' . htmlspecialchars(stripslashes(trim($email)));
-            } else {
-                $error_message = 'Failed to store OTP in the database.';
-            }
+        if ($conn->connect_error) {
+            $error_message = 'Connection failed: ' . htmlspecialchars($conn->connect_error);
         } else {
-            $error_message = 'Email not found.';
-        }
+            // Check if the email exists in the database
+            $stmt = $conn->prepare("SELECT * FROM tbluser WHERE email = ?");
+            $stmt->bind_param("s", $email);
+            $stmt->execute();
+            $stmt->store_result();
 
-        $stmt->close();
+            if ($stmt->num_rows > 0) {
+                // Generate OTP and store it in the database with expiry time (5 minutes)
+                $otp_expiry = date('Y-m-d H:i:s', time() + 300);  // 5 minutes expiry
+                $stmt = $conn->prepare("UPDATE tbluser SET otp = ?, otp_expiry = ? WHERE email = ?");
+                $stmt->bind_param("sss", $otp, $otp_expiry, $email);
+
+                if ($stmt->execute()) {
+                    // Send OTP email
+                    $mail->send();
+                    $success_message = 'OTP has been sent to your email - ' . htmlspecialchars(stripslashes(trim($email)));
+                } else {
+                    $error_message = 'Failed to store OTP in the database.';
+                }
+            } else {
+                $error_message = 'Email not found.';
+            }
+
+            $stmt->close();
+            $conn->close();
+        }
     } catch (Exception $e) {
         $error_message = "Message could not be sent. Mailer Error: " . htmlspecialchars($mail->ErrorInfo);
     }

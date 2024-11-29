@@ -31,33 +31,32 @@ if (isset($_POST['reset_password'])) {
         // Hash the new password
         $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
 
-        // Database credentials
-        $MySQL_username = "u510162695_db_barangay";
-        $Password = "1Db_barangay";    
-        $MySQL_database_name = "u510162695_db_barangay";
+        // Database connection
+        $host = 'localhost';
+        $username = 'root';
+        $password = '';
+        $database = 'db_barangay'; // Replace with your actual database name
 
-        // Establishing connection with server
-        $con = mysqli_connect('localhost', $MySQL_username, $Password, $MySQL_database_name);
+        $conn = new mysqli($host, $username, $password, $database);
 
-        // Checking connection
-        if (!$con) {
-            die("Connection failed: " . mysqli_connect_error());
-        }
-
-        // Prepare the SQL query to update the user's password
-        $stmt = $con->prepare("UPDATE tbluser SET password = ? WHERE email = ?");
-        $stmt->bind_param("ss", $hashed_password, $email);
-
-        if ($stmt->execute()) {
-            // Password successfully updated
-            $success_message = 'Your password has been successfully reset. You may now log in.';
-            unset($_SESSION['email_for_reset']); // Clear the email session variable after successful reset
+        if ($conn->connect_error) {
+            $error_message = 'Database connection failed: ' . $conn->connect_error;
         } else {
-            $error_message = 'Failed to reset password. Please try again later.';
-        }
+            // Prepare the SQL query to update the user's password
+            $stmt = $conn->prepare("UPDATE tbluser SET password = ? WHERE email = ?");
+            $stmt->bind_param("ss", $hashed_password, $email);
 
-        $stmt->close();
-        $con->close();
+            if ($stmt->execute()) {
+                // Password successfully updated
+                $success_message = 'Your password has been successfully reset. You may now log in.';
+                unset($_SESSION['email_for_reset']); // Clear the email session variable after successful reset
+            } else {
+                $error_message = 'Failed to reset password. Please try again later.';
+            }
+
+            $stmt->close();
+            $conn->close();
+        }
     }
 }
 ?>
