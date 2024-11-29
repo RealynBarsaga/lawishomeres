@@ -4,6 +4,22 @@ $error_message = '';
 $success_message = '';
 $email = '';
 
+// Database credentials
+$MySQL_username = "u510162695_db_barangay";
+$Password = "1Db_barangay";    
+$MySQL_database_name = "u510162695_db_barangay";
+
+// Establishing connection with server
+$con = mysqli_connect('localhost', $MySQL_username, $Password, $MySQL_database_name);
+
+// Checking connection
+if (!$con) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+// Setting the default timezone
+date_default_timezone_set("Asia/Manila");
+
 if (isset($_POST['reset'])) {
     $email = trim($_POST['email']);
     
@@ -110,42 +126,29 @@ if (empty($error_message)) {
             </html>
         ';
 
+        // Database query to check if the email exists
+        $stmt = $con->prepare("SELECT * FROM tblstaff WHERE email = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $stmt->store_result();
 
-        // Database connection
-        $host = 'localhost';
-        $username = 'root';
-        $password = '';
-        $database = 'db_barangay';
+        if ($stmt->num_rows > 0) {
+            // Prepared statement for updating the reset code
+            $stmt = $con->prepare("UPDATE tblstaff SET code = ? WHERE email = ?");
+            $stmt->bind_param("ss", $code, $email);
 
-        $conn = new mysqli($host, $username, $password, $database);
-
-        if ($conn->connect_error) {
-            $error_message = 'Connection failed: ' . htmlspecialchars(stripslashes(trim($conn->connect_error)));
-        } else {
-            // Prepared statement for verifying if the email exists
-            $stmt = $conn->prepare("SELECT * FROM tblstaff WHERE email = ?");
-            $stmt->bind_param("s", $email);
-            $stmt->execute();
-            $stmt->store_result();
-
-            if ($stmt->num_rows > 0) {
-                // Prepared statement for updating the code
-                $stmt = $conn->prepare("UPDATE tblstaff SET code = ? WHERE email = ?");
-                $stmt->bind_param("ss", $code, $email);
-
-                if ($stmt->execute()) {
-                    $mail->send();
-                    $success_message = 'Message has been sent, please check your email - ' . htmlspecialchars(stripslashes(trim($email)));
-                } else {
-                    $error_message = 'Failed to update the reset code.';
-                }
+            if ($stmt->execute()) {
+                $mail->send();
+                $success_message = 'Message has been sent, please check your email - ' . htmlspecialchars(stripslashes(trim($email)));
             } else {
-                $error_message = 'Email not found.';
+                $error_message = 'Failed to update the reset code.';
             }
-
-            $stmt->close();
-            $conn->close();
+        } else {
+            $error_message = 'Email not found.';
         }
+
+        $stmt->close();
+        $con->close();
     } catch (Exception $e) {
         $error_message = "Message could not be sent. Mailer Error: " . htmlspecialchars(stripslashes(trim($mail->ErrorInfo)));
     }
@@ -155,6 +158,6 @@ if (empty($error_message)) {
 session_start();
 $_SESSION['error_message'] = $error_message;
 $_SESSION['success_message'] = $success_message;
-header("Location: email_link_form.php");
+header("Location: ../email_link_form");
 exit();
 ?>
