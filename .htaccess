@@ -8,10 +8,14 @@ RewriteRule ^$ login.php [L]
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /login\.php\ HTTP/ [NC]
 RewriteRule ^login\.php$ / [R=302,L]
 
-# This rule removes ".php" extension from the URL
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^([a-zA-Z0-9_-]+)$ $1.php [L]
-
 # Rewrite /forgot_password to /forgot_password.php?pages=forgot_password
 RewriteRule ^forgot_password_option/?$ /forgot_password_option.php [L,QSA]
+
+# Rewrite /forgot_password to /forgot_password.php?pages=forgot_password
+RewriteRule ^email_link_form/?$ /email_link_form.php [L,QSA]
+
+# Rewrite /forgot_password to /forgot_password.php?pages=forgot_password
+RewriteRule ^email_link_process/?$ /email_link_process.php [L,QSA]
+
+# Rewrite /forgot_password to /forgot_password.php?pages=forgot_password
+RewriteRule ^email_otp_form/?$ /email_otp_form.php [L,QSA]

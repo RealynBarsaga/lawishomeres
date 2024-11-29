@@ -249,7 +249,7 @@ $email = '';
     document.addEventListener("DOMContentLoaded", function() {
         if(document.getElementById("success-ok-button")) {
             document.getElementById("success-ok-button").addEventListener("click", function() {
-                window.location.href = 'email_otp_form.php'; // Redirect after success
+                window.location.href = '../email_otp_form'; // Redirect after success
             });
         }
     });

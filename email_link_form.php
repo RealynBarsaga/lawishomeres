@@ -326,7 +326,7 @@ $email = '';
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("success-ok-button").addEventListener("click", function() {
-            window.location.href = 'email_link_form.php';
+            window.location.href = '../email_link_form';
         });
     });
 </script>

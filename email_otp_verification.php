@@ -13,6 +13,22 @@ if (isset($_GET['email']) && isset($_GET['otp'])) {
     $error_message = 'Invalid request. Please try again.';
 }
 
+// Database credentials
+$MySQL_username = "u510162695_db_barangay";
+$Password = "1Db_barangay";    
+$MySQL_database_name = "u510162695_db_barangay";
+
+// Establishing connection with server
+$con = mysqli_connect('localhost', $MySQL_username, $Password, $MySQL_database_name);
+
+// Checking connection
+if (!$con) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+// Setting the default timezone
+date_default_timezone_set("Asia/Manila");
+
 // Check if the form is submitted
 if (isset($_POST['verify_otp'])) {
     // Validate OTP
@@ -23,50 +39,40 @@ if (isset($_POST['verify_otp'])) {
     } elseif (!is_numeric($entered_otp) || strlen($entered_otp) != 6) {
         $error_message = 'Invalid OTP format. Please enter a 6-digit OTP.';
     } else {
-        // Check OTP from the database
-        $host = 'localhost';
-        $username = 'root';
-        $password = '';
-        $database = 'db_barangay'; // Replace with your actual database name
+        // Query to check if the OTP exists and is valid
+        $stmt = $con->prepare("SELECT otp, otp_expiry FROM tblstaff WHERE email = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $stmt->store_result();
 
-        $conn = new mysqli($host, $username, $password, $database);
+        if ($stmt->num_rows > 0) {
+            $stmt->bind_result($otp, $otp_expiry);
+            $stmt->fetch();
 
-        if ($conn->connect_error) {
-            $error_message = 'Database connection failed: ' . $conn->connect_error;
-        } else {
-            // Query to check if the OTP exists and is valid
-            $stmt = $conn->prepare("SELECT otp, otp_expiry FROM tblstaff WHERE email = ?");
-            $stmt->bind_param("s", $email);
-            $stmt->execute();
-            $stmt->store_result();
-
-            if ($stmt->num_rows > 0) {
-                $stmt->bind_result($otp, $otp_expiry);
-                $stmt->fetch();
-
-                // Check if the OTP matches and is not expired
-                if (trim((string)$otp) === trim((string)$entered_otp)) {
-                    $current_time = date('Y-m-d H:i:s');
-                    if ($current_time <= $otp_expiry) {
-                        // OTP is valid and not expired, allow password reset
-                        $_SESSION['email_for_reset'] = $email; // Store email in session for password reset
-                        header("Location: reset_password_otp.php"); // Redirect to password reset page
-                        exit();
-                    } else {
-                        $error_message = 'The OTP has expired. Please request a new OTP.';
-                    }
+            // Check if the OTP matches and is not expired
+            if (trim((string)$otp) === trim((string)$entered_otp)) {
+                $current_time = date('Y-m-d H:i:s');
+                if ($current_time <= $otp_expiry) {
+                    // OTP is valid and not expired, allow password reset
+                    $_SESSION['email_for_reset'] = $email; // Store email in session for password reset
+                    header("Location: reset_password_otp.php"); // Redirect to password reset page
+                    exit();
                 } else {
-                    $error_message = 'Invalid OTP entered. Please try again.';
+                    $error_message = 'The OTP has expired. Please request a new OTP.';
                 }
             } else {
-                $error_message = 'Email not found. Please check your email.';
+                $error_message = 'Invalid OTP entered. Please try again.';
             }
-
-            $stmt->close();
-            $conn->close();
+        } else {
+            $error_message = 'Email not found. Please check your email.';
         }
+
+        $stmt->close();
     }
 }
+
+// Close the database connection
+mysqli_close($con);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -281,7 +287,7 @@ if (isset($_POST['verify_otp'])) {
         </form>
 
         <div class="back-link">
-            <a href="forgot_password_option.php">
+            <a href="../forgot_password_option">
                 Back to Forgot Password Options
             </a>
         </div>
