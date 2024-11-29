@@ -31,6 +31,11 @@
                                 </a>
                             </li>
                             <li>
+                                <a href="../clearance/clearance.php">
+                                    <i class="fa fa-file"></i> <span>Barangay Clearance</span>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="../certofresidency/certofres.php">
                                     <i class="fa fa-file"></i> <span>Certificate Of Residency</span>
                                 </a>
