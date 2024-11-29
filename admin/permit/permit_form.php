@@ -349,7 +349,7 @@
     <img src="../../img/image1.png" alt="Image" style="margin-top: -60px;margin-left: -9px;">
 
     <!-- Text above the image -->
-    <div style="text-align: center; margin-top: -85px;margin-left: -9px;"><!-- Added margin-top to create space between image and text -->
+    <div style="text-align: center; margin-top: -75px;margin-left: -9px;"><!-- Added margin-top to create space between image and text -->
         <span>
         <?php
             // Fetching data from the database and displaying the Business ID
