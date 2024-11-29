@@ -125,6 +125,7 @@ body {
                                     </tbody>
                                 </table>
 
+                                <?php include "delete_modal.php"; ?>
                                 <?php include "../deleteModal.php"; ?>
                             </form>
                         </div>
