@@ -13,7 +13,7 @@
 .nav-tabs li a {
     cursor: pointer;
 }
-body {
+html, body {
     overflow: hidden; /* Prevents body from scrolling */
 }
 
