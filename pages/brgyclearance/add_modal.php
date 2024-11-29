@@ -1,4 +1,7 @@
 <?php
+// Start session to access session variables
+session_start();
+
 // Database credentials
 $MySQL_username = "u510162695_db_barangay";
 $Password = "1Db_barangay";    
@@ -19,11 +22,14 @@ date_default_timezone_set("Asia/Manila");
 $off_barangay = $_SESSION["barangay"] ?? "";
 
 // Query the latest clearance number from the database
-$query = "SELECT clearanceNo FROM tblclearance WHERE barangay = '$off_barangay' ORDER BY id DESC LIMIT 1";
-$result = mysqli_query($conn, $query);
+$query = "SELECT clearanceNo FROM tblclearance WHERE barangay = ? ORDER BY id DESC LIMIT 1";
+$stmt = $conn->prepare($query);
+$stmt->bind_param("s", $off_barangay); // Bind barangay parameter to prevent SQL injection
+$stmt->execute();
+$result = $stmt->get_result();
 
-if ($result && mysqli_num_rows($result) > 0) {
-    $row = mysqli_fetch_assoc($result);
+if ($result && $result->num_rows > 0) {
+    $row = $result->fetch_assoc();
     // Extract the last clearance number and increment it
     $last_clearance_number = $row['clearanceNo'];
     
