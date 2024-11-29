@@ -145,7 +145,5 @@ $(document).ready(function() {
         }
         $('#txt_age').val(age);
     });
-
-    // Additional form validation can go here
 });
 </script>
