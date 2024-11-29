@@ -303,7 +303,7 @@ $email = '';
                     <div class="form-group">
                         <button type="submit" name="reset" class="btn">Send Reset Link</button>
                         <div class="back-link">
-                            <a href="forgot_password_option.php">
+                            <a href="../forgot_password_option">
                                 <button type="button" class="login-btn">Back</button>
                             </a>
                         </div>
