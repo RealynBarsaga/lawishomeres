@@ -43,9 +43,79 @@ body {
     text-transform: none;
     font-weight: 100;
 }
+/* Container Styles */
+.chart-wrapper {
+    display: flex;
+    justify-content: space-between; /* Aligns children (charts) in a row */
+    flex-wrap: wrap; /* Allows wrapping of elements (so Line Chart can go under Bar Chart) */
+    gap: 20px; /* Space between charts */
+    margin: 20px auto;
+}
+
+/* Flex items */
 .chart-container {
-    width: 80%;
-    margin: auto;
+    max-width: 492px; /* Optional max-width */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    height: 320px; /* Set a fixed height for the Bar Chart container */
+    width: 506px;
+    margin-left: 9px;
+}
+
+/* Specific style for Pie Chart container */
+.chart-containers {
+    width: 48%; /* Makes pie chart container take 48% of the available width */
+    max-width: 600px;
+    padding: 6px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    height: 319px; /* Set a fixed height for the Pie Chart container */
+    margin-right: 5px;
+}
+
+/* Specific style for Line Chart container */
+.chart-contain {
+    max-width: 492px; /* Optional max-width */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    height: 320px; /* Set a fixed height for the Bar Chart container */
+    width: 506px;
+    margin-left: 9px;
+}
+
+/* Canvas Styles (to ensure charts are responsive inside their containers) */
+canvas {
+    width: 100% !important; /* Makes canvas responsive to parent container */
+    height: 100% !important; /* Ensure the canvas fills the container */
+    display: block; /* Removes any extra space below the canvas */
+}
+
+
+/* Specific Styles for Bar Chart */
+#myBarChart {
+    width: 98% !important; /* Makes bar chart canvas responsive to parent container */
+    height: 315px !important; /* Set fixed height for Bar Chart */
+}
+
+/* Specific Styles for Pie Chart */
+#myPieChart {
+    margin-left: 74px;
+    width: 69% !important;
+    height: 329px !important;
+}
+
+/* Specific Styles for Line Chart */
+#myLineChart {
+    width: 98% !important; /* Makes line chart canvas responsive to parent container */
+    height: 315px !important; /* Set fixed height for Line Chart */
+}
+
+/* Optional: Style for titles above the charts */
+h3 {
+    font-size: 1.2rem;
+    text-align: center;
+    color: #333;
+    margin-bottom: 15px;
 }
 </style>
 <div class="row-offcanvas row-offcanvas-left">
