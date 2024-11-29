@@ -41,10 +41,9 @@ if ($result && mysqli_num_rows($result) > 0) {
 // Format the clearance number to be 4 digits (e.g., 0001)
 $formatted_clearance_number = str_pad($next_clearance_number, 4, '0', STR_PAD_LEFT);
 ?>
-
 <!-- ========================= MODAL ======================= -->
 <div id="addModal" class="modal fade">
-<form method="post">
+<form method="post" enctype="multipart/form-data">
   <div class="modal-dialog modal-sm" style="width:300px !important;">
     <div class="modal-content">
         <div class="modal-header">
