@@ -984,7 +984,7 @@ ul li {
                 </div>
                <!-- Forgot password link -->
                <div class="forgot-password" style="margin-top: -2.1px;margin-left: 84px;float: left;">
-                    <a href="forgot_password_option.php">Forgot Password?</a>
+                    <a href="../admin/forgot_password_option">Forgot Password?</a>
                 </div>
                 <!-- Horizontal rule -->
                 <hr style="border: 1px solid gray; margin-top: 10px;margin-left: -9px;width: 292px;">
