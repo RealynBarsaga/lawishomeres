@@ -1,5 +1,5 @@
-<?php
-// Start session to access session variables
+<?php 
+// Start the session
 session_start();
 
 // Database credentials
@@ -103,13 +103,13 @@ $formatted_clearance_number = str_pad($next_clearance_number, 4, '0', STR_PAD_LE
                                 <input name="txt_bplace" class="form-control input-sm" type="text" placeholder="Birth Place" required/>
                             </div>
                             <div class="form-group">
-                               <label class="control-label">Civil Status:</label>
-                               <select name="txt_cstatus" class="form-control input-sm" required>
+                                <label class="control-label">Civil Status:</label>
+                                <select name="txt_cstatus" class="form-control input-sm" required>
                                     <option value="" disabled selected>Select Civil Status</option>
                                     <option value="Single">Single</option>
                                     <option value="Married">Married</option>
                                     <option value="Widowed">Widowed</option>
-                               </select>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label>OR Number:</label>
@@ -121,7 +121,6 @@ $formatted_clearance_number = str_pad($next_clearance_number, 4, '0', STR_PAD_LE
                             </div>
                         </div>
                     </div>
-                    
                 </div>
                 <div class="modal-footer">
                     <input type="button" class="btn btn-default btn-sm" data-dismiss="modal" value="Cancel"/>
@@ -131,18 +130,20 @@ $formatted_clearance_number = str_pad($next_clearance_number, 4, '0', STR_PAD_LE
         </div>
     </form>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function() {
-        // Calculate age function
-        $('#txt_bdate').change(function(){
-            var dob = new Date($(this).val());
-            var today = new Date();
-            var age = today.getFullYear() - dob.getFullYear();
-            var m = today.getMonth() - dob.getMonth();
-            if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
-                age--;
-            }
-            $('#txt_age').val(age);
-        });
+$(document).ready(function() {
+    // Calculate age function
+    $('#txt_bdate').change(function() {
+        var dob = new Date($(this).val());
+        var today = new Date();
+        var age = today.getFullYear() - dob.getFullYear();
+        var m = today.getMonth() - dob.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+            age--;
+        }
+        $('#txt_age').val(age);
     });
+});
 </script>
