@@ -1,4 +1,5 @@
-<?php echo '<div id="editModal'.$row['pid'].'" class="modal fade">
+<?php
+echo '<div id="editModal'.$row['pid'].'" class="modal fade">
 <form method="post">
   <div class="modal-dialog modal-sm" style="width:300px !important;">
     <div class="modal-content">
@@ -20,7 +21,7 @@
         <div class="row">
             <div class="col-md-12">
                 <input type="hidden" value="'.$row['id'].'" name="hidden_id" id="hidden_id"/>
-               
+
                 <div class="form-group">
                     <label>Resident Name: </label>
                     <input name="txt_edit_residentname" class="form-control input-sm" type="text" value="'.$row['Name'].'"/>
@@ -75,8 +76,8 @@
     </div>
   </div>
 </form>
-</div>';?>
-
+</div>';
+?>
 
 <script>
 function calculateAge() {
@@ -84,18 +85,22 @@ function calculateAge() {
     var today = new Date();
     var age = today.getFullYear() - dob.getFullYear();
     var m = today.getMonth() - dob.getMonth();
+
+    // Check if the birthday has already occurred this year
     if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
         age--;
     }
+
     document.getElementById('txt_edit_age').value = age;
 }
 
-// Ensure the age is calculated on page load if the birthdate is already set
-window.onload = function() {
+// Ensure the age is calculated when the page loads if the birthdate is already set
+document.addEventListener('DOMContentLoaded', function() {
     calculateAge();
-};
+});
 
 // Set minimum date to January 1, 1924 and disable future years
-document.getElementById('txt_edit_bdate').setAttribute('min', '1924-01-01');
-document.getElementById('txt_edit_bdate').setAttribute('max', new Date().toISOString().split('T')[0]);
+var birthdateInput = document.getElementById('txt_edit_bdate');
+birthdateInput.setAttribute('min', '1924-01-01');
+birthdateInput.setAttribute('max', new Date().toISOString().split('T')[0]);
 </script>
