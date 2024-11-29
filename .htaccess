@@ -19,7 +19,4 @@ RewriteRule ^forgot_password_option/?$ /forgot_password_option.php?pages=forgot_
 RewriteRule ^email_link_form/?$ /email_link_form.php?pages=forgot_password [L,QSA]
 
 # Rewrite /forgot_password to /forgot_password.php?pages=forgot_password
-RewriteRule ^email_link_process/?$ /email_link_process.php?pages=forgot_password [L,QSA]
-
-# Rewrite /forgot_password to /forgot_password.php?pages=forgot_password
 RewriteRule ^email_otp_form/?$ /email_otp_form.php?pages=forgot_password [L,QSA]
