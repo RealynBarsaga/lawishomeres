@@ -1,9 +1,3 @@
-<?php
-session_start();
-$error_message = isset($_SESSION['error_message']) ? $_SESSION['error_message'] : '';
-$success_message = isset($_SESSION['success_message']) ? $_SESSION['success_message'] : '';
-$email = ''; 
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,7 +21,6 @@ $email = '';
             font-family: 'Poppins', sans-serif;
         }
 
-        /* Styling for the header */
         .res {
             font-size: 20px;
             font-weight: bold;
@@ -37,7 +30,6 @@ $email = '';
             text-align: center;
         }
 
-        /* Styling for the paragraph */
         p.text-center {
             font-size: 15px;
             color: #333;
@@ -131,7 +123,6 @@ $email = '';
             color: #000000;
         }
 
-        /* Success Modal styles */
         .modal {
             position: fixed;
             z-index: 1000;
@@ -204,101 +195,23 @@ $email = '';
             color: #aaa;
             margin-top: 20px;
         }
-
-        /* Media Queries for responsiveness */
-        @media screen and (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-
-            .form {
-                padding: 25px;
-            }
-
-            .res {
-                font-size: 18px;
-            }
-
-            p.text-center {
-                font-size: 14px;
-                margin-bottom: 20px;
-            }
-
-            .form-control {
-                font-size: 14px;
-                padding: 8px 12px;
-            }
-
-            .btn {
-                font-size: 14px;
-                padding: 8px 12px;
-            }
-
-            .back-link button {
-                font-size: 14px;
-                padding: 8px;
-            }
-
-            .modal-content {
-                width: 80%; /* Adjust modal width for smaller screens */
-                padding: 20px;
-            }
-
-            .modal-title {
-                font-size: 16px; /* Adjust modal title font size */
-            }
-
-            .modal-content .btn-ok {
-                font-size: 14px;
-                padding: 10px 20px;
-            }
-
-            .modal p {
-                font-size: 14px; /* Adjust modal text font size */
-            }
-        }
-
-        @media screen and (max-width: 470px) {
-            .container {
-                width: 90%;
-            }
-
-            .modal-content {
-                left: 457px;
-                width: 85%; /* Adjust modal width even more for very small screens */
-                padding: 15px;
-            }
-
-            .modal-title {
-                font-size: 14px; /* Adjust modal title font size */
-            }
-
-            .modal-content .btn-ok {
-                font-size: 14px;
-                padding: 10px 20px;
-            }
-
-            .modal p {
-                font-size: 12px; /* Adjust modal text font size */
-            }
-        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="row">
             <div class="col-md-4 offset-md-4 form">
-                <form action="email_link_process.php" method="POST" autocomplete="off">
+                <form action="" method="POST" autocomplete="off">
                     <p class="res">Reset via Email Link</p>
                     <p class="text-center">Enter the email address associated with your account and we will send you a link to reset your password.</p>
                     <br>
-                    <?php if (!empty($error_message)): ?>
+                    <?php if (!empty($_SESSION['error_message'])): ?>
                         <div class="alert alert-danger" style="color: #a94442;">
-                            <?php echo $error_message; ?>
+                            <?php echo $_SESSION['error_message']; ?>
                         </div>
                     <?php endif; ?>
                     <div class="form-group">
-                        <input type="email" name="email" class="form-control" placeholder="Enter your email" required value="<?php echo htmlspecialchars($email); ?>">
+                        <input type="email" name="email" class="form-control" placeholder="Enter your email" required value="">
                     </div>
                     <div class="form-group">
                         <button type="submit" name="reset" class="btn">Send Reset Link</button>
@@ -313,16 +226,17 @@ $email = '';
         </div>
     </div>
 
-    <?php if (!empty($success_message)): ?>
+    <?php if (!empty($_SESSION['success_message'])): ?>
         <!-- Success Modal structure -->
         <div id="success-modal" class="modal" style="display: block;">
             <div class="modal-content">
                 <span class="modal-title">Success</span>
-                <p><?php echo $success_message; ?></p>
+                <p><?php echo $_SESSION['success_message']; ?></p>
                 <button id="success-ok-button" class="btn-ok">OK</button>
             </div>
         </div>  
     <?php endif; ?>
+
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("success-ok-button").addEventListener("click", function() {
@@ -332,9 +246,3 @@ $email = '';
 </script>
 </body>
 </html>
-
-<?php
-// Clear session messages after displaying them
-unset($_SESSION['error_message']);
-unset($_SESSION['success_message']);
-?>
