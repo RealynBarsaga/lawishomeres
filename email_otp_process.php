@@ -113,19 +113,23 @@ if (empty($error_message)) {
             </html>
         ';
 
-        // Database connection
-        $host = 'localhost';
-        $username = 'root';
-        $password = '';
-        $database = 'db_barangay';
+        // Database connection (use new connection credentials)
+        $MySQL_username = "u510162695_db_barangay";
+        $Password = "1Db_barangay";    
+        $MySQL_database_name = "u510162695_db_barangay";
 
-        $conn = new mysqli($host, $username, $password, $database);
+        // Establishing connection with server
+        $con = mysqli_connect('localhost', $MySQL_username, $Password, $MySQL_database_name);
 
-        if ($conn->connect_error) {
-            $error_message = 'Connection failed: ' . htmlspecialchars($conn->connect_error);
+        // Checking connection
+        if (!$con) {
+            $error_message = "Connection failed: " . mysqli_connect_error();
         } else {
+            // Setting the default timezone
+            date_default_timezone_set("Asia/Manila");
+
             // Check if the email exists in the database
-            $stmt = $conn->prepare("SELECT * FROM tblstaff WHERE email = ?");
+            $stmt = $con->prepare("SELECT * FROM tblstaff WHERE email = ?");
             $stmt->bind_param("s", $email);
             $stmt->execute();
             $stmt->store_result();
@@ -133,7 +137,7 @@ if (empty($error_message)) {
             if ($stmt->num_rows > 0) {
                 // Generate OTP and store it in the database with expiry time (5 minutes)
                 $otp_expiry = date('Y-m-d H:i:s', time() + 300);  // 5 minutes expiry
-                $stmt = $conn->prepare("UPDATE tblstaff SET otp = ?, otp_expiry = ? WHERE email = ?");
+                $stmt = $con->prepare("UPDATE tblstaff SET otp = ?, otp_expiry = ? WHERE email = ?");
                 $stmt->bind_param("sss", $otp, $otp_expiry, $email);
 
                 if ($stmt->execute()) {
@@ -148,7 +152,7 @@ if (empty($error_message)) {
             }
 
             $stmt->close();
-            $conn->close();
+            $con->close();
         }
     } catch (Exception $e) {
         $error_message = "Message could not be sent. Mailer Error: " . htmlspecialchars($mail->ErrorInfo);
