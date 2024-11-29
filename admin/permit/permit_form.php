@@ -78,16 +78,18 @@
         <div class="col-xs-4 col-sm-3 col-md-2" style="float: left;margin-top: 60px;">
             <img src="../../img/lg.png" style="width: 170px; height: 135px;" />
         </div>
-        
-        <!-- Centered Text Content -->
-        <div class="col-xs-7 col-sm-6 col-md-8" style="text-align: center;">
-            <div style="font-size: 15px; font-family: 'Courier New', Courier;">
-                <p style="margin-right: 180px;">Republic of the Philippines<br>
+        <div class="col-xs-7 col-sm-6 col-md-8" style="background: white; padding: 10px;">
+        <div class="pull-left" style="font-size: 16px; margin-left: 100px; font-family: 'Courier New', Courier;">
+            <center>
+                Republic of the Philippines<br>
                 Province of Cebu<br>
-                <span style="font-size: 15px; font-weight: bolder;margin-left: -1px;">Municipality of Madridejos</span></p>
-            </div>
-            <p style="font-size: 24px; font-weight: bolder; margin-left: -190px;margin-top: -5px;">OFFICE OF THE MUNICIPAL MAYOR</p>
-            <p style="font-size: 10px; font-weight: bolder;margin-left: -190px;margin-top: -15px;">BUSINESS PERMIT AND LICENSING OFFICE</p>
+                Municipality of Madridejos
+                <b>
+                    <p style="font-size: 24px; font-weight: bolder; margin-left: -190px;margin-top: -5px;">OFFICE OF THE MUNICIPAL MAYOR</p>
+                    <p style="font-size: 10px; font-weight: bolder;margin-left: -190px;margin-top: -15px;">BUSINESS PERMIT AND LICENSING OFFICE</p>
+                </b>
+            </center>
+        </div>
         </div>
         <!-- Right Logo -->
         <div class="col-xs-4 col-sm-3 col-md-2" style="float: right;margin-top: -80px;">
