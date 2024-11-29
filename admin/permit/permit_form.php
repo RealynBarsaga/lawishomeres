@@ -82,9 +82,9 @@
         <!-- Centered Text Content -->
         <div class="col-xs-7 col-sm-6 col-md-8" style="text-align: center;">
             <div style="font-size: 16px; font-family: 'Courier New', Courier;">
-                <p style="margin-right: 170px;">Republic of the Philippines<br>
+                <p style="margin-right: 180px;">Republic of the Philippines<br>
                 Province of Cebu<br>
-                <span style="font-size: 18px; font-weight: bolder;margin-left: -18px;">Municipality of Madridejos</span></p>
+                <span style="font-size: 18px; font-weight: bolder;margin-left: -1px;">Municipality of Madridejos</span></p>
             </div>
             <p style="font-size: 24px; font-weight: bolder; margin-left: -190px;margin-top: -5px;">OFFICE OF THE MUNICIPAL MAYOR</p>
             <p style="font-size: 10px; font-weight: bolder;margin-left: -190px;margin-top: -15px;">BUSINESS PERMIT AND LICENSING OFFICE</p>
