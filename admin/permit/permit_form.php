@@ -80,8 +80,8 @@
         </div>
         
         <!-- Centered Text Content -->
-        <div class="col-xs-7 col-sm-6 col-md-8">
-            <div style="font-size: 16px; font-family: 'Courier New', Courier;text-align: center;">
+        <div class="col-xs-7 col-sm-6 col-md-8" style="text-align: center;">
+            <div style="font-size: 16px; font-family: 'Courier New', Courier;">
                 <p style="margin-right: 170px;">Republic of the Philippines<br>
                 Province of Cebu<br>
                 <span style="font-size: 18px; font-weight: bolder;margin-left: -18px;">Municipality of Madridejos</span></p>
@@ -399,26 +399,26 @@
 
         <span style="margin-left: -380px;font-size: 25px;letter-spacing: -2px;text-transform: uppercase;">VALID UP TO
         <?php
-            $name = $_GET['resident'];
-            $squery = mysqli_query($con, "SELECT * FROM tblpermit WHERE name = '$name' LIMIT 1");
-        
-            // Get the current date
-            $currentDate = new DateTime();
-            
-            if ($row = mysqli_fetch_array($squery)) {
-                $dateRecorded = $row['dateRecorded'];
-        
-                // Clone the current date to keep the original intact
-                $expirationDate = new DateTime($dateRecorded);
-        
-                // Add 1 year to the expiration date
-                $expirationDate->modify('+1 year');
-        
-                // Display the expiration date, formatted as "Month day, Year"
-                // Use $expirationDate instead of the original $dateRecorded
-                echo "<strong>" . $expirationDate->format('F j, Y') . "</strong>";
-            }
-        ?>
+    $name = $_GET['resident'];
+    $squery = mysqli_query($con, "SELECT * FROM tblpermit WHERE name = '$name' LIMIT 1");
+
+    // Get the current date
+    $currentDate = new DateTime();
+    
+    if ($row = mysqli_fetch_array($squery)) {
+        $dateRecorded = $row['dateRecorded'];
+
+        // Clone the current date to keep the original intact
+        $expirationDate = new DateTime($dateRecorded);
+
+        // Add 1 year to the expiration date
+        $expirationDate->modify('+1 year');
+
+        // Display the expiration date, formatted as "Month day, Year"
+        // Use $expirationDate instead of the original $dateRecorded
+        echo "<strong>" . $expirationDate->format('F j, Y') . "</strong>";
+    }
+?>
         </span>
     </p>
 </body>
