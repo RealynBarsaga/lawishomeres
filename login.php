@@ -1027,7 +1027,7 @@ ul li {
                             </span>
                         </div>
                         <div class="form-group" style="margin-top: 5px; width: 3px; margin-left: -11px; transform: scale(0.99); transform-origin: 0 0;">
-                            <div class="g-recaptcha" data-sitekey="6LeI31UqAAAAAIMbElYP18m5855S0nqy2npHMUml"></div>
+                            <div class="g-recaptcha" data-sitekey="6Lc2slYqAAAAACs0mn07_8egSpnyY3BMELOexgRb"></div>
                         </div>
                         <p id="captcha-error" style="font-size:10px;margin-top: -17px;margin-left: -11px;color:#ed4337;display: none;">
                           Please verify that you are not a robot
@@ -1041,7 +1041,7 @@ ul li {
                 </div>
                 <!-- Forgot password link -->
                 <div class="forgot-password" style="margin-top: -2.1px;margin-left: 84px;float: left;">
-                    <a href="forgot_password_option.php">Forgot Password?</a>
+                    <a href="../forgot_password_option">Forgot Password?</a>
                 </div>
                 <!-- For Switching Login Form-->
                 <!-- <div style="margin-top: -20px;margin-left: 195px;">

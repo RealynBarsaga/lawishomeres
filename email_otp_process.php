@@ -113,16 +113,17 @@ if (empty($error_message)) {
             </html>
         ';
 
-        // Database connection
-        $host = 'localhost';
-        $username = 'root';
-        $password = '';
-        $database = 'db_barangay';
+        // Database connection using provided credentials
+        $MySQL_username = "u510162695_db_barangay";
+        $Password = "1Db_barangay";    
+        $MySQL_database_name = "u510162695_db_barangay";
 
-        $conn = new mysqli($host, $username, $password, $database);
+        // Establishing connection with server
+        $conn = mysqli_connect('localhost', $MySQL_username, $Password, $MySQL_database_name);
 
-        if ($conn->connect_error) {
-            $error_message = 'Connection failed: ' . htmlspecialchars($conn->connect_error);
+        // Checking connection
+        if (!$conn) {
+            $error_message = "Connection failed: " . mysqli_connect_error();
         } else {
             // Check if the email exists in the database
             $stmt = $conn->prepare("SELECT * FROM tblstaff WHERE email = ?");

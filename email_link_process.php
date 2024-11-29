@@ -110,42 +110,46 @@ if (empty($error_message)) {
             </html>
         ';
 
-
         // Database connection
-        $host = 'localhost';
-        $username = 'root';
-        $password = '';
-        $database = 'db_barangay';
+        // Database credentials
+        $MySQL_username = "u510162695_db_barangay";
+        $Password = "1Db_barangay";    
+        $MySQL_database_name = "u510162695_db_barangay";
 
-        $conn = new mysqli($host, $username, $password, $database);
+        // Establishing connection with server
+        $con = mysqli_connect('localhost', $MySQL_username, $Password, $MySQL_database_name);
 
-        if ($conn->connect_error) {
-            $error_message = 'Connection failed: ' . htmlspecialchars(stripslashes(trim($conn->connect_error)));
-        } else {
-            // Prepared statement for verifying if the email exists
-            $stmt = $conn->prepare("SELECT * FROM tblstaff WHERE email = ?");
-            $stmt->bind_param("s", $email);
-            $stmt->execute();
-            $stmt->store_result();
-
-            if ($stmt->num_rows > 0) {
-                // Prepared statement for updating the code
-                $stmt = $conn->prepare("UPDATE tblstaff SET code = ? WHERE email = ?");
-                $stmt->bind_param("ss", $code, $email);
-
-                if ($stmt->execute()) {
-                    $mail->send();
-                    $success_message = 'Message has been sent, please check your email - ' . htmlspecialchars(stripslashes(trim($email)));
-                } else {
-                    $error_message = 'Failed to update the reset code.';
-                }
-            } else {
-                $error_message = 'Email not found.';
-            }
-
-            $stmt->close();
-            $conn->close();
+        // Checking connection
+        if (!$con) {
+            die("Connection failed: " . mysqli_connect_error());
         }
+
+        // Setting the default timezone
+        date_default_timezone_set("Asia/Manila");
+
+        // Prepared statement for verifying if the email exists
+        $stmt = $con->prepare("SELECT * FROM tblstaff WHERE email = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $stmt->store_result();
+
+        if ($stmt->num_rows > 0) {
+            // Prepared statement for updating the code
+            $stmt = $con->prepare("UPDATE tblstaff SET code = ? WHERE email = ?");
+            $stmt->bind_param("ss", $code, $email);
+
+            if ($stmt->execute()) {
+                $mail->send();
+                $success_message = 'Message has been sent, please check your email - ' . htmlspecialchars(stripslashes(trim($email)));
+            } else {
+                $error_message = 'Failed to update the reset code.';
+            }
+        } else {
+            $error_message = 'Email not found.';
+        }
+
+        $stmt->close();
+        $con->close();
     } catch (Exception $e) {
         $error_message = "Message could not be sent. Mailer Error: " . htmlspecialchars(stripslashes(trim($mail->ErrorInfo)));
     }

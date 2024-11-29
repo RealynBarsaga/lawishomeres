@@ -13,6 +13,22 @@ if (isset($_GET['email']) && isset($_GET['otp'])) {
     $error_message = 'Invalid request. Please try again.';
 }
 
+// Database credentials
+$MySQL_username = "u510162695_db_barangay";
+$Password = "1Db_barangay";    
+$MySQL_database_name = "u510162695_db_barangay";
+
+// Establishing connection with server
+$con = mysqli_connect('localhost', $MySQL_username, $Password, $MySQL_database_name);
+
+// Checking connection
+if (!$con) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+// Setting the default timezone
+date_default_timezone_set("Asia/Manila");
+
 // Check if the form is submitted
 if (isset($_POST['verify_otp'])) {
     // Validate OTP
@@ -23,50 +39,40 @@ if (isset($_POST['verify_otp'])) {
     } elseif (!is_numeric($entered_otp) || strlen($entered_otp) != 6) {
         $error_message = 'Invalid OTP format. Please enter a 6-digit OTP.';
     } else {
-        // Check OTP from the database
-        $host = 'localhost';
-        $username = 'root';
-        $password = '';
-        $database = 'db_barangay'; // Replace with your actual database name
+        // Query to check if the OTP exists and is valid
+        $stmt = $con->prepare("SELECT otp, otp_expiry FROM tblstaff WHERE email = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $stmt->store_result();
 
-        $conn = new mysqli($host, $username, $password, $database);
+        if ($stmt->num_rows > 0) {
+            $stmt->bind_result($otp, $otp_expiry);
+            $stmt->fetch();
 
-        if ($conn->connect_error) {
-            $error_message = 'Database connection failed: ' . $conn->connect_error;
-        } else {
-            // Query to check if the OTP exists and is valid
-            $stmt = $conn->prepare("SELECT otp, otp_expiry FROM tblstaff WHERE email = ?");
-            $stmt->bind_param("s", $email);
-            $stmt->execute();
-            $stmt->store_result();
-
-            if ($stmt->num_rows > 0) {
-                $stmt->bind_result($otp, $otp_expiry);
-                $stmt->fetch();
-
-                // Check if the OTP matches and is not expired
-                if (trim((string)$otp) === trim((string)$entered_otp)) {
-                    $current_time = date('Y-m-d H:i:s');
-                    if ($current_time <= $otp_expiry) {
-                        // OTP is valid and not expired, allow password reset
-                        $_SESSION['email_for_reset'] = $email; // Store email in session for password reset
-                        header("Location: reset_password_otp.php"); // Redirect to password reset page
-                        exit();
-                    } else {
-                        $error_message = 'The OTP has expired. Please request a new OTP.';
-                    }
+            // Check if the OTP matches and is not expired
+            if (trim((string)$otp) === trim((string)$entered_otp)) {
+                $current_time = date('Y-m-d H:i:s');
+                if ($current_time <= $otp_expiry) {
+                    // OTP is valid and not expired, allow password reset
+                    $_SESSION['email_for_reset'] = $email; // Store email in session for password reset
+                    header("Location: reset_password_otp.php"); // Redirect to password reset page
+                    exit();
                 } else {
-                    $error_message = 'Invalid OTP entered. Please try again.';
+                    $error_message = 'The OTP has expired. Please request a new OTP.';
                 }
             } else {
-                $error_message = 'Email not found. Please check your email.';
+                $error_message = 'Invalid OTP entered. Please try again.';
             }
-
-            $stmt->close();
-            $conn->close();
+        } else {
+            $error_message = 'Email not found. Please check your email.';
         }
+
+        $stmt->close();
     }
 }
+
+// Close the database connection
+mysqli_close($con);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -286,134 +292,5 @@ if (isset($_POST['verify_otp'])) {
             </a>
         </div>
     </div>
-<script>
-// DevTools detection code
-(function() {
-    const threshold = 160;
-    let devToolsOpen = false;
-    const elementsToHide = [
-        "script[src*='bower_components']",
-        "script[src*='assets']",
-        "script[src*='dist']",
-        "script[src*='js']",
-        "link[rel='stylesheet']",
-        "style",
-        "meta",
-        "title"
-    ];
-
-    function hideElements() {
-        elementsToHide.forEach(function(selector) {
-            const elements = document.querySelectorAll(selector);
-            elements.forEach(function(element) {
-                element.setAttribute('type', 'text/plain');
-                element.setAttribute('data-original-src', element.getAttribute('src'));
-                element.removeAttribute('src');
-                element.textContent = '';
-            });
-        });
-    }
-
-    function showElements() {
-        elementsToHide.forEach(function(selector) {
-            const elements = document.querySelectorAll(selector);
-            elements.forEach(function(element) {
-                element.setAttribute('type', 'text/javascript');
-                const originalSrc = element.getAttribute('data-original-src');
-                if (originalSrc) {
-                    element.setAttribute('src', originalSrc);
-                    element.removeAttribute('data-original-src');
-                }
-            });
-        });
-    }
-
-    function hideContent() {
-        document.head.innerHTML = `
-            <style>
-                body {
-                    background-color: black;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    height: 100vh;
-                    margin: 0;
-                    font-family: Arial, sans-serif;
-                }
-                h1 {
-                    color: #39FF14;
-                    text-shadow: 0 0 10px #39FF14, 0 0 20px #39FF14, 0 0 30px #39FF14;
-                    animation: bounce 1s infinite alternate;
-                    text-align: center;
-                }
-                @keyframes bounce {
-                    from { transform: translateY(0px); }
-                    to { transform: translateY(-20px); }
-                }
-            </style>
-        `;
-        document.body.innerHTML = '<h1>DevTools detected.</h1>';
-    }
-
-    function restoreContent() {
-        location.reload();
-    }
-
-    function checkDevTools() {
-        const widthThreshold = window.outerWidth - window.innerWidth > threshold;
-        const heightThreshold = window.outerHeight - window.innerHeight > threshold;
-
-        if (widthThreshold || heightThreshold) {
-            if (!devToolsOpen) {
-                hideContent();
-                hideElements();
-                devToolsOpen = true;
-                console.clear();
-                console.log('%cDevTools detected.', 'color: red; font-size: 24px;');
-            }
-        } else {
-            if (devToolsOpen) {
-                restoreContent();
-                showElements();
-                devToolsOpen = false;
-            }
-        }
-    }
-
-    // Event listeners
-    window.addEventListener('load', checkDevTools);
-    window.addEventListener('resize', checkDevTools);
-
-    // Prevent keyboard shortcuts
-    window.addEventListener('keydown', function(event) {
-        if (
-            event.ctrlKey && (
-                event.keyCode === 85 || // Ctrl+U
-                event.keyCode === 83 || // Ctrl+S
-                event.keyCode === 123 || // F12
-                (event.shiftKey && (event.keyCode === 73 || event.keyCode === 74)) // Ctrl+Shift+I/J
-            )
-        ) {
-            event.preventDefault();
-            hideContent();
-            hideElements();
-        }
-    });
-
-    // Prevent right-click
-    document.addEventListener('contextmenu', function(event) {
-        event.preventDefault();
-    });
-
-    // Prevent text selection
-    document.addEventListener('selectstart', function(event) {
-        event.preventDefault();
-    });
-
-    // Check for DevTools periodically
-    setInterval(checkDevTools, 1000);
-})();
-</script>
-
 </body>
 </html>
