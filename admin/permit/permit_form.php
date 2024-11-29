@@ -209,7 +209,7 @@
         <!-- Payment Mode with box -->
         <strong style="font-weight: 900; color: #FFFFFF !important; -webkit-text-stroke: 1px #000;">
             Payment Mode: 
-        </strong><br><br>
+        </strong><br>
 
         <!-- Amount Paid with box -->
         <strong style="font-weight: 900; color: #FFFFFF !important; -webkit-text-stroke: 1px #000;">
