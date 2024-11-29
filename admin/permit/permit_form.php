@@ -89,7 +89,7 @@
             <p style="font-size: 10px; font-weight: bolder;margin-left: -190px;margin-top: -15px;">BUSINESS PERMIT AND LICENSING OFFICE</p>
         </div>
         <!-- Right Logo -->
-        <div class="col-xs-4 col-sm-3 col-md-2" style="padding: 10px; float: right;margin-top: -100px;">
+        <div class="col-xs-4 col-sm-3 col-md-2" style="padding: 10px; float: right;margin-top: -110px;">
             <img src="../../img/mayors.jfif" style="width: 170px; height: 135px;margin-left: 70px; border-radius: 50%;" />
         </div>
 
