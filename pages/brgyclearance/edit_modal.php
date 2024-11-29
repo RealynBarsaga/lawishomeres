@@ -36,20 +36,24 @@ echo '<div id="editModal'.$row['pid'].'" class="modal fade">
                     <label>Purpose : </label>
                     <input name="txt_edit_purpose" class="form-control input-sm" type="text" value="'.$row['purpose'].'" />
                 </div>
+
                 <div class="form-group">
                     <label class="control-label">Age:</label>
                     <input name="txt_edit_age" id="txt_edit_age" class="form-control input-sm" type="text" value="'.$age.'" readonly/>
                     <label class="control-label" style="margin-top:10px;">Birthdate:</label>
                     <input name="txt_edit_bdate" id="txt_edit_bdate" class="form-control input-sm" type="date" value="'.$row['bdate'].'" onchange="calculateAge()" min="1924-01-01" max="'.date('Y-m-d').'"/>
                 </div>
+
                 <div class="form-group">
                     <label class="control-label">Purok:</label>
                     <input name="txt_edit_purok" class="form-control input-sm input-size" type="text" value="'.$row['purok'].'"/>
                 </div>
+
                 <div class="form-group">
                     <label class="control-label">Birth Place:</label>
                     <input name="txt_edit_bplace" class="form-control input-sm input-size" type="text" value="'.$row['bplace'].'"/>
                 </div>
+
                 <div class="form-group">
                     <label class="control-label">Civil Status:</label>
                     <select name="txt_edit_cstatus" class="form-control input-sm">
@@ -58,14 +62,17 @@ echo '<div id="editModal'.$row['pid'].'" class="modal fade">
                         <option value="Widowed" '.($row['civilstatus'] == 'Widowed' ? 'selected' : '').'>Widowed</option>
                     </select>
                 </div>
+                
                 <div class="form-group">
                     <label>OR Number : </label>
                     <input name="txt_edit_ornum" class="form-control input-sm" type="text" value="'.$row['orNo'].'" />
                 </div>
+                
                 <div class="form-group">
                     <label>Amount : </label>
                     <input name="txt_edit_amount" class="form-control input-sm" type="text" value="'.$row['samount'].'" />
                 </div>
+
             </div>
         </div>
         </div>
