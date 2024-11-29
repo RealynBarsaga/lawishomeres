@@ -840,7 +840,7 @@ header h2 {
     font-family: Arial, sans-serif;
     margin-top: 2px;
     float: left;
-    margin-left: -12px;
+    margin-left: -9px;
 }
 
 /* Style for the checkbox */
