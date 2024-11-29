@@ -17,3 +17,6 @@ RewriteRule ^forgot_password_option/?$ /admin/forgot_password_option.php?pages=f
 
 # Rewrite /admin/forgot_password to /admin/forgot_password.php?pages=forgot_password
 RewriteRule ^email_link_form/?$ /admin/email_link_form.php?pages=forgot_password [L,QSA]
+
+# Rewrite /admin/forgot_password to /admin/forgot_password.php?pages=forgot_password
+RewriteRule ^email_otp_form/?$ /admin/email_otp_form.php?pages=forgot_password [L,QSA]
