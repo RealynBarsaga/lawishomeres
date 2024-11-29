@@ -160,8 +160,6 @@ if (empty($error_message)) {
 // Redirect with success or error message
 $_SESSION['error_message'] = $error_message;
 $_SESSION['success_message'] = $success_message;
-header("Location: ../email_link_form");
-exit();
 ?>
 <!DOCTYPE html>
 <html lang="en">
