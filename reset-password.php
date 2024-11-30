@@ -299,7 +299,7 @@ if (isset($_GET['code'])) {
         <script>
             document.addEventListener("DOMContentLoaded", function() {
                 document.getElementById("success-ok-button").addEventListener("click", function() {
-                    window.location.href = '/';
+                    window.location.href = 'login.php';
                 });
             });
         </script>
