@@ -33,3 +33,6 @@ RewriteRule ^email_otp_process/?$ /email_otp_process.php [L,QSA]
 
 # Rewrite /email_otp_verification to /email_otp_verification.php
 RewriteRule ^email_otp_verification/?$ /email_otp_verification.php [L,QSA]
+
+# Rewrite /reset-password_otp to /reset-password_otp.php
+RewriteRule ^reset-password_otp/?$ /reset-password_otp.php [L,QSA]
