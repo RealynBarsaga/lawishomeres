@@ -43,7 +43,7 @@ use PHPMailer\PHPMailer\Exception;
 
 require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/PHPMailer.php';
-require 'PHPMailer/src/SMTP.php';
+require 'PHMailer/src/SMTP.php';
 
 // Check for any error message
 if (empty($error_message)) {
@@ -159,4 +159,10 @@ if (empty($error_message)) {
 // Store messages in session variables
 $_SESSION['error_message'] = $error_message;
 $_SESSION['success_message'] = $success_message;
+
+// Use JavaScript for redirect
+echo "<script>
+    window.location.href = 'email_link_form.php';
+</script>";
+exit();
 ?>
