@@ -1,8 +1,37 @@
 <?php
+// Start session at the very beginning of the file
+session_start();
+
 // Initialize variables
 $error_message = '';
 $success_message = '';
 $email = '';
+
+
+// Database credentials
+$MySQL_username = "u510162695_db_barangay";
+$Password = "1Db_barangay";    
+$MySQL_database_name = "u510162695_db_barangay";
+
+// Establishing connection with the server
+$con = mysqli_connect('localhost', $MySQL_username, $Password, $MySQL_database_name);
+
+// Checking connection
+if (!$con) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+// Setting the default timezone
+date_default_timezone_set("Asia/Manila");
+
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
+
+// Load PHPMailer classes
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
 if (isset($_POST['sendotp'])) {
     $email = trim($_POST['email']);
@@ -16,15 +45,6 @@ if (isset($_POST['sendotp'])) {
 } else {
     $error_message = 'No form submitted.';
 }
-
-// Load PHPMailer classes
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
-
-require 'PHPMailer/src/Exception.php';
-require 'PHPMailer/src/PHPMailer.php';
-require 'PHPMailer/src/SMTP.php';
 
 // Check for any error message
 if (empty($error_message)) {
@@ -52,117 +72,52 @@ if (empty($error_message)) {
 
         // Email content
         $mail->isHTML(true);
-        $mail->Subject = 'Password Reset';
-        $mail->Body = '
-            <html>
-            <head>
-                <style>
-                    body {
-                        font-family: Arial, sans-serif;
-                        background-color: #f4f4f4;
-                        margin: 0;
-                        padding: 0;
-                    }
-                    .email-container {
-                        background-color: #ffffff;
-                        width: 100%;
-                        max-width: 600px;
-                        padding: 20px;
-                        border: 1px solid #ddd;
-                        border-radius: 5px;
-                        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                    }
-                    h2 {
-                        color: #333;
-                        font-size: 24px;
-                        margin-top: 0;
-                    }
-                    p {
-                        color: #555;
-                        font-size: 15px;
-                        line-height: 1.6;
-                        margin-bottom: 20px;
-                    }
-                    .button {
-                        background-color: #dc3545;
-                        border-color: #dc3545;
-                        padding: 12px 20px;
-                        text-decoration: none;
-                        border-radius: 5px;
-                        display: inline-block;
-                        font-size: 16px;
-                        margin: 10px 0;
-                    }
-                    .button:hover {
-                        background-color: #dc3545;
-                    }
-                </style>
-            </head>
-            <body>
-                <div class="email-container">
-                    <h2>Password Reset Request</h2>
-                    <h3 style="font-weight: bold;">Dear User,</h3>
-                    <p>We received a request to reset your password.</p>
-                    <p>Your One-Time Password (OTP) is: <strong>' . $otp . '</strong></p>
-                    <p>The OTP will expire in 5 minutes.</p>
-                    <p>To verify your OTP, click the link below:</p>
-                    <p><a href="http://localhost/mhrmsystem/email_otp_verification.php?email=' . htmlspecialchars(stripslashes(trim($email))) . '&otp=' . htmlspecialchars(stripslashes(trim($otp))) . '" class="button" style="color: #fff;">Verify OTP</a></p>
-                    <p>If you did not request this, please ignore this email.</p>
-                </div>
-            </body>
-            </html>
-        ';
+        $mail->Subject = 'Password Reset Request';
+        $mail->Body    = '<b>Dear User</b>
+        <p>We received a request to reset your password.</p>
+        <p>Your One-Time Password (OTP) is: <strong>' . $otp . '</strong></p>
+        <p>To reset your password, please click the following link:<br><br>
+        <p>The OTP will expire in 5 minutes.</p>
+        <p>To verify your OTP, click the link below:</p><br><br>
+        <a href="http://localhost/mhrmsystem/email_otp_verification.php?email=' . htmlspecialchars(stripslashes(trim($email))) . '&otp=' . htmlspecialchars(stripslashes(trim($otp))) . '">Reset Password</a></p>
+        <p>If you did not request this, please ignore this email.</p>';
 
-        // Database connection (use new connection credentials)
-        $MySQL_username = "u510162695_db_barangay";
-        $Password = "1Db_barangay";    
-        $MySQL_database_name = "u510162695_db_barangay";
 
-        // Establishing connection with server
-        $con = mysqli_connect('localhost', $MySQL_username, $Password, $MySQL_database_name);
-
-        // Checking connection
-        if (!$con) {
-            $error_message = "Connection failed: " . mysqli_connect_error();
-        } else {
-            // Setting the default timezone
-            date_default_timezone_set("Asia/Manila");
-
-            // Check if the email exists in the database
-            $stmt = $con->prepare("SELECT * FROM tblstaff WHERE email = ?");
-            $stmt->bind_param("s", $email);
-            $stmt->execute();
-            $stmt->store_result();
-
-            if ($stmt->num_rows > 0) {
-                // Generate OTP and store it in the database with expiry time (5 minutes)
-                $otp_expiry = date('Y-m-d H:i:s', time() + 300);  // 5 minutes expiry
-                $stmt = $con->prepare("UPDATE tblstaff SET otp = ?, otp_expiry = ? WHERE email = ?");
-                $stmt->bind_param("sss", $otp, $otp_expiry, $email);
-
-                if ($stmt->execute()) {
-                    // Send OTP email
-                    $mail->send();
-                    $success_message = 'OTP has been sent to your email - ' . htmlspecialchars(stripslashes(trim($email)));
-                } else {
-                    $error_message = 'Failed to store OTP in the database.';
-                }
+        // Check if the email exists in the database
+        $stmt = $con->prepare("SELECT * FROM tblstaff WHERE email = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $stmt->store_result();
+ 
+        if ($stmt->num_rows > 0) {
+            // Generate OTP and store it in the database with expiry time (5 minutes)
+            $otp_expiry = date('Y-m-d H:i:s', time() + 300);  // 5 minutes expiry
+            $stmt = $con->prepare("UPDATE tblstaff SET otp = ?, otp_expiry = ? WHERE email = ?");
+            $stmt->bind_param("sss", $otp, $otp_expiry, $email);
+ 
+            if ($stmt->execute()) {
+                // Send OTP email
+                $mail->send();
+                $success_message = 'OTP has been sent to your email - ' . htmlspecialchars(stripslashes(trim($email)));
             } else {
-                $error_message = 'Email not found.';
+                $error_message = 'Failed to store OTP in the database.';
             }
-
-            $stmt->close();
-            $con->close();
+        } else {
+            $error_message = 'Email not found.';
         }
+
+        $stmt->close();
     } catch (Exception $e) {
         $error_message = "Message could not be sent. Mailer Error: " . htmlspecialchars($mail->ErrorInfo);
     }
-}
 
-// Redirect with success or error message
-session_start();
 $_SESSION['error_message'] = $error_message;
 $_SESSION['success_message'] = $success_message;
-header("Location: email_otp_form.php");
+
+// Use JavaScript for redirect
+echo "<script>
+    window.location.href = 'email_otp_form.php';
+</script>";
 exit();
+}
 ?>
