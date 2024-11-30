@@ -225,7 +225,7 @@ $email = '';
                     <div class="form-group">
                         <button type="submit" name="sendotp" class="btn">Send OTP</button>
                         <div class="back-link">
-                            <a href="forgot_password_option.php">
+                            <a href="../forgot_password_option">
                                 <button type="button" class="login-btn">Back</button>
                             </a>
                         </div>
@@ -249,7 +249,7 @@ $email = '';
     document.addEventListener("DOMContentLoaded", function() {
         if(document.getElementById("success-ok-button")) {
             document.getElementById("success-ok-button").addEventListener("click", function() {
-                window.location.href = 'email_otp_form.php'; // Redirect after success
+                window.location.href = '../email_otp_form'; // Redirect after success
             });
         }
     });
