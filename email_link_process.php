@@ -47,9 +47,6 @@ if (isset($_POST['reset'])) {
 
 // Check for any error message
 if (empty($error_message)) {
-
-    // Load Composer's autoloader for PHPMailer
-    require 'vendor/autoload.php';
     
     $mail = new PHPMailer(true);
 
