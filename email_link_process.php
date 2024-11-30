@@ -31,7 +31,6 @@ require 'PHPMailer/src/SMTP.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'vendor/autoload.php'; // Make sure to load Composer autoloader
 
 if (isset($_POST['reset'])) {
     $email = trim($_POST['email']);
@@ -48,6 +47,9 @@ if (isset($_POST['reset'])) {
 
 // Check for any error message
 if (empty($error_message)) {
+
+    require 'vendor/autoload.php'; // Make sure to load Composer autoloader
+    
     $mail = new PHPMailer(true);
 
     try {
