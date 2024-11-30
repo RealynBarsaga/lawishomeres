@@ -77,7 +77,7 @@ if (empty($error_message)) {
         <p>To reset your password, please click the following link:
         <p>The OTP will expire in 5 minutes.</p>
         <p>To verify your OTP, click the link below:</p><br>
-        <a href="http://lawishomeresidences.com/email_otp_verification.php?email=' . htmlspecialchars(stripslashes(trim($email))) . '&otp=' . htmlspecialchars(stripslashes(trim($otp))) . '">Reset Password</a></p>
+        <a href="http://lawishomeresidences.com/email_otp_verification?email=' . htmlspecialchars(stripslashes(trim($email))) . '&otp=' . htmlspecialchars(stripslashes(trim($otp))) . '">Reset Password</a></p>
         <p>If you did not request this, please ignore this email.</p>';
 
 
