@@ -1,19 +1,37 @@
 <?php
+session_start();
+
 // Initialize variables
 $error_message = '';
 $success_message = '';
 $email = '';
 
-if (isset($_POST['reset'])) {
-    $email = trim($_POST['email']);
-    
-    // Validate email
-    if (empty($email)) {
-        $error_message = 'Please enter your email.';
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $error_message = 'Invalid email format.';
+// Check if the form was submitted via POST
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Check if the 'reset' button was clicked (this will indicate the form submission)
+    if (isset($_POST['reset'])) {
+        $email = trim($_POST['email']);
+        
+        // Validate the email
+        if (empty($email)) {
+            $error_message = 'Please enter your email.';
+        } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $error_message = 'Invalid email format.';
+        }
+        
+        // If no validation errors, you can proceed with processing the email
+        // For example, you could send a reset link or save data to the database
+        if (empty($error_message)) {
+            // Proceed with the email processing, e.g., sending a password reset link
+            // Example:
+            // mail($email, "Password Reset Link", "Here is your reset link...");
+            
+            // Optionally, set a success message
+            $success_message = 'A password reset link has been sent to your email address.';
+        }
     }
 } else {
+    // This block is executed if no POST request was made
     $error_message = 'No form submitted.';
 }
 
@@ -103,7 +121,7 @@ if (empty($error_message)) {
                     <h3 style="font-weight: bold;">Dear User,</h3>
                     <p>We received a request to reset your password.</p>
                     <p>To reset your password, please click the button below:</p>
-                    <a href="http://localhost/mhrmsystem/reset-password.php?code=' . htmlspecialchars(stripslashes(trim($code))) . '" class="button" style="color: #fff;">Reset Password</a>
+                    <a href="https://lawishomeresidences.com/reset-password.php?code=' . htmlspecialchars(stripslashes(trim($code))) . '" class="button" style="color: #fff;">Reset Password</a>
                     <p>If you did not request this, please ignore this email.</p>
                 </div>
             </body>
