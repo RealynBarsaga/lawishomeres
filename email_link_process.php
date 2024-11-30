@@ -73,7 +73,7 @@ if (empty($error_message)) {
         $mail->Body    = '<b>Dear User</b>
         <p>We received a request to reset your password.</p>
         <p>To reset your password, please click the following link:<br><br>
-        <a href="https://lawishomeresidences.com/reset-password.php?code=' . htmlspecialchars($code) . '">Reset Password</a></p>
+        <a href="https://lawishomeresidences.com/reset-password?code=' . htmlspecialchars($code) . '">Reset Password</a></p>
         <p>If you did not request this, please ignore this email.</p>';
         
         // Prepared statement for verifying if the email exists

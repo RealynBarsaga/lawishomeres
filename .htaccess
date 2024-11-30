@@ -19,3 +19,6 @@ RewriteRule ^email_otp_form/?$ /email_otp_form.php [L,QSA]
 
 # Rewrite /email_link_process to /email_link_process.php
 RewriteRule ^email_link_process/?$ /email_link_process.php [L,QSA]
+
+# Rewrite /reset-password to /reset-password.php
+RewriteRule ^reset-password/?$ /reset-password.php [L,QSA]
