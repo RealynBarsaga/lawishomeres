@@ -1,4 +1,7 @@
 <?php
+// Start session at the very beginning of the file
+session_start();
+
 // Initialize variables
 $error_message = '';
 $success_message = '';
@@ -153,10 +156,11 @@ if (empty($error_message)) {
     }
 }
 
-// Redirect with success or error message
-session_start();
+// Store messages in session variables
 $_SESSION['error_message'] = $error_message;
 $_SESSION['success_message'] = $success_message;
+
+// Redirect to the email link form page
 header("Location: email_link_form.php");
 exit();
 ?>
