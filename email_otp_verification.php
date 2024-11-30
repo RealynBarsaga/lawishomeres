@@ -290,7 +290,7 @@ if ($error_message) {
         </form>
 
         <div class="back-link">
-            <a href="forgot_password_option.php">
+            <a href="../forgot_password_option">
                 Back
             </a>
         </div>
