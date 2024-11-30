@@ -1,8 +1,5 @@
 <?php
-// Initialize variables
-$error_message = '';
-$success_message = '';
-$email = '';
+session_start();
 
 // Database credentials
 $MySQL_username = "u510162695_db_barangay";
@@ -20,16 +17,38 @@ if (!$con) {
 // Setting the default timezone
 date_default_timezone_set("Asia/Manila");
 
-if (isset($_POST['reset'])) {
-    $email = trim($_POST['email']);
-    
-    // Validate email
-    if (empty($email)) {
-        $error_message = 'Please enter your email.';
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $error_message = 'Invalid email format.';
+
+// Initialize variables
+$error_message = '';
+$success_message = '';
+$email = '';
+
+// Check if the form was submitted via POST
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Check if the 'reset' button was clicked (this will indicate the form submission)
+    if (isset($_POST['reset'])) {
+        $email = trim($_POST['email']);
+        
+        // Validate the email
+        if (empty($email)) {
+            $error_message = 'Please enter your email.';
+        } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $error_message = 'Invalid email format.';
+        }
+        
+        // If no validation errors, you can proceed with processing the email
+        // For example, you could send a reset link or save data to the database
+        if (empty($error_message)) {
+            // Proceed with the email processing, e.g., sending a password reset link
+            // Example:
+            // mail($email, "Password Reset Link", "Here is your reset link...");
+            
+            // Optionally, set a success message
+            $success_message = 'A password reset link has been sent to your email address.';
+        }
     }
 } else {
+    // This block is executed if no POST request was made
     $error_message = 'No form submitted.';
 }
 
