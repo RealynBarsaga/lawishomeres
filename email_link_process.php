@@ -159,8 +159,4 @@ if (empty($error_message)) {
 // Store messages in session variables
 $_SESSION['error_message'] = $error_message;
 $_SESSION['success_message'] = $success_message;
-
-// Redirect to the email link form page
-header("Location: email_link_form.php");
-exit();
 ?>
