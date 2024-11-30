@@ -31,6 +31,4 @@ require 'PHPMailer/src/SMTP.php';
 // Load PHPMailer classes (correct file paths and namespaces)
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-
-require 'vendor/autoload.php'; // Make sure to load Composer autoloader
 ?>
