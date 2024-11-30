@@ -163,6 +163,6 @@ if (empty($error_message)) {
 session_start();
 $_SESSION['error_message'] = $error_message;
 $_SESSION['success_message'] = $success_message;
-header("Location: ../email_otp_form");
+header("Location: email_otp_form.php");
 exit();
 ?>

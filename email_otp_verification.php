@@ -287,7 +287,7 @@ mysqli_close($con);
         </form>
 
         <div class="back-link">
-            <a href="../forgot_password_option">
+            <a href="forgot_password_option.php">
                 Back to Forgot Password Options
             </a>
         </div>

@@ -1024,7 +1024,7 @@ ul li {
                 </div>
                 <!-- Forgot password link -->
                 <div class="forgot-password" style="margin-top: -2.1px;margin-left: 84px;float: left;">
-                    <a href="../forgot_password_option">Forgot Password?</a>
+                    <a href="forgot_password_option.php">Forgot Password?</a>
                 </div>
                 <!-- For Switching Login Form-->
                 <!-- <div style="margin-top: -20px;margin-left: 195px;">

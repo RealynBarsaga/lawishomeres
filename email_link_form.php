@@ -201,7 +201,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4 offset-md-4 form">
-                <form action="https://lawishomeresidences.com/email_link_process" method="POST" class="submit-once" autocomplete="off">
+                <form action="email_link_process.php" method="POST" class="submit-once" autocomplete="off">
                     <p class="res">Reset via Email Link</p>
                     <p class="text-center">Enter the email address associated with your account and we will send you a link to reset your password.</p>
                     <br>
@@ -216,7 +216,7 @@
                     <div class="form-group">
                         <button type="submit" name="reset" class="btn">Send Reset Link</button>
                         <div class="back-link">
-                            <a href="../forgot_password_option">
+                            <a href="forgot_password_option.php">
                                 <button type="button" class="login-btn">Back</button>
                             </a>
                         </div>

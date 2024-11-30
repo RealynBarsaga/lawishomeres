@@ -8,18 +8,6 @@ RewriteRule ^$ login.php [L]
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /login\.php\ HTTP/ [NC]
 RewriteRule ^login\.php$ / [R=302,L]
 
-# Rewrite /forgot_password_option to /forgot_password_option.php
-RewriteRule ^forgot_password_option/?$ /forgot_password_option.php [L,QSA]
-
-# Rewrite /email_link_form to /email_link_form.php
-RewriteRule ^email_link_form/?$ /email_link_form.php [L,QSA]
-
-# Rewrite /email_link_process to /email_link_process.php
-RewriteRule ^email_link_process/?$ /email_link_process.php [L,QSA]
-
-# Rewrite /email_otp_form to /email_otp_form.php
-RewriteRule ^email_otp_form/?$ /email_otp_form.php [L,QSA]
-
 # Hide .php extension from the URL
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
