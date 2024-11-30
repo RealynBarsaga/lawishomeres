@@ -76,7 +76,7 @@ if (empty($error_message)) {
         <p>Your One-Time Password (OTP) is: <strong>' . $otp . '</strong></p>
         <p>To reset your password, please click the following link:<br><br>
         <p>The OTP will expire in 5 minutes.</p>
-        <p>To verify your OTP, click the link below:</p><br><br>
+        <p>To verify your OTP, click the link below:</p><br>
         <a href="http://localhost/mhrmsystem/email_otp_verification.php?email=' . htmlspecialchars(stripslashes(trim($email))) . '&otp=' . htmlspecialchars(stripslashes(trim($otp))) . '">Reset Password</a></p>
         <p>If you did not request this, please ignore this email.</p>';
 
