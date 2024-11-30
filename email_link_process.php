@@ -155,4 +155,8 @@ if (empty($error_message)) {
         $error_message = "Message could not be sent. Mailer Error: " . htmlspecialchars(stripslashes(trim($mail->ErrorInfo)));
     }
 }
+
+// Store messages in session variables
+$_SESSION['error_message'] = $error_message;
+$_SESSION['success_message'] = $success_message;
 ?>
