@@ -7,3 +7,6 @@ RewriteRule ^$ login.php [L]
 # Block direct access to login.php
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /login\.php\ HTTP/ [NC]
 RewriteRule ^login\.php$ / [R=302,L]
+
+# Rewrite /forgot_password_option to /forgot_password_option.php
+RewriteRule ^forgot_password_option/?$ /forgot_password_option.php [L,QSA]
