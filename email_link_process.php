@@ -1,4 +1,7 @@
 <?php
+// Start session at the very beginning of the file
+session_start();
+
 // Initialize variables
 $error_message = '';
 $success_message = '';
@@ -19,4 +22,15 @@ if (!$con) {
 
 // Setting the default timezone
 date_default_timezone_set("Asia/Manila");
+
+
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
+
+// Load PHPMailer classes (correct file paths and namespaces)
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'vendor/autoload.php'; // Make sure to load Composer autoloader
 ?>
