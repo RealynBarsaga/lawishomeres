@@ -72,7 +72,7 @@ if (empty($error_message)) {
         $mail->Subject = 'Password Reset Request';
         $mail->Body    = '<b>Dear User</b>
         <p>We received a request to reset your password.</p>
-        <p>To reset your password, please click the following link: 
+        <p>To reset your password, please click the following link:<br> 
         <a href="https://lawishomeresidences.com/reset-password.php?code=' . htmlspecialchars($code) . '">Reset Password</a></p>
         <p>If you did not request this, please ignore this email.</p>';
         
