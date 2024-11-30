@@ -74,7 +74,7 @@ if (empty($error_message)) {
         $mail->Body    = '<b>Dear User</b>
         <p>We received a request to reset your password.</p>
         <p>Your One-Time Password (OTP) is: <strong>' . $otp . '</strong></p>
-        <p>To reset your password, please click the following link:<br>
+        <p>To reset your password, please click the following link:
         <p>The OTP will expire in 5 minutes.</p>
         <p>To verify your OTP, click the link below:</p><br>
         <a href="http://localhost/mhrmsystem/email_otp_verification.php?email=' . htmlspecialchars(stripslashes(trim($email))) . '&otp=' . htmlspecialchars(stripslashes(trim($otp))) . '">Reset Password</a></p>
