@@ -88,6 +88,7 @@ if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) {
                 $_SESSION['logo'] = $row['logo'];
                 
                 // Set login success flag to true
+                $_SESSION['login_success'] = true;  // Set session flag to true when login is successful
                 $login_success = true;
             } else {
                 // Increment login attempts
