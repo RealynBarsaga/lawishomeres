@@ -106,6 +106,10 @@ if (empty($error_message)) {
     }
 }
 
+// Store messages in session variables
+$_SESSION['error_message'] = $error_message;
+$_SESSION['success_message'] = $success_message;
+
 // Use JavaScript for redirect
 echo "<script>
     window.location.href = 'email_link_form.php';
