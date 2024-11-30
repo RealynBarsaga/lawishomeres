@@ -102,7 +102,6 @@ if (empty($error_message)) {
     } catch (Exception $e) {
         $error_message = "Message could not be sent. Mailer Error: " . htmlspecialchars($mail->ErrorInfo);
     }
-}
 
 // Store messages in session variables
 $_SESSION['error_message'] = $error_message;
@@ -113,4 +112,5 @@ echo "<script>
     window.location.href = 'email_link_form.php';
 </script>";
 exit();
+}
 ?>

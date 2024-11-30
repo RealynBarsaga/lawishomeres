@@ -1,3 +1,9 @@
+<?php
+session_start();
+$error_message = isset($_SESSION['error_message']) ? $_SESSION['error_message'] : '';
+$success_message = isset($_SESSION['success_message']) ? $_SESSION['success_message'] : '';
+$email = ''; 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -211,7 +217,7 @@
                         </div>
                     <?php endif; ?>
                     <div class="form-group">
-                        <input type="email" name="email" class="form-control" placeholder="Enter your email" required value="">
+                        <input type="email" name="email" class="form-control" placeholder="Enter your email" required value="<?php echo htmlspecialchars($email); ?>">
                     </div>
                     <div class="form-group">
                         <button type="submit" name="reset" class="btn">Send Reset Link</button>
@@ -245,3 +251,8 @@
 </script>
 </body>
 </html>
+<?php
+// Clear session messages after displaying them
+unset($_SESSION['error_message']);
+unset($_SESSION['success_message']);
+?>
