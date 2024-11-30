@@ -4,6 +4,9 @@ $error_message = '';
 $success_message = '';
 $email = '';
 
+// Start session for error/success message display
+session_start();
+
 // Check if the form was submitted via POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['reset'])) {
@@ -35,8 +38,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $mail->isSMTP();
                 $mail->Host       = 'smtp.gmail.com';
                 $mail->SMTPAuth   = true;
-                $mail->Username   = 'sevillejogilbert15@gmail.com';  // Replace with your Gmail account
-                $mail->Password   = 'pbgfszjxplakhcxb';  // Replace with your Gmail app password
+                $mail->Username   = 'your-email@gmail.com';  // Replace with your Gmail account
+                $mail->Password   = 'your-gmail-app-password';  // Replace with your Gmail app password
                 $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS;
                 $mail->Port       = 587;
 
@@ -152,7 +155,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Store messages in session and redirect
-session_start();
 $_SESSION['error_message'] = $error_message;
 $_SESSION['success_message'] = $success_message;
 header("Location: email_link_form.php");
