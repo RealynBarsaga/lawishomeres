@@ -4,16 +4,26 @@ session_start();
 $error_message = '';
 $success_message = '';
 
+// Database credentials
+$MySQL_username = "u510162695_db_barangay";
+$Password = "1Db_barangay";    
+$MySQL_database_name = "u510162695_db_barangay";
+
+// Establishing connection with the server
+$conn = mysqli_connect('localhost', $MySQL_username, $Password, $MySQL_database_name);
+
+// Checking connection
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+// Setting the default timezone
+date_default_timezone_set("Asia/Manila");
+
 // Check if the 'code' parameter is present
 if (isset($_GET['code'])) {
     // Sanitize 'code' from the URL to prevent XSS
     $code = htmlspecialchars(stripslashes(trim($_GET['code'])), ENT_QUOTES, 'UTF-8');
-
-    // Connect to the database
-    $conn = new mysqli('localhost', 'root', '', 'db_barangay');
-    if ($conn->connect_error) {
-        $error_message = 'Could not connect to the database.';
-    }
 
     // Verify if the code is valid
     $verifyQuery = $conn->prepare("SELECT * FROM tblstaff WHERE code = ?");
