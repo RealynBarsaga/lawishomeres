@@ -114,7 +114,7 @@ $_SESSION['success_message'] = $success_message;
 
 // Use JavaScript for redirect
 echo "<script>
-    window.location.href = 'email_otp_form.php';
+    window.location.href = '../email_otp_form';
 </script>";
 exit();
 }
