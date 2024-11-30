@@ -20,11 +20,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // If no validation errors, proceed with email processing
         if (empty($error_message)) {
-            // Load PHPMailer and Composer's autoloader
-            require 'vendor/autoload.php'; // Use Composer's autoloader
+            // Load PHPMailer classes manually
+            require 'PHPMailer/src/Exception.php';
+            require 'PHPMailer/src/PHPMailer.php';
+            require 'PHPMailer/src/SMTP.php';
+
+            // Use PHPMailer namespaces
+            use PHPMailer\PHPMailer\PHPMailer;
+            use PHPMailer\PHPMailer\SMTP;
+            use PHPMailer\PHPMailer\Exception;
             
             // Set up PHPMailer
-            $mail = new PHPMailer\PHPMailer\PHPMailer();
+            $mail = new PHPMailer(true);
             try {
                 // Server settings
                 $mail->isSMTP();
