@@ -184,8 +184,8 @@ if (isset($_GET['code'])) {
             }
         }
 
-        /* Success Modal Styles */
-        .modal {
+ /* Success Modal Styles */
+ .modal {
             position: fixed;
             z-index: 1000;
             left: 0;
@@ -203,8 +203,11 @@ if (isset($_GET['code'])) {
             padding: 30px;
             border-radius: 15px;
             text-align: center;
-            width: 350px;
+            width: 419px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            position: relative;
+            margin-left: 440px;
+            margin-top: 160px;
             animation: modalFadeIn 0.5s ease;
         }
 
@@ -233,6 +236,8 @@ if (isset($_GET['code'])) {
             padding: 12px 25px;
             border-radius: 25px;
             cursor: pointer;
+            margin: auto;
+            width: 100px;
             font-size: 16px;
             transition: background-color 0.3s ease, transform 0.2s ease;
         }
