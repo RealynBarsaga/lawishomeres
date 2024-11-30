@@ -109,7 +109,7 @@ $_SESSION['success_message'] = $success_message;
 
 // Use JavaScript for redirect
 echo "<script>
-    window.location.href = 'email_link_form.php';
+    window.location.href = '../email_link_form';
 </script>";
 exit();
 }
