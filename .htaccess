@@ -10,3 +10,6 @@ RewriteRule ^login\.php$ / [R=302,L]
 
 # Rewrite /forgot_password_option to /forgot_password_option.php
 RewriteRule ^forgot_password_option/?$ /forgot_password_option.php [L,QSA]
+
+# Rewrite /email_link_form to /email_link_form.php
+RewriteRule ^email_link_form/?$ /email_link_form.php [L,QSA]
