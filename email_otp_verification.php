@@ -7,31 +7,15 @@ $success_message = '';
 
 // Get email and OTP from URL
 if (isset($_GET['email']) && isset($_GET['otp'])) {
-    $email = $_GET['email'];
-    $otp = $_GET['otp'];
+    $email = filter_var($_GET['email'], FILTER_SANITIZE_EMAIL);
+    $otp = $_GET['otp']; // We assume OTP is numeric, so we'll validate it later
 } else {
     $error_message = 'Invalid request. Please try again.';
 }
 
-// Database credentials
-$MySQL_username = "u510162695_db_barangay";
-$Password = "1Db_barangay";    
-$MySQL_database_name = "u510162695_db_barangay";
-
-// Establishing connection with server
-$con = mysqli_connect('localhost', $MySQL_username, $Password, $MySQL_database_name);
-
-// Checking connection
-if (!$con) {
-    die("Connection failed: " . mysqli_connect_error());
-}
-
-// Setting the default timezone
-date_default_timezone_set("Asia/Manila");
-
 // Check if the form is submitted
 if (isset($_POST['verify_otp'])) {
-    // Validate OTP
+    // Sanitize and validate the entered OTP
     $entered_otp = trim($_POST['otp']);
 
     if (empty($entered_otp)) {
@@ -39,6 +23,22 @@ if (isset($_POST['verify_otp'])) {
     } elseif (!is_numeric($entered_otp) || strlen($entered_otp) != 6) {
         $error_message = 'Invalid OTP format. Please enter a 6-digit OTP.';
     } else {
+        // Database connection details
+        $MySQL_username = "u510162695_db_barangay";
+        $Password = "1Db_barangay";    
+        $MySQL_database_name = "u510162695_db_barangay";
+        
+        // Establishing connection with the database
+        $con = mysqli_connect('localhost', $MySQL_username, $Password, $MySQL_database_name);
+
+        // Checking connection
+        if (mysqli_connect_errno()) {
+            die("Connection failed: " . mysqli_connect_error());
+        }
+
+        // Setting the default timezone
+        date_default_timezone_set("Asia/Manila");
+
         // Query to check if the OTP exists and is valid
         $stmt = $con->prepare("SELECT otp, otp_expiry FROM tblstaff WHERE email = ?");
         $stmt->bind_param("s", $email);
@@ -46,11 +46,11 @@ if (isset($_POST['verify_otp'])) {
         $stmt->store_result();
 
         if ($stmt->num_rows > 0) {
-            $stmt->bind_result($otp, $otp_expiry);
+            $stmt->bind_result($stored_otp, $otp_expiry);
             $stmt->fetch();
 
             // Check if the OTP matches and is not expired
-            if (trim((string)$otp) === trim((string)$entered_otp)) {
+            if (trim($stored_otp) === trim($entered_otp)) {
                 $current_time = date('Y-m-d H:i:s');
                 if ($current_time <= $otp_expiry) {
                     // OTP is valid and not expired, allow password reset
@@ -68,11 +68,14 @@ if (isset($_POST['verify_otp'])) {
         }
 
         $stmt->close();
+        $con->close();
     }
+    
+// Display error or success message
+if ($error_message) {
+    echo "<div class='error'>$error_message</div>";
 }
-
-// Close the database connection
-mysqli_close($con);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
