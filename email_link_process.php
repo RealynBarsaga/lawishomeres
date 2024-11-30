@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 // Initialize variables
 $error_message = '';
 $success_message = '';
@@ -154,6 +152,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Store messages in session and redirect
+session_start();
 $_SESSION['error_message'] = $error_message;
 $_SESSION['success_message'] = $success_message;
 header("Location: email_link_form.php");
