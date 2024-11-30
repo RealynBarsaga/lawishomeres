@@ -36,20 +36,18 @@ if (isset($_POST['reset'])) {
     $error_message = 'No form submitted.';
 }
 
-// Load PHPMailer classes
+// Load PHPMailer classes (correct file paths and namespaces)
 use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/PHPMailer.php';
-require 'PHMailer/src/SMTP.php';
+require 'PHPMailer/src/SMTP.php';
+
+require 'vendor/autoload.php'; // Make sure to load Composer autoloader
 
 // Check for any error message
 if (empty($error_message)) {
-    // Load Composer's autoloader for PHPMailer
-    require 'vendor/autoload.php';
-
     $mail = new PHPMailer(true);
 
     try {
@@ -66,6 +64,7 @@ if (empty($error_message)) {
         $mail->setFrom('no-reply@example.com', 'lawishomeresidences');
         $mail->addAddress($email);
 
+        // Generate the reset code
         $code = substr(str_shuffle('1234567890QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm'), 0, 10);
 
         // Email content
@@ -74,7 +73,7 @@ if (empty($error_message)) {
         $mail->Body    = '<b>Dear User</b>
         <p>We received a request to reset your password.</p>
         <p>To reset your password, please click the following link: 
-        <a href="https://lawishomeresidences.com/reset-password.php?code=' . htmlspecialchars(stripslashes(trim($code))) . '">Reset Password</a></p>
+        <a href="https://lawishomeresidences.com/reset-password.php?code=' . htmlspecialchars($code) . '">Reset Password</a></p>
         <p>If you did not request this, please ignore this email.</p>';
         
         // Prepared statement for verifying if the email exists
@@ -89,8 +88,9 @@ if (empty($error_message)) {
             $stmt->bind_param("ss", $code, $email);
 
             if ($stmt->execute()) {
+                // Send the email
                 $mail->send();
-                $success_message = 'Message has been sent, please check your email - ' . htmlspecialchars(stripslashes(trim($email)));
+                $success_message = 'Message has been sent. Please check your email - ' . htmlspecialchars($email);
             } else {
                 $error_message = 'Failed to update the reset code.';
             }
@@ -100,7 +100,7 @@ if (empty($error_message)) {
 
         $stmt->close();
     } catch (Exception $e) {
-        $error_message = "Message could not be sent. Mailer Error: " . htmlspecialchars(stripslashes(trim($mail->ErrorInfo)));
+        $error_message = "Message could not be sent. Mailer Error: " . htmlspecialchars($mail->ErrorInfo);
     }
 }
 
