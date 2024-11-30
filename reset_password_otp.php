@@ -31,13 +31,21 @@ if (isset($_POST['reset_password'])) {
         // Hash the new password
         $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
 
-        // Database connection
-        $host = 'localhost';
-        $username = 'root';
-        $password = '';
-        $database = 'db_barangay'; // Replace with your actual database name
-
-        $conn = new mysqli($host, $username, $password, $database);
+        // Database credentials
+        $MySQL_username = "u510162695_db_barangay";
+        $Password = "1Db_barangay";    
+        $MySQL_database_name = "u510162695_db_barangay";
+        
+        // Establishing connection with the server
+        $conn = mysqli_connect('localhost', $MySQL_username, $Password, $MySQL_database_name);
+        
+        // Checking connection
+        if (!$conn) {
+            die("Connection failed: " . mysqli_connect_error());
+        }
+        
+        // Setting the default timezone
+        date_default_timezone_set("Asia/Manila");
 
         if ($conn->connect_error) {
             $error_message = 'Database connection failed: ' . $conn->connect_error;
