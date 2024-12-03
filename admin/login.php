@@ -972,8 +972,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return null;
     }
 });
-</script>
-<script>
+
 function openTerms() {
     document.getElementById("termsModal").style.display = "block";
 }
