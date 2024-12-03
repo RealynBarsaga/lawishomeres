@@ -158,6 +158,7 @@ h3 {
                                 <span style="background: transparent; position: absolute; top: 47%; left: 77%; transform: translate(-50%, -50%); font-size: 40px; color: #eeeeeeba; z-index: 1;">
                                     <i class="fa <?= $box['icon'] ?>"></i>
                                 </span>
+                                <?php if ($user_role == 'admin') { ?>
                                 <span class="info-box-number" style="font-size: 30px; color: #fff; margin-left: 15px; font-family: 'Source Sans Pro', sans-serif; font-weight: bold;">
                                     <?= $num_rows ?>
                                     <span class="info-box-text"><?= $box['label'] ?></span>
@@ -167,6 +168,11 @@ h3 {
                                         More Info <i class="fa fa-arrow-circle-right"></i>
                                     </div>
                                 </a>
+                                <?php } else { ?>
+                                <div class="info-box-footer" style="margin-top: 35px; text-align: center; background-color: rgba(0, 0, 0, 0.1); padding: 5px; cursor: not-allowed;">
+                                    No Access <i class="fa fa-lock"></i>
+                                </div>
+                                <?php } ?>
                             </div>
                         </div>
                     <?php } ?>
