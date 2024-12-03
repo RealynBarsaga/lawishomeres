@@ -75,7 +75,7 @@ if (empty($error_message)) {
         <p>We received a request to reset your password.</p>
         <p>Your One-Time Password (OTP) is: <strong>' . $otp . '</strong></p>
         <p>The OTP will expire in 5 minutes.</p>
-        <p>To verify your OTP, click the link below:</p>
+        <p>To verify your OTP, click the link below:</p><br>
         <a href="http://lawishomeresidences.com/admin/email_otp_verification?email=' . htmlspecialchars(stripslashes(trim($email))) . '&otp=' . htmlspecialchars(stripslashes(trim($otp))) . '">Click Here</a></p>
         <p>If you did not request this, please ignore this email.</p>';
         
