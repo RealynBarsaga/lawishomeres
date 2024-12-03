@@ -246,91 +246,62 @@ html {
     }
 }
 /* Cookies Cite */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-}
-body {
-  min-height: 100vh;
-}
+/* Cookie Consent Banner Styles */
 .wrapper {
-  position: fixed;
-  bottom: 26px;
-  min-height: 36%;
-  right: -370px;
-  max-width: 345px;
-  width: 100%;
-  background: #fff;
-  border-radius: 8px;
-  padding: 15px 25px 22px;
-  transition: right 0.3s ease;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-}
-.wrapper.show {
-  right: 14px;
-}
-.wrapper header {
-  display: flex;
-  align-items: center;
-  column-gap: 15px;
-}
-header i {
-  color: #f90404b3;
-  font-size: 32px;
-}
-header h2 {
-  color: #4070f4;
-  font-weight: 500;
-  margin-top: 14px;
-}
-.wrapper .data {
-  margin-top: 16px;
-}
-.wrapper .data p {
-  color: #333;
-  font-size: 16px;
-}
-.data p a {
-  color: #f60000;
-  text-decoration: none;
-}
-.data p a:hover {
-  text-decoration: underline;
-}
-.wrapper .buttons {
-  margin-top: 16px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.buttons .button {
-  border: none;
-  color: #000000;
-  padding: 8px 0;
-  border-radius: 4px;
-  font-size: 12px;
-  cursor: pointer;
-  border: none;
-  width: calc(100% / 2 - 10px);
-}
-#acceptBtn{
-    background-image: url('img/bg.jpg');
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
     color: #fff;
+    padding: 15px 30px;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
 }
-.buttons #acceptBtn:hover {
-  color: #fff;
-  cursor: pointer;
+
+.cookie-message h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
 }
-#declineBtn {
-    background: transparent;
+
+.cookie-message p {
+    margin: 5px 0 0;
+    font-size: 14px;
+    color: #ddd;
 }
-#declineBtn:hover {
-  c color: #000;
-  cursor: pointer;
-} 
+
+.buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+button:focus {
+    outline: none;
+}
+
+button[disabled] {
+    background-color: #777;
+    cursor: not-allowed;
+}
 
 
 /* Modal styles for "Too many failed attempts" */
@@ -1110,7 +1081,7 @@ ul li {
         </div>
         </div>
         <div class="wrapper">
-            <div>
+            <div class="cookie-message">
                 <h3>We use cookies!</h3>
                 <p>
                     This website uses essential cookies to ensure its proper operation and tracking cookies to understand how you interact with it. The latter will be set only after consent.
@@ -1118,11 +1089,68 @@ ul li {
             </div>
             <div class="buttons">
                 <button class="button" id="acceptBtn">Accept</button>
-                <button class="button" id="customizeBtn">Reject</button>
+                <button class="button" id="rejectBtn">Reject</button>
             </div>
         </div>
     </div>
 </div>
+<script>
+// Check if the user has already made a choice
+document.addEventListener('DOMContentLoaded', function() {
+    if (getCookie('cookieConsent') === 'accepted') {
+        hideBanner();
+    } else if (getCookie('cookieConsent') === 'rejected') {
+        hideBanner();
+    } else {
+        showBanner();
+    }
+
+    // Accept button
+    document.getElementById('acceptBtn').addEventListener('click', function() {
+        setCookie('cookieConsent', 'accepted', 365); // Set cookie for 1 year
+        hideBanner();
+    });
+
+    // Reject button
+    document.getElementById('rejectBtn').addEventListener('click', function() {
+        setCookie('cookieConsent', 'rejected', 365); // Set cookie for 1 year
+        hideBanner();
+    });
+
+    // Function to show the cookie banner
+    function showBanner() {
+        document.querySelector('.wrapper').style.display = 'flex';
+    }
+
+    // Function to hide the cookie banner
+    function hideBanner() {
+        document.querySelector('.wrapper').style.display = 'none';
+    }
+
+    // Function to set a cookie
+    function setCookie(name, value, days) {
+        var expires = '';
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    }
+
+    // Function to get a cookie value
+    function getCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    }
+});
+</script>
 <script>
 function openTerms() {
     document.getElementById("termsModal").style.display = "block";
@@ -1150,30 +1178,6 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
-</script>
-<script>
-const cookieBox = document.querySelector(".wrapper"),
-    buttons = document.querySelectorAll(".button");
-
-    const executeCodes = () => {
-      // If cookie contains codinglab, it will be returned and below code will not run
-      if (document.cookie.includes("codinglab")) return;
-      cookieBox.classList.add("show");
-    
-      buttons.forEach((button) => {
-        button.addEventListener("click", () => {
-          // Check if the button clicked is not the "Customize" button
-          if (button.id === "acceptBtn") {
-            // Hide cookie box and set the cookie
-            cookieBox.classList.remove("show");
-            document.cookie = "cookieBy=codinglab; max-age=" + 60 * 60 * 24 * 30;
-          }
-          // If the button clicked is "Customize," do not hide the cookie box
-        });
-      });
-    };
-    
-    executeCodes();
 </script>
 <script>
    $(document).on('click', '#btn_login', function(){
