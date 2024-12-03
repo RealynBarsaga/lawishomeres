@@ -204,7 +204,7 @@ while ($notif = mysqli_fetch_assoc($squery)) {
         </ul>
 
         <div class="footer">
-            <a href="dashboard/dashboard.php">Back to Home</a>
+            <a href="dashboard/dashboard">Back to Home</a>
         </div>
     </div>
     
