@@ -1073,63 +1073,6 @@ ul li {
     </div>
 </div>
 <script>
-// Check if the user has already made a choice
-document.addEventListener('DOMContentLoaded', function() {
-    if (getCookie('cookieConsent') === 'accepted') {
-        hideBanner();
-    } else if (getCookie('cookieConsent') === 'rejected') {
-        hideBanner();
-    } else {
-        showBanner();
-    }
-
-    // Accept button
-    document.getElementById('acceptBtn').addEventListener('click', function() {
-        setCookie('cookieConsent', 'accepted', 365); // Set cookie for 1 year
-        hideBanner();
-    });
-
-    // Reject button
-    document.getElementById('rejectBtn').addEventListener('click', function() {
-        setCookie('cookieConsent', 'rejected', 365); // Set cookie for 1 year
-        hideBanner();
-    });
-
-    // Function to show the cookie banner
-    function showBanner() {
-        document.querySelector('.wrapper').style.display = 'flex';
-    }
-
-    // Function to hide the cookie banner
-    function hideBanner() {
-        document.querySelector('.wrapper').style.display = 'none';
-    }
-
-    // Function to set a cookie
-    function setCookie(name, value, days) {
-        var expires = '';
-        if (days) {
-            var date = new Date();
-            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-            expires = "; expires=" + date.toUTCString();
-        }
-        document.cookie = name + "=" + (value || "") + expires + "; path=/";
-    }
-
-    // Function to get a cookie value
-    function getCookie(name) {
-        var nameEQ = name + "=";
-        var ca = document.cookie.split(';');
-        for (var i = 0; i < ca.length; i++) {
-            var c = ca[i];
-            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-        }
-        return null;
-    }
-});
-</script>
-<script>
 function openTerms() {
     document.getElementById("termsModal").style.display = "block";
 }
@@ -1209,6 +1152,63 @@ window.onclick = function(event) {
             iconElement.classList.add('fa-eye');
         }
     }
+</script>
+<script>
+// Check if the user has already made a choice
+document.addEventListener('DOMContentLoaded', function() {
+    if (getCookie('cookieConsent') === 'accepted') {
+        hideBanner();
+    } else if (getCookie('cookieConsent') === 'rejected') {
+        hideBanner();
+    } else {
+        showBanner();
+    }
+
+    // Accept button
+    document.getElementById('acceptBtn').addEventListener('click', function() {
+        setCookie('cookieConsent', 'accepted', 365); // Set cookie for 1 year
+        hideBanner();
+    });
+
+    // Reject button
+    document.getElementById('rejectBtn').addEventListener('click', function() {
+        setCookie('cookieConsent', 'rejected', 365); // Set cookie for 1 year
+        hideBanner();
+    });
+
+    // Function to show the cookie banner
+    function showBanner() {
+        document.querySelector('.wrapper').style.display = 'none';
+    }
+
+    // Function to hide the cookie banner
+    function hideBanner() {
+        document.querySelector('.wrapper').style.display = 'none';
+    }
+
+    // Function to set a cookie
+    function setCookie(name, value, days) {
+        var expires = '';
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    }
+
+    // Function to get a cookie value
+    function getCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    }
+});
 </script>
 <script>
 $(document).ready(function() {
