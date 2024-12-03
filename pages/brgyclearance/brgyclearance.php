@@ -85,13 +85,13 @@ html, body {
                                                     
                                                     // Map barangays to their corresponding clearance form files
                                                     $barangay_forms = [
-                                                        "Tabagak" => "tabagak_clearance_form.php",
-                                                        "Bunakan" => "bunakan_clearance_form.php",
+                                                        "Tabagak" => "tabagak_clearance_form",
+                                                        "Bunakan" => "bunakan_clearance_form",
                                                         /* "Kodia" => "kodia_clearance_form.php", */
                                                         /* "Talangnan" => "talangnan_clearance_form.php", */
                                                         /* "Poblacion" => "poblacion_clearance_form.php", */
-                                                        "Maalat" => "maalat_clearance_form.php",
-                                                        "Pili" => "pili_clearance_form.php"
+                                                        "Maalat" => "maalat_clearance_form",
+                                                        "Pili" => "pili_clearance_form"
                                                         /* "Kaongkod" => "kaongkod_clearance_form.php", */
                                                        /*  "Mancilang" => "mancilang_clearance_form.php", */
                                                         /* "Kangwayan" => "kangwayan_clearance_form.php", */
