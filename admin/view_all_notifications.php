@@ -163,7 +163,7 @@ while ($notif = mysqli_fetch_assoc($squery)) {
                     echo '<li>' . $message . '
                             <button class="menu-button" onclick="toggleMenu('.$notif['id'].')"></button>
                             <div id="menu-'.$notif['id'].'" class="dropdown-menu">
-                                <a href="view_all_notifications.php?delete_id='.$notif['id'].'">Delete</a>
+                                <a href="view_all_notifications?delete_id='.$notif['id'].'">Delete</a>
                             </div>
                           </li>';
                 }
@@ -193,7 +193,7 @@ while ($notif = mysqli_fetch_assoc($squery)) {
                     echo '<li>' . $message . '
                             <button class="menu-button" onclick="toggleMenu('.$notif['id'].')"></button>
                             <div id="menu-'.$notif['id'].'" class="dropdown-menu">
-                                <a href="view_all_notifications.php?delete_id='.$notif['id'].'">Delete</a>
+                                <a href="view_all_notifications?delete_id='.$notif['id'].'">Delete</a>
                             </div>
                           </li>';
                 }
