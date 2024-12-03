@@ -698,6 +698,7 @@ ul li {
     }
 }
 
+
 /* Cookie Consent Banner Styles */
 .wrapper {
     position: fixed;
