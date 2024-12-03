@@ -131,8 +131,13 @@ if (isset($_POST['btn_add'])) {
 
 // Handle form submission for editing a resident
 if (isset($_POST['btn_save'])) {
-
-
+    
+    // Function to remove <script> tags and its content
+    function removeScripts($input) {
+        // Remove <script> tags and its content
+        $cleaned_input = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', '', $input);
+        return $cleaned_input;
+    }
     
     // Get form data with sanitization
     $id = htmlspecialchars(strip_tags(trim(removeScripts($_POST['hidden_id']))), ENT_QUOTES, 'UTF-8'); 
