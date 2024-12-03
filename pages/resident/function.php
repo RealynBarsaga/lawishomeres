@@ -67,7 +67,7 @@ if (isset($_POST['btn_add'])) {
                             '$txt_image', '$txt_role', '$txt_head_of_family')") or die('Error: ' . mysqli_error($con));
                     } else {
                         // Handle file move error
-                        $_SESSION['file_move_error'] = 1;
+                        $_SESSION['file_upload_error'] = 1;
                         header("location: " . $_SERVER['REQUEST_URI']);
                         exit();
                     }
@@ -161,25 +161,20 @@ if (isset($_POST['btn_save'])) {
                         // You can store the image name/path in the database
                     } else {
                         // File upload failed
-                        $_SESSION['file_upload_error'] = "Sorry, there was an error uploading your file.";
+                        $_SESSION['file_upload_error'] = 1;
                         header("Location: " . $_SERVER['REQUEST_URI']);
                         exit();
                     }
-                } else {
-                    // If file already exists
-                    $_SESSION['file_exists'] = "Sorry, file already exists.";
-                    header("Location: " . $_SERVER['REQUEST_URI']);
-                    exit();
                 }
             } else {
                 // Not a valid image
-                $_SESSION['invalid_image'] = "File is not a valid image.";
+                $_SESSION['invalid_image'] = 1;
                 header("Location: " . $_SERVER['REQUEST_URI']);
                 exit();
             }
         } else {
             // Invalid file type or size
-            $_SESSION['invalid_file'] = "Invalid file type or size.";
+            $_SESSION['invalid_file'] = 1;
             header("Location: " . $_SERVER['REQUEST_URI']);
             exit();
         }
