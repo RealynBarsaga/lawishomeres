@@ -50,7 +50,7 @@
     <script>
         window.print();
         onafterprint = () => {
-            window.location.href = "permit.php";
+            window.location.href = "permit";
         }
     </script>
 </head>

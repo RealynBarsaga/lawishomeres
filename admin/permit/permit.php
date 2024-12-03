@@ -115,7 +115,7 @@ html, body {
                                                             <button class="btn btn-primary btn-sm" data-target="#editModal' . $row['id'] . '" data-toggle="modal">
                                                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
                                                             </button>
-                                                            <a style="width: 80px;color: #fff;background-color: #198754;border-color: #198754;" href="permit_form.php?resident='. urlencode($row['name']) .'&purpose='. urlencode($row['businessName']) .'" class="btn btn-primary btn-sm">
+                                                            <a style="width: 80px;color: #fff;background-color: #198754;border-color: #198754;" href="permit_form?resident='. urlencode($row['name']) .'&purpose='. urlencode($row['businessName']) .'" class="btn btn-primary btn-sm">
                                                                 <i class="fa fa-print" aria-hidden="true"></i> Print
                                                             </a>
                                                             <button class="btn btn-danger btn-sm" data-target="#deleteModals' . htmlspecialchars($row['id']) . '" data-toggle="modal" style="margin-left: 1px;color: #fff;background-color: #dc3545;border-color: #dc3545;">
