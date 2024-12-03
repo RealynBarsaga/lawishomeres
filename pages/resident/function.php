@@ -1,7 +1,7 @@
 <?php
 // Handle form submission for adding a resident
 if (isset($_POST['btn_add'])) {
-    // Sanitize input data
+    // Sanitize input data (handle spaces and special characters)
     $txt_lname = htmlspecialchars(stripslashes(trim($_POST['txt_lname'])), ENT_QUOTES, 'UTF-8');
     $txt_fname = htmlspecialchars(stripslashes(trim($_POST['txt_fname'])), ENT_QUOTES, 'UTF-8');
     $txt_mname = htmlspecialchars(stripslashes(trim($_POST['txt_mname'])), ENT_QUOTES, 'UTF-8');
@@ -42,33 +42,49 @@ if (isset($_POST['btn_add'])) {
     $milliseconds = round(microtime(true) * 1000);
     $txt_image = $milliseconds . '_' . $name;
 
-
+    // Check for existing user (to prevent duplicate)
     $su = mysqli_query($con, "SELECT * FROM tbltabagak WHERE lname='$txt_lname' AND fname='$txt_fname' AND mname='$txt_mname'");
     $ct = mysqli_num_rows($su);
 
     if ($ct == 0) {
         if ($name != "") {
-            if (($imagetype == "image/jpeg" || $imagetype == "image/png" || $imagetype == "image/bmp") && $size <= 2048000) {
-                if (move_uploaded_file($temp, 'image/' . $txt_image)) {
-                    // Insert resident's data
-                    $query = mysqli_query($con, "INSERT INTO tbltabagak (
-                        lname, fname, mname, bdate, bplace, age, barangay, purok, 
-                        civilstatus, householdnum, religion, nationality, 
-                        gender, houseOwnershipStatus, landOwnershipStatus, lightningFacilities, 
-                        formerAddress, image, role, headoffamily) VALUES (
-                        '$txt_lname', '$txt_fname', '$txt_mname', '$txt_bdate', '$txt_bplace', 
-                        '$txt_age', '$txt_brgy', '$txt_purok', 
-                        '$txt_cstatus', '$txt_householdnum', '$txt_religion', '$txt_national', 
-                        '$ddl_gender', '$ddl_hos', '$ddl_los', '$txt_lightning', '$txt_faddress', 
-                        '$txt_image', '$txt_role', '$txt_head_of_family')") or die('Error: ' . mysqli_error($con));
+            // Validate image type and size
+            $allowedTypes = ['image/jpeg', 'image/png', 'image/bmp'];
+            if (in_array($imagetype, $allowedTypes) && $size <= 2048000) {
+                // Ensure it's a valid image file
+                if (getimagesize($temp) !== false) {
+                    if (move_uploaded_file($temp, 'image/' . $txt_image)) {
+                        // Insert resident's data
+                        $query = mysqli_query($con, "INSERT INTO tbltabagak (
+                            lname, fname, mname, bdate, bplace, age, barangay, purok, 
+                            civilstatus, householdnum, religion, nationality, 
+                            gender, houseOwnershipStatus, landOwnershipStatus, lightningFacilities, 
+                            formerAddress, image, role, headoffamily) VALUES (
+                            '$txt_lname', '$txt_fname', '$txt_mname', '$txt_bdate', '$txt_bplace', 
+                            '$txt_age', '$txt_brgy', '$txt_purok', 
+                            '$txt_cstatus', '$txt_householdnum', '$txt_religion', '$txt_national', 
+                            '$ddl_gender', '$ddl_hos', '$ddl_los', '$txt_lightning', '$txt_faddress', 
+                            '$txt_image', '$txt_role', '$txt_head_of_family')") or die('Error: ' . mysqli_error($con));
+                    } else {
+                        // Handle file move error
+                        $_SESSION['file_move_error'] = 1;
+                        header("location: " . $_SERVER['REQUEST_URI']);
+                        exit();
+                    }
                 } else {
-                    // Handle file move error
+                    // Not a valid image
+                    $_SESSION['invalid_image'] = 1;
+                    header("location: " . $_SERVER['REQUEST_URI']);
+                    exit();
                 }
             } else {
-                $_SESSION['filesize'] = 1;
+                // Invalid file type or file too large
+                $_SESSION['invalid_file'] = 1;
                 header("location: " . $_SERVER['REQUEST_URI']);
+                exit();
             }
         } else {
+            // If no image is uploaded, use default image
             $txt_image = 'default.png';
             // Insert resident's data without image
             $query = mysqli_query($con, "INSERT INTO tbltabagak (
@@ -97,6 +113,7 @@ if (isset($_POST['btn_add'])) {
     } else {
         $_SESSION['duplicateuser'] = 1;
         header("location: " . $_SERVER['REQUEST_URI']);
+        exit();
     }
 }
 
