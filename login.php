@@ -276,6 +276,9 @@ html {
 .buttons {
     display: flex;
     gap: 15px;
+}
+
+#acceptBtn {
     padding: 10px 20px;
     background-image: url('img/bg.jpg');
     color: white;
@@ -286,15 +289,39 @@ html {
     transition: background-image 0.3s ease;
 }
 
-.buttons:hover {
+#acceptBtn:hover {
     background-color: #0056b3;
 }
 
-.buttons:focus {
+#acceptBtn:focus {
     outline: none;
 }
 
-.buttons[disabled] {
+#acceptBtn[disabled] {
+    background-color: #777;
+    cursor: not-allowed;
+}
+
+#rejectBtn {
+    padding: 10px 20px;
+    background-image: url('img/bg.jpg');
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-image 0.3s ease;
+}
+
+#rejectBtn:hover {
+    background-color: #0056b3;
+}
+
+#rejectBtn:focus {
+    outline: none;
+}
+
+#rejectBtn[disabled] {
     background-color: #777;
     cursor: not-allowed;
 }
@@ -1084,8 +1111,8 @@ ul li {
                 </p>
             </div>
             <div class="buttons">
-                <button class="button" id="acceptBtn">Accept</button>
-                <button class="button" id="rejectBtn">Reject</button>
+                <button id="acceptBtn">Accept</button>
+                <button id="rejectBtn">Reject</button>
             </div>
         </div>
     </div>
