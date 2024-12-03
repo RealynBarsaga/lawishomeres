@@ -15,7 +15,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 </head>
 <style>
-body {
+html, body {
     overflow: hidden; /* Prevents body from scrolling */
 }
 
