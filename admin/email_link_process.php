@@ -26,7 +26,6 @@ require '../PHPMailer/src/SMTP.php';
 
 // Load PHPMailer classes
 use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 if (isset($_POST['reset'])) {
@@ -91,6 +90,7 @@ if (empty($error_message)) {
         } else {
             $error_message = 'Email not found.';
         }
+
         $stmt->close();
     } catch (Exception $e) {
         $error_message = "Message could not be sent. Mailer Error: " . htmlspecialchars(stripslashes(trim($mail->ErrorInfo)));
