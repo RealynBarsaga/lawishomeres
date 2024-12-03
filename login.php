@@ -1121,6 +1121,126 @@ ul li {
                 <button class="button" id="customizeBtn">Customize</button>
             </div>
         </div>
+        <!-- Modal Structure -->
+        <div id="cookieSettingsModal" class="modal" style="display:none;">
+            <div id="s-inr" class="modal-content3">
+                <div id="s-hdr">
+                    <h2 id="s-ttl">Cookies Settings</h2>
+                    <span id="s-c-bn" class="close-button" aria-label="Close">&times;</span>
+                </div>
+                <div id="s-bl">
+                    <div class="scrollable">
+                    <div class="desc">
+                        <h4 style="font-size: 18px;">Cookies Usage</h4>
+                        <p style="font-size:14px;">We use cookies to ensure the basic functionalities of the website and to improve your online experience. You can choose to opt in or out of each category whenever you want.</p>
+                    </div>
+                    <div class="c-bl">
+                        <div class="title">
+                            <h5 class="b-tl">Functionality Cookies</h5>
+                            <label class="b-tg">
+                                <input type="checkbox" id="functionalityCookies" class="c-tgl" checked>
+                                <span class="c-tg" aria-hidden="true">
+                                    <span class="on-i"></span>
+                                    <span class="off-i"></span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+        
+                    <div class="c-bl">
+                        <div class="title">
+                            <h5 class="b-tl">Security Cookies</h5>
+                            <label class="b-tg">
+                                <input type="checkbox" id="securityCookies" class="c-tgl" checked>
+                                <span class="c-tg" aria-hidden="true">
+                                    <span class="on-i"></span>
+                                    <span class="off-i"></span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+        
+                    <div class="c-bl">
+                        <div class="title">
+                            <h5 class="b-tl">Personalization Cookies</h5>
+                            <label class="b-tg">
+                                <input type="checkbox" id="personalizationCookies" class="c-tgl">
+                                <span class="c-tg" aria-hidden="true">
+                                    <span class="on-i"></span>
+                                    <span class="off-i"></span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+        
+                    <div class="c-bl">
+                        <div class="title">
+                            <h5 class="b-tl">Ad Cookies</h5>
+                            <label class="b-tg">
+                                <input type="checkbox" id="adCookies" class="c-tgl">
+                                <span class="c-tg" aria-hidden="true">
+                                    <span class="on-i"></span>
+                                    <span class="off-i"></span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+        
+                    <div class="c-bl">
+                        <div class="title">
+                            <h5 class="b-tl">Ad User Data</h5>
+                            <label class="b-tg">
+                                <input type="checkbox" id="adUserData" class="c-tgl">
+                                <span class="c-tg" aria-hidden="true">
+                                    <span class="on-i"></span>
+                                    <span class="off-i"></span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+        
+                    <div class="c-bl">
+                        <div class="title">
+                            <h5 class="b-tl">Ad Personalization</h5>
+                            <label class="b-tg">
+                                <input type="checkbox" id="adPersonalization" class="c-tgl">
+                                <span class="c-tg" aria-hidden="true">
+                                    <span class="on-i"></span>
+                                    <span class="off-i"></span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+        
+                    <div class="c-bl">
+                        <div class="title">
+                            <h5 class="b-tl">Analytics Cookies</h5>
+                            <label class="b-tg">
+                                <input type="checkbox" id="analyticsCookies" class="c-tgl">
+                                <span class="c-tg" aria-hidden="true">
+                                    <span class="on-i"></span>
+                                    <span class="off-i"></span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+        
+                    <div class="c-bl">
+                        <div class="title">
+                            <h5 class="b-tl" style="margin-left: -8px;">More Information</h5>
+                        </div>
+                        <div class="desc">
+                            <p style="font-size:14px;">For any queries in relation to my policy on cookies and your choices, please contact us.</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="s-bns">
+                    <button id="acceptall" class="c-bn">Accept All</button>
+                    <button id="acceptnecessary" class="c-bn1" style="margin-right: 143px;width: 153px;">Accept Necessary</button>
+                    <button id="saveSettings" class="c-bn1" style="margin-right: -18px;width: 113px;">Save Settings</button>
+                </div>
+            </div>
+        </div> 
     </div>
 </div>
 <script>
