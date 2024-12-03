@@ -95,17 +95,17 @@ html, body {
 
                                         echo '
                                         <tr>
-                                            <td><input type="checkbox" name="chk_delete[]" class="chk_delete" value="'.htmlspecialchars($row['id']).'" /></td>
+                                            <td><input type="checkbox" name="chk_delete[]" class="chk_delete" value="'.htmlspecialchars(removeScripts($row['id'])).'" /></td>
                                             <td><img src="image/' . basename($row['image']) . '" style="width:60px;height:60px;"/></td>
-                                            <td>'. htmlspecialchars($row['householdnum']) .'</td>
-                                            <td>'. htmlspecialchars($row['cname']) .'</td>
-                                            <td>'. htmlspecialchars($row['age']) .'</td>
-                                            <td>'. htmlspecialchars($row['gender']) .'</td>
-                                            <td>'. htmlspecialchars($row['formerAddress']) .'</td>
-                                            <td>'. htmlspecialchars($row['purok']) .'</td>
-                                            <td>'. htmlspecialchars($row['role']) .'</td>
+                                            <td>'. htmlspecialchars(removeScripts($row['householdnum'])) .'</td>
+                                            <td>'. htmlspecialchars(removeScripts($row['cname'])) .'</td>
+                                            <td>'. htmlspecialchars(removeScripts($row['age'])) .'</td>
+                                            <td>'. htmlspecialchars(removeScripts($row['gender'])) .'</td>
+                                            <td>'. htmlspecialchars(removeScripts($row['formerAddress'])) .'</td>
+                                            <td>'. htmlspecialchars(removeScripts($row['purok'])) .'</td>
+                                            <td>'. htmlspecialchars(removeScripts($row['role'])) .'</td>
                                             <td>
-                                                <button class="btn btn-primary btn-sm" data-target="#editModal'.htmlspecialchars($row['id']).'" data-toggle="modal">
+                                                <button class="btn btn-primary btn-sm" data-target="#editModal'.htmlspecialchars(removeScripts($row['id'])).'" data-toggle="modal">
                                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
                                                 </button>
                                                 <button class="btn btn-danger btn-sm" data-target="#' . $deleteModalId . '" data-toggle="modal" style="margin-left: 5px;color: #fff;background-color: #dc3545;border-color: #dc3545;">
