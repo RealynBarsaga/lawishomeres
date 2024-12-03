@@ -239,62 +239,6 @@ html {
         width: 100%;
     }
 }
-/* Cookie Consent Banner Styles */
-.wrapper {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: #333;
-    color: #fff;
-    padding: 15px 30px;
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 1000;
-}
-
-.cookie-message h3 {
-    margin: 0;
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.cookie-message p {
-    margin: 5px 0 0;
-    font-size: 14px;
-    color: #ddd;
-}
-
-.buttons {
-    display: flex;
-    gap: 15px;
-}
-
-.button {
-    padding: 10px 20px;
-    background-image: url('../img/bg.jpg');
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-image 0.3s ease;
-}
-
-.button:hover {
-    background-color: #0056b3;
-}
-
-button:focus {
-    outline: none;
-}
-
-button[disabled] {
-    background-color: #777;
-    cursor: not-allowed;
-}
  
 
 /* Modal styles for "Too many failed attempts" */
@@ -612,185 +556,7 @@ button[disabled] {
 .input-group-text:hover i {
     opacity: 1; /* Increase opacity on hover */
 }
-/* Modal Background */
-.modal3 {
-    position: fixed;
-    background: transparent;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    padding: 20px; /* Added padding for small screens */
-}
-.modal-content3{
-    padding: 30px;
-    border-radius: 15px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 15px;
-    animation: modalFadeIn 0.5s ease;
-}
-/* Fade-in animation */
-@keyframes modalFadeIn {
-    from {
-        opacity: 0;
-        transform: scale(0.95); /* Slight scaling for a zoom-in effect */
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-/* Modal Inner */
-#s-inr {
-    background: white;
-    border-radius: 8px;
-    width: 100%;
-    max-width: 604px;
-    max-height: 530px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
-}
-/* Header */
-#s-hdr {
-    padding: 3px;
-    border-bottom: 1px solid #ddd;
-    display: flex;
-    justify-content: space-between; /* Align title and close button */
-    align-items: center;
-}
-#s-ttl {
-    margin: 0;
-    font-size: 1.5rem; /* Adjusted for better responsiveness */
-    margin-left: -4px;
-    margin-top: 1px;
-}
-/* Close Button */
-#s-c-bn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 2rem; /* Increased size for better touch */
-}
-/* Block Elements */
-.c-bl {
-    padding: 3px;
-    border-bottom: 1px solid #ddd;
-}
-.c-bl:last-child {
-    border-bottom: none;
-}
-.title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px;
-}
-/* Description */
-.desc {
-    margin-top: 8px;
-    font-size: 0.875rem; /* Smaller font for descriptions */
-    color: #555;
-}
-/* Toggle */
-.b-tg {
-    display: flex;
-    align-items: center;
-}
-.c-tgl {
-    margin-right: 8px;
-}
-.c-tg {
-    position: relative;
-    width: 50px; /* Width of the toggle */
-    height: 24px; /* Height of the toggle */
-    background-color: #ccc; /* Background color for off state */
-    border-radius: 50px; /* Rounded corners */
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-.c-tg .on-i, .c-tg .off-i {
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-}
-.c-tg .on-i {
-    position: absolute;
-    top: 0;
-    left: 15px;
-    background: green;
-    transition: transform 0.3s;
-}
-.c-tg .off-i {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: red;
-}
-.c-tgl:checked + .c-tg {
-    background: #4CAF50;
-}
-.c-tgl:checked + .c-tg .on-i {
-    transform: translateX(-15px);
-}
-/* Buttons */
-#s-bns {
-    display: flex;
-    justify-content: space-between;
-    padding: 16px;
-    border-top: 1px solid #ddd;
-}
-/* Ensure the buttons are visible */
-#s-bns {
-    display: flex;
-    justify-content: space-between;
-    padding: 16px;
-    border-top: 1px solid #ddd;
-    background: white; /* Ensure background for contrast */
-}
-.c-bn {
-    background-image: url('../img/bg.jpg'); /* Ensure the button color is visible */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background 0.3s;
-    flex: 1; /* Makes buttons flexible */
-    margin: 0 5px; /* Space between buttons */
-    margin-left: -16px;
-    max-width: 124px;
-}
-/* Accessibility */
-[aria-hidden="true"] {
-    display: none;
-}
-/* Responsive Design */
-@media (max-width: 600px) {
-    #s-ttl {
-        font-size: 1.25rem; /* Smaller title */
-    }
-    .c-bl {
-        padding: 12px; /* Smaller padding for mobile */
-    }
-    .desc {
-        font-size: 0.75rem; /* Smaller description font */
-    }
-    .c-bn {
-        font-size: 0.875rem; /* Smaller button font */
-    }
-}
-#s-bl {
-    width: 546px; /* Adjust width as needed */
-}
-.scrollable {
-    max-height: 400px; /* Set the height you want */
-    overflow-y: auto;  /* Enables vertical scrolling */
-    border: 1px solid #ccc; /* Optional: adds a border */
-    padding: 10px; /* Optional: adds some padding */
-    background-color: #f9f9f9; /* Optional: background color */
-}
+
 /* Style for the terms-checkbox container */
 .terms-checkbox {
     display: flex;
@@ -931,8 +697,80 @@ ul li {
         font-size: 14px;
     }
 }
+
+/* Cookie Consent Banner Styles */
+.wrapper {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    color: #fff;
+    padding: 15px 30px;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+}
+.cookie-message h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+.cookie-message p {
+    margin: 5px 0 0;
+    font-size: 14px;
+    color: #ddd;
+}
+.buttons {
+    display: flex;
+    gap: 15px;
+}
+#acceptBtn {
+    padding: 10px 20px;
+    background-image: url('img/bg.jpg');
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-image 0.3s ease;
+}
+#acceptBtn:hover {
+    background-color: #0056b3;
+}
+#acceptBtn:focus {
+    outline: none;
+}
+#acceptBtn[disabled] {
+    background-color: #777;
+    cursor: not-allowed;
+}
+#rejectBtn {
+    padding: 10px 20px;
+    background-image: url('img/bg.jpg');
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-image 0.3s ease;
+}
+#rejectBtn:hover {
+    background-color: #0056b3;
+}
+#rejectBtn:focus {
+    outline: none;
+}
+#rejectBtn[disabled] {
+    background-color: #777;
+    cursor: not-allowed;
+}
 </style>
 <body class="skin-black">
+
+<!-- Main Content -->
 <div class="container" style="margin-top: -5px;">
     <div class="col-md-4 col-md-offset-4">
         <div class="panel">
@@ -1027,51 +865,57 @@ ul li {
                     </div>
                 </div>
                 <?php endif; ?>
-                </div>
-            </div>
-             <!-- Terms and Conditions Modal -->
-        <div id="termsModal" class="modal4" style="display:none;">
-        <div class="modal-content4">
-            <span class="close" onclick="closeTerms()">&times;</span>
-            <h2>Terms and Conditions</h2>
-            <div class="terms-content">
-                <h3>1. Introduction</h3>
-                <p>Welcome to our e-commerce platform. By accessing or using our website, you agree to these terms and conditions.</p>
-
-                <h3>2. Account Security</h3>
-                <p>You are responsible for maintaining the confidentiality of your account credentials and for all activities under your account.</p>
-
-                <h3>3. Privacy Policy</h3>
-                <p>Your use of our platform is also governed by our Privacy Policy. By using our services, you consent to our collection and use of your data as described therein.</p>
-
-                <h3>4. Prohibited Activities</h3>
-                <p>You agree not to:</p>
-                <ul>
-                    <li>Use the platform for any illegal purposes</li>
-                    <li>Attempt to gain unauthorized access to other user accounts</li>
-                    <li>Upload malicious content or viruses</li>
-                    <li>Engage in fraudulent activities</li>
-                </ul>
-
-                <h3>5. Termination</h3>
-                <p>We reserve the right to terminate or suspend your account for violations of these terms.</p>
-            </div>
-        </div>
-        </div>
-        <div class="wrapper">
-            <div class="cookie-message">
-                <h3>We use cookies!</h3>
-                <p>
-                    This website uses essential cookies to ensure its proper operation and tracking cookies to understand how you interact with it. The latter will be set only after consent.
-                </p>
-            </div>
-            <div class="buttons">
-                <button class="button" id="acceptBtn">Accept</button>
-                <button class="button" id="rejectBtn">Reject</button>
             </div>
         </div>
     </div>
 </div>
+<!-- Terms and Conditions Modal -->
+<div id="termsModal" class="modal4" style="display:none;">
+<div class="modal-content4">
+    <span class="close" onclick="closeTerms()">&times;</span>
+    <h2>Terms and Conditions</h2>
+    <div class="terms-content">
+        <h3>1. Introduction</h3>
+        <p>Welcome to our e-commerce platform. By accessing or using our website, you agree to these terms and conditions.</p>
+        <h3>2. Account Security</h3>
+        <p>You are responsible for maintaining the confidentiality of your account credentials and for all activities under your account.</p>
+        <h3>3. Privacy Policy</h3>
+        <p>Your use of our platform is also governed by our Privacy Policy. By using our services, you consent to our collection and use of your data as described therein.</p>
+        <h3>4. Prohibited Activities</h3>
+        <p>You agree not to:</p>
+        <ul>
+            <li>Use the platform for any illegal purposes</li>
+            <li>Attempt to gain unauthorized access to other user accounts</li>
+            <li>Upload malicious content or viruses</li>
+            <li>Engage in fraudulent activities</li>
+        </ul>
+        <h3>5. Termination</h3>
+        <p>We reserve the right to terminate or suspend your account for violations of these terms.</p>
+    </div>
+</div>
+<!-- Cookie Consent Banner -->
+<div class="wrapper">
+    <div class="cookie-message">
+        <h3>We use cookies!</h3>
+        <p>This website uses essential cookies to ensure its proper operation and tracking cookies to understand how you interact with it. The latter will be set only after consent.</p>
+    </div>
+    <div class="buttons">
+        <button id="acceptBtn">Accept</button>
+        <button id="rejectBtn">Reject</button>
+    </div>
+</div>
+<script>
+     // Handle the OK button for modal
+     document.addEventListener("DOMContentLoaded", function() {
+        // Attach a click event to the OK button to redirect to the dashboard
+        const okButton = document.getElementById("ok-button2");
+        if (okButton) {
+            okButton.addEventListener("click", function() {
+                window.location.href = '../admin/dashboard/dashboard.php';
+            });
+        }
+    });
+</script>
 <script>
 function openTerms() {
     document.getElementById("termsModal").style.display = "block";
@@ -1128,14 +972,6 @@ window.onclick = function(event) {
       document.getElementById("error-ok-button1").addEventListener("click", function() {
           // Close the error modal when OK is clicked
           document.getElementById("error-modal1").style.display = 'none';
-      });
-  });
-  // Wait for the DOM to load
-  document.addEventListener("DOMContentLoaded", function() {
-      // Attach a click event to the OK button
-      document.getElementById("ok-button2").addEventListener("click", function() {
-          // Redirect to the dashboard after the OK button is clicked
-          window.location.href = '../admin/dashboard/dashboard.php';
       });
   });
   function togglePassword(inputId, icon) {

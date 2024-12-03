@@ -702,84 +702,73 @@ ul li {
 
 /* Cookie Consent Banner Styles */
 .wrapper {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: #333;
-            color: #fff;
-            padding: 15px 30px;
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-        }
-
-        .cookie-message h3 {
-            margin: 0;
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        .cookie-message p {
-            margin: 5px 0 0;
-            font-size: 14px;
-            color: #ddd;
-        }
-
-        .buttons {
-            display: flex;
-            gap: 15px;
-        }
-
-        #acceptBtn {
-            padding: 10px 20px;
-            background-image: url('img/bg.jpg');
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: background-image 0.3s ease;
-        }
-
-        #acceptBtn:hover {
-            background-color: #0056b3;
-        }
-
-        #acceptBtn:focus {
-            outline: none;
-        }
-
-        #acceptBtn[disabled] {
-            background-color: #777;
-            cursor: not-allowed;
-        }
-
-        #rejectBtn {
-            padding: 10px 20px;
-            background-image: url('img/bg.jpg');
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: background-image 0.3s ease;
-        }
-
-        #rejectBtn:hover {
-            background-color: #0056b3;
-        }
-
-        #rejectBtn:focus {
-            outline: none;
-        }
-
-        #rejectBtn[disabled] {
-            background-color: #777;
-            cursor: not-allowed;
-        }
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    color: #fff;
+    padding: 15px 30px;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+}
+.cookie-message h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+.cookie-message p {
+    margin: 5px 0 0;
+    font-size: 14px;
+    color: #ddd;
+}
+.buttons {
+    display: flex;
+    gap: 15px;
+}
+#acceptBtn {
+    padding: 10px 20px;
+    background-image: url('img/bg.jpg');
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-image 0.3s ease;
+}
+#acceptBtn:hover {
+    background-color: #0056b3;
+}
+#acceptBtn:focus {
+    outline: none;
+}
+#acceptBtn[disabled] {
+    background-color: #777;
+    cursor: not-allowed;
+}
+#rejectBtn {
+    padding: 10px 20px;
+    background-image: url('img/bg.jpg');
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-image 0.3s ease;
+}
+#rejectBtn:hover {
+    background-color: #0056b3;
+}
+#rejectBtn:focus {
+    outline: none;
+}
+#rejectBtn[disabled] {
+    background-color: #777;
+    cursor: not-allowed;
+}
 </style>
 <body class="skin-black">
 
