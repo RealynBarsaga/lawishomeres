@@ -51,20 +51,6 @@ echo '<div class="alert alert-filesize alert-autocloseable-filesize" style="back
 </div>';
 ?>
 
-<?php
-if (isset($_SESSION['invalidFileType'])) {
-    echo "<div class='alert alert-danger'>Invalid file type. Please upload a JPG, PNG, or BMP image.</div>";
-    unset($_SESSION['invalidFileType']);
-}
-?>
-
-<?php
-if (isset($_SESSION['fileUploadError'])) {
-    echo "<div class='alert alert-danger'>There was an error uploading your file. Please try again.</div>";
-    unset($_SESSION['fileUploadError']);
-}
-?>
-
 <?php if(isset($_SESSION['blotter'])){
     echo '<script>$(document).ready(function (){blotter();});</script>';
     unset($_SESSION['blotter']);

@@ -1,7 +1,6 @@
 <?php
 // Handle form submission for adding a resident
 if (isset($_POST['btn_add'])) {
-
     // Function to remove <script> tags and its content
     function removeScripts($input) {
         // Remove <script> tags and its content
@@ -51,21 +50,6 @@ if (isset($_POST['btn_add'])) {
     $milliseconds = round(microtime(true) * 1000);
     $txt_image = $milliseconds . '_' . $name;
 
-    // Check if the file is an allowed image type
-    if (isset($_FILES['txt_image'])) {
-        $file = $_FILES['txt_image'];
-        $fileType = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
-
-        // Allowed file types
-        $allowedTypes = ['jpg', 'jpeg', 'png', 'bmp'];
-
-        if (!in_array($fileType, $allowedTypes)) {
-            // Invalid file type, redirect or show error message
-            $_SESSION['invalidFileType'] = "Invalid file type. Please upload a JPG, PNG, or BMP image."; // Store error in session
-            header("location: " . $_SERVER['REQUEST_URI']);
-            exit();
-        }
-    }
 
     $su = mysqli_query($con, "SELECT * FROM tbltabagak WHERE lname='$txt_lname' AND fname='$txt_fname' AND mname='$txt_mname'");
     $ct = mysqli_num_rows($su);
@@ -87,14 +71,10 @@ if (isset($_POST['btn_add'])) {
                         '$txt_image', '$txt_role', '$txt_head_of_family')") or die('Error: ' . mysqli_error($con));
                 } else {
                     // Handle file move error
-                    $_SESSION['fileUploadError'] = "There was an error uploading your file. Please try again.";
-                    header("location: " . $_SERVER['REQUEST_URI']);
-                    exit();
                 }
             } else {
                 $_SESSION['filesize'] = 1;
                 header("location: " . $_SERVER['REQUEST_URI']);
-                exit();
             }
         } else {
             $txt_image = 'default.png';
@@ -131,7 +111,7 @@ if (isset($_POST['btn_add'])) {
 
 // Handle form submission for editing a resident
 if (isset($_POST['btn_save'])) {
-
+    
     // Function to remove <script> tags and its content
     function removeScripts($input) {
         // Remove <script> tags and its content
@@ -159,30 +139,15 @@ if (isset($_POST['btn_save'])) {
     $lightning = htmlspecialchars(strip_tags(trim(removeScripts($_POST['txt_edit_lightning']))), ENT_QUOTES, 'UTF-8');
     $formerAddress = htmlspecialchars(strip_tags(trim(removeScripts($_POST['txt_edit_faddress']))), ENT_QUOTES, 'UTF-8');
     
-    // Handle image upload with validation
+    // Handle image upload
     $image = $_FILES['txt_edit_image']['name'];
-
     if ($image) {
-        // Validate image type
         $target_dir = "image/";
         $target_file = $target_dir . basename($image);
-        $fileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-        $allowedTypes = ['jpg', 'jpeg', 'png', 'bmp'];
-
-        // Check if the file type is allowed
-        if (!in_array($fileType, $allowedTypes)) {
-            $_SESSION['invalidFileType'] = 1;
-            header("Location: " . $_SERVER['REQUEST_URI']);
-            exit();
-        }
-
-        // If the file type is valid, move the uploaded file
         if (move_uploaded_file($_FILES["txt_edit_image"]["tmp_name"], $target_file)) {
             // File upload successful
         } else {
-            $_SESSION['fileUploadError'] = 1;
-            header("Location: " . $_SERVER['REQUEST_URI']);
-            exit();
+            // Handle file upload error if necessary
         }
     } else {
         // If no new image is uploaded, retrieve the existing image
@@ -213,7 +178,7 @@ if (isset($_POST['btn_save'])) {
               image = '$image' 
               WHERE id = '$id'") or die('Error: ' . mysqli_error($con));
 
-    // Redirect after successful edit
+    // Redirect after successful edited
     if ($update_query) {
         $_SESSION['edited'] = 1;
 
@@ -227,7 +192,6 @@ if (isset($_POST['btn_save'])) {
         exit();
     }
 }
-
 
 if (isset($_POST['btn_del'])) {
     if (isset($_POST['hidden_id'])) {
