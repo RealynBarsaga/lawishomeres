@@ -7,11 +7,11 @@
         exit; // Ensure no further execution after redirect
     }
 
-   // Check if the user has the correct role (admin in this case)
-    else (isset($_SESSION['userid']) && $_SESSION['role'] !== 'Administrator') {
-    header('Location: /pages/dashboard/dashboard.php'); // Redirect to user page if not admin
-    exit;
-   }
+      // Check if the user is an administrator
+      if (isset($_SESSION['role']) && $_SESSION['role'] !== 'Administrator') {
+        header('Location: /pages/dashboard/dashboard.php'); // Redirect to user page if not admin
+        exit;
+    }
 
     include('../head_css.php');
 ?>
