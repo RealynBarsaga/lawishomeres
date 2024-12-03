@@ -8,7 +8,7 @@ session_set_cookie_params([
     'domain' => 'lawishomeresidences.com', // Change this to your domain
     'secure' => true,             // Set to true if using HTTPS
     'httponly' => true,           // Prevent JavaScript access to the cookie
-    'samesite' => 'Strict'        // Use 'Lax' or 'Strict' based on your needs
+    'samesite' => 'Lax'        // Use 'Lax' or 'Strict' based on your needs
 ]);
 
 // Start the session
