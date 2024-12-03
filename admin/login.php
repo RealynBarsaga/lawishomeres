@@ -915,7 +915,7 @@ ul li {
         const okButton = document.getElementById("ok-button2");
         if (okButton) {
             okButton.addEventListener("click", function() {
-                window.location.href = '../admin/dashboard/dashboard.php';
+                window.location.href = '../admin/dashboard/dashboard';
             });
         }
     });
