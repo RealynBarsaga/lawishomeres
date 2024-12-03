@@ -276,9 +276,6 @@ html {
 .buttons {
     display: flex;
     gap: 15px;
-}
-
-.button {
     padding: 10px 20px;
     background-image: url('img/bg.jpg');
     color: white;
@@ -289,15 +286,15 @@ html {
     transition: background-image 0.3s ease;
 }
 
-.button:hover {
+.buttons:hover {
     background-color: #0056b3;
 }
 
-button:focus {
+.buttons:focus {
     outline: none;
 }
 
-button[disabled] {
+.buttons[disabled] {
     background-color: #777;
     cursor: not-allowed;
 }
