@@ -209,7 +209,7 @@ $email = '';
     <div class="container">
         <div class="row">
             <div class="col-md-4 offset-md-4 form">
-                <form action="email_otp_process.php" method="POST" autocomplete="off">
+                <form action="email_otp_process" method="POST" autocomplete="off">
                     <p class="res">Reset via Email OTP</p>
                     <p class="text-center">Enter the email associated with your account and we will send you a code to reset your password.</p>
                     <br>
@@ -250,7 +250,7 @@ $email = '';
         document.addEventListener("DOMContentLoaded", function() {
             if(document.getElementById("success-ok-button")) {
                 document.getElementById("success-ok-button").addEventListener("click", function() {
-                    window.location.href = 'email_otp_form.php'; // Redirect after success
+                    window.location.href = '../admin/email_otp_form'; // Redirect after success
                 });
             }
         });

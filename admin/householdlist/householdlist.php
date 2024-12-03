@@ -10,7 +10,7 @@
     include("../connection.php");
 ?>
 <style>
-body {
+html, body {
     overflow: hidden; /* Prevents body from scrolling */
 }
 
