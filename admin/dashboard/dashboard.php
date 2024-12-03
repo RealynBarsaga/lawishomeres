@@ -2,9 +2,9 @@
 <html lang="en">
 <?php
     ob_start(); // Start output buffering at the very top to avoid header errors
-    
+    // Check if the user is logged in and is an admin
     session_start();
-    if (!isset($_SESSION['userid'])) {
+    if (!isset($_SESSION['userid'] || $_SESSION['role'] != 'Administrator')) {
         header('Location: ../../admin/login.php');
         exit; // Ensure no further execution after redirect
     }
