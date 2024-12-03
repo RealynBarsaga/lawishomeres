@@ -85,20 +85,20 @@ html, body {
                                                     
                                                     // Map barangays to their corresponding clearance form files
                                                     $barangay_forms = [
-                                                        "Tabagak" => "tabagak_clearance_form.php",
-                                                        "Bunakan" => "bunakan_clearance_form.php",
-                                                        /* "Kodia" => "kodia_clearance_form.php", */
-                                                        /* "Talangnan" => "talangnan_clearance_form.php", */
-                                                        /* "Poblacion" => "poblacion_clearance_form.php", */
-                                                        "Maalat" => "maalat_clearance_form.php",
-                                                        "Pili" => "pili_clearance_form.php"
-                                                        /* "Kaongkod" => "kaongkod_clearance_form.php", */
-                                                       /*  "Mancilang" => "mancilang_clearance_form.php", */
-                                                        /* "Kangwayan" => "kangwayan_clearance_form.php", */
-                                                        /* "Tugas" => "tugas_clearance_form.php", */
-                                                       /*  "Malbago" => "malbago_clearance_form.php", */
-                                                       /*  "Tarong" => "tarong_clearance_form.php", */
-                                                        /* "San Agustin" => "san_agustin_clearance_form.php" */
+                                                        "Tabagak" => "tabagak_clearance_form",
+                                                        "Bunakan" => "bunakan_clearance_form",
+                                                        /* "Kodia" => "kodia_clearance_form", */
+                                                        /* "Talangnan" => "talangnan_clearance_form", */
+                                                        /* "Poblacion" => "poblacion_clearance_form", */
+                                                        "Maalat" => "maalat_clearance_form",
+                                                        "Pili" => "pili_clearance_form"
+                                                        /* "Kaongkod" => "kaongkod_clearance_form", */
+                                                       /*  "Mancilang" => "mancilang_clearance_form", */
+                                                        /* "Kangwayan" => "kangwayan_clearance_form", */
+                                                        /* "Tugas" => "tugas_clearance_form", */
+                                                       /*  "Malbago" => "malbago_clearance_form", */
+                                                       /*  "Tarong" => "tarong_clearance_form", */
+                                                        /* "San Agustin" => "san_agustin_clearance_form" */
                                                     ];
 
                                                     $stmt = $con->prepare("SELECT name, clearanceNo, purpose, orNo, samount, id AS pid FROM tblclearance WHERE barangay = '$off_barangay'");

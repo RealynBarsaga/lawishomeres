@@ -52,7 +52,7 @@
     <script>
         window.print();
         onafterprint = () => {
-            window.location.href = "clearance.php";
+            window.location.href = "clearance";
         }
     </script>
 </head>
