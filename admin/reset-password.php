@@ -51,7 +51,7 @@ if (isset($_GET['code'])) {
             $updateQuery->bind_param("ss", $hashed_password, $code);
 
             if ($updateQuery->execute()) {
-                $success_message = "Password has been reset successfully. You may now log in.";
+                $success_message = "Your password has been reset successfully reset. You may now log in.";
             } else {
                 $error_message = "Failed to update the password. Please try again.";
             }

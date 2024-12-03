@@ -56,10 +56,10 @@ if (isset($_POST['verify_otp'])) {
                 if (trim((string)$otp) === trim((string)$entered_otp)) {
                     $current_time = date('Y-m-d H:i:s');
                     if ($current_time <= $otp_expiry) {
+
                         // OTP is valid and not expired, allow password reset
-                        $_SESSION['email_for_reset'] = $email; // Store email in session for password reset
-                        header("Location: reset_password_otp.php"); // Redirect to password reset page
-                        exit();
+                        $success_message = 'OTP is valid and not expired, you may now reset your password.';
+                        unset($_SESSION['email_for_reset']); // Clear the email session variable after successful reset
                     } else {
                         $error_message = 'The OTP has expired. Please request a new OTP.';
                     }
@@ -275,10 +275,6 @@ if (isset($_POST['verify_otp'])) {
             <div class="error"><?php echo $error_message; ?></div>
         <?php endif; ?>
 
-        <?php if (!empty($success_message)): ?>
-            <div class="success"><?php echo $success_message; ?></div>
-        <?php endif; ?>
-
         <form method="POST" action="">
             <div class="form-group">
                 <input type="text" name="otp" class="form-control" placeholder="Enter OTP" required>
@@ -294,5 +290,22 @@ if (isset($_POST['verify_otp'])) {
             </a>
         </div>
     </div>
+    <?php if (!empty($success_message)): ?>
+        <!-- Success Modal structure -->
+        <div id="success-modal" class="modal" style="display: block;">
+            <div class="modal-content">
+                <span class="modal-title">Success</span>
+                <p><?php echo $success_message; ?></p>
+                <button id="success-ok-button" class="btn-ok">OK</button>
+            </div>
+        </div>  
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                document.getElementById("success-ok-button").addEventListener("click", function() {
+                    window.location.href = '../admin/reset_password_otp';
+                });
+            });
+        </script>
+    <?php endif; ?>
 </body>
 </html>
