@@ -288,7 +288,7 @@ $email = '';
     <div class="container">
         <div class="row">
             <div class="col-md-4 offset-md-4 form">
-                <form action="admin/email_link_process" method="POST" autocomplete="off">
+                <form action="../admin/email_link_process" method="POST" autocomplete="off">
                     <p class="res">Reset Password via Email</p>
                     <p class="text-center">Enter the email address associated with your account and we will send you a link to reset your password.</p>
                     <br>
