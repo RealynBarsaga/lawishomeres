@@ -183,19 +183,20 @@ h3 {
         </section><!-- /.content -->
     </aside><!-- /.right-side -->
 </div><!-- ./wrapper -->
-<?php
-// Query to count data for each barangay
-$barangays = ['Tabagak', 'Bunakan', 'Kodia', 'Talangnan', 'Maalat', 'Pili', 'Kaongkod', 'Mancilang', 'Kangwayan', 'Tugas', 'Malbago', 'Tarong', 'San Agustin'];
-$counts = [];
-                    
-foreach ($barangays as $barangay) {
-    $q = mysqli_query($con, "SELECT * FROM tbltabagak WHERE barangay = '$barangay'");
-    $counts[] = mysqli_num_rows($q);
-}
-?>
-<script>
-    const ctx = document.getElementById('myBarChart').getContext('2d');
-    const myBarChart = new Chart(ctx, {
+    <?php
+    // Query to count data for each barangay
+    $barangays = ['Tabagak', 'Bunakan', 'Kodia', 'Talangnan', 'Poblacion', 'Maalat', 'Pili', 'Kaongkod', 'Mancilang', 'Kangwayan', 'Tugas', 'Malbago', 'Tarong', 'San Agustin'];
+    $counts = [];
+
+    foreach ($barangays as $barangay) {
+        $q = mysqli_query($con, "SELECT * FROM tbltabagak WHERE barangay = '$barangay'");
+        $counts[] = mysqli_num_rows($q);
+    }
+    ?>
+
+    <script>
+    const barCtx = document.getElementById('myBarChart').getContext('2d');
+    const myBarChart = new Chart(barCtx, {
         type: 'bar',
         data: {
             labels: <?= json_encode($barangays) ?>,
@@ -206,7 +207,7 @@ foreach ($barangays as $barangay) {
                     '#4CB5F5',
                 ],
                 borderColor: [
-                   '#4CB5F5',
+                    '#4CB5F5',
                 ],
                 borderWidth: 1
             }]
@@ -216,20 +217,30 @@ foreach ($barangays as $barangay) {
             plugins: {
                 title: {
                     display: true,
-                    text: 'Household Overview',
+                    text: 'Population Overview',
                     font: {
-                        size: 18
-                    }
+                        size: 14 // Adjusted font size for the title
+                    },
                 }
             },
             scales: {
                 y: {
                     beginAtZero: true,
                     ticks: {
-                        stepSize: 1
+                        stepSize: 1,
+                        font: {
+                            size: 9 // Adjusted font size for the y-axis labels
+                        }
+                    }
+                },
+                x: {
+                    ticks: {
+                        font: {
+                            size: 9 // Adjusted font size for the x-axis labels
+                        }
                     }
                 }
-            }
+            },
         }
     });
 </script>    
