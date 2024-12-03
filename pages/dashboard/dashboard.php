@@ -6,14 +6,6 @@
         header('Location: ../../login.php');
         exit; // Ensure no further execution after redirect
     }
-    // Assuming the user role is stored in session (you should define it when the user logs in)
-    $user_role = $_SESSION['role']; // 'user' or 'admin'
-    
-    // Redirect non-admin users from accessing admin pages
-    if ($user_role != 'Administrator') {
-        // Optional: Hide or modify links if the user is not an admin
-        // You can add a flag or conditional rendering to show/hide admin-related content
-    }
     include('../head_css.php');
 ?>
 <head>
@@ -139,7 +131,7 @@ h3 {
                     <?php
                     $off_barangay = $_SESSION['barangay'];
                     $info_boxes = [
-                        ['label' => 'Barangay Officials', 'icon' => 'fa-user', 'color' => '#00c0ef', 'query' => "SELECT * FROM tblbrgyofficial WHERE barangay = '$off_barangay'", 'link' => ($user_role == 'Administrator' ? '../officials/officials.php' : '#')],
+                        ['label' => 'Barangay Officials', 'icon' => 'fa-user', 'color' => '#00c0ef', 'query' => "SELECT * FROM tblbrgyofficial WHERE barangay = '$off_barangay'", 'link' => '../officials/officials.php'],
                         ['label' => 'Total Household', 'icon' => 'fa-users', 'color' => '#007256', 'query' => "SELECT * FROM tblhousehold h LEFT JOIN tbltabagak r ON r.id = h.headoffamily WHERE r.barangay = '$off_barangay'", 'link' => '../household/household.php?page=household'],
                         ['label' => 'Total Resident', 'icon' => 'fa-users', 'color' => '#bd1e24', 'query' => "SELECT * FROM tbltabagak WHERE barangay = '$off_barangay'", 'link' => '../resident/resident.php?page=resident'],
                         ['label' => 'Total Clearance', 'icon' => 'fa-file', 'color' => '#e5c707', 'query' => "SELECT * FROM tblclearance WHERE barangay = '$off_barangay'", 'link' => '../BrgyClearance/BrgyClearance.php?page=BrgyClearance'],
@@ -158,7 +150,6 @@ h3 {
                                 <span style="background: transparent; position: absolute; top: 47%; left: 77%; transform: translate(-50%, -50%); font-size: 40px; color: #eeeeeeba; z-index: 1;">
                                     <i class="fa <?= $box['icon'] ?>"></i>
                                 </span>
-                                <?php if ($user_role == 'admin') { ?>
                                 <span class="info-box-number" style="font-size: 30px; color: #fff; margin-left: 15px; font-family: 'Source Sans Pro', sans-serif; font-weight: bold;">
                                     <?= $num_rows ?>
                                     <span class="info-box-text"><?= $box['label'] ?></span>
@@ -168,11 +159,6 @@ h3 {
                                         More Info <i class="fa fa-arrow-circle-right"></i>
                                     </div>
                                 </a>
-                                <?php } else { ?>
-                                <div class="info-box-footer" style="margin-top: 35px; text-align: center; background-color: rgba(0, 0, 0, 0.1); padding: 5px; cursor: not-allowed;">
-                                    No Access <i class="fa fa-lock"></i>
-                                </div>
-                                <?php } ?>
                             </div>
                         </div>
                     <?php } ?>
