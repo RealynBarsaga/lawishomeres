@@ -39,9 +39,9 @@ if (isset($_POST['btn_add'])) {
     $txt_lightning = htmlspecialchars(strip_tags(trim(removeScripts($_POST['txt_lightning']))), ENT_QUOTES, 'UTF-8');
     $txt_faddress = htmlspecialchars(strip_tags(trim(removeScripts($_POST['txt_faddress']))), ENT_QUOTES, 'UTF-8');
     $txt_role = htmlspecialchars(strip_tags(trim(removeScripts($_POST['txt_role']))), ENT_QUOTES, 'UTF-8');
-    $txt_head_of_family =htmlspecialchars(strip_tags(trim(removeScripts($_POST['txt_head_of_family']))), ENT_QUOTES, 'UTF-8');
+    $txt_head_of_family = htmlspecialchars(strip_tags(trim(removeScripts($_POST['txt_head_of_family']))), ENT_QUOTES, 'UTF-8');
 
-    
+    // Handle file upload
     $name = basename($_FILES['txt_image']['name']);
     $temp = $_FILES['txt_image']['tmp_name'];
     $imagetype = $_FILES['txt_image']['type'];
@@ -49,7 +49,6 @@ if (isset($_POST['btn_add'])) {
 
     $milliseconds = round(microtime(true) * 1000);
     $txt_image = $milliseconds . '_' . $name;
-
 
     $su = mysqli_query($con, "SELECT * FROM tbltabagak WHERE lname='$txt_lname' AND fname='$txt_fname' AND mname='$txt_mname'");
     $ct = mysqli_num_rows($su);
@@ -142,8 +141,8 @@ if (isset($_POST['btn_save'])) {
     // Handle image upload
     $image = $_FILES['txt_edit_image']['name'];
     if ($image) {
-        $target_dir = "image/";
-        $target_file = $target_dir . basename($image);
+        $target_dir = "image/"; 
+        $target_file = $target_dir . basename($image); 
         if (move_uploaded_file($_FILES["txt_edit_image"]["tmp_name"], $target_file)) {
             // File upload successful
         } else {
@@ -178,7 +177,7 @@ if (isset($_POST['btn_save'])) {
               image = '$image' 
               WHERE id = '$id'") or die('Error: ' . mysqli_error($con));
 
-    // Redirect after successful edited
+    // Redirect after successful edit
     if ($update_query) {
         $_SESSION['edited'] = 1;
 
