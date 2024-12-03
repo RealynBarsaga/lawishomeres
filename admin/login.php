@@ -869,6 +869,7 @@ ul li {
         </div>
     </div>
 </div>
+
 <!-- Terms and Conditions Modal -->
 <div id="termsModal" class="modal4" style="display:none;">
 <div class="modal-content4">
@@ -893,6 +894,7 @@ ul li {
         <p>We reserve the right to terminate or suspend your account for violations of these terms.</p>
     </div>
 </div>
+
 <!-- Cookie Consent Banner -->
 <div class="wrapper">
     <div class="cookie-message">
@@ -904,6 +906,7 @@ ul li {
         <button id="rejectBtn">Reject</button>
     </div>
 </div>
+
 <script>
      // Handle the OK button for modal
      document.addEventListener("DOMContentLoaded", function() {
