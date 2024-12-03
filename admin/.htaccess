@@ -26,3 +26,6 @@ RewriteRule ^email_otp_form/?$ /admin/email_otp_form.php [L,QSA]
 
 # Rewrite /admin/email_otp_process to /admin/email_otp_process.php
 RewriteRule ^email_otp_process/?$ /admin/email_otp_process.php [L,QSA]
+
+# Rewrite /admin/email_otp_verification to /admin/email_otp_verification.php
+RewriteRule ^email_otp_verification/?$ /admin/email_otp_verification.php [L,QSA]
