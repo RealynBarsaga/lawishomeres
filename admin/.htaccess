@@ -17,6 +17,9 @@ RewriteRule ^email_link_form/?$ /admin/email_link_form.php [L,QSA]
 # Rewrite /admin/email_link_process to /admin/femail_link_process.php
 RewriteRule ^email_link_process/?$ /admin/email_link_process.php [L,QSA]
 
+# Rewrite /admin/email_link_process to /admin/femail_link_process.php
+RewriteRule ^reset-password/?$ /admin/reset-password.php [L,QSA]
+
 
 
 
