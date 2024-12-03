@@ -81,7 +81,7 @@ if (empty($error_message)) {
         
 
         // Check if the email exists in the database
-        $stmt = $conn->prepare("SELECT * FROM tbluser WHERE email = ?");
+        $stmt = $con->prepare("SELECT * FROM tbluser WHERE email = ?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $stmt->store_result();
@@ -89,7 +89,7 @@ if (empty($error_message)) {
         if ($stmt->num_rows > 0) {
             // Generate OTP and store it in the database with expiry time (5 minutes)
             $otp_expiry = date('Y-m-d H:i:s', time() + 300);  // 5 minutes expiry
-            $stmt = $conn->prepare("UPDATE tbluser SET otp = ?, otp_expiry = ? WHERE email = ?");
+            $stmt = $con->prepare("UPDATE tbluser SET otp = ?, otp_expiry = ? WHERE email = ?");
             $stmt->bind_param("sss", $otp, $otp_expiry, $email);
 
             if ($stmt->execute()) {
