@@ -3,7 +3,7 @@
 <head>
     <?php
     session_start();
-    if (!isset($_SESSION['userid'] || $_SESSION['role'] != 'Administrator')) {
+    if (!isset($_SESSION['userid'])) {
         header('Location: ../../admin/login.php');
         exit; // Ensure no further execution after redirect
     }
