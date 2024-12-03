@@ -78,7 +78,7 @@ if (isset($_POST['btn_add'])) {
                         '$txt_image', '$txt_role', '$txt_head_of_family')") or die('Error: ' . mysqli_error($con));
                 } else {
                     // Handle file move error
-                    $_SESSION['fileMoveError'] = 1;
+                    $_SESSION['fileUploadError'] = 1;
                     header("location: " . $_SERVER['REQUEST_URI']);
                     exit();
                 }
@@ -142,15 +142,30 @@ if (isset($_POST['btn_save'])) {
     $lightning = htmlspecialchars(stripslashes(trim($_POST['txt_edit_lightning'])), ENT_QUOTES, 'UTF-8');
     $formerAddress = htmlspecialchars(stripslashes(trim($_POST['txt_edit_faddress'])), ENT_QUOTES, 'UTF-8');
     
-    // Handle image upload
+    // Handle image upload with validation
     $image = $_FILES['txt_edit_image']['name'];
+
     if ($image) {
+        // Validate image type
         $target_dir = "image/";
         $target_file = $target_dir . basename($image);
+        $fileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+        $allowedTypes = ['jpg', 'jpeg', 'png', 'bmp'];
+
+        // Check if the file type is allowed
+        if (!in_array($fileType, $allowedTypes)) {
+            $_SESSION['invalidFileType'] = 1;
+            header("Location: " . $_SERVER['REQUEST_URI']);
+            exit();
+        }
+
+        // If the file type is valid, move the uploaded file
         if (move_uploaded_file($_FILES["txt_edit_image"]["tmp_name"], $target_file)) {
             // File upload successful
         } else {
-            // Handle file upload error if necessary
+            $_SESSION['fileUploadError'] = 1;
+            header("Location: " . $_SERVER['REQUEST_URI']);
+            exit();
         }
     } else {
         // If no new image is uploaded, retrieve the existing image
@@ -181,7 +196,7 @@ if (isset($_POST['btn_save'])) {
               image = '$image' 
               WHERE id = '$id'") or die('Error: ' . mysqli_error($con));
 
-    // Redirect after successful edited
+    // Redirect after successful edit
     if ($update_query) {
         $_SESSION['edited'] = 1;
 
@@ -195,6 +210,7 @@ if (isset($_POST['btn_save'])) {
         exit();
     }
 }
+
 
 if (isset($_POST['btn_del'])) {
     if (isset($_POST['hidden_id'])) {
