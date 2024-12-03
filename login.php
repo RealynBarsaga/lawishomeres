@@ -1117,130 +1117,10 @@ ul li {
                 </p>
             </div>
             <div class="buttons">
-                <button class="button" id="acceptBtn">I Agree</button>
-                <button class="button" id="customizeBtn">Customize</button>
+                <button class="button" id="acceptBtn">Accept</button>
+                <button class="button" id="customizeBtn">Reject</button>
             </div>
         </div>
-        <!-- Modal Structure -->
-        <div id="cookieSettingsModal" class="modal" style="display:none;">
-            <div id="s-inr" class="modal-content3">
-                <div id="s-hdr">
-                    <h2 id="s-ttl">Cookies Settings</h2>
-                    <span id="s-c-bn" class="close-button" aria-label="Close">&times;</span>
-                </div>
-                <div id="s-bl">
-                    <div class="scrollable">
-                    <div class="desc">
-                        <h4 style="font-size: 18px;">Cookies Usage</h4>
-                        <p style="font-size:14px;">We use cookies to ensure the basic functionalities of the website and to improve your online experience. You can choose to opt in or out of each category whenever you want.</p>
-                    </div>
-                    <div class="c-bl">
-                        <div class="title">
-                            <h5 class="b-tl">Functionality Cookies</h5>
-                            <label class="b-tg">
-                                <input type="checkbox" id="functionalityCookies" class="c-tgl" checked>
-                                <span class="c-tg" aria-hidden="true">
-                                    <span class="on-i"></span>
-                                    <span class="off-i"></span>
-                                </span>
-                            </label>
-                        </div>
-                    </div>
-        
-                    <div class="c-bl">
-                        <div class="title">
-                            <h5 class="b-tl">Security Cookies</h5>
-                            <label class="b-tg">
-                                <input type="checkbox" id="securityCookies" class="c-tgl" checked>
-                                <span class="c-tg" aria-hidden="true">
-                                    <span class="on-i"></span>
-                                    <span class="off-i"></span>
-                                </span>
-                            </label>
-                        </div>
-                    </div>
-        
-                    <div class="c-bl">
-                        <div class="title">
-                            <h5 class="b-tl">Personalization Cookies</h5>
-                            <label class="b-tg">
-                                <input type="checkbox" id="personalizationCookies" class="c-tgl">
-                                <span class="c-tg" aria-hidden="true">
-                                    <span class="on-i"></span>
-                                    <span class="off-i"></span>
-                                </span>
-                            </label>
-                        </div>
-                    </div>
-        
-                    <div class="c-bl">
-                        <div class="title">
-                            <h5 class="b-tl">Ad Cookies</h5>
-                            <label class="b-tg">
-                                <input type="checkbox" id="adCookies" class="c-tgl">
-                                <span class="c-tg" aria-hidden="true">
-                                    <span class="on-i"></span>
-                                    <span class="off-i"></span>
-                                </span>
-                            </label>
-                        </div>
-                    </div>
-        
-                    <div class="c-bl">
-                        <div class="title">
-                            <h5 class="b-tl">Ad User Data</h5>
-                            <label class="b-tg">
-                                <input type="checkbox" id="adUserData" class="c-tgl">
-                                <span class="c-tg" aria-hidden="true">
-                                    <span class="on-i"></span>
-                                    <span class="off-i"></span>
-                                </span>
-                            </label>
-                        </div>
-                    </div>
-        
-                    <div class="c-bl">
-                        <div class="title">
-                            <h5 class="b-tl">Ad Personalization</h5>
-                            <label class="b-tg">
-                                <input type="checkbox" id="adPersonalization" class="c-tgl">
-                                <span class="c-tg" aria-hidden="true">
-                                    <span class="on-i"></span>
-                                    <span class="off-i"></span>
-                                </span>
-                            </label>
-                        </div>
-                    </div>
-        
-                    <div class="c-bl">
-                        <div class="title">
-                            <h5 class="b-tl">Analytics Cookies</h5>
-                            <label class="b-tg">
-                                <input type="checkbox" id="analyticsCookies" class="c-tgl">
-                                <span class="c-tg" aria-hidden="true">
-                                    <span class="on-i"></span>
-                                    <span class="off-i"></span>
-                                </span>
-                            </label>
-                        </div>
-                    </div>
-        
-                    <div class="c-bl">
-                        <div class="title">
-                            <h5 class="b-tl" style="margin-left: -8px;">More Information</h5>
-                        </div>
-                        <div class="desc">
-                            <p style="font-size:14px;">For any queries in relation to my policy on cookies and your choices, please contact us.</p>
-                        </div>
-                    </div>
-                </div>
-                <div id="s-bns">
-                    <button id="acceptall" class="c-bn">Accept All</button>
-                    <button id="acceptnecessary" class="c-bn1" style="margin-right: 143px;width: 153px;">Accept Necessary</button>
-                    <button id="saveSettings" class="c-bn1" style="margin-right: -18px;width: 113px;">Save Settings</button>
-                </div>
-            </div>
-        </div> 
     </div>
 </div>
 <script>
@@ -1272,54 +1152,7 @@ window.onclick = function(event) {
 }
 </script>
 <script>
-// Get modal elements
-const modal = document.getElementById('cookieSettingsModal');
-const customizeBtn = document.getElementById('customizeBtn');
-const closeButton = document.querySelector('.close-button');
-const saveSettingsButton = document.getElementById('saveSettings');
-
-// Function to open the modal
-customizeBtn.addEventListener('click', () => {
-    modal.style.display = 'block';
-});
-
-// Function to close the modal
-closeButton.addEventListener('click', () => {
-    modal.style.display = 'none';
-});
-
-// Optional: Save settings functionality
-saveSettingsButton.addEventListener('click', () => {
-    const functionalityEnabled = document.getElementById('functionalityCookies').checked;
-    const securityEnabled = document.getElementById('securityCookies').checked;
-    const personalizationEnabled = document.getElementById('personalizationCookies').checked;
-    const adEnabled = document.getElementById('adCookies').checked;
-    const adUserDataEnabled = document.getElementById('adUserData').checked;
-    const adPersonalizationEnabled = document.getElementById('adPersonalization').checked;
-    const analyticsEnabled = document.getElementById('analyticsCookies').checked;
-
-    console.log(`Functionality Cookies Enabled: ${functionalityEnabled}`);
-    console.log(`Security Cookies Enabled: ${securityEnabled}`);
-    console.log(`Personalization Cookies Enabled: ${personalizationEnabled}`);
-    console.log(`Ad Cookies Enabled: ${adEnabled}`);
-    console.log(`Ad User Data Enabled: ${adUserDataEnabled}`);
-    console.log(`Ad Personalization Enabled: ${adPersonalizationEnabled}`);
-    console.log(`Analytics Cookies Enabled: ${analyticsEnabled}`);
-
-    // Save preferences logic here
-    modal.style.display = 'none'; // Close modal after saving
-});
-
-// Close modal if clicked outside of it
-window.addEventListener('click', (event) => {
-    if (event.target === modal) {
-        modal.style.display = 'none';
-    }
-});
-
-
-  
-    const cookieBox = document.querySelector(".wrapper"),
+const cookieBox = document.querySelector(".wrapper"),
     buttons = document.querySelectorAll(".button");
 
     const executeCodes = () => {
@@ -1341,61 +1174,6 @@ window.addEventListener('click', (event) => {
     };
     
     executeCodes();
-
-  
-   //executeCodes function will be called on webpage load
-   window.addEventListener("load", executeCodes);
-
-document.addEventListener("DOMContentLoaded", function() {
-    const acceptAllButton = document.getElementById("acceptall");
-    const acceptNecessaryButton = document.getElementById("acceptnecessary");
-    const saveSettingsButton = document.getElementById("saveSettings");
-
-    const functionalityCookies = document.getElementById("functionalityCookies");
-    const securityCookies = document.getElementById("securityCookies");
-    const personalizationCookies = document.getElementById("personalizationCookies");
-    const adCookies = document.getElementById("adCookies");
-    const adUserData = document.getElementById("adUserData");
-    const adPersonalization = document.getElementById("adPersonalization");
-    const analyticsCookies = document.getElementById("analyticsCookies");
-
-    // Accept All button functionality
-    acceptAllButton.addEventListener("click", function() {
-        functionalityCookies.checked = true;
-        securityCookies.checked = true;
-        personalizationCookies.checked = true;
-        adCookies.checked = true;
-        adUserData.checked = true;
-        adPersonalization.checked = true;
-        analyticsCookies.checked = true;
-    });
-
-    // Accept Necessary button functionality
-    acceptNecessaryButton.addEventListener("click", function() {
-        functionalityCookies.checked = true;
-        securityCookies.checked = true;
-        personalizationCookies.checked = false;
-        adCookies.checked = false;
-        adUserData.checked = false;
-        adPersonalization.checked = false;
-        analyticsCookies.checked = false;
-    });
-
-    // Save Settings button functionality
-    saveSettingsButton.addEventListener("click", function() {
-        const settings = {
-            functionality: functionalityCookies.checked,
-            security: securityCookies.checked,
-            personalization: personalizationCookies.checked,
-            ads: adCookies.checked,
-            adUserData: adUserData.checked,
-            adPersonalization: adPersonalization.checked,
-            analytics: analyticsCookies.checked,
-        };
-        console.log("Settings saved:", settings);
-        // Close modal here if needed
-    });
-});
 </script>
 <script>
    $(document).on('click', '#btn_login', function(){
