@@ -57,7 +57,7 @@
     <script>
         window.print();
         onafterprint = () => {
-            window.location.href = "brgycertificate.php";
+            window.location.href = "brgycertificate";
         } 
     </script>
 </head>

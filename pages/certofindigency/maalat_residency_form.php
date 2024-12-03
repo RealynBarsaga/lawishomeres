@@ -52,7 +52,7 @@
     <script>
         window.print();
         onafterprint = () => {
-            window.location.href = "certofindigency.php";
+            window.location.href = "certofindigency";
         }
     </script>
 </head>
