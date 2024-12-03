@@ -14,7 +14,7 @@ include('../head_css.php');
 .input-size {
     width: 418px;
 }
-body {
+html, body {
     overflow: hidden; /* Prevents body from scrolling */
 }
 
