@@ -52,7 +52,7 @@
     <script>
         window.print();
         onafterprint = () => {
-            window.location.href = "certofres.php";
+            window.location.href = "certofres";
         }
     </script>
 </head>

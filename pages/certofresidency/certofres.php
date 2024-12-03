@@ -76,20 +76,20 @@ body {
                                                     
                                         // Map barangays to their corresponding residency form files
                                         $barangay_forms = [
-                                            "Tabagak" => "tabagak_residency_form.php",
-                                            "Bunakan" => "bunakan_residency_form.php",
-                                            /* "Kodia" => "kodia_residency_form.php", */
-                                            /* "Talangnan" => "talangnan_residency_form.php", */
-                                            /* "Poblacion" => "poblacion_residency_form.php", */
-                                            "Maalat" => "maalat_residency_form.php",
-                                            "Pili" => "pili_residency_form.php"
-                                            /* "Kaongkod" => "kaongkod_residency_form.php", */
-                                            /* "Mancilang" => "mancilang_residency_form.php", */
-                                            /* "Kangwayan" => "kangwayan_residency_form.php", */
-                                            /* "Tugas" => "tugas_residency_form.php", */
-                                            /* "Malbago" => "malbago_residency_form.php", */
-                                            /* "Tarong" => "tarong_residency_form.php", */
-                                            /* "San Agustin" => "san_agustin_residency_form.php" */
+                                            "Tabagak" => "tabagak_residency_form",
+                                            "Bunakan" => "bunakan_residency_form",
+                                            /* "Kodia" => "kodia_residency_form", */
+                                            /* "Talangnan" => "talangnan_residency_form", */
+                                            /* "Poblacion" => "poblacion_residency_form", */
+                                            "Maalat" => "maalat_residency_form",
+                                            "Pili" => "pili_residency_form"
+                                            /* "Kaongkod" => "kaongkod_residency_form", */
+                                            /* "Mancilang" => "mancilang_residency_form", */
+                                            /* "Kangwayan" => "kangwayan_residency_form", */
+                                            /* "Tugas" => "tugas_residency_form", */
+                                            /* "Malbago" => "malbago_residency_form", */
+                                            /* "Tarong" => "tarong_residency_form", */
+                                            /* "San Agustin" => "san_agustin_residency_form" */
                                         ];
 
                                         $stmt = $con->prepare("SELECT Name, purpose, barangay, purok, id AS pid FROM tblrecidency WHERE barangay = '$off_barangay'");
