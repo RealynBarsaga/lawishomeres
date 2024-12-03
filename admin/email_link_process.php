@@ -97,7 +97,12 @@ if (empty($error_message)) {
     }
 $_SESSION['error_message'] = $error_message;
 $_SESSION['success_message'] = $success_message;
-header("Location: ../admin/email_link_form");
+
+
+// Use JavaScript for redirect
+echo "<script>
+    window.location.href = '../admin/email_link_form';
+</script>";
 exit();
 }
 ?>
