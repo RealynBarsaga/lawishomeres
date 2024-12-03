@@ -24,9 +24,9 @@ if (!$con) {
 date_default_timezone_set("Asia/Manila");
 
 
-require '../PHPMailer/src/Exception.php';
-require '../PHPMailer/src/PHPMailer.php';
-require '../PHPMailer/src/SMTP.php';
+require '../admin/PHPMailer/src/Exception.php';
+require '../admin/PHPMailer/src/PHPMailer.php';
+require '../admin/PHPMailer/src/SMTP.php';
 
 // Load PHPMailer classes
 use PHPMailer\PHPMailer\PHPMailer;
@@ -100,7 +100,7 @@ if (empty($error_message)) {
     } catch (Exception $e) {
         $error_message = "Message could not be sent. Mailer Error: " . htmlspecialchars(stripslashes(trim($mail->ErrorInfo)));
     }
-    
+
 $_SESSION['error_message'] = $error_message;
 $_SESSION['success_message'] = $success_message;
 

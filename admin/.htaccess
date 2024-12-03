@@ -19,11 +19,11 @@ RewriteRule ^forgot_password_option/?$ /admin/forgot_password_option.php [L,QSA]
 # Rewrite /admin/forgot_password to /admin/forgot_password.php
 RewriteRule ^email_link_form/?$ /admin/email_link_form.php [L,QSA]
 
-# Rewrite /admin/forgot_password to /admin/forgot_password.php
+# Rewrite /admin/email_link_process to /admin/femail_link_process.php
 RewriteRule ^email_link_process/?$ /admin/email_link_process.php [L,QSA]
 
 
 
 
-# Rewrite /admin/forgot_password to /admin/forgot_password.php
+# Rewrite /admin/email_otp_form to /admin/email_otp_form.php
 RewriteRule ^email_otp_form/?$ /admin/email_otp_form.php [L,QSA]
