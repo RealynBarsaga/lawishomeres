@@ -245,6 +245,93 @@ html {
         width: 100%;
     }
 }
+/* Cookies Cite */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+body {
+  min-height: 100vh;
+}
+.wrapper {
+  position: fixed;
+  bottom: 26px;
+  min-height: 36%;
+  right: -370px;
+  max-width: 345px;
+  width: 100%;
+  background: #fff;
+  border-radius: 8px;
+  padding: 15px 25px 22px;
+  transition: right 0.3s ease;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+.wrapper.show {
+  right: 14px;
+}
+.wrapper header {
+  display: flex;
+  align-items: center;
+  column-gap: 15px;
+}
+header i {
+  color: #f90404b3;
+  font-size: 32px;
+}
+header h2 {
+  color: #4070f4;
+  font-weight: 500;
+  margin-top: 14px;
+}
+.wrapper .data {
+  margin-top: 16px;
+}
+.wrapper .data p {
+  color: #333;
+  font-size: 16px;
+}
+.data p a {
+  color: #f60000;
+  text-decoration: none;
+}
+.data p a:hover {
+  text-decoration: underline;
+}
+.wrapper .buttons {
+  margin-top: 16px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.buttons .button {
+  border: none;
+  color: #000000;
+  padding: 8px 0;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  border: none;
+  width: calc(100% / 2 - 10px);
+}
+#acceptBtn{
+    background-image: url('img/bg.jpg');
+    color: #fff;
+}
+.buttons #acceptBtn:hover {
+  color: #fff;
+  cursor: pointer;
+}
+#declineBtn {
+    background: transparent;
+}
+#declineBtn:hover {
+  c color: #000;
+  cursor: pointer;
+} 
+
 
 /* Modal styles for "Too many failed attempts" */
 .modal {
@@ -995,31 +1082,43 @@ ul li {
         </div>
         <!-- Terms and Conditions Modal -->
         <div id="termsModal" class="modal4" style="display:none;">
-            <div class="modal-content4">
-                <span class="close" onclick="closeTerms()">&times;</span>
-                <h2>Terms and Conditions</h2>
-                <div class="terms-content">
-                    <h3>1. Introduction</h3>
-                    <p>Welcome to our e-commerce platform. By accessing or using our website, you agree to these terms and conditions.</p>
-    
-                    <h3>2. Account Security</h3>
-                    <p>You are responsible for maintaining the confidentiality of your account credentials and for all activities under your account.</p>
-    
-                    <h3>3. Privacy Policy</h3>
-                    <p>Your use of our platform is also governed by our Privacy Policy. By using our services, you consent to our collection and use of your data as described therein.</p>
-    
-                    <h3>4. Prohibited Activities</h3>
-                    <p>You agree not to:</p>
-                    <ul>
-                        <li>Use the platform for any illegal purposes</li>
-                        <li>Attempt to gain unauthorized access to other user accounts</li>
-                        <li>Upload malicious content or viruses</li>
-                        <li>Engage in fraudulent activities</li>
-                    </ul>
-    
-                    <h3>5. Termination</h3>
-                    <p>We reserve the right to terminate or suspend your account for violations of these terms.</p>
-                </div>
+        <div class="modal-content4">
+            <span class="close" onclick="closeTerms()">&times;</span>
+            <h2>Terms and Conditions</h2>
+            <div class="terms-content">
+                <h3>1. Introduction</h3>
+                <p>Welcome to our e-commerce platform. By accessing or using our website, you agree to these terms and conditions.</p>
+
+                <h3>2. Account Security</h3>
+                <p>You are responsible for maintaining the confidentiality of your account credentials and for all activities under your account.</p>
+
+                <h3>3. Privacy Policy</h3>
+                <p>Your use of our platform is also governed by our Privacy Policy. By using our services, you consent to our collection and use of your data as described therein.</p>
+
+                <h3>4. Prohibited Activities</h3>
+                <p>You agree not to:</p>
+                <ul>
+                    <li>Use the platform for any illegal purposes</li>
+                    <li>Attempt to gain unauthorized access to other user accounts</li>
+                    <li>Upload malicious content or viruses</li>
+                    <li>Engage in fraudulent activities</li>
+                </ul>
+
+                <h3>5. Termination</h3>
+                <p>We reserve the right to terminate or suspend your account for violations of these terms.</p>
+            </div>
+        </div>
+        </div>
+        <div class="wrapper">
+            <div>
+                <h3>We use cookies!</h3>
+                <p>
+                    This website uses essential cookies to ensure its proper operation and tracking cookies to understand how you interact with it. The latter will be set only after consent.
+                </p>
+            </div>
+            <div class="buttons">
+                <button class="button" id="acceptBtn">I Agree</button>
+                <button class="button" id="customizeBtn">Customize</button>
             </div>
         </div>
     </div>
@@ -1051,6 +1150,132 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
+</script>
+<script>
+// Get modal elements
+const modal = document.getElementById('cookieSettingsModal');
+const customizeBtn = document.getElementById('customizeBtn');
+const closeButton = document.querySelector('.close-button');
+const saveSettingsButton = document.getElementById('saveSettings');
+
+// Function to open the modal
+customizeBtn.addEventListener('click', () => {
+    modal.style.display = 'block';
+});
+
+// Function to close the modal
+closeButton.addEventListener('click', () => {
+    modal.style.display = 'none';
+});
+
+// Optional: Save settings functionality
+saveSettingsButton.addEventListener('click', () => {
+    const functionalityEnabled = document.getElementById('functionalityCookies').checked;
+    const securityEnabled = document.getElementById('securityCookies').checked;
+    const personalizationEnabled = document.getElementById('personalizationCookies').checked;
+    const adEnabled = document.getElementById('adCookies').checked;
+    const adUserDataEnabled = document.getElementById('adUserData').checked;
+    const adPersonalizationEnabled = document.getElementById('adPersonalization').checked;
+    const analyticsEnabled = document.getElementById('analyticsCookies').checked;
+
+    console.log(`Functionality Cookies Enabled: ${functionalityEnabled}`);
+    console.log(`Security Cookies Enabled: ${securityEnabled}`);
+    console.log(`Personalization Cookies Enabled: ${personalizationEnabled}`);
+    console.log(`Ad Cookies Enabled: ${adEnabled}`);
+    console.log(`Ad User Data Enabled: ${adUserDataEnabled}`);
+    console.log(`Ad Personalization Enabled: ${adPersonalizationEnabled}`);
+    console.log(`Analytics Cookies Enabled: ${analyticsEnabled}`);
+
+    // Save preferences logic here
+    modal.style.display = 'none'; // Close modal after saving
+});
+
+// Close modal if clicked outside of it
+window.addEventListener('click', (event) => {
+    if (event.target === modal) {
+        modal.style.display = 'none';
+    }
+});
+
+
+  
+    const cookieBox = document.querySelector(".wrapper"),
+    buttons = document.querySelectorAll(".button");
+
+    const executeCodes = () => {
+      // If cookie contains codinglab, it will be returned and below code will not run
+      if (document.cookie.includes("codinglab")) return;
+      cookieBox.classList.add("show");
+    
+      buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+          // Check if the button clicked is not the "Customize" button
+          if (button.id === "acceptBtn") {
+            // Hide cookie box and set the cookie
+            cookieBox.classList.remove("show");
+            document.cookie = "cookieBy=codinglab; max-age=" + 60 * 60 * 24 * 30;
+          }
+          // If the button clicked is "Customize," do not hide the cookie box
+        });
+      });
+    };
+    
+    executeCodes();
+
+  
+   //executeCodes function will be called on webpage load
+   window.addEventListener("load", executeCodes);
+
+document.addEventListener("DOMContentLoaded", function() {
+    const acceptAllButton = document.getElementById("acceptall");
+    const acceptNecessaryButton = document.getElementById("acceptnecessary");
+    const saveSettingsButton = document.getElementById("saveSettings");
+
+    const functionalityCookies = document.getElementById("functionalityCookies");
+    const securityCookies = document.getElementById("securityCookies");
+    const personalizationCookies = document.getElementById("personalizationCookies");
+    const adCookies = document.getElementById("adCookies");
+    const adUserData = document.getElementById("adUserData");
+    const adPersonalization = document.getElementById("adPersonalization");
+    const analyticsCookies = document.getElementById("analyticsCookies");
+
+    // Accept All button functionality
+    acceptAllButton.addEventListener("click", function() {
+        functionalityCookies.checked = true;
+        securityCookies.checked = true;
+        personalizationCookies.checked = true;
+        adCookies.checked = true;
+        adUserData.checked = true;
+        adPersonalization.checked = true;
+        analyticsCookies.checked = true;
+    });
+
+    // Accept Necessary button functionality
+    acceptNecessaryButton.addEventListener("click", function() {
+        functionalityCookies.checked = true;
+        securityCookies.checked = true;
+        personalizationCookies.checked = false;
+        adCookies.checked = false;
+        adUserData.checked = false;
+        adPersonalization.checked = false;
+        analyticsCookies.checked = false;
+    });
+
+    // Save Settings button functionality
+    saveSettingsButton.addEventListener("click", function() {
+        const settings = {
+            functionality: functionalityCookies.checked,
+            security: securityCookies.checked,
+            personalization: personalizationCookies.checked,
+            ads: adCookies.checked,
+            adUserData: adUserData.checked,
+            adPersonalization: adPersonalization.checked,
+            analytics: analyticsCookies.checked,
+        };
+        console.log("Settings saved:", settings);
+        // Close modal here if needed
+    });
+});
 </script>
 <script>
    $(document).on('click', '#btn_login', function(){
