@@ -162,7 +162,7 @@ if (isset($_POST['btn_saveeditProfile'])) {
                                 ?>
                             </ul>
                         </li>
-                        <li class="footer"><a href="../view_all_notifications.php?page=notifications">View all</a></li>
+                        <li class="footer"><a href="../view_all_notifications">View all</a></li>
                     </ul>
                 </li>
                 <li class="dropdown user user-menu">
