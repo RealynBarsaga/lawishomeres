@@ -121,7 +121,7 @@ h3 {
     include('../../admin/header.php');
     ?>
     <div class="wrapper row-offcanvas row-offcanvas-left">
-        <?php include('../../admin/sidebar-left.php'); ?>
+        <?php include('../sidebar-left.php'); ?>
 
         <aside class="right-side">
             <section class="content-header">
