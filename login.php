@@ -1203,7 +1203,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to show the cookie banner
     function showBanner() {
-        document.querySelector('.wrapper').style.display = 'none';
+        document.querySelector('.wrapper').style.display = 'flex';
     }
 
     // Function to hide the cookie banner
