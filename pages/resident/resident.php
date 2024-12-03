@@ -78,6 +78,13 @@ html, body {
                                     </thead>
                                     <tbody>
                                     <?php
+
+                                    // Function to remove <script> tags and its content
+                                    function removeScripts($input) {
+                                        // Remove <script> tags and its content
+                                        $cleaned_input = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', '', $input);
+                                        return $cleaned_input;
+                                    }
                                     
                                     $squery = mysqli_query($con, 
                                     "SELECT id, 
@@ -205,13 +212,6 @@ html, body {
         // Trigger the update function on page load to set the initial state
         updateDeleteButton();
     });
-
-    // Function to remove <script> tags and its content
-    function removeScripts($input) {
-        // Remove <script> tags and its content
-        $cleaned_input = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', '', $input);
-        return $cleaned_input;
-    }
     </script>
 </body>
 </html>
