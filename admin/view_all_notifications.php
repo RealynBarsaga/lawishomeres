@@ -6,7 +6,7 @@ if (isset($_GET['delete_id'])) {
     $delete_id = intval($_GET['delete_id']);
     $delete_query = mysqli_query($con, "DELETE FROM tbllogs WHERE id = $delete_id");
     if ($delete_query) {
-        header("Location: view_all_notifications.php");
+        header("Location: view_all_notifications");
         exit();
     } else {
         echo "Error deleting notification.";
