@@ -1036,14 +1036,16 @@ window.onclick = function(event) {
           document.getElementById("error-modal1").style.display = 'none';
       });
   });
-  // Wait for the DOM to load
-  document.addEventListener("DOMContentLoaded", function() {
-      // Attach a click event to the OK button
-      document.getElementById("ok-button2").addEventListener("click", function() {
-          // Redirect to the dashboard after the OK button is clicked
-          window.location.href = 'pages/dashboard/dashboard.php';
-      });
-  });
+    // Handle the OK button for modal
+    document.addEventListener("DOMContentLoaded", function() {
+        // Attach a click event to the OK button to redirect to the dashboard
+        const okButton = document.getElementById("ok-button2");
+        if (okButton) {
+            okButton.addEventListener("click", function() {
+                window.location.href = 'pages/dashboard/dashboard.php';
+            });
+        }
+    });
 
   function togglePassword(inputId, icon) {
         const input = document.getElementById(inputId);
