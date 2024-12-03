@@ -3,7 +3,7 @@ session_start();
 
 // Check if the user has a valid session for password reset
 if (!isset($_SESSION['email_for_reset'])) {
-    header("Location: ../admin/forgot_password_option"); // Redirect to the forgot password options page if no valid session
+    header("Location: forgot_password_option.php"); // Redirect to the forgot password options page if no valid session
     exit();
 }
 
