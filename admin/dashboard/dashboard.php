@@ -4,13 +4,9 @@
     ob_start(); // Start output buffering at the very top to avoid header errors
     // Check if the user is logged in and is an admin
     session_start();
-    if (!isset($_SESSION['userid'] && $_SESSION['role'] === 'Administrator')) {
+    if (!isset($_SESSION['userid'])) {
         header('Location: ../../admin/login.php');
         exit; // Ensure no further execution after redirect
-    } else {
-        // Redirect non-admin users to a user page
-        header('Location: /pages/dashboard/dashboard.php');
-        exit();
     }
     include('../../admin/head_css.php'); 
 ?>
