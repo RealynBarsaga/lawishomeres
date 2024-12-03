@@ -274,13 +274,13 @@ html {
 
 .button {
     padding: 10px 20px;
-    background-color: #007BFF;
+    background-image: url('../img/bg.jpg');
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 14px;
-    transition: background-color 0.3s ease;
+    transition: background-image 0.3s ease;
 }
 
 .button:hover {
