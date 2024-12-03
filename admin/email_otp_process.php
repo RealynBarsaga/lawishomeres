@@ -46,14 +46,6 @@ if (isset($_POST['sendotp'])) {
     $error_message = 'No form submitted.';
 }
 
-require '../PHPMailer/src/Exception.php';
-require '../PHPMailer/src/PHPMailer.php';
-require '../PHPMailer/src/SMTP.php';
-
-// Load PHPMailer classes
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
 // Check for any error message
 if (empty($error_message)) {
 
