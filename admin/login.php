@@ -1210,18 +1210,5 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
-<script>
-$(document).ready(function() {
-    $(".preloader-it").fadeOut(500);  // Fade out the preloader once the DOM is fully ready
-});
-// Check if the user is logged in based on the session variable
-<?php if (isset($_SESSION['login_success']) && $_SESSION['login_success'] == true): ?>
-    // If logged in, hide the preloader
-    document.getElementById('preloader').style.display = 'none';
-<?php else: ?>
-    // If not logged in, show the preloader (this can be customized)
-    document.getElementById('preloader').style.display = 'block';
-<?php endif; ?>
-</script>
 </body>
 </html>
