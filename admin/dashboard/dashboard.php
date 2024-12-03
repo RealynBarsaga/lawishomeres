@@ -120,8 +120,8 @@ h3 {
     include "../../admin/connection.php";
     include('../../admin/header.php');
     ?>
-    <div class="wrapper row-offcanvas row-offcanvas-left">
-        <?php include('../sidebar-left.php'); ?>
+    <div class="row-offcanvas row-offcanvas-left">
+        <?php include('../../admin/sidebar-left.php'); ?>
 
         <aside class="right-side">
             <section class="content-header">
