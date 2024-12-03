@@ -195,7 +195,7 @@
                                 <!-- Image -->
                                 <div class="form-group">
                                     <label class="control-label">Image:</label>
-                                    <input name="txt_image" class="form-control input-sm" type="file" required/>
+                                    <input name="txt_image" class="form-control input-sm" type="file" accept=".jpg, .jpeg, .png, .bmp" required/>
                                 </div>
                             </div>
                         </div>

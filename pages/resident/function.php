@@ -42,6 +42,21 @@ if (isset($_POST['btn_add'])) {
     $milliseconds = round(microtime(true) * 1000);
     $txt_image = $milliseconds . '_' . $name;
 
+    // Check if the file is an allowed image type
+    if (isset($_FILES['txt_image'])) {
+        $file = $_FILES['txt_image'];
+        $fileType = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+
+        // Allowed file types
+        $allowedTypes = ['jpg', 'jpeg', 'png', 'bmp'];
+
+        if (!in_array($fileType, $allowedTypes)) {
+            // Invalid file type, redirect or show error message
+            $_SESSION['invalidFileType'] = 1; // Store error in session
+            header("location: " . $_SERVER['REQUEST_URI']);
+            exit();
+        }
+    }
 
     $su = mysqli_query($con, "SELECT * FROM tbltabagak WHERE lname='$txt_lname' AND fname='$txt_fname' AND mname='$txt_mname'");
     $ct = mysqli_num_rows($su);
@@ -63,10 +78,14 @@ if (isset($_POST['btn_add'])) {
                         '$txt_image', '$txt_role', '$txt_head_of_family')") or die('Error: ' . mysqli_error($con));
                 } else {
                     // Handle file move error
+                    $_SESSION['fileMoveError'] = 1;
+                    header("location: " . $_SERVER['REQUEST_URI']);
+                    exit();
                 }
             } else {
                 $_SESSION['filesize'] = 1;
                 header("location: " . $_SERVER['REQUEST_URI']);
+                exit();
             }
         } else {
             $txt_image = 'default.png';
