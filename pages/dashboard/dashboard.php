@@ -6,6 +6,14 @@
         header('Location: ../../login.php');
         exit; // Ensure no further execution after redirect
     }
+    // Assuming the user role is stored in session (you should define it when the user logs in)
+    $user_role = $_SESSION['role']; // 'user' or 'admin'
+    
+    // Redirect non-admin users from accessing admin pages
+    if ($user_role != 'Administrator') {
+        // Optional: Hide or modify links if the user is not an admin
+        // You can add a flag or conditional rendering to show/hide admin-related content
+    }
     include('../head_css.php');
 ?>
 <head>
@@ -131,7 +139,7 @@ h3 {
                     <?php
                     $off_barangay = $_SESSION['barangay'];
                     $info_boxes = [
-                        ['label' => 'Barangay Officials', 'icon' => 'fa-user', 'color' => '#00c0ef', 'query' => "SELECT * FROM tblbrgyofficial WHERE barangay = '$off_barangay'", 'link' => '../officials/officials.php'],
+                        ['label' => 'Barangay Officials', 'icon' => 'fa-user', 'color' => '#00c0ef', 'query' => "SELECT * FROM tblbrgyofficial WHERE barangay = '$off_barangay'", 'link' => ($user_role == 'Administrator' ? '../officials/officials.php' : '#')],
                         ['label' => 'Total Household', 'icon' => 'fa-users', 'color' => '#007256', 'query' => "SELECT * FROM tblhousehold h LEFT JOIN tbltabagak r ON r.id = h.headoffamily WHERE r.barangay = '$off_barangay'", 'link' => '../household/household.php?page=household'],
                         ['label' => 'Total Resident', 'icon' => 'fa-users', 'color' => '#bd1e24', 'query' => "SELECT * FROM tbltabagak WHERE barangay = '$off_barangay'", 'link' => '../resident/resident.php?page=resident'],
                         ['label' => 'Total Clearance', 'icon' => 'fa-file', 'color' => '#e5c707', 'query' => "SELECT * FROM tblclearance WHERE barangay = '$off_barangay'", 'link' => '../BrgyClearance/BrgyClearance.php?page=BrgyClearance'],
