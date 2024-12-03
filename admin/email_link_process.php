@@ -20,6 +20,10 @@ if (!$con) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
+// Setting the default timezone
+date_default_timezone_set("Asia/Manila");
+
+
 require '../PHPMailer/src/Exception.php';
 require '../PHPMailer/src/PHPMailer.php';
 require '../PHPMailer/src/SMTP.php';
@@ -81,6 +85,7 @@ if (empty($error_message)) {
             // Prepared statement for updating the code
             $stmt = $con->prepare("UPDATE tbluser SET code = ? WHERE email = ?");
             $stmt->bind_param("ss", $code, $email);
+
             if ($stmt->execute()) {
                 $mail->send();
                 $success_message = 'Message has been sent, please check your email - ' . htmlspecialchars(stripslashes(trim($email)));
@@ -95,6 +100,7 @@ if (empty($error_message)) {
     } catch (Exception $e) {
         $error_message = "Message could not be sent. Mailer Error: " . htmlspecialchars(stripslashes(trim($mail->ErrorInfo)));
     }
+    
 $_SESSION['error_message'] = $error_message;
 $_SESSION['success_message'] = $success_message;
 
