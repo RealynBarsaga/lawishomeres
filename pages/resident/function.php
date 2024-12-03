@@ -61,7 +61,7 @@ if (isset($_POST['btn_add'])) {
 
         if (!in_array($fileType, $allowedTypes)) {
             // Invalid file type, redirect or show error message
-            $_SESSION['invalidFileType'] = 1; // Store error in session
+            $_SESSION['invalidFileType'] = "Invalid file type. Please upload a JPG, PNG, or BMP image."; // Store error in session
             header("location: " . $_SERVER['REQUEST_URI']);
             exit();
         }
@@ -87,7 +87,7 @@ if (isset($_POST['btn_add'])) {
                         '$txt_image', '$txt_role', '$txt_head_of_family')") or die('Error: ' . mysqli_error($con));
                 } else {
                     // Handle file move error
-                    $_SESSION['fileUploadError'] = 1;
+                    $_SESSION['fileUploadError'] = "There was an error uploading your file. Please try again.";
                     header("location: " . $_SERVER['REQUEST_URI']);
                     exit();
                 }
@@ -131,7 +131,7 @@ if (isset($_POST['btn_add'])) {
 
 // Handle form submission for editing a resident
 if (isset($_POST['btn_save'])) {
-    
+
     // Function to remove <script> tags and its content
     function removeScripts($input) {
         // Remove <script> tags and its content
