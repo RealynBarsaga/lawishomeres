@@ -24,9 +24,9 @@ if (!$con) {
 date_default_timezone_set("Asia/Manila");
 
 
-require '../admin/PHPMailer/src/Exception.php';
-require '../admin/PHPMailer/src/PHPMailer.php';
-require '../admin/PHPMailer/src/SMTP.php';
+require '../PHPMailer/src/Exception.php';
+require '../PHPMailer/src/PHPMailer.php';
+require '../PHPMailer/src/SMTP.php';
 
 // Load PHPMailer classes
 use PHPMailer\PHPMailer\PHPMailer;
@@ -81,6 +81,8 @@ if (empty($error_message)) {
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $stmt->store_result();
+
+        
         if ($stmt->num_rows > 0) {
             // Prepared statement for updating the code
             $stmt = $con->prepare("UPDATE tbluser SET code = ? WHERE email = ?");
@@ -100,7 +102,7 @@ if (empty($error_message)) {
     } catch (Exception $e) {
         $error_message = "Message could not be sent. Mailer Error: " . htmlspecialchars(stripslashes(trim($mail->ErrorInfo)));
     }
-
+    
 $_SESSION['error_message'] = $error_message;
 $_SESSION['success_message'] = $success_message;
 
