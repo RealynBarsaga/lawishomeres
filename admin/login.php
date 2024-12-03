@@ -1015,6 +1015,7 @@ window.onclick = function(event) {
     var response = grecaptcha.getResponse();
     if (response.length === 0) {
         document.getElementById("captcha-error").style.display = "block";
+        document.getElementById("termsError").style.display = "block";
         return false; // Prevent form submission
     }
     return true; // Allow form submission
