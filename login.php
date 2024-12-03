@@ -245,7 +245,6 @@ html {
         width: 100%;
     }
 }
-/* Cookies Cite */
 /* Cookie Consent Banner Styles */
 .wrapper {
     position: fixed;

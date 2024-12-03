@@ -6,7 +6,7 @@ session_set_cookie_params([
     'domain' => 'lawishomeresidences.com/admin/', // Change this to your domain
     'secure' => true,             // Set to true if using HTTPS
     'httponly' => true,           // Prevent JavaScript access to the cookie
-    'samesite' => 'Lax'        // Use 'Lax' or 'Strict' based on your needs
+    'samesite' => 'Lax'          // Use 'Lax' or 'Strict' based on your needs
 ]);
 
 // Start the session
@@ -239,92 +239,63 @@ html {
         width: 100%;
     }
 }
-/* Cookies Cite */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-}
-body {
-  min-height: 100vh;
-}
+/* Cookie Consent Banner Styles */
 .wrapper {
-  position: fixed;
-  bottom: 26px;
-  min-height: 36%;
-  right: -370px;
-  max-width: 345px;
-  width: 100%;
-  background: #fff;
-  border-radius: 8px;
-  padding: 15px 25px 22px;
-  transition: right 0.3s ease;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-}
-.wrapper.show {
-  right: 14px;
-}
-.wrapper header {
-  display: flex;
-  align-items: center;
-  column-gap: 15px;
-}
-header i {
-  color: #f90404b3;
-  font-size: 32px;
-}
-header h2 {
-  color: #4070f4;
-  font-weight: 500;
-  margin-top: 14px;
-}
-.wrapper .data {
-  margin-top: 16px;
-}
-.wrapper .data p {
-  color: #333;
-  font-size: 16px;
-}
-.data p a {
-  color: #f60000;
-  text-decoration: none;
-}
-.data p a:hover {
-  text-decoration: underline;
-}
-.wrapper .buttons {
-  margin-top: 16px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.buttons .button {
-  border: none;
-  color: #000000;
-  padding: 8px 0;
-  border-radius: 4px;
-  font-size: 12px;
-  cursor: pointer;
-  border: none;
-  width: calc(100% / 2 - 10px);
-}
-#acceptBtn{
-    background-image: url('../img/bg.jpg');
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
     color: #fff;
+    padding: 15px 30px;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
 }
-.buttons #acceptBtn:hover {
-  color: #fff;
-  cursor: pointer;
+
+.cookie-message h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
 }
-#declineBtn {
-    background: transparent;
+
+.cookie-message p {
+    margin: 5px 0 0;
+    font-size: 14px;
+    color: #ddd;
 }
-#declineBtn:hover {
-  color: #000;
-  cursor: pointer;
-} 
+
+.buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+button:focus {
+    outline: none;
+}
+
+button[disabled] {
+    background-color: #777;
+    cursor: not-allowed;
+}
+ 
 
 /* Modal styles for "Too many failed attempts" */
 .modal {
@@ -1088,140 +1059,76 @@ ul li {
         </div>
         </div>
         <div class="wrapper">
-            <div>
+            <div class="cookie-message">
                 <h3>We use cookies!</h3>
                 <p>
                     This website uses essential cookies to ensure its proper operation and tracking cookies to understand how you interact with it. The latter will be set only after consent.
                 </p>
             </div>
             <div class="buttons">
-                <button class="button" id="acceptBtn">I Agree</button>
-                <button class="button" id="customizeBtn">Customize</button>
+                <button class="button" id="acceptBtn">Accept</button>
+                <button class="button" id="rejectBtn">Reject</button>
             </div>
         </div>
-        <!-- Modal Structure -->
-        <div id="cookieSettingsModal" class="modal" style="display:none;">
-            <div id="s-inr" class="modal-content3">
-                <div id="s-hdr">
-                    <h2 id="s-ttl">Cookies Settings</h2>
-                    <span id="s-c-bn" class="close-button" aria-label="Close">&times;</span>
-                </div>
-                <div id="s-bl">
-                    <div class="scrollable">
-                    <div class="desc">
-                        <h4 style="font-size: 18px;">Cookies Usage</h4>
-                        <p>We use cookies to ensure the basic functionalities of the website and to improve your online experience. You can choose to opt in or out of each category whenever you want.</p>
-                    </div>
-        
-                    <div class="c-bl">
-                        <div class="title">
-                            <h5 class="b-tl">Functionality Cookies</h5>
-                            <label class="b-tg">
-                                <input type="checkbox" id="functionalityCookies" class="c-tgl" checked>
-                                <span class="c-tg" aria-hidden="true">
-                                    <span class="on-i"></span>
-                                    <span class="off-i"></span>
-                                </span>
-                            </label>
-                        </div>
-                    </div>
-        
-                    <div class="c-bl">
-                        <div class="title">
-                            <h5 class="b-tl">Security Cookies</h5>
-                            <label class="b-tg">
-                                <input type="checkbox" id="securityCookies" class="c-tgl" checked>
-                                <span class="c-tg" aria-hidden="true">
-                                    <span class="on-i"></span>
-                                    <span class="off-i"></span>
-                                </span>
-                            </label>
-                        </div>
-                    </div>
-        
-                    <div class="c-bl">
-                        <div class="title">
-                            <h5 class="b-tl">Personalization Cookies</h5>
-                            <label class="b-tg">
-                                <input type="checkbox" id="personalizationCookies" class="c-tgl">
-                                <span class="c-tg" aria-hidden="true">
-                                    <span class="on-i"></span>
-                                    <span class="off-i"></span>
-                                </span>
-                            </label>
-                        </div>
-                    </div>
-        
-                    <div class="c-bl">
-                        <div class="title">
-                            <h5 class="b-tl">Ad Cookies</h5>
-                            <label class="b-tg">
-                                <input type="checkbox" id="adCookies" class="c-tgl">
-                                <span class="c-tg" aria-hidden="true">
-                                    <span class="on-i"></span>
-                                    <span class="off-i"></span>
-                                </span>
-                            </label>
-                        </div>
-                    </div>
-        
-                    <div class="c-bl">
-                        <div class="title">
-                            <h5 class="b-tl">Ad User Data</h5>
-                            <label class="b-tg">
-                                <input type="checkbox" id="adUserData" class="c-tgl">
-                                <span class="c-tg" aria-hidden="true">
-                                    <span class="on-i"></span>
-                                    <span class="off-i"></span>
-                                </span>
-                            </label>
-                        </div>
-                    </div>
-        
-                    <div class="c-bl">
-                        <div class="title">
-                            <h5 class="b-tl">Ad Personalization</h5>
-                            <label class="b-tg">
-                                <input type="checkbox" id="adPersonalization" class="c-tgl">
-                                <span class="c-tg" aria-hidden="true">
-                                    <span class="on-i"></span>
-                                    <span class="off-i"></span>
-                                </span>
-                            </label>
-                        </div>
-                    </div>
-        
-                    <div class="c-bl">
-                        <div class="title">
-                            <h5 class="b-tl">Analytics Cookies</h5>
-                            <label class="b-tg">
-                                <input type="checkbox" id="analyticsCookies" class="c-tgl">
-                                <span class="c-tg" aria-hidden="true">
-                                    <span class="on-i"></span>
-                                    <span class="off-i"></span>
-                                </span>
-                            </label>
-                        </div>
-                    </div>
-        
-                    <div class="c-bl">
-                        <div class="title">
-                            <h5 class="b-tl" style="margin-left: -8px;">More Information</h5>
-                        </div>
-                        <div class="desc">
-                            <p>For any queries in relation to my policy on cookies and your choices, please contact us.</p>
-                        </div>
-                    </div>
-                </div>
-                <div id="s-bns">
-                    <button id="acceptall" class="c-bn">Accept All</button>
-                    <button id="acceptnecessary" class="c-bn1" style="margin-right: 143px;width: 153px;">Accept Necessary</button>
-                    <button id="saveSettings" class="c-bn1" style="margin-right: -18px;width: 113px;">Save Settings</button>
-                </div>
-            </div>
-        </div> 
     </div>
 </div>
+<script>
+// Check if the user has already made a choice
+document.addEventListener('DOMContentLoaded', function() {
+    if (getCookie('cookieConsent') === 'accepted') {
+        hideBanner();
+    } else if (getCookie('cookieConsent') === 'rejected') {
+        hideBanner();
+    } else {
+        showBanner();
+    }
+
+    // Accept button
+    document.getElementById('acceptBtn').addEventListener('click', function() {
+        setCookie('cookieConsent', 'accepted', 365); // Set cookie for 1 year
+        hideBanner();
+    });
+
+    // Reject button
+    document.getElementById('rejectBtn').addEventListener('click', function() {
+        setCookie('cookieConsent', 'rejected', 365); // Set cookie for 1 year
+        hideBanner();
+    });
+
+    // Function to show the cookie banner
+    function showBanner() {
+        document.querySelector('.wrapper').style.display = 'flex';
+    }
+
+    // Function to hide the cookie banner
+    function hideBanner() {
+        document.querySelector('.wrapper').style.display = 'none';
+    }
+
+    // Function to set a cookie
+    function setCookie(name, value, days) {
+        var expires = '';
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    }
+
+    // Function to get a cookie value
+    function getCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    }
+});
+</script>
 <script>
 function openTerms() {
     document.getElementById("termsModal").style.display = "block";
@@ -1249,132 +1156,6 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
-</script>
-<script>
-// Get modal elements
-const modal = document.getElementById('cookieSettingsModal');
-const customizeBtn = document.getElementById('customizeBtn');
-const closeButton = document.querySelector('.close-button');
-const saveSettingsButton = document.getElementById('saveSettings');
-
-// Function to open the modal
-customizeBtn.addEventListener('click', () => {
-    modal.style.display = 'block';
-});
-
-// Function to close the modal
-closeButton.addEventListener('click', () => {
-    modal.style.display = 'none';
-});
-
-// Optional: Save settings functionality
-saveSettingsButton.addEventListener('click', () => {
-    const functionalityEnabled = document.getElementById('functionalityCookies').checked;
-    const securityEnabled = document.getElementById('securityCookies').checked;
-    const personalizationEnabled = document.getElementById('personalizationCookies').checked;
-    const adEnabled = document.getElementById('adCookies').checked;
-    const adUserDataEnabled = document.getElementById('adUserData').checked;
-    const adPersonalizationEnabled = document.getElementById('adPersonalization').checked;
-    const analyticsEnabled = document.getElementById('analyticsCookies').checked;
-
-    console.log(`Functionality Cookies Enabled: ${functionalityEnabled}`);
-    console.log(`Security Cookies Enabled: ${securityEnabled}`);
-    console.log(`Personalization Cookies Enabled: ${personalizationEnabled}`);
-    console.log(`Ad Cookies Enabled: ${adEnabled}`);
-    console.log(`Ad User Data Enabled: ${adUserDataEnabled}`);
-    console.log(`Ad Personalization Enabled: ${adPersonalizationEnabled}`);
-    console.log(`Analytics Cookies Enabled: ${analyticsEnabled}`);
-
-    // Save preferences logic here
-    modal.style.display = 'none'; // Close modal after saving
-});
-
-// Close modal if clicked outside of it
-window.addEventListener('click', (event) => {
-    if (event.target === modal) {
-        modal.style.display = 'none';
-    }
-});
-
-
-  
-    const cookieBox = document.querySelector(".wrapper"),
-    buttons = document.querySelectorAll(".button");
-
-    const executeCodes = () => {
-      // If cookie contains codinglab, it will be returned and below code will not run
-      if (document.cookie.includes("codinglab")) return;
-      cookieBox.classList.add("show");
-    
-      buttons.forEach((button) => {
-        button.addEventListener("click", () => {
-          // Check if the button clicked is not the "Customize" button
-          if (button.id === "acceptBtn") {
-            // Hide cookie box and set the cookie
-            cookieBox.classList.remove("show");
-            document.cookie = "cookieBy=codinglab; max-age=" + 60 * 60 * 24 * 30;
-          }
-          // If the button clicked is "Customize," do not hide the cookie box
-        });
-      });
-    };
-    
-    executeCodes();
-
-  
-   //executeCodes function will be called on webpage load
-   window.addEventListener("load", executeCodes);
-
-document.addEventListener("DOMContentLoaded", function() {
-    const acceptAllButton = document.getElementById("acceptall");
-    const acceptNecessaryButton = document.getElementById("acceptnecessary");
-    const saveSettingsButton = document.getElementById("saveSettings");
-
-    const functionalityCookies = document.getElementById("functionalityCookies");
-    const securityCookies = document.getElementById("securityCookies");
-    const personalizationCookies = document.getElementById("personalizationCookies");
-    const adCookies = document.getElementById("adCookies");
-    const adUserData = document.getElementById("adUserData");
-    const adPersonalization = document.getElementById("adPersonalization");
-    const analyticsCookies = document.getElementById("analyticsCookies");
-
-    // Accept All button functionality
-    acceptAllButton.addEventListener("click", function() {
-        functionalityCookies.checked = true;
-        securityCookies.checked = true;
-        personalizationCookies.checked = true;
-        adCookies.checked = true;
-        adUserData.checked = true;
-        adPersonalization.checked = true;
-        analyticsCookies.checked = true;
-    });
-
-    // Accept Necessary button functionality
-    acceptNecessaryButton.addEventListener("click", function() {
-        functionalityCookies.checked = true;
-        securityCookies.checked = true;
-        personalizationCookies.checked = false;
-        adCookies.checked = false;
-        adUserData.checked = false;
-        adPersonalization.checked = false;
-        analyticsCookies.checked = false;
-    });
-
-    // Save Settings button functionality
-    saveSettingsButton.addEventListener("click", function() {
-        const settings = {
-            functionality: functionalityCookies.checked,
-            security: securityCookies.checked,
-            personalization: personalizationCookies.checked,
-            ads: adCookies.checked,
-            adUserData: adUserData.checked,
-            adPersonalization: adPersonalization.checked,
-            analytics: analyticsCookies.checked,
-        };
-        console.log("Settings saved:", settings);
-        // Close modal here if needed
-    });
-});
 </script>
 <script>
      document.addEventListener("DOMContentLoaded", function() {
