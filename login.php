@@ -245,87 +245,6 @@ html {
         width: 100%;
     }
 }
-/* Cookie Consent Banner Styles */
-.wrapper {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: #333;
-    color: #fff;
-    padding: 15px 30px;
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 1000;
-}
-
-.cookie-message h3 {
-    margin: 0;
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.cookie-message p {
-    margin: 5px 0 0;
-    font-size: 14px;
-    color: #ddd;
-}
-
-.buttons {
-    display: flex;
-    gap: 15px;
-}
-
-#acceptBtn {
-    padding: 10px 20px;
-    background-image: url('img/bg.jpg');
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-image 0.3s ease;
-}
-
-#acceptBtn:hover {
-    background-color: #0056b3;
-}
-
-#acceptBtn:focus {
-    outline: none;
-}
-
-#acceptBtn[disabled] {
-    background-color: #777;
-    cursor: not-allowed;
-}
-
-#rejectBtn {
-    padding: 10px 20px;
-    background-image: url('img/bg.jpg');
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-image 0.3s ease;
-}
-
-#rejectBtn:hover {
-    background-color: #0056b3;
-}
-
-#rejectBtn:focus {
-    outline: none;
-}
-
-#rejectBtn[disabled] {
-    background-color: #777;
-    cursor: not-allowed;
-}
-
 
 /* Modal styles for "Too many failed attempts" */
 .modal {
@@ -1076,43 +995,31 @@ ul li {
         </div>
         <!-- Terms and Conditions Modal -->
         <div id="termsModal" class="modal4" style="display:none;">
-        <div class="modal-content4">
-            <span class="close" onclick="closeTerms()">&times;</span>
-            <h2>Terms and Conditions</h2>
-            <div class="terms-content">
-                <h3>1. Introduction</h3>
-                <p>Welcome to our e-commerce platform. By accessing or using our website, you agree to these terms and conditions.</p>
-
-                <h3>2. Account Security</h3>
-                <p>You are responsible for maintaining the confidentiality of your account credentials and for all activities under your account.</p>
-
-                <h3>3. Privacy Policy</h3>
-                <p>Your use of our platform is also governed by our Privacy Policy. By using our services, you consent to our collection and use of your data as described therein.</p>
-
-                <h3>4. Prohibited Activities</h3>
-                <p>You agree not to:</p>
-                <ul>
-                    <li>Use the platform for any illegal purposes</li>
-                    <li>Attempt to gain unauthorized access to other user accounts</li>
-                    <li>Upload malicious content or viruses</li>
-                    <li>Engage in fraudulent activities</li>
-                </ul>
-
-                <h3>5. Termination</h3>
-                <p>We reserve the right to terminate or suspend your account for violations of these terms.</p>
-            </div>
-        </div>
-        </div>
-        <div class="wrapper">
-            <div class="cookie-message">
-                <h3>We use cookies!</h3>
-                <p>
-                    This website uses essential cookies to ensure its proper operation and tracking cookies to understand how you interact with it. The latter will be set only after consent.
-                </p>
-            </div>
-            <div class="buttons">
-                <button id="acceptBtn">Accept</button>
-                <button id="rejectBtn">Reject</button>
+            <div class="modal-content4">
+                <span class="close" onclick="closeTerms()">&times;</span>
+                <h2>Terms and Conditions</h2>
+                <div class="terms-content">
+                    <h3>1. Introduction</h3>
+                    <p>Welcome to our e-commerce platform. By accessing or using our website, you agree to these terms and conditions.</p>
+    
+                    <h3>2. Account Security</h3>
+                    <p>You are responsible for maintaining the confidentiality of your account credentials and for all activities under your account.</p>
+    
+                    <h3>3. Privacy Policy</h3>
+                    <p>Your use of our platform is also governed by our Privacy Policy. By using our services, you consent to our collection and use of your data as described therein.</p>
+    
+                    <h3>4. Prohibited Activities</h3>
+                    <p>You agree not to:</p>
+                    <ul>
+                        <li>Use the platform for any illegal purposes</li>
+                        <li>Attempt to gain unauthorized access to other user accounts</li>
+                        <li>Upload malicious content or viruses</li>
+                        <li>Engage in fraudulent activities</li>
+                    </ul>
+    
+                    <h3>5. Termination</h3>
+                    <p>We reserve the right to terminate or suspend your account for violations of these terms.</p>
+                </div>
             </div>
         </div>
     </div>
@@ -1201,63 +1108,6 @@ window.onclick = function(event) {
             iconElement.classList.add('fa-eye');
         }
     }
-</script>
-<script>
-// Check if the user has already made a choice
-document.addEventListener('DOMContentLoaded', function() {
-    if (getCookie('cookieConsent') === 'accepted') {
-        hideBanner();
-    } else if (getCookie('cookieConsent') === 'rejected') {
-        hideBanner();
-    } else {
-        showBanner();
-    }
-
-    // Accept button
-    document.getElementById('acceptBtn').addEventListener('click', function() {
-        setCookie('cookieConsent', 'accepted', 365); // Set cookie for 1 year
-        hideBanner();
-    });
-
-    // Reject button
-    document.getElementById('rejectBtn').addEventListener('click', function() {
-        setCookie('cookieConsent', 'rejected', 365); // Set cookie for 1 year
-        hideBanner();
-    });
-
-    // Function to show the cookie banner
-    function showBanner() {
-        document.querySelector('.wrapper').style.display = 'flex';
-    }
-
-    // Function to hide the cookie banner
-    function hideBanner() {
-        document.querySelector('.wrapper').style.display = 'none';
-    }
-
-    // Function to set a cookie
-    function setCookie(name, value, days) {
-        var expires = '';
-        if (days) {
-            var date = new Date();
-            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-            expires = "; expires=" + date.toUTCString();
-        }
-        document.cookie = name + "=" + (value || "") + expires + "; path=/";
-    }
-
-    // Function to get a cookie value
-    function getCookie(name) {
-        var nameEQ = name + "=";
-        var ca = document.cookie.split(';');
-        for (var i = 0; i < ca.length; i++) {
-            var c = ca[i];
-            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-        }
-        return null;
-    }
-});
 </script>
 </body>
 </html>
