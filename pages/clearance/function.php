@@ -1,16 +1,16 @@
 <?php
 if (isset($_POST['btn_add'])) {
     // Sanitize inputs
-    $txt_cnum = htmlspecialchars(stripslashes(trim($_POST['txt_cnum'])), ENT_QUOTES, 'UTF-8');
-    $txt_name = htmlspecialchars(stripslashes(trim($_POST['txt_name'])), ENT_QUOTES, 'UTF-8');
-    $txt_purpose = htmlspecialchars(stripslashes(trim($_POST['txt_purpose'])), ENT_QUOTES, 'UTF-8');
-    $txt_ornum = htmlspecialchars(stripslashes(trim($_POST['txt_ornum'])), ENT_QUOTES, 'UTF-8');
-    $txt_amount = htmlspecialchars(stripslashes(trim($_POST['txt_amount'])), ENT_QUOTES, 'UTF-8');
+    $txt_cnum = htmlspecialchars(strip_tags(trim($_POST['txt_cnum'])), ENT_QUOTES, 'UTF-8');
+    $txt_name = htmlspecialchars(strip_tags(trim($_POST['txt_name'])), ENT_QUOTES, 'UTF-8');
+    $txt_purpose = htmlspecialchars(strip_tags(trim($_POST['txt_purpose'])), ENT_QUOTES, 'UTF-8');
+    $txt_ornum = htmlspecialchars(strip_tags(trim($_POST['txt_ornum'])), ENT_QUOTES, 'UTF-8');
+    $txt_amount = htmlspecialchars(strip_tags(trim($_POST['txt_amount'])), ENT_QUOTES, 'UTF-8');
     $txt_age = (int) $_POST['txt_age']; // Cast age to integer
-    $txt_bdate = htmlspecialchars(stripslashes(trim($_POST['txt_bdate'])), ENT_QUOTES, 'UTF-8');
-    $txt_purok = htmlspecialchars(stripslashes(trim($_POST['txt_purok'])), ENT_QUOTES, 'UTF-8');
-    $txt_bplace = htmlspecialchars(stripslashes(trim($_POST['txt_bplace'])), ENT_QUOTES, 'UTF-8');
-    $txt_cstatus = htmlspecialchars(stripslashes(trim($_POST['txt_cstatus'])), ENT_QUOTES, 'UTF-8');
+    $txt_bdate = htmlspecialchars(strip_tags(trim($_POST['txt_bdate'])), ENT_QUOTES, 'UTF-8');
+    $txt_purok = htmlspecialchars(strip_tags(trim($_POST['txt_purok'])), ENT_QUOTES, 'UTF-8');
+    $txt_bplace = htmlspecialchars(strip_tags(trim($_POST['txt_bplace'])), ENT_QUOTES, 'UTF-8');
+    $txt_cstatus = htmlspecialchars(strip_tags(trim($_POST['txt_cstatus'])), ENT_QUOTES, 'UTF-8');
     $date = date('Y-m-d'); // Current date in 'YYYY-MM-DD' format
     $off_barangay = $_SESSION["barangay"] ?? "";
 
@@ -112,17 +112,17 @@ if(isset($_POST['btn_disapprove']))
 
 if(isset($_POST['btn_save'])) {
     // Sanitize inputs
-    $txt_id = htmlspecialchars(stripslashes(trim($_POST['hidden_id'])), ENT_QUOTES, 'UTF-8');
-    $txt_edit_residentname = htmlspecialchars(stripslashes(trim($_POST['txt_edit_residentname'])), ENT_QUOTES, 'UTF-8');
-    $txt_edit_cnum = htmlspecialchars(stripslashes(trim($_POST['txt_edit_cnum'])), ENT_QUOTES, 'UTF-8');
-    $txt_edit_purpose = htmlspecialchars(stripslashes(trim($_POST['txt_edit_purpose'])), ENT_QUOTES, 'UTF-8');
-    $txt_edit_ornum = htmlspecialchars(stripslashes(trim($_POST['txt_edit_ornum'])), ENT_QUOTES, 'UTF-8');
-    $txt_edit_amount = htmlspecialchars(stripslashes(trim($_POST['txt_edit_amount'])), ENT_QUOTES, 'UTF-8');
+    $txt_id = htmlspecialchars(strip_tags(trim($_POST['hidden_id'])), ENT_QUOTES, 'UTF-8');
+    $txt_edit_residentname = htmlspecialchars(strip_tags(trim($_POST['txt_edit_residentname'])), ENT_QUOTES, 'UTF-8');
+    $txt_edit_cnum = htmlspecialchars(strip_tags(trim($_POST['txt_edit_cnum'])), ENT_QUOTES, 'UTF-8');
+    $txt_edit_purpose = htmlspecialchars(strip_tags(trim($_POST['txt_edit_purpose'])), ENT_QUOTES, 'UTF-8');
+    $txt_edit_ornum = htmlspecialchars(strip_tags(trim($_POST['txt_edit_ornum'])), ENT_QUOTES, 'UTF-8');
+    $txt_edit_amount = htmlspecialchars(strip_tags(trim($_POST['txt_edit_amount'])), ENT_QUOTES, 'UTF-8');
     $txt_edit_age = (int) $_POST['txt_edit_age']; // Cast to integer
-    $txt_edit_bdate = htmlspecialchars(stripslashes(trim($_POST['txt_edit_bdate'])), ENT_QUOTES, 'UTF-8');
-    $txt_edit_purok = htmlspecialchars(stripslashes(trim($_POST['txt_edit_purok'])), ENT_QUOTES, 'UTF-8');
-    $txt_edit_bplace = htmlspecialchars(stripslashes(trim($_POST['txt_edit_bplace'])), ENT_QUOTES, 'UTF-8');
-    $txt_edit_cstatus = htmlspecialchars(stripslashes(trim($_POST['txt_edit_cstatus'])), ENT_QUOTES, 'UTF-8');
+    $txt_edit_bdate = htmlspecialchars(strip_tags(trim($_POST['txt_edit_bdate'])), ENT_QUOTES, 'UTF-8');
+    $txt_edit_purok = htmlspecialchars(strip_tags(trim($_POST['txt_edit_purok'])), ENT_QUOTES, 'UTF-8');
+    $txt_edit_bplace = htmlspecialchars(strip_tags(trim($_POST['txt_edit_bplace'])), ENT_QUOTES, 'UTF-8');
+    $txt_edit_cstatus = htmlspecialchars(strip_tags(trim($_POST['txt_edit_cstatus'])), ENT_QUOTES, 'UTF-8');
    
 
     // Update query including the new fields

@@ -1,12 +1,12 @@
 <?php
 if(isset($_POST['btn_add'])){
     // Sanitize all inputs
-    $ddl_pos = htmlspecialchars(stripslashes(trim($_POST['ddl_pos'])), ENT_QUOTES, 'UTF-8');
-    $txt_cname = htmlspecialchars(stripslashes(trim($_POST['txt_cname'])), ENT_QUOTES, 'UTF-8');
-    $txt_contact = htmlspecialchars(stripslashes(trim($_POST['txt_contact'])), ENT_QUOTES, 'UTF-8');
-    $txt_address = htmlspecialchars(stripslashes(trim($_POST['txt_address'])), ENT_QUOTES, 'UTF-8');
-    $txt_sterm = htmlspecialchars(stripslashes(trim($_POST['txt_sterm'])), ENT_QUOTES, 'UTF-8');
-    $txt_eterm = htmlspecialchars(stripslashes(trim($_POST['txt_eterm'])), ENT_QUOTES, 'UTF-8');
+    $ddl_pos = htmlspecialchars(strip_tags(trim($_POST['ddl_pos'])), ENT_QUOTES, 'UTF-8');
+    $txt_cname = htmlspecialchars(strip_tags(trim($_POST['txt_cname'])), ENT_QUOTES, 'UTF-8');
+    $txt_contact = htmlspecialchars(strip_tags(trim($_POST['txt_contact'])), ENT_QUOTES, 'UTF-8');
+    $txt_address = htmlspecialchars(strip_tags(trim($_POST['txt_address'])), ENT_QUOTES, 'UTF-8');
+    $txt_sterm = htmlspecialchars(strip_tags(trim($_POST['txt_sterm'])), ENT_QUOTES, 'UTF-8');
+    $txt_eterm = htmlspecialchars(strip_tags(trim($_POST['txt_eterm'])), ENT_QUOTES, 'UTF-8');
     $off_barangay = $_SESSION['barangay']; // Assuming barangay is stored in the session
 
     // Handle file upload
@@ -61,12 +61,12 @@ if(isset($_POST['btn_add'])){
 
 if (isset($_POST['btn_save'])) {
     // Sanitize inputs
-    $id = htmlspecialchars(stripslashes(trim($_POST['hidden_id'])), ENT_QUOTES, 'UTF-8');
-    $completeName = htmlspecialchars(stripslashes(trim($_POST['txt_edit_cname'])), ENT_QUOTES, 'UTF-8');
-    $pcontact = htmlspecialchars(stripslashes(trim($_POST['txt_edit_contact'])), ENT_QUOTES, 'UTF-8');
-    $paddress = htmlspecialchars(stripslashes(trim($_POST['txt_edit_address'])), ENT_QUOTES, 'UTF-8');
-    $termStart = htmlspecialchars(stripslashes(trim($_POST['txt_edit_sterm'])), ENT_QUOTES, 'UTF-8');
-    $termEnd = htmlspecialchars(stripslashes(trim($_POST['txt_edit_eterm'])), ENT_QUOTES, 'UTF-8');
+    $id = htmlspecialchars(strip_tags(trim($_POST['hidden_id'])), ENT_QUOTES, 'UTF-8');
+    $completeName = htmlspecialchars(strip_tags(trim($_POST['txt_edit_cname'])), ENT_QUOTES, 'UTF-8');
+    $pcontact = htmlspecialchars(strip_tags(trim($_POST['txt_edit_contact'])), ENT_QUOTES, 'UTF-8');
+    $paddress = htmlspecialchars(strip_tags(trim($_POST['txt_edit_address'])), ENT_QUOTES, 'UTF-8');
+    $termStart = htmlspecialchars(strip_tags(trim($_POST['txt_edit_sterm'])), ENT_QUOTES, 'UTF-8');
+    $termEnd = htmlspecialchars(strip_tags(trim($_POST['txt_edit_eterm'])), ENT_QUOTES, 'UTF-8');
 
     // Handle image upload
     $image = $_FILES['txt_edit_image']['name'];
