@@ -48,7 +48,7 @@ if (isset($_POST['btn_add'])) {
 
     if ($ct == 0) {
         if ($name != "") {
-            if (($imagetype == "image/jpeg" || $imagetype == "image/png" || $imagetype == "image/bmp") && $size => 2097000) {
+            if (($imagetype == "image/jpeg" || $imagetype == "image/png" || $imagetype == "image/bmp") && $size <= 2097000) {
                 if (move_uploaded_file($temp, 'image/' . $txt_image)) {
                     // Insert resident's data
                     $query = mysqli_query($con, "INSERT INTO tbltabagak (
