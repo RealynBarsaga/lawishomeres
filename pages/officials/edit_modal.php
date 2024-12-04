@@ -20,7 +20,7 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label">Image:</label>
-                    <input name="txt_edit_image" class="form-control input-sm" type="file" />
+                    <input name="txt_edit_image" class="form-control input-sm" type="file" accept=".jpg, .jpeg, .png"/>
                 </div>
                 <div class="form-group">
                     <label>Contact #:</label>
