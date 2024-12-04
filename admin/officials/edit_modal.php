@@ -16,11 +16,11 @@
                 </div>
                 <div class="form-group">
                     <label>Name: <span style="color:gray; font-size: 10px;">(Firstname Middlename, Lastname)</span></label>
-                    <input name="txt_edit_cname" class="form-control input-sm" type="text" value="'.$row['completeName'].'" required/>
+                    <input name="txt_edit_cname" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" value="'.$row['completeName'].'" required/>
                 </div>
                 <div class="form-group">
                     <label>Image:</label>
-                    <input name="txt_edit_image" class="form-control input-sm" type="file"/>
+                    <input name="txt_edit_image" class="form-control input-sm" type="file" accept=".jpg, .jpeg, .png"/>
                 </div>
                 
                 <div class="form-group">
@@ -30,7 +30,7 @@
 
                 <div class="form-group">
                     <label>Address: </label>
-                    <input name="txt_edit_address" class="form-control input-sm" type="text" value="'.$row['paddress'].'" required/>
+                    <input name="txt_edit_address" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" value="'.$row['paddress'].'" required/>
                 </div>
                 <div class="form-group">
                     <label>Start Term: </label>

@@ -75,26 +75,31 @@ if (isset($_POST['btn_save'])) {
     // Handle image upload
     $image = $_FILES['txt_edit_image']['name'];
     if ($image) {
+        $maxFileSize = 2 * 1024 * 1024; // 2 MB in bytes
         $target_dir = "image/";
         $target_file = $target_dir . basename($image);
-        
+        $fileSize = $_FILES['txt_edit_image']['size'];
+    
+        // Check if file size is within the limit
+        if ($fileSize > $maxFileSize) {
+            $_SESSION['filesize'] = 1;
+            header("Location: " . $_SERVER['REQUEST_URI']);
+            exit();
+        }
+    
+        // Proceed with file upload if size is valid
         if (move_uploaded_file($_FILES["txt_edit_image"]["tmp_name"], $target_file)) {
-            // Image upload successful
+            // File upload successful
         } else {
-            // Handle error
-            echo "Sorry, there was an error uploading your file.";
+            // Handle file upload error if necessary
+            echo "Error: Failed to upload the file.";
             exit();
         }
     } else {
-        // Get existing image if no new image is uploaded
+        // If no new image is uploaded, retrieve the existing image
         $edit_query = mysqli_query($con, "SELECT image FROM tblmadofficial WHERE id='$id'");
-        if ($edit_query) {
-            $row = mysqli_fetch_array($edit_query);
-            $image = $row['image'];
-        } else {
-            // Handle query error
-            die('Error fetching existing image: ' . mysqli_error($con));
-        }
+        $row = mysqli_fetch_array($edit_query);
+        $image = $row['image'];
     }
 
     // Update official's information in the database
