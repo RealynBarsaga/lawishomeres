@@ -169,7 +169,6 @@ echo '<div id="editModal'.$row['id'].'" class="modal fade" role="dialog">
                             <label class="control-label">Image:</label>
                             <input name="txt_edit_image" id="txt_edit_image" class="form-control input-sm" type="file" accept=".jpg, .jpeg, .png"/>
                             <small id="fileError" style="color: red; display: none;">The selected image file exceeds 2MB. Please upload a smaller file.</small>
-                            <small id="fileEmptyError" style="color: red; display: none;">Please select a file to upload.</small>
                         </div>
                     </div>
                 </div>
@@ -177,7 +176,7 @@ echo '<div id="editModal'.$row['id'].'" class="modal fade" role="dialog">
         </div>
         <div class="modal-footer">
             <input type="button" class="btn btn-default btn-sm" data-dismiss="modal" value="Cancel"/>
-            <input type="submit" class="btn btn-primary btn-sm" name="btn_save" value="Save" id="btn_save" onclick="validateAndSubmit(event)" disabled/>
+            <input type="submit" class="btn btn-primary btn-sm" name="btn_save" value="Save" id="btn_save" onclick="validateAndSubmit(event)"/>
         </div>
     </div>
   </div>
@@ -271,34 +270,19 @@ document.querySelector('form').addEventListener('submit', function(event) {
     }
 });
 function validateAndSubmit(event) {
-    var inputFile = document.getElementById('txt_edit_image');
-    var errorMessage = document.getElementById('fileError');
-    var emptyErrorMessage = document.getElementById('fileEmptyError');
-    var file = inputFile.files[0];
-    var saveButton = document.getElementById('btn_save');
-    
-    // Hide all error messages initially
-    errorMessage.style.display = 'none';
-    emptyErrorMessage.style.display = 'none';
-    
-    // Check if a file is selected
-    if (!file) {
-        // Prevent form submission and show the empty file error message
-        event.preventDefault();
-        emptyErrorMessage.style.display = 'block';
-        saveButton.disabled = true; // Disable the save button
-        return;
-    }
+        var inputFile = document.getElementById('txt_edit_image');
+        var errorMessage = document.getElementById('fileError');
+        var file = inputFile.files[0];
 
-    // Check if the file size is greater than 2MB
-    if (file.size > 2 * 1024 * 1024) {
-        // Prevent form submission and show the size error message
-        event.preventDefault();
-        errorMessage.style.display = 'block';
-        saveButton.disabled = true; // Disable the save button
-    } else {
-        // Enable the save button when the file is valid
-        saveButton.disabled = false;
+        // Check if the file exists and its size
+        if (file && file.size > 2 * 1024 * 1024) { // 2MB in bytes
+            // Prevent form submission
+            event.preventDefault();
+            // Show the error message
+            errorMessage.style.display = 'block';
+        } else {
+            // Hide the error message if file size is valid
+            errorMessage.style.display = 'none';
+        }
     }
-}
 </script>
