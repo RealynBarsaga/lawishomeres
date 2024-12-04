@@ -270,7 +270,7 @@ document.querySelector('form').addEventListener('submit', function(event) {
     }
 });
 function validateAndSubmit(event) {
-        var inputFile = document.getElementById('txt_image');
+        var inputFile = document.getElementById('txt_edit_image');
         var errorMessage = document.getElementById('fileError');
         var file = inputFile.files[0];
 
