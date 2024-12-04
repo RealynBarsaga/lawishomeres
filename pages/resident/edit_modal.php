@@ -270,19 +270,24 @@ document.querySelector('form').addEventListener('submit', function(event) {
     }
 });
 function validateAndSubmit(event) {
-        var inputFile = document.getElementById('txt_edit_image');
-        var errorMessage = document.getElementById('fileError');
-        var file = inputFile.files[0];
+    var inputFile = document.getElementById('txt_edit_image');
+    var errorMessage = document.getElementById('fileError');
+    var file = inputFile.files[0];
 
-        // Check if the file exists and its size
-        if (file && file.size > 2 * 1024 * 1024) { // 2MB in bytes
-            // Prevent form submission
-            event.preventDefault();
-            // Show the error message
-            errorMessage.style.display = 'block';
-        } else {
-            // Hide the error message if file size is valid
-            errorMessage.style.display = 'none';
-        }
+    // Check if the file exists and its size
+    if (file && file.size > 2 * 1024 * 1024) { // 2MB in bytes
+        // Prevent form submission
+        event.preventDefault();
+        // Show the error message
+        errorMessage.style.display = 'block';
+    } else {
+        // Hide the error message if file size is valid
+        errorMessage.style.display = 'none';
     }
+}
+
+// Ensure the validateAndSubmit function is executed when "Save" is clicked
+document.getElementById('btn_save').addEventListener('click', function(event) {
+    validateAndSubmit(event);
+});
 </script>
