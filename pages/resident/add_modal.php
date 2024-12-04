@@ -195,8 +195,9 @@
                                 <!-- Image -->
                                 <div class="form-group">
                                     <label class="control-label">Image:</label>
-                                    <input name="txt_image" id="txt_image" class="form-control input-sm" type="file" accept=".jpg, .jpeg, .png, .bmp" required/>
-                                </div>
+                                    <input name="txt_image" id="txt_image" class="form-control input-sm" type="file" accept=".jpg, .jpeg, .png, .bmp" required onchange="validateFileSize(this)" />
+                                    <small id="fileError" style="color: red; display: none;">The selected image file exceeds 2MB. Please upload a smaller file.</small>
+                                </div>                                
                             </div>
                         </div>
                     </div>
@@ -266,31 +267,6 @@ document.querySelector('form').addEventListener('submit', function(event) {
     }
 });
 
-document.querySelector('form').addEventListener('submit', function(event) {
-    let isValid = true;
-
-    // Validate required image input
-    const imageInput = document.querySelector('input[name="txt_image"]');
-    if (imageInput.files.length === 0) {
-        alert(`Please upload an image: ${field.placeholder || field.name}`);
-        isValid = false;
-        imageInput.focus();
-    } else {
-        const file = imageInput.files[0];
-        const maxFileSize = 2 * 1024 * 1024; // 2MB in bytes
-        if (file.size > maxFileSize) {
-            alert("The selected image file exceeds 2MB. Please upload a smaller file.");
-            isValid = false;
-            imageInput.focus();
-        }
-    }
-
-    // If validation failed, prevent form submission
-    if (!isValid) {
-        event.preventDefault();
-    }
-});
-
 // Toggle Head of Family dropdown based on role selection
 function toggleHeadOfFamily() {
     var roleSelect = document.getElementById('roleSelect');
@@ -312,4 +288,17 @@ function getHouseholdNumber() {
     var householdNumber = selectedOption.getAttribute('data-household');
     document.getElementById('txt_householdnum').value = householdNumber;
 }
+
+function validateFileSize(input) {
+        var file = input.files[0];
+        var errorMessage = document.getElementById('fileError');
+
+        if (file && file.size > 2 * 1024 * 1024) { // 2MB in bytes
+            errorMessage.style.display = 'block';
+            input.setCustomValidity(''); // Clear any previous custom validation
+        } else {
+            errorMessage.style.display = 'none';
+            input.setCustomValidity(''); // Clear custom validation if size is valid
+        }
+    }
 </script>
