@@ -272,7 +272,7 @@ document.querySelector('form').addEventListener('submit', function(event) {
     // Validate required image input
     const imageInput = document.querySelector('input[name="txt_image"]');
     if (imageInput.files.length === 0) {
-        alert("Please upload an image.");
+        alert(`Please upload an image: ${field.placeholder || field.name}`);
         isValid = false;
         imageInput.focus();
     } else {
