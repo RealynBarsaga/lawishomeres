@@ -126,26 +126,12 @@ if (isset($_POST['btn_save'])) {
     // Handle image upload
     $image = $_FILES['txt_edit_image']['name'];
     if ($image) {
-        $maxFileSize = 2 * 1024 * 1024; // 2 MB in bytes
         $target_dir = "image/";
         $target_file = $target_dir . basename($image);
-        $fileSize = $_FILES['txt_edit_image']['size'];
-    
-        // Check if file size is within the limit
-        if ($fileSize > $maxFileSize) {
-            // File size exceeds limit
-            $_SESSION['filesize'] = 1;
-            header("location: " . $_SERVER['REQUEST_URI']);
-            exit(); // Stop further execution
-        }
-    
-        // Proceed with file upload if size is valid
         if (move_uploaded_file($_FILES["txt_edit_image"]["tmp_name"], $target_file)) {
             // File upload successful
         } else {
             // Handle file upload error if necessary
-            echo "Error: Failed to upload the file.";
-            exit();
         }
     } else {
         // If no new image is uploaded, retrieve the existing image
