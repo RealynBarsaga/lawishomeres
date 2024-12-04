@@ -1,20 +1,13 @@
 <?php
 // Handle form submission for adding a resident
 if (isset($_POST['btn_add'])) {
-    // Function to remove <script> tags and its content
-    function removeScripts($input) {
-        // Remove <script> tags and its content
-        $cleaned_input = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', '', $input);
-        return $cleaned_input;
-    }
-
     // Sanitize and trim input data
-    $txt_lname = htmlspecialchars(strip_tags(trim(removeScripts($_POST['txt_lname']))), ENT_QUOTES, 'UTF-8');
-    $txt_fname = htmlspecialchars(strip_tags(trim(removeScripts($_POST['txt_fname']))), ENT_QUOTES, 'UTF-8');
-    $txt_mname = htmlspecialchars(strip_tags(trim(removeScripts($_POST['txt_mname']))), ENT_QUOTES, 'UTF-8');
-    $ddl_gender = htmlspecialchars(strip_tags(trim(removeScripts($_POST['ddl_gender']))), ENT_QUOTES, 'UTF-8');
-    $txt_bdate = htmlspecialchars(strip_tags(trim(removeScripts($_POST['txt_bdate']))), ENT_QUOTES, 'UTF-8');
-    $txt_bplace = htmlspecialchars(strip_tags(trim(removeScripts($_POST['txt_bplace']))), ENT_QUOTES, 'UTF-8');
+    $txt_lname = htmlspecialchars(strip_tags(trim($_POST['txt_lname'])), ENT_QUOTES, 'UTF-8');
+    $txt_fname = htmlspecialchars(strip_tags(trim($_POST['txt_fname'])), ENT_QUOTES, 'UTF-8');
+    $txt_mname = htmlspecialchars(strip_tags(trim($_POST['txt_mname'])), ENT_QUOTES, 'UTF-8');
+    $ddl_gender = htmlspecialchars(strip_tags(trim($_POST['ddl_gender'])), ENT_QUOTES, 'UTF-8');
+    $txt_bdate = htmlspecialchars(strip_tags(trim($_POST['txt_bdate'])), ENT_QUOTES, 'UTF-8');
+    $txt_bplace = htmlspecialchars(strip_tags(trim($_POST['txt_bplace'])), ENT_QUOTES, 'UTF-8');
     
     // Calculate age based on birthdate
     $dateOfBirth = DateTime::createFromFormat('Y-m-d', $txt_bdate);
@@ -28,18 +21,18 @@ if (isset($_POST['btn_add'])) {
     }
     
     // Continue with other sanitized and trimmed form data
-    $txt_brgy = htmlspecialchars(strip_tags(trim(removeScripts($_POST['txt_brgy']))), ENT_QUOTES, 'UTF-8');
-    $txt_purok = htmlspecialchars(strip_tags(trim(removeScripts($_POST['txt_purok']))), ENT_QUOTES, 'UTF-8');
-    $txt_cstatus = htmlspecialchars(strip_tags(trim(removeScripts($_POST['txt_cstatus']))), ENT_QUOTES, 'UTF-8');
-    $txt_householdnum = filter_var(trim(removeScripts($_POST['txt_householdnum'])), FILTER_SANITIZE_NUMBER_INT);
-    $txt_religion = htmlspecialchars(strip_tags(trim(removeScripts($_POST['txt_religion']))), ENT_QUOTES, 'UTF-8');
-    $txt_national = htmlspecialchars(strip_tags(trim(removeScripts($_POST['txt_national']))), ENT_QUOTES, 'UTF-8');
-    $ddl_hos = htmlspecialchars(strip_tags(trim(removeScripts($_POST['ddl_hos']))), ENT_QUOTES, 'UTF-8');
-    $ddl_los = htmlspecialchars(strip_tags(trim(removeScripts($_POST['ddl_los']))), ENT_QUOTES, 'UTF-8');
-    $txt_lightning = htmlspecialchars(strip_tags(trim(removeScripts($_POST['txt_lightning']))), ENT_QUOTES, 'UTF-8');
-    $txt_faddress = htmlspecialchars(strip_tags(trim(removeScripts($_POST['txt_faddress']))), ENT_QUOTES, 'UTF-8');
-    $txt_role = htmlspecialchars(strip_tags(trim(removeScripts($_POST['txt_role']))), ENT_QUOTES, 'UTF-8');
-    $txt_head_of_family = htmlspecialchars(strip_tags(trim(removeScripts($_POST['txt_head_of_family']))), ENT_QUOTES, 'UTF-8');
+    $txt_brgy = htmlspecialchars(strip_tags(trim($_POST['txt_brgy'])), ENT_QUOTES, 'UTF-8');
+    $txt_purok = htmlspecialchars(strip_tags(trim($_POST['txt_purok'])), ENT_QUOTES, 'UTF-8');
+    $txt_cstatus = htmlspecialchars(strip_tags(trim($_POST['txt_cstatus'])), ENT_QUOTES, 'UTF-8');
+    $txt_householdnum = filter_var(trim($_POST['txt_householdnum']), FILTER_SANITIZE_NUMBER_INT);
+    $txt_religion = htmlspecialchars(strip_tags(trim($_POST['txt_religion'])), ENT_QUOTES, 'UTF-8');
+    $txt_national = htmlspecialchars(strip_tags(trim($_POST['txt_national'])), ENT_QUOTES, 'UTF-8');
+    $ddl_hos = htmlspecialchars(strip_tags(trim($_POST['ddl_hos'])), ENT_QUOTES, 'UTF-8');
+    $ddl_los = htmlspecialchars(strip_tags(trim($_POST['ddl_los'])), ENT_QUOTES, 'UTF-8');
+    $txt_lightning = htmlspecialchars(strip_tags(trim($_POST['txt_lightning'])), ENT_QUOTES, 'UTF-8');
+    $txt_faddress = htmlspecialchars(strip_tags(trim($_POST['txt_faddress'])), ENT_QUOTES, 'UTF-8');
+    $txt_role = htmlspecialchars(strip_tags(trim($_POST['txt_role'])), ENT_QUOTES, 'UTF-8');
+    $txt_head_of_family = htmlspecialchars(strip_tags(trim($_POST['txt_head_of_family'])), ENT_QUOTES, 'UTF-8');
 
     // Handle file upload
     $name = basename($_FILES['txt_image']['name']);
@@ -110,33 +103,25 @@ if (isset($_POST['btn_add'])) {
 
 // Handle form submission for editing a resident
 if (isset($_POST['btn_save'])) {
-    
-    // Function to remove <script> tags and its content
-    function removeScripts($input) {
-        // Remove <script> tags and its content
-        $cleaned_input = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', '', $input);
-        return $cleaned_input;
-    }
-    
     // Get form data with sanitization
-    $id = htmlspecialchars(strip_tags(trim(removeScripts($_POST['hidden_id']))), ENT_QUOTES, 'UTF-8'); 
-    $lname = htmlspecialchars(strip_tags(trim(removeScripts($_POST['txt_edit_lname']))), ENT_QUOTES, 'UTF-8');
-    $fname = htmlspecialchars(strip_tags(trim(removeScripts($_POST['txt_edit_fname']))), ENT_QUOTES, 'UTF-8');
-    $mname = htmlspecialchars(strip_tags(trim(removeScripts($_POST['txt_edit_mname']))), ENT_QUOTES, 'UTF-8');
+    $id = htmlspecialchars(strip_tags(trim($_POST['hidden_id'])), ENT_QUOTES, 'UTF-8'); 
+    $lname = htmlspecialchars(strip_tags(trim($_POST['txt_edit_lname'])), ENT_QUOTES, 'UTF-8');
+    $fname = htmlspecialchars(strip_tags(trim($_POST['txt_edit_fname'])), ENT_QUOTES, 'UTF-8');
+    $mname = htmlspecialchars(strip_tags(trim($_POST['txt_edit_mname'])), ENT_QUOTES, 'UTF-8');
     $age = (int) $_POST['txt_edit_age']; // cast age to an integer
-    $bdate = htmlspecialchars(strip_tags(trim(removeScripts($_POST['txt_edit_bdate']))), ENT_QUOTES, 'UTF-8');
-    $barangay = htmlspecialchars(strip_tags(trim(removeScripts($_POST['txt_edit_brgy']))), ENT_QUOTES, 'UTF-8');
-    $purok = htmlspecialchars(strip_tags(trim(removeScripts($_POST['txt_edit_purok']))), ENT_QUOTES, 'UTF-8');
-    $householdnum = filter_var(trim(removeScripts($_POST['txt_edit_householdnum'])), ENT_QUOTES, 'UTF-8');
-    $cstatus = htmlspecialchars(strip_tags(trim(removeScripts($_POST['txt_edit_cstatus']))), ENT_QUOTES, 'UTF-8');
-    $nationality = htmlspecialchars(strip_tags(trim(removeScripts($_POST['txt_edit_national']))), ENT_QUOTES, 'UTF-8');
-    $landOwnershipStatus = htmlspecialchars(strip_tags(trim(removeScripts($_POST['ddl_edit_los']))), ENT_QUOTES, 'UTF-8');
-    $gender = htmlspecialchars(strip_tags(trim(removeScripts($_POST['ddl_edit_gender']))), ENT_QUOTES, 'UTF-8');
-    $bplace = htmlspecialchars(strip_tags(trim(removeScripts($_POST['txt_edit_bplace']))), ENT_QUOTES, 'UTF-8');
-    $religion = htmlspecialchars(strip_tags(trim(removeScripts($_POST['txt_edit_religion']))), ENT_QUOTES, 'UTF-8');
-    $houseOwnershipStatus = htmlspecialchars(strip_tags(trim(removeScripts($_POST['ddl_edit_hos']))), ENT_QUOTES, 'UTF-8');
-    $lightning = htmlspecialchars(strip_tags(trim(removeScripts($_POST['txt_edit_lightning']))), ENT_QUOTES, 'UTF-8');
-    $formerAddress = htmlspecialchars(strip_tags(trim(removeScripts($_POST['txt_edit_faddress']))), ENT_QUOTES, 'UTF-8');
+    $bdate = htmlspecialchars(strip_tags(trim($_POST['txt_edit_bdate'])), ENT_QUOTES, 'UTF-8');
+    $barangay = htmlspecialchars(strip_tags(trim($_POST['txt_edit_brgy'])), ENT_QUOTES, 'UTF-8');
+    $purok = htmlspecialchars(strip_tags(trim($_POST['txt_edit_purok'])), ENT_QUOTES, 'UTF-8');
+    $householdnum = filter_var(trim($_POST['txt_edit_householdnum']), ENT_QUOTES, 'UTF-8');
+    $cstatus = htmlspecialchars(strip_tags(trim($_POST['txt_edit_cstatus'])), ENT_QUOTES, 'UTF-8');
+    $nationality = htmlspecialchars(strip_tags(trim($_POST['txt_edit_national'])), ENT_QUOTES, 'UTF-8');
+    $landOwnershipStatus = htmlspecialchars(strip_tags(trim($_POST['ddl_edit_los'])), ENT_QUOTES, 'UTF-8');
+    $gender = htmlspecialchars(strip_tags(trim($_POST['ddl_edit_gender'])), ENT_QUOTES, 'UTF-8');
+    $bplace = htmlspecialchars(strip_tags(trim($_POST['txt_edit_bplace'])), ENT_QUOTES, 'UTF-8');
+    $religion = htmlspecialchars(strip_tags(trim($_POST['txt_edit_religion'])), ENT_QUOTES, 'UTF-8');
+    $houseOwnershipStatus = htmlspecialchars(strip_tags(trim($_POST['ddl_edit_hos'])), ENT_QUOTES, 'UTF-8');
+    $lightning = htmlspecialchars(strip_tags(trim($_POST['txt_edit_lightning'])), ENT_QUOTES, 'UTF-8');
+    $formerAddress = htmlspecialchars(strip_tags(trim($_POST['txt_edit_faddress'])), ENT_QUOTES, 'UTF-8');
     
     // Handle image upload
     $image = $_FILES['txt_edit_image']['name'];
