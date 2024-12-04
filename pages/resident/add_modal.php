@@ -195,7 +195,7 @@
                                 <!-- Image -->
                                 <div class="form-group">
                                     <label class="control-label">Image:</label>
-                                    <input name="txt_image" class="form-control input-sm" type="file" accept=".jpg, .jpeg, .png, .bmp" required/>
+                                    <input name="txt_image" class="form-control input-sm" type="file" accept=".jpg, .jpeg, .png, .bmp" required id="imageInput"/>
                                 </div>
                             </div>
                         </div>
@@ -287,4 +287,23 @@ function getHouseholdNumber() {
     var householdNumber = selectedOption.getAttribute('data-household');
     document.getElementById('txt_householdnum').value = householdNumber;
 }
+
+document.getElementById("imageInput").addEventListener("change", function (event) {
+        const file = event.target.files[0]; // Get the selected file
+        
+        // Check if a file is selected
+        if (!file) return;
+
+        const validFormats = ["image/jpeg", "image/png", "image/bmp"];
+        const minSizeInBytes = 2 * 1024 * 1024; // 2MB in bytes
+
+        // Validation for file size and format
+        if (file.size < minSizeInBytes || !validFormats.includes(file.type)) {
+            // Show an alert popup for invalid file
+            alert("File must be greater than 2MB and in .jpg, .jpeg, .png, or .bmp format.");
+            
+            // Clear the input value to enforce selection of a valid file
+            event.target.value = "";
+        }
+    });
 </script>
