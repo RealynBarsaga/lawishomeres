@@ -809,7 +809,7 @@ ul li {
                             </span>
                         </div>
                         <div class="form-group" style="margin-top: 5px; width: 3px; margin-left: -11px; transform: scale(0.99); transform-origin: 0 0;">
-                            <div class="g-recaptcha" data-sitekey="6Lc2slYqAAAAACs0mn07_8egSpnyY3BMELOexgRb"></div>
+                            <div class="g-recaptcha" data-sitekey="07b4afb6-707c-4b02-b6a8-9d5cc5324c6e"></div>
                         </div>
                         <p id="captcha-error" style="font-size:10px;margin-top: -17px;margin-left: -11px;color:#ed4337;display: none;">
                           Please verify that you are not a robot
