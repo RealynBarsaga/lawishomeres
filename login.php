@@ -91,15 +91,6 @@ if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) {
                 $_SESSION['login_success'] = true;  // Set session flag to true when login is successful
                 $login_success = true;
 
-                // After successful login, save session ID in the database
-                $session_id = session_id();
-                $user_id = $row['id']; // The logged-in user's ID
-
-                // Insert the session ID and user ID into the database
-                $query = "INSERT INTO user_sessions (session_id, user_id) VALUES (?, ?)";
-                $stmt = $con->prepare($query);
-                $stmt->bind_param("si", $session_id, $user_id);
-                $stmt->execute();
             } else {
                 // Increment login attempts
                 $_SESSION['login_attempts']++;
