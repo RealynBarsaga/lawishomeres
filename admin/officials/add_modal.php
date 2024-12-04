@@ -26,7 +26,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Image:</label>
-                                    <input type="file" name="image" class="form-control input-sm" accept=".jpg, .jpeg, .png" required>
+                                    <input type="file" name="image" id="txt_image" class="form-control input-sm" accept=".jpg, .jpeg, .png" required>
                                     <small id="fileError" style="color: red; display: none;">File size is greater than 2mb or Invalid Format !</small>
                                 </div>
                                 <div class="form-group">
