@@ -195,7 +195,7 @@
                                 <!-- Image -->
                                 <div class="form-group">
                                     <label class="control-label">Image:</label>
-                                    <input name="txt_image" class="form-control input-sm" type="file" accept=".jpg, .jpeg, .png, .bmp" required id="imageInput"/>
+                                    <input name="txt_image" class="form-control input-sm" type="file" accept=".jpg, .jpeg, .png, .bmp" required/>
                                 </div>
                             </div>
                         </div>
@@ -261,8 +261,20 @@ document.querySelector('form').addEventListener('submit', function(event) {
         }
     });
 
+    // Check image file size
+    const imageInput = document.querySelector('input[name="txt_image"]');
+    if (imageInput.files.length > 0) {
+        const file = imageInput.files[0];
+        const maxFileSize = 2 * 1024 * 1024; // 2MB in bytes
+        if (file.size > maxFileSize) {
+            alert("The selected image file exceeds 2MB. Please upload a smaller file.");
+            isValid = false;
+            imageInput.focus(); // Focus on the file input
+        }
+    }
+
     if (!isValid) {
-        event.preventDefault(); // Prevent form submission if there are invalid fields
+        event.preventDefault(); // Prevent form submission if validation fails
     }
 });
 
@@ -287,23 +299,4 @@ function getHouseholdNumber() {
     var householdNumber = selectedOption.getAttribute('data-household');
     document.getElementById('txt_householdnum').value = householdNumber;
 }
-
-document.getElementById("imageInput").addEventListener("change", function (event) {
-        const file = event.target.files[0]; // Get the selected file
-        
-        // Check if a file is selected
-        if (!file) return;
-
-        const validFormats = ["image/jpeg", "image/png", "image/bmp"];
-        const minSizeInBytes = 2 * 1024 * 1024; // 2MB in bytes
-
-        // Validation for file size and format
-        if (file.size < minSizeInBytes || !validFormats.includes(file.type)) {
-            // Show an alert popup for invalid file
-            alert("File must be greater than 2MB and in .jpg, .jpeg, .png, or .bmp format.");
-            
-            // Clear the input value to enforce selection of a valid file
-            event.target.value = "";
-        }
-    });
 </script>
