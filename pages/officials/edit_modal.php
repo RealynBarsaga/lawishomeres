@@ -16,7 +16,7 @@
                 </div>
                 <div class="form-group">
                     <label>Name: <span style="color:gray; font-size: 10px;">(Firstname Middlename, Lastname)</span></label>
-                    <input name="txt_edit_cname" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s]+$" value="'.$row['completeName'].'"/>
+                    <input name="txt_edit_cname" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" value="'.$row['completeName'].'"/>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Image:</label>
@@ -24,12 +24,13 @@
                 </div>
                 <div class="form-group">
                     <label>Contact #:</label>
-                    <input name="txt_edit_contact" id="txt_contact" class="form-control input-sm" type="text" value="'.$row['pcontact'].'" maxlength="11" pattern="^\d{11}$" required />
+                    <input name="txt_edit_contact" id="txt_contact" class="form-control input-sm" type="text" value="'.$row['pcontact'].'" maxlength="11" pattern="^09\d{9}$"
+                    title="Contact number should start with "09" and be exactly 11 digits."/>
                 </div>
 
                 <div class="form-group">
                     <label>Address: </label>
-                    <input name="txt_edit_address" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s]+$" value="'.$row['paddress'].'" />
+                    <input name="txt_edit_address" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" value="'.$row['paddress'].'" />
                 </div>
                 <div class="form-group">
                     <label>Start Term: </label>

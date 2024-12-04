@@ -27,13 +27,13 @@ echo '<div id="editModal'.$row['id'].'" class="modal fade" role="dialog">
                             <input type="hidden" value="'.$erow['id'].'" name="hidden_id" id="hidden_id"/>
                             <label class="control-label">Name: <span style="color:gray; font-size: 10px;">(Lastname Firstname, Middlename)</span></label><br>
                             <div class="col-sm-4">
-                                <input name="txt_edit_lname" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s]+$" value="'.$erow['lname'].'"/>
+                                <input name="txt_edit_lname" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" value="'.$erow['lname'].'"/>
                             </div> 
                             <div class="col-sm-4">
-                                <input name="txt_edit_fname" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s]+$" value="'.$erow['fname'].'"/>
+                                <input name="txt_edit_fname" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" value="'.$erow['fname'].'"/>
                             </div> 
                             <div class="col-sm-4">
-                                <input name="txt_edit_mname" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s]+$" value="'.$erow['mname'].'"/>
+                                <input name="txt_edit_mname" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" value="'.$erow['mname'].'"/>
                             </div>
                         </div>
 
@@ -43,6 +43,7 @@ echo '<div id="editModal'.$row['id'].'" class="modal fade" role="dialog">
                             <label class="control-label" style="margin-top:10px;">Birthdate:</label>
                             <input name="txt_edit_bdate" id="txt_edit_bdate" class="form-control input-sm" type="date" value="'.$erow['bdate'].'" onchange="calculateAge()" min="1924-01-01" max="'.date('Y-m-d').'"/>
                         </div>
+                        
                         <div class="form-group">
                             <label class="control-label">Barangay:</label>
                             <select name="txt_edit_brgy" class="form-control input-sm" id="barangaySelect">';
@@ -123,17 +124,17 @@ echo '<div id="editModal'.$row['id'].'" class="modal fade" role="dialog">
 
                         <div class="form-group">
                             <label class="control-label">Birthplace:</label>
-                            <input name="txt_edit_bplace" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s]+$" value="'.$erow['bplace'].'"/>
+                            <input name="txt_edit_bplace" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" value="'.$erow['bplace'].'"/>
                         </div>
 
                         <div class="form-group">
                             <label class="control-label">Nationality:</label>
-                            <input name="txt_edit_national" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s]+$" value="'.$erow['nationality'].'"/>
+                            <input name="txt_edit_national" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" value="'.$erow['nationality'].'"/>
                         </div>
                         
                         <div class="form-group">
                             <label class="control-label">Religion:</label>
-                            <input name="txt_edit_religion" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s]+$" value="'.$erow['religion'].'"/>
+                            <input name="txt_edit_religion" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" value="'.$erow['religion'].'"/>
                         </div>
 
                         <div class="form-group">
@@ -162,7 +163,7 @@ echo '<div id="editModal'.$row['id'].'" class="modal fade" role="dialog">
 
                         <div class="form-group">
                             <label class="control-label">Former Address:</label>
-                            <input name="txt_edit_faddress" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s]+$" value="'.$erow['formerAddress'].'"/>
+                            <input name="txt_edit_faddress" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" value="'.$erow['formerAddress'].'"/>
                         </div>
 
                         <div class="form-group">

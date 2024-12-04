@@ -16,13 +16,13 @@
                                 <div class="form-group">
                                     <label class="control-label">Name: <span style="color:gray; font-size: 10px;">(Lastname Firstname, Middlename)</span></label><br>
                                     <div class="col-sm-4">
-                                        <input name="txt_lname" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s]+$" placeholder="Lastname" required/>
+                                        <input name="txt_lname" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" placeholder="Lastname" required/>
                                     </div>
                                     <div class="col-sm-4">
-                                        <input name="txt_fname" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s]+$" placeholder="Firstname" required/>
+                                        <input name="txt_fname" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" placeholder="Firstname" required/>
                                     </div>
                                     <div class="col-sm-4">
-                                        <input name="txt_mname" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s]+$" placeholder="Middlename" required/>
+                                        <input name="txt_mname" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" placeholder="Middlename" required/>
                                     </div>
                                 </div>
 
@@ -129,19 +129,19 @@
                                 <!-- Birthplace -->
                                 <div class="form-group">
                                     <label class="control-label">Birthplace:</label>
-                                    <input name="txt_bplace" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s]+$" placeholder="Birthplace" required/>
+                                    <input name="txt_bplace" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" placeholder="Birthplace" required/>
                                 </div>
 
                                 <!-- Nationality -->
                                 <div class="form-group">
                                     <label class="control-label">Nationality:</label>
-                                    <input name="txt_national" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s]+$" placeholder="Nationality" required/>
+                                    <input name="txt_national" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" placeholder="Nationality" required/>
                                 </div>
 
                                 <!-- Religion -->
                                 <div class="form-group">
                                     <label class="control-label">Religion:</label>
-                                    <input name="txt_religion" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s]+$" placeholder="Religion" required/>
+                                    <input name="txt_religion" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" placeholder="Religion" required/>
                                 </div>
 
                                 <div class="form-group">
@@ -189,7 +189,7 @@
                                 <!-- Former Address -->
                                 <div class="form-group">
                                     <label class="control-label">Former Address:</label>
-                                    <input name="txt_faddress" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s]+$" placeholder="Former Address" required/>
+                                    <input name="txt_faddress" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" placeholder="Former Address" required/>
                                 </div>
 
                                 <!-- Image -->
