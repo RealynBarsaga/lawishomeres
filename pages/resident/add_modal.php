@@ -16,13 +16,13 @@
                                 <div class="form-group">
                                     <label class="control-label">Name: <span style="color:gray; font-size: 10px;">(Lastname Firstname, Middlename)</span></label><br>
                                     <div class="col-sm-4">
-                                        <input name="txt_lname" class="form-control input-sm" type="text" placeholder="Lastname" required/>
+                                        <input name="txt_lname" class="form-control input-sm" type="text" pattern="[A-Za-z\s]*" placeholder="Lastname" required/>
                                     </div>
                                     <div class="col-sm-4">
-                                        <input name="txt_fname" class="form-control input-sm" type="text" placeholder="Firstname" required/>
+                                        <input name="txt_fname" class="form-control input-sm" type="text" pattern="[A-Za-z\s]*" placeholder="Firstname" required/>
                                     </div>
                                     <div class="col-sm-4">
-                                        <input name="txt_mname" class="form-control input-sm" type="text" placeholder="Middlename" required/>
+                                        <input name="txt_mname" class="form-control input-sm" type="text" pattern="[A-Za-z\s]*" placeholder="Middlename" required/>
                                     </div>
                                 </div>
 
@@ -129,19 +129,19 @@
                                 <!-- Birthplace -->
                                 <div class="form-group">
                                     <label class="control-label">Birthplace:</label>
-                                    <input name="txt_bplace" class="form-control input-sm" type="text" placeholder="Birthplace" required/>
+                                    <input name="txt_bplace" class="form-control input-sm" type="text" pattern="[A-Za-z\s]*" placeholder="Birthplace" required/>
                                 </div>
 
                                 <!-- Nationality -->
                                 <div class="form-group">
                                     <label class="control-label">Nationality:</label>
-                                    <input name="txt_national" class="form-control input-sm" type="text" placeholder="Nationality" required/>
+                                    <input name="txt_national" class="form-control input-sm" type="text" pattern="[A-Za-z\s]*" placeholder="Nationality" required/>
                                 </div>
 
                                 <!-- Religion -->
                                 <div class="form-group">
                                     <label class="control-label">Religion:</label>
-                                    <input name="txt_religion" class="form-control input-sm" type="text" placeholder="Religion" required/>
+                                    <input name="txt_religion" class="form-control input-sm" type="text" pattern="[A-Za-z\s]*" placeholder="Religion" required/>
                                 </div>
 
                                 <div class="form-group">
@@ -189,7 +189,7 @@
                                 <!-- Former Address -->
                                 <div class="form-group">
                                     <label class="control-label">Former Address:</label>
-                                    <input name="txt_faddress" class="form-control input-sm" type="text" placeholder="Former Address" required/>
+                                    <input name="txt_faddress" class="form-control input-sm" type="text" pattern="[A-Za-z\s]*" placeholder="Former Address" required/>
                                 </div>
 
                                 <!-- Image -->
@@ -225,6 +225,31 @@ $(document).ready(function() {
     });
 });
 
+// Function to sanitize input
+function sanitizeInput(input) {
+    return input.replace(/[<>"'&]/g, function (char) {
+        switch (char) {
+            case '<':
+                return '&lt;';
+            case '>':
+                return '&gt;';
+            case '"':
+                return '&quot;';
+            case "'":
+                return '&#x27;';
+            case '&':
+                return '&amp;';
+            default:
+                return char;
+        }
+    });
+}
+
+document.querySelector('[name="txt_lname"], [name="txt_fname"], [name="txt_mname"], [name="txt_bplace"], [name="txt_national"], [name="txt_religion"], [name="txt_faddress"]').addEventListener('input', function(event) {
+    // Sanitize user input
+    event.target.value = sanitizeInput(event.target.value);
+});
+
 // JavaScript to dynamically update the purok dropdown based on selected barangay
 const puroks = <?php echo json_encode($puroks); ?>; // Pass the PHP puroks array to JavaScript
 
@@ -245,26 +270,4 @@ document.getElementById('barangay_select').addEventListener('change', function()
         });
     }
 });
-
-// Toggle Head of Family dropdown based on role selection
-function toggleHeadOfFamily() {
-    var roleSelect = document.getElementById('roleSelect');
-    var headOfFamilySelect = document.getElementById('headOfFamilySelect');
-    
-    if (roleSelect.value === 'Members') {
-        headOfFamilySelect.style.display = 'block';
-        householdNumField.readOnly = true;  // Make the Household # readonly if role is 'Members'
-    } else {
-        headOfFamilySelect.style.display = 'none';
-        document.getElementById('txt_householdnum').value = ''; // Clear household number if Head of Family is not selected
-    }
-}
-
-// Update Household Number based on selected Head of Family
-function getHouseholdNumber() {
-    var headOfFamilySelect = document.querySelector('[name="txt_head_of_family"]');
-    var selectedOption = headOfFamilySelect.options[headOfFamilySelect.selectedIndex];
-    var householdNumber = selectedOption.getAttribute('data-household');
-    document.getElementById('txt_householdnum').value = householdNumber;
-}
 </script>
