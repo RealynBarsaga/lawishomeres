@@ -28,7 +28,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Image:</label>
-                                    <input type="file" name="image" class="form-control input-sm" accept=".jpg, .jpeg, .png" required>
+                                    <input type="file" name="image" id="txt_image" class="form-control input-sm" accept=".jpg, .jpeg, .png" required>
+                                    <small id="fileError" style="color: red; display: none;">File size is greater than 2mb or Invalid Format !</small>
                                 </div>
                                 <div class="form-group">
                                     <label>Contact #:</label>
@@ -76,7 +77,7 @@
                     </div>
                     <div class="modal-footer">
                         <input type="button" class="btn btn-default btn-sm" data-dismiss="modal" value="Cancel"/>
-                        <input type="submit" class="btn btn-primary btn-sm" name="btn_add" value="Add Officials"/>
+                        <input type="submit" class="btn btn-primary btn-sm" name="btn_add" value="Add" onclick="validateAndSubmit(event)"/>
                     </div>
                 </div>
               </div>
@@ -107,4 +108,21 @@
             }
         });
     });
+
+    function validateAndSubmit(event) {
+        var inputFile = document.getElementById('txt_image');
+        var errorMessage = document.getElementById('fileError');
+        var file = inputFile.files[0];
+
+        // Check if the file exists and its size
+        if (file && file.size > 2 * 1024 * 1024) { // 2MB in bytes
+            // Prevent form submission
+            event.preventDefault();
+            // Show the error message
+            errorMessage.style.display = 'block';
+        } else {
+            // Hide the error message if file size is valid
+            errorMessage.style.display = 'none';
+        }
+    }
 </script>
