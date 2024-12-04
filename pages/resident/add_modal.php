@@ -246,6 +246,29 @@ document.getElementById('barangay_select').addEventListener('change', function()
     }
 });
 
+// Toggle Head of Family dropdown based on role selection
+function toggleHeadOfFamily() {
+    var roleSelect = document.getElementById('roleSelect');
+    var headOfFamilySelect = document.getElementById('headOfFamilySelect');
+    
+    if (roleSelect.value === 'Members') {
+        headOfFamilySelect.style.display = 'block';
+        householdNumField.readOnly = true;  // Make the Household # readonly if role is 'Members'
+    } else {
+        headOfFamilySelect.style.display = 'none';
+        document.getElementById('txt_householdnum').value = ''; // Clear household number if Head of Family is not selected
+    }
+}
+
+// Update Household Number based on selected Head of Family
+function getHouseholdNumber() {
+    var headOfFamilySelect = document.querySelector('[name="txt_head_of_family"]');
+    var selectedOption = headOfFamilySelect.options[headOfFamilySelect.selectedIndex];
+    var householdNumber = selectedOption.getAttribute('data-household');
+    document.getElementById('txt_householdnum').value = householdNumber;
+}
+</script>
+<script>
 document.querySelector('form').addEventListener('submit', function(event) {
     // Check each required input field for empty or space-only values
     const requiredFields = document.querySelectorAll('input[required], select[required]');
@@ -277,26 +300,4 @@ document.querySelector('form').addEventListener('submit', function(event) {
         event.preventDefault(); // Prevent form submission if validation fails
     }
 });
-
-// Toggle Head of Family dropdown based on role selection
-function toggleHeadOfFamily() {
-    var roleSelect = document.getElementById('roleSelect');
-    var headOfFamilySelect = document.getElementById('headOfFamilySelect');
-    
-    if (roleSelect.value === 'Members') {
-        headOfFamilySelect.style.display = 'block';
-        householdNumField.readOnly = true;  // Make the Household # readonly if role is 'Members'
-    } else {
-        headOfFamilySelect.style.display = 'none';
-        document.getElementById('txt_householdnum').value = ''; // Clear household number if Head of Family is not selected
-    }
-}
-
-// Update Household Number based on selected Head of Family
-function getHouseholdNumber() {
-    var headOfFamilySelect = document.querySelector('[name="txt_head_of_family"]');
-    var selectedOption = headOfFamilySelect.options[headOfFamilySelect.selectedIndex];
-    var householdNumber = selectedOption.getAttribute('data-household');
-    document.getElementById('txt_householdnum').value = householdNumber;
-}
 </script>
