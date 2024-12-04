@@ -255,7 +255,7 @@ document.querySelector('form').addEventListener('submit', function(event) {
         const value = field.value.trim(); // Remove leading/trailing spaces
         if (value === '') {
             // Show a custom alert or display the error message
-            alert(`We will not accept spaces: ${field.placeholder || field.name}`);
+            alert(`Please fill out the required field: ${field.placeholder || field.name}`);
             isValid = false;
             field.focus(); // Focus on the first empty required field
         }
