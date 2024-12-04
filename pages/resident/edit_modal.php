@@ -164,10 +164,11 @@ echo '<div id="editModal'.$row['id'].'" class="modal fade" role="dialog">
                             <label class="control-label">Former Address:</label>
                             <input name="txt_edit_faddress" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s]+$" value="'.$erow['formerAddress'].'"/>
                         </div>
-                        
+
                         <div class="form-group">
                             <label class="control-label">Image:</label>
-                            <input name="txt_edit_image" class="form-control input-sm" type="file" accept=".jpg, .jpeg, .png, .bmp"/>
+                            <input name="txt_edit_image" id="txt_edit_image" class="form-control input-sm" type="file" accept=".jpg, .jpeg, .png, .bmp"/>
+                            <small id="fileError" style="color: red; display: none;">The selected image file exceeds 2MB. Please upload a smaller file.</small>
                         </div>
                     </div>
                 </div>
@@ -175,7 +176,7 @@ echo '<div id="editModal'.$row['id'].'" class="modal fade" role="dialog">
         </div>
         <div class="modal-footer">
             <input type="button" class="btn btn-default btn-sm" data-dismiss="modal" value="Cancel"/>
-            <input type="submit" class="btn btn-primary btn-sm" name="btn_save" value="Save"/>
+            <input type="submit" class="btn btn-primary btn-sm" name="btn_save" value="Save" onclick="validateAndSubmit(event)"/>
         </div>
     </div>
   </div>
@@ -268,4 +269,20 @@ document.querySelector('form').addEventListener('submit', function(event) {
         event.preventDefault(); // Prevent form submission if there are invalid fields
     }
 });
+function validateAndSubmit(event) {
+        var inputFile = document.getElementById('txt_image');
+        var errorMessage = document.getElementById('fileError');
+        var file = inputFile.files[0];
+
+        // Check if the file exists and its size
+        if (file && file.size > 2 * 1024 * 1024) { // 2MB in bytes
+            // Prevent form submission
+            event.preventDefault();
+            // Show the error message
+            errorMessage.style.display = 'block';
+        } else {
+            // Hide the error message if file size is valid
+            errorMessage.style.display = 'none';
+        }
+    }
 </script>
