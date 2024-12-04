@@ -144,7 +144,7 @@ if ($error || $error_attempts) {
     <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <!-- Theme style -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <script src="https://dashboard.hcaptcha.com/overview" async defer></script>
+    <script src="https://hcaptcha.com/1/api.js" async defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -809,7 +809,7 @@ ul li {
                             </span>
                         </div>
                         <div class="form-group" style="margin-top: 5px; width: 3px; margin-left: -11px; transform: scale(0.99); transform-origin: 0 0;">
-                            <div class="g-recaptcha" data-sitekey="07b4afb6-707c-4b02-b6a8-9d5cc5324c6e"></div>
+                            <div class="h-captcha" data-sitekey="07b4afb6-707c-4b02-b6a8-9d5cc5324c6e"></div>
                         </div>
                         <p id="captcha-error" style="font-size:10px;margin-top: -17px;margin-left: -11px;color:#ed4337;display: none;">
                           Please verify that you are not a robot
