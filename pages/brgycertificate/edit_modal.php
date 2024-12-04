@@ -20,11 +20,11 @@
                 <input type="hidden" value="'.$row['id'].'" name="hidden_id" id="hidden_id"/>
                 <div class="form-group">
                     <label>Resident Name: </label>
-                    <input name="txt_edit_resident" class="form-control input-sm" type="text" value="'.$row['Name'].'"/>
+                    <input name="txt_edit_resident" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" value="'.$row['Name'].'"/>
                 </div>
                 <div class="form-group">
                     <label>Purpose : </label>
-                    <input name="txt_edit_purpose" class="form-control input-sm" type="text" value="'.$row['purpose'].'" />
+                    <input name="txt_edit_purpose" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" value="'.$row['purpose'].'" />
                 </div>
                 <div class="form-group">
                     <label class="control-label">Age:</label>
@@ -34,7 +34,7 @@
                 </div>
                 <div class="form-group">
                     <label>Purok: </label>
-                    <input name="txt_edit_purok" class="form-control input-sm" type="text" value="'.$row['purok'].'" />
+                    <input name="txt_edit_purok" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" value="'.$row['purok'].'" />
                 </div>
                 <div class="form-group">
                     <label class="control-label">Civil Status:</label>
@@ -71,4 +71,24 @@ function calculateAge() {
 // Set minimum date to January 1, 2024 and disable future years
 document.getElementById('txt_edit_bdate').setAttribute('min', '1924-01-01');
 document.getElementById('txt_edit_bdate').setAttribute('max', new Date().toISOString().split('T')[0]);
+
+document.querySelector('form').addEventListener('submit', function(event) {
+    // Check each required input field for empty or space-only values
+    const requiredFields = document.querySelectorAll('input[required], select[required]');
+    let isValid = true;
+
+    requiredFields.forEach(function(field) {
+        const value = field.value.trim(); // Remove leading/trailing spaces
+        if (value === '') {
+            // Show a custom alert or display the error message
+            alert(`Please fill out the required field: ${field.placeholder || field.name}`);
+            isValid = false;
+            field.focus(); // Focus on the first empty required field
+        }
+    });
+
+    if (!isValid) {
+        event.preventDefault(); // Prevent form submission if there are invalid fields
+    }
+});
 </script>
