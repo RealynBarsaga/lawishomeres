@@ -13,7 +13,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label>Resident Name:</label>
-                        <input name="txt_name" class="form-control input-sm" type="text" placeholder="Name" required/>
+                        <input name="txt_name" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" placeholder="Name" required/>
                     </div>
                     <div class="form-group">
                         <label class="control-label">Gender:</label>
@@ -35,7 +35,7 @@
                     </div>
                     <div class="form-group">
                         <label>Purpose:</label>
-                        <input name="txt_prps" class="form-control input-sm" type="text" placeholder="Purpose" required/>
+                        <input name="txt_prps" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" placeholder="Purpose" required/>
                     </div>
                     <div class="form-group">
                         <?php
@@ -106,4 +106,24 @@
             $('#txt_age').val(age);
         });
     });
+
+    document.querySelector('form').addEventListener('submit', function(event) {
+    // Check each required input field for empty or space-only values
+    const requiredFields = document.querySelectorAll('input[required], select[required]');
+    let isValid = true;
+
+    requiredFields.forEach(function(field) {
+        const value = field.value.trim(); // Remove leading/trailing spaces
+        if (value === '') {
+            // Show a custom alert or display the error message
+            alert(`Please fill out the required field: ${field.placeholder || field.name}`);
+            isValid = false;
+            field.focus(); // Focus on the first empty required field
+        }
+    });
+
+    if (!isValid) {
+        event.preventDefault(); // Prevent form submission if there are invalid fields
+    }
+});
 </script>

@@ -1,13 +1,13 @@
 <?php
 if(isset($_POST['btn_add'])){
     // Sanitize inputs
-    $txt_name = htmlspecialchars(stripslashes(trim($_POST['txt_name'])), ENT_QUOTES, 'UTF-8');
-    $ddl_gender = htmlspecialchars(stripslashes(trim($_POST['ddl_gender'])), ENT_QUOTES, 'UTF-8');
+    $txt_name = htmlspecialchars(strip_tags(trim($_POST['txt_name'])), ENT_QUOTES, 'UTF-8');
+    $ddl_gender = htmlspecialchars(strip_tags(trim($_POST['ddl_gender'])), ENT_QUOTES, 'UTF-8');
     $txt_age = (int) $_POST['txt_age']; // Cast age to integer
-    $txt_bdate = htmlspecialchars(stripslashes(trim($_POST['txt_bdate'])), ENT_QUOTES, 'UTF-8');
-    $txt_prps = htmlspecialchars(stripslashes(trim($_POST['txt_prps'])), ENT_QUOTES, 'UTF-8');
-    $txt_purok = htmlspecialchars(stripslashes(trim($_POST['txt_purok'])), ENT_QUOTES, 'UTF-8');
-    $txt_cstatus = htmlspecialchars(stripslashes(trim($_POST['txt_cstatus'])), ENT_QUOTES, 'UTF-8');
+    $txt_bdate = htmlspecialchars(strip_tags(trim($_POST['txt_bdate'])), ENT_QUOTES, 'UTF-8');
+    $txt_prps = htmlspecialchars(strip_tags(trim($_POST['txt_prps'])), ENT_QUOTES, 'UTF-8');
+    $txt_purok = htmlspecialchars(strip_tags(trim($_POST['txt_purok'])), ENT_QUOTES, 'UTF-8');
+    $txt_cstatus = htmlspecialchars(strip_tags(trim($_POST['txt_cstatus'])), ENT_QUOTES, 'UTF-8');
     $date = date('Y-m-d'); // Current date
     
 
@@ -41,13 +41,13 @@ if(isset($_POST['btn_add'])){
 if(isset($_POST['btn_save']))
 {
     // Sanitize inputs
-    $txt_edit_resident = htmlspecialchars(stripslashes(trim($_POST['txt_edit_resident'])), ENT_QUOTES, 'UTF-8');
-    $ddl_edit_gender = htmlspecialchars(stripslashes(trim($_POST['ddl_edit_gender'])), ENT_QUOTES, 'UTF-8');
-    $txt_edit_age = htmlspecialchars(stripslashes(trim($_POST[' txt_edit_age'])), ENT_QUOTES, 'UTF-8');
-    $txt_edit_bdate = htmlspecialchars(stripslashes(trim($_POST['txt_edit_bdate'])), ENT_QUOTES, 'UTF-8');
-    $txt_edit_purpose = htmlspecialchars(stripslashes(trim($_POST['txt_edit_purpose'])), ENT_QUOTES, 'UTF-8');
-    $txt_edit_purok = htmlspecialchars(stripslashes(trim($_POST['txt_edit_purok'])), ENT_QUOTES, 'UTF-8');
-    $txt_edit_cstatus = htmlspecialchars(stripslashes(trim($_POST['txt_edit_cstatus'])), ENT_QUOTES, 'UTF-8');
+    $txt_edit_resident = htmlspecialchars(strip_tags(trim($_POST['txt_edit_resident'])), ENT_QUOTES, 'UTF-8');
+    $ddl_edit_gender = htmlspecialchars(strip_tags(trim($_POST['ddl_edit_gender'])), ENT_QUOTES, 'UTF-8');
+    $txt_edit_age = htmlspecialchars(strip_tags(trim($_POST[' txt_edit_age'])), ENT_QUOTES, 'UTF-8');
+    $txt_edit_bdate = htmlspecialchars(strip_tags(trim($_POST['txt_edit_bdate'])), ENT_QUOTES, 'UTF-8');
+    $txt_edit_purpose = htmlspecialchars(strip_tags(trim($_POST['txt_edit_purpose'])), ENT_QUOTES, 'UTF-8');
+    $txt_edit_purok = htmlspecialchars(strip_tags(trim($_POST['txt_edit_purok'])), ENT_QUOTES, 'UTF-8');
+    $txt_edit_cstatus = htmlspecialchars(strip_tags(trim($_POST['txt_edit_cstatus'])), ENT_QUOTES, 'UTF-8');
     
 
     $update_query = mysqli_query($con,"UPDATE tblindigency set 
