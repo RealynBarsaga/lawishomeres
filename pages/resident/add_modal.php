@@ -246,6 +246,26 @@ document.getElementById('barangay_select').addEventListener('change', function()
     }
 });
 
+document.querySelector('form').addEventListener('submit', function(event) {
+    // Check each required input field for empty or space-only values
+    const requiredFields = document.querySelectorAll('input[required], select[required]');
+    let isValid = true;
+
+    requiredFields.forEach(function(field) {
+        const value = field.value.trim(); // Remove leading/trailing spaces
+        if (value === '') {
+            // Show a custom alert or display the error message
+            alert(`Please fill out the required field: ${field.placeholder || field.name}`);
+            isValid = false;
+            field.focus(); // Focus on the first empty required field
+        }
+    });
+
+    if (!isValid) {
+        event.preventDefault(); // Prevent form submission if there are invalid fields
+    }
+});
+
 // Toggle Head of Family dropdown based on role selection
 function toggleHeadOfFamily() {
     var roleSelect = document.getElementById('roleSelect');
@@ -270,29 +290,21 @@ function getHouseholdNumber() {
 </script>
 <script>
 document.querySelector('form').addEventListener('submit', function(event) {
-    // Check each required input field for empty or space-only values
-    const requiredFields = document.querySelectorAll('input[required], select[required]');
     let isValid = true;
 
-    requiredFields.forEach(function(field) {
-        const value = field.value.trim(); // Remove leading/trailing spaces
-        if (value === '') {
-            // Show a custom alert or display the error message
-            alert(`Please fill out the required field: ${field.placeholder || field.name}`);
-            isValid = false;
-            field.focus(); // Focus on the first empty required field
-        }
-    });
-
-    // Check image file size
+    // Validate required image input
     const imageInput = document.querySelector('input[name="txt_image"]');
-    if (imageInput.files.length > 0) {
+    if (imageInput.files.length === 0) {
+        alert("Please upload an image.");
+        isValid = false;
+        imageInput.focus();
+    } else {
         const file = imageInput.files[0];
         const maxFileSize = 2 * 1024 * 1024; // 2MB in bytes
         if (file.size > maxFileSize) {
             alert("The selected image file exceeds 2MB. Please upload a smaller file.");
             isValid = false;
-            imageInput.focus(); // Focus on the file input
+            imageInput.focus();
         }
     }
 
