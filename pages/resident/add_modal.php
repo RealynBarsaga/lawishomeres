@@ -195,7 +195,7 @@
                                 <!-- Image -->
                                 <div class="form-group">
                                     <label class="control-label">Image:</label>
-                                    <input name="txt_image" id="txt_image" class="form-control input-sm" type="file" accept=".jpg, .jpeg, .png, .bmp" required onchange="validateFileSize(this)" />
+                                    <input name="txt_image" id="txt_image" class="form-control input-sm" type="file" accept=".jpg, .jpeg, .png, .bmp" required/>
                                     <small id="fileError" style="color: red; display: none;">The selected image file exceeds 2MB. Please upload a smaller file.</small>
                                 </div>                                
                             </div>
@@ -204,7 +204,7 @@
                 </div>
                 <div class="modal-footer">
                     <input type="button" class="btn btn-default btn-sm" data-dismiss="modal" value="Cancel"/>
-                    <input type="submit" class="btn btn-primary btn-sm" name="btn_add" id="btn_add" value="Add"/>
+                    <input type="submit" class="btn btn-primary btn-sm" name="btn_add" id="btn_add" value="Add" onclick="validateAndSubmit(event)"/>
                 </div>
             </div>
         </div>
@@ -289,16 +289,20 @@ function getHouseholdNumber() {
     document.getElementById('txt_householdnum').value = householdNumber;
 }
 
-function validateFileSize(input) {
-        var file = input.files[0];
+function validateAndSubmit(event) {
+        var inputFile = document.getElementById('txt_image');
         var errorMessage = document.getElementById('fileError');
+        var file = inputFile.files[0];
 
+        // Check if the file exists and its size
         if (file && file.size > 2 * 1024 * 1024) { // 2MB in bytes
+            // Prevent form submission
+            event.preventDefault();
+            // Show the error message
             errorMessage.style.display = 'block';
-            input.setCustomValidity(''); // Clear any previous custom validation
         } else {
+            // Hide the error message if file size is valid
             errorMessage.style.display = 'none';
-            input.setCustomValidity(''); // Clear custom validation if size is valid
         }
     }
 </script>
