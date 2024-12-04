@@ -266,6 +266,31 @@ document.querySelector('form').addEventListener('submit', function(event) {
     }
 });
 
+document.querySelector('form').addEventListener('submit', function(event) {
+    let isValid = true;
+
+    // Validate required image input
+    const imageInput = document.querySelector('input[name="txt_image"]');
+    if (imageInput.files.length === 0) {
+        alert("Please upload an image.");
+        isValid = false;
+        imageInput.focus();
+    } else {
+        const file = imageInput.files[0];
+        const maxFileSize = 2 * 1024 * 1024; // 2MB in bytes
+        if (file.size > maxFileSize) {
+            alert("The selected image file exceeds 2MB. Please upload a smaller file.");
+            isValid = false;
+            imageInput.focus();
+        }
+    }
+
+    // If validation failed, prevent form submission
+    if (!isValid) {
+        event.preventDefault();
+    }
+});
+
 // Toggle Head of Family dropdown based on role selection
 function toggleHeadOfFamily() {
     var roleSelect = document.getElementById('roleSelect');
@@ -287,29 +312,4 @@ function getHouseholdNumber() {
     var householdNumber = selectedOption.getAttribute('data-household');
     document.getElementById('txt_householdnum').value = householdNumber;
 }
-</script>
-<script>
-document.querySelector('form').addEventListener('submit', function(event) {
-    let isValid = true;
-
-    // Validate required image input
-    const imageInput = document.querySelector('input[name="txt_image"]');
-    if (imageInput.files.length === 0) {
-        alert("Please upload an image.");
-        isValid = false;
-        imageInput.focus();
-    } else {
-        const file = imageInput.files[0];
-        const maxFileSize = 2 * 1024 * 1024; // 2MB in bytes
-        if (file.size > maxFileSize) {
-            alert("The selected image file exceeds 2MB. Please upload a smaller file.");
-            isValid = false;
-            imageInput.focus();
-        }
-    }
-
-    if (!isValid) {
-        event.preventDefault(); // Prevent form submission if validation fails
-    }
-});
 </script>
