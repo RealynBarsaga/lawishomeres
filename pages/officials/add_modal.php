@@ -28,7 +28,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Image:</label>
-                                    <input type="file" name="image" class="form-control input-sm" required>
+                                    <input type="file" name="image" class="form-control input-sm" accept=".jpg, .jpeg, .png, .bmp" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Contact #:</label>
