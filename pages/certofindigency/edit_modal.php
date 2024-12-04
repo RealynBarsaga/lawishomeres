@@ -22,7 +22,7 @@
                 <input type="hidden" value="'.$row['id'].'" name="hidden_id" id="hidden_id"/>
                 <div class="form-group">
                     <label>Resident Name: </label>
-                    <input name="txt_edit_resident" class="form-control input-sm" type="text" value="'.$row['Name'].'" readonly/>
+                    <input name="txt_edit_resident" class="form-control input-sm" type="text" value="'.$row['Name'].'"/>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Gender:</label>
