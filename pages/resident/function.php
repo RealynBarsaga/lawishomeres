@@ -37,7 +37,6 @@ if (isset($_POST['btn_add'])) {
     $name = basename($_FILES['txt_image']['name']);
     $temp = $_FILES['txt_image']['tmp_name'];
     $imagetype = $_FILES['txt_image']['type'];
-    $size = $_FILES['txt_image']['size'];
 
     $milliseconds = round(microtime(true) * 1000);
     $txt_image = $milliseconds . '_' . $name;
@@ -48,7 +47,7 @@ if (isset($_POST['btn_add'])) {
 
     if ($ct == 0) {
         if ($name != "") {
-            if (($imagetype == "image/jpeg" || $imagetype == "image/png" || $imagetype == "image/bmp") && $size <= 2097000) {
+            if (($imagetype == "image/jpeg" || $imagetype == "image/png" || $imagetype == "image/bmp")) {
                 if (move_uploaded_file($temp, 'image/' . $txt_image)) {
                     // Insert resident's data
                     $query = mysqli_query($con, "INSERT INTO tbltabagak (
@@ -65,8 +64,7 @@ if (isset($_POST['btn_add'])) {
                     // Handle file move error
                 }
             } else {
-                $_SESSION['filesize'] = 1;
-                header("location: " . $_SERVER['REQUEST_URI']);
+                // Handle file move error
             }
         } else {
             $txt_image = 'default.png';
