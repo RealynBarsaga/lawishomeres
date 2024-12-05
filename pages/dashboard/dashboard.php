@@ -16,9 +16,9 @@
     $allowedURL = '/pages/dashboard/dashboard';
 
     // Check if the current URL contains '/admin/' or is an unauthorized path
-    if (strpos($currentURL, '/Adminitrator/') !== false && $currentURL !== $allowedURL) {
+    if (strpos($currentURL, '/admin/') !== false && $currentURL !== $allowedURL) {
         // Redirect to the error page if they are not allowed to access the URL
-        header('Location: redirectlink.php');
+        header('Location: ../pages/redirectlink.php');
         exit; // Ensure no further execution after redirect
     }
 
