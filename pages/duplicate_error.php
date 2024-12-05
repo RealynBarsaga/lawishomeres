@@ -3,7 +3,7 @@
     unset($_SESSION['duplicate']);
     } 
 echo '<div class="alert alert-duplicate alert-autocloseable-duplicate" style="background: #d9534f; position: fixed; top: 1em; right: 1em; z-index: 9999; display: none;">
-    X Duplicate record !
+     Duplicate record !
 </div>';
 ?>
 
@@ -12,7 +12,7 @@ echo '<div class="alert alert-duplicate alert-autocloseable-duplicate" style="ba
     unset($_SESSION['duplicateuser']);
     } 
 echo '<div class="alert alert-duplicateuser alert-autocloseable-duplicateuser" style="background: #d9534f; position: fixed; top: 1em; right: 1em; z-index: 9999; display: none;">
-    X Username Already Exists !
+     Username Already Exists !
 </div>';
 ?>
 
@@ -21,7 +21,7 @@ echo '<div class="alert alert-duplicateuser alert-autocloseable-duplicateuser" s
     unset($_SESSION['end']);
     } 
 echo '<div class="alert alert-end alert-autocloseable-end" style="background: #dff0d8; position: fixed; top: 1em; right: 1em; z-index: 9999; display: none;">
-    ✔ End Term Successfully !
+     End Term Successfully !
 </div>';
 ?>
 
@@ -30,7 +30,7 @@ echo '<div class="alert alert-end alert-autocloseable-end" style="background: #d
     unset($_SESSION['start']);
     } 
 echo '<div class="alert alert-start alert-autocloseable-start" style="background: #dff0d8; position: fixed; top: 1em; right: 1em; z-index: 9999; display: none;">
-    ✔ Start Term Successfully !
+     Start Term Successfully !
 </div>';
 ?>
 
@@ -39,7 +39,7 @@ echo '<div class="alert alert-start alert-autocloseable-start" style="background
     unset($_SESSION['delete']);
     } ?>
 <div class="alert alert-danger alert-autocloseable-danger" style="position: fixed; top: 1em; right: 1em; z-index: 9999; display: none;">
-   ✔ Deleted Successfully !
+     Deleted Successfully !
 </div>
 
 <?php if(isset($_SESSION['filesize'])){
@@ -47,7 +47,7 @@ echo '<div class="alert alert-start alert-autocloseable-start" style="background
     unset($_SESSION['filesize']);
     } 
 echo '<div class="alert alert-filesize alert-autocloseable-filesize" style="background: #d9534f; position: fixed; top: 1em; right: 1em; z-index: 9999; display: none;">
-    X File size is greater than 2mb or Invalid Format !
+     File size is greater than 2mb or Invalid Format !
 </div>';
 ?>
 
