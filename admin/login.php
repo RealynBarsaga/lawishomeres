@@ -167,7 +167,7 @@ html {
     padding: 15px; /* Add padding to the container */
 }
 .panel {
-    height: 455px;
+    height: 435px;
     min-height: 370px;
     width: 345px;
     margin-left: 0px;
