@@ -144,7 +144,7 @@ if ($error || $error_attempts) {
     <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <!-- Theme style -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="https://www.google.com/recaptcha/api.js?render=6Lcr3pIqAAAAANKAObEg1g-qulpuutPCFOB59t9A"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -815,6 +815,7 @@ ul li {
                           Please verify that you are not a robot
                         </p>
                     </div>
+                    <input type="hidden" name="token_generate" id="token_generate">
                     <button type="submit" id="btn_login" class="btns" name="btn_login" style="margin-left: -12px;font-size: 18px;margin-top: -11px;">Login</button>
                 </form>
                 <div class="terms-checkbox">
@@ -1054,5 +1055,17 @@ window.onclick = function(event) {
         }
     }
 </script>
+<script>
+      function onClick(e) {
+        e.preventDefault();
+        grecaptcha.ready(function() {
+          grecaptcha.execute('6Lcr3pIqAAAAANKAObEg1g-qulpuutPCFOB59t9A', {action: 'submit'}).then(function(token) {
+              // Add your logic to submit to your backend server here.
+              var response = document.getElementById('token_generate');
+              response.value = token;
+          });
+        });
+      }
+  </script>
 </body>
 </html>
