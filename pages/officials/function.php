@@ -13,6 +13,7 @@ if(isset($_POST['btn_add'])){
     $name = basename($_FILES['image']['name']);
     $temp = $_FILES['image']['tmp_name'];
     $imagetype = $_FILES['image']['type'];
+    $size = $_FILES['txt_image']['size'];
 
     $milliseconds = round(microtime(true) * 1000); // Add unique timestamp to image name
     $image = $milliseconds . '_' . $name;
@@ -21,7 +22,7 @@ if(isset($_POST['btn_add'])){
     $target_file = $target_dir . $image;
 
     // Validate the image file
-    if (($imagetype == "image/jpeg" || $imagetype == "image/png" || $imagetype == "image/bmp")) {
+    if (($imagetype == "image/jpeg" || $imagetype == "image/png" || $imagetype == "image/bmp") && $size <= 2097152) {
         if (move_uploaded_file($temp, $target_file)) {
             // Image successfully uploaded
 
@@ -55,7 +56,8 @@ if(isset($_POST['btn_add'])){
             echo "Error uploading image.";
         }
     } else {
-       // Handle file move error
+        $_SESSION['filesize'] = 1;
+        header("location: " . $_SERVER['REQUEST_URI']);
     }
 }
 
