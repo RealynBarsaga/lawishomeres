@@ -1,12 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-    session_start();
-    if (!isset($_SESSION['userid'])) {
-        header('Location: ../../login.php');
-        exit; // Ensure no further execution after redirect
-    }
-    include('../head_css.php');
+session_start();
+
+// Redirect to login if the user is not authenticated
+if (!isset($_SESSION['userid'])) {
+    header('Location: ../../login.php');
+    exit; // Ensure no further execution after redirect
+}
+
+// Validate URL and check if the file exists
+$url = $_SERVER['REQUEST_URI']; // Get the current URL
+$basePath = $_SERVER['DOCUMENT_ROOT']; // Root directory
+$requestedPath = realpath($basePath . parse_url($url, PHP_URL_PATH));
+
+// Check if the requested path is valid and exists within your application directory
+if (!$requestedPath || strpos($requestedPath, $basePath) !== 0 || !file_exists($requestedPath)) {
+    header("Location: ../pages/redirectlink.php");
+    exit;
+}
+
+// Include other necessary files
+include('../head_css.php');
 ?>
 <head>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -244,6 +259,25 @@ h3 {
         }
     });
 </script>    
+<script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const validUrls = [
+                'pages/dashboard/dashboard',
+                'pages/officials/officials',
+                'pages/household/household',
+                'pages/resident/resident',
+                'pages/clearance/clearance',
+                'pages/certofresidency/certofres',
+                'pages/certofindigency/certofindigency',
+                'pages/brgycertificate/brgycertificate'
+            ];
+            
+            const currentPath = window.location.pathname;
+            if (!validUrls.includes(currentPath)) {
+                window.location.href = '/redirectlink.php';
+            }
+        });
+    </script>
     <?php include "../footer.php"; ?>
 </body>
 </html>
