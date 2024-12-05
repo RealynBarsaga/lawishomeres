@@ -174,7 +174,7 @@ html {
     padding: 15px; /* Add padding to the container */
 }
 .panel {
-    height: 455px;
+    height: 435px;
     min-height: 370px;
     width: 345px;
     margin-left: 0px;
@@ -778,7 +778,7 @@ ul li {
     <div class="col-md-4 col-md-offset-4">
         <div class="panel">
             <div class="panel-body">
-            <div style="text-align:center;margin-top:-28px;">
+            <div style="text-align:center;margin-top:-10px;">
                     <img src="img/lg.png" style="height:60px;"/>
                     <h3 class="panel-title">
                         <strong>
@@ -814,7 +814,7 @@ ul li {
                         </div>
                     </div>
                     <input type="hidden" name="token_generate" id="token_generate">
-                    <button type="submit" id="btn_login" class="btns" name="btn_login" style="margin-left: -12px;font-size: 18px;margin-top: 42px;">Login</button>
+                    <button type="submit" id="btn_login" class="btns" name="btn_login" style="margin-left: -12px;font-size: 18px;margin-top: 8px;">Login</button>
                 </form>
                 <!-- Forgot password link -->
                 <div class="forgot-password" style="margin-top: -2.1px;margin-left: 84px;float: left;">
