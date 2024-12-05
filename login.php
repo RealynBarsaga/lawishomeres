@@ -706,7 +706,7 @@ ul li {
     position: fixed;
     bottom: 0;
     left: 0;
-    width: 77%;
+    width: 100%;
     background-color: #333;
     color: #fff;
     padding: 15px 30px;
@@ -715,7 +715,6 @@ ul li {
     justify-content: space-between;
     align-items: center;
     z-index: 1000;
-    margin-left: 130px;
 }
 .cookie-message h3 {
     margin: 0;
