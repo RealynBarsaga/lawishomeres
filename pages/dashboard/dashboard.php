@@ -2,10 +2,26 @@
 <html lang="en">
 <?php
     session_start();
+
+    // Check if the user is logged in
     if (!isset($_SESSION['userid'])) {
         header('Location: ../../login.php');
         exit; // Ensure no further execution after redirect
     }
+
+    // Check if the user is trying to access a restricted URL
+    $currentURL = $_SERVER['REQUEST_URI']; // Get the current URL
+
+    // Define the correct base path for the dashboard page
+    $allowedURL = '/pages/dashboard/dashboard';
+
+    // Check if the current URL contains '/admin/' or is an unauthorized path
+    if (strpos($currentURL, '/Adminitrator/') !== false && $currentURL !== $allowedURL) {
+        // Redirect to the error page if they are not allowed to access the URL
+        header('Location: redirectlink.php');
+        exit; // Ensure no further execution after redirect
+    }
+
     include('../head_css.php');
 ?>
 <head>
