@@ -821,7 +821,7 @@ ul li {
                 <!-- Horizontal rule -->
                 <hr style="border: 1px solid gray; margin-top: 10px;margin-left: -9px;width: 292px;">
                 
-                <p style="font-size:12px;color:#ed4337;margin-top: -17px;">
+                <p style="font-size:12px;color:#ed4337;margin-top: -17px;margin-left: -9px;">
                     <?php echo $error_attempts; ?>
                 </p>
                 <?php if ($error_attempts): ?>
