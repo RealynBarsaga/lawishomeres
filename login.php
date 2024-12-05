@@ -701,34 +701,23 @@ ul li {
     }
 }
 
-/* Cookie Consent Banner Styles */
 .wrapper {
     position: fixed;
     bottom: 0;
     left: 0;
-    width: 100%;
+    width: auto; /* Change to fit content */
+    max-width: 400px; /* Optional: Limit width */
     background-color: #333;
     color: #fff;
-    padding: 15px 30px;
+    padding: 15px 20px;
     font-family: Arial, sans-serif;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column; /* Stack content vertically */
+    align-items: flex-start; /* Align content to the left */
     z-index: 1000;
 }
-
-/* Align buttons on the left */
-.buttons {
-    display: flex;
-    gap: 15px;
-    order: 1; /* Place buttons first in the flex order */
-}
-
-/* Text content aligned to the right */
 .cookie-message {
-    text-align: right;
-    flex: 1; /* Take up remaining space */
-    order: 2; /* Place text second in the flex order */
+    margin-bottom: 10px; /* Add space between message and buttons */
 }
 .cookie-message h3 {
     margin: 0;
@@ -740,47 +729,27 @@ ul li {
     font-size: 14px;
     color: #ddd;
 }
-
-/* Accept Button Styles */
-#acceptBtn {
+.buttons {
+    display: flex;
+    gap: 10px; /* Adjust spacing between buttons */
+}
+#acceptBtn, #rejectBtn {
     padding: 10px 20px;
-    background-image: url('img/bg.jpg');
+    background-color: #444; /* Replace background image */
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 14px;
-    transition: background-image 0.3s ease;
+    transition: background-color 0.3s ease;
 }
-#acceptBtn:hover {
+#acceptBtn:hover, #rejectBtn:hover {
     background-color: #0056b3;
 }
-#acceptBtn:focus {
+#acceptBtn:focus, #rejectBtn:focus {
     outline: none;
 }
-#acceptBtn[disabled] {
-    background-color: #777;
-    cursor: not-allowed;
-}
-
-/* Reject Button Styles */
-#rejectBtn {
-    padding: 10px 20px;
-    background-image: url('img/bg.jpg');
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-image 0.3s ease;
-}
-#rejectBtn:hover {
-    background-color: #0056b3;
-}
-#rejectBtn:focus {
-    outline: none;
-}
-#rejectBtn[disabled] {
+#acceptBtn[disabled], #rejectBtn[disabled] {
     background-color: #777;
     cursor: not-allowed;
 }
