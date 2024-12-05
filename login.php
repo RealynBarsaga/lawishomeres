@@ -778,7 +778,7 @@ ul li {
     <div class="col-md-4 col-md-offset-4">
         <div class="panel">
             <div class="panel-body">
-            <div style="text-align:center;margin-top:-10px;">
+            <div style="text-align:center;margin-top:-19px;">
                     <img src="img/lg.png" style="height:60px;"/>
                     <h3 class="panel-title">
                         <strong>
