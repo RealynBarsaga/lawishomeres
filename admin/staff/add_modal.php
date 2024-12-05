@@ -45,7 +45,7 @@
 
                             <div class="form-group">
                                 <label>Email:</label>
-                                <input name="txt_email" class="form-control input-sm" type="email" placeholder="Ex: juan@sample.com" pattern="^(?!\s*$)[A-Za-z\s.,]+$" required/>
+                                <input name="txt_email" class="form-control input-sm" type="email" placeholder="Ex: juan@sample.com" pattern="^(?!\s*$@)[A-Za-z\s.,]+$" required/>
                             </div>
 
                             <div class="form-group">
