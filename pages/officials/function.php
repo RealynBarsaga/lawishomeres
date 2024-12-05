@@ -13,7 +13,7 @@ if(isset($_POST['btn_add'])){
     $name = basename($_FILES['image']['name']);
     $temp = $_FILES['image']['tmp_name'];
     $imagetype = $_FILES['image']['type'];
-    $size = $_FILES['txt_image']['size'];
+    $size = $_FILES['image']['size'];
 
     $milliseconds = round(microtime(true) * 1000); // Add unique timestamp to image name
     $image = $milliseconds . '_' . $name;

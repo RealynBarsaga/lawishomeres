@@ -8,32 +8,48 @@ if (isset($_POST['btn_add'])) {
     $filename = date("mdGis") . ".png";
     $tmp_name = $_FILES['logo']['tmp_name'];
     $folder = "./logo/" . $filename;
+    
+    $imagetype = mime_content_type($tmp_name);
+    $size = $_FILES['logo']['size'];
 
-    // Check if the username already exists
-    $su = mysqli_query($con, "SELECT * FROM tblstaff WHERE username = '$txt_uname'");
-    $ct = mysqli_num_rows($su);
+    // Validate the image file
+    if (($imagetype == "image/jpeg" || $imagetype == "image/png" || $imagetype == "image/bmp") && $size <= 2097152) {
+        if ($_FILES['logo']['error'] === UPLOAD_ERR_OK) {
+            // Image successfully uploaded
 
-    if ($ct == 0) {
-        $hashed = password_hash($txt_pass, PASSWORD_DEFAULT);
-        $query = mysqli_query($con, "INSERT INTO tblstaff (name, username, email, password, compass,logo) 
-            VALUES ('$txt_name', '$txt_uname', '$txt_email', '$hashed', '$hashed', '$filename')") or die('Error: ' . mysqli_error($con));
-        if ($query) {
-            move_uploaded_file($tmp_name, $folder);
-            $_SESSION['added'] = 1;
-
-            // Log the action if the user has the appropriate role
-            if (isset($_SESSION['role']) && $_SESSION['role'] === 'Administrator') {
-                $action = 'Added Barangay ' . $txt_name;
-                $iquery = mysqli_query($con, "INSERT INTO tbllogs (user, logdate, action) VALUES ('Administrator', NOW(), '$action')");
+            // Check if the username already exists
+            $su = mysqli_query($con, "SELECT * FROM tblstaff WHERE username = '$txt_uname'");
+            $ct = mysqli_num_rows($su);
+        
+            if ($ct == 0) {
+                $hashed = password_hash($txt_pass, PASSWORD_DEFAULT);
+                $query = mysqli_query($con, "INSERT INTO tblstaff (name, username, email, password, compass,logo) 
+                    VALUES ('$txt_name', '$txt_uname', '$txt_email', '$hashed', '$hashed', '$filename')") or die('Error: ' . mysqli_error($con));
+                if ($query) {
+                    move_uploaded_file($tmp_name, $folder);
+                    $_SESSION['added'] = 1;
+        
+                    // Log the action if the user has the appropriate role
+                    if (isset($_SESSION['role']) && $_SESSION['role'] === 'Administrator') {
+                        $action = 'Added Barangay ' . $txt_name;
+                        $iquery = mysqli_query($con, "INSERT INTO tbllogs (user, logdate, action) VALUES ('Administrator', NOW(), '$action')");
+                    }
+        
+                    header("location: " . $_SERVER['REQUEST_URI']);
+                    exit();
+                }
+            } else {
+                $_SESSION['duplicateuser'] = 1;
+                header("location: " . $_SERVER['REQUEST_URI']);
+                exit();
             }
-
-            header("location: " . $_SERVER['REQUEST_URI']);
-            exit();
+        } else {
+            // Handle file move error
+            echo "Error uploading image.";
         }
     } else {
-        $_SESSION['duplicateuser'] = 1;
+        $_SESSION['filesize'] = 1;
         header("location: " . $_SERVER['REQUEST_URI']);
-        exit();
     }
 }
 
@@ -45,24 +61,32 @@ if (isset($_POST['btn_save'])) {
     $txt_edit_pass = htmlspecialchars(strip_tags(trim($_POST['txt_edit_pass'])), ENT_QUOTES, 'UTF-8');
     $txt_edit_compass = htmlspecialchars(strip_tags(trim($_POST['txt_edit_compass'])), ENT_QUOTES, 'UTF-8');
 
-
-    // Check if the username already exists
-    // $su = mysqli_query($con, "SELECT * FROM tblstaff WHERE username = '$txt_edit_uname'");
-    // $ct = mysqli_num_rows($su);
-
+    // Check if a file is uploaded
     if ($_FILES['logo']['error'] > 0) {
+        // No file uploaded or error during upload
         if (!empty($txt_edit_pass)) {
             $hashed = password_hash($txt_edit_pass, PASSWORD_DEFAULT);
-        $update_query = mysqli_query($con, "UPDATE tblstaff 
-            SET name = '$txt_edit_name', username = '$txt_edit_uname', email = '$txt_edit_email', password = '$hashed', compass = '$hashed' 
-            WHERE id = '$txt_id'") or die('Error: ' . mysqli_error($con));
-        }else{
-            
-        $update_query = mysqli_query($con, "UPDATE tblstaff 
-            SET name = '$txt_edit_name', username = '$txt_edit_uname'
-            WHERE id = '$txt_id'") or die('Error: ' . mysqli_error($con));
+            $update_query = mysqli_query($con, "UPDATE tblstaff 
+                SET name = '$txt_edit_name', username = '$txt_edit_uname', email = '$txt_edit_email', password = '$hashed', compass = '$hashed' 
+                WHERE id = '$txt_id'") or die('Error: ' . mysqli_error($con));
+        } else {
+            $update_query = mysqli_query($con, "UPDATE tblstaff 
+                SET name = '$txt_edit_name', username = '$txt_edit_uname'
+                WHERE id = '$txt_id'") or die('Error: ' . mysqli_error($con));
         }
-    }else{
+    } else {
+        // File uploaded, validate size
+        $max_size = 2097152; // 2MB in bytes
+        $file_size = $_FILES['logo']['size'];
+
+        if ($file_size > $max_size) {
+            // File size exceeds the limit
+            $_SESSION['filesize'] = 1;
+            header("Location: " . $_SERVER['REQUEST_URI']);
+            exit();
+        }
+
+        // Process the file if size is valid
         $filename = date("mdGis") . ".png";
         $tmp_name = $_FILES['logo']['tmp_name'];
         $folder = "./logo/" . $filename;
@@ -70,16 +94,14 @@ if (isset($_POST['btn_save'])) {
         if (!empty($txt_edit_pass)) {
             $hashed = password_hash($txt_edit_pass, PASSWORD_DEFAULT);
             move_uploaded_file($tmp_name, $folder);
-        $update_query = mysqli_query($con, "UPDATE tblstaff 
-            SET name = '$txt_edit_name', username = '$txt_edit_uname', email = '$txt_edit_email', password = '$hashed', compass = '$hashed', logo = '$filename' 
-            WHERE id = '$txt_id'") or die('Error: ' . mysqli_error($con));
-           
-        }else{
+            $update_query = mysqli_query($con, "UPDATE tblstaff 
+                SET name = '$txt_edit_name', username = '$txt_edit_uname', email = '$txt_edit_email', password = '$hashed', compass = '$hashed', logo = '$filename' 
+                WHERE id = '$txt_id'") or die('Error: ' . mysqli_error($con));
+        } else {
             move_uploaded_file($tmp_name, $folder);
-        $update_query = mysqli_query($con, "UPDATE tblstaff 
-            SET name = '$txt_edit_name', username = '$txt_edit_uname', logo = '$filename' 
-            WHERE id = '$txt_id'") or die('Error: ' . mysqli_error($con));
-            
+            $update_query = mysqli_query($con, "UPDATE tblstaff 
+                SET name = '$txt_edit_name', username = '$txt_edit_uname', logo = '$filename' 
+                WHERE id = '$txt_id'") or die('Error: ' . mysqli_error($con));
         }
     }
 
