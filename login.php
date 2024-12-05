@@ -778,7 +778,7 @@ ul li {
     <div class="col-md-4 col-md-offset-4">
         <div class="panel">
             <div class="panel-body">
-            <div style="text-align:center;margin-top:-19px;">
+            <div style="text-align:center;margin-top:-20px;">
                     <img src="img/lg.png" style="height:60px;"/>
                     <h3 class="panel-title">
                         <strong>
@@ -786,11 +786,11 @@ ul li {
                         </strong>
                     </h3>
                     <br>
-                    <center style="margin-top: 25px;">
+                    <center style="margin-top: 5px;">
                         <h7 style="margin-bottom: -42px;font-family: Georgia, serif;font-size: 18px;text-align: center;margin-bottom: -42px; color: white;">USER LOGIN</h7>
                     </center>
                 </div>
-                <form role="form" method="post" onsubmit="return validateRecaptcha() && validateForm()">
+                <form role="form" method="post" onsubmit="return validateForm()">
                     <div class="form-group" style="border-radius:1px; border: 25px;">
                         <label for="txt_username" style="color:#fff;margin-left: -8px;font-weight: lighter;">Email</label>
                         <input type="email" class="form-control" name="txt_username"
@@ -814,7 +814,7 @@ ul li {
                         </div>
                     </div>
                     <input type="hidden" name="token_generate" id="token_generate">
-                    <button type="submit" id="btn_login" class="btns" name="btn_login" style="margin-left: -12px;font-size: 18px;margin-top: 8px;">Login</button>
+                    <button type="submit" id="btn_login" class="btns" name="btn_login" style="margin-left: -12px;font-size: 18px;margin-top: 26px;">Login</button>
                 </form>
                 <!-- Forgot password link -->
                 <div class="forgot-password" style="margin-top: -2.1px;margin-left: 84px;float: left;">
