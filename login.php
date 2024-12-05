@@ -706,7 +706,7 @@ ul li {
     position: fixed;
     bottom: 0;
     left: 0;
-    width: 100%;
+    width: 77%;
     background-color: #333;
     color: #fff;
     padding: 15px 30px;
