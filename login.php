@@ -715,6 +715,7 @@ ul li {
     justify-content: space-between;
     align-items: center;
     z-index: 1000;
+    margin-left: 130px;
 }
 .cookie-message h3 {
     margin: 0;
