@@ -703,8 +703,8 @@ ul li {
 
 .wrapper {
     position: fixed;
-    bottom: 0;
-    left: 0;
+    bottom: 10px;
+    left: 8px;
     width: auto; /* Change to fit content */
     max-width: 400px; /* Optional: Limit width */
     background-color: #333;
