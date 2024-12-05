@@ -732,6 +732,7 @@ ul li {
 .buttons {
     display: flex;
     gap: 10px; /* Adjust spacing between buttons */
+    margin-left: 191px;
 }
 #acceptBtn, #rejectBtn {
     padding: 10px 20px;
