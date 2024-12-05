@@ -745,7 +745,7 @@ ul li {
     transition: background-color 0.3s ease;
 }
 #acceptBtn:hover, #rejectBtn:hover {
-    background-color: #0056b3;
+    background-image: url('img/bg.jpg');
 }
 #acceptBtn:focus, #rejectBtn:focus {
     outline: none;
