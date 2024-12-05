@@ -16,7 +16,7 @@ $requestedPath = realpath($basePath . parse_url($url, PHP_URL_PATH));
 
 // Check if the requested path is valid and exists within your application directory
 if (!$requestedPath || strpos($requestedPath, $basePath) !== 0 || !file_exists($requestedPath)) {
-    header("Location: ../pages/redirectlink.php");
+    header("Location: /redirectlink.php");
     exit;
 }
 
