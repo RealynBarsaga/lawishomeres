@@ -716,6 +716,20 @@ ul li {
     align-items: center;
     z-index: 1000;
 }
+
+/* Align buttons on the left */
+.buttons {
+    display: flex;
+    gap: 15px;
+    order: 1; /* Place buttons first in the flex order */
+}
+
+/* Text content aligned to the right */
+.cookie-message {
+    text-align: right;
+    flex: 1; /* Take up remaining space */
+    order: 2; /* Place text second in the flex order */
+}
 .cookie-message h3 {
     margin: 0;
     font-size: 18px;
@@ -726,10 +740,8 @@ ul li {
     font-size: 14px;
     color: #ddd;
 }
-.buttons {
-    display: flex;
-    gap: 15px;
-}
+
+/* Accept Button Styles */
 #acceptBtn {
     padding: 10px 20px;
     background-image: url('img/bg.jpg');
@@ -750,6 +762,8 @@ ul li {
     background-color: #777;
     cursor: not-allowed;
 }
+
+/* Reject Button Styles */
 #rejectBtn {
     padding: 10px 20px;
     background-image: url('img/bg.jpg');
