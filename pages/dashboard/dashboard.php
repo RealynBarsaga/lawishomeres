@@ -16,6 +16,7 @@ $requestedPath = realpath($basePath . parse_url($url, PHP_URL_PATH));
 
 // Check if the requested path is valid and exists within your application directory
 if (!$requestedPath || strpos($requestedPath, $basePath) !== 0 || !file_exists($requestedPath)) {
+    header("Location: /redirectlink.php");
     exit;
 }
 
@@ -261,14 +262,14 @@ h3 {
 <script>
         document.addEventListener('DOMContentLoaded', function () {
             const validUrls = [
-                'pages/dashboard/dashboard',
-                'pages/officials/officials',
-                'pages/household/household',
-                'pages/resident/resident',
-                'pages/clearance/clearance',
-                'pages/certofresidency/certofres',
-                'pages/certofindigency/certofindigency',
-                'pages/brgycertificate/brgycertificate'
+                '/dashboard/dashboard',
+                '/officials/officials',
+                '/household/household',
+                '/resident/resident',
+                '/clearance/clearance',
+                '/certofresidency/certofres',
+                '/certofindigency/certofindigency',
+                '/brgycertificate/brgycertificate'
             ];
             
             const currentPath = window.location.pathname;
