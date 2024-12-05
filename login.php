@@ -786,7 +786,7 @@ ul li {
                         </strong>
                     </h3>
                     <br>
-                    <center style="margin-top: -5px;">
+                    <center style="margin-top: 25px;">
                         <h7 style="margin-bottom: -42px;font-family: Georgia, serif;font-size: 18px;text-align: center;margin-bottom: -42px; color: white;">USER LOGIN</h7>
                     </center>
                 </div>
@@ -814,7 +814,7 @@ ul li {
                         </div>
                     </div>
                     <input type="hidden" name="token_generate" id="token_generate">
-                    <button type="submit" id="btn_login" class="btns" name="btn_login" style="margin-left: -12px;font-size: 18px;margin-top: -11px;">Login</button>
+                    <button type="submit" id="btn_login" class="btns" name="btn_login" style="margin-left: -12px;font-size: 18px;margin-top: 42px;">Login</button>
                 </form>
                 <!-- Forgot password link -->
                 <div class="forgot-password" style="margin-top: -2.1px;margin-left: 84px;float: left;">
