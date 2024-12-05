@@ -30,7 +30,7 @@
                 </div>
                 <div class="form-group">
                     <label>Email:</label>
-                    <input name="txt_edit_email" class="form-control input-sm" type="email" placeholder="Ex: juan@sample.com" pattern="^(?!\s*$)[A-Za-z\s.,]+$"/>
+                    <input name="txt_edit_email" class="form-control input-sm" type="email" placeholder="Ex: juan@sample.com" $pattern="/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/"/>
                 </div>
                 <div class="form-group">
                     <label>Password: </label>
