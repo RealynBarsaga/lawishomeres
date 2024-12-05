@@ -812,7 +812,7 @@ ul li {
                         </div>
                     </div>
                     <input type="hidden" name="token_generate" id="token_generate">
-                    <button type="submit" id="btn_login" class="btns" name="btn_login" style="margin-left: -12px;font-size: 18px;margin-top: -11px;">Login</button>
+                    <button type="submit" id="btn_login" class="btns" name="btn_login" style="margin-left: -12px;font-size: 18px;margin-top: 26px;">Login</button>
                 </form>
                <!-- Forgot password link -->
                <div class="forgot-password" style="margin-top: -2.1px;margin-left: 84px;float: left;">
@@ -821,11 +821,6 @@ ul li {
                 <!-- Horizontal rule -->
                 <hr style="border: 1px solid gray; margin-top: 10px;margin-left: -9px;width: 292px;">
                 
-                
-                <!-- Error attempts message -->
-                <p id="termsError" style="font-size:12px;margin-top: -17px;margin-left: -8px;color:#ed4337;display: none;">
-                    Please accept the terms and conditions to continue
-                </p>
                 <p style="font-size:12px;color:#ed4337;margin-top: -17px;">
                     <?php echo $error_attempts; ?>
                 </p>
