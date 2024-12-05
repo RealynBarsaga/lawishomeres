@@ -924,6 +924,21 @@ ul li {
             });
         }
     });
+    
+    document.addEventListener("DOMContentLoaded", function() {
+      document.getElementById("error-ok-button").addEventListener("click", function() {
+          document.getElementById("error-modal").style.display = 'none';
+      });
+  });
+
+  // Wait for the DOM to load
+  document.addEventListener("DOMContentLoaded", function() {
+      // Attach a click event to the OK button
+      document.getElementById("error-ok-button1").addEventListener("click", function() {
+          // Close the error modal when OK is clicked
+          document.getElementById("error-modal1").style.display = 'none';
+      });
+  });
 </script>
 <script>
 // Cookie Consent Logic
@@ -1023,21 +1038,6 @@ window.onclick = function(event) {
     }
     return true; // Allow form submission
   }
-
-  document.addEventListener("DOMContentLoaded", function() {
-      document.getElementById("error-ok-button").addEventListener("click", function() {
-          document.getElementById("error-modal").style.display = 'none';
-      });
-  });
-
-  // Wait for the DOM to load
-  document.addEventListener("DOMContentLoaded", function() {
-      // Attach a click event to the OK button
-      document.getElementById("error-ok-button1").addEventListener("click", function() {
-          // Close the error modal when OK is clicked
-          document.getElementById("error-modal1").style.display = 'none';
-      });
-  });
 
   function togglePassword(inputId, icon) {
         const input = document.getElementById(inputId);

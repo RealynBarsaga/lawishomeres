@@ -12,7 +12,8 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>Barangay Logo:</label>
-                                <input name="logo" class="form-control input-sm" type="file" required/>
+                                <input name="logo" id="txt_image" class="form-control input-sm" type="file" accept=".jpg, .jpeg, .png" required/>
+                                <small id="fileError" style="color: red; display: none;">File size is greater than 2mb or Invalid Format !</small>
                             </div>
 
                             <div class="form-group">
@@ -38,13 +39,13 @@
 
                             <div class="form-group">
                                 <label>Username:</label>
-                                <input name="txt_uname" class="form-control input-sm" id="username" type="text" placeholder="Username" required/>
+                                <input name="txt_uname" class="form-control input-sm" id="username" type="text" placeholder="Username" pattern="^(?!\s*$)[A-Za-z\s.,]+$" required/>
                                 <label id="user_msg" class="text-danger"></label>
                             </div>
 
                             <div class="form-group">
                                 <label>Email:</label>
-                                <input name="txt_email" class="form-control input-sm" type="email" placeholder="Ex: juan@sample.com" required/>
+                                <input name="txt_email" class="form-control input-sm" type="email" placeholder="Ex: juan@sample.com" pattern="^(?!\s*$)[A-Za-z\s.,]+$" required/>
                             </div>
 
                             <div class="form-group">
@@ -77,7 +78,7 @@
 
                 <div class="modal-footer">
                     <input type="button" class="btn btn-default btn-sm" data-dismiss="modal" value="Cancel"/>
-                    <input type="submit" class="btn btn-primary btn-sm" name="btn_add" id="btn_add" value="Add"/>
+                    <input type="submit" class="btn btn-primary btn-sm" name="btn_add" id="btn_add" value="Add" onclick="validateAndSubmit(event)"/>
                 </div>
             </div>
         </div>
@@ -159,4 +160,41 @@
             }
         });
     });
+
+    document.querySelector('form').addEventListener('submit', function(event) {
+        // Check each required input field for empty or space-only values
+        const requiredFields = document.querySelectorAll('input[required], select[required]');
+        let isValid = true;
+    
+        requiredFields.forEach(function(field) {
+            const value = field.value.trim(); // Remove leading/trailing spaces
+            if (value === '') {
+                // Show a custom alert or display the error message
+                alert(`Please fill out the required field: ${field.placeholder || field.name}`);
+                isValid = false;
+                field.focus(); // Focus on the first empty required field
+            }
+        });
+    
+        if (!isValid) {
+            event.preventDefault(); // Prevent form submission if there are invalid fields
+        }
+    });
+
+    function validateAndSubmit(event) {
+        var inputFile = document.getElementById('txt_image');
+        var errorMessage = document.getElementById('fileError');
+        var file = inputFile.files[0];
+
+        // Check if the file exists and its size
+        if (file && file.size > 2 * 1024 * 1024) { // 2MB in bytes
+            // Prevent form submission
+            event.preventDefault();
+            // Show the error message
+            errorMessage.style.display = 'block';
+        } else {
+            // Hide the error message if file size is valid
+            errorMessage.style.display = 'none';
+        }
+    }
 </script>

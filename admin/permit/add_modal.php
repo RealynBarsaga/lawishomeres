@@ -107,23 +107,23 @@ if ($lastReceipt) {
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label>Name:</label>
-                                <input name="txt_name" class="form-control input-sm" type="text" placeholder="Name" required/>
+                                <input name="txt_name" class="form-control input-sm" type="text" placeholder="Name" pattern="^(?!\s*$)[A-Za-z\s.,]+$" required/>
                             </div>
                             <div class="form-group">
                                 <label>Business Name:</label>
-                                <input name="txt_busname" class="form-control input-sm" type="text" placeholder="Business Name" required/>
+                                <input name="txt_busname" class="form-control input-sm" type="text" placeholder="Business Name" pattern="^(?!\s*$)[A-Za-z\s.,]+$" required/>
                             </div>
                             <div class="form-group">
                                 <label>Business Address:</label>
-                                <input name="txt_busadd" class="form-control input-sm" type="text" placeholder="Business Address" required/>
+                                <input name="txt_busadd" class="form-control input-sm" type="text" placeholder="Business Address" pattern="^(?!\s*$)[A-Za-z\s.,]+$" required/>
                             </div>
                             <div class="form-group">
                                 <label>Type of Business:</label>
-                                <input name="ddl_tob" class="form-control input-sm" type="text" placeholder="Type of Business" required/>                                 
+                                <input name="ddl_tob" class="form-control input-sm" type="text" placeholder="Type of Business" pattern="^(?!\s*$)[A-Za-z\s.,]+$" required/>                                 
                             </div>
                             <div class="form-group">
                                 <label>Permit No:</label>
-                                <input name="txt_ornum" id="permit_no" class="form-control input-sm" type="text" placeholder="Permit No" readonly required/>
+                                <input name="txt_ornum" id="permit_no" class="form-control input-sm" type="text" placeholder="Permit No" readonly/>
                             </div>
                             <div class="form-group">
                                 <label>Amount:</label>
@@ -135,27 +135,27 @@ if ($lastReceipt) {
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label class="control-label">Type of Application:</label>
-                                <input name="txt_typeofapp" class="form-control input-sm" type="text" placeholder="Type of Application" required/>
+                                <input name="txt_typeofapp" class="form-control input-sm" type="text" placeholder="Type of Application" pattern="^(?!\s*$)[A-Za-z\s.,]+$" required/>
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Line of Business:</label>
-                                <input name="txt_lineofbus" class="form-control input-sm" type="text" placeholder="Line of Business" required/>
+                                <input name="txt_lineofbus" class="form-control input-sm" type="text" placeholder="Line of Business" pattern="^(?!\s*$)[A-Za-z\s.,]+$" required/>
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Payment Mode:</label>
-                                <input name="txt_paymode" class="form-control input-sm" type="text" placeholder="Payment Mode" required/>
+                                <input name="txt_paymode" class="form-control input-sm" type="text" placeholder="Payment Mode" pattern="^(?!\s*$)[A-Za-z\s.,]+$" required/>
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Official Receipt No:</label>
-                                <input name="txt_offrecno" id="offrec_no" class="form-control input-sm" type="text" placeholder="Business ID No" readonly required/>
+                                <input name="txt_offrecno" id="offrec_no" class="form-control input-sm" type="text" placeholder="Business ID No" readonly/>
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Business ID No:</label>
-                                <input name="txt_busidno" id="busid_no" class="form-control input-sm" type="text" placeholder="Business ID No" readonly required/>
+                                <input name="txt_busidno" id="busid_no" class="form-control input-sm" type="text" placeholder="Business ID No" readonly/>
                             </div>
                             <div class="form-group">
                                 <label class="control-label">OR Date:</label>
-                                <input name="txt_ordate" id="ordate" class="form-control input-sm" type="text" placeholder="OR Date" readonly required/>
+                                <input name="txt_ordate" id="ordate" class="form-control input-sm" type="text" placeholder="OR Date" readonly/>
                             </div>
                         </div>
                     </div>
@@ -190,5 +190,26 @@ if ($lastReceipt) {
         
         // Set the OR Date value to the input field
         document.getElementById('ordate').value = orDate;
+    });
+
+
+    document.querySelector('form').addEventListener('submit', function(event) {
+        // Check each required input field for empty or space-only values
+        const requiredFields = document.querySelectorAll('input[required], select[required]');
+        let isValid = true;
+    
+        requiredFields.forEach(function(field) {
+            const value = field.value.trim(); // Remove leading/trailing spaces
+            if (value === '') {
+                // Show a custom alert or display the error message
+                alert(`Please fill out the required field: ${field.placeholder || field.name}`);
+                isValid = false;
+                field.focus(); // Focus on the first empty required field
+            }
+        });
+    
+        if (!isValid) {
+            event.preventDefault(); // Prevent form submission if there are invalid fields
+        }
     });
 </script>

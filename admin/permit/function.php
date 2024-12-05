@@ -1,18 +1,18 @@
 <?php
 if(isset($_POST['btn_add'])){
     // Sanitize and validate inputs
-    $txt_name = htmlspecialchars(stripslashes(trim($_POST['txt_name'])), ENT_QUOTES, 'UTF-8');
-    $txt_busname = htmlspecialchars(stripslashes(trim($_POST['txt_busname'])), ENT_QUOTES, 'UTF-8');
-    $txt_busadd = htmlspecialchars(stripslashes(trim($_POST['txt_busadd'])), ENT_QUOTES, 'UTF-8');
-    $ddl_tob = htmlspecialchars(stripslashes(trim($_POST['ddl_tob'])), ENT_QUOTES, 'UTF-8');
-    $txt_ornum = htmlspecialchars(stripslashes(trim($_POST['txt_ornum'])), ENT_QUOTES, 'UTF-8');
-    $txt_amount = htmlspecialchars(stripslashes(trim($_POST['txt_amount'])), ENT_QUOTES, 'UTF-8');
-    $txt_busidno = htmlspecialchars(stripslashes(trim($_POST['txt_busidno'])), ENT_QUOTES, 'UTF-8');
-    $txt_offrecno = htmlspecialchars(stripslashes(trim($_POST['txt_offrecno'])), ENT_QUOTES, 'UTF-8');
-    $txt_ordate = htmlspecialchars(stripslashes(trim($_POST['txt_ordate'])), ENT_QUOTES, 'UTF-8');
-    $txt_typeofapp = htmlspecialchars(stripslashes(trim($_POST['txt_typeofapp'])), ENT_QUOTES, 'UTF-8');
-    $txt_lineofbus = htmlspecialchars(stripslashes(trim($_POST['txt_lineofbus'])), ENT_QUOTES, 'UTF-8');
-    $txt_paymode = htmlspecialchars(stripslashes(trim($_POST['txt_paymode'])), ENT_QUOTES, 'UTF-8');
+    $txt_name = htmlspecialchars(strip_tags(trim($_POST['txt_name'])), ENT_QUOTES, 'UTF-8');
+    $txt_busname = htmlspecialchars(strip_tags(trim($_POST['txt_busname'])), ENT_QUOTES, 'UTF-8');
+    $txt_busadd = htmlspecialchars(strip_tags(trim($_POST['txt_busadd'])), ENT_QUOTES, 'UTF-8');
+    $ddl_tob = htmlspecialchars(strip_tags(trim($_POST['ddl_tob'])), ENT_QUOTES, 'UTF-8');
+    $txt_ornum = htmlspecialchars(strip_tags(trim($_POST['txt_ornum'])), ENT_QUOTES, 'UTF-8');
+    $txt_amount = htmlspecialchars(strip_tags(trim($_POST['txt_amount'])), ENT_QUOTES, 'UTF-8');
+    $txt_busidno = htmlspecialchars(strip_tags(trim($_POST['txt_busidno'])), ENT_QUOTES, 'UTF-8');
+    $txt_offrecno = htmlspecialchars(strip_tags(trim($_POST['txt_offrecno'])), ENT_QUOTES, 'UTF-8');
+    $txt_ordate = htmlspecialchars(strip_tags(trim($_POST['txt_ordate'])), ENT_QUOTES, 'UTF-8');
+    $txt_typeofapp = htmlspecialchars(strip_tags(trim($_POST['txt_typeofapp'])), ENT_QUOTES, 'UTF-8');
+    $txt_lineofbus = htmlspecialchars(strip_tags(trim($_POST['txt_lineofbus'])), ENT_QUOTES, 'UTF-8');
+    $txt_paymode = htmlspecialchars(strip_tags(trim($_POST['txt_paymode'])), ENT_QUOTES, 'UTF-8');
     $date = date('Y-m-d H:i:s');
     
     
@@ -92,19 +92,19 @@ if(isset($_POST['btn_disapprove'])){
 }
 if(isset($_POST['btn_save'])){
     // Sanitize and validate inputs
-    $txt_id = htmlspecialchars(stripslashes(trim($_POST['hidden_id'])), ENT_QUOTES, 'UTF-8'); // Sanitize hidden ID
-    $txt_edit_name = htmlspecialchars(stripslashes(trim($_POST['txt_edit_name'])), ENT_QUOTES, 'UTF-8');
-    $txt_edit_busname = htmlspecialchars(stripslashes(trim($_POST['txt_edit_busname'])), ENT_QUOTES, 'UTF-8');
-    $txt_edit_busadd = htmlspecialchars(stripslashes(trim($_POST['txt_edit_busadd'])), ENT_QUOTES, 'UTF-8');
-    $ddl_edit_tob = htmlspecialchars(stripslashes(trim($_POST['ddl_edit_tob'])), ENT_QUOTES, 'UTF-8');
-    $txt_edit_ornum = htmlspecialchars(stripslashes(trim($_POST['txt_edit_ornum'])), ENT_QUOTES, 'UTF-8');
-    $txt_edit_amount = htmlspecialchars(stripslashes(trim($_POST['txt_edit_amount'])), ENT_QUOTES, 'UTF-8');
-    $txt_edit_busidno = htmlspecialchars(stripslashes(trim($_POST['txt_edit_busidno'])), ENT_QUOTES, 'UTF-8');
-    $txt_edit_offrecno = htmlspecialchars(stripslashes(trim($_POST['txt_edit_offrecno'])), ENT_QUOTES, 'UTF-8');
-    $txt_edit_ordate = htmlspecialchars(stripslashes(trim($_POST['txt_edit_ordate'])), ENT_QUOTES, 'UTF-8');
-    $txt_edit_typeofapp = htmlspecialchars(stripslashes(trim($_POST['txt_edit_typeofapp'])), ENT_QUOTES, 'UTF-8');
-    $txt_edit_lineofbus = htmlspecialchars(stripslashes(trim($_POST['txt_edit_lineofbus'])), ENT_QUOTES, 'UTF-8');
-    $txt_edit_paymode = htmlspecialchars(stripslashes(trim($_POST['txt_edit_paymode'])), ENT_QUOTES, 'UTF-8');
+    $txt_id = htmlspecialchars(strip_tags(trim($_POST['hidden_id'])), ENT_QUOTES, 'UTF-8'); // Sanitize hidden ID
+    $txt_edit_name = htmlspecialchars(strip_tags(trim($_POST['txt_edit_name'])), ENT_QUOTES, 'UTF-8');
+    $txt_edit_busname = htmlspecialchars(strip_tags(trim($_POST['txt_edit_busname'])), ENT_QUOTES, 'UTF-8');
+    $txt_edit_busadd = htmlspecialchars(strip_tags(trim($_POST['txt_edit_busadd'])), ENT_QUOTES, 'UTF-8');
+    $ddl_edit_tob = htmlspecialchars(strip_tags(trim($_POST['ddl_edit_tob'])), ENT_QUOTES, 'UTF-8');
+    $txt_edit_ornum = htmlspecialchars(strip_tags(trim($_POST['txt_edit_ornum'])), ENT_QUOTES, 'UTF-8');
+    $txt_edit_amount = htmlspecialchars(strip_tags(trim($_POST['txt_edit_amount'])), ENT_QUOTES, 'UTF-8');
+    $txt_edit_busidno = htmlspecialchars(strip_tags(trim($_POST['txt_edit_busidno'])), ENT_QUOTES, 'UTF-8');
+    $txt_edit_offrecno = htmlspecialchars(strip_tags(trim($_POST['txt_edit_offrecno'])), ENT_QUOTES, 'UTF-8');
+    $txt_edit_ordate = htmlspecialchars(strip_tags(trim($_POST['txt_edit_ordate'])), ENT_QUOTES, 'UTF-8');
+    $txt_edit_typeofapp = htmlspecialchars(strip_tags(trim($_POST['txt_edit_typeofapp'])), ENT_QUOTES, 'UTF-8');
+    $txt_edit_lineofbus = htmlspecialchars(strip_tags(trim($_POST['txt_edit_lineofbus'])), ENT_QUOTES, 'UTF-8');
+    $txt_edit_paymode = htmlspecialchars(strip_tags(trim($_POST['txt_edit_paymode'])), ENT_QUOTES, 'UTF-8');
 
 
     $update_query = mysqli_query($con,"UPDATE tblpermit set 

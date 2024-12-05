@@ -1,10 +1,10 @@
 <?php
 if (isset($_POST['btn_add'])) {
-    $txt_name = htmlspecialchars(stripslashes(trim($_POST['txt_name'])), ENT_QUOTES, 'UTF-8');
-    $txt_uname = htmlspecialchars(stripslashes(trim($_POST['txt_uname'])), ENT_QUOTES, 'UTF-8');
-    $txt_email = htmlspecialchars(stripslashes(trim($_POST['txt_email'])), ENT_QUOTES, 'UTF-8');
-    $txt_pass = htmlspecialchars(stripslashes(trim($_POST['txt_pass'])), ENT_QUOTES, 'UTF-8');
-    $txt_compass = htmlspecialchars(stripslashes(trim($_POST['txt_compass'])), ENT_QUOTES, 'UTF-8');
+    $txt_name = htmlspecialchars(strip_tags(trim($_POST['txt_name'])), ENT_QUOTES, 'UTF-8');
+    $txt_uname = htmlspecialchars(strip_tags(trim($_POST['txt_uname'])), ENT_QUOTES, 'UTF-8');
+    $txt_email = htmlspecialchars(strip_tags(trim($_POST['txt_email'])), ENT_QUOTES, 'UTF-8');
+    $txt_pass = htmlspecialchars(strip_tags(trim($_POST['txt_pass'])), ENT_QUOTES, 'UTF-8');
+    $txt_compass = htmlspecialchars(strip_tags(trim($_POST['txt_compass'])), ENT_QUOTES, 'UTF-8');
     $filename = date("mdGis") . ".png";
     $tmp_name = $_FILES['logo']['tmp_name'];
     $folder = "./logo/" . $filename;
@@ -38,12 +38,12 @@ if (isset($_POST['btn_add'])) {
 }
 
 if (isset($_POST['btn_save'])) {
-    $txt_id = htmlspecialchars(stripslashes(trim($_POST['hidden_id'])), ENT_QUOTES, 'UTF-8');
-    $txt_edit_name = htmlspecialchars(stripslashes(trim($_POST['txt_edit_name'])), ENT_QUOTES, 'UTF-8');
-    $txt_edit_uname = htmlspecialchars(stripslashes(trim($_POST['txt_edit_uname'])), ENT_QUOTES, 'UTF-8');
-    $txt_edit_email = htmlspecialchars(stripslashes(trim($_POST['txt_edit_email'])), ENT_QUOTES, 'UTF-8');
-    $txt_edit_pass = htmlspecialchars(stripslashes(trim($_POST['txt_edit_pass'])), ENT_QUOTES, 'UTF-8');
-    $txt_edit_compass = htmlspecialchars(stripslashes(trim($_POST['txt_edit_compass'])), ENT_QUOTES, 'UTF-8');
+    $txt_id = htmlspecialchars(strip_tags(trim($_POST['hidden_id'])), ENT_QUOTES, 'UTF-8');
+    $txt_edit_name = htmlspecialchars(strip_tags(trim($_POST['txt_edit_name'])), ENT_QUOTES, 'UTF-8');
+    $txt_edit_uname = htmlspecialchars(strip_tags(trim($_POST['txt_edit_uname'])), ENT_QUOTES, 'UTF-8');
+    $txt_edit_email = htmlspecialchars(strip_tags(trim($_POST['txt_edit_email'])), ENT_QUOTES, 'UTF-8');
+    $txt_edit_pass = htmlspecialchars(strip_tags(trim($_POST['txt_edit_pass'])), ENT_QUOTES, 'UTF-8');
+    $txt_edit_compass = htmlspecialchars(strip_tags(trim($_POST['txt_edit_compass'])), ENT_QUOTES, 'UTF-8');
 
 
     // Check if the username already exists
