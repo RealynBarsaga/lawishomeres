@@ -771,6 +771,34 @@ ul li {
     cursor: not-allowed;
 }
 </style>
+<?php 
+if(isset($_POST['submit']))
+{
+    $url = 'https://www.google.com/recaptcha/api/siteverify';
+    $secret = '6Lcr3pIqAAAAAFSR3T0EfH8uFxIj3jYiWf-Pl_ET';
+    $response = $_POST['token_generate'];
+    $remoteip = $_SERVER['REMOTE_ADDR'];
+
+    $request = file_get_contents($url.'?secret='.$secret.'&response='.$response);
+
+    $result = json_decode($request);
+
+    if($result->success == true)
+    { ?>
+      <script>
+        alert("Data save successfuly");
+      </script>
+      <?php }
+      else {
+        ?>
+        <script>
+          alert("Data not saved");
+        </script>
+       <?php
+      }
+
+    }
+?>
 <body class="skin-black">
 
 <!-- Main Content -->
@@ -1037,8 +1065,6 @@ window.onclick = function(event) {
     }
 </script>
 <script>
-function onClick(e) {
-  e.preventDefault();
   grecaptcha.ready(function() {
     grecaptcha.execute('6Lcr3pIqAAAAANKAObEg1g-qulpuutPCFOB59t9A', {action: 'submit'}).then(function(token) {
         // Add your logic to submit to your backend server here.
@@ -1046,7 +1072,6 @@ function onClick(e) {
         response.value = token;
     });
   });
-}
 </script>
 </body>
 </html>
