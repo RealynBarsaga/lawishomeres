@@ -2,45 +2,13 @@
 <html lang="en">
 <?php
 session_start();
-
-// Function to log unauthorized access
-function log_unauthorized_access($url) {
-    $log_file = 'unauthorized_access.log'; // File to log the attempts
-    $ip = $_SERVER['REMOTE_ADDR']; // Get the user's IP address
-    $user_agent = $_SERVER['HTTP_USER_AGENT']; // Get the user's browser info
-    $time = date('Y-m-d H:i:s'); // Get the current date and time
-
-    // Format the log entry
-    $log_entry = "Time: $time | IP: $ip | User-Agent: $user_agent | Accessed URL: $url\n";
-
-    // Write to the log file
-    file_put_contents($log_file, $log_entry, FILE_APPEND);
-}
-
 // Check if 'userid' is not set (user not logged in)
 if (!isset($_SESSION['userid'])) {
-    log_unauthorized_access($_SERVER['REQUEST_URI']);
+    // Redirect the user to the login page if not authenticated
     header('Location: ../../login.php');
-    exit();
+    exit(); // Ensure no further execution after redirect
 }
-
-// Check if the user is logged in and has the correct role
-if (!isset($_SESSION['role']) || $_SESSION['role'] != "Staff") {
-    // Check if the user is trying to access an admin page (e.g., /admin/dashboard/dashboard)
-    $current_url = $_SERVER['REQUEST_URI']; // Get the current URL
-    $forbidden_url = '../admin/dashboard/dashboard'; // Define the restricted URL
-
-    if (strpos($current_url, $forbidden_url) !== false) {
-        // Log the unauthorized access
-        log_unauthorized_access($current_url);
-
-        // Send the HTTP status code 403 and display the forbidden page
-        header('HTTP/1.0 403 Forbidden');
-        include('403-forbidden.php'); // Include the 403 Forbidden page content
-        exit();
-    }
-}
-
+// If the user is logged in, include the necessary files
 include('../head_css.php');
 ?>
 <head>
