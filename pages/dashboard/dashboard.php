@@ -7,14 +7,14 @@ if (!isset($_SESSION['userid'])) {
     exit(); // Ensure no further execution after redirect
 }
 
-// Check if the user's role is 'admin'
-if (!isset($_SESSION['role']) || $_SESSION['role'] === 'Administartor') {
-    // Redirect to a different page (e.g., error page or login page)
-    header('Location: access-denied');
+// Check if the user's role is not 'Administrator'
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Administrator') {
+    // Redirect to the access denied page if not an admin
+    header('Location: ../../access-denied.php');
     exit(); // Stop further script execution
 }
 
-// If the user is logged in, include the necessary files
+// If the user is logged in and their role is correct, include the necessary files
 include('../head_css.php');
 ?>
 <!DOCTYPE html>
