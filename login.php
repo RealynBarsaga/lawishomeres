@@ -91,18 +91,18 @@ if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) {
                 // Set login success flag to true
                 $login_success = true;
 
-                // Set an additional cookie
                 setcookie(
                     "user_session",           // Cookie name
-                    session_id(),             // Cookie value (you can set any value)
-                    time() + (86400 * 30),    // Expiration time (30 days)
-                    "/",                      // Path
-                    "lawishomeresidences.com", // Domain (your domain)
-                    true,                     // Secure (true for HTTPS)
-                    true,                      // HttpOnly
-                    'samesite' => 'Lax'           // Use 'Lax' or 'Strict' based on your needs
+                    session_id(),             // Cookie value
+                    [
+                        'expires' => time() + (86400 * 30),  // Expiration time (30 days)
+                        'path' => '/',                       // Path
+                        'domain' => 'lawishomeresidences.com', // Domain
+                        'secure' => true,                    // Secure (true for HTTPS)
+                        'httponly' => true,                  // HttpOnly
+                        'samesite' => 'Lax'                  // SameSite attribute
+                    ]
                 );
-
             } else {
                 // Increment login attempts
                 $_SESSION['login_attempts']++;
