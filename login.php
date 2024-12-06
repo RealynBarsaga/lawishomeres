@@ -99,7 +99,8 @@ if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) {
                     "/",                      // Path
                     "lawishomeresidences.com", // Domain (your domain)
                     true,                     // Secure (true for HTTPS)
-                    true                      // HttpOnly
+                    true,                      // HttpOnly
+                    'samesite' => 'Lax'           // Use 'Lax' or 'Strict' based on your needs
                 );
 
             } else {
