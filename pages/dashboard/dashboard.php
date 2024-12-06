@@ -3,17 +3,8 @@
 <?php
 session_start();
 
-
-// Regenerate session ID every 1 minutes
-if (!isset($_SESSION['CREATED'])) {
-    $_SESSION['CREATED'] = time();
-} elseif (time() - $_SESSION['CREATED'] > 5) {
-    session_regenerate_id(true); // Replace old session ID
-    $_SESSION['CREATED'] = time();
-}
-
 // Set session timeout in seconds
-$timeout = 5; // 5 seconds
+$timeout = 300; // 5 minutes
 
 // Check if the session is inactive for too long
 if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > $timeout)) {
@@ -23,7 +14,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 
     exit(); // Ensure no further execution after redirect
 }
 
-// Update last activity time stamp
+// Update last activity timestamp
 $_SESSION['LAST_ACTIVITY'] = time();
 
 // Check if 'userid' is not set (user not logged in)
@@ -31,6 +22,18 @@ if (!isset($_SESSION['userid']) || empty($_SESSION['userid'])) {
     // Redirect the user to the login page if not authenticated
     header('Location: ../../login.php');
     exit(); // Ensure no further execution after redirect
+}
+
+// Assign barangay from the session to a variable
+if (isset($_SESSION['barangay']) && !empty($_SESSION['barangay'])) {
+    $off_barangay = $_SESSION['barangay'];
+} else {
+    // Handle the case where barangay is not set or is empty
+    // Redirecting to login page as a fallback
+    session_unset();
+    session_destroy();
+    header('Location: ../../login.php');
+    exit();
 }
 
 // If the user is logged in, include the necessary files
