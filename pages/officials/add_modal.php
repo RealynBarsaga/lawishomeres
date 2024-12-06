@@ -130,19 +130,38 @@
     });
 
     function validateAndSubmit(event) {
-        var inputFile = document.getElementById('txt_image');
-        var errorMessage = document.getElementById('fileError');
-        var file = inputFile.files[0];
+        document.getElementById('txt_image').addEventListener('change', function(event) {
+        const fileInput = event.target;
+        const file = fileInput.files[0];
+        const errorMessage = document.getElementById('fileError');
+        const allowedExtensions = /\.(jpg|jpeg|png)$/i;
 
-        // Check if the file exists and its size
-        if (file && file.size > 2 * 1024 * 1024) { // 2MB in bytes
-            // Prevent form submission
-            event.preventDefault();
-            // Show the error message
-            errorMessage.style.display = 'block';
-        } else {
-            // Hide the error message if file size is valid
-            errorMessage.style.display = 'none';
+        // Reset error message display
+        errorMessage.style.display = 'none';
+
+        if (file) {
+            // Check file size
+            if (file.size > 2 * 1024 * 1024) {
+                errorMessage.style.display = 'block';
+                fileInput.value = ''; // Clear the input
+                return;
+            }
+
+            // Check file extension
+            if (!allowedExtensions.test(file.name)) {
+                errorMessage.style.display = 'block';
+                fileInput.value = ''; // Clear the input
+                return;
+            }
+
+            // Check for valid filename (preventing malicious file names like 'index.php.png')
+            const invalidNamePattern = /[^a-zA-Z0-9_\-\.]/;
+            if (invalidNamePattern.test(file.name.replace(/\.(jpg|jpeg|png)$/i, ''))) {
+                errorMessage.style.display = 'block';
+                fileInput.value = ''; // Clear the input
+                return;
+            }
         }
+    });
     }
 </script>
