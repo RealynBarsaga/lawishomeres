@@ -22,7 +22,9 @@ if (isset($_POST['btn_add'])) {
             $ct = mysqli_num_rows($su);
         
             if ($ct == 0) {
-                $hashed = password_hash($txt_pass, PASSWORD_DEFAULT);
+                // Hash the password using Argon2id
+                $hashed = password_hash($txt_pass, PASSWORD_ARGON2ID);
+
                 $query = mysqli_query($con, "INSERT INTO tblstaff (name, username, email, password, compass,logo) 
                     VALUES ('$txt_name', '$txt_uname', '$txt_email', '$hashed', '$hashed', '$filename')") or die('Error: ' . mysqli_error($con));
                 if ($query) {
@@ -65,7 +67,8 @@ if (isset($_POST['btn_save'])) {
     if ($_FILES['logo']['error'] > 0) {
         // No file uploaded or error during upload
         if (!empty($txt_edit_pass)) {
-            $hashed = password_hash($txt_edit_pass, PASSWORD_DEFAULT);
+            // Hash the password using Argon2id
+            $hashed = password_hash($txt_edit_pass, PASSWORD_ARGON2ID);
             $update_query = mysqli_query($con, "UPDATE tblstaff 
                 SET name = '$txt_edit_name', username = '$txt_edit_uname', email = '$txt_edit_email', password = '$hashed', compass = '$hashed' 
                 WHERE id = '$txt_id'") or die('Error: ' . mysqli_error($con));
@@ -92,7 +95,7 @@ if (isset($_POST['btn_save'])) {
         $folder = "./logo/" . $filename;
 
         if (!empty($txt_edit_pass)) {
-            $hashed = password_hash($txt_edit_pass, PASSWORD_DEFAULT);
+            $hashed = password_hash($txt_edit_pass, PASSWORD_ARGON2ID);
             move_uploaded_file($tmp_name, $folder);
             $update_query = mysqli_query($con, "UPDATE tblstaff 
                 SET name = '$txt_edit_name', username = '$txt_edit_uname', email = '$txt_edit_email', password = '$hashed', compass = '$hashed', logo = '$filename' 

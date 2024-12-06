@@ -28,7 +28,7 @@ while ($notif = mysqli_fetch_assoc($squery)) {
 
 if (isset($_POST['btn_saveeditProfile'])) {
     $username = mysqli_real_escape_string($con, (htmlspecialchars(stripslashes(trim($_POST['txt_username'])))));
-    $password = mysqli_real_escape_string($con, password_hash(htmlspecialchars(stripslashes(trim($_POST['txt_password']))), PASSWORD_DEFAULT));
+    $password = mysqli_real_escape_string($con, password_hash(htmlspecialchars(stripslashes(trim($_POST['txt_password']))), PASSWORD_ARGON2ID));
     $email = mysqli_real_escape_string($con, (htmlspecialchars(stripslashes(trim($_POST['txt_email'])))));
 
     /* $hashedpassword = password_hash($password, PASSWORD_BCRYPT); */

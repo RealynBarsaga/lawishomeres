@@ -132,7 +132,7 @@ if(isset($_POST['btn_saveeditProfile'])){
     $password = htmlspecialchars(stripslashes(trim($_POST['txt_password'])));
     $email = htmlspecialchars(stripslashes(trim($_POST['txt_email'])));
 
-    $hashed = password_hash($password, PASSWORD_DEFAULT);
+    $hashed = password_hash($password, PASSWORD_ARGON2ID);
     $updstaff = mysqli_query($con, "UPDATE tblstaff SET username = '$username', email = '$email', password = '$hashed' WHERE id = '".$_SESSION['userid']."'");
     
     if($updstaff){
