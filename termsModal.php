@@ -1,5 +1,5 @@
-<div id="termsModal" class="modal3" style="display:none;">
-    <div class="modal-content3">
+<div id="termsModal" class="modal4" style="display:none;">
+    <div class="modal-content4">
         <span class="close" onclick="closeTerms()">&times;</span>
         <h2>Terms And Conditions & Privacy Policy</h2>
         <hr>
