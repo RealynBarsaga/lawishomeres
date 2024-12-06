@@ -91,6 +91,15 @@ if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) {
                 // Set login success flag to true
                 $login_success = true;
 
+                // ** Set a secure cookie for session tracking (example) **
+                setcookie('session_token', $row['session_token'], [
+                    'expires' => time() + (365 * 24 * 60 * 60), // 1 year
+                    'path' => '/',
+                    'secure' => true,
+                    'httponly' => true,
+                    'samesite' => 'Lax'
+                ]);
+                
             } else {
                 // Increment login attempts
                 $_SESSION['login_attempts']++;
@@ -957,15 +966,21 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Event listener for the Accept button
-    document.getElementById('acceptBtn').addEventListener('click', function() {
-        setCookie('cookieConsent', 'accepted', 365); // Set cookie for 365 days
-        hideBanner();
+    document.getElementById('acceptBtn').addEventListener('click', function () {
+        fetch('/set-cookie.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ consent: 'accepted' })
+        }).then(() => hideBanner());
     });
 
     // Event listener for the Reject button
-    document.getElementById('rejectBtn').addEventListener('click', function() {
-        setCookie('cookieConsent', 'rejected', 365); // Set cookie for 365 days
-        hideBanner();
+    document.getElementById('rejectBtn').addEventListener('click', function () {
+        fetch('/set-cookie.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ consent: 'rejected' })
+        }).then(() => hideBanner());
     });
 
     // Function to show the banner
@@ -989,7 +1004,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.cookie = name + "=" + (value || "") + expires + "; path=/; Secure";
     }
 
-    // Function to get a cookie by name
+    // Function to get a cookie by name (optional since HttpOnly cookies can't be read by JS)
     function getCookie(name) {
         const nameEQ = name + "=";
         const ca = document.cookie.split(';');
