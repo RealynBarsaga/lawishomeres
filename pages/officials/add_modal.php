@@ -1,6 +1,6 @@
 <!-- ========================= MODAL ======================= -->
             <div id="addOfficialModal" class="modal fade">
-            <form method="post" enctype="multipart/form-data">
+            <form method="post" enctype="multipart/form-data" onsubmit="validateAndSubmit(event)">
               <div class="modal-dialog modal-sm" style="width:300px !important;">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -77,7 +77,7 @@
                     </div>
                     <div class="modal-footer">
                         <input type="button" class="btn btn-default btn-sm" data-dismiss="modal" value="Cancel"/>
-                        <input type="submit" class="btn btn-primary btn-sm" name="btn_add" value="Add" onclick="validateAndSubmit(event)"/>
+                        <input type="submit" class="btn btn-primary btn-sm" name="btn_add" value="Add"/>
                     </div>
                 </div>
               </div>
@@ -130,38 +130,37 @@
     });
 
     function validateAndSubmit(event) {
-        document.getElementById('txt_image').addEventListener('change', function(event) {
-        const fileInput = event.target;
-        const file = fileInput.files[0];
-        const errorMessage = document.getElementById('fileError');
-        const allowedExtensions = /\.(jpg|jpeg|png)$/i;
+    // Get the file input and error message elements
+    const fileInput = document.getElementById('txt_image');
+    const errorMessage = document.getElementById('fileError');
+    const file = fileInput.files[0];
+    const allowedExtensions = /\.(jpg|jpeg|png)$/i;
 
-        // Reset error message display
-        errorMessage.style.display = 'none';
+    // Reset error message display
+    errorMessage.style.display = 'none';
 
-        if (file) {
-            // Check file size
-            if (file.size > 2 * 1024 * 1024) {
-                errorMessage.style.display = 'block';
-                fileInput.value = ''; // Clear the input
-                return;
-            }
-
-            // Check file extension
-            if (!allowedExtensions.test(file.name)) {
-                errorMessage.style.display = 'block';
-                fileInput.value = ''; // Clear the input
-                return;
-            }
-
-            // Check for valid filename (preventing malicious file names like 'index.php.png')
-            const invalidNamePattern = /[^a-zA-Z0-9_\-\.]/;
-            if (invalidNamePattern.test(file.name.replace(/\.(jpg|jpeg|png)$/i, ''))) {
-                errorMessage.style.display = 'block';
-                fileInput.value = ''; // Clear the input
-                return;
-            }
+    if (file) {
+        // Check file size
+        if (file.size > 2 * 1024 * 1024) {
+            errorMessage.style.display = 'block';
+            event.preventDefault(); // Prevent form submission
+            return;
         }
-    });
+
+        // Check file extension
+        if (!allowedExtensions.test(file.name)) {
+            errorMessage.style.display = 'block';
+            event.preventDefault(); // Prevent form submission
+            return;
+        }
+
+        // Check for valid filename (preventing malicious file names like 'index.php.png')
+        const invalidNamePattern = /[^a-zA-Z0-9_\-\.]/;
+        if (invalidNamePattern.test(file.name.replace(/\.(jpg|jpeg|png)$/i, ''))) {
+            errorMessage.style.display = 'block';
+            event.preventDefault(); // Prevent form submission
+            return;
+        }
     }
+}
 </script>
