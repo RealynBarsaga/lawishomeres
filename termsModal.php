@@ -1,15 +1,14 @@
 <div id="termsModal" class="modal4" style="display:none;">
     <div class="modal-content4">
         <span class="close" onclick="closeTerms()">&times;</span>
-        <h2>Madridejos Home Residence Management System - Privacy Policy & Terms And Conditions</h2>
+        <h2>Terms And Conditions & Privacy Policy</h2>
         <div class="terms-content">
-            <p><strong>Last Updated: December 6, 2024</strong></p>
             <p>These Terms and Conditions govern your use of the Madridejos Home Residence Management System. By using this system, you accept these terms in full. If you disagree with any part of these terms, you must not use the system.</p>
 
-            <h3>1. Use License</h3>
+            <h3>Use License</h3>
             <p>You are granted a limited license to use the Madridejos Home Residence Management System for personal, non-commercial purposes, subject to these terms and conditions.</p>
 
-            <h3>2. Limitations</h3>
+            <h3>Limitations</h3>
             <p>You must not:</p>
             <ul>
                 <li>Republish material from this system</li>
