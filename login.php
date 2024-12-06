@@ -844,7 +844,7 @@ if(isset($_POST['submit']))
             
 
                 <!-- Horizontal rule -->
-                <hr>
+                <hr style="border: 1px solid gray; margin-top: 10px;margin-left: -9px;width: 292px;">
                 
                 
                 <!-- Error attempts message -->
