@@ -24,12 +24,21 @@ if (!isset($_SESSION['userid'])) {
     exit();
 }
 
-// Check if the 'role' is not set or if the role is not "Staff"
+// Check if the user is logged in and has the correct role
 if (!isset($_SESSION['role']) || $_SESSION['role'] != "Staff") {
-    log_unauthorized_access($_SERVER['REQUEST_URI']);
-    header('HTTP/1.0 403 Forbidden');
-    header('Location: /pages/redirectlink.php');
-    exit();
+    // Check if the user is trying to access an admin page (e.g., /admin/dashboard/dashboard)
+    $current_url = $_SERVER['REQUEST_URI']; // Get the current URL
+    $forbidden_url = '/admin/dashboard/dashboard'; // Define the restricted URL
+
+    if (strpos($current_url, $forbidden_url) !== false) {
+        // Log the unauthorized access
+        log_unauthorized_access($current_url);
+
+        // Send the HTTP status code 403 and display the forbidden page
+        header('HTTP/1.0 403 Forbidden');
+        include('403-forbidden.php'); // Include the 403 Forbidden page content
+        exit();
+    }
 }
 
 include('../head_css.php');
