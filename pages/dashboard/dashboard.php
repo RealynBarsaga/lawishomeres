@@ -2,13 +2,22 @@
 <html lang="en">
 <?php
 session_start();
+
 // Check if 'userid' is not set (user not logged in)
 if (!isset($_SESSION['userid'])) {
     // Redirect the user to the login page if not authenticated
     header('Location: ../../login.php');
     exit(); // Ensure no further execution after redirect
 }
-// If the user is logged in, include the necessary files
+
+// Check if the 'role' is not set or if the role is not "Staff"
+if (!isset($_SESSION['role']) || $_SESSION['role'] != "Staff") {
+    // Redirect the user to the login page if they are not a "Staff"
+    header('Location: ../../login.php');
+    exit(); // Ensure no further execution after redirect
+}
+
+// If the user is logged in and has the "Staff" role, include the necessary files
 include('../head_css.php');
 ?>
 <head>
