@@ -715,7 +715,7 @@ ul li {
     bottom: 10px;
     left: 8px;
     width: auto; /* Change to fit content */
-    max-width: 400px; /* Optional: Limit width */
+    max-width: 362px; /* Optional: Limit width */
     background-color: #333;
     color: #fff;
     padding: 15px 20px;
@@ -741,7 +741,7 @@ ul li {
 .buttons {
     display: flex;
     gap: 10px; /* Adjust spacing between buttons */
-    margin-left: 191px;
+    margin-left: 150px;
 }
 #acceptBtn, #rejectBtn {
     padding: 10px 20px;
