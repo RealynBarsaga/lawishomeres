@@ -3,21 +3,35 @@
 <?php
 session_start();
 
+// Function to log unauthorized access
+function log_unauthorized_access($url) {
+    $log_file = 'unauthorized_access.log'; // File to log the attempts
+    $ip = $_SERVER['REMOTE_ADDR']; // Get the user's IP address
+    $user_agent = $_SERVER['HTTP_USER_AGENT']; // Get the user's browser info
+    $time = date('Y-m-d H:i:s'); // Get the current date and time
+
+    // Format the log entry
+    $log_entry = "Time: $time | IP: $ip | User-Agent: $user_agent | Accessed URL: $url\n";
+
+    // Write to the log file
+    file_put_contents($log_file, $log_entry, FILE_APPEND);
+}
+
 // Check if 'userid' is not set (user not logged in)
 if (!isset($_SESSION['userid'])) {
-    // Redirect the user to the login page if not authenticated
+    log_unauthorized_access($_SERVER['REQUEST_URI']);
     header('Location: ../../login.php');
-    exit(); // Ensure no further execution after redirect
+    exit();
 }
 
 // Check if the 'role' is not set or if the role is not "Staff"
 if (!isset($_SESSION['role']) || $_SESSION['role'] != "Staff") {
-    // Redirect the user to the login page if they are not a "Staff"
-    header('Location: ../../login.php');
-    exit(); // Ensure no further execution after redirect
+    log_unauthorized_access($_SERVER['REQUEST_URI']);
+    header('HTTP/1.0 403 Forbidden');
+    header('Location: /redirectlink');
+    exit();
 }
 
-// If the user is logged in and has the "Staff" role, include the necessary files
 include('../head_css.php');
 ?>
 <head>
