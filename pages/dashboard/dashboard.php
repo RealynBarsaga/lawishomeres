@@ -15,7 +15,7 @@ $off_barangay = $_SESSION['barangay'];
 
 // Redirect user to the correct dashboard URL if URL is tampered
 $current_url = $_SERVER['REQUEST_URI'];
-$correct_url = '../pages/dashboard/dashboard';  // Update with the correct URL for your dashboard
+$correct_url = '/pages/dashboard/dashboard';  // Update with the correct URL for your dashboard
 
 if ($current_url !== $correct_url) {
     header("Location: $correct_url");
