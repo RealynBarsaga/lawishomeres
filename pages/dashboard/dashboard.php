@@ -17,6 +17,11 @@ $off_barangay = $_SESSION['barangay'];
 $current_url = $_SERVER['REQUEST_URI'];
 $correct_url = '../pages/dashboard/dashboard';  // Update with the correct URL for your dashboard
 
+if ($current_url !== $correct_url) {
+    header("Location: $correct_url");
+    exit();
+}
+
 // Validate the session token in the database
 $stmt = $pdo->prepare("SELECT session_token, barangay FROM tblstaff WHERE id = ?");
 $stmt->execute([$userid]);
