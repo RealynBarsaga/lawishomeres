@@ -28,7 +28,7 @@ if (!isset($_SESSION['userid'])) {
 if (!isset($_SESSION['role']) || $_SESSION['role'] != "Staff") {
     // Check if the user is trying to access an admin page (e.g., /admin/dashboard/dashboard)
     $current_url = $_SERVER['REQUEST_URI']; // Get the current URL
-    $forbidden_url = '/admin/dashboard/dashboard'; // Define the restricted URL
+    $forbidden_url = '../admin/dashboard/dashboard'; // Define the restricted URL
 
     if (strpos($current_url, $forbidden_url) !== false) {
         // Log the unauthorized access
