@@ -1,16 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-    session_start();
-    // Check if 'userid' is not set or if the 'role' is not 'Administrator'
-    if (!isset($_SESSION['userid']) || $_SESSION['role'] !== 'Staff') {
-        // Redirect the user to the login page if not authenticated or not an admin
-        header('Location: ../../login.php');
-        exit; // Ensure no further execution after redirect
-    }
+session_start();
 
-    // If the user is logged in and is an administrator, include the necessary files
-    include('../head_css.php');
+
+// Regenerate session ID every 5 minutes
+if (!isset($_SESSION['CREATED'])) {
+    $_SESSION['CREATED'] = time();
+} elseif (time() - $_SESSION['CREATED'] > 300) {
+    session_regenerate_id(true); // Replace old session ID
+    $_SESSION['CREATED'] = time();
+}
+
+// Set session timeout in seconds
+$timeout = 1800; // 30 minutes
+
+// Check if the session is inactive for too long
+if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > $timeout)) {
+    session_unset();     // Unset session variables
+    session_destroy();   // Destroy the session
+    header('Location: ../../login.php'); // Redirect to login page
+    exit(); // Ensure no further execution after redirect
+}
+
+// Update last activity time stamp
+$_SESSION['LAST_ACTIVITY'] = time();
+
+// Check if 'userid' is not set (user not logged in)
+if (!isset($_SESSION['userid']) || empty($_SESSION['userid'])) {
+    // Redirect the user to the login page if not authenticated
+    header('Location: ../../login.php');
+    exit(); // Ensure no further execution after redirect
+}
+
+// If the user is logged in, include the necessary files
+include('../head_css.php');
 ?>
 <head>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
