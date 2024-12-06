@@ -4,6 +4,10 @@ RewriteBase /
 # Redirect root to login.php
 RewriteRule ^$ login.php [L]
 
+RewriteEngine On
+RewriteCond %{REQUEST_URI} !^/correct-url$
+RewriteRule ^(.*)$ /correct-url [R=301,L]
+
 # Block direct access to login.php
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /login\.php\ HTTP/ [NC]
 RewriteRule ^login\.php$ / [R=302,L]
