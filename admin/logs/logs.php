@@ -6,6 +6,14 @@
         header('Location: ../../admin/login.php');
         exit; // Ensure no further execution after redirect
     }
+
+    // Check if the user's role is not 'Administrator'
+    if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Administrator') {
+        // Redirect to the access denied page if not an admin
+        header('Location: ../../admin/redirectlink');
+        exit(); // Stop further script execution
+    } 
+    
     include('../../admin/head_css.php'); // Removed ob_start() since it's not needed here
 ?>
     <body class="skin-black">
