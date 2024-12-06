@@ -44,16 +44,16 @@
             </ul>
 
             <h3>How We Protect Your Information</h3>
-            <p>We implement security measures to safeguard your personal information. However, no method of electronic transmission is entirely secure, and we cannot guarantee absolute security.</p>
+            <p>&nbsp;&nbsp;&nbsp;We implement security measures to safeguard your personal information. However, no method of electronic transmission is entirely secure, and we cannot guarantee absolute security.</p>
 
             <h3>Sharing Your Information</h3>
-            <p>We do not sell, rent, or lease your personal information to third parties. We may share your information with third-party service providers who help us manage the system and with law enforcement or government authorities if required by law.</p>
+            <p>&nbsp;&nbsp;&nbsp;We do not sell, rent, or lease your personal information to third parties. We may share your information with third-party service providers who help us manage the system and with law enforcement or government authorities if required by law.</p>
 
             <h3>Your Rights</h3>
-            <p>You have the right to access, update, or delete your personal information. If you wish to exercise any of these rights, please contact us through the system's contact page.</p>
+            <p>&nbsp;&nbsp;&nbsp;You have the right to access, update, or delete your personal information. If you wish to exercise any of these rights, please contact us through the system's contact page.</p>
 
             <h3>Changes to the Privacy Policy</h3>
-            <p>We may update our Privacy Policy from time to time. We encourage you to review this policy regularly for any changes.</p>
+            <p>&nbsp;&nbsp;&nbsp;We may update our Privacy Policy from time to time. We encourage you to review this policy regularly for any changes.</p>
         </div>
     </div>
 </div>
