@@ -28,7 +28,7 @@ if (!isset($_SESSION['userid'])) {
 if (!isset($_SESSION['role']) || $_SESSION['role'] != "Staff") {
     log_unauthorized_access($_SERVER['REQUEST_URI']);
     header('HTTP/1.0 403 Forbidden');
-    header('Location: /redirectlink');
+    header('Location: /pages/redirectlink.php');
     exit();
 }
 
