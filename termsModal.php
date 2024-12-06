@@ -3,6 +3,7 @@
         <span class="close" onclick="closeTerms()">&times;</span>
         <h2>Terms And Conditions & Privacy Policy</h2>
         <div class="terms-content">
+            <h3>Terms And Conditions</h3>
             <p>&nbsp;&nbsp;&nbsp;These Terms and Conditions govern your use of the Madridejos Home Residence Management System. By using this system, you accept these terms in full. If you disagree with any part of these terms, you must not use the system.</p>
 
             <h3>Use License</h3>
@@ -15,8 +16,9 @@
                 <li>Sell, rent, or sub-license material from this system</li>
                 <li>Reproduce, duplicate, or copy material from this system</li>
             </ul>
-            
-            <p><strong>Privacy Policy Overview:</strong> We are committed to protecting your privacy. This Privacy Policy explains how we collect, use, and disclose your information when you use the system.</p>
+
+            <h3>Modifications</h3>
+            <p>&nbsp;&nbsp;&nbsp;We may revise these terms from time to time. Please check this page regularly to ensure you are happy with any changes.</p>
 
             <h4>Information We Collect</h4>
             <p>We may collect personal information such as:</p>
