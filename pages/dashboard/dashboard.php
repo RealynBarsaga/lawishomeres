@@ -7,13 +7,13 @@ session_start();
 // Regenerate session ID every 1 minutes
 if (!isset($_SESSION['CREATED'])) {
     $_SESSION['CREATED'] = time();
-} elseif (time() - $_SESSION['CREATED'] > 60) {
+} elseif (time() - $_SESSION['CREATED'] > 5) {
     session_regenerate_id(true); // Replace old session ID
     $_SESSION['CREATED'] = time();
 }
 
 // Set session timeout in seconds
-$timeout = 60; // 1 minutes
+$timeout = 5; // 5 seconds
 
 // Check if the session is inactive for too long
 if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > $timeout)) {
