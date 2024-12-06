@@ -10,7 +10,7 @@ if (!isset($_SESSION['userid'])) {
 // Check if the user's role is not 'Administrator'
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Administrator') {
     // Redirect to the access denied page if not an admin
-    header('Location: ../../access-denied');
+    header('Location: ../../redirectlink');
     exit(); // Stop further script execution
 }
 
