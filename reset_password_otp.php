@@ -29,7 +29,7 @@ if (isset($_POST['reset_password'])) {
         $email = $_SESSION['email_for_reset']; // Get email from session
 
         // Hash the new password
-        $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
+        $hashed_password = password_hash($new_password, PASSWORD_ARGON2ID);
 
         // Database credentials
         $MySQL_username = "u510162695_db_barangay";

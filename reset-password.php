@@ -44,7 +44,7 @@ if (isset($_GET['code'])) {
         // Check if passwords match
         if ($new_password === $con_password) {
             // Hash the password
-            $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
+            $hashed_password = password_hash($new_password, PASSWORD_ARGON2ID);
 
             // Update the password and clear the code
             $updateQuery = $conn->prepare("UPDATE tblstaff SET password = ?, code = NULL WHERE code = ?");
