@@ -8,6 +8,14 @@
         header('Location: ../../admin/login.php');
         exit; // Ensure no further execution after redirect
     }
+
+    // Check if the user's role is not 'Staff'
+    if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Staff') {
+        // Redirect to the access denied page if not an admin
+        header('Location: ../../admin/access-denied.php');
+        exit(); // Stop further script execution
+    } 
+
     include('../../admin/head_css.php'); 
 ?>
 <head>
