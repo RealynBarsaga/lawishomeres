@@ -1,3 +1,5 @@
+<!-- Cookie Consent Banner -->
+<?php include 'cookiesModal.php'; ?>
 <div class="wrapper">
     <div class="cookie-message">
         <h3>We use cookies!</h3>

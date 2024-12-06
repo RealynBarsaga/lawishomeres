@@ -897,8 +897,6 @@ if(isset($_POST['submit']))
 </div>
 <!-- Terms and Conditions Modal -->
 <?php include 'termsModal.php'; ?>
-<!-- Cookie Consent Banner -->
-<?php include 'cookiesModal.php'; ?>
 <script>
      // Handle the OK button for modal
      document.addEventListener("DOMContentLoaded", function() {
@@ -927,46 +925,6 @@ if(isset($_POST['submit']))
   });
 </script>
 <script>
-// Select the buttons
-const acceptButton = document.getElementById('acceptBtn');
-const rejectButton = document.getElementById('rejectBtn');
-
-// Event listener for the "Accept" button
-acceptButton.addEventListener('click', () => {
-    console.log('Cookies accepted');
-    saveConsent('accepted');
-    hideCookieMessage();
-});
-
-// Event listener for the "Reject" button
-rejectButton.addEventListener('click', () => {
-    console.log('Cookies rejected');
-    saveConsent('rejected');
-    hideCookieMessage();
-});
-
-// Function to save the user's consent choice
-function saveConsent(choice) {
-    localStorage.setItem('cookieConsent', choice);
-}
-
-// Function to hide the cookie message
-function hideCookieMessage() {
-    const cookieMessage = document.querySelector('.cookie-message');
-    if (cookieMessage) {
-        cookieMessage.style.display = 'none';
-    }
-}
-
-// Check if user has already made a choice
-document.addEventListener('DOMContentLoaded', () => {
-    const consent = localStorage.getItem('cookieConsent');
-    if (consent) {
-        hideCookieMessage();
-    }
-});
-
-
 function openTerms() {
     document.getElementById("termsModal").style.display = "block";
 }
