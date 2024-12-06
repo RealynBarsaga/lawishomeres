@@ -3,11 +3,27 @@
 <?php
 session_start();
 // Check if 'userid' is not set (user not logged in)
-if (!isset($_SESSION['userid'])) {
+if (!isset($_SESSION['userid'], $_SESSION['session_token'])) {
     // Redirect the user to the login page if not authenticated
     header('Location: ../../login.php');
     exit(); // Ensure no further execution after redirect
 }
+
+$userid = $_SESSION['userid'];
+$session_token = $_SESSION['session_token'];
+
+// Validate the session token in the database
+$stmt = $pdo->prepare("SELECT session_token FROM tblstaff WHERE id = ?");
+$stmt->execute([$user_id]);
+$db_token = $stmt->fetchColumn();
+
+if ($db_token !== $session_token) {
+    // Logout the user
+    session_destroy();
+    header("Location: login.php");
+    exit;
+}
+
 // If the user is logged in, include the necessary files
 include('../head_css.php');
 ?>

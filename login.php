@@ -83,6 +83,7 @@ if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) {
                 $_SESSION['role'] = "Staff";
                 $_SESSION['staff'] = $row['name'];
                 $_SESSION['userid'] = $row['id'];
+                $_SESSION['session_token'] = $row['session_token'];
                 $_SESSION['username'] = $row['username'];
                 $_SESSION["barangay"] = $row["name"];
                 $_SESSION['logo'] = $row['logo'];
@@ -947,57 +948,60 @@ if(isset($_POST['submit']))
   });
 </script>
 <script>
-// Cookie Consent Logic
 document.addEventListener('DOMContentLoaded', function() {
-    if (getCookie('cookieConsent') === 'accepted') {
-        hideBanner();
-    } else if (getCookie('cookieConsent') === 'rejected') {
+    // Check if the cookieConsent cookie exists and hide/show the banner accordingly
+    if (getCookie('cookieConsent') === 'accepted' || getCookie('cookieConsent') === 'rejected') {
         hideBanner();
     } else {
         showBanner();
     }
 
-    // Accept button
+    // Event listener for the Accept button
     document.getElementById('acceptBtn').addEventListener('click', function() {
-        setCookie('cookieConsent', 'accepted', 365);
+        setCookie('cookieConsent', 'accepted', 365); // Set cookie for 365 days
         hideBanner();
     });
 
-    // Reject button
+    // Event listener for the Reject button
     document.getElementById('rejectBtn').addEventListener('click', function() {
-        setCookie('cookieConsent', 'rejected', 365);
+        setCookie('cookieConsent', 'rejected', 365); // Set cookie for 365 days
         hideBanner();
     });
 
+    // Function to show the banner
     function showBanner() {
         document.querySelector('.wrapper').style.display = 'flex';
     }
 
+    // Function to hide the banner
     function hideBanner() {
         document.querySelector('.wrapper').style.display = 'none';
     }
 
+    // Function to set a cookie
     function setCookie(name, value, days) {
-        var expires = '';
+        let expires = '';
         if (days) {
-            var date = new Date();
+            const date = new Date();
             date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
             expires = "; expires=" + date.toUTCString();
         }
-        document.cookie = name + "=" + (value || "") + expires + "; path=/";
+        document.cookie = name + "=" + (value || "") + expires + "; path=/; Secure";
     }
 
+    // Function to get a cookie by name
     function getCookie(name) {
-        var nameEQ = name + "=";
-        var ca = document.cookie.split(';');
-        for (var i = 0; i < ca.length; i++) {
-            var c = ca[i];
+        const nameEQ = name + "=";
+        const ca = document.cookie.split(';');
+        for (let i = 0; i < ca.length; i++) {
+            let c = ca[i];
             while (c.charAt(0) == ' ') c = c.substring(1, c.length);
             if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
         }
         return null;
     }
 });
+
         
 function openTerms() {
     document.getElementById("termsModal").style.display = "block";

@@ -1,23 +1,19 @@
 <?php
-// Logout script
 session_start();
+require 'connection.php'; // Include your database connection
 
-// Unset all session variables
-$_SESSION = [];
+if (isset($_SESSION['userid'])) {
+    $userid = $_SESSION['userid'];
+
+    // Clear the session token in the database
+    $stmt = $pdo->prepare("UPDATE tblstaff SET session_token = NULL WHERE id = ?");
+    $stmt->execute([$userid]);
+}
 
 // Destroy the session
 session_destroy();
 
-// Delete the session cookie
-if (ini_get("session.use_cookies")) {
-    $params = session_get_cookie_params();
-    setcookie(session_name(), '', time() - 42000, 
-        $params["path"], $params["domain"], 
-        $params["secure"], $params["httponly"]
-    );
-}
-
-// Redirect to login or home page
+// Redirect to the login page
 header("Location: login.php");
-exit();
+exit;
 ?>
