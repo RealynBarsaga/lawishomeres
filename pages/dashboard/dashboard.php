@@ -2,40 +2,12 @@
 <html lang="en">
 <?php
 session_start();
-
-// Set session timeout in seconds
-$timeout = 300; // 5 minutes
-
-// Check if the session is inactive for too long
-if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > $timeout)) {
-    session_unset();     // Unset session variables
-    session_destroy();   // Destroy the session
-    header('Location: ../../login.php'); // Redirect to login page
-    exit(); // Ensure no further execution after redirect
-}
-
-// Update last activity timestamp
-$_SESSION['LAST_ACTIVITY'] = time();
-
 // Check if 'userid' is not set (user not logged in)
-if (!isset($_SESSION['userid']) || empty($_SESSION['userid'])) {
+if (!isset($_SESSION['userid'])) {
     // Redirect the user to the login page if not authenticated
     header('Location: ../../login.php');
     exit(); // Ensure no further execution after redirect
 }
-
-// Assign barangay from the session to a variable
-if (isset($_SESSION['barangay']) && !empty($_SESSION['barangay'])) {
-    $off_barangay = $_SESSION['barangay'];
-} else {
-    // Handle the case where barangay is not set or is empty
-    // Redirecting to login page as a fallback
-    session_unset();
-    session_destroy();
-    header('Location: ../../login.php');
-    exit();
-}
-
 // If the user is logged in, include the necessary files
 include('../head_css.php');
 ?>
