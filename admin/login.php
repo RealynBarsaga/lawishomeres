@@ -888,44 +888,8 @@ if(isset($_POST['submit']))
         </div>
     </div>
 </div>
-
 <!-- Terms and Conditions Modal -->
-<div id="termsModal" class="modal4" style="display:none;">
-<div class="modal-content4">
-    <span class="close" onclick="closeTerms()">&times;</span>
-    <h2>Terms and Conditions</h2>
-    <div class="terms-content">
-        <h3>1. Introduction</h3>
-        <p>Welcome to our e-commerce platform. By accessing or using our website, you agree to these terms and conditions.</p>
-        <h3>2. Account Security</h3>
-        <p>You are responsible for maintaining the confidentiality of your account credentials and for all activities under your account.</p>
-        <h3>3. Privacy Policy</h3>
-        <p>Your use of our platform is also governed by our Privacy Policy. By using our services, you consent to our collection and use of your data as described therein.</p>
-        <h3>4. Prohibited Activities</h3>
-        <p>You agree not to:</p>
-        <ul>
-            <li>Use the platform for any illegal purposes</li>
-            <li>Attempt to gain unauthorized access to other user accounts</li>
-            <li>Upload malicious content or viruses</li>
-            <li>Engage in fraudulent activities</li>
-        </ul>
-        <h3>5. Termination</h3>
-        <p>We reserve the right to terminate or suspend your account for violations of these terms.</p>
-    </div>
-</div>
-
-<!-- Cookie Consent Banner -->
-<div class="wrapper">
-    <div class="cookie-message">
-        <h3>We use cookies!</h3>
-        <p>This website uses essential cookies to ensure its proper operation and tracking cookies to understand how you interact with it. The latter will be set only after consent.</p>
-    </div>
-    <div class="buttons">
-        <button id="acceptBtn">Accept</button>
-        <button id="rejectBtn">Reject</button>
-    </div>
-</div>
-
+<?php include 'termsModal.php'; ?>
 <script>
      // Handle the OK button for modal
      document.addEventListener("DOMContentLoaded", function() {
@@ -939,62 +903,6 @@ if(isset($_POST['submit']))
     });
 </script>
 <script>
-// Check if the user has already made a choice
-document.addEventListener('DOMContentLoaded', function() {
-    if (getCookie('cookieConsent') === 'accepted') {
-        hideBanner();
-    } else if (getCookie('cookieConsent') === 'rejected') {
-        hideBanner();
-    } else {
-        showBanner();
-    }
-
-    // Accept button
-    document.getElementById('acceptBtn').addEventListener('click', function() {
-        setCookie('cookieConsent', 'accepted', 365); // Set cookie for 1 year
-        hideBanner();
-    });
-
-    // Reject button
-    document.getElementById('rejectBtn').addEventListener('click', function() {
-        setCookie('cookieConsent', 'rejected', 365); // Set cookie for 1 year
-        hideBanner();
-    });
-
-    // Function to show the cookie banner
-    function showBanner() {
-        document.querySelector('.wrapper').style.display = 'none';
-    }
-
-    // Function to hide the cookie banner
-    function hideBanner() {
-        document.querySelector('.wrapper').style.display = 'none';
-    }
-
-    // Function to set a cookie
-    function setCookie(name, value, days) {
-        var expires = '';
-        if (days) {
-            var date = new Date();
-            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-            expires = "; expires=" + date.toUTCString();
-        }
-        document.cookie = name + "=" + (value || "") + expires + "; path=/";
-    }
-
-    // Function to get a cookie value
-    function getCookie(name) {
-        var nameEQ = name + "=";
-        var ca = document.cookie.split(';');
-        for (var i = 0; i < ca.length; i++) {
-            var c = ca[i];
-            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-        }
-        return null;
-    }
-});
-
 function openTerms() {
     document.getElementById("termsModal").style.display = "block";
 }
