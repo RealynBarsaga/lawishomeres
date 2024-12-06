@@ -697,7 +697,7 @@ ul li {
 /* Responsive Design for Small Screens */
 @media screen and (max-width: 768px) {
     .modal-content4 {
-        width: 70%; /* Full width for mobile */
+        width: 99%; /* Full width for mobile */
     }
     h2 {
         font-size: 20px;
