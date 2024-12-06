@@ -29,7 +29,7 @@ include('../head_css.php');
       include('../header.php'); 
     ?>
 <style>
-body {
+html, body {
     overflow: hidden; /* Prevents body from scrolling */
 }
 

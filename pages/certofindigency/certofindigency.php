@@ -14,12 +14,12 @@
         header('Location: /pages/redirectlink');
         exit(); // Stop further script execution
     }
-    
+
     include('../head_css.php');
     ?>
 </head>
 <style>
-body {
+html, body {
     overflow: hidden; /* Prevents body from scrolling */
 }
 
