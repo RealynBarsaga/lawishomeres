@@ -13,7 +13,7 @@ if (!isset($_SESSION['CREATED'])) {
 }
 
 // Set session timeout in seconds
-$timeout = 1800; // 30 minutes
+$timeout = 900; // 15 minutes
 
 // Check if the session is inactive for too long
 if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > $timeout)) {
