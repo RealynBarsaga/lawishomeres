@@ -1,5 +1,5 @@
-<div id="termsModal" class="modal4" style="display:none;">
-    <div class="modal-content4">
+<div id="termsModal" class="modal3" style="display:none;">
+    <div class="modal-content3">
         <span class="close" onclick="closeTerms()">&times;</span>
         <h2>Terms And Conditions & Privacy Policy</h2>
         <hr>
@@ -20,8 +20,11 @@
 
             <h3>Modifications</h3>
             <p>&nbsp;&nbsp;&nbsp;We may revise these terms from time to time. Please check this page regularly to ensure you are happy with any changes.</p>
+            <hr>
+            <h3>Privacy Policy</h3>
+            <p>&nbsp;&nbsp;&nbsp;At Madridejos Home Residence Management System, we are committed to protecting your privacy. This Privacy Policy explains how we collect, use, and disclose your information when you use our system.</p>
 
-            <h4>Information We Collect</h4>
+            <h3>Information We Collect</h3>
             <p>We may collect personal information such as:</p>
             <ul>
                 <li>Name</li>
@@ -31,7 +34,7 @@
                 <li>Any other information you provide voluntarily</li>
             </ul>
 
-            <h4>How We Use Your Information</h4>
+            <h3>How We Use Your Information</h3>
             <p>The information we collect is used to:</p>
             <ul>
                 <li>Provide and manage the services of the Madridejos Home Residence Management System</li>
@@ -40,16 +43,16 @@
                 <li>Ensure security and compliance with legal obligations</li>
             </ul>
 
-            <h4>How We Protect Your Information</h4>
+            <h3>How We Protect Your Information</h3>
             <p>We implement security measures to safeguard your personal information. However, no method of electronic transmission is entirely secure, and we cannot guarantee absolute security.</p>
 
-            <h4>Sharing Your Information</h4>
+            <h3>Sharing Your Information</h3>
             <p>We do not sell, rent, or lease your personal information to third parties. We may share your information with third-party service providers who help us manage the system and with law enforcement or government authorities if required by law.</p>
 
-            <h4>Your Rights</h4>
+            <h3>Your Rights</h3>
             <p>You have the right to access, update, or delete your personal information. If you wish to exercise any of these rights, please contact us through the system's contact page.</p>
 
-            <h4>Changes to the Privacy Policy</h4>
+            <h3>Changes to the Privacy Policy</h3>
             <p>We may update our Privacy Policy from time to time. We encourage you to review this policy regularly for any changes.</p>
         </div>
     </div>
