@@ -91,6 +91,17 @@ if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) {
                 // Set login success flag to true
                 $login_success = true;
 
+                // Set an additional cookie
+                setcookie(
+                    "user_session",           // Cookie name
+                    session_id(),             // Cookie value (you can set any value)
+                    time() + (86400 * 30),    // Expiration time (30 days)
+                    "/",                      // Path
+                    "lawishomeresidences.com", // Domain (your domain)
+                    true,                     // Secure (true for HTTPS)
+                    true                      // HttpOnly
+                );
+
             } else {
                 // Increment login attempts
                 $_SESSION['login_attempts']++;
@@ -953,7 +964,7 @@ document.addEventListener('DOMContentLoaded', function() {
             date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
             expires = "; expires=" + date.toUTCString();
         }
-        document.cookie = name + "=" + (value || "") + expires + "; path=/; Secure";
+        document.cookie = name + "=" + (value || "") + expires + "; path=/; Secure"; setcookie("name", "value", time() + (86400 * 30), "/", "", true, true);
     }
 
     // Function to get a cookie by name
