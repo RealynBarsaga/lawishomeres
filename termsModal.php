@@ -2,6 +2,7 @@
     <div class="modal-content4">
         <span class="close" onclick="closeTerms()">&times;</span>
         <h2>Terms And Conditions & Privacy Policy</h2>
+        <hr>
         <div class="terms-content">
             <h3>Terms And Conditions</h3>
             <p>&nbsp;&nbsp;&nbsp;These Terms and Conditions govern your use of the Madridejos Home Residence Management System. By using this system, you accept these terms in full. If you disagree with any part of these terms, you must not use the system.</p>
