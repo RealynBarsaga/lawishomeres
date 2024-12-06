@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
 <?php
 session_start();
 // Check if 'userid' is not set (user not logged in)
@@ -11,6 +9,8 @@ if (!isset($_SESSION['userid'])) {
 // If the user is logged in, include the necessary files
 include('../head_css.php');
 ?>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
