@@ -91,15 +91,6 @@ if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) {
                 // Set login success flag to true
                 $login_success = true;
 
-                // ** Set a secure cookie for session tracking (example) **
-                setcookie('session_token', $row['session_token'], [
-                    'expires' => time() + (365 * 24 * 60 * 60), // 1 year
-                    'path' => '/',
-                    'secure' => true,
-                    'httponly' => true,
-                    'samesite' => 'Lax'
-                ]);
-                
             } else {
                 // Increment login attempts
                 $_SESSION['login_attempts']++;
@@ -697,7 +688,7 @@ ul li {
 /* Responsive Design for Small Screens */
 @media screen and (max-width: 768px) {
     .modal-content4 {
-        width: 99%; /* Full width for mobile */
+        width: 70%; /* Full width for mobile */
     }
     h2 {
         font-size: 20px;
@@ -715,7 +706,7 @@ ul li {
     bottom: 10px;
     left: 8px;
     width: auto; /* Change to fit content */
-    max-width: 362px; /* Optional: Limit width */
+    max-width: 400px; /* Optional: Limit width */
     background-color: #333;
     color: #fff;
     padding: 15px 20px;
@@ -741,7 +732,7 @@ ul li {
 .buttons {
     display: flex;
     gap: 10px; /* Adjust spacing between buttons */
-    margin-left: 150px;
+    margin-left: 191px;
 }
 #acceptBtn, #rejectBtn {
     padding: 10px 20px;
@@ -844,7 +835,7 @@ if(isset($_POST['submit']))
             
 
                 <!-- Horizontal rule -->
-                <hr style="border: 0.5px solid gray; margin-top: 10px;margin-left: -9px;width: 292px;">
+                <hr style="border: 1px solid gray; margin-top: 10px;margin-left: -9px;width: 292px;">
                 
                 
                 <!-- Error attempts message -->
@@ -933,21 +924,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Event listener for the Accept button
-    document.getElementById('acceptBtn').addEventListener('click', function () {
-        fetch('/set-cookie.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ consent: 'accepted' })
-        }).then(() => hideBanner());
+    document.getElementById('acceptBtn').addEventListener('click', function() {
+        setCookie('cookieConsent', 'accepted', 365); // Set cookie for 365 days
+        hideBanner();
     });
 
     // Event listener for the Reject button
-    document.getElementById('rejectBtn').addEventListener('click', function () {
-        fetch('/set-cookie.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ consent: 'rejected' })
-        }).then(() => hideBanner());
+    document.getElementById('rejectBtn').addEventListener('click', function() {
+        setCookie('cookieConsent', 'rejected', 365); // Set cookie for 365 days
+        hideBanner();
     });
 
     // Function to show the banner
@@ -971,7 +956,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.cookie = name + "=" + (value || "") + expires + "; path=/; Secure";
     }
 
-    // Function to get a cookie by name (optional since HttpOnly cookies can't be read by JS)
+    // Function to get a cookie by name
     function getCookie(name) {
         const nameEQ = name + "=";
         const ca = document.cookie.split(';');
