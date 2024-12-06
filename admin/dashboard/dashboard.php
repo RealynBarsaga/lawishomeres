@@ -16,7 +16,7 @@
 </head>
 <style>
 html, body {
-    overflow: hidden; /* Prevents body from scrolling */
+    overflow: hidden; 
 }
 
 .wrapper {
