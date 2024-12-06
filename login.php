@@ -927,61 +927,46 @@ if(isset($_POST['submit']))
   });
 </script>
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Check if the cookieConsent cookie exists and hide/show the banner accordingly
-    if (getCookie('cookieConsent') === 'accepted' || getCookie('cookieConsent') === 'rejected') {
-        hideBanner();
-    } else {
-        showBanner();
+// Select the buttons
+const acceptButton = document.getElementById('acceptBtn');
+const rejectButton = document.getElementById('rejectBtn');
+
+// Event listener for the "Accept" button
+acceptButton.addEventListener('click', () => {
+    console.log('Cookies accepted');
+    saveConsent('accepted');
+    hideCookieMessage();
+});
+
+// Event listener for the "Reject" button
+rejectButton.addEventListener('click', () => {
+    console.log('Cookies rejected');
+    saveConsent('rejected');
+    hideCookieMessage();
+});
+
+// Function to save the user's consent choice
+function saveConsent(choice) {
+    localStorage.setItem('cookieConsent', choice);
+}
+
+// Function to hide the cookie message
+function hideCookieMessage() {
+    const cookieMessage = document.querySelector('.cookie-message');
+    if (cookieMessage) {
+        cookieMessage.style.display = 'none';
     }
+}
 
-    // Event listener for the Accept button
-    document.getElementById('acceptBtn').addEventListener('click', function() {
-        setCookie('cookieConsent', 'accepted', 365); // Set cookie for 365 days
-        hideBanner();
-    });
-
-    // Event listener for the Reject button
-    document.getElementById('rejectBtn').addEventListener('click', function() {
-        setCookie('cookieConsent', 'rejected', 365); // Set cookie for 365 days
-        hideBanner();
-    });
-
-    // Function to show the banner
-    function showBanner() {
-        document.querySelector('.wrapper').style.display = 'flex';
-    }
-
-    // Function to hide the banner
-    function hideBanner() {
-        document.querySelector('.wrapper').style.display = 'none';
-    }
-
-    // Function to set a cookie
-    function setCookie(name, value, days) {
-        let expires = '';
-        if (days) {
-            const date = new Date();
-            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-            expires = "; expires=" + date.toUTCString();
-        }
-        document.cookie = name + "=" + (value || "") + expires + "; path=/; Secure"; setcookie("name", "value", time() + (86400 * 30), "/", "", true, true);
-    }
-
-    // Function to get a cookie by name
-    function getCookie(name) {
-        const nameEQ = name + "=";
-        const ca = document.cookie.split(';');
-        for (let i = 0; i < ca.length; i++) {
-            let c = ca[i];
-            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-        }
-        return null;
+// Check if user has already made a choice
+document.addEventListener('DOMContentLoaded', () => {
+    const consent = localStorage.getItem('cookieConsent');
+    if (consent) {
+        hideCookieMessage();
     }
 });
 
-        
+
 function openTerms() {
     document.getElementById("termsModal").style.display = "block";
 }
