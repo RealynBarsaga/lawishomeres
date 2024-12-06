@@ -6,7 +6,7 @@ if (isset($_SESSION['userid'])) {
     $userid = $_SESSION['userid'];
 
     // Clear the session token in the database
-    $stmt = $pdo->prepare("UPDATE tblstaff SET session_token = NULL WHERE id = ?");
+    $stmt = $pdo->prepare("UPDATE tblstaff SET session_token = NULL, barangay = NULL WHERE id = ?");
     $stmt->execute([$userid]);
 }
 
