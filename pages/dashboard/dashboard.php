@@ -18,7 +18,7 @@ $current_url = $_SERVER['REQUEST_URI'];
 $correct_url = '/pages/dashboard/dashboard';  // Update with the correct URL for your dashboard
 
 if ($current_url !== $correct_url) {
-    header("Location: $correct_url");
+    header("Location: '/pages/dashboard/dashboard'");
     exit();
 }
 
