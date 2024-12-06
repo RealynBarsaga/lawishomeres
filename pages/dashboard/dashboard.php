@@ -8,7 +8,7 @@ if (!isset($_SESSION['userid'])) {
 }
 
 // Check if the user's role is 'admin'
-if (!isset($_SESSION['role']) || $_SESSION['role'] === 'Administrator') {
+if (!isset($_SESSION['type']) || $_SESSION['type'] === 'administrator') {
     // Redirect to a different page (e.g., error page or login page)
     header('Location: access-denied.php');
     exit(); // Stop further script execution
