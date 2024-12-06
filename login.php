@@ -83,7 +83,6 @@ if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) {
                 $_SESSION['role'] = "Staff";
                 $_SESSION['staff'] = $row['name'];
                 $_SESSION['userid'] = $row['id'];
-                $_SESSION['session_token'] = $row['session_token'];
                 $_SESSION['username'] = $row['username'];
                 $_SESSION["barangay"] = $row["name"];
                 $_SESSION['logo'] = $row['logo'];
