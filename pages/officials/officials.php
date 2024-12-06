@@ -7,6 +7,14 @@
         header('Location: ../../login.php');
         exit; // Ensure no further execution after redirect
     }
+    
+    // Check if the user's role is not 'staff'
+    if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Staff') {
+        // Redirect to the access denied page if not an admin
+        header('Location: /peges/redirectlink');
+        exit(); // Stop further script execution
+    }
+
     include('../head_css.php'); // Removed ob_start() since it's not needed here
     ?>
 </head>
