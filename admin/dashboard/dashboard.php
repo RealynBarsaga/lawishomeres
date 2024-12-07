@@ -112,7 +112,7 @@ canvas {
 /* Specific Styles for Line Chart */
 #myLineChart {
     width: 98% !important; /* Makes line chart canvas responsive to parent container */
-    height: 315px !important; /* Set fixed height for Line Chart */
+    height: 273px !important; /* Set fixed height for Line Chart */
 }
 
 /* Optional: Style for titles above the charts */
