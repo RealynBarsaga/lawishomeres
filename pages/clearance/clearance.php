@@ -11,7 +11,7 @@
     // Check if the user's role is not 'staff'
     if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Staff') {
         // Redirect to the access denied page if not an admin
-        header('Location: /pages/redirectlink');
+        header('Location: /pages/access-denied');
         exit(); // Stop further script execution
     }
     
