@@ -268,6 +268,81 @@ const myBarChart = new Chart(barCtx, {
     }
 });
 </script>   
-    <?php include "../footer.php"; ?>
+<?php
+$off_barangay = $_SESSION['barangay']; // Get the logged-in user's barangay from the session
+
+// Initialize variables
+$maleCount = 0;
+$femaleCount = 0;
+
+// Query to count male residents in the specific barangay
+$maleCountQuery = mysqli_query($con, "SELECT COUNT(*) AS male_count FROM tbltabagak WHERE barangay = '$off_barangay' AND gender = 'Male'");
+if ($maleCountQuery && mysqli_num_rows($maleCountQuery) > 0) {
+    $maleCountResult = mysqli_fetch_assoc($maleCountQuery);
+    $maleCount = $maleCountResult['male_count'];
+}
+
+// Query to count female residents in the specific barangay
+$femaleCountQuery = mysqli_query($con, "SELECT COUNT(*) AS female_count FROM tbltabagak WHERE barangay = '$off_barangay' AND gender = 'Female'");
+if ($femaleCountQuery && mysqli_num_rows($femaleCountQuery) > 0) {
+    $femaleCountResult = mysqli_fetch_assoc($femaleCountQuery);
+    $femaleCount = $femaleCountResult['female_count'];
+}
+
+// Calculate total count and percentages
+$totalCount = $maleCount + $femaleCount;
+$malePercentage = $totalCount > 0 ? ($maleCount / $totalCount) * 100 : 0;
+$femalePercentage = $totalCount > 0 ? ($femaleCount / $totalCount) * 100 : 0;
+?>
+<script>
+const pieCtx = document.getElementById('myPieChart').getContext('2d');
+const myPieChart = new Chart(pieCtx, {
+    type: 'pie',
+    data: {
+        labels: ['Male', 'Female'],
+        datasets: [{
+            label: 'Gender Distribution',
+            data: [<?= $maleCount ?>, <?= $femaleCount ?>],
+            backgroundColor: ['#4CB5F5', '#FF6384'], // Male: Blue, Female: Pink
+            borderColor: ['#fff', '#fff'],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            title: {
+                display: true,
+                text: 'Gender Distribution for Brgy. <?= $off_barangay ?>',
+                font: {
+                    size: 16
+                }
+            },
+            legend: {
+                position: 'left',
+                labels: {
+                    boxWidth: 12,
+                    font: {
+                        size: 12
+                    }
+                }
+            },
+            tooltip: {
+                callbacks: {
+                    label: function(tooltipItem) {
+                        const dataset = tooltipItem.dataset.data;
+                        const currentValue = tooltipItem.raw;
+                        const total = dataset.reduce((a, b) => a + b, 0);
+                        const percentage = ((currentValue / total) * 100).toFixed(1) + '%';
+                        return `${tooltipItem.label}: ${currentValue} (${percentage})`;
+                    }
+                }
+            }
+        }
+    },
+    plugins: [ChartDataLabels]
+});
+</script>
+<?php include "../footer.php"; ?>
 </body>
 </html>
