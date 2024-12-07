@@ -295,6 +295,14 @@ $malePercentage = $totalCount > 0 ? ($maleCount / $totalCount) * 100 : 0;
 $femalePercentage = $totalCount > 0 ? ($femaleCount / $totalCount) * 100 : 0;
 ?>
 <script>
+const maleCount = <?= $maleCount ?>;
+const femaleCount = <?= $femaleCount ?>;
+const totalCount = maleCount + femaleCount;
+
+// Calculate percentages dynamically
+const malePercentage = totalCount > 0 ? ((maleCount / totalCount) * 100).toFixed(1) : 0;
+const femalePercentage = totalCount > 0 ? ((femaleCount / totalCount) * 100).toFixed(1) : 0;
+
 const pieCtx = document.getElementById('myPieChart').getContext('2d');
 const myPieChart = new Chart(pieCtx, {
     type: 'pie',
@@ -302,7 +310,7 @@ const myPieChart = new Chart(pieCtx, {
         labels: ['Male', 'Female'],
         datasets: [{
             label: 'Gender Distribution',
-            data: [<?= $maleCount ?>, <?= $femaleCount ?>],
+            data: [maleCount, femaleCount],
             backgroundColor: ['#4CB5F5', '#FF6384'], // Male: Blue, Female: Pink
             borderColor: ['#fff', '#fff'],
             borderWidth: 1
@@ -313,7 +321,7 @@ const myPieChart = new Chart(pieCtx, {
         plugins: {
             title: {
                 display: true,
-                text: 'Gender Distribution for Brgy. <?= $off_barangay ?>',
+                text: 'Gender Distribution in <?= $off_barangay ?>',
                 font: {
                     size: 16
                 }
@@ -330,11 +338,9 @@ const myPieChart = new Chart(pieCtx, {
             tooltip: {
                 callbacks: {
                     label: function(tooltipItem) {
-                        const dataset = tooltipItem.dataset.data;
                         const currentValue = tooltipItem.raw;
-                        const total = dataset.reduce((a, b) => a + b, 0);
-                        const percentage = ((currentValue / total) * 100).toFixed(1) + '%';
-                        return `${tooltipItem.label}: ${currentValue} (${percentage})`;
+                        const percentage = totalCount > 0 ? ((currentValue / totalCount) * 100).toFixed(1) : 0;
+                        return `${tooltipItem.label}: ${currentValue} (${percentage}%)`;
                     }
                 }
             }
