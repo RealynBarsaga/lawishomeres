@@ -241,7 +241,7 @@ const myBarChart = new Chart(barCtx, {
         plugins: {
             title: {
                 display: true,
-                text: 'Purok Overview for <?= $off_barangay ?>',
+                text: 'Purok Overview for Brgy. <?= $off_barangay ?>',
                 font: {
                     size: 14 // Adjusted font size for the title
                 },
