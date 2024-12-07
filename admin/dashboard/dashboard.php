@@ -259,7 +259,7 @@ $femalePercentage = $totalCount > 0 ? ($femaleCount / $totalCount) * 100 : 0;
                     },
                     bodyFont: {
                         size: 9 // Smaller font size for tooltip text
-                    }
+                    } Gender Distribution for Brgy. <?= $off_barangay ?>
                 },
                 datalabels: {
                     formatter: (value, ctx) => {

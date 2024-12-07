@@ -295,59 +295,73 @@ $malePercentage = $totalCount > 0 ? ($maleCount / $totalCount) * 100 : 0;
 $femalePercentage = $totalCount > 0 ? ($femaleCount / $totalCount) * 100 : 0;
 ?>
 <script>
-const maleCount = <?= $maleCount ?>;
-const femaleCount = <?= $femaleCount ?>;
-const totalCount = maleCount + femaleCount;
-
-// Calculate percentages dynamically
-const malePercentage = totalCount > 0 ? ((maleCount / totalCount) * 100).toFixed(1) : 0;
-const femalePercentage = totalCount > 0 ? ((femaleCount / totalCount) * 100).toFixed(1) : 0;
-
-const pieCtx = document.getElementById('myPieChart').getContext('2d');
-const myPieChart = new Chart(pieCtx, {
-    type: 'pie',
-    data: {
-        labels: ['Male', 'Female'],
-        datasets: [{
-            label: 'Gender Distribution',
-            data: [maleCount, femaleCount],
-            backgroundColor: ['#4CB5F5', '#FF6384'], // Male: Blue, Female: Pink
-            borderColor: ['#fff', '#fff'],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        responsive: true,
-        plugins: {
-            title: {
-                display: true,
-                text: 'Gender Distribution in <?= $off_barangay ?>',
-                font: {
-                    size: 16
-                }
-            },
-            legend: {
-                position: 'left',
-                labels: {
-                    boxWidth: 12,
+    const pieCtx = document.getElementById('myPieChart').getContext('2d');
+    const myPieChart = new Chart(pieCtx, {
+        type: 'pie',
+        data: {
+            labels: ['Male', 'Female'],
+            datasets: [{
+                label: 'Gender Distribution',
+                data: [<?= $maleCount ?>, <?= $femaleCount ?>],
+                backgroundColor: ['#4CB5F5', '#FF6384'],
+                borderColor: ['#fff', '#fff'],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Gender Distribution for Brgy. <?= $off_barangay ?>',
                     font: {
-                        size: 12
+                        size: 16 // Adjusted font size for the title
+                    },
+                },
+                legend: {
+                    position: 'left',
+                    labels: {
+                        boxWidth: 9,  // Reduce the width of the box next to the labels (if you have colored boxes)
+                        font: {
+                            size: 10 // Smaller font size for legend labels
+                        }
                     }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(tooltipItem) {
+                            const total = tooltipItem.dataset.data.reduce((a, b) => a + b, 0);
+                            const currentValue = tooltipItem.raw;
+                            const percentage = ((currentValue / total) * 100).toFixed(1) + '%';
+                            return currentValue + ' (' + percentage + ')'; // Show count and percentage in tooltip
+                        }
+                    },
+                    bodyFont: {
+                        size: 9 // Smaller font size for tooltip text
+                    }
+                },
+                datalabels: {
+                    formatter: (value, ctx) => {
+                        const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
+                        const percentage = ((value / total) * 100).toFixed(1) + '%'; // Calculate percentage
+                        return percentage; // Return the percentage
+                    },
+                    font: {
+                        size: 9 // Smaller font size for data labels
+                    },
+                    color: '#fff', // Text color
+                    anchor: 'center', // Center the labels on the segments
+                    align: 'center' // Align the labels to the center
                 }
             },
-            tooltip: {
-                callbacks: {
-                    label: function(tooltipItem) {
-                        const currentValue = tooltipItem.raw;
-                        const percentage = totalCount > 0 ? ((currentValue / totalCount) * 100).toFixed(1) : 0;
-                        return `${tooltipItem.label}: ${currentValue} (${percentage}%)`;
-                    }
+            layout: {
+                padding: {
+                    right: 45
                 }
             }
-        }
-    },
-    plugins: [ChartDataLabels]
-});
+        },
+        plugins: [ChartDataLabels] // Register the plugin
+    });
 </script>
 <?php include "../footer.php"; ?>
 </body>
