@@ -363,6 +363,90 @@ $femalePercentage = $totalCount > 0 ? ($femaleCount / $totalCount) * 100 : 0;
         plugins: [ChartDataLabels] // Register the plugin
     });
 </script>
+<?php
+$off_barangay = $_SESSION['barangay']; // Get the logged-in user's barangay from the session
+
+// Initialize variables for age distribution
+$ageGroups = [
+    '0-9' => 0,
+    '10-19' => 0,
+    '20-29' => 0,
+    '30-39' => 0,
+    '40-49' => 0,
+    '50-59' => 0,
+    '60+' => 0,
+];
+
+// Query to get age distribution filtered by barangay
+$ageQuery = mysqli_query($con, "SELECT age FROM tbltabagak WHERE barangay = '$off_barangay'");
+while ($row = mysqli_fetch_assoc($ageQuery)) {
+    $age = $row['age'];
+    if ($age >= 0 && $age <= 9) {
+        $ageGroups['0-9']++;
+    } elseif ($age >= 10 && $age <= 19) {
+        $ageGroups['10-19']++;
+    } elseif ($age >= 20 && $age <= 29) {
+        $ageGroups['20-29']++;
+    } elseif ($age >= 30 && $age <= 39) {
+        $ageGroups['30-39']++;
+    } elseif ($age >= 40 && $age <= 49) {
+        $ageGroups['40-49']++;
+    } elseif ($age >= 50 && $age <= 59) {
+        $ageGroups['50-59']++;
+    } else {
+        $ageGroups['60+']++;
+    }
+}
+
+$ageLabels = array_keys($ageGroups);
+$ageCounts = array_values($ageGroups);
+?>
+<script>
+const lineCtx = document.getElementById('myLineChart').getContext('2d');
+const myLineChart = new Chart(lineCtx, {
+    type: 'line',
+    data: {
+        labels: <?= json_encode($ageLabels) ?>,
+        datasets: [{
+            label: 'Age Distribution',
+            data: <?= json_encode($ageCounts) ?>,
+            backgroundColor: 'rgba(76, 181, 245, 0.2)', // Semi-transparent fill
+            borderColor: '#4CB5F5', // Blue border
+            borderWidth: 1,
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            title: {
+                display: true,
+                text: 'Age Distribution for Brgy. <?= $off_barangay ?>',
+                font: {
+                    size: 14 // Adjusted title font size
+                },
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                ticks: {
+                    stepSize: 1, // Step size for better readability
+                    font: {
+                        size: 9 // Adjusted font size for y-axis labels
+                    }
+                }
+            },
+            x: {
+                ticks: {
+                    font: {
+                        size: 9 // Adjusted font size for x-axis labels
+                    }
+                }
+            }
+        }
+    }
+});
+</script>
 <?php include "../footer.php"; ?>
 </body>
 </html>
