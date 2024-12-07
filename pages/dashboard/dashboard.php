@@ -313,7 +313,7 @@ $femalePercentage = $totalCount > 0 ? ($femaleCount / $totalCount) * 100 : 0;
             plugins: {
                 title: {
                     display: true,
-                    text: 'Gender Distribution for Brgy. <?= $off_barangay ?>',
+                    text: '       Gender Distribution for Brgy. <?= $off_barangay ?>',
                     font: {
                         size: 16 // Adjusted font size for the title
                     },
