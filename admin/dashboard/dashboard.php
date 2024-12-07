@@ -1,68 +1,20 @@
 <?php
-ob_start(); // Start output buffering at the very top to avoid header errors
-session_start(); // Ensure session is started
-
-// Database credentials
-$MySQL_username = "u510162695_db_barangay";
-$Password = "1Db_barangay";    
-$MySQL_database_name = "u510162695_db_barangay";
-
-// Establish connection with server
-$con = mysqli_connect('localhost', $MySQL_username, $Password, $MySQL_database_name);
-
-// Check connection
-if (!$con) {
-    die("Connection failed: " . mysqli_connect_error());
-}
-
-// Set default timezone
-date_default_timezone_set("Asia/Manila");
-
-// Check if the user is logged in
-if (!isset($_SESSION['userid'])) {
-    header('Location: ../../admin/login.php');
-    exit; // Ensure no further execution after redirect
-}
-
-// Check if the user's role is 'Administrator'
-if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Administrator') {
-    // Redirect to the access denied page if not an admin
-    header('Location: ../../admin/access-denied');
-    exit(); // Stop further script execution
-}
-
-// Additional session check with the database
-$userid = $_SESSION['userid'];
-
-// Query to check the user's session status
-$query = "SELECT status FROM tbluser WHERE user_id = '$userid'";
-$result = mysqli_query($con, $query);
-
-if ($result) {
-    $row = mysqli_fetch_assoc($result);
-
-    // Check if the user's status is 'logged_out'
-    if ($row['status'] === 'logged_out') {
-        // Destroy the session if logged out in another site
-        session_unset();
-        session_destroy();
-
-        // Redirect to the login page
-        header("Location: ../../admin/login.php");
-        exit();
+    ob_start(); // Start output buffering at the very top to avoid header errors
+    // Check if the user is logged in and is an admin
+    session_start();
+    if (!isset($_SESSION['userid'])) {
+        header('Location: ../../admin/login.php');
+        exit; // Ensure no further execution after redirect
     }
 
-    // Update last activity in the database
-    $update_query = "UPDATE tbluser SET last_activity = NOW() WHERE user_id = '$userid'";
-    mysqli_query($con, $update_query);
-} else {
-    // Handle query failure
-    echo "Error checking session status: " . mysqli_error($con);
-    exit();
-}
+    // Check if the user's role is not 'Administrator'
+    if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Administrator') {
+        // Redirect to the access denied page if not an admin
+        header('Location: ../../admin/access-denied');
+        exit(); // Stop further script execution
+    } 
 
-// Include the necessary header CSS
-include('../../admin/head_css.php');
+    include('../../admin/head_css.php'); 
 ?>
 <!DOCTYPE html>
 <html lang="en">
