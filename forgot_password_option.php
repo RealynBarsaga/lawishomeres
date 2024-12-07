@@ -1,14 +1,3 @@
-<?php
-// Start the session
-session_start();
-
-// Check if the user's role is not 'Staff'
-if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Staff') {
-    // Redirect to the access denied page if not 'Staff'
-    header('Location: redirectlink');
-    exit(); // Stop further script execution
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
