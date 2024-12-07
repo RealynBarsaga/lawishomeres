@@ -12,12 +12,6 @@ session_set_cookie_params([
 // Start the session
 session_start();
 
-// Regenerate session ID upon each new login to prevent session fixation
-if (!isset($_SESSION['session_created'])) {
-    session_regenerate_id(true);  // Regenerate session ID on login
-    $_SESSION['session_created'] = time();
-}
-
 // Security headers
 header("X-XSS-Protection: 1; mode=block");
 header("X-Frame-Options: DENY");
@@ -119,11 +113,14 @@ if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) {
             $error_attempts = "Too many failed attempts. Please try again in 5 minute(s).";
             $error = false; // Stop showing the "Invalid account" message
         }
-
-        // Close the prepared statement and connection
-        $stmt->close();
-        $con->close();
     }
+}
+
+// Optional: Clear the error after showing it to avoid repetition on refresh
+if ($error || $error_attempts) {
+    $error_message = "Invalid account. Please try again.";
+} else {
+    $error_message = ""; // Reset error message if login attempt is successful
 }
 ?>
 <!DOCTYPE html>
@@ -905,7 +902,7 @@ if(isset($_POST['submit']))
 <?php include 'termsModal.php'; ?>
 <script>
      // Handle the OK button for modal
-     document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function() {
         // Attach a click event to the OK button to redirect to the dashboard
         const okButton = document.getElementById("ok-button2");
         if (okButton) {
@@ -913,6 +910,20 @@ if(isset($_POST['submit']))
                 window.location.href = '../admin/dashboard/dashboard';
             });
         }
+    });
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("error-ok-button").addEventListener("click", function() {
+            document.getElementById("error-modal").style.display = 'none';
+        });
+    });
+  
+    // Wait for the DOM to load
+    document.addEventListener("DOMContentLoaded", function() {
+        // Attach a click event to the OK button
+        document.getElementById("error-ok-button1").addEventListener("click", function() {
+            // Close the error modal when OK is clicked
+            document.getElementById("error-modal1").style.display = 'none';
+        });
     });
 </script>
 <script>
@@ -944,20 +955,6 @@ window.onclick = function(event) {
 }
 </script>
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-      document.getElementById("error-ok-button").addEventListener("click", function() {
-          document.getElementById("error-modal").style.display = 'none';
-      });
-  });
-
-  // Wait for the DOM to load
-  document.addEventListener("DOMContentLoaded", function() {
-      // Attach a click event to the OK button
-      document.getElementById("error-ok-button1").addEventListener("click", function() {
-          // Close the error modal when OK is clicked
-          document.getElementById("error-modal1").style.display = 'none';
-      });
-  });
   function togglePassword(inputId, icon) {
         const input = document.getElementById(inputId);
         const iconElement = icon.querySelector('i');
