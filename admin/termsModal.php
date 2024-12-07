@@ -54,6 +54,13 @@
 
             <h3>Changes to the Privacy Policy</h3>
             <p>&nbsp;&nbsp;&nbsp;We may update our Privacy Policy from time to time. We encourage you to review this policy regularly for any changes.</p>
+
+            <h3>Contact Us</h3>
+            <p>If you have any questions about this Privacy Policy, You can contact us:</p>
+            <ul>
+                <li>By visiting this page on our website: https://lawishomeresidences.com/admin</li>
+                <li>By sending us an email: lawishomeresidences@gmail.com</li>
+            </ul>
         </div>
     </div>
 </div>
