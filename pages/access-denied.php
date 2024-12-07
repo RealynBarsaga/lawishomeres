@@ -48,7 +48,7 @@
 </head>
 <body>
     <div class="container">
-        <h4>CINDY LUCERO</h4>
+        <h4>404</h4>
         <h2>&nbsp;&nbsp;This page could not be found.</h2>
     </div>
 </body>
