@@ -58,7 +58,7 @@
             <h3>Contact Us</h3>
             <p>If you have any questions about this Privacy Policy, You can contact us:</p>
             <ul>
-                <li>By visiting this page on our website: https://lawishomeresidences.com</li>
+                <li>By visiting this page on our website: <a href="https://lawishomeresidences.com">https://lawishomeresidences.com</a></li>
                 <li>By sending us an email: lawishomeresidences@gmail.com</li>
             </ul>
         </div>
