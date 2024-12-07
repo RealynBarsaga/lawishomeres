@@ -1,5 +1,26 @@
 <?php
+// Set cookie parameters before starting the session
+session_set_cookie_params([
+    'lifetime' => 0,              // Session cookie (expires when the browser is closed)
+    'path' => '/',                // Available across the entire domain
+    'domain' => 'lawishomeresidences.com', // Change this to your domain
+    'secure' => true,             // Set to true if using HTTPS
+    'httponly' => true,           // Prevent JavaScript access to the cookie
+    'samesite' => 'Lax'           // Use 'Lax' or 'Strict' based on your needs
+]);
+
 session_start();
+
+// Custom session timeout (e.g., 30 minutes)
+$timeout = 1800; // 30 minutes
+if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > $timeout)) {
+    session_unset();
+    session_destroy();
+    header('Location: ../../login.php');
+    exit(); // Ensure no further execution
+}
+$_SESSION['LAST_ACTIVITY'] = time();
+
 // Check if 'userid' is not set (user not logged in)
 if (!isset($_SESSION['userid'])) {
     // Redirect the user to the login page if not authenticated
