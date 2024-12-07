@@ -14,15 +14,6 @@ session_set_cookie_params([
 // Start the session
 session_start();
 
-// Custom session timeout (e.g., 30 minutes)
-$timeout = 300; // 5 minutes
-
-if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > $timeout)) {
-    session_unset();
-    session_destroy();
-}
-$_SESSION['LAST_ACTIVITY'] = time();
-
 // Security headers
 header("X-XSS-Protection: 1; mode=block");
 header("X-Frame-Options: DENY");

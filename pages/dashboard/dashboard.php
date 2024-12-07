@@ -1,26 +1,21 @@
 <?php
-// Set cookie parameters before starting the session
-session_set_cookie_params([
-    'lifetime' => 0,              // Session cookie (expires when the browser is closed)
-    'path' => '/',                // Available across the entire domain
-    'domain' => 'lawishomeresidences.com', // Change this to your domain
-    'secure' => true,             // Set to true if using HTTPS
-    'httponly' => true,           // Prevent JavaScript access to the cookie
-    'samesite' => 'Lax'           // Use 'Lax' or 'Strict' based on your needs
-]);
+session_start(); // Ensure session is started
 
-session_start();
+// Database credentials
+$MySQL_username = "u510162695_db_barangay";
+$Password = "1Db_barangay";    
+$MySQL_database_name = "u510162695_db_barangay";
 
-// Custom session timeout (e.g., 30 minutes)
-$timeout = 300; // 5 minutes
+// Establish connection with server
+$con = mysqli_connect('localhost', $MySQL_username, $Password, $MySQL_database_name);
 
-if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > $timeout)) {
-    session_unset();
-    session_destroy();
-    header('Location: ../../login.php');
-    exit(); // Ensure no further execution
+// Check connection
+if (!$con) {
+    die("Connection failed: " . mysqli_connect_error());
 }
-$_SESSION['LAST_ACTIVITY'] = time();
+
+// Set default timezone
+date_default_timezone_set("Asia/Manila");
 
 // Check if 'userid' is not set (user not logged in)
 if (!isset($_SESSION['userid'])) {
@@ -29,16 +24,47 @@ if (!isset($_SESSION['userid'])) {
     exit(); // Ensure no further execution after redirect
 }
 
-// Check if the user's role is not 'staff'
+// Check if the user's role is not 'Staff'
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Staff') {
-    // Redirect to the access denied page if not an admin
+    // Redirect to the access denied page if not a staff
     header('Location: /pages/access-denied');
     exit(); // Stop further script execution
 }
 
-// If the user is logged in and their role is correct, include the necessary files
+// Additional session check logic with the MySQL connection
+$userid = $_SESSION['userid'];
+
+// Query to check the user's session status
+$query = "SELECT status FROM tblstaff WHERE userid = '$userid'";
+$result = mysqli_query($con, $query);
+
+if ($result) {
+    $row = mysqli_fetch_assoc($result);
+
+    // Check if the user's status is 'logged_out'
+    if ($row['status'] === 'logged_out') {
+        // Destroy the session if logged out in another site
+        session_unset();
+        session_destroy();
+
+        // Redirect to the login page
+        header("Location: ../../login.php");
+        exit();
+    }
+
+    // Update last activity in the database
+    $update_query = "UPDATE tblstaff SET last_activity = NOW() WHERE userid = '$userid'";
+    mysqli_query($con, $update_query);
+} else {
+    // Handle query failure
+    echo "Error checking session status: " . mysqli_error($con);
+    exit();
+}
+
+// Include the necessary files
 include('../head_css.php');
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

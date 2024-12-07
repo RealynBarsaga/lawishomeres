@@ -1,21 +1,45 @@
 <?php
-// Securely start the session
-session_set_cookie_params([
-    'lifetime' => 0,              // Session cookie (expires when the browser is closed)
-    'path' => '/',                // Available across the entire domain
-    'domain' => 'lawishomeresidences.com', // Change this to your domain
-    'secure' => true,             // Set to true if using HTTPS
-    'httponly' => true,           // Prevent JavaScript access to the cookie
-    'samesite' => 'Lax'           // Use 'Lax' or 'Strict' based on your needs
-]);
+session_start();
 
-session_start(); // Start the session
+// Example user ID
+$userid = $_SESSION['userid'];
 
-// Destroy session variables and session
-session_unset(); // Clear all session data
-session_destroy(); // Completely destroy the session
+// Database credentials
+$MySQL_username = "u510162695_db_barangay";
+$Password = "1Db_barangay";
+$MySQL_database_name = "u510162695_db_barangay";
 
-// Redirect the user to the login page
-header('Location: login.php');
+// Establishing connection with server
+$con = mysqli_connect('localhost', $MySQL_username, $Password, $MySQL_database_name);
+
+// Checking connection
+if (!$con) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+// Setting the default timezone
+date_default_timezone_set("Asia/Manila");
+
+// Update user session status to logged_out
+$query = "UPDATE tblstaff SET status = 'logged_out' WHERE userid = ?";
+$stmt = mysqli_prepare($con, $query);
+
+if ($stmt) {
+    mysqli_stmt_bind_param($stmt, "s", $userid);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+} else {
+    die("Error preparing statement: " . mysqli_error($con));
+}
+
+// Close the database connection
+mysqli_close($con);
+
+// Destroy the current session
+session_unset();
+session_destroy();
+
+// Redirect to login page
+header("Location: login.php");
 exit();
 ?>
