@@ -64,7 +64,6 @@ if ($result) {
 // Include the necessary files
 include('../head_css.php');
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
