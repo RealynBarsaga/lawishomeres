@@ -194,67 +194,80 @@ h3 {
         </section><!-- /.content -->
     </aside><!-- /.right-side -->
 </div><!-- ./wrapper -->
-    <?php
-    // Query to count data for each barangay
-    $barangays = ['Tabagak', 'Bunakan', 'Kodia', 'Talangnan', 'Poblacion', 'Maalat', 'Pili', 'Kaongkod', 'Mancilang', 'Kangwayan', 'Tugas', 'Malbago', 'Tarong', 'San Agustin'];
-    $counts = [];
+<?php
+$off_barangay = $_SESSION['barangay'];
 
-    foreach ($barangays as $barangay) {
-        $q = mysqli_query($con, "SELECT * FROM tbltabagak WHERE barangay = '$barangay'");
-        $counts[] = mysqli_num_rows($q);
-    }
-    ?>
+// Purok options for each barangay
+$puroks = [
+    "Tabagak" => ["Lamon-Lamon", "Tangigue", "Lawihan", "Lower-Bangus", "Upper-Bangus"],
+    "Bunakan" => ["Bilabid", "Helinggero", "Kamaisan", "Kalubian", "Samonite"],
+    "Maalat" => ["Neem Tree", "Talisay", "Kabakhawan", "Mahogany", "Gmelina"],
+    "Pili" => ["Malinawon", "Mahigugmaon", "Matinabangun", "Maabtikon", "Malipayon", "Mauswagon"],
+    "Tarong" => ["Orchids", "Gumamela", "Santan", "Rose", "Vietnam Rose", "Kumintang", "Sunflower", "Daisy"],
+    // Add other barangays and their corresponding puroks as needed
+];
 
-    <script>
-    const barCtx = document.getElementById('myBarChart').getContext('2d');
-    const myBarChart = new Chart(barCtx, {
-        type: 'bar',
-        data: {
-            labels: <?= json_encode($barangays) ?>,
-            datasets: [{
-                label: 'Count',
-                data: <?= json_encode($counts) ?>,
-                backgroundColor: [
-                    '#4CB5F5',
-                ],
-                borderColor: [
-                    '#4CB5F5',
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Population Overview',
-                    font: {
-                        size: 14 // Adjusted font size for the title
-                    },
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        stepSize: 1,
-                        font: {
-                            size: 9 // Adjusted font size for the y-axis labels
-                        }
-                    }
+// Get puroks for the current barangay
+$current_puroks = isset($puroks[$off_barangay]) ? $puroks[$off_barangay] : [];
+$counts = [];
+
+// Query database for each purok in the current barangay
+foreach ($current_puroks as $purok) {
+    $q = mysqli_query($con, "SELECT * FROM tbltabagak WHERE barangay = '$off_barangay' AND purok = '$purok'");
+    $counts[] = mysqli_num_rows($q);
+}
+?>
+
+<script>
+const barCtx = document.getElementById('myBarChart').getContext('2d');
+const myBarChart = new Chart(barCtx, {
+    type: 'bar',
+    data: {
+        labels: <?= json_encode($current_puroks) ?>,
+        datasets: [{
+            label: 'Count',
+            data: <?= json_encode($counts) ?>,
+            backgroundColor: [
+                '#4CB5F5',
+            ],
+            borderColor: [
+                '#4CB5F5',
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            title: {
+                display: true,
+                text: 'Population Overview for <?= $off_barangay ?>',
+                font: {
+                    size: 14 // Adjusted font size for the title
                 },
-                x: {
-                    ticks: {
-                        font: {
-                            size: 9 // Adjusted font size for the x-axis labels
-                        }
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                ticks: {
+                    stepSize: 1,
+                    font: {
+                        size: 9 // Adjusted font size for the y-axis labels
                     }
                 }
             },
-        }
-    });
-</script>    
+            x: {
+                ticks: {
+                    font: {
+                        size: 9 // Adjusted font size for the x-axis labels
+                    }
+                }
+            }
+        },
+    }
+});
+</script>   
     <?php include "../footer.php"; ?>
 </body>
 </html>
