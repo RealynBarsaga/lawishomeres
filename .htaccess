@@ -8,6 +8,10 @@ RewriteRule ^$ login.php [L]
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /login\.php\ HTTP/ [NC]
 RewriteRule ^login\.php$ / [R=302,L]
 
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.*)$ $1.php [L]
+
 # Rewrite /forgot_password_option to /forgot_password_option.php
 RewriteRule ^forgot_password_option/?$ /forgot_password_option.php [L,QSA]
 
