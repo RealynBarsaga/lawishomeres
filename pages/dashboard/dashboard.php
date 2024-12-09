@@ -1,21 +1,5 @@
 <?php
-session_start(); // Ensure session is started
-
-// Database credentials
-$MySQL_username = "u510162695_db_barangay";
-$Password = "1Db_barangay";    
-$MySQL_database_name = "u510162695_db_barangay";
-
-// Establish connection with server
-$con = mysqli_connect('localhost', $MySQL_username, $Password, $MySQL_database_name);
-
-// Check connection
-if (!$con) {
-    die("Connection failed: " . mysqli_connect_error());
-}
-
-// Set default timezone
-date_default_timezone_set("Asia/Manila");
+session_start();
 
 // Check if 'userid' is not set (user not logged in)
 if (!isset($_SESSION['userid'])) {
@@ -24,44 +8,14 @@ if (!isset($_SESSION['userid'])) {
     exit(); // Ensure no further execution after redirect
 }
 
-// Check if the user's role is not 'Staff'
+// Check if the user's role is not 'staff'
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Staff') {
-    // Redirect to the access denied page if not a staff
+    // Redirect to the access denied page if not an admin
     header('Location: /pages/access-denied');
     exit(); // Stop further script execution
 }
 
-// Additional session check logic with the MySQL connection
-$userid = $_SESSION['userid'];
-
-// Query to check the user's session status
-$query = "SELECT status FROM tblstaff WHERE userid = '$userid'";
-$result = mysqli_query($con, $query);
-
-if ($result) {
-    $row = mysqli_fetch_assoc($result);
-
-    // Check if the user's status is 'logged_out'
-    if ($row['status'] === 'logged_out') {
-        // Destroy the session if logged out in another site
-        session_unset();
-        session_destroy();
-
-        // Redirect to the login page
-        header("Location: ../../login.php");
-        exit();
-    }
-
-    // Update last activity in the database
-    $update_query = "UPDATE tblstaff SET last_activity = NOW() WHERE userid = '$userid'";
-    mysqli_query($con, $update_query);
-} else {
-    // Handle query failure
-    echo "Error checking session status: " . mysqli_error($con);
-    exit();
-}
-
-// Include the necessary files
+// If the user is logged in and their role is correct, include the necessary files
 include('../head_css.php');
 ?>
 <!DOCTYPE html>
