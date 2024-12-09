@@ -1,53 +1,22 @@
 <?php
 session_start();
 
-// Regenerate session ID to prevent session fixation attacks
-session_regenerate_id(true);
-
-// Check if the user is logged in
+// Check if 'userid' is not set (user not logged in)
 if (!isset($_SESSION['userid'])) {
-    // User not logged in, redirect to login page
+    // Redirect the user to the login page if not authenticated
     header('Location: ../../login.php');
-    exit();
+    exit(); // Ensure no further execution after redirect
 }
 
-// Check session token, status, and last activity
-if (!isset($_SESSION['session_token']) || !isset($_SESSION['status']) || $_SESSION['status'] !== 'active') {
-    // Invalid session token or status, redirect to login page
-    header('Location: ../../login.php');
-    exit();
-}
-
-// Check for session expiration (inactive for over 1 hour)
-$timeout_duration = 3600; // 1 hour inactivity timeout
-$current_time = time();
-$last_activity = $_SESSION['last_activity'] ?? $current_time;
-
-if (($current_time - $last_activity) > $timeout_duration) {
-    // Session expired, log the user out
-    session_unset(); // Clear all session variables
-    session_destroy(); // Destroy the session
-    header('Location: ../../login.php');
-    exit();
-}
-
-// Update last activity time
-$_SESSION['last_activity'] = $current_time;
-
-// Check if user is staff (authorized role)
+// Check if the user's role is not 'staff'
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Staff') {
-    // User not authorized, redirect to access denied page
+    // Redirect to the access denied page if not an admin
     header('Location: /pages/access-denied');
-    exit();
+    exit(); // Stop further script execution
 }
 
-// Include necessary CSS for the page
+// If the user is logged in and their role is correct, include the necessary files
 include('../head_css.php');
-
-// Regenerate session token if it's not set (for additional security)
-if (!isset($_SESSION['session_token'])) {
-    $_SESSION['session_token'] = bin2hex(random_bytes(32)); // Generate a secure session token
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
