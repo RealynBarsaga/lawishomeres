@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// Destroy all sessions
 session_unset();
 session_destroy();
 
@@ -11,3 +10,4 @@ setcookie(session_name(), '', time() - 3600, '/', 'lawishomeresidences.com', tru
 header("Location: login.php");
 exit();
 ?>
+

@@ -1,41 +1,29 @@
 <?php
 session_start();
 
-// Check if 'userid' is not set (user not logged in)
+// Redirect to login if not authenticated
 if (!isset($_SESSION['userid'])) {
     header('Location: ../../login.php');
     exit();
 }
 
-// Check if the user's role is not 'Staff'
+// Ensure user has the correct role
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Staff') {
     header('Location: /pages/access-denied');
     exit();
 }
 
-// Session timeout logic
-if (isset($_SESSION['last_activity'])) {
-    $timeout_duration = 15 * 60; // 15 minutes (in seconds)
-
-    // If user is from the target barangay, apply stricter timeout (5 seconds)
-    $off_barangay = $_SESSION['barangay']; // Assuming this is set during login
-    if ($off_barangay === 'target_barangay') {
-        $timeout_duration = 5; // 5 seconds
-    }
-
-    // Check if the timeout has been exceeded
-    if ((time() - $_SESSION['last_activity']) > $timeout_duration) {
-        session_unset();
-        session_destroy();
-        header('Location: ../../login.php');
-        exit();
-    }
+// Session timeout logic (5 seconds for testing)
+if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 5)) {
+    session_unset();
+    session_destroy();
+    header('Location: ../../login.php');
+    exit();
 }
 
 // Update last activity timestamp
 $_SESSION['last_activity'] = time();
 
-// If the user is logged in and their role is correct, include the necessary files
 include('../head_css.php');
 ?>
 <!DOCTYPE html>
