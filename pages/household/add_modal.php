@@ -158,11 +158,22 @@
         }
     }
 
-    // When the modal is shown, reset all fields
     $('#addModal').on('show.bs.modal', function () {
-        $('#txt_members').val('');  // Clear the members input field
-        $('#txt_totalmembers').val('');  // Clear the total members count
-        $('#txt_brgy').val('');  // Clear barangay field
-        $('#txt_purok').val('');  // Clear purok field
-    });
+    $('#txt_members').val('');  // Clear the members input field
+    $('#txt_totalmembers').val('');  // Clear the total members count
+    $('#txt_brgy').val('');  // Clear barangay field
+    $('#txt_purok').val('');  // Clear purok field
+
+    // Re-trigger the head of family dropdown on modal open if there's a household number
+    var householdID = $('#txt_householdno').val();
+    if (householdID) {
+        show_head();
+    }
+
+    // Also re-trigger total members if a head of family is already selected
+    var hofID = $('#txt_hof').val();
+    if (hofID) {
+        show_total();
+    }
+});
 </script>
