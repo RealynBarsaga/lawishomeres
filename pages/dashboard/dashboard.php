@@ -15,26 +15,26 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Staff') {
 
 // Session timeout logic
 if (isset($_SESSION['last_activity'])) {
-    $timeout_duration = 10; // Default 15 minutes timeout for different barangays
-    
+    $timeout_duration = 900; // Default 15 minutes timeout
+
     // Check if barangay matches the session barangay
     $user_barangay = $_SESSION['barangay']; // Current user's barangay
-    $allowed_barangay = 'TargetBarangay'; // Replace with the barangay you want to allow
-    
-    if ($user_barangay === $allowed_barangay) {
-        // If the barangays match, skip timeout logic
-        $_SESSION['last_activity'] = time();
-    } else {
-        // Enforce timeout if barangays don't match
+    $target_barangay = 'TargetBarangay'; // Replace with the barangay you want to enforce logout for
+
+    // If the barangay matches, enforce timeout logic (logout after inactivity)
+    if ($user_barangay === $target_barangay) {
         if ((time() - $_SESSION['last_activity']) > $timeout_duration) {
             session_unset();
             session_destroy();
             header('Location: ../../login.php');
             exit();
         }
+    } else {
+        // If barangay does not match, keep session active (no logout logic)
+        $_SESSION['last_activity'] = time(); // Update last activity timestamp
     }
 } else {
-    // Set initial activity time
+    // Set initial activity time if it's the first visit
     $_SESSION['last_activity'] = time();
 }
 
