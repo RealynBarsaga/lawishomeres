@@ -55,7 +55,7 @@ ob_start();
                                 <a href="#" class="btn btn-default btn-flat" data-toggle="modal" data-target="#editProfileModal">Change Password</a>
                             </div>
                             <div class="pull-right">
-                                <a href="login.php" class="btn btn-default btn-flat">Sign out</a>
+                                <a href="../../" class="btn btn-default btn-flat">Sign out</a>
                             </div>
                         </li>
                     </ul>
