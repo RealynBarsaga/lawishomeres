@@ -16,12 +16,12 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Staff') {
 }
 
 // Session timeout logic based on barangay
-$currentBarangay = $_SESSION['barangay']; // Retrieve barangay from session
+$off_barangay = $_SESSION['barangay']; // Retrieve barangay from session
 
-if (!isset($_SESSION['last_activity'][$currentBarangay])) {
+if (!isset($_SESSION['last_activity'][$off_barangay])) {
     // Initialize activity tracking for this barangay if not set
-    $_SESSION['last_activity'][$currentBarangay] = time();
-} elseif (time() - $_SESSION['last_activity'][$currentBarangay] > 10) { // 900 seconds = 15 minutes
+    $_SESSION['last_activity'][$off_barangay] = time();
+} elseif (time() - $_SESSION['last_activity'][$off_barangay] > 10) { // 900 seconds = 15 minutes
     // If session timed out for this barangay
     session_unset();
     session_destroy();
@@ -30,7 +30,7 @@ if (!isset($_SESSION['last_activity'][$currentBarangay])) {
 }
 
 // Update last activity timestamp for this barangay
-$_SESSION['last_activity'][$currentBarangay] = time();
+$_SESSION['last_activity'][$off_barangay] = time();
 
 // Include necessary files
 include('../head_css.php');
