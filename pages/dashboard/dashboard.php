@@ -8,26 +8,24 @@ if (!isset($_SESSION['userid'])) {
     exit(); // Ensure no further execution after redirect
 }
 
-// Check if the user's status is not 'active'
-if ($_SESSION['status'] !== 'active') {
-    // Redirect to the login page if the status is not active
-    session_unset();
-    session_destroy();
-    header('Location: ../../login.php');
+// Check if the user's role is not 'staff'
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Staff') {
+    // Redirect to the access denied page if not staff
+    header('Location: /pages/access-denied');
     exit(); // Stop further script execution
 }
 
-// Timeout check (15 minutes of inactivity)
-$timeout_duration = 5; // 15 minutes timeout duration
-if (isset($_SESSION['last_activity'])) {
-    if ((time() - $_SESSION['last_activity']) > $timeout_duration) {
-        // Update the user status to 'logged_out' upon session timeout
-        include "pages/connection.php";
-        $query = "UPDATE tblstaff SET status = 'logged_out' WHERE id = ?";
-        $stmt = $con->prepare($query);
-        $stmt->execute([$_SESSION['userid']]);
+// Session timeout logic (default 10 minutes, stricter timeout for different barangay)
+$timeout_duration = 10 * 60; // Default timeout duration (10 minutes)
 
-        // Destroy the session
+if (isset($_SESSION['last_activity'])) {
+    // Stricter timeout if barangay is different
+    if ($_SESSION['barangay'] !== 'target_barangay') {
+        $timeout_duration = 5 * 60; // 5 minutes for users from a different barangay
+    }
+
+    // Check if session has timed out
+    if ((time() - $_SESSION['last_activity']) > $timeout_duration) {
         session_unset();
         session_destroy();
         header('Location: ../../login.php');

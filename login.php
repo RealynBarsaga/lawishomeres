@@ -83,14 +83,7 @@ if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) {
                 $_SESSION["barangay"] = $row["name"];
                 $_SESSION['logo'] = $row['logo'];
                 $_SESSION['last_activity'] = time(); // Track user activity
-                $_SESSION['status'] = 'active'; // Set status to 'active' upon successful login
 
-                
-                // Set user status to active in the database
-                $query = "UPDATE tblstaff SET status = 'active' WHERE id = ?";
-                $stmt = $con->prepare($query);
-                $stmt->execute([$_SESSION['userid']]);
-                
                 // Set login success flag to true
                 $login_success = true;
 
