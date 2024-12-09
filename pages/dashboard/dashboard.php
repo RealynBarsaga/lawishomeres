@@ -1,64 +1,63 @@
 <?php
-session_start(); // Start session
+session_start(); // Ensure session is started
 
 // Database credentials
 $MySQL_username = "u510162695_db_barangay";
-$Password = "1Db_barangay";
+$Password = "1Db_barangay";    
 $MySQL_database_name = "u510162695_db_barangay";
 
 // Establish connection with server
-$con = new mysqli('localhost', $MySQL_username, $Password, $MySQL_database_name);
+$con = mysqli_connect('localhost', $MySQL_username, $Password, $MySQL_database_name);
 
 // Check connection
-if ($con->connect_error) {
-    die("Connection failed: " . $con->connect_error);
+if (!$con) {
+    die("Connection failed: " . mysqli_connect_error());
 }
 
 // Set default timezone
 date_default_timezone_set("Asia/Manila");
 
-// Redirect to login if 'userid' is not set
+// Check if 'userid' is not set (user not logged in)
 if (!isset($_SESSION['userid'])) {
+    // Redirect the user to the login page if not authenticated
     header('Location: ../../login.php');
-    exit();
+    exit(); // Ensure no further execution after redirect
 }
 
 // Check if the user's role is not 'Staff'
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Staff') {
+    // Redirect to the access denied page if not a staff
     header('Location: /pages/access-denied');
-    exit();
+    exit(); // Stop further script execution
 }
 
-// Retrieve barangay from session
-$off_barangay = $_SESSION['barangay'] ?? '';
-
-// Additional session check logic
+// Additional session check logic with the MySQL connection
 $userid = $_SESSION['userid'];
 
-// Use a prepared statement to prevent SQL injection
-$query = $con->prepare("SELECT status, barangay FROM tblstaff WHERE userid = ?");
-$query->bind_param("s", $userid);
-$query->execute();
-$result = $query->get_result();
+// Query to check the user's session status
+$query = "SELECT status FROM tblstaff WHERE userid = '$userid'";
+$result = mysqli_query($con, $query);
 
-if ($result && $row = $result->fetch_assoc()) {
-    // Check if the user's status is 'logged_out' and barangay does not match
-    if ($row['status'] === 'logged_out' && $row['barangay'] !== $off_barangay) {
+if ($result) {
+    $row = mysqli_fetch_assoc($result);
+
+    // Check if the user's status is 'logged_out'
+    if ($row['status'] === 'logged_out') {
+        // Destroy the session if logged out in another site
         session_unset();
         session_destroy();
 
-        // Redirect to login page
+        // Redirect to the login page
         header("Location: ../../login.php");
         exit();
     }
 
     // Update last activity in the database
-    $update_query = $con->prepare("UPDATE tblstaff SET last_activity = NOW() WHERE userid = ?");
-    $update_query->bind_param("s", $userid);
-    $update_query->execute();
+    $update_query = "UPDATE tblstaff SET last_activity = NOW() WHERE userid = '$userid'";
+    mysqli_query($con, $update_query);
 } else {
     // Handle query failure
-    echo "Error checking session status: " . $con->error;
+    echo "Error checking session status: " . mysqli_error($con);
     exit();
 }
 
