@@ -2,9 +2,10 @@
 session_start();
 include('../connection.php'); // Ensure your DB connection is included here
 
-// Check if the user is logged in and has a valid session token
-if (!isset($_SESSION['session_token'])) {
-    header("Location: dashboard");
+// Check if the user is authenticated and has the 'Staff' role
+if (!isset($_SESSION['userid'])) {
+    // Redirect to the login page if the user is not logged in
+    header('Location: ../../login.php');
     exit();
 }
 
@@ -23,7 +24,7 @@ $stmt->close();
 // If the session is not active, destroy the session and redirect to login
 if ($status != 'active') {
     session_destroy();
-    header("Location: dashboard");
+    header("Location: login.php");
     exit();
 }
 
@@ -32,13 +33,6 @@ $stmt = $conn->prepare("UPDATE tblstaff SET last_activity = CURRENT_TIMESTAMP WH
 $stmt->bind_param("is", $userid, $session_token);
 $stmt->execute();
 $stmt->close();
-
-// Check if the user is authenticated and has the 'Staff' role
-if (!isset($_SESSION['userid'])) {
-    // Redirect to the login page if the user is not logged in
-    header('Location: ../../login.php');
-    exit();
-}
 
 // Check if the user's role is 'Staff'
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Staff') {
