@@ -13,14 +13,14 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Staff') {
     exit();
 }
 
-// Session timeout logic (15 minutes)
+// Session timeout logic
 if (isset($_SESSION['last_activity'])) {
-    $timeout_duration = 10; // 15 minutes
+    $timeout_duration = 15 * 60; // 15 minutes (in seconds)
 
-    // If user is from a different barangay, apply stricter timeout (e.g., 5 minutes)
+    // If user is from the target barangay, apply stricter timeout (5 seconds)
     $off_barangay = $_SESSION['barangay']; // Assuming this is set during login
-    if ($off_barangay !== 'target_barangay') { 
-        $timeout_duration = 10; // 5 minutes
+    if ($off_barangay === 'target_barangay') {
+        $timeout_duration = 5; // 5 seconds
     }
 
     // Check if the timeout has been exceeded
