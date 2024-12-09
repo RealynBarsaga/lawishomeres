@@ -3,38 +3,31 @@ session_start();
 
 // Check if 'userid' is not set (user not logged in)
 if (!isset($_SESSION['userid'])) {
+    // Redirect the user to the login page if not authenticated
     header('Location: ../../login.php');
-    exit();
+    exit(); // Ensure no further execution after redirect
 }
 
-// Check if the user's role is not 'Staff'
-if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Staff') {
-    header('Location: /pages/access-denied');
-    exit();
+// Check if the user's status is not 'active'
+if ($_SESSION['status'] !== 'active') {
+    // Redirect to the login page if the status is not active
+    session_unset();
+    session_destroy();
+    header('Location: ../../login.php');
+    exit(); // Stop further script execution
 }
 
-// If barangay is not already stored in the session or cookie, set it
-if (!isset($_SESSION['barangay'])) {
-    // Store barangay in a cookie to persist across browser sessions (even incognito)
-    if (isset($_COOKIE['barangay'])) {
-        $_SESSION['barangay'] = $_COOKIE['barangay'];
-    } else {
-        // If not set, initialize a default or the one from the current session
-        $_SESSION['barangay'] = 'default_barangay'; // Replace with actual logic to retrieve barangay
-    }
-}
-
-// Session timeout logic (10 minutes by default, stricter timeout for a different barangay)
-$timeout_duration = 10 * 60; // Default timeout duration (10 minutes)
-
+// Timeout check (15 minutes of inactivity)
+$timeout_duration = 15 * 60; // 15 minutes timeout duration
 if (isset($_SESSION['last_activity'])) {
-    // Check for a stricter timeout if barangay is different
-    if ($_SESSION['barangay'] !== 'target_barangay') { 
-        $timeout_duration = 5 * 60; // 5 minutes for users from a different barangay
-    }
-
-    // Check if session has timed out
     if ((time() - $_SESSION['last_activity']) > $timeout_duration) {
+        // Update the user status to 'logged_out' upon session timeout
+        include "pages/connection.php";
+        $query = "UPDATE tblstaff SET status = 'logged_out' WHERE id = ?";
+        $stmt = $con->prepare($query);
+        $stmt->execute([$_SESSION['userid']]);
+
+        // Destroy the session
         session_unset();
         session_destroy();
         header('Location: ../../login.php');
@@ -44,9 +37,6 @@ if (isset($_SESSION['last_activity'])) {
 
 // Update last activity timestamp
 $_SESSION['last_activity'] = time();
-
-// Set or update barangay cookie (to persist in future sessions)
-setcookie('barangay', $_SESSION['barangay'], time() + 3600, '/'); // expires in 1 hour
 
 // If the user is logged in and their role is correct, include the necessary files
 include('../head_css.php');
