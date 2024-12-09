@@ -13,27 +13,30 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Staff') {
     exit();
 }
 
-// Session timeout logic (15 minutes)
+// Session timeout logic
 if (isset($_SESSION['last_activity'])) {
-    $timeout_duration = 10; // 15 minutes
-
-    // If user is from a different barangay, apply stricter timeout (e.g., 5 minutes)
-    $off_barangay = $_SESSION['barangay']; // Assuming this is set during login
-    if ($off_barangay !== 'target_barangay') { 
-        $timeout_duration = 10; // 5 minutes
+    $timeout_duration = 10; // Default 15 minutes timeout for different barangays
+    
+    // Check if barangay matches the session barangay
+    $user_barangay = $_SESSION['barangay']; // Current user's barangay
+    $allowed_barangay = 'TargetBarangay'; // Replace with the barangay you want to allow
+    
+    if ($user_barangay === $allowed_barangay) {
+        // If the barangays match, skip timeout logic
+        $_SESSION['last_activity'] = time();
+    } else {
+        // Enforce timeout if barangays don't match
+        if ((time() - $_SESSION['last_activity']) > $timeout_duration) {
+            session_unset();
+            session_destroy();
+            header('Location: ../../login.php');
+            exit();
+        }
     }
-
-    // Check if the timeout has been exceeded
-    if ((time() - $_SESSION['last_activity']) > $timeout_duration) {
-        session_unset();
-        session_destroy();
-        header('Location: ../../login.php');
-        exit();
-    }
+} else {
+    // Set initial activity time
+    $_SESSION['last_activity'] = time();
 }
-
-// Update last activity timestamp
-$_SESSION['last_activity'] = time();
 
 // If the user is logged in and their role is correct, include the necessary files
 include('../head_css.php');
