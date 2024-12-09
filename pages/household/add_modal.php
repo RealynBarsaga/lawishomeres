@@ -122,52 +122,52 @@
         }
     }
 
-    // Fetch and display members for a given Head of Family
-    function fetchMembers(headoffamily) {
-        console.log('Fetching members for HOF ID:', headoffamily);  // Debugging
-        if (headoffamily) {
-            $.ajax({
-                type: 'POST',
-                url: 'household_dropdown.php',
-                data: { 
-                    headoffamily: headoffamily,
-                    barangay: loggedInBarangay // Pass barangay as part of the POST data
-                },
-                success: function (response) {
-                    console.log('Family Members Response:', response);  // Debugging
+   // Fetch and display members for a given Head of Family
+function fetchMembers(headoffamily) {
+    console.log('Fetching members for HOF ID:', headoffamily);  // Debugging
+    if (headoffamily) {
+        $.ajax({
+            type: 'POST',
+            url: 'household_dropdown.php',
+            data: { 
+                headoffamily: headoffamily,
+                barangay: loggedInBarangay // Pass barangay as part of the POST data
+            },
+            success: function (response) {
+                console.log('Family Members Response:', response);  // Debugging
+                
+                try {
+                    var members = JSON.parse(response); // Parse the JSON response
                     
-                    try {
-                        var members = JSON.parse(response); // Parse the JSON response
-                        
-                        if (Array.isArray(members) && members.length > 0) {
-                            // Set the member names if there are members
-                            var memberNames = members.map(function(member) {
-                                return member.fullName;
-                            });
-                            $('#txt_members').val(memberNames.join(", ")); // Update the field
-                            $('#txt_totalmembers').val(members.length);  // Update total members count
-                        } else {
-                            // If no members, set the appropriate value
-                            $('#txt_members').val("No Members Found");
-                            $('#txt_totalmembers').val(0);
-                        }
-                    } catch (error) {
-                        console.error('Error parsing response:', error);  // Log any JSON parsing errors
-                        $('#txt_members').val("Error loading members");
+                    if (Array.isArray(members) && members.length > 0) {
+                        // Set the member names if there are members
+                        var memberNames = members.map(function(member) {
+                            return member.fullName;
+                        });
+                        $('#txt_members').val(memberNames.join(", ")); // Update the field
+                        $('#txt_totalmembers').val(members.length);  // Update total members count
+                    } else {
+                        // If no members, set the appropriate value
+                        $('#txt_members').val("No Members Found");
                         $('#txt_totalmembers').val(0);
                     }
-                },
-                error: function (xhr, status, error) {
-                    console.error('AJAX request failed:', status, error); // Debugging
+                } catch (error) {
+                    console.error('Error parsing response:', error);  // Log any JSON parsing errors
                     $('#txt_members').val("Error loading members");
                     $('#txt_totalmembers').val(0);
                 }
-            });
-        }
+            },
+            error: function (xhr, status, error) {
+                console.error('AJAX request failed:', status, error); // Debugging
+                $('#txt_members').val("Error loading members");
+                $('#txt_totalmembers').val(0);
+            }
+        });
     }
+}
 
-
-    $('#addModal').on('show.bs.modal', function () {
+// Reset and display relevant fields when the modal is shown
+$('#addModal').on('show.bs.modal', function () {
     $('#txt_members').val('');  // Clear the members input field
     $('#txt_totalmembers').val('');  // Clear the total members count
     $('#txt_brgy').val('');  // Clear barangay field
@@ -179,10 +179,18 @@
         show_head();
     }
 
-    // Also re-trigger total members if a head of family is already selected
+    // Re-fetch total members if a head of family is selected
     var hofID = $('#txt_hof').val();
     if (hofID) {
-        show_total();
+        fetchMembers(hofID);  // Fetch members for the selected head of family
+    }
+});
+
+// Optional: Trigger on the "Add" button or when changes are made to the Head of Family field
+$('#txt_hof').change(function() {
+    var hofID = $(this).val();
+    if (hofID) {
+        fetchMembers(hofID);  // Fetch members whenever a new head of family is selected
     }
 });
 </script>
