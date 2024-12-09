@@ -15,7 +15,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Staff') {
 }
 
 // Session timeout logic (15 minutes)
-if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 15)) {
+if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 10)) {
     session_unset();
     session_destroy();
     header('Location: ../../login.php');
