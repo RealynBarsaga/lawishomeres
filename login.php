@@ -90,7 +90,7 @@ if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) {
                 // Set a cookie to track user session for 30 days
                 setcookie(
                     "user_session",           // Cookie name
-                    session_token(),             // Cookie value (session ID)
+                    session_id(),             // Cookie value (session ID)
                     time() + (86400 * 30),    // Expiration time (30 days)
                     '/',                      // Path
                     'lawishomeresidences.com',// Domain
