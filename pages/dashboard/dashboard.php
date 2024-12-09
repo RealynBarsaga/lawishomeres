@@ -1,9 +1,6 @@
 <?php
 session_start();
 
-// Session timeout (30 minutes)
-define('SESSION_TIMEOUT', 900);
-
 // Check if 'userid' is not set (user not logged in)
 if (!isset($_SESSION['userid'])) {
     // Redirect the user to the login page if not authenticated
@@ -17,14 +14,6 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Staff') {
     header('Location: /pages/access-denied');
     exit(); // Stop further script execution
 }
-
-if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > SESSION_TIMEOUT)) {
-    session_unset();
-    session_destroy();
-    header("Location: login.php");
-    exit;
-}
-$_SESSION['LAST_ACTIVITY'] = time(); // Update last activity timestamp
 
 // If the user is logged in and their role is correct, include the necessary files
 include('../head_css.php');
