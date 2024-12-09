@@ -1,23 +1,5 @@
 <?php
-// Set session cookie parameters to make cookies more secure
-session_set_cookie_params([
-    'lifetime' => 0,  // Session cookie expires when the browser is closed
-    'path' => '/',     // Valid for your entire site
-    'domain' => 'lawishomeresidences.com', // Ensure this domain is correct
-    'secure' => true,  // Only send cookies over HTTPS (set to true if using HTTPS)
-    'httponly' => true, // Make cookies inaccessible via JavaScript
-    'samesite' => 'Strict', // Prevent session cookie from being sent in cross-site requests
-]);
-
-// Start the session after setting the cookie parameters
 session_start();
-session_regenerate_id(true); // Regenerate session ID to prevent session fixation
-
-// Prevent page caching
-header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
-header('Pragma: no-cache');
-header('Expires: Sat, 26 Jul 1997 05:00:00 GMT'); // Past date to prevent caching
-
 // Check if 'userid' is not set (user not logged in)
 if (!isset($_SESSION['userid'])) {
     // Redirect the user to the login page if not authenticated
@@ -31,19 +13,6 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Staff') {
     header('Location: /pages/access-denied');
     exit(); // Stop further script execution
 }
-
-// Session timeout logic (15 minutes)
-if (isset($_SESSION['last_activity'])) {
-    $timeout_duration = 5; // 15 minutes (in seconds)
-    if (time() - $_SESSION['last_activity'] > $timeout_duration) {
-        // Expire session after 15 minutes of inactivity
-        session_unset();
-        session_destroy();
-        header('Location: ../../login.php');
-        exit();
-    }
-}
-$_SESSION['last_activity'] = time(); // Update last activity timestamp
 
 // If the user is logged in and their role is correct, include the necessary files
 include('../head_css.php');
@@ -234,7 +203,7 @@ $puroks = [
     "Bunakan" => ["Bilabid", "Helinggero", "Kamaisan", "Kalubian", "Samonite"],
     "Maalat" => ["Neem Tree", "Talisay", "Kabakhawan", "Mahogany", "Gmelina"],
     "Pili" => ["Malinawon", "Mahigugmaon", "Matinabangun", "Maabtikon", "Malipayon", "Mauswagon"],
-    "Tarong" => ["Orchids", "Gumamela", "Santan", "Rose", "Vietnam Rose", "Kumintang", "Sunflower", "Daisy"],
+    "Tarong" => ["Orchids", "Gumamela 1", "Gumamela 2", "Santan 1", "Santan 2", "Rose 1", "Rose 2", "Vietnam Rose", "Kumintang 1", "Kumintang 2", "Sunflower", "Daisy"],
     // Add other barangays and their corresponding puroks as needed
 ];
 
