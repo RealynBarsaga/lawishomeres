@@ -8,15 +8,44 @@ if (!isset($_SESSION['userid'])) {
     exit(); // Ensure no further execution after redirect
 }
 
-// Check if the user's role is not 'staff'
+// Check if the session is still valid (session_token, status, last_activity)
+if (!isset($_SESSION['session_token']) || !isset($_SESSION['status']) || $_SESSION['status'] !== 'active') {
+    // Redirect if session token or status is not valid or session is inactive
+    header('Location: ../../login.php');
+    exit();
+}
+
+// Check if session has expired based on last activity
+$timeout_duration = 3600; // Timeout after 1 hour of inactivity
+$current_time = time();
+$last_activity = $_SESSION['last_activity'] ?? $current_time;
+
+// If the session is expired, log out the user
+if (($current_time - $last_activity) > $timeout_duration) {
+    // Clear session variables and destroy the session to log out
+    session_unset();
+    session_destroy();
+    header('Location: ../../login.php');
+    exit();
+}
+
+// Update last activity time to the current time
+$_SESSION['last_activity'] = $current_time;
+
+// Check if the user's role is not 'Staff'
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Staff') {
-    // Redirect to the access denied page if not an admin
+    // Redirect to the access denied page if not a staff member
     header('Location: /pages/access-denied');
     exit(); // Stop further script execution
 }
 
 // If the user is logged in and their role is correct, include the necessary files
 include('../head_css.php');
+
+// Optional: Update session_token if you want to regenerate a new token for extra security
+if (!isset($_SESSION['session_token'])) {
+    $_SESSION['session_token'] = bin2hex(random_bytes(32)); // Generate a secure token
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
