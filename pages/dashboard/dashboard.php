@@ -18,7 +18,7 @@ if ($_SESSION['status'] !== 'active') {
 }
 
 // Timeout check (15 minutes of inactivity)
-$timeout_duration = 15 * 60; // 15 minutes timeout duration
+$timeout_duration = 5; // 15 minutes timeout duration
 if (isset($_SESSION['last_activity'])) {
     if ((time() - $_SESSION['last_activity']) > $timeout_duration) {
         // Update the user status to 'logged_out' upon session timeout
