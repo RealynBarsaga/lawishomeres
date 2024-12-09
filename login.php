@@ -82,8 +82,7 @@ if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) {
                 $_SESSION['username'] = $row['username'];
                 $_SESSION["barangay"] = $row["name"];
                 $_SESSION['logo'] = $row['logo'];
-                $_SESSION['last_activity'] = time(); // Track user activity
-
+                
                 // Set login success flag to true
                 $login_success = true;
 
