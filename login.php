@@ -111,8 +111,9 @@ if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) {
                     ]
                 );
 
-                // Set login success flag to true
-                $login_success = true;
+                // Redirect to the dashboard
+                header("Location: pages/dashboard/dashboard.php");
+                exit();
             } else {
                 // Increment login attempts
                 $_SESSION['login_attempts']++;
