@@ -677,7 +677,7 @@ h3 {
 /* Paragraph Styling */
 p {
     margin: 10px 0;
-    font-size: 12px;
+    font-size: 13px;
 }
 
 /* List Style */
