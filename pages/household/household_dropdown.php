@@ -71,27 +71,50 @@ if (isset($_POST['total_id']) && isset($_POST['barangay'])) {
     }
 }
 
-// Assuming this is a part of your PHP file that processes the AJAX request for fetching members.
 if (isset($_POST['headoffamily']) && isset($_POST['barangay'])) {
     $headoffamily = $_POST['headoffamily'];
     $barangay = $_POST['barangay'];
 
-    // SQL Query to fetch members
-    $stmt = $con->prepare("SELECT * FROM tbltabagak WHERE role = 'Members' AND headoffamily = ? AND barangay = ?");
-    $stmt->bind_param("ss", $headoffamily, $barangay);
-    $stmt->execute();
-
-    $result = $stmt->get_result();
-    $members = [];
-
-    while ($row = $result->fetch_assoc()) {
-        $members[] = [
-            'id' => $row['id'],
-            'fullName' => htmlspecialchars($row['lname'] . ', ' . $row['fname'] . ' ' . $row['mname'])
-        ];
+    // Ensure database connection is successful
+    if ($con) {
+        // SQL Query to fetch members
+        $stmt = $con->prepare("SELECT * FROM tbltabagak WHERE role = 'Members' AND headoffamily = ? AND barangay = ?");
+        
+        // Check if the query is prepared correctly
+        if ($stmt) {
+            $stmt->bind_param("ss", $headoffamily, $barangay);
+            $stmt->execute();
+            
+            $result = $stmt->get_result();
+            $members = [];
+            
+            // Check if we have results
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    // Constructing full name
+                    $fullName = htmlspecialchars($row['lname'] . ', ' . $row['fname'] . ' ' . $row['mname']);
+                    $members[] = [
+                        'id' => $row['id'],
+                        'fullName' => $fullName
+                    ];
+                }
+            } else {
+                $members[] = ['fullName' => 'No Members Found'];  // If no members found
+            }
+            
+            $stmt->close();
+            // Return the JSON-encoded members array
+            echo json_encode($members);
+        } else {
+            // Query preparation failed
+            echo json_encode(['error' => 'Query preparation failed.']);
+        }
+    } else {
+        // Database connection failed
+        echo json_encode(['error' => 'Database connection failed.']);
     }
-
-    $stmt->close();
-    echo json_encode($members);
+} else {
+    // Missing parameters
+    echo json_encode(['error' => 'Missing headoffamily or barangay parameters.']);
 }
 ?>

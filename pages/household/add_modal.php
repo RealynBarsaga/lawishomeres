@@ -135,28 +135,37 @@
                 },
                 success: function (response) {
                     console.log('Family Members Response:', response);  // Debugging
-                    var membersSelect = document.getElementById("txt_members");
-
-                    var members = JSON.parse(response);
-                    if (Array.isArray(members) && members.length > 0) {
-                        // Set the member names if there are members
-                        var memberNames = members.map(function(member) {
-                            return member.fullName;
-                        });
-                        membersSelect.value = memberNames.join(", ");
-                        $('#txt_totalmembers').val(members.length);
-                    } else {
-                        // If no members, set the appropriate value
-                        membersSelect.value = "No Members Found";
+                    
+                    try {
+                        var members = JSON.parse(response); // Parse the JSON response
+                        
+                        if (Array.isArray(members) && members.length > 0) {
+                            // Set the member names if there are members
+                            var memberNames = members.map(function(member) {
+                                return member.fullName;
+                            });
+                            $('#txt_members').val(memberNames.join(", ")); // Update the field
+                            $('#txt_totalmembers').val(members.length);  // Update total members count
+                        } else {
+                            // If no members, set the appropriate value
+                            $('#txt_members').val("No Members Found");
+                            $('#txt_totalmembers').val(0);
+                        }
+                    } catch (error) {
+                        console.error('Error parsing response:', error);  // Log any JSON parsing errors
+                        $('#txt_members').val("Error loading members");
                         $('#txt_totalmembers').val(0);
                     }
                 },
                 error: function (xhr, status, error) {
                     console.error('AJAX request failed:', status, error); // Debugging
+                    $('#txt_members').val("Error loading members");
+                    $('#txt_totalmembers').val(0);
                 }
             });
         }
     }
+
 
     $('#addModal').on('show.bs.modal', function () {
     $('#txt_members').val('');  // Clear the members input field
