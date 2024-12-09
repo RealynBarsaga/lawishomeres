@@ -2,6 +2,9 @@
 session_start();
 
 // Regenerate session ID to prevent session fixation attacks
+session_regenerate_id(true);
+
+// Check if the user is logged in
 if (!isset($_SESSION['userid'])) {
     // User not logged in, redirect to login page
     header('Location: ../../login.php');
@@ -45,9 +48,6 @@ include('../head_css.php');
 if (!isset($_SESSION['session_token'])) {
     $_SESSION['session_token'] = bin2hex(random_bytes(32)); // Generate a secure session token
 }
-
-// Optional: regenerate session ID for better security on active sessions
-session_regenerate_id(true);
 ?>
 <!DOCTYPE html>
 <html lang="en">
