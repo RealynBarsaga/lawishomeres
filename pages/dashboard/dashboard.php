@@ -4,7 +4,7 @@ include('../connection.php'); // Ensure your DB connection is included here
 
 // Check if the user is logged in and has a valid session token
 if (!isset($_SESSION['session_token'])) {
-    header("Location: login.php");
+    header("Location: login");
     exit();
 }
 
