@@ -2,7 +2,7 @@
 session_start();
 
 // Session timeout (30 minutes)
-define('SESSION_TIMEOUT', 1800);
+define('SESSION_TIMEOUT', 900);
 
 // Check if 'userid' is not set (user not logged in)
 if (!isset($_SESSION['userid'])) {
