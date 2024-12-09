@@ -15,13 +15,6 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Staff') {
     exit();
 }
 
-// Check if barangay is set in session
-if (!isset($_SESSION['barangay'])) {
-    // If no barangay is assigned, redirect or handle error
-    header('Location: /pages/access-denied');
-    exit();
-}
-
 // Session timeout logic based on barangay
 $currentBarangay = $_SESSION['barangay']; // Retrieve barangay from session
 
