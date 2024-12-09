@@ -1,19 +1,18 @@
 <?php
 session_start();
 
-// Redirect to login if not authenticated
+// Ensure the session is unique per user
 if (!isset($_SESSION['userid'])) {
     header('Location: ../../login.php');
     exit();
 }
 
-// Ensure user has the correct role
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Staff') {
     header('Location: /pages/access-denied');
     exit();
 }
 
-// Session timeout logic (5 seconds for testing)
+// Session timeout logic
 if (isset($_SESSION['last_activity'])) {
     $timeout_duration = 5; // In seconds, adjust to your desired timeout
     if (time() - $_SESSION['last_activity'] > $timeout_duration) {
