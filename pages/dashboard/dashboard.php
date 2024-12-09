@@ -3,28 +3,27 @@ session_start();
 
 // Check if 'userid' is not set (user not logged in)
 if (!isset($_SESSION['userid'])) {
-    // Redirect the user to the login page if not authenticated
     header('Location: ../../login.php');
-    exit(); // Ensure no further execution after redirect
+    exit();
 }
 
-// Check if the user's role is not 'staff'
+// Check if the user's role is not 'Staff'
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Staff') {
-    // Redirect to the access denied page if not staff
     header('Location: /pages/access-denied');
-    exit(); // Stop further script execution
+    exit();
 }
 
-// Session timeout logic (default 10 minutes, stricter timeout for different barangay)
-$timeout_duration = 10 * 60; // Default timeout duration (10 minutes)
-
+// Session timeout logic
 if (isset($_SESSION['last_activity'])) {
-    // Stricter timeout if barangay is different
-    if ($_SESSION['barangay'] !== 'target_barangay') {
-        $timeout_duration = 5 * 60; // 5 minutes for users from a different barangay
+    $timeout_duration = 15 * 60; // 15 minutes (in seconds)
+
+    // If user is from the target barangay, apply stricter timeout (5 seconds)
+    $off_barangay = $_SESSION['barangay']; // Assuming this is set during login
+    if ($off_barangay === 'target_barangay') {
+        $timeout_duration = 5; // 5 seconds
     }
 
-    // Check if session has timed out
+    // Check if the timeout has been exceeded
     if ((time() - $_SESSION['last_activity']) > $timeout_duration) {
         session_unset();
         session_destroy();
