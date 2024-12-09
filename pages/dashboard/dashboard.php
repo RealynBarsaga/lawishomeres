@@ -34,7 +34,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Staff') {
 
 // Session timeout logic (15 minutes)
 if (isset($_SESSION['last_activity'])) {
-    $timeout_duration = 900; // 15 minutes (in seconds)
+    $timeout_duration = 5; // 15 minutes (in seconds)
     if (time() - $_SESSION['last_activity'] > $timeout_duration) {
         // Expire session after 15 minutes of inactivity
         session_unset();
