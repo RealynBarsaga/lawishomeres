@@ -35,7 +35,7 @@
                 <div class="form-group">
                     <label>Password: </label>
                     <div class="input-group">
-                        <input id="password" name="txt_edit_pass" class="form-control input-sm" type="password" value="'.$row['password'].'"/>
+                        <input id="password" name="txt_edit_pass" class="form-control input-sm" type="password" placeholder="•••••••••••"/>
                         <span class="input-group-addon eye-icon" onclick="togglePasswordVisibility(\'password\')">
                             <i class="fa fa-eye" id="eye-password"></i>
                         </span>
