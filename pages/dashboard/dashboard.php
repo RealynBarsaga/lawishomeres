@@ -14,11 +14,17 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Staff') {
 }
 
 // Session timeout logic (5 seconds for testing)
-if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 5)) {
-    session_unset();
-    session_destroy();
-    header('Location: ../../login.php');
-    exit();
+if (isset($_SESSION['last_activity'])) {
+    $timeout_duration = 5; // In seconds, adjust to your desired timeout
+    if (time() - $_SESSION['last_activity'] > $timeout_duration) {
+        // Check if the session belongs to the current site
+        if ($_SERVER['HTTP_HOST'] == "lawishomeresidences.com") {
+            session_unset();
+            session_destroy();
+            header('Location: ../../login.php');
+            exit();
+        }
+    }
 }
 
 // Update last activity timestamp
