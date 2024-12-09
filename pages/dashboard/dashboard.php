@@ -1,20 +1,10 @@
 <?php
 session_start();
-
 // Check if 'userid' is not set (user not logged in)
 if (!isset($_SESSION['userid'])) {
     // Redirect the user to the login page if not authenticated
     header('Location: ../../login.php');
     exit(); // Ensure no further execution after redirect
-}
-
-// Check if session is expired
-if (isset($_SESSION['expire']) && time() > $_SESSION['expire']) {
-    // Destroy session if expired
-    session_unset();
-    session_destroy();
-    header('Location: login.php'); // Redirect to login
-    exit();
 }
 
 // Check if the user's role is not 'staff'

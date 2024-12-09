@@ -14,9 +14,6 @@ session_set_cookie_params([
 // Start the session
 session_start();
 
-// Regenerate session ID to prevent session fixation
-session_regenerate_id(true);
-
 // Security headers
 header("X-XSS-Protection: 1; mode=block");
 header("X-Frame-Options: DENY");
@@ -89,10 +86,6 @@ if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) {
                 // Set login success flag to true
                 $login_success = true;
 
-                // Set session expiration (optional - can be changed as needed)
-                $_SESSION['expire'] = time() + 3600; // Session expires after 1 hour
-
-                // Set a session cookie
                 setcookie(
                     "user_session",           // Cookie name
                     session_id(),             // Cookie value
