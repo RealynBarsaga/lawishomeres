@@ -1,38 +1,31 @@
 <?php
 session_start();
-
 // Check if 'userid' is not set (user not logged in)
 if (!isset($_SESSION['userid'])) {
     // Redirect the user to the login page if not authenticated
     header('Location: ../../login.php');
-    exit();
+    exit(); // Ensure no further execution after redirect
 }
 
 // Check if the user's role is not 'staff'
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Staff') {
     // Redirect to the access denied page if not an admin
     header('Location: /pages/access-denied');
-    exit();
+    exit(); // Stop further script execution
 }
 
-// Session timeout logic based on barangay
-$off_barangay = $_SESSION['barangay']; // Retrieve barangay from session
-
-if (!isset($_SESSION['last_activity'][$off_barangay])) {
-    // Initialize activity tracking for this barangay if not set
-    $_SESSION['last_activity'][$off_barangay] = time();
-} elseif (time() - $_SESSION['last_activity'][$off_barangay] > 10) { // 900 seconds = 15 minutes
-    // If session timed out for this barangay
+// Session timeout logic (15 minutes)
+if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 15)) {
     session_unset();
     session_destroy();
     header('Location: ../../login.php');
     exit();
 }
 
-// Update last activity timestamp for this barangay
-$_SESSION['last_activity'][$off_barangay] = time();
+$_SESSION['last_activity'] = time(); // Update last activity timestamp
 
-// Include necessary files
+
+// If the user is logged in and their role is correct, include the necessary files
 include('../head_css.php');
 ?>
 <!DOCTYPE html>
