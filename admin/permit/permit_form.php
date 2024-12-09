@@ -219,7 +219,7 @@
     </p>
     <div class="col-md-5 col-xs-4" style="float:left;margin-top: -239px;margin-left: 165px;">
     <!-- Image -->
-    <img src="../../img/image.png" alt="Image" style="margin-top: -48px;margin-left: -9px;">
+    <img src="../../img/image.png" alt="Image" style="margin-top: -38px;margin-left: -9px;">
     
     <!-- Text above the image -->
     <div style="text-align: center; margin-top: -83px;margin-left: -9px;"> <!-- Added margin-top to create space between image and text -->
