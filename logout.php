@@ -3,7 +3,7 @@ session_start();
 
 // Ensure the session is active before attempting to destroy it
 if (isset($_SESSION['userid'])) {
-    // Destroy all session variables
+    // Clear all session variables
     session_unset();
 
     // Destroy the session itself
@@ -11,15 +11,15 @@ if (isset($_SESSION['userid'])) {
 
     // Clear any session cookies (optional but recommended)
     if (isset($_COOKIE[session_name()])) {
-        setcookie(session_name(), '', time() - 3600, '/'); // Expire the cookie
+        // Expire the session cookie by setting the expiration to one hour ago
+        setcookie(session_name(), '', time() - 3600, '/'); // Make sure the path is set correctly
     }
 
     // Optionally, invalidate the session token (if used)
-    // This is handled by session destruction, but explicitly nullifying the session token is a good practice.
     unset($_SESSION['session_token']);
 }
 
-// Redirect to login page
+// Redirect to the login page
 header("Location: login.php");
 exit();
 ?>

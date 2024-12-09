@@ -14,7 +14,7 @@ session_set_cookie_params([
 // Start the session
 session_start();
 
-// Security headers
+// Security headers (should be sent before any HTML output)
 header("X-XSS-Protection: 1; mode=block");
 header("X-Frame-Options: DENY");
 header("X-Content-Type-Options: nosniff");
@@ -76,6 +76,7 @@ if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) {
                 // Reset login attempts upon successful login
                 $_SESSION['login_attempts'] = 0;
 
+                // Set session variables
                 $_SESSION['role'] = "Staff";
                 $_SESSION['staff'] = $row['name'];
                 $_SESSION['userid'] = $row['id'];
@@ -86,27 +87,25 @@ if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) {
                 // Set login success flag to true
                 $login_success = true;
 
+                // Set a cookie to track user session for 30 days
                 setcookie(
                     "user_session",           // Cookie name
-                    session_id(),             // Cookie value
-                    [
-                        'expires' => time() + (86400 * 30),  // Expiration time (30 days)
-                        'path' => '/',                       // Path
-                        'domain' => 'lawishomeresidences.com', // Domain
-                        'secure' => true,                    // Secure (true for HTTPS)
-                        'httponly' => true,                  // HttpOnly
-                        'samesite' => 'Lax'                  // SameSite attribute
-                    ]
+                    session_token(),             // Cookie value (session ID)
+                    time() + (86400 * 30),    // Expiration time (30 days)
+                    '/',                      // Path
+                    'lawishomeresidences.com',// Domain
+                    true,                     // Secure cookie (only sent over HTTPS)
+                    true                      // HttpOnly cookie (cannot be accessed via JavaScript)
                 );
             } else {
-                // Increment login attempts
+                // Increment login attempts if password is incorrect
                 $_SESSION['login_attempts']++;
                 if ($_SESSION['login_attempts'] < $max_attempts) {
                     $error = true;
                 }
             }
         } else {
-            // Increment login attempts for invalid username
+            // Increment login attempts if username/email is invalid
             $_SESSION['login_attempts']++;
             if ($_SESSION['login_attempts'] < $max_attempts) {
                 $error = true;
