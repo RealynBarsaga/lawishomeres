@@ -23,7 +23,7 @@ $stmt->close();
 // If the session is not active, destroy the session and redirect to login
 if ($status != 'active') {
     session_destroy();
-    header("Location: login.php");
+    header("Location: dashboard");
     exit();
 }
 
