@@ -1,29 +1,39 @@
 <?php
 session_start();
+
 // Check if 'userid' is not set (user not logged in)
 if (!isset($_SESSION['userid'])) {
-    // Redirect the user to the login page if not authenticated
-    header('Location: ../../login.php');
-    exit(); // Ensure no further execution after redirect
-}
-
-// Check if the user's role is not 'staff'
-if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Staff') {
-    // Redirect to the access denied page if not an admin
-    header('Location: /pages/access-denied');
-    exit(); // Stop further script execution
-}
-
-// Session timeout logic (15 minutes)
-if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 10)) {
-    session_unset();
-    session_destroy();
     header('Location: ../../login.php');
     exit();
 }
 
-$_SESSION['last_activity'] = time(); // Update last activity timestamp
+// Check if the user's role is not 'Staff'
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Staff') {
+    header('Location: /pages/access-denied');
+    exit();
+}
 
+// Session timeout logic (15 minutes)
+if (isset($_SESSION['last_activity'])) {
+    $timeout_duration = 10; // 15 minutes
+
+    // If user is from a different barangay, apply stricter timeout (e.g., 5 minutes)
+    $off_barangay = $_SESSION['barangay']; // Assuming this is set during login
+    if ($off_barangay !== 'target_barangay') { 
+        $timeout_duration = 10; // 5 minutes
+    }
+
+    // Check if the timeout has been exceeded
+    if ((time() - $_SESSION['last_activity']) > $timeout_duration) {
+        session_unset();
+        session_destroy();
+        header('Location: ../../login.php');
+        exit();
+    }
+}
+
+// Update last activity timestamp
+$_SESSION['last_activity'] = time();
 
 // If the user is logged in and their role is correct, include the necessary files
 include('../head_css.php');
