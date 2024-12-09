@@ -13,17 +13,27 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Staff') {
     exit();
 }
 
-// Session timeout logic (15 minutes)
-if (isset($_SESSION['last_activity'])) {
-    $timeout_duration = 10; // 15 minutes
+// If barangay is not already stored in the session or cookie, set it
+if (!isset($_SESSION['barangay'])) {
+    // Store barangay in a cookie to persist across browser sessions (even incognito)
+    if (isset($_COOKIE['barangay'])) {
+        $_SESSION['barangay'] = $_COOKIE['barangay'];
+    } else {
+        // If not set, initialize a default or the one from the current session
+        $_SESSION['barangay'] = 'default_barangay'; // Replace with actual logic to retrieve barangay
+    }
+}
 
-    // If user is from a different barangay, apply stricter timeout (e.g., 5 minutes)
-    $off_barangay = $_SESSION['barangay']; // Assuming this is set during login
-    if ($off_barangay !== 'target_barangay') { 
-        $timeout_duration = 10; // 5 minutes
+// Session timeout logic (10 minutes by default, stricter timeout for a different barangay)
+$timeout_duration = 10 * 60; // Default timeout duration (10 minutes)
+
+if (isset($_SESSION['last_activity'])) {
+    // Check for a stricter timeout if barangay is different
+    if ($_SESSION['barangay'] !== 'target_barangay') { 
+        $timeout_duration = 5 * 60; // 5 minutes for users from a different barangay
     }
 
-    // Check if the timeout has been exceeded
+    // Check if session has timed out
     if ((time() - $_SESSION['last_activity']) > $timeout_duration) {
         session_unset();
         session_destroy();
@@ -34,6 +44,9 @@ if (isset($_SESSION['last_activity'])) {
 
 // Update last activity timestamp
 $_SESSION['last_activity'] = time();
+
+// Set or update barangay cookie (to persist in future sessions)
+setcookie('barangay', $_SESSION['barangay'], time() + 3600, '/'); // expires in 1 hour
 
 // If the user is logged in and their role is correct, include the necessary files
 include('../head_css.php');
