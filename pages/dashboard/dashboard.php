@@ -1,17 +1,19 @@
 <?php
 session_start(); // Start session
 
-// Database credentials
-$MySQL_username = "u510162695_db_barangay";
-$Password = "1Db_barangay";
-$MySQL_database_name = "u510162695_db_barangay";
+// Database credentials (consider storing these in environment variables)
+$MySQL_username = getenv('DB_USERNAME') ?: 'u510162695_db_barangay';
+$Password = getenv('DB_PASSWORD') ?: '1Db_barangay';
+$MySQL_database_name = getenv('DB_NAME') ?: 'u510162695_db_barangay';
 
-// Establish connection with server
+// Establish connection with the server
 $con = new mysqli('localhost', $MySQL_username, $Password, $MySQL_database_name);
 
 // Check connection
 if ($con->connect_error) {
-    die("Connection failed: " . $con->connect_error);
+    // Log error and terminate script
+    error_log('Connection failed: ' . $con->connect_error);
+    die("Connection failed. Please try again later.");
 }
 
 // Set default timezone
@@ -57,12 +59,13 @@ if ($result && $row = $result->fetch_assoc()) {
     $update_query->bind_param("s", $userid);
     $update_query->execute();
 } else {
-    // Handle query failure
-    echo "Error checking session status: " . $con->error;
-    exit();
+    // Log error in case of query failure
+    error_log("Error checking session status: " . $con->error);
+    // Optionally, redirect the user to a generic error page
+    die("An error occurred. Please try again later.");
 }
 
-// Include the necessary files
+// Include the necessary files (ensure these files exist and are properly secured)
 include('../head_css.php');
 ?>
 <!DOCTYPE html>
