@@ -15,7 +15,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Staff') {
 
 // Session timeout logic
 if (isset($_SESSION['last_activity'])) {
-    $timeout_duration = 900; // Default 15 minutes timeout
+    $timeout_duration = 15; // Default 15 minutes timeout
 
     // Check if barangay matches the session barangay
     $user_barangay = $_SESSION['barangay']; // Current user's barangay
