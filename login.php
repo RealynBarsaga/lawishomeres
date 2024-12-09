@@ -14,6 +14,9 @@ session_set_cookie_params([
 // Start the session
 session_start();
 
+// Regenerate session ID to prevent session fixation
+session_regenerate_id(true);
+
 // Security headers
 header("X-XSS-Protection: 1; mode=block");
 header("X-Frame-Options: DENY");
@@ -83,21 +86,13 @@ if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) {
                 $_SESSION["barangay"] = $row["name"];
                 $_SESSION['logo'] = $row['logo'];
                 
-                // Create a session token
-                $session_token = bin2hex(random_bytes(32)); // Generate a secure session token
-                
-                // Store session data in the database
-                $stmt = $con->prepare("INSERT INTO tblstaff (userid, session_token, status) VALUES (?, ?, ?)");
-                $status = 'active'; // Set status to active
-                $stmt->bind_param("iss", $row['id'], $session_token, $status);
-                $stmt->execute();
-                $stmt->close();
+                // Set login success flag to true
+                $login_success = true;
 
-                // Set session data
-                $_SESSION['session_token'] = $session_token;
-                $_SESSION['userid'] = $row['id'];
+                // Set session expiration (optional - can be changed as needed)
+                $_SESSION['expire'] = time() + 3600; // Session expires after 1 hour
 
-                // Update session cookie
+                // Set a session cookie
                 setcookie(
                     "user_session",           // Cookie name
                     session_id(),             // Cookie value
@@ -110,9 +105,6 @@ if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) {
                         'samesite' => 'Lax'                  // SameSite attribute
                     ]
                 );
-
-                // Set login success flag to true
-                $login_success = true;
             } else {
                 // Increment login attempts
                 $_SESSION['login_attempts']++;

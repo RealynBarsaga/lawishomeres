@@ -1,53 +1,30 @@
 <?php
 session_start();
-include('../connection.php'); // Ensure your DB connection is included here
 
-// Check if the user is logged in and has a valid session token
-if (!isset($_SESSION['session_token'])) {
-    header("Location: login.php");
-    exit();
-}
-
-// Validate session token from the database
-$session_token = $_SESSION['session_token'];
-$userid = $_SESSION['userid'];
-
-// Query to validate the session token and fetch the session status and last activity
-$stmt = $conn->prepare("SELECT status, last_activity FROM tblstaff WHERE userid = ? AND session_token = ?");
-$stmt->bind_param("is", $userid, $session_token);
-$stmt->execute();
-$stmt->bind_result($status, $last_activity);
-$stmt->fetch();
-$stmt->close();
-
-// If the session is not active, destroy the session and redirect to login
-if ($status != 'active') {
-    session_destroy();
-    header("Location: login.php");
-    exit();
-}
-
-// Update the last activity timestamp
-$stmt = $conn->prepare("UPDATE tblstaff SET last_activity = CURRENT_TIMESTAMP WHERE userid = ? AND session_token = ?");
-$stmt->bind_param("is", $userid, $session_token);
-$stmt->execute();
-$stmt->close();
-
-// Check if the user is authenticated and has the 'Staff' role
+// Check if 'userid' is not set (user not logged in)
 if (!isset($_SESSION['userid'])) {
-    // Redirect to the login page if the user is not logged in
+    // Redirect the user to the login page if not authenticated
     header('Location: ../../login.php');
+    exit(); // Ensure no further execution after redirect
+}
+
+// Check if session is expired
+if (isset($_SESSION['expire']) && time() > $_SESSION['expire']) {
+    // Destroy session if expired
+    session_unset();
+    session_destroy();
+    header('Location: login.php'); // Redirect to login
     exit();
 }
 
-// Check if the user's role is 'Staff'
+// Check if the user's role is not 'staff'
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Staff') {
-    // Redirect to access denied if the user does not have the required role
+    // Redirect to the access denied page if not an admin
     header('Location: /pages/access-denied');
-    exit();
+    exit(); // Stop further script execution
 }
 
-// Include necessary CSS or header files
+// If the user is logged in and their role is correct, include the necessary files
 include('../head_css.php');
 ?>
 <!DOCTYPE html>
