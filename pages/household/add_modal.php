@@ -102,7 +102,7 @@
                     });
     
                     // Update the hidden input field with the family members data
-                    $('#txt_members').val(members.join(', ')); // Convert array to comma-separated string
+                    $('#txt_members').val(members.join('#family_members_list')); // Convert array to comma-separated string
                     updateTotalMembers(); // Update total household members
                 },
                 error: function (xhr, status, error) {
