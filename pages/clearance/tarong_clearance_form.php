@@ -128,20 +128,20 @@
                     }elseif($row['sPosition'] == "SK"){
                         echo '
                         <div style="text-align: center;"><br>
-                            <span style="font-size:12px;">SK Chairperson:</span><br>
                             <b style="font-size:10.5px; text-decoration: underline;">'.strtoupper($row['completeName']).'</b><br>
+                            <span style="font-size:12px;">SK Chairman:</span><br>
                         </div>';
                     }elseif($row['sPosition'] == "Secretary") {
                         echo '
                         <div style="text-align: center;"><br>
-                            <span style="font-size:12px;">Barangay Secretary:</span><br>
                             <b style="font-size:10.5px; text-decoration: underline;">'.strtoupper($row['completeName']).'</b><br>
+                            <span style="font-size:12px;">Barangay Secretary:</span><br>
                         </div>';
                     } elseif($row['sPosition'] == "Treasurer") {
                         echo '
                         <div style="text-align: center;">
-                            <span style="font-size:12px;">Barangay Treasurer:</span><br>
                             <b style="font-size:10.5px; text-decoration: underline;">'.strtoupper($row['completeName']).'</b>
+                            <span style="font-size:12px;">Barangay Treasurer:</span><br>
                         </div>';
                     }
                 }
