@@ -119,8 +119,7 @@
         }
     }
 
-    // Fetch and display members for a given Head of Family
-function fetchMembers(headoffamily) {
+    function fetchMembers(headoffamily) {
     console.log('Fetching members for HOF ID:', headoffamily);  // Debugging
 
     if (!headoffamily) {
@@ -146,6 +145,9 @@ function fetchMembers(headoffamily) {
                 if (Array.isArray(members) && members.length > 0) {
                     // Map the members to extract full names
                     var memberNames = members.map(member => member.fullName);
+
+                    // Debugging: Check extracted member names
+                    console.log('Extracted Member Names:', memberNames);
 
                     // Update the UI fields
                     $('#txt_members').val(memberNames.join(", "));

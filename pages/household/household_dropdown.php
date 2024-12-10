@@ -71,23 +71,43 @@ if (isset($_POST['total_id']) && isset($_POST['barangay'])) {
     }
 }
 
- // Fetch family members based on Head of Family
- if (isset($_POST['headoffamily']) && isset($_POST['barangay'])) {
+// Fetch family members based on Head of Family
+if (isset($_POST['headoffamily']) && isset($_POST['barangay'])) {
     $headoffamily = $_POST['headoffamily'];
     $barangay = $_POST['barangay'];
 
-    $stmt = $con->prepare("SELECT id, lname, fname, mname FROM tbltabagak WHERE role = 'Members' AND headoffamily = ? AND barangay = ?");
-    $stmt->bind_param("ss", $headoffamily, $barangay);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    // Prepare SQL statement
+    $stmt = $con->prepare("
+        SELECT id, lname, fname, mname 
+        FROM tbltabagak 
+        WHERE role = 'Members' AND headoffamily = ? AND barangay = ?
+    ");
 
-    $members = [];
-    while ($row = $result->fetch_assoc()) {
-        $fullName = htmlspecialchars($row['lname'] . ', ' . $row['fname'] . ' ' . $row['mname']);
-        $members[] = ['id' => $row['id'], 'fullName' => $fullName];
+    if ($stmt) {
+        // Bind parameters
+        $stmt->bind_param("ss", $headoffamily, $barangay);
+
+        // Execute the query
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $members = [];
+        while ($row = $result->fetch_assoc()) {
+            $fullName = htmlspecialchars($row['lname'] . ', ' . $row['fname'] . ' ' . $row['mname']);
+            $members[] = [
+                'id' => $row['id'], 
+                'fullName' => $fullName
+            ];
+        }
+
+        $stmt->close();
+        echo json_encode($members); // Return the result as JSON
+    } else {
+        // Log error for debugging
+        error_log("Database error: " . $con->error);
+        echo json_encode(['error' => 'Failed to prepare the statement']);
     }
-
-    $stmt->close();
-    echo json_encode($members);
+} else {
+    echo json_encode(['error' => 'Invalid parameters']);
 }
 ?>
