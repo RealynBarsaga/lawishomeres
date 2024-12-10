@@ -91,7 +91,7 @@
                 },
                 success: function (html) {
                     console.log('Family Members HTML:', html); // Debugging
-                    $('#family_members_list').html(html); // Populate the family members list
+                    $('#txt_members').val(html); // Assuming html contains the Barangay value
                     updateTotalMembers(); // Update total household members
                 },
                 error: function (xhr, status, error) {
