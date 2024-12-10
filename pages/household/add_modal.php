@@ -22,11 +22,11 @@
                             </div>
                             <div class="form-group">
                                 <label>Family Members:</label>
-                                <input id="txt_members" name="txt_members" class="form-control input-sm" type="text" placeholder="Family Members" required />
+                                <input id="txt_members" disabled name="txt_members" class="form-control input-sm" type="text" placeholder="Family Members" required />
                             </div>
                             <div class="form-group">
                                 <label>Total Household Members:</label>
-                                <input id="txt_totalmembers" name="txt_totalmembers" class="form-control input-sm" type="text" placeholder="Total Household Members" required />
+                                <input id="txt_totalmembers" disabled name="txt_totalmembers" class="form-control input-sm" type="text" placeholder="Total Household Members" required />
                             </div>
                             <div class="form-group">
                                 <label>Barangay:</label>
