@@ -86,7 +86,7 @@
                 Province of Cebu<br>
                 Municipality of Madridejos
                 <b>
-                    <p style="font-size: 22px; font-family: 'Courier New', Courier; text-transform: uppercase;text-decoration: underline;">Barangay <?= $_SESSION['barangay'] ?></p>
+                    <p style="font-size: 22px; font-family: 'Courier New', Courier; text-transform: uppercase;">Barangay <?= $_SESSION['barangay'] ?></p>
                 </b>
             </center>
             <p style="font-weight: bold;margin-left:-5px;">OFFICE OF THE PUNONG BARANGAY</p>
