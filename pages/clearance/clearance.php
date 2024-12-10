@@ -99,13 +99,13 @@ html, body {
                                                         /* "Talangnan" => "talangnan_clearance_form", */
                                                         /* "Poblacion" => "poblacion_clearance_form", */
                                                         "Maalat" => "maalat_clearance_form",
-                                                        "Pili" => "pili_clearance_form"
+                                                        "Pili" => "pili_clearance_form",
                                                         /* "Kaongkod" => "kaongkod_clearance_form", */
                                                        /*  "Mancilang" => "mancilang_clearance_form", */
                                                         /* "Kangwayan" => "kangwayan_clearance_form", */
                                                         /* "Tugas" => "tugas_clearance_form", */
                                                        /*  "Malbago" => "malbago_clearance_form", */
-                                                       /*  "Tarong" => "tarong_clearance_form", */
+                                                        "Tarong" => "tarong_clearance_form"
                                                         /* "San Agustin" => "san_agustin_clearance_form" */
                                                     ];
 

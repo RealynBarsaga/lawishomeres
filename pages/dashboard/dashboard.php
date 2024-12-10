@@ -14,6 +14,17 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Staff') {
     exit(); // Stop further script execution
 }
 
+// Session timeout logic (5 seconds for testing)
+if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 5)) {
+    session_unset();
+    session_destroy();
+    header('Location: ../../login.php');
+    exit();
+}
+
+// Update last activity timestamp
+$_SESSION['last_activity'] = time();
+
 // If the user is logged in and their role is correct, include the necessary files
 include('../head_css.php');
 ?>
