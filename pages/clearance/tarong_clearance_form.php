@@ -151,7 +151,7 @@
     <!-- Main Content -->
     <div class="main-content col-xs-12 col-md-12">
         <br><br>
-        <p class="text-center" style="font-size: 20px; font-weight: bold; margin-left: 100px;margin-top:-730px;">
+        <p class="text-center" style="font-size: 20px; font-weight: bold; margin-left: 100px;margin-top:-700px;">
             <b style="font-size: 23px;"><u>BARANGAY CLEARANCE</u></b>
         </p>
         <p style="margin-left: 220px;font-size: 12px; font-family: 'Courier New', Courier;">TO WHOM IT MAY CONCERN:</p>
