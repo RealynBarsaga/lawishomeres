@@ -37,18 +37,18 @@ if (isset($_POST['purok_id']) && isset($_POST['barangay'])) {
 
 // Fetch Family Members
 if (isset($_POST['headoffamily']) && isset($_POST['barangay'])) {
-    $hof_id = $_POST['headoffamily'];
+    $headoffamily = $_POST['headoffamily'];
     $barangay = $_POST['barangay'];
 
     // Prepare the SQL query
-    $stmt = $con->prepare("SELECT id, lname, fname, mname FROM tbltabagak WHERE role = 'Members' AND headoffamily = ? AND barangay = ?");
+    $stmt = $con->prepare("SELECT id, lname, fname, mname FROM tbltabagak WHERE headoffamily = ? AND barangay = ?");
     
     if ($stmt === false) {
         echo json_encode(['error' => 'Failed to prepare the query']);
         exit;
     }
     
-    $stmt->bind_param("ss", $hof_id, $barangay);
+    $stmt->bind_param("ss", $headoffamily, $barangay);
     
     // Execute the query
     if ($stmt->execute()) {
