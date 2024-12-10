@@ -174,7 +174,7 @@
                 echo "<p style='font-family: \"Courier New\", Courier, monospace; text-align: justify; font-size: 15px;margin-left: 220px;margin-right: 60px;'>
                 &nbsp;&nbsp;&nbsp;This is to certify that <strong>" . strtoupper($row['Name']) . "</strong>, 
                 <strong>" . $row['age'] . "</strong> years old, " . $row['civilstatus'] . ", and a Filipino citizen, is a bona fide resident of Purok " . $row['purok'] . ", Barangay " . $row['barangay'] . ", 
-                Madridejos, Cebu. He/She is known to be <strong>a person of good moral character and a law-abiding citizen in the community.</strong><br>
+                Madridejos, Cebu is known to me personally to be a person of good moral character, Peaceful and a law-abiding citizen in this community.<br>
                 This is to certify further that he/she <strong>has no pending case before the office of the Lupong Tagapamayapa either civil or criminal case as of the date</strong></p>";
             }
         ?>
