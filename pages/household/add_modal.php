@@ -22,7 +22,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Family Members:</label>
-                                <div id="family_members_list" class="form-control input-sm" style="height: 100px; overflow-y: auto;" disabled>
+                                <div id="family_members_list" name="txt_members" class="form-control input-sm" style="height: 100px; overflow-y: auto;" disabled>
                                    <!-- Family member names will be displayed here -->
                                 </div>
                             </div>
