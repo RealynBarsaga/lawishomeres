@@ -34,41 +34,4 @@ if (isset($_POST['purok_id']) && isset($_POST['barangay'])) {
     $query = mysqli_query($con, "SELECT purok FROM tbltabagak WHERE id = '$purok_id' AND barangay = '$barangay'");
     echo ($row = mysqli_fetch_assoc($query)) ? $row['purok'] : '';
 }
-
-if (isset($_POST['headoffamily']) && isset($_POST['barangay'])) {
-    $headoffamily = $_POST['headoffamily'];
-    $barangay = $_POST['barangay'];
-
-    // Prepare the SQL query to fetch members with role 'Members'
-    $stmt = $con->prepare("SELECT id, lname, fname, mname FROM tbltabagak WHERE headoffamily = ? AND barangay = ? AND role = 'Members'");
-    
-    if ($stmt === false) {
-        echo json_encode(['error' => 'Failed to prepare the query']);
-        exit;
-    }
-    
-    $stmt->bind_param("ss", $headoffamily, $barangay);
-    
-    // Execute the query
-    if ($stmt->execute()) {
-        $result = $stmt->get_result();
-        
-        if ($result->num_rows > 0) {
-            $members = [];
-            while ($row = $result->fetch_assoc()) {
-                $members[] = [
-                    'id' => $row['id'], 
-                    'fullName' => htmlspecialchars($row['lname'] . ', ' . $row['fname'] . ' ' . $row['mname'])
-                ];
-            }
-            echo json_encode($members);
-        } else {
-            echo json_encode(['error' => 'No family members found for the given Head of Family and Barangay']);
-        }
-    } else {
-        echo json_encode(['error' => 'Query execution failed']);
-    }
-    
-    $stmt->close();
-}
 ?>
