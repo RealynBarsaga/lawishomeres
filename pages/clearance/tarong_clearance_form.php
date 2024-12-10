@@ -110,8 +110,8 @@
                     if($row['sPosition'] == "Captain"){
                         echo '
                             <p style="text-align: justify;">
+                            <b style="font-size:10.5px; color: dodgerblue !important;text-decoration: underline;">HON.'.strtoupper($row['completeName']).'</b>
                             <span style="font-size:12px;">Barangay Captain</span><br>
-                            <b style="font-size:10.5px; color: dodgerblue !important;">HON.'.strtoupper($row['completeName']).'</b>
                             </p><br>
                         ';
                     }elseif($row['sPosition'] == "Kagawad"){
