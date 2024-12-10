@@ -35,28 +35,22 @@ if (isset($_POST['purok_id']) && isset($_POST['barangay'])) {
     echo ($row = mysqli_fetch_assoc($query)) ? $row['purok'] : '';
 }
 
-
-if (isset($_POST['household_id']) && isset($_POST['barangay'])) {
-    $household_id = $_POST['household_id'];
+// Fetch Family Members
+if (isset($_POST['headoffamily']) && isset($_POST['barangay'])) {
+    $hof_id = $_POST['headoffamily'];
     $barangay = $_POST['barangay'];
 
-    // Query to fetch family members and total members for the given household ID
-    $query = "SELECT lname, fname, mname FROM tbltabagak WHERE household_id = :household_id AND barangay = :barangay";
-    $stmt = $pdo->prepare($query);
-    $stmt->bindParam(':household_id', $household_id);
-    $stmt->bindParam(':barangay', $barangay);
+    $stmt = $con->prepare("SELECT id, lname, fname, mname FROM tbltabagak WHERE role = 'Members' AND headoffamily = ? AND barangay = ?");
+    $stmt->bind_param("ss", $hof_id, $barangay);
     $stmt->execute();
+    $result = $stmt->get_result();
 
-    $members = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    $total_members = count($members);
+    $members = [];
+    while ($row = $result->fetch_assoc()) {
+        $members[] = ['id' => $row['id'], 'fullName' => htmlspecialchars($row['lname'] . ', ' . $row['fname'] . ' ' . $row['mname'])];
+    }
 
-    // Prepare response data
-    $response = [
-        'members' => implode(', ', array_column($members, htmlspecialchars($row['lname'] . ', ' . $row['fname'] . ' ' . $row['mname']))),  // List member names as a string
-        'total_members' => $total_members  // Total member count
-    ];
-
-    // Return the response as JSON
-    echo json_encode($response);
+    $stmt->close();
+    echo json_encode($members);
 }
 ?>

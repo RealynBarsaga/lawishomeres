@@ -22,11 +22,11 @@
                             </div>
                             <div class="form-group">
                                 <label>Family Members:</label>
-                                <input id="txt_members" name="txt_members" class="form-control input-sm" type="text" placeholder="Family Members" required />
+                                <input id="txt_members" disabled name="txt_members" class="form-control input-sm" type="text" placeholder="Family Members" required />
                             </div>
                             <div class="form-group">
                                 <label>Total Household Members:</label>
-                                <input id="txt_totalmembers" name="txt_totalmembers" class="form-control input-sm" type="text" placeholder="Total Household Members" required />
+                                <input id="txt_totalmembers" disabled name="txt_totalmembers" class="form-control input-sm" type="text" placeholder="Total Household Members" required />
                             </div>
                             <div class="form-group">
                                 <label>Barangay:</label>
@@ -107,24 +107,30 @@
             });
 
             // After updating Barangay and Purok, fetch and update family members and total members
-            update_family_info(householdID);
+            update_family_info(householdID, totalID);
         }
     }
 
-    // Function to update the family members and total member count
-    function update_family_info(householdID) {
-        $.ajax({
-            type: 'POST',
-            url: 'household_dropdown.php',  // This should be the PHP file that returns the members and total count
-            data: { household_id: householdID, barangay: loggedInBarangay },
-            success: function(response) {
-                var data = JSON.parse(response);
-                $('#txt_members').val(data.members);  // Assuming data.members contains the family member names/IDs
-                $('#txt_totalmembers').val(data.total_members);  // Assuming data.total_members contains the total count
-            },
-            error: function (xhr, status, error) {
-                console.error('Error fetching family info:', status, error);
-            }
-        });
-    }
+   // Function to update the family members and total member count
+function update_family_info(householdID, hofID) {
+    $.ajax({
+        type: 'POST',
+        url: 'household_dropdown.php',  // This should be the PHP file that returns the members and total count
+        data: { headoffamily: hofID, barangay: loggedInBarangay },
+        success: function(response) {
+            var data = JSON.parse(response);
+            var familyNames = data.map(function(member) {
+                return member.fullName;  // Create an array of family member names
+            });
+            var totalMembers = familyNames.length;  // Get the total count of members
+
+            // Update the fields
+            $('#txt_members').val(familyNames.join(', '));  // Show family member names in the field
+            $('#txt_totalmembers').val(totalMembers);  // Show total count of members in the field
+        },
+        error: function (xhr, status, error) {
+            console.error('Error fetching family info:', status, error);
+        }
+    });
+}
 </script>
