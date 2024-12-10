@@ -155,9 +155,9 @@ while ($notif = mysqli_fetch_assoc($squery)) {
     <h1>All Notifications</h1>
 
     <!-- Delete All Button -->
-    <div style="text-align: right; margin-bottom: 20px;">
+    <div style="text-align: right; margin-top: -39px;">
         <a href="view_all_notifications?delete_all=true" 
-           style="text-decoration: none; color: white; background-color: #d9534f; 
+           style="text-decoration: none; color: gray;
            padding: 8px 12px; border-radius: 4px; font-size: 14px;">
             Delete All
         </a>
