@@ -14,7 +14,6 @@ if(isset($_POST['btn_add'])){
 
     if($rows == 0){
         $txt_totalmembers += 1;  // Add 1 to total members
-        $txt_members = mysqli_real_escape_string($con, $_POST['txt_members']); // Make sure to sanitize the input
         $query = mysqli_query($con,"INSERT INTO tblhousehold (householdno, totalhouseholdmembers, headoffamily, barangay, purok, membersname) 
             values ('$txt_householdno', '$txt_totalmembers', '$txt_hof', '$txt_brgy', '$txt_purok', '$txt_members')") or die('Error: ' . mysqli_error($con));
         if($query == true)
