@@ -18,11 +18,11 @@ echo '<div id="editModal' . $row['id'] . '" class="modal fade">
                             </div>
                             <div class="form-group">
                                 <label>Head of Family: <span style="color:gray; font-size: 10px;"></label>
-                                 <input  id="txt_edit_name" name="txt_edit_name" class="form-control input-sm" value="' . htmlspecialchars($row['head_of_family'], ENT_QUOTES, 'UTF-8') . '" required readonly/>
+                                 <input  id="txt_edit_name" name="txt_edit_name" class="form-control input-sm" value="' . htmlspecialchars($row['head_of_family'], ENT_QUOTES, 'UTF-8') . '" readonly style="height: 100px; overflow-y: auto;"/>
                             </div>
                             <div class="form-group">
                                 <label>Family Members:</label>
-                                <input  id="txt_members" name="txt_members" class="form-control input-sm" value="' . htmlspecialchars($row['membersname'], ENT_QUOTES, 'UTF-8') . '" required readonly/>
+                                <input  id="txt_members" name="txt_members" class="form-control input-sm" value="' . htmlspecialchars($row['membersname'], ENT_QUOTES, 'UTF-8') . '" readonly/>
                             </div>
                             <div class="form-group">
                                 <label>Total Household Members: </label>
