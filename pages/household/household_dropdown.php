@@ -35,14 +35,12 @@ if (isset($_POST['purok_id']) && isset($_POST['barangay'])) {
     echo ($row = mysqli_fetch_assoc($query)) ? $row['purok'] : '';
 }
 
-// Fetch Family Members
 if (isset($_POST['headoffamily']) && isset($_POST['barangay'])) {
     $headoffamily = $_POST['headoffamily'];
     $barangay = $_POST['barangay'];
 
     // Prepare the SQL query
     $stmt = $con->prepare("SELECT id, lname, fname, mname FROM tbltabagak WHERE headoffamily = ? AND barangay = ?");
-    
     if ($stmt === false) {
         echo json_encode(['error' => 'Failed to prepare the query']);
         exit;

@@ -152,11 +152,6 @@ function fetchMembers(headoffamily) {
                     $('#txt_members').val("Error loading members");
                     $('#txt_totalmembers').val(0);
                 }
-            },
-            error: function (xhr, status, error) {
-                console.error('AJAX request failed:', status, error); // Debugging
-                $('#txt_members').val("Error loading members");
-                $('#txt_totalmembers').val(0);
             }
         });
     }
