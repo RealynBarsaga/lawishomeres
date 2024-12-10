@@ -22,13 +22,11 @@
                             </div>
                             <div class="form-group">
                                 <label>Family Members:</label>
-                                <div id="family_members_list" name="txt_members" class="form-control input-sm" style="height: 100px; overflow-y: auto;" disabled>
-                                   <!-- Family member names will be displayed here -->
-                                </div>
+                                <input id="family_members_list" name="txt_members" class="form-control input-sm" style="height: 100px; overflow-y: auto;" disabled>
                             </div>
                             <div class="form-group">
                                 <label>Total Household Members:</label>
-                                <input id="txt_totalmembers" name="txt_totalmembers" class="form-control input-sm" type="text" placeholder="Total Household Members" required readonly />
+                                <input id="txt_totalmembers" disabled name="txt_totalmembers" class="form-control input-sm" type="text" placeholder="Total Household Members" required />
                             </div>
                             <div class="form-group">
                                 <label>Barangay:</label>
@@ -137,7 +135,7 @@
 
     // Update Total Household Members based on displayed family members
     function updateTotalMembers() {
-        var familyMembers = $('#family_members_list').children('div').length; // Count the number of family member divs
+        var familyMembers = $('#family_members_list').children('input').length; // Count the number of family member divs
         $('#txt_totalmembers').val(familyMembers); // Update the total members field
     }
 </script>

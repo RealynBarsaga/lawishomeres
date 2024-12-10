@@ -45,10 +45,10 @@ if (isset($_POST['hof_id']) && isset($_POST['barangay'])) {
     
     if (mysqli_num_rows($query) > 0) {
         while ($row = mysqli_fetch_assoc($query)) {
-            echo '<div>' . $row['lname'] . ', ' . $row['fname'] . ' ' . $row['mname'] . '</div>';
+            echo '<input>' . $row['lname'] . ', ' . $row['fname'] . ' ' . $row['mname'] . '</input>';
         }
     } else {
-        echo '<div>No family members found</div>';
+        echo '<input>No family members found</input>';
     }
 }
 ?>
