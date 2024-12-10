@@ -51,6 +51,16 @@
 <script>
     var loggedInBarangay = '<?= $_SESSION["barangay"] ?? ""; ?>'; // Pass PHP session variable to JS
 
+    // Reset modal on open
+    $('#addModal').on('shown.bs.modal', function () {
+        $('#txt_householdno').val('');
+        $('#txt_hof').html('<option disabled selected>-- Input Household # First --</option>');
+        $('#txt_members').val('');
+        $('#txt_totalmembers').val('');
+        $('#txt_brgy').val('');
+        $('#txt_purok').val('');
+    });
+
     function show_head() {
         var householdID = $('#txt_householdno').val();
         if (householdID) {
@@ -106,31 +116,43 @@
                 }
             });
 
-            // After updating Barangay and Purok, fetch and update family members and total members
-            update_family_info(householdID, totalID);
+            // Fetch Members
+            fetchMembers(totalID);
         }
     }
 
-   // Function to update the family members and total member count
-function update_family_info(householdID, hofID) {
-    $.ajax({
-        type: 'POST',
-        url: 'household_dropdown.php',  // This should be the PHP file that returns the members and total count
-        data: { headoffamily: hofID, barangay: loggedInBarangay },
-        success: function(response) {
-            var data = JSON.parse(response);
-            var familyNames = data.map(function(member) {
-                return member.fullName;  // Create an array of family member names
+    function fetchMembers(headoffamily) {
+        if (headoffamily) {
+            $.ajax({
+                type: 'POST',
+                url: 'household_dropdown.php',
+                data: {
+                    headoffamily: headoffamily,
+                    barangay: loggedInBarangay
+                },
+                success: function (response) {
+                    try {
+                        var members = JSON.parse(response);
+                        if (Array.isArray(members) && members.length > 0) {
+                            var memberNames = members.map(member => member.fullName);
+                            $('#txt_members').val(memberNames.join(", "));
+                            $('#txt_totalmembers').val(members.length);
+                        } else {
+                            $('#txt_members').val("No Members Found");
+                            $('#txt_totalmembers').val(0);
+                        }
+                    } catch (e) {
+                        console.error('Error parsing members JSON:', e);
+                        $('#txt_members').val("Error loading members");
+                        $('#txt_totalmembers').val(0);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error in fetchMembers AJAX:', status, error);
+                    $('#txt_members').val("Error loading members");
+                    $('#txt_totalmembers').val(0);
+                }
             });
-            var totalMembers = familyNames.length;  // Get the total count of members
-
-            // Update the fields
-            $('#txt_members').val(familyNames.join(', '));  // Show family member names in the field
-            $('#txt_totalmembers').val(totalMembers);  // Show total count of members in the field
-        },
-        error: function (xhr, status, error) {
-            console.error('Error fetching family info:', status, error);
         }
-    });
-}
+    }
 </script>

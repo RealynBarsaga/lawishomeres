@@ -40,17 +40,36 @@ if (isset($_POST['headoffamily']) && isset($_POST['barangay'])) {
     $hof_id = $_POST['headoffamily'];
     $barangay = $_POST['barangay'];
 
+    // Prepare the SQL query
     $stmt = $con->prepare("SELECT id, lname, fname, mname FROM tbltabagak WHERE role = 'Members' AND headoffamily = ? AND barangay = ?");
-    $stmt->bind_param("ss", $hof_id, $barangay);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    $members = [];
-    while ($row = $result->fetch_assoc()) {
-        $members[] = ['id' => $row['id'], 'fullName' => htmlspecialchars($row['lname'] . ', ' . $row['fname'] . ' ' . $row['mname'])];
+    
+    if ($stmt === false) {
+        echo json_encode(['error' => 'Failed to prepare the query']);
+        exit;
     }
-
+    
+    $stmt->bind_param("ss", $hof_id, $barangay);
+    
+    // Execute the query
+    if ($stmt->execute()) {
+        $result = $stmt->get_result();
+        
+        if ($result->num_rows > 0) {
+            $members = [];
+            while ($row = $result->fetch_assoc()) {
+                $members[] = [
+                    'id' => $row['id'], 
+                    'fullName' => htmlspecialchars($row['lname'] . ', ' . $row['fname'] . ' ' . $row['mname'])
+                ];
+            }
+            echo json_encode($members);
+        } else {
+            echo json_encode(['message' => 'No family members found']);
+        }
+    } else {
+        echo json_encode(['error' => 'Query execution failed']);
+    }
+    
     $stmt->close();
-    echo json_encode($members);
 }
 ?>
