@@ -109,8 +109,8 @@
                 while($row=mysqli_fetch_array($qry)){
                     if($row['sPosition'] == "Captain"){
                         echo '
-                            <p style="text-align: justify;">
-                            <b style="font-size:10.5px; color: dodgerblue !important;text-decoration: underline;">HON.'.strtoupper($row['completeName']).'</b>
+                            <p style="text-align: center;">
+                            <b style="font-size:10.5px;text-decoration: underline;">HON.'.strtoupper($row['completeName']).'</b>
                             <span style="font-size:12px;">Barangay Captain</span><br>
                             </p><br>
                         ';
