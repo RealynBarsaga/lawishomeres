@@ -50,7 +50,7 @@
     </form>
 </div>
 
-<script>
+<script> 
     // Assuming barangay information is passed in a hidden field or directly in JavaScript
     var loggedInBarangay = '<?= $_SESSION["barangay"] ?? ""; ?>'; // Pass PHP session variable to JS
 
@@ -68,7 +68,7 @@
                 },
                 success: function (html) {
                     console.log('Head of Family Dropdown HTML:', html); // Debugging
-                    $('#txt_hof').html(html); // Populate the dropdown for head of family
+                    $('#txt_hof').html(html);
                 },
                 error: function (xhr, status, error) {
                     console.error('AJAX request failed:', status, error); // Debugging
@@ -82,7 +82,6 @@
         var hofID = $('#txt_hof').val();
         console.log('Head of Family ID: ', hofID);  // Debugging
         if (hofID) {
-            // Fetch family members
             $.ajax({
                 type: 'POST',
                 url: 'household_dropdown.php',
@@ -100,19 +99,34 @@
                 }
             });
 
-            // Fetch Barangay and Purok values (Ensure that variables are being sent correctly)
+            // Fetch Barangay value
             $.ajax({
                 type: 'POST',
                 url: 'household_dropdown.php',
                 data: { 
-                    hof_id: hofID, // Use hofID to fetch Barangay and Purok
+                    brgy_id: hofID,
                     barangay: loggedInBarangay // Pass barangay as part of the POST data
                 },
                 success: function (html) {
-                    console.log('Barangay and Purok HTML:', html); // Debugging
-                    var data = JSON.parse(html); // Assuming the server returns JSON for Barangay and Purok
-                    $('#txt_brgy').val(data.barangay); // Assuming the response has a 'barangay' field
-                    $('#txt_purok').val(data.purok); // Assuming the response has a 'purok' field
+                    console.log('Barangay HTML:', html); // Debugging
+                    $('#txt_brgy').val(html); // Assuming html contains the Barangay value
+                },
+                error: function (xhr, status, error) {
+                    console.error('AJAX request failed:', status, error); // Debugging
+                }
+            });
+
+            // Fetch Purok value
+            $.ajax({
+                type: 'POST',
+                url: 'household_dropdown.php',
+                data: { 
+                    purok_id: hofID,
+                    barangay: loggedInBarangay // Pass barangay as part of the POST data
+                },
+                success: function (html) {
+                    console.log('Purok HTML:', html); // Debugging
+                    $('#txt_purok').val(html); // Assuming html contains the Purok value
                 },
                 error: function (xhr, status, error) {
                     console.error('AJAX request failed:', status, error); // Debugging
