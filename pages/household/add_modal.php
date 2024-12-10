@@ -12,29 +12,29 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>Household #:</label>
-                                <input onkeyup="show_head()" id="txt_householdno" name="txt_householdno" class="form-control input-sm" type="number" placeholder="Household #" required />
+                                <input onkeyup="show_head()" id="txt_householdno" name="txt_householdno" class="form-control input-sm" type="number" placeholder="Household #" required/>
                             </div>
                             <div class="form-group">
                                 <label>Head Of Family:</label>
                                 <select id="txt_hof" name="txt_hof" class="form-control input-sm select2" style="width:100%" onchange="show_total()" required>
-                                    <option disabled selected>-- Input Household # First --</option>
+                                   <option disabled selected>-- Input Household # First --</option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label>Family Members:</label>
-                                <input id="txt_members" disabled name="txt_members" class="form-control input-sm" type="text" placeholder="Family Members" required />
+                                <input id="txt_members" disabled name="txt_members" class="form-control input-sm" type="text" placeholder="Family Members" required/>
                             </div>
                             <div class="form-group">
                                 <label>Total Household Members:</label>
-                                <input id="txt_totalmembers" disabled name="txt_totalmembers" class="form-control input-sm" type="text" placeholder="Total Household Members" required />
+                                <input id="txt_totalmembers" disabled name="txt_totalmembers" class="form-control input-sm" type="text" placeholder="Total Household Members" required/>
                             </div>
                             <div class="form-group">
                                 <label>Barangay:</label>
-                                <input id="txt_brgy" disabled name="txt_brgy" class="form-control input-sm" type="text" placeholder="Barangay" required />
+                                <input id="txt_brgy" disabled name="txt_brgy" class="form-control input-sm" type="text" placeholder="Barangay" required/>
                             </div>
                             <div class="form-group">
                                 <label>Purok:</label>
-                                <input id="txt_purok" disabled name="txt_purok" class="form-control input-sm" type="text" placeholder="Purok" required />
+                                <input id="txt_purok" disabled name="txt_purok" class="form-control input-sm" type="text" placeholder="Purok" required/>
                             </div>
                         </div>
                     </div>
