@@ -119,14 +119,14 @@
 }
 
 // Fetch and display members for a given Head of Family
-function fetchMembers(headoffamily) {
+function fetchMembers(totalID) {
     console.log('Fetching members for HOF ID:', headoffamily);  // Debugging
-    if (headoffamily) {
+    if (totalID) {
         $.ajax({
             type: 'POST',
             url: 'household_dropdown.php',
             data: { 
-                headoffamily: headoffamily,
+                headoffamily: totalID,
                 barangay: loggedInBarangay // Pass barangay as part of the POST data
             },
             success: function (response) {
