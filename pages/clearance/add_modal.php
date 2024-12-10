@@ -104,7 +104,7 @@ mysqli_stmt_close($stmt);
                                 /* "Kangwayan" => ["Purok", "Puroks"], */
                                 /* "Tugas" => ["Purok", "Puroks"], */
                                 /* "Malbago" => ["Purok", "Puroks"], */
-                                "Tarong" => ["Orchids", "Gumamela", "Santan", "Rose", "Vietnam Rose", "Kumintang", "Sunflower", "Daisy"],
+                                "Tarong" => ["Orchids", "Gumamela 1", "Gumamela 2", "Santan 1", "Santan 2", "Rose 1", "Rose 2", "Vietnam Rose", "Kumintang 1", "Kumintang 2", "Sunflower", "Daisy"],
                                 // Add purok options for other barangays
                             ];
                         ?>
