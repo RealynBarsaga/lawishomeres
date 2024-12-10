@@ -22,11 +22,11 @@
                             </div>
                             <div class="form-group">
                                 <label>Family Members:</label>
-                                <input id="txt_members" name="txt_members" class="form-control input-sm" type="text" placeholder="Family Members" required readonly />
+                                <input id="txt_members" name="txt_members" class="form-control input-sm" type="text" placeholder="Family Members" required />
                             </div>
                             <div class="form-group">
                                 <label>Total Household Members:</label>
-                                <input id="txt_totalmembers" name="txt_totalmembers" class="form-control input-sm" type="text" placeholder="Total Household Members" required readonly />
+                                <input id="txt_totalmembers" name="txt_totalmembers" class="form-control input-sm" type="text" placeholder="Total Household Members" required />
                             </div>
                             <div class="form-group">
                                 <label>Barangay:</label>
@@ -50,16 +50,6 @@
 
 <script>
     var loggedInBarangay = '<?= $_SESSION["barangay"] ?? ""; ?>'; // Pass PHP session variable to JS
-
-    // Reset modal on open
-    $('#addModal').on('shown.bs.modal', function () {
-        $('#txt_householdno').val('');
-        $('#txt_hof').html('<option disabled selected>-- Input Household # First --</option>');
-        $('#txt_members').val('');
-        $('#txt_totalmembers').val('');
-        $('#txt_brgy').val('');
-        $('#txt_purok').val('');
-    });
 
     function show_head() {
         var householdID = $('#txt_householdno').val();
@@ -116,43 +106,25 @@
                 }
             });
 
-            // Fetch Members
-            fetchMembers(totalID);
+            // After updating Barangay and Purok, fetch and update family members and total members
+            update_family_info(householdID);
         }
     }
 
-    function fetchMembers(headoffamily) {
-        if (headoffamily) {
-            $.ajax({
-                type: 'POST',
-                url: 'household_dropdown.php',
-                data: {
-                    headoffamily: headoffamily,
-                    barangay: loggedInBarangay
-                },
-                success: function (response) {
-                    try {
-                        var members = JSON.parse(response);
-                        if (Array.isArray(members) && members.length > 0) {
-                            var memberNames = members.map(member => member.fullName);
-                            $('#txt_members').val(memberNames.join(", "));
-                            $('#txt_totalmembers').val(members.length);
-                        } else {
-                            $('#txt_members').val("No Members Found");
-                            $('#txt_totalmembers').val(0);
-                        }
-                    } catch (e) {
-                        console.error('Error parsing members JSON:', e);
-                        $('#txt_members').val("Error loading members");
-                        $('#txt_totalmembers').val(0);
-                    }
-                },
-                error: function (xhr, status, error) {
-                    console.error('Error in fetchMembers AJAX:', status, error);
-                    $('#txt_members').val("Error loading members");
-                    $('#txt_totalmembers').val(0);
-                }
-            });
-        }
+    // Function to update the family members and total member count
+    function update_family_info(householdID) {
+        $.ajax({
+            type: 'POST',
+            url: 'household_dropdown.php',  // This should be the PHP file that returns the members and total count
+            data: { household_id: householdID, barangay: loggedInBarangay },
+            success: function(response) {
+                var data = JSON.parse(response);
+                $('#txt_members').val(data.members);  // Assuming data.members contains the family member names/IDs
+                $('#txt_totalmembers').val(data.total_members);  // Assuming data.total_members contains the total count
+            },
+            error: function (xhr, status, error) {
+                console.error('Error fetching family info:', status, error);
+            }
+        });
     }
 </script>
