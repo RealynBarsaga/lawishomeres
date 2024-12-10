@@ -119,55 +119,47 @@
         }
     }
 
+    // Fetch and display members for a given Head of Family
     function fetchMembers(headoffamily) {
-    console.log('Fetching members for HOF ID:', headoffamily);  // Debugging
-
-    if (!headoffamily) {
-        console.error('Head of Family ID is invalid or empty.');
-        return;
-    }
-
-    $.ajax({
-        type: 'POST',
-        url: 'household_dropdown.php',
-        data: { 
-            headoffamily: headoffamily,
-            barangay: loggedInBarangay // Pass barangay as part of the POST data
-        },
-        success: function (response) {
-            console.log('Family Members Response:', response);  // Debugging
-            
-            try {
-                // Parse the JSON response
-                var members = JSON.parse(response);
-
-                // Check if response is an array and has members
-                if (Array.isArray(members) && members.length > 0) {
-                    // Map the members to extract full names
-                    var memberNames = members.map(member => member.fullName);
-
-                    // Debugging: Check extracted member names
-                    console.log('Extracted Member Names:', memberNames);
-
-                    // Update the UI fields
-                    $('#txt_members').val(memberNames.join(", "));
-                    $('#txt_totalmembers').val(members.length);
-                } else {
-                    // If no members, set the appropriate value
-                    $('#txt_members').val("No Members Found");
+        console.log('Fetching members for HOF ID:', headoffamily);  // Debugging
+        if (headoffamily) {
+            $.ajax({
+                type: 'POST',
+                url: 'household_dropdown.php',
+                data: { 
+                    headoffamily: headoffamily,
+                    barangay: loggedInBarangay // Pass barangay as part of the POST data
+                },
+                success: function (response) {
+                    console.log('Family Members Response:', response);  // Debugging
+                    
+                    try {
+                        var members = JSON.parse(response); // Parse the JSON response
+                        
+                        if (Array.isArray(members) && members.length > 0) {
+                            // Set the member names if there are members
+                            var memberNames = members.map(function(member) {
+                                return member.fullName;
+                            });
+                            $('#txt_members').val(memberNames.join(", ")); // Update the field
+                            $('#txt_totalmembers').val(members.length);  // Update total members count
+                        } else {
+                            // If no members, set the appropriate value
+                            $('#txt_members').val("No Members Found");
+                            $('#txt_totalmembers').val(0);
+                        }
+                    } catch (error) {
+                        console.error('Error parsing response:', error);  // Log any JSON parsing errors
+                        $('#txt_members').val("Error loading members");
+                        $('#txt_totalmembers').val(0);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error('AJAX request failed:', status, error); // Debugging
+                    $('#txt_members').val("Error loading members");
                     $('#txt_totalmembers').val(0);
                 }
-            } catch (error) {
-                console.error('Error parsing JSON response:', error);
-                $('#txt_members').val("Error loading members");
-                $('#txt_totalmembers').val(0);
-            }
-        },
-        error: function (xhr, status, error) {
-            console.error('AJAX request failed:', status, error);
-            $('#txt_members').val("Error loading members");
-            $('#txt_totalmembers').val(0);
+            });
         }
-    });
-}
+    }
 </script>

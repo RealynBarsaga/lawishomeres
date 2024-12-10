@@ -73,11 +73,11 @@ if (isset($_POST['total_id']) && isset($_POST['barangay'])) {
 
  // Fetch family members based on Head of Family
  if (isset($_POST['headoffamily']) && isset($_POST['barangay'])) {
-    $headoffamily = $_POST['headoffamily'];
+    $hof_id = $_POST['headoffamily'];
     $barangay = $_POST['barangay'];
 
     $stmt = $con->prepare("SELECT id, lname, fname, mname FROM tbltabagak WHERE role = 'Members' AND headoffamily = ? AND barangay = ?");
-    $stmt->bind_param("ss", $headoffamily, $barangay);
+    $stmt->bind_param("ss", $hof_id, $barangay);
     $stmt->execute();
     $result = $stmt->get_result();
 
