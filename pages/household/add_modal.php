@@ -22,9 +22,9 @@
                             </div>
                             <div class="form-group">
                                 <label>Family Members:</label>
-                                <div id="family_members_list" name="txt_members" class="form-control input-sm" style="height: 100px; overflow-y: auto;" disabled>
+                                <input id="family_members_list" name="txt_members" class="form-control input-sm" style="height: 100px; overflow-y: auto;" disabled>
                                    <!-- Family member names will be displayed here -->
-                                </div>
+                                </input>
                             </div>
                             <div class="form-group">
                                 <label>Total Household Members:</label>
@@ -91,7 +91,7 @@
                 },
                 success: function (html) {
                     console.log('Family Members HTML:', html); // Debugging
-                    $('#txt_members').val(html); // Assuming html contains the Barangay value
+                    $('#family_members_list').html(html); // Populate the family members list
                     updateTotalMembers(); // Update total household members
                 },
                 error: function (xhr, status, error) {
