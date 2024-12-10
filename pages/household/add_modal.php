@@ -119,25 +119,9 @@
         }
     }
 
-// Function to update family members display
-function updateFamilyMembers(members) {
-    if (Array.isArray(members) && members.length > 0) {
-        // Map member names and update the input fields
-        var memberNames = members.map(function(member) {
-            return member.fullName;
-        });
-        $('#txt_members').val(memberNames.join(", ")); // Update the field
-        $('#txt_totalmembers').val(members.length); // Update total members count
-    } else {
-        // Handle case with no members
-        $('#txt_members').val("No Members Found");
-        $('#txt_totalmembers').val(0);
-    }
-}
-
-// Fetch and display members for a given Head of Family
+    // Fetch and display members for a given Head of Family
 function fetchMembers(headoffamily) {
-    console.log('Fetching members for HOF ID:', headoffamily); // Debugging
+    console.log('Fetching members for HOF ID:', headoffamily);  // Debugging
     if (headoffamily) {
         $.ajax({
             type: 'POST',
@@ -147,67 +131,45 @@ function fetchMembers(headoffamily) {
                 barangay: loggedInBarangay // Pass barangay as part of the POST data
             },
             success: function (response) {
-                console.log('Family Members Response:', response); // Debugging
+                console.log('Family Members Response:', response);  // Debugging
                 
                 try {
                     var members = JSON.parse(response); // Parse the JSON response
-                    updateFamilyMembers(members); // Update the UI using the reusable function
+                    
+                    if (Array.isArray(members) && members.length > 0) {
+                        // Set the member names if there are members
+                        var memberNames = members.map(function(member) {
+                            return member.fullName;
+                        });
+                        $('#txt_members').val(memberNames.join(", ")); // Update the field
+                        $('#txt_totalmembers').val(members.length);  // Update total members count
+                    } else {
+                        // If no members, set the appropriate value
+                        $('#txt_members').val("No Members Found");
+                        $('#txt_totalmembers').val(0);
+                    }
                 } catch (error) {
-                    console.error('Error parsing response:', error); // Log JSON parsing errors
-                    updateFamilyMembers([]); // Clear the UI in case of an error
+                    console.error('Error parsing response:', error);  // Log any JSON parsing errors
+                    $('#txt_members').val("Error loading members");
+                    $('#txt_totalmembers').val(0);
                 }
             },
             error: function (xhr, status, error) {
                 console.error('AJAX request failed:', status, error); // Debugging
-                updateFamilyMembers([]); // Clear the UI in case of an error
+                $('#txt_members').val("Error loading members");
+                $('#txt_totalmembers').val(0);
             }
         });
-    } else {
-        // Clear fields if no HOF is selected
-        updateFamilyMembers([]);
     }
 }
 
-// Reset and display relevant fields when the modal is shown
-$('#addModal').on('show.bs.modal', function () {
-    $('#txt_members').val(''); // Clear the members input field
-    $('#txt_totalmembers').val(''); // Clear the total members count
-    $('#txt_brgy').val(''); // Clear barangay field
-    $('#txt_purok').val(''); // Clear purok field
+// Call this function after adding or updating family members to ensure dynamic refresh
+function addMember(headoffamily, newMember) {
+    // Code to add the member to the database or local array
+    // After adding the member, fetch the updated list
+    fetchMembers(headoffamily); // Trigger a refresh to update the members list
+}
 
-    // Re-trigger the head of family dropdown if there's a household number
-    var householdID = $('#txt_householdno').val();
-    if (householdID) {
-        show_head();
-    }
-
-    // Re-fetch total members if a head of family is selected
-    var hofID = $('#txt_hof').val();
-    if (hofID) {
-        fetchMembers(hofID); // Fetch members for the selected head of family
-    }
-});
-
-// Trigger on changes to the Head of Family dropdown
-$('#txt_hof').change(function() {
-    var hofID = $(this).val();
-    if (hofID) {
-        fetchMembers(hofID); // Fetch members whenever a new head of family is selected
-    } else {
-        // Clear fields if no HOF is selected
-        updateFamilyMembers([]);
-    }
-});
-
-// Mock: Dynamically add new members (for demonstration/testing)
-$('#addMemberButton').click(function() {
-    var currentMembers = $('#txt_members').val().split(', ').filter(Boolean); // Get existing members from the field
-    var newMemberName = "New Member " + (currentMembers.length + 1); // Generate a new member name
-    currentMembers.push(newMemberName); // Add the new member
-
-    // Update the display with the updated members list
-    updateFamilyMembers(currentMembers.map(function(name) {
-        return { fullName: name }; // Map to objects with `fullName`
-    }));
-});
+// Example of using it when adding a new member
+addMember('HOF123', { fullName: 'John Doe' });
 </script>
