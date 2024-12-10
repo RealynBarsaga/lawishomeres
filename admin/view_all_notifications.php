@@ -155,11 +155,11 @@ while ($notif = mysqli_fetch_assoc($squery)) {
     <h1>All Notifications</h1>
 
     <!-- Delete All Button -->
-    <div style="text-align: right; margin-top: -39px;">
+    <div style="text-align: right; margin-top: -42px;">
         <a href="view_all_notifications?delete_all=true" 
            style="text-decoration: none; color: gray;
            padding: 8px 12px; border-radius: 4px; font-size: 14px;">
-            Delete All
+            Delete All/<a href="dashboard/dashboard">Dashboard</a>
         </a>
     </div>
 
@@ -222,10 +222,6 @@ while ($notif = mysqli_fetch_assoc($squery)) {
             }
             ?>
         </ul>
-
-        <div class="footer">
-            <a href="dashboard/dashboard">Back to Home</a>
-        </div>
     </div>
     
     <script>
