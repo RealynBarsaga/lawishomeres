@@ -119,56 +119,47 @@
         }
     }
 
+    // Fetch and display members for a given Head of Family
     function fetchMembers(headoffamily) {
-    console.log('Fetching members for HOF ID:', headoffamily);  // Debugging
-    
-    if (headoffamily) {
-        // Clear existing members before fetching new data to avoid stale values
-        $('#txt_members').val("Loading...");
-        $('#txt_totalmembers').val("");
-        
-        $.ajax({
-            type: 'POST',
-            url: 'household_dropdown.php',
-            data: { 
-                headoffamily: headoffamily,
-                barangay: loggedInBarangay // Pass barangay as part of the POST data
-            },
-            success: function (response) {
-                console.log('Family Members Response:', response);  // Debugging
-                
-                try {
-                    var members = JSON.parse(response); // Parse the JSON response
+        console.log('Fetching members for HOF ID:', headoffamily);  // Debugging
+        if (headoffamily) {
+            $.ajax({
+                type: 'POST',
+                url: 'household_dropdown.php',
+                data: { 
+                    headoffamily: headoffamily,
+                    barangay: loggedInBarangay // Pass barangay as part of the POST data
+                },
+                success: function (response) {
+                    console.log('Family Members Response:', response);  // Debugging
                     
-                    if (Array.isArray(members) && members.length > 0) {
-                        // Create member names array and update dynamically
-                        var memberNames = members.map(function(member) {
-                            return member.fullName;
-                        });
+                    try {
+                        var members = JSON.parse(response); // Parse the JSON response
                         
-                        $('#txt_members').val(memberNames.join(", ")); // Update members field
-                        $('#txt_totalmembers').val(members.length);  // Update total count
-                    } else {
-                        // If no members, reset the fields with appropriate values
-                        $('#txt_members').val("No Members Found");
+                        if (Array.isArray(members) && members.length > 0) {
+                            // Set the member names if there are members
+                            var memberNames = members.map(function(member) {
+                                return member.fullName;
+                            });
+                            $('#txt_members').val(memberNames.join(", ")); // Update the field
+                            $('#txt_totalmembers').val(members.length);  // Update total members count
+                        } else {
+                            // If no members, set the appropriate value
+                            $('#txt_members').val("No Members Found");
+                            $('#txt_totalmembers').val(0);
+                        }
+                    } catch (error) {
+                        console.error('Error parsing response:', error);  // Log any JSON parsing errors
+                        $('#txt_members').val("Error loading members");
                         $('#txt_totalmembers').val(0);
                     }
-                } catch (error) {
-                    console.error('Error parsing response:', error);  // Handle JSON parsing errors
+                },
+                error: function (xhr, status, error) {
+                    console.error('AJAX request failed:', status, error); // Debugging
                     $('#txt_members').val("Error loading members");
                     $('#txt_totalmembers').val(0);
                 }
-            },
-            error: function (xhr, status, error) {
-                console.error('AJAX request failed:', status, error); // Log errors
-                $('#txt_members').val("Error loading members");
-                $('#txt_totalmembers').val(0);
-            }
-        });
-    } else {
-        // If no HOF ID is provided, clear the fields
-        $('#txt_members').val("Select a Head of Family");
-        $('#txt_totalmembers').val("");
+            });
+        }
     }
-}
 </script>
