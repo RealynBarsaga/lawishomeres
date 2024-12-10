@@ -117,15 +117,6 @@
                 }
             });
 
-            // Fetch Members
-            fetchMembers(totalID);
-        }
-    }
-
-    // Fetch and display members for a given Head of Family
-    function fetchMembers(headoffamily) {
-        console.log('Fetching members for HOF ID:', headoffamily);  // Debugging
-        if (headoffamily) {
             $.ajax({
                 type: 'POST',
                 url: 'household_dropdown.php',
@@ -165,32 +156,4 @@
             });
         }
     }
-
-    // Reset and display relevant fields when the modal is shown
-    $('#addModal').on('show.bs.modal', function () {
-        $('#txt_members').val('');  // Clear the members input field
-        $('#txt_totalmembers').val('');  // Clear the total members count
-        $('#txt_brgy').val('');  // Clear barangay field
-        $('#txt_purok').val('');  // Clear purok field
-
-        // Re-trigger the head of family dropdown on modal open if there's a household number
-        var householdID = $('#txt_householdno').val();
-        if (householdID) {
-            show_head();
-        }
-
-        // Re-fetch total members if a head of family is selected
-        var hofID = $('#txt_hof').val();
-        if (hofID) {
-            fetchMembers(hofID);  // Fetch members for the selected head of family
-        }
-    });
-
-    // Optional: Trigger on the "Add" button or when changes are made to the Head of Family field
-    $('#txt_hof').change(function() {
-        var hofID = $(this).val();
-        if (hofID) {
-            fetchMembers(hofID);  // Fetch members whenever a new head of family is selected
-        }
-    });
 </script>
