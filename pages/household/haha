@@ -1,3 +1,4 @@
+add_modal.php (Front End)
 <!-- ========================= MODAL ======================= -->
 <div id="addModal" class="modal fade">
     <form method="post">
@@ -16,19 +17,17 @@
                             </div>
                             <div class="form-group">
                                 <label>Head Of Family:</label>
-                                <select id="txt_hof" name="txt_hof" class="form-control input-sm select2" style="width:100%" onchange="show_family_members()" required>
+                                <select id="txt_hof" name="txt_hof" class="form-control input-sm select2" style="width:100%" onchange="show_total()" required>
                                    <option disabled selected>-- Input Household # First --</option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label>Family Members:</label>
-                                <div id="family_members_list" class="form-control input-sm" style="height: 100px; overflow-y: auto;" disabled>
-                                   <!-- Family member names will be displayed here -->
-                                </div>
+                                <input id="txt_members" disabled name="txt_members" class="form-control input-sm" type="text" placeholder="Family Members" required />
                             </div>
                             <div class="form-group">
                                 <label>Total Household Members:</label>
-                                <input id="txt_totalmembers" name="txt_totalmembers" class="form-control input-sm" type="text" placeholder="Total Household Members" required readonly />
+                                <input id="txt_totalmembers" disabled name="txt_totalmembers" class="form-control input-sm" type="text" placeholder="Total Household Members" required />
                             </div>
                             <div class="form-group">
                                 <label>Barangay:</label>
@@ -50,7 +49,7 @@
     </form>
 </div>
 
-<script>
+<script> 
     // Assuming barangay information is passed in a hidden field or directly in JavaScript
     var loggedInBarangay = '<?= $_SESSION["barangay"] ?? ""; ?>'; // Pass PHP session variable to JS
 
@@ -68,7 +67,7 @@
                 },
                 success: function (html) {
                     console.log('Head of Family Dropdown HTML:', html); // Debugging
-                    $('#txt_hof').html(html); // Populate the dropdown for head of family
+                    $('#txt_hof').html(html);
                 },
                 error: function (xhr, status, error) {
                     console.error('AJAX request failed:', status, error); // Debugging
@@ -77,53 +76,43 @@
         }
     }
 
-    // Show Family Members based on the selected Head of Family
-    function show_family_members() {
-        var hofID = $('#txt_hof').val();
-        console.log('Head of Family ID: ', hofID);  // Debugging
-        if (hofID) {
-            // Fetch family members
-            $.ajax({
-                type: 'POST',
-                url: 'household_dropdown.php',
-                data: { 
-                    hof_id: hofID,
-                    barangay: loggedInBarangay // Pass barangay as part of the POST data
-                },
-                success: function (html) {
-                    console.log('Family Members HTML:', html); // Debugging
-                    $('#family_members_list').html(html); // Populate the family members list
-                    updateTotalMembers(); // Update total household members
-                },
-                error: function (xhr, status, error) {
-                    console.error('AJAX request failed:', status, error); // Debugging
-                }
-            });
+    function show_total() {
+    var totalID = $('#txt_hof').val();
+    console.log('Head of Family ID: ', totalID);  // Debugging
+    if (totalID) {
+        // Fetch Barangay value
+        $.ajax({
+            type: 'POST',
+            url: 'household_dropdown.php',
+            data: { 
+                brgy_id: totalID,
+                barangay: loggedInBarangay // Pass barangay as part of the POST data
+            },
+            success: function (html) {
+                console.log('Barangay HTML:', html); // Debugging
+                $('#txt_brgy').val(html); // Assuming html contains the Barangay value
+            },
+            error: function (xhr, status, error) {
+                console.error('AJAX request failed:', status, error); // Debugging
+            }
+        });
 
-            // Fetch Barangay and Purok values (Ensure that variables are being sent correctly)
-            $.ajax({
-                type: 'POST',
-                url: 'household_dropdown.php',
-                data: { 
-                    hof_id: hofID, // Use hofID to fetch Barangay and Purok
-                    barangay: loggedInBarangay // Pass barangay as part of the POST data
-                },
-                success: function (html) {
-                    console.log('Barangay and Purok HTML:', html); // Debugging
-                    var data = JSON.parse(html); // Assuming the server returns JSON for Barangay and Purok
-                    $('#txt_brgy').val(data.barangay); // Assuming the response has a 'barangay' field
-                    $('#txt_purok').val(data.purok); // Assuming the response has a 'purok' field
-                },
-                error: function (xhr, status, error) {
-                    console.error('AJAX request failed:', status, error); // Debugging
-                }
-            });
-        }
+        // Fetch Purok value
+        $.ajax({
+            type: 'POST',
+            url: 'household_dropdown.php',
+            data: { 
+                purok_id: totalID,
+                barangay: loggedInBarangay // Pass barangay as part of the POST data
+            },
+            success: function (html) {
+                console.log('Purok HTML:', html); // Debugging
+                $('#txt_purok').val(html); // Assuming html contains the Purok value
+            },
+            error: function (xhr, status, error) {
+                console.error('AJAX request failed:', status, error); // Debugging
+            }
+        });
     }
-
-    // Update Total Household Members based on displayed family members
-    function updateTotalMembers() {
-        var familyMembers = $('#family_members_list').children('div').length; // Count the number of family member divs
-        $('#txt_totalmembers').val(familyMembers); // Update the total members field
-    }
+}
 </script>
