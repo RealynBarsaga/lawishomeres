@@ -119,7 +119,7 @@
 }
 
 // Fetch and display members for a given Head of Family
-function fetchMembers(totalID) {
+function fetchMembers(headoffamily) {
     console.log('Fetching members for HOF ID:', headoffamily);  // Debugging
     if (headoffamily) {
         $.ajax({
