@@ -86,7 +86,7 @@
                 Province of Cebu<br>
                 Municipality of Madridejos
                 <b>
-                    <p style="font-size: 22px; font-family: 'Courier New', Courier; text-transform: uppercase;color: dodgerblue !important;">Barangay <?= $_SESSION['barangay'] ?></p>
+                    <p style="font-size: 22px; font-family: 'Courier New', Courier; text-transform: uppercase;text-decoration: underline;">Barangay <?= $_SESSION['barangay'] ?></p>
                 </b>
             </center>
             <p style="font-weight: bold;margin-left:-5px;">OFFICE OF THE PUNONG BARANGAY</p>
@@ -120,28 +120,28 @@
                     </p>';
                     }elseif($row['sPosition'] == "Kagawad"){
                         echo '
-                        <p style="text-align: justify;">
-                        <b style="font-size:10.5px;  color: dodgerblue !important;">HON.'.strtoupper($row['completeName']).'</b><br>
+                        <p style="text-align: center;">
+                        <b style="font-size:10.5px;  text-decoration: underline;">HON.'.strtoupper($row['completeName']).'</b><br>
                         <span style="font-size:12px;">&nbsp;&nbsp;&nbsp;Barangay Kagawad</span>
                         </p>
                         ';
                     }elseif($row['sPosition'] == "SK"){
                         echo '
-                        <div style="text-align: justify;"><br>
+                        <div style="text-align: center;"><br>
                             <span style="font-size:12px;">SK Chairperson:</span><br>
-                            <b style="font-size:10.5px; color: dodgerblue !important;">'.strtoupper($row['completeName']).'</b><br>
+                            <b style="font-size:10.5px; text-decoration: underline;">'.strtoupper($row['completeName']).'</b><br>
                         </div>';
                     }elseif($row['sPosition'] == "Secretary") {
                         echo '
-                        <div style="text-align: justify;"><br>
+                        <div style="text-align: center;"><br>
                             <span style="font-size:12px;">Barangay Secretary:</span><br>
-                            <b style="font-size:10.5px; color: dodgerblue !important;">'.strtoupper($row['completeName']).'</b><br>
+                            <b style="font-size:10.5px; text-decoration: underline;">'.strtoupper($row['completeName']).'</b><br>
                         </div>';
                     } elseif($row['sPosition'] == "Treasurer") {
                         echo '
-                        <div style="text-align: justify;">
+                        <div style="text-align: center;">
                             <span style="font-size:12px;">Barangay Treasurer:</span><br>
-                            <b style="font-size:10.5px; color: dodgerblue !important;">'.strtoupper($row['completeName']).'</b>
+                            <b style="font-size:10.5px; text-decoration: underline;">'.strtoupper($row['completeName']).'</b>
                         </div>';
                     }
                 }
