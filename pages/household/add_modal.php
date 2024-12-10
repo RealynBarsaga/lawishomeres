@@ -22,9 +22,11 @@
                             </div>
                             <div class="form-group">
                                 <label>Family Members:</label>
-                                <input id="family_members_list" name="txt_members" class="form-control input-sm" style="height: 100px; overflow-y: auto;" disabled>
+                                <div id="family_members_list" name="txt_members" class="form-control input-sm" style="height: 100px; overflow-y: auto;" disabled>
                                    <!-- Family member names will be displayed here -->
-                                </input>
+                                </div>
+                                <!-- Hidden inputs to store family member names -->
+                                <input type="hidden" id="txt_members" name="txt_members" />
                             </div>
                             <div class="form-group">
                                 <label>Total Household Members:</label>
@@ -92,6 +94,15 @@
                 success: function (html) {
                     console.log('Family Members HTML:', html); // Debugging
                     $('#family_members_list').html(html); // Populate the family members list
+    
+                    // Collect family member names from the div and update hidden input field
+                    var members = [];
+                    $('#family_members_list').children('div').each(function() {
+                        members.push($(this).text().trim()); // Add each family member name to the array
+                    });
+    
+                    // Update the hidden input field with the family members data
+                    $('#txt_members').val(members.join(', ')); // Convert array to comma-separated string
                     updateTotalMembers(); // Update total household members
                 },
                 error: function (xhr, status, error) {
