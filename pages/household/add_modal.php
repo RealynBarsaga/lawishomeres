@@ -95,16 +95,15 @@
                     console.log('Family Members HTML:', html); // Debugging
                     $('#family_members_list').html(html); // Populate the family members list
     
-                    function updateFamilyMembers() {
-                        // Collect family member names from the div
-                        var members = [];
-                        $('#family_members_list').children('div').each(function() {
-                            members.push($(this).text().trim()); // Add each family member name to the array
-                        });
-                    
-                        // Update the hidden input field with the family members data
-                        $('#txt_members').val(members.join(', ')); // Convert array to comma-separated string
-                    }
+                    // Collect family member names from the div and update hidden input field
+                    var members = [];
+                    $('#family_members_list').children('div').each(function() {
+                        members.push($(this).text().trim()); // Add each family member name to the array
+                    });
+    
+                    // Update the hidden input field with the family members data
+                    $('#txt_members').val(members.join(', ')); // Convert array to comma-separated string
+                    updateTotalMembers(); // Update total household members
                 },
                 error: function (xhr, status, error) {
                     console.error('AJAX request failed:', status, error); // Debugging
