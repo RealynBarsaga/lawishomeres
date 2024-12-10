@@ -30,7 +30,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Total Household Members:</label>
-                                <input id="txt_totalmembers" name="txt_totalmembers" class="form-control input-sm" type="text" placeholder="Total Household Members" required/>
+                                <input id="txt_totalmembers" name="txt_totalmembers" class="form-control input-sm" type="text" placeholder="Total Household Members" required readonly />
                             </div>
                             <div class="form-group">
                                 <label>Barangay:</label>
@@ -104,7 +104,6 @@
                     
                         // Update the hidden input field with the family members data
                         $('#txt_members').val(members.join(', ')); // Convert array to comma-separated string
-                        updateTotalMembers(); // Update total household members
                     }
                 },
                 error: function (xhr, status, error) {
