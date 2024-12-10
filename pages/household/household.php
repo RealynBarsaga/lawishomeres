@@ -99,11 +99,11 @@ html, body {
                                     while ($row = $result->fetch_assoc()) {
                                         $deleteModalId = 'deleteModal' . $row['id'];
                                     
-                                        // Format the membersname field
-                                        $membersname = htmlspecialchars($row['membersname'], ENT_QUOTES, 'UTF-8');
+                                        // Format the hof_id field
+                                        $hof_id = htmlspecialchars($row['hof_id'], ENT_QUOTES, 'UTF-8');
                                         
                                         // Split the names by commas and trim extra spaces
-                                        $names = array_map('trim', explode(',', $membersname));
+                                        $names = array_map('trim', explode(',', $hof_id));
                                     
                                         // Create an array to hold formatted names
                                         $formatted_names = [];
@@ -128,7 +128,7 @@ html, body {
                                             <td>' . htmlspecialchars($row['head_of_family'], ENT_QUOTES, 'UTF-8') . '</td>
                                             <td>' . htmlspecialchars($row['barangay'], ENT_QUOTES, 'UTF-8') . '</td>
                                             <td>' . htmlspecialchars($row['purok'], ENT_QUOTES, 'UTF-8') . '</td>
-                                            <td>' . $formatted_names_output . '</td> <!-- Updated this line to display formatted membersnames -->
+                                            <td>' . $formatted_names_output . '</td> <!-- Updated this line to display formatted hof_id -->
                                             <td>
                                                 <button class="btn btn-primary btn-sm" data-target="#editModal' . htmlspecialchars($row['id'], ENT_QUOTES, 'UTF-8') . '" data-toggle="modal">
                                                     <i class="fa fa-eye" aria-hidden="true"></i> View
