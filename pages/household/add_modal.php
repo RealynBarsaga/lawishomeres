@@ -79,6 +79,10 @@
     var totalID = $('#txt_hof').val();
     console.log('Head of Family ID: ', totalID);  // Debugging
     if (totalID) {
+        // Reset fields before updating
+        $('#txt_members').val("Loading..."); // Indicate loading state
+        $('#txt_totalmembers').val(""); // Reset total members count
+
         // Fetch Barangay value
         $.ajax({
             type: 'POST',
@@ -118,7 +122,6 @@
     }
 }
 
-// Fetch and display members for a given Head of Family
 function fetchMembers(headoffamily) {
     console.log('Fetching members for HOF ID:', headoffamily);  // Debugging
     if (headoffamily) {
@@ -133,25 +136,35 @@ function fetchMembers(headoffamily) {
                 console.log('Family Members Response:', response);  // Debugging
                 
                 try {
-                    var members = JSON.parse(response); // Parse the JSON response
+                    // Parse the JSON response from the backend
+                    var members = JSON.parse(response);
                     
+                    // Check if the response contains valid members data
                     if (Array.isArray(members) && members.length > 0) {
-                        // Set the member names if there are members
                         var memberNames = members.map(function(member) {
-                            return member.fullName;
+                            return member.fullName; // Get full names of members
                         });
-                        $('#txt_members').val(memberNames.join(", ")); // Update the field
-                        $('#txt_totalmembers').val(members.length);  // Update total members count
+                        
+                        // Display member names and total members count
+                        $('#txt_members').val(memberNames.join(", "));  // Update the family members field
+                        $('#txt_totalmembers').val(members.length);    // Update the total members count
                     } else {
-                        // If no members, set the appropriate value
+                        // If no members found, set appropriate messages
                         $('#txt_members').val("No Members Found");
                         $('#txt_totalmembers').val(0);
                     }
                 } catch (error) {
-                    console.error('Error parsing response:', error);  // Log any JSON parsing errors
+                    // Handle any errors that occur while parsing the response
+                    console.error('Error parsing response:', error);
                     $('#txt_members').val("Error loading members");
                     $('#txt_totalmembers').val(0);
                 }
+            },
+            error: function (xhr, status, error) {
+                // Handle AJAX request failure
+                console.error('AJAX request failed:', status, error);
+                $('#txt_members').val("Error loading members");
+                $('#txt_totalmembers').val(0);
             }
         });
     }

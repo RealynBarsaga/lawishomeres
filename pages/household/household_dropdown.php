@@ -39,8 +39,9 @@ if (isset($_POST['headoffamily']) && isset($_POST['barangay'])) {
     $headoffamily = $_POST['headoffamily'];
     $barangay = $_POST['barangay'];
 
-    // Prepare the SQL query
-    $stmt = $con->prepare("SELECT id, lname, fname, mname FROM tbltabagak WHERE headoffamily = ? AND barangay = ?");
+    // Prepare the SQL query to fetch members with role 'Members'
+    $stmt = $con->prepare("SELECT id, lname, fname, mname FROM tbltabagak WHERE headoffamily = ? AND barangay = ? AND role = 'Members'");
+    
     if ($stmt === false) {
         echo json_encode(['error' => 'Failed to prepare the query']);
         exit;
@@ -62,7 +63,7 @@ if (isset($_POST['headoffamily']) && isset($_POST['barangay'])) {
             }
             echo json_encode($members);
         } else {
-            echo json_encode(['message' => 'No family members found']);
+            echo json_encode(['error' => 'No family members found for the given Head of Family and Barangay']);
         }
     } else {
         echo json_encode(['error' => 'Query execution failed']);
