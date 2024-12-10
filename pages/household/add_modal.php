@@ -22,10 +22,11 @@
                             </div>
                             <div class="form-group">
                                 <label>Family Members:</label>
-                                <div id="family_members_list" class="form-control input-sm" style="height: 100px; overflow-y: auto;">
-                                    <!-- Hidden input to store family member names -->
-                                    <input type="hidden" id="txt_members" name="txt_members" />
+                                <div id="family_members_list" class="form-control input-sm" style="height: 100px; overflow-y: auto;" readonly>
+                                    <!-- Family member names will be displayed here -->
                                 </div>
+                                <!-- Hidden input to store family member names -->
+                                <input type="hidden" id="txt_members" name="txt_members" />
                             </div>
                             <div class="form-group">
                                 <label>Total Household Members:</label>
