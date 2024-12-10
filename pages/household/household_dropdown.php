@@ -1,99 +1,79 @@
 <?php
-include "../connection.php";
+include '../connection.php'; // Include your database connection file
 
-// This section handles fetching the Head of Family for a given Household #
-if (isset($_POST['hhold_id']) && isset($_POST['barangay'])) {
-    $hhold_id = $_POST['hhold_id'];
-    $barangay = $_POST['barangay'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['hhold_id']) && isset($_POST['barangay'])) {
+        // Fetch Head of Family dropdown options based on Household ID and Barangay
+        $hhold_id = $_POST['hhold_id'];
+        $barangay = $_POST['barangay'];
 
-    // Query filtering by household number, barangay, and role as Head of Family
-    $query = mysqli_query($con, "SELECT *, id as resID FROM tbltabagak WHERE householdnum = '$hhold_id' AND barangay = '$barangay' AND role = 'Head of Family'") or die('Error: ' . mysqli_error($con));
-    $rowCount = mysqli_num_rows($query);
+        $stmt = $con->prepare("SELECT id, lname, fname, mname FROM tbltabagak WHERE household_no = ? AND barangay = ? AND role = 'Head'");
+        $stmt->bind_param("ss", $hhold_id, $barangay);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-    if ($rowCount > 0) {
-        echo '<option value="" disabled selected>-- Select Head of Family --</option>';
-        while ($row = mysqli_fetch_array($query)) {
-            echo '<option value="' . $row['resID'] . '">' . $row['lname'] . ', ' . $row['fname'] . ' ' . $row['mname'] . '</option>';
+        if ($result->num_rows > 0) {
+            echo '<option disabled selected>-- Select Head of Family --</option>';
+            while ($row = $result->fetch_assoc()) {
+                $fullName = htmlspecialchars($row['lname'] . ', ' . $row['fname'] . ' ' . $row['mname']);
+                echo '<option value="' . $row['id'] . '">' . $fullName . '</option>';
+            }
+        } else {
+            echo '<option disabled selected>No Head of Family Found</option>';
         }
-    } else {
-        echo '<option value="" disabled selected>-- No Existing Head of Family for Household # entered --</option>';
+        $stmt->close();
     }
-}
 
-// This section handles returning the Barangay
-if (isset($_POST['brgy_id']) && isset($_POST['barangay'])) {
-    $brgy_id = $_POST['brgy_id'];
-    $barangay = $_POST['barangay'];
+    // Fetch Barangay based on selected Head of Family
+    if (isset($_POST['brgy_id']) && isset($_POST['barangay'])) {
+        $hof_id = $_POST['brgy_id'];
+        $stmt = $con->prepare("SELECT barangay FROM tbltabagak WHERE id = ? AND barangay = ?");
+        $stmt->bind_param("ss", $hof_id, $_POST['barangay']);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-    $query = mysqli_query($con, "SELECT * FROM tbltabagak WHERE id = '$brgy_id' AND barangay = '$barangay'") or die('Error: ' . mysqli_error($con));
-    $rowCount = mysqli_num_rows($query);
-
-    if ($rowCount > 0) {
-        while ($row = mysqli_fetch_array($query)) {
-            echo $row['barangay'];
+        if ($row = $result->fetch_assoc()) {
+            echo htmlspecialchars($row['barangay']);
+        } else {
+            echo "No Barangay Found";
         }
-    } else {
-        echo '';
+        $stmt->close();
     }
-}
 
-// This section handles returning the Purok
-if (isset($_POST['purok_id']) && isset($_POST['barangay'])) {
-    $purok_id = $_POST['purok_id'];
-    $barangay = $_POST['barangay'];
+    // Fetch Purok based on selected Head of Family
+    if (isset($_POST['purok_id']) && isset($_POST['barangay'])) {
+        $hof_id = $_POST['purok_id'];
+        $stmt = $con->prepare("SELECT purok FROM tbltabagak WHERE id = ? AND barangay = ?");
+        $stmt->bind_param("ss", $hof_id, $_POST['barangay']);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-    $query = mysqli_query($con, "SELECT * FROM tbltabagak WHERE id = '$purok_id' AND barangay = '$barangay'") or die('Error: ' . mysqli_error($con));
-    $rowCount = mysqli_num_rows($query);
-
-    if ($rowCount > 0) {
-        while ($row = mysqli_fetch_array($query)) {
-            echo $row['purok'];
+        if ($row = $result->fetch_assoc()) {
+            echo htmlspecialchars($row['purok']);
+        } else {
+            echo "No Purok Found";
         }
-    } else {
-        echo '';
+        $stmt->close();
     }
-}
 
-// This section handles returning the total number of household members
-if (isset($_POST['total_id']) && isset($_POST['barangay'])) {
-    $total_id = $_POST['total_id'];
-    $barangay = $_POST['barangay'];
+    // Fetch family members based on Head of Family
+    if (isset($_POST['headoffamily']) && isset($_POST['barangay'])) {
+        $hof_id = $_POST['headoffamily'];
+        $barangay = $_POST['barangay'];
 
-    $query = mysqli_query($con, "SELECT * FROM tbltabagak WHERE id = '$total_id' AND barangay = '$barangay'") or die('Error: ' . mysqli_error($con));
-    $rowCount = mysqli_num_rows($query);
+        $stmt = $con->prepare("SELECT id, lname, fname, mname FROM tbltabagak WHERE role = 'Members' AND headoffamily = ? AND barangay = ?");
+        $stmt->bind_param("ss", $hof_id, $barangay);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-    if ($rowCount > 0) {
-        while ($row = mysqli_fetch_array($query)) {
-            echo $row['totalhouseholdmembers'];
+        $members = [];
+        while ($row = $result->fetch_assoc()) {
+            $fullName = htmlspecialchars($row['lname'] . ', ' . $row['fname'] . ' ' . $row['mname']);
+            $members[] = ['id' => $row['id'], 'fullName' => $fullName];
         }
-    } else {
-        echo '0';
+
+        $stmt->close();
+        echo json_encode($members);
     }
-}
-
-// Assuming this is a part of your PHP file that processes the AJAX request for fetching members.
-if (isset($_POST['headoffamily']) && isset($_POST['barangay'])) {
-    $headoffamily = $_POST['headoffamily'];
-    $barangay = $_POST['barangay'];
-
-    // SQL Query to fetch members
-    $stmt = $con->prepare("SELECT * FROM tbltabagak WHERE role = 'Members' AND headoffamily = ? AND barangay = ?");
-    $stmt->bind_param("ss", $headoffamily, $barangay);
-    $stmt->execute();
-
-    $result = $stmt->get_result();
-    $members = [];
-
-    while ($row = $result->fetch_assoc()) {
-        // Constructing full name
-        $fullName = htmlspecialchars($row['lname'] . ', ' . $row['fname'] . ' ' . $row['mname']);
-        $members[] = [
-            'id' => $row['id'],
-            'fullName' => $fullName
-        ];
-    }
-
-    $stmt->close();
-    echo json_encode($members);
 }
 ?>
