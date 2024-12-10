@@ -34,4 +34,22 @@ if (isset($_POST['purok_id']) && isset($_POST['barangay'])) {
     $query = mysqli_query($con, "SELECT purok FROM tbltabagak WHERE id = '$purok_id' AND barangay = '$barangay'");
     echo ($row = mysqli_fetch_assoc($query)) ? $row['purok'] : '';
 }
+
+
+// Fetch Family Members based on Head of Family
+if (isset($_POST['hof_id']) && isset($_POST['barangay'])) {
+    $hof_id = $_POST['hof_id'];
+    $barangay = $_POST['barangay'];
+
+    $query = mysqli_query($con, "SELECT * FROM tbltabagak WHERE householdnum = (SELECT householdnum FROM tbltabagak WHERE id = '$hof_id') AND barangay = '$barangay' AND role != 'Head of Family'");
+    
+    if (mysqli_num_rows($query) > 0) {
+        echo '<option value="" disabled selected>-- Select Family Members --</option>';
+        while ($row = mysqli_fetch_assoc($query)) {
+            echo '<option value="' . $row['id'] . '">' . $row['lname'] . ', ' . $row['fname'] . ' ' . $row['mname'] . '</option>';
+        }
+    } else {
+        echo '<option value="" disabled selected>-- No Family Members Found --</option>';
+    }
+}
 ?>

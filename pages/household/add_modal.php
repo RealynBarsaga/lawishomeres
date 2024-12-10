@@ -16,17 +16,19 @@
                             </div>
                             <div class="form-group">
                                 <label>Head Of Family:</label>
-                                <select id="txt_hof" name="txt_hof" class="form-control input-sm select2" style="width:100%" onchange="show_total()" required>
+                                <select id="txt_hof" name="txt_hof" class="form-control input-sm select2" style="width:100%" onchange="show_family_members()" required>
                                    <option disabled selected>-- Input Household # First --</option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label>Family Members:</label>
-                                <input id="txt_members" name="txt_members" class="form-control input-sm" type="number" placeholder="Family Members" oninput="updateTotalMembers()" required />
+                                <select id="txt_members" name="txt_members[]" class="form-control input-sm select2" style="width:100%" multiple="multiple" required>
+                                   <option disabled selected>-- Select Family Members --</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label>Total Household Members:</label>
-                                <input id="txt_totalmembers" name="txt_totalmembers" class="form-control input-sm" type="text" placeholder="Total Household Members" required />
+                                <input id="txt_totalmembers" name="txt_totalmembers" class="form-control input-sm" type="text" placeholder="Total Household Members" required readonly />
                             </div>
                             <div class="form-group">
                                 <label>Barangay:</label>
@@ -75,38 +77,22 @@
         }
     }
 
-    function show_total() {
-        var totalID = $('#txt_hof').val();
-        console.log('Head of Family ID: ', totalID);  // Debugging
-        if (totalID) {
-            // Fetch Barangay value
+    // Show Family Members based on the selected Head of Family
+    function show_family_members() {
+        var hofID = $('#txt_hof').val();
+        console.log('Head of Family ID: ', hofID);  // Debugging
+        if (hofID) {
             $.ajax({
                 type: 'POST',
                 url: 'household_dropdown.php',
                 data: { 
-                    brgy_id: totalID,
+                    hof_id: hofID,
                     barangay: loggedInBarangay // Pass barangay as part of the POST data
                 },
                 success: function (html) {
-                    console.log('Barangay HTML:', html); // Debugging
-                    $('#txt_brgy').val(html); // Assuming html contains the Barangay value
-                },
-                error: function (xhr, status, error) {
-                    console.error('AJAX request failed:', status, error); // Debugging
-                }
-            });
-
-            // Fetch Purok value
-            $.ajax({
-                type: 'POST',
-                url: 'household_dropdown.php',
-                data: { 
-                    purok_id: totalID,
-                    barangay: loggedInBarangay // Pass barangay as part of the POST data
-                },
-                success: function (html) {
-                    console.log('Purok HTML:', html); // Debugging
-                    $('#txt_purok').val(html); // Assuming html contains the Purok value
+                    console.log('Family Members Dropdown HTML:', html); // Debugging
+                    $('#txt_members').html(html); // Populate the family members dropdown
+                    updateTotalMembers(); // Update total household members
                 },
                 error: function (xhr, status, error) {
                     console.error('AJAX request failed:', status, error); // Debugging
@@ -115,9 +101,10 @@
         }
     }
 
-    // Update Total Household Members based on Family Members
+    // Update Total Household Members based on selected family members
     function updateTotalMembers() {
-        var familyMembers = $('#txt_members').val();
-        $('#txt_totalmembers').val(familyMembers); // Set Total Household Members to the same value as Family Members
+        var familyMembers = $('#txt_members').val(); // Get selected family members
+        var totalMembers = familyMembers ? familyMembers.length : 0; // Count selected family members
+        $('#txt_totalmembers').val(totalMembers); // Update the total members field
     }
 </script>
