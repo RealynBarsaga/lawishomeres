@@ -1,78 +1,42 @@
 <?php
 include "../connection.php";
 
-// This section handles fetching the Head of Family for a given Household #
+// Fetch Head of Family
 if (isset($_POST['hhold_id']) && isset($_POST['barangay'])) {
     $hhold_id = $_POST['hhold_id'];
     $barangay = $_POST['barangay'];
 
-    // Query filtering by household number, barangay, and role as Head of Family
-    $query = mysqli_query($con, "SELECT *, id as resID FROM tbltabagak WHERE householdnum = '$hhold_id' AND barangay = '$barangay' AND role = 'Head of Family'") or die('Error: ' . mysqli_error($con));
-    $rowCount = mysqli_num_rows($query);
-
-    if ($rowCount > 0) {
+    $query = mysqli_query($con, "SELECT *, id as resID FROM tbltabagak WHERE householdnum = '$hhold_id' AND barangay = '$barangay' AND role = 'Head of Family'");
+    if (mysqli_num_rows($query) > 0) {
         echo '<option value="" disabled selected>-- Select Head of Family --</option>';
-        while ($row = mysqli_fetch_array($query)) {
+        while ($row = mysqli_fetch_assoc($query)) {
             echo '<option value="' . $row['resID'] . '">' . $row['lname'] . ', ' . $row['fname'] . ' ' . $row['mname'] . '</option>';
         }
     } else {
-        echo '<option value="" disabled selected>-- No Existing Head of Family for Household # entered --</option>';
+        echo '<option value="" disabled selected>-- No Existing Head of Family for Household # --</option>';
     }
 }
 
-// This section handles returning the Barangay
+// Fetch Barangay
 if (isset($_POST['brgy_id']) && isset($_POST['barangay'])) {
     $brgy_id = $_POST['brgy_id'];
     $barangay = $_POST['barangay'];
 
-    $query = mysqli_query($con, "SELECT * FROM tbltabagak WHERE id = '$brgy_id' AND barangay = '$barangay'") or die('Error: ' . mysqli_error($con));
-    $rowCount = mysqli_num_rows($query);
-
-    if ($rowCount > 0) {
-        while ($row = mysqli_fetch_array($query)) {
-            echo $row['barangay'];
-        }
-    } else {
-        echo '';
-    }
+    $query = mysqli_query($con, "SELECT barangay FROM tbltabagak WHERE id = '$brgy_id' AND barangay = '$barangay'");
+    echo ($row = mysqli_fetch_assoc($query)) ? $row['barangay'] : '';
 }
 
-// This section handles returning the Purok
+// Fetch Purok
 if (isset($_POST['purok_id']) && isset($_POST['barangay'])) {
     $purok_id = $_POST['purok_id'];
     $barangay = $_POST['barangay'];
 
-    $query = mysqli_query($con, "SELECT * FROM tbltabagak WHERE id = '$purok_id' AND barangay = '$barangay'") or die('Error: ' . mysqli_error($con));
-    $rowCount = mysqli_num_rows($query);
-
-    if ($rowCount > 0) {
-        while ($row = mysqli_fetch_array($query)) {
-            echo $row['purok'];
-        }
-    } else {
-        echo '';
-    }
+    $query = mysqli_query($con, "SELECT purok FROM tbltabagak WHERE id = '$purok_id' AND barangay = '$barangay'");
+    echo ($row = mysqli_fetch_assoc($query)) ? $row['purok'] : '';
 }
 
-// This section handles returning the total number of household members
-if (isset($_POST['total_id']) && isset($_POST['barangay'])) {
-    $total_id = $_POST['total_id'];
-    $barangay = $_POST['barangay'];
-
-    $query = mysqli_query($con, "SELECT * FROM tbltabagak WHERE id = '$total_id' AND barangay = '$barangay'") or die('Error: ' . mysqli_error($con));
-    $rowCount = mysqli_num_rows($query);
-
-    if ($rowCount > 0) {
-        while ($row = mysqli_fetch_array($query)) {
-            echo $row['totalhouseholdmembers'];
-        }
-    } else {
-        echo '0';
-    }
-}
-
- // Fetch family members based on Head of Family
- if (isset($_POST['headoffamily']) && isset($_POST['barangay'])) {
+// Fetch Family Members
+if (isset($_POST['headoffamily']) && isset($_POST['barangay'])) {
     $hof_id = $_POST['headoffamily'];
     $barangay = $_POST['barangay'];
 
@@ -83,8 +47,7 @@ if (isset($_POST['total_id']) && isset($_POST['barangay'])) {
 
     $members = [];
     while ($row = $result->fetch_assoc()) {
-        $fullName = htmlspecialchars($row['lname'] . ', ' . $row['fname'] . ' ' . $row['mname']);
-        $members[] = ['id' => $row['id'], 'fullName' => $fullName];
+        $members[] = ['id' => $row['id'], 'fullName' => htmlspecialchars($row['lname'] . ', ' . $row['fname'] . ' ' . $row['mname'])];
     }
 
     $stmt->close();
