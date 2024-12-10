@@ -67,9 +67,6 @@
                 success: function (html) {
                     console.log('Head of Family Dropdown HTML:', html); // Debugging
                     $('#txt_hof').html(html);
-                    // Clear previous member data when a new household is selected
-                    $('#txt_members').val('');
-                    $('#txt_totalmembers').val('');
                 },
                 error: function (xhr, status, error) {
                     console.error('AJAX request failed:', status, error); // Debugging
