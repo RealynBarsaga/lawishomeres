@@ -22,9 +22,9 @@
                             </div>
                             <div class="form-group">
                                 <label>Family Members:</label>
-                                <select id="txt_members" name="txt_members[]" class="form-control input-sm select2" style="width:100%" multiple="multiple" required>
-                                   <option disabled selected>-- Select Family Members --</option>
-                                </select>
+                                <div id="family_members_list" class="form-control input-sm" style="height: 100px; overflow-y: auto;" disabled>
+                                   <!-- Family member names will be displayed here -->
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label>Total Household Members:</label>
@@ -90,8 +90,8 @@
                     barangay: loggedInBarangay // Pass barangay as part of the POST data
                 },
                 success: function (html) {
-                    console.log('Family Members Dropdown HTML:', html); // Debugging
-                    $('#txt_members').html(html); // Populate the family members dropdown
+                    console.log('Family Members HTML:', html); // Debugging
+                    $('#family_members_list').html(html); // Populate the family members list
                     updateTotalMembers(); // Update total household members
                 },
                 error: function (xhr, status, error) {
@@ -101,10 +101,9 @@
         }
     }
 
-    // Update Total Household Members based on selected family members
+    // Update Total Household Members based on displayed family members
     function updateTotalMembers() {
-        var familyMembers = $('#txt_members').val(); // Get selected family members
-        var totalMembers = familyMembers ? familyMembers.length : 0; // Count selected family members
-        $('#txt_totalmembers').val(totalMembers); // Update the total members field
+        var familyMembers = $('#family_members_list').children('div').length; // Count the number of family member divs
+        $('#txt_totalmembers').val(familyMembers); // Update the total members field
     }
 </script>
