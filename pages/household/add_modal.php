@@ -144,7 +144,7 @@
                             var memberNames = members.map(function(member) {
                                 return member.fullName;
                             });
-                            $('#txt_members').val(memberNames.join(", ")); // Update the field
+                            $('#txt_members').val(fullName.join(", ")); // Update the field
                             $('#txt_totalmembers').val(members.length);  // Update total members count
                         } else {
                             // If no members, set the appropriate value
