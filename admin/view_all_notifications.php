@@ -1,7 +1,7 @@
 <?php
 include "connection.php"; // Ensure you include your database connection
 
-// Handle deletion
+// Handle single deletion
 if (isset($_GET['delete_id'])) {
     $delete_id = intval($_GET['delete_id']);
     $delete_query = mysqli_query($con, "DELETE FROM tbllogs WHERE id = $delete_id");
@@ -10,6 +10,17 @@ if (isset($_GET['delete_id'])) {
         exit();
     } else {
         echo "Error deleting notification.";
+    }
+}
+
+// Handle delete all
+if (isset($_GET['delete_all'])) {
+    $delete_all_query = mysqli_query($con, "DELETE FROM tbllogs");
+    if ($delete_all_query) {
+        header("Location: view_all_notifications");
+        exit();
+    } else {
+        echo "Error deleting all notifications.";
     }
 }
 
@@ -141,7 +152,16 @@ while ($notif = mysqli_fetch_assoc($squery)) {
 </head>
 <body>
     <div class="container">
-        <h1>All Notifications</h1>
+    <h1>All Notifications</h1>
+
+    <!-- Delete All Button -->
+    <div style="text-align: right; margin-bottom: 20px;">
+        <a href="view_all_notifications?delete_all=true" 
+           style="text-decoration: none; color: white; background-color: #d9534f; 
+           padding: 8px 12px; border-radius: 4px; font-size: 14px;">
+            Delete All
+        </a>
+    </div>
 
         <!-- Display New Notifications -->
         <ul>
