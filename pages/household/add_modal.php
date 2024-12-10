@@ -82,7 +82,23 @@
         var hofID = $('#txt_hof').val();
         console.log('Head of Family ID: ', hofID);  // Debugging
         if (hofID) {
-            
+            $.ajax({
+                type: 'POST',
+                url: 'household_dropdown.php',
+                data: { 
+                    hof_id: hofID,
+                    barangay: loggedInBarangay // Pass barangay as part of the POST data
+                },
+                success: function (html) {
+                    console.log('Family Members HTML:', html); // Debugging
+                    $('#family_members_list').html(html); // Populate the family members list
+                    updateTotalMembers(); // Update total household members
+                },
+                error: function (xhr, status, error) {
+                    console.error('AJAX request failed:', status, error); // Debugging
+                }
+            });
+
             // Fetch Barangay value
             $.ajax({
                 type: 'POST',
@@ -111,23 +127,6 @@
                 success: function (html) {
                     console.log('Purok HTML:', html); // Debugging
                     $('#txt_purok').val(html); // Assuming html contains the Purok value
-                },
-                error: function (xhr, status, error) {
-                    console.error('AJAX request failed:', status, error); // Debugging
-                }
-            });
-
-            $.ajax({
-                type: 'POST',
-                url: 'household_dropdown.php',
-                data: { 
-                    hof_id: hofID,
-                    barangay: loggedInBarangay // Pass barangay as part of the POST data
-                },
-                success: function (html) {
-                    console.log('Family Members HTML:', html); // Debugging
-                    $('#family_members_list').html(html); // Populate the family members list
-                    updateTotalMembers(); // Update total household members
                 },
                 error: function (xhr, status, error) {
                     console.error('AJAX request failed:', status, error); // Debugging
