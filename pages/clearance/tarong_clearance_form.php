@@ -101,7 +101,7 @@
     </div>
     <div class="col-xs-4 col-sm-6 col-md-3" style="margin-top: -14px;background: white; margin-left:50px; border: 1px solid black;width: 200px;height:720px;">
         <div style="margin-top:40px; text-align: center; word-wrap: break-word;font-size:15px;">
-            <p style="font-size:12px;font-weight: 600;">SANGGUNIANG BARANGAY</p>
+            <p style="font-size:12px;font-weight: 600;">BARANGAY OFFECIAL</p>
             <?php
             $off_barangay = $_SESSION["barangay"] ?? "";
 
@@ -114,6 +114,10 @@
                             <span style="font-size:12px;">Barangay Captain</span><br>
                             </p><br>
                         ';
+                    echo '
+                    <p style="font-size:12px;font-weight: 600;">
+                    SANGGUNIANG BARANGAY MEMBERS
+                    </p>';
                     }elseif($row['sPosition'] == "Kagawad"){
                         echo '
                         <p style="text-align: justify;">
