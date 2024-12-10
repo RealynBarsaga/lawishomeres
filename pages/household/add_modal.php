@@ -119,10 +119,14 @@
         }
     }
 
-    // Fetch and display members for a given Head of Family
-function fetchMembers(headoffamily) {
+    function fetchMembers(headoffamily) {
     console.log('Fetching members for HOF ID:', headoffamily);  // Debugging
+    
     if (headoffamily) {
+        // Clear existing members before fetching new data to avoid stale values
+        $('#txt_members').val("Loading...");
+        $('#txt_totalmembers').val("");
+        
         $.ajax({
             type: 'POST',
             url: 'household_dropdown.php',
@@ -137,39 +141,34 @@ function fetchMembers(headoffamily) {
                     var members = JSON.parse(response); // Parse the JSON response
                     
                     if (Array.isArray(members) && members.length > 0) {
-                        // Set the member names if there are members
+                        // Create member names array and update dynamically
                         var memberNames = members.map(function(member) {
                             return member.fullName;
                         });
-                        $('#txt_members').val(memberNames.join(", ")); // Update the field
-                        $('#txt_totalmembers').val(members.length);  // Update total members count
+                        
+                        $('#txt_members').val(memberNames.join(", ")); // Update members field
+                        $('#txt_totalmembers').val(members.length);  // Update total count
                     } else {
-                        // If no members, set the appropriate value
+                        // If no members, reset the fields with appropriate values
                         $('#txt_members').val("No Members Found");
                         $('#txt_totalmembers').val(0);
                     }
                 } catch (error) {
-                    console.error('Error parsing response:', error);  // Log any JSON parsing errors
+                    console.error('Error parsing response:', error);  // Handle JSON parsing errors
                     $('#txt_members').val("Error loading members");
                     $('#txt_totalmembers').val(0);
                 }
             },
             error: function (xhr, status, error) {
-                console.error('AJAX request failed:', status, error); // Debugging
+                console.error('AJAX request failed:', status, error); // Log errors
                 $('#txt_members').val("Error loading members");
                 $('#txt_totalmembers').val(0);
             }
         });
+    } else {
+        // If no HOF ID is provided, clear the fields
+        $('#txt_members').val("Select a Head of Family");
+        $('#txt_totalmembers').val("");
     }
 }
-
-// Call this function after adding or updating family members to ensure dynamic refresh
-function addMember(headoffamily, newMember) {
-    // Code to add the member to the database or local array
-    // After adding the member, fetch the updated list
-    fetchMembers(headoffamily); // Trigger a refresh to update the members list
-}
-
-// Example of using it when adding a new member
-addMember('HOF123', { fullName: 'John Doe' });
 </script>
