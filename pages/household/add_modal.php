@@ -45,7 +45,7 @@
                 </div>
                 <div class="modal-footer">
                     <input type="button" class="btn btn-default btn-sm" data-dismiss="modal" value="Cancel" />
-                    <input type="submit" class="btn btn-primary btn-sm" name="btn_add" data-toggle="modal" data-target="#addModal" value="Add" />
+                    <input type="submit" class="btn btn-primary btn-sm" name="btn_add" value="Add" />
                 </div>
             </div>
         </div>
