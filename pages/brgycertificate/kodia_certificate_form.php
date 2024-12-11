@@ -171,9 +171,30 @@
             // Loop through clearance details
             if ($row = mysqli_fetch_array($squery)) {
                 echo "<p style='font-family: \"Courier New\", Courier, monospace; text-align: justify; font-size: 15px;margin-left: 220px;margin-right: 60px;'>
-                &nbsp;&nbsp;&nbsp;This is to certify that, <strong>" . strtoupper($row['Name']) . "</strong>, 
-                <strong>" . $row['age'] . "</strong> years old, " . $row['civilstatus'] . ", and a Filipino citizen, is a bonafide resident of <strong>Purok " . $row['purok'] . ", Barangay " . $row['barangay'] . ", 
-                Madridejos, Cebu.</strong></p>";
+                &nbsp;&nbsp;&nbsp;This is to certify that <strong>" . strtoupper($row['Name']) . "</strong>, 
+                <strong>" . $row['age'] . "</strong> years old, Filipino citizen, is a bonafide resident of Purok " . $row['purok'] . ", Barangay " . $row['barangay'] . ", 
+                Madridejos, Cebu, Philippines.</p>";
+            }
+        ?>
+        <br>
+        <br>
+        <?php
+            // Get barangay from session
+            $off_barangay = $_SESSION["barangay"] ?? "";
+            // Get the resident's name from the URL parameter
+            $name = $_GET['resident'];
+
+            // Ensure proper escaping to avoid SQL injection
+            $name = mysqli_real_escape_string($con, $name);
+            $off_barangay = mysqli_real_escape_string($con, $off_barangay);
+
+            // Query to select clearance details along with age, bdate, and purok from tbltabagak
+            $squery = mysqli_query($con, "SELECT * FROM tblcertificate WHERE name = '$name' AND barangay = '$off_barangay' LIMIT 1");
+            
+            // Loop through clearance details
+            if ($row = mysqli_fetch_array($squery)) {
+                echo "<p style='font-family: \"Courier New\", Courier, monospace; text-align: justify; font-size: 15px;margin-left: 220px;margin-right: 60px;'>
+                &nbsp;&nbsp;&nbsp;This certification us being issued upon the request of the aforementioned individual for <strong>" . $row['purpose'] . "</strong> purposes and for whatever legal purpose it may serve him/her best.</p>";
             }
         ?>
         </p>
@@ -188,8 +209,8 @@
                 if ($row = mysqli_fetch_array($squery)) {
                     $dateRecorded = $row['dateRecorded'];
                     echo "<span style='font-family: \"Courier New\", Courier, monospace; text-align: justify; font-size: 15px;'>
-                        &nbsp;&nbsp;Issued on this <strong>" . date('j', strtotime($dateRecorded)) . "<sup>" . date('S', strtotime($dateRecorded)) . "</sup></strong> day of 
-                        <strong>" . date('F', strtotime($dateRecorded)) . "</strong> in the year of our Lord Jesus Christ, <strong>" . date('Y', strtotime($dateRecorded)) . "</strong> 
+                        &nbsp;&nbsp;Issued this <strong>" . date('j', strtotime($dateRecorded)) . "<sup>" . date('S', strtotime($dateRecorded)) . "</sup></strong> day of 
+                        <strong>" . date('F', strtotime($dateRecorded)) . "</strong> <strong>" . date('Y', strtotime($dateRecorded)) . "</strong> 
                         at the <strong>Barangay Hall</strong> of <strong>Barangay " . $row['barangay'] . ", Madridejos</strong><strong> Cebu, Philippines.</strong>
                     </span>";
                 }
