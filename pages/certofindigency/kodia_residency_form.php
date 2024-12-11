@@ -181,7 +181,7 @@
         </p>
         </p>
     </div>
-    <div class="col-xs-offset-6 col-xs-5 col-md-offset-6 col-md-4" style="top: 190px;">
+    <div class="col-xs-offset-6 col-xs-5 col-md-offset-6 col-md-4" style="top: 170px;">
     <i>Approved by:</i>
     <br>
     <br>
