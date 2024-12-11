@@ -25,8 +25,7 @@
                                 <div id="family_members_list" class="form-control input-sm" style="height: 100px; overflow-y: auto;" readonly>
                                     <!-- Family member names will be displayed here -->
                                 </div>
-                                <!-- Hidden input to store family member names -->
-                                <input id="family_members_list" name="txt_members" type="hidden" readonly/>
+                                <input type="hidden" id="txt_members" name="txt_members" /> <!-- Hidden input to store family members -->
                             </div>
                             <div class="form-group">
                                 <label>Total Household Members:</label>
@@ -79,76 +78,79 @@
         }
     }
 
-    // Show Family Members based on the selected Head of Family
-    function show_family_members() {
-        var hofID = $('#txt_hof').val();
-        console.log('Head of Family ID: ', hofID);  // Debugging
-        if (hofID) {
-            $.ajax({
-                type: 'POST',
-                url: 'household_dropdown.php',
-                data: { 
-                    hof_id: hofID,
-                    barangay: loggedInBarangay // Pass barangay as part of the POST data
-                },
-                success: function (html) {
-                    console.log('Family Members HTML:', html); // Debugging
-                    $('#family_members_list').html(html); // Populate the family members list
-    
-                    // Collect family member names from the div and update hidden input field
-                    var members = [];
-                    $('#family_members_list').children('div').each(function() {
-                        members.push($(this).text().trim()); // Add each family member name to the array
-                    });
-    
-                    // Update the hidden input field with the family members data
-                    $('#txt_members').val(members.join('#family_members_list')); // Convert array to comma-separated string
-                    updateTotalMembers(); // Update total household members
-                },
-                error: function (xhr, status, error) {
-                    console.error('AJAX request failed:', status, error); // Debugging
-                }
-            });
+   // Show Family Members based on the selected Head of Family
+function show_family_members() {
+    var hofID = $('#txt_hof').val(); // Get the selected Head of Family ID
+    console.log('Head of Family ID: ', hofID);  // Debugging
+    if (hofID) {
+        $.ajax({
+            type: 'POST',
+            url: 'household_dropdown.php', // Your server-side script to get family members
+            data: { 
+                hof_id: hofID, // Send the Head of Family ID
+                barangay: loggedInBarangay // Pass barangay as part of the POST data
+            },
+            success: function (html) {
+                console.log('Family Members HTML:', html); // Debugging
+                
+                // Populate the family members list with the response HTML (family members)
+                $('#family_members_list').html(html); 
 
-            // Fetch Barangay value
-            $.ajax({
-                type: 'POST',
-                url: 'household_dropdown.php',
-                data: { 
-                    brgy_id: hofID,
-                    barangay: loggedInBarangay // Pass barangay as part of the POST data
-                },
-                success: function (html) {
-                    console.log('Barangay HTML:', html); // Debugging
-                    $('#txt_brgy').val(html); // Assuming html contains the Barangay value
-                },
-                error: function (xhr, status, error) {
-                    console.error('AJAX request failed:', status, error); // Debugging
-                }
-            });
+                // Collect family member names from the div and update hidden input field
+                var members = [];
+                $('#family_members_list').children('div').each(function() {
+                    members.push($(this).text().trim()); // Add each family member name to the array
+                });
 
-            // Fetch Purok value
-            $.ajax({
-                type: 'POST',
-                url: 'household_dropdown.php',
-                data: { 
-                    purok_id: hofID,
-                    barangay: loggedInBarangay // Pass barangay as part of the POST data
-                },
-                success: function (html) {
-                    console.log('Purok HTML:', html); // Debugging
-                    $('#txt_purok').val(html); // Assuming html contains the Purok value
-                },
-                error: function (xhr, status, error) {
-                    console.error('AJAX request failed:', status, error); // Debugging
-                }
-            });
-        }
+                // Update the hidden input field with the family members data
+                $('#txt_members').val(members.join(', ')); // Convert array to comma-separated string
+
+                updateTotalMembers(); // Update total household members
+            },
+            error: function (xhr, status, error) {
+                console.error('AJAX request failed:', status, error); // Debugging
+            }
+        });
+
+        // Fetch Barangay value (if needed)
+        $.ajax({
+            type: 'POST',
+            url: 'household_dropdown.php',
+            data: { 
+                brgy_id: hofID,
+                barangay: loggedInBarangay // Pass barangay as part of the POST data
+            },
+            success: function (html) {
+                console.log('Barangay HTML:', html); // Debugging
+                $('#txt_brgy').val(html); // Assuming html contains the Barangay value
+            },
+            error: function (xhr, status, error) {
+                console.error('AJAX request failed:', status, error); // Debugging
+            }
+        });
+
+        // Fetch Purok value (if needed)
+        $.ajax({
+            type: 'POST',
+            url: 'household_dropdown.php',
+            data: { 
+                purok_id: hofID,
+                barangay: loggedInBarangay // Pass barangay as part of the POST data
+            },
+            success: function (html) {
+                console.log('Purok HTML:', html); // Debugging
+                $('#txt_purok').val(html); // Assuming html contains the Purok value
+            },
+            error: function (xhr, status, error) {
+                console.error('AJAX request failed:', status, error); // Debugging
+            }
+        });
     }
+}
 
-    // Update Total Household Members based on displayed family members
-    function updateTotalMembers() {
-        var familyMembers = $('#family_members_list').children('div').length; // Count the number of family member divs
-        $('#txt_totalmembers').val(familyMembers); // Update the total members field
-    }
+// Update Total Household Members based on displayed family members
+function updateTotalMembers() {
+    var familyMembers = $('#family_members_list').children('div').length; // Count the number of family member divs
+    $('#txt_totalmembers').val(familyMembers); // Update the total members field
+}
 </script>
