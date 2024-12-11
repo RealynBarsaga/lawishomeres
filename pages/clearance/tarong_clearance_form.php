@@ -180,7 +180,7 @@
         </p>
         <br>
         <p>
-            <strong style="margin-left: 225px;">REMARKS:</strong> <hr style="border: 0.1px solid black; width: 30%; margin-left: 275px;margin-top: -15px;"/>
+            <strong style="margin-left: 225px;">REMARKS:</strong> <hr style="border: 0.1px solid black; width: 30%; margin-left: 285px;margin-top: -15px;"/>
         </p>
         <br>
         <p style="margin-left: 220px; margin-right: 60px; font-family: 'Courier New', Courier; text-indent:15px; text-align: justify;">
