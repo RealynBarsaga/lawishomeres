@@ -174,13 +174,10 @@
                 echo "<p style='font-family: \"Courier New\", Courier, monospace; text-align: justify; font-size: 15px;margin-left: 220px;margin-right: 60px;'>
                 &nbsp;&nbsp;&nbsp;This is to certify that <strong>" . strtoupper($row['Name']) . "</strong> a Filipino citizen of legal Age " . $row['civilstatus'] . " with a residence and address in Purok " . $row['purok'] . ", Barangay " . $row['barangay'] . ", 
                 Madridejos, Cebu is known to me personally to be a person of good moral character, Peaceful and a law-abiding citizen in this community.<br><br>
-                &nbsp;&nbsp;I further certify that he/she has no crimininal record filed with this Barangay nor has he/she ever been convicted or indicted if any offense and that he/she has no derogatory information or whatsoever legal papers maybe presented.</p>";
+                &nbsp;&nbsp;This Clearance is being issued upon the request of the aforementioned individual for <strong>" . strtoupper($row['purpose']) . "</strong> 
+                purposes and for whatever legal purpose it may serve her/him best.</p>";
             }
         ?>
-        </p>
-        <br>
-        <p>
-            <strong style="margin-left: 225px;">REMARK:</strong> <hr style="border: 0.1px solid black; width: 30%; margin-left: 305px;margin-top: -15px;"/>
         </p>
         <br>
         <p style="margin-left: 220px; margin-right: 60px; font-family: 'Courier New', Courier; text-indent:15px; text-align: justify;">
@@ -191,9 +188,9 @@
                 if ($row = mysqli_fetch_array($squery)) {
                     $dateRecorded = $row['dateRecorded'];
                     echo "<span style='font-family: \"Courier New\", Courier, monospace; text-align: justify; font-size: 15px;'>
-                       &nbsp;&nbsp;In witness, whereof, I have unto affixed my signature this ". date('j', strtotime($dateRecorded)) ."<sup>". date('S', strtotime($dateRecorded)) ."</sup> day of 
+                       &nbsp;&nbsp;Issued this ". date('j', strtotime($dateRecorded)) ."<sup>". date('S', strtotime($dateRecorded)) ."</sup> day of 
                        " . date('F', strtotime($dateRecorded)) . " " . date('Y', strtotime($dateRecorded)) . "
-                       at Barangay " . $row['barangay'] . ", Madridejos Cebu, Philippines.
+                       at Barangay Hall of " . $row['barangay'] . ", Madridejos Cebu, Philippines.
                     </span>";
                 }
             ?>
