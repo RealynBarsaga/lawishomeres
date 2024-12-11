@@ -24,7 +24,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Name: <span style="color:gray; font-size: 10px;">(Firstname Middlename, Lastname)</span></label>
-                                    <input name="txt_cname" class="form-control input-sm" type="text" placeholder="Firstname Middlename, Lastname" pattern="^(?!\s*$)[A-Za-z\s.,]+$" required/>
+                                    <input name="txt_cname" class="form-control input-sm" type="text" placeholder="Firstname Middlename, Lastname" required/>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Image:</label>
