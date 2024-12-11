@@ -1,6 +1,6 @@
 <?php 
 echo '<div id="editModal' . $row['id'] . '" class="modal fade">
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         <div class="modal-dialog modal-sm" style="width:300px !important;">
             <div class="modal-content">
                 <div class="modal-header">

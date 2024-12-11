@@ -66,7 +66,7 @@ html, body {
                         </div><!-- /.box-header -->
 
                         <div class="box-body table-responsive">
-                            <form method="post">
+                            <form method="post" enctype="multipart/form-data">
                                 <table id="table" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
