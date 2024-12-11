@@ -128,19 +128,19 @@
                         echo '
                         <div style="text-align: center;"><br>
                             <b style="font-size:10.5px; text-decoration: underline;">'.strtoupper($row['completeName']).'</b><br>
-                            <span style="font-size:12px;">SK Chairman:</span><br>
+                            <span style="font-size:12px;">SK Chairman</span><br>
                         </div>';
                     }elseif($row['sPosition'] == "Secretary") {
                         echo '
                         <div style="text-align: center;"><br>
                             <b style="font-size:10.5px; text-decoration: underline;">'.strtoupper($row['completeName']).'</b><br>
-                            <span style="font-size:12px;">Barangay Secretary:</span><br>
+                            <span style="font-size:12px;">Barangay Secretary</span><br>
                         </div>';
                     } elseif($row['sPosition'] == "Treasurer") {
                         echo '
                         <div style="text-align: center;">
                             <b style="font-size:10.5px; text-decoration: underline;">'.strtoupper($row['completeName']).'</b><br>
-                            <span style="font-size:12px;">Barangay Treasurer:</span><br>
+                            <span style="font-size:12px;">Barangay Treasurer</span><br>
                         </div>';
                     }
                 }
