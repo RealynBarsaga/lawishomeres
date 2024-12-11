@@ -259,10 +259,5 @@
             ?>
         </p>
     </div>
-    <div class="col-md-5 col-xs-4" style="float:left;margin-top: -150px;margin-left: 250px;">
-        <div style="height:100px; width:130px; border: 1px solid black;">
-            <center><span style="text-align: center; line-height: 160px;">Right Thumb Mark</span></center>
-        </div>
-    </div>
 </body>
 </html>
