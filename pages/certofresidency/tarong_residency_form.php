@@ -209,7 +209,7 @@
     <br>
     <br>
     <p>
-        <strong style="margin-left: 225px;top: 100px;">CERTIFIED BY:</strong>
+        <strong style="margin-left: 225px;margin-top: 100px;">CERTIFIED BY:</strong>
     </p>
     </div>
     <div class="col-xs-offset-6 col-xs-5 col-md-offset-6 col-md-4" style="top: 70px;">
