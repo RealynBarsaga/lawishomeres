@@ -93,7 +93,7 @@ mysqli_stmt_close($stmt);
                             $puroks = [
                                 "Tabagak" => ["Lamon-Lamon", "Tangigue", "Lawihan", "Lower-Bangus", "Upper-Bangus"],
                                 "Bunakan" => ["Bilabid", "Helinggero", "Kamaisan", "Kalubian", "Samonite"],
-                                /* "Kodia" => ["Purok X", "Purok Y", "Purok Z"], */
+                                "Kodia" => ["Mahugany", "Tugas", "Lumboy", "Dita", "Magtalisay", "Kawayan", "Bakhaw", "La Kodia Village"],
                                 /* "Talangnan" => ["",], */
                                 /*  "Poblacion" => ["",], */
                                 "Maalat" => ["Neem Tree", "Talisay", "Kabakhawan", "Mahogany", "Gmelina"],
