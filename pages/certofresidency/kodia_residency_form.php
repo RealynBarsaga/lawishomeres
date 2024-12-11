@@ -171,9 +171,9 @@
             // Loop through clearance details
             if ($row = mysqli_fetch_array($squery)) {
                 echo "<p style='font-family: \"Courier New\", Courier, monospace; text-align: justify; font-size: 15px;margin-left: 220px;margin-right: 60px;'>
-                &nbsp;&nbsp;&nbsp;This is to certify that <strong>" . strtoupper($row['Name']) . "</strong> a Filipino Citizen 
-                of " . $row['age'] . " years old a bonafide resident of Purok " . $row['purok'] . ", Barangay " . $row['barangay'] . ", 
-                Madridejos, Cebu.</p>";
+                &nbsp;&nbsp;&nbsp;This is to certify that <strong>" . strtoupper($row['Name']) . "</strong>, <strong>" . $row['age'] . "</strong> years old, <strong>" . $row['civilstatus'] . "</strong> Filipino citizen, 
+                is a <strong>PERMANENT RESIDENT</strong> of this of Purok " . $row['purok'] . ", Barangay " . $row['barangay'] . ", 
+                Madridejos, Cebu. and he/she is personally known to me and a law abiding citizen of this barangay.</p>";
             }
         ?>
         </p>
