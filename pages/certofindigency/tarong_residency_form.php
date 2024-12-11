@@ -198,9 +198,9 @@
                 if ($row = mysqli_fetch_array($squery)) {
                     $dateRecorded = $row['dateRecorded'];
                     echo "<span style='font-family: \"Courier New\", Courier, monospace; text-align: justify; font-size: 15px;'>
-                        &nbsp;&nbsp;Issued on this <strong>" . date('j', strtotime($dateRecorded)) . "<sup>" . date('S', strtotime($dateRecorded)) . "</sup></strong> day of 
-                        <strong>" . date('F', strtotime($dateRecorded)) . "</strong>, in the year of our Lord, <strong>" . date('Y', strtotime($dateRecorded)) . "</strong> 
-                        at <strong>Barangay " . $row['barangay'] . ", Madridejos</strong><strong> Cebu, Philippines.</strong>
+                        &nbsp;&nbsp;Issued this <strong>" . date('j', strtotime($dateRecorded)) . "<sup>" . date('S', strtotime($dateRecorded)) . "</sup></strong> day of 
+                        <strong>" . date('F', strtotime($dateRecorded)) . "</strong> <strong>" . date('Y', strtotime($dateRecorded)) . "</strong> 
+                        at Barangay " . $row['barangay'] . ", Madridejos Cebu.
                     </span>";
                 }
             ?>
