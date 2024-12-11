@@ -22,11 +22,13 @@
                             </div>
                             <div class="form-group">
                                 <label>Family Members:</label>
-                                <div id="family_members_list" class="form-control input-sm" style="height: 100px; overflow-y: auto;" readonly>
-                                    <!-- Family member names will be displayed here -->
-                                </div>
-                                <input type="hidden" id="txt_members" name="txt_members" /> <!-- Hidden input to store family members -->
+                                <input id="family_members_list" name="txt_members" class="form-control input-sm" style="height: 100px; overflow-y: auto;" readonly>
+                                <!-- Family member names will be displayed here -->
+                                </input>
                             </div>
+                            
+                            <!-- Add a button to simulate adding family members -->
+                            <button type="button" onclick="addFamilyMember()">Add Family Member</button>
                             <div class="form-group">
                                 <label>Total Household Members:</label>
                                 <input id="txt_totalmembers" name="txt_totalmembers" class="form-control input-sm" type="text" placeholder="Total Household Members" required readonly />
@@ -152,5 +154,31 @@ function show_family_members() {
 function updateTotalMembers() {
     var familyMembers = $('#family_members_list').children('div').length; // Count the number of family member divs
     $('#txt_totalmembers').val(familyMembers); // Update the total members field
+}
+
+// Function to add family member from modal
+function addFamilyMember() {
+    var hofID = $('#txt_hof').val(); // Get the selected Head of Family ID
+    if (hofID) {
+        var memberName = prompt("Enter family member's name:");
+
+        if (memberName) {
+            // Append the new family member name to the family members list
+            $('#family_members_list').append('<div>' + memberName + '</div>');
+
+            // Update the input field with the comma-separated family member names
+            var members = [];
+            $('#family_members_list').children('div').each(function() {
+                members.push($(this).text().trim());
+            });
+
+            $('#txt_members').val(members.join(', ')); // Update the hidden field with the list of names
+            updateTotalMembers(); // Update the total members count
+        } else {
+            alert("Please enter a valid name.");
+        }
+    } else {
+        alert("Please select a Head of Family first.");
+    }
 }
 </script>
