@@ -185,7 +185,7 @@
 
             if ($row = mysqli_fetch_array($squery)) {
                 echo "<p style='font-family: \"Courier New\", Courier, monospace; text-align: justify; font-size: 15px;margin-left: 220px;margin-right: 60px;'>
-                    &nbsp;&nbsp;&nbsp;This certification is being issued upon the request of <strong>" .  strtoupper($row['Name']) . "</strong> person for <strong>" .  strtoupper($row['purpose']) . "</strong> purposes it may serve him/her best.</p>";
+                    &nbsp;&nbsp;&nbsp;This certification is being issued upon the request of the interested person for " .  strtoupper($row['purpose']) . " purposes it may serve him/her best.</p>";
             }
             ?> 
         </p>
@@ -198,9 +198,9 @@
                 if ($row = mysqli_fetch_array($squery)) {
                     $dateRecorded = $row['dateRecorded'];
                     echo "<span style='font-family: \"Courier New\", Courier, monospace; text-align: justify; font-size: 15px;'>
-                        &nbsp;&nbsp;Issued on this <strong>" . date('j', strtotime($dateRecorded)) . "<sup>" . date('S', strtotime($dateRecorded)) . "</sup></strong> day of 
-                        <strong>" . date('F', strtotime($dateRecorded)) . "</strong>, in the year of our Lord, <strong>" . date('Y', strtotime($dateRecorded)) . "</strong> 
-                        at <strong>Barangay " . $row['barangay'] . ", Madridejos</strong><strong> Cebu, Philippines.</strong>
+                        &nbsp;&nbsp;Done this " . date('j', strtotime($dateRecorded)) . "<sup>" . date('S', strtotime($dateRecorded)) . "</sup> day of 
+                        " . date('F', strtotime($dateRecorded)) . " " . date('Y', strtotime($dateRecorded)) . " 
+                        at Barangay " . $row['barangay'] . ", Madridejos Cebu.
                     </span>";
                 }
             ?>
