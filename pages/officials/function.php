@@ -104,7 +104,7 @@ if (isset($_POST['btn_save'])) {
     $update_query = mysqli_query($con, "UPDATE tblbrgyofficial SET 
         completeName = '$completeName',
         pcontact = '$pcontact', 
-        paddress = CONCAT('$paddress', ', Madridejos Cebu'), 
+        paddress = '$paddress', 
         termStart = '$termStart', 
         termEnd = '$termEnd',
         image = '$image'
