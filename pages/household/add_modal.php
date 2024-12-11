@@ -92,39 +92,35 @@ function show_family_members() {
                 hof_id: hofID,
                 barangay: loggedInBarangay // Pass barangay as part of the POST data
             },
-            success: function (html) {
-                console.log('Family Members HTML:', html); // Debugging
+            success: function(response) {
+                console.log('Family Members:', response); // Debugging
 
                 // Clear any existing family member inputs
                 $('#family_members_list').html('');
 
-                // Array to hold member names
-                var familyMembers = [];
+                // Parse the response (it should be a JSON array)
+                var familyMembers = JSON.parse(response);
 
-                // Parse the response and update the family members list
-                $(html).each(function() {
-                    var memberName = $(this).val(); // Get member name from each input
-                    $('#family_members_list').append('<input type="text" class="form-control input-sm" value="' + memberName + '" readonly />');
+                // Check if any members were found
+                if (familyMembers.length > 0 && familyMembers[0] !== "No family members found") {
+                    // Iterate over the array of family members
+                    familyMembers.forEach(function(memberName) {
+                        // Append each family member's name in an input field
+                        $('#family_members_list').append('<input type="text" class="form-control input-sm" value="' + memberName + '" readonly />');
+                    });
 
-                    // Add each family member's name to the familyMembers array
-                    familyMembers.push(memberName);
-                });
+                    // Update the hidden txt_members field with the comma-separated list
+                    $('#txt_members').val(familyMembers.join(', '));
 
-                // Join the family members into a comma-separated string
-                var membersString = familyMembers.join(', ');
-
-                // Update the hidden txt_members field with the comma-separated list
-                $('#txt_members').val(membersString);  // Set the value in the hidden input
-
-                // Update the visible family members list (optional, if you want to show it somewhere else)
-                $('#txt_members_list').val(membersString);  // Show family members in the visible field
+                } else {
+                    // If no family members found, show a message
+                    $('#family_members_list').append('<input type="text" class="form-control input-sm" value="No family members found" readonly />');
+                }
 
                 updateTotalMembers(); // Update the total household members count
-
-                // Fetch Barangay and Purok information (if needed)
-                fetchBarangayPurok(hofID);
+                fetchBarangayPurok(hofID); // Optionally fetch Barangay and Purok info
             },
-            error: function (xhr, status, error) {
+            error: function(xhr, status, error) {
                 console.error('AJAX request failed:', status, error); // Debugging
             }
         });
