@@ -155,8 +155,7 @@
                 }
             ?>
         </p>
-    </div> 
-    <div class="col-xs-offset-6 col-xs-5 col-md-offset-6 col-md-4" style="float: left;top: 30px;">
+    <div class="col-xs-offset-6 col-xs-5 col-md-offset-6 col-md-4" style="top: 30px;">
     <i>Prepared by:</i>
     <br>
     <br>
@@ -177,6 +176,7 @@
                 }
             ?>
         </p>
+    </div>
     </div>
     <div class="col-xs-offset-6 col-xs-5 col-md-offset-6 col-md-4" style="top: 280px;">
     <i>Approved by:</i>
