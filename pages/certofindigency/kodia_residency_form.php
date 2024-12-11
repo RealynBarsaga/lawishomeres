@@ -156,7 +156,7 @@
             ?>
         </p>
     </div> 
-    <div class="col-xs-offset-6 col-xs-5 col-md-offset-6 col-md-4" style="top: 280px;">
+    <div class="col-xs-offset-6 col-xs-5 col-md-offset-6 col-md-4" style="top: 10px;">
     <i>Prepared by:</i>
     <br>
     <br>
