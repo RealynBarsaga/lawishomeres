@@ -168,7 +168,7 @@
                     if($row['sPosition'] == "Secretary"){
                         echo '
                         <strong style="font-size: 18px; margin-right: 3px;">HON.'.strtoupper($row['completeName']).'</strong><br>
-                        <hr style="border: 1px solid black; width: 90%; margin: 1px auto;margin-top: -15px;" />
+                        <hr style="border: 1px solid black; width: 50%; margin: 1px auto;margin-top: -15px;" />
                         <span style="margin-left: 85px;">Barangay Secretary</span>
                         ';
                     }
