@@ -45,16 +45,12 @@
                 </div>
                 <div class="modal-footer">
                     <input type="button" class="btn btn-default btn-sm" data-dismiss="modal" value="Cancel" />
-                    <input type="submit" class="btn btn-primary btn-sm" name="btn_add" value="Add" />
+                    <input type="submit" class="btn btn-primary btn-sm" name="btn_add" data-toggle="modal" data-target="#addModal" value="Add" />
                 </div>
             </div>
         </div>
     </form>
 </div>
-
-<!-- Trigger Button for Modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Add Household</button>
-
 <script> 
     // Assuming barangay information is passed in a hidden field or directly in JavaScript
     var loggedInBarangay = '<?= $_SESSION["barangay"] ?? ""; ?>'; // Pass PHP session variable to JS
