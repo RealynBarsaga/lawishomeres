@@ -157,6 +157,28 @@
         </p>
     </div> 
     <div class="col-xs-offset-6 col-xs-5 col-md-offset-6 col-md-4" style="top: 280px;">
+    <i>Prepared by:</i>
+    <br>
+    <br>
+        <p style="text-align: center;">
+            <?php
+                // Assuming a session has already been started somewhere in your code
+                $off_barangay = $_SESSION["barangay"] ?? ""; // Get barangay from session
+                // Adjust the query to filter by barangay
+                $qry = mysqli_query($con, "SELECT * FROM tblbrgyofficial WHERE barangay = '$off_barangay'");
+                while($row = mysqli_fetch_array($qry)){
+                    if($row['sPosition'] == "Secretary"){
+                        echo '
+                        <strong style="font-size: 18px; margin-right: 3px;">HON.'.strtoupper($row['completeName']).'</strong><br>
+                        <hr style="border: 1px solid black; width: 90%; margin: 1px auto;margin-top: -15px;" />
+                        <span style="margin-left: 85px;">Punong Barangay</span>
+                        ';
+                    }
+                }
+            ?>
+        </p>
+    </div>
+    <div class="col-xs-offset-6 col-xs-5 col-md-offset-6 col-md-4" style="top: 280px;">
     <i>Approved by:</i>
     <br>
     <br>
