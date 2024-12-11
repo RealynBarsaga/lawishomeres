@@ -156,7 +156,7 @@
             ?>
         </p>
     </div> 
-    <div class="col-xs-offset-6 col-xs-5 col-md-offset-6 col-md-4" style="top: 20px;">
+    <div class="col-xs-offset-6 col-xs-5 col-md-offset-6 col-md-4" style="float: right;top: 30px;">
     <i>Prepared by:</i>
     <br>
     <br>
@@ -171,7 +171,7 @@
                         echo '
                         <strong style="font-size: 18px; margin-right: 3px;">HON.'.strtoupper($row['completeName']).'</strong><br>
                         <hr style="border: 1px solid black; width: 90%; margin: 1px auto;margin-top: -15px;" />
-                        <span style="margin-left: 85px;">Punong Barangay</span>
+                        <span style="margin-left: 85px;">Barangay Secretary</span>
                         ';
                     }
                 }
