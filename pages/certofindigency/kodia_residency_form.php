@@ -173,7 +173,7 @@
                         echo '
                         <strong style="font-size: 18px; margin-left: -440px;">HON.'.strtoupper($row['completeName']).'</strong><br>
                         <hr style="border: 1px solid black; width: 32%; margin-left: 40px;margin-top: -15px;" />
-                        <span style="margin-left: 85px;">Barangay Secretary</span>
+                        <span style="margin-left: 85px;margin-top: -15px;">Barangay Secretary</span>
                         ';
                     }
                 }
