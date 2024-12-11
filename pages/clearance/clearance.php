@@ -103,7 +103,7 @@ html, body {
                                                         /* "Kaongkod" => "kaongkod_clearance_form", */
                                                        /*  "Mancilang" => "mancilang_clearance_form", */
                                                         /* "Kangwayan" => "kangwayan_clearance_form", */
-                                                        /* "Tugas" => "tugas_clearance_form", */
+                                                        "Tugas" => "tugas_clearance_form",
                                                        /*  "Malbago" => "malbago_clearance_form", */
                                                         "Tarong" => "tarong_clearance_form"
                                                         /* "San Agustin" => "san_agustin_clearance_form" */
