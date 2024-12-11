@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html id="clearance">
+<html>
 <head>
 <title>Madridejos Home Residence Management System</title>
 <link rel="icon" type="x-icon" href="../../img/lg.png">
@@ -35,8 +35,8 @@
             margin-left: 40px;
             margin-right: 40px;
         }
-        /* Overlay Image Styles */
-        .overlay-image {
+         /* Overlay Image Styles */
+         .overlay-image {
             position: fixed; /* Fixed position relative to the page */
             top: 50%; /* Position it vertically at the center */
             left: 50%; /* Position it horizontally at the center */
@@ -70,7 +70,6 @@
     }
 
     ob_start(); // Start output buffering
-    $_SESSION['clr'] = $_GET['clearance']; // Store clearance ID in session
     include('../head_css.php'); // Include CSS file
     include "../connection.php"; // Include database connection
     ?>
@@ -86,10 +85,10 @@
                 Province of Cebu<br>
                 Municipality of Madridejos
                 <b>
-                    <p style="font-size: 22px; font-family: 'Courier New', Courier; text-transform: uppercase;">Barangay <?= $_SESSION['barangay'] ?></p>
+                    <p style="font-size: 22px; font-family: 'Courier New', Courier; text-transform: uppercase;color: dodgerblue !important;">Barangay <?= $_SESSION['barangay'] ?></p>
                 </b>
             </center>
-            <p style="font-weight: bold;margin-left:-5px;">OFFICE OF THE PUNONG BARANGAY</p>
+            <p style="font-weight: bold;margin-left:-8px;">OFFICE OF THE PUNONG BARANGAY</p>
             <hr style="border: 1px solid black; width: 252%; margin: 1px auto; position: relative; right: 210px;" />
         </div>
     </div>
@@ -101,7 +100,7 @@
     </div>
     <div class="col-xs-4 col-sm-6 col-md-3" style="margin-top: -14px;background: white; margin-left:50px; border: 1px solid black;width: 200px;height:790px;">
         <div style="margin-top:40px; text-align: center; word-wrap: break-word;font-size:15px;">
-            <p style="font-size:12px;font-weight: 600;">BARANGAY OFFECIAL</p>
+            <p style="font-size:12px;font-weight: 600;">SANGGUNIANG BARANGAY</p>
             <?php
             $off_barangay = $_SESSION["barangay"] ?? "";
 
@@ -152,8 +151,8 @@
     <div class="main-content col-xs-12 col-md-12">
         <br><br>
         <p class="text-center" style="font-size: 20px; font-weight: bold; margin-left: 100px;margin-top:-800px;">
-            <b style="font-size: 23px;"><u>BARANGAY CLEARANCE</u></b>
-        </p>
+            <b style="font-size: 23px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>BARANAGAY CERTIFICATION</u></b>
+        </p><br>
         <p style="margin-left: 220px;font-size: 12px; font-family: 'Courier New', Courier;">TO WHOM IT MAY CONCERN:</p>
         <p>
         <?php
@@ -167,33 +166,31 @@
             $off_barangay = mysqli_real_escape_string($con, $off_barangay);
 
             // Query to select clearance details along with age, bdate, and purok from tbltabagak
-            $squery = mysqli_query($con, "SELECT * FROM tblclearance WHERE name = '$name' AND barangay = '$off_barangay' LIMIT 1");
+            $squery = mysqli_query($con, "SELECT * FROM tblcertificate WHERE name = '$name' AND barangay = '$off_barangay' LIMIT 1");
             
             // Loop through clearance details
             if ($row = mysqli_fetch_array($squery)) {
                 echo "<p style='font-family: \"Courier New\", Courier, monospace; text-align: justify; font-size: 15px;margin-left: 220px;margin-right: 60px;'>
-                &nbsp;&nbsp;&nbsp;This is to certify that <strong>" . strtoupper($row['Name']) . "</strong> a Filipino citizen of legal Age " . $row['civilstatus'] . " with a residence and address in Purok " . $row['purok'] . ", Barangay " . $row['barangay'] . ", 
-                Madridejos, Cebu is known to me personally to be a person of good moral character, Peaceful and a law-abiding citizen in this community.<br><br>
-                &nbsp;&nbsp;I further certify that he/she has no crimininal record filed with this Barangay nor has he/she ever been convicted or indicted if any offense and that he/she has no derogatory information or whatsoever legal papers maybe presented.</p>";
+                &nbsp;&nbsp;&nbsp;This is to certify that, <strong>" . strtoupper($row['Name']) . "</strong>, 
+                <strong>" . $row['age'] . "</strong> years old, " . $row['civilstatus'] . ", and a Filipino citizen, is a bonafide resident of <strong>Purok " . $row['purok'] . ", Barangay " . $row['barangay'] . ", 
+                Madridejos, Cebu.</strong></p>";
             }
         ?>
         </p>
         <br>
-        <p>
-            <strong style="margin-left: 225px;">REMARK:</strong> <hr style="border: 0.1px solid black; width: 30%; margin-left: 305px;margin-top: -15px;"/>
-        </p>
+        <br>
         <br>
         <p style="margin-left: 220px; margin-right: 60px; font-family: 'Courier New', Courier; text-indent:15px; text-align: justify;">
             <?php
                 $name = $_GET['resident'];
-                $squery = mysqli_query($con, "SELECT * FROM tblclearance WHERE name = '$name' LIMIT 1");
+                $squery = mysqli_query($con, "SELECT * FROM tblcertificate WHERE name = '$name' LIMIT 1");
             
                 if ($row = mysqli_fetch_array($squery)) {
                     $dateRecorded = $row['dateRecorded'];
                     echo "<span style='font-family: \"Courier New\", Courier, monospace; text-align: justify; font-size: 15px;'>
-                       &nbsp;&nbsp;In witness, whereof, I have unto affixed my signature this ". date('j', strtotime($dateRecorded)) ."<sup>". date('S', strtotime($dateRecorded)) ."</sup> day of 
-                       " . date('F', strtotime($dateRecorded)) . " " . date('Y', strtotime($dateRecorded)) . "
-                       at Barangay " . $row['barangay'] . ", Madridejos Cebu, Philippines.
+                        &nbsp;&nbsp;Issued on this <strong>" . date('j', strtotime($dateRecorded)) . "<sup>" . date('S', strtotime($dateRecorded)) . "</sup></strong> day of 
+                        <strong>" . date('F', strtotime($dateRecorded)) . "</strong> in the year of our Lord Jesus Christ, <strong>" . date('Y', strtotime($dateRecorded)) . "</strong> 
+                        at the <strong>Barangay Hall</strong> of <strong>Barangay " . $row['barangay'] . ", Madridejos</strong><strong> Cebu, Philippines.</strong>
                     </span>";
                 }
             ?>
