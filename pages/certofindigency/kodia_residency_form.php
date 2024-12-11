@@ -154,9 +154,7 @@
                     </span>";
                 }
             ?>
-        </p>
-    </div>
-    <br>
+         <br>
     <br>
     <br>
     <br>
@@ -180,6 +178,8 @@
                 }
             ?>
         </p>
+        </p>
+    </div>
     <div class="col-xs-offset-6 col-xs-5 col-md-offset-6 col-md-4" style="top: 280px;">
     <i>Approved by:</i>
     <br>
