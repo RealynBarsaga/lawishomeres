@@ -170,8 +170,8 @@
                 while($row = mysqli_fetch_array($qry)){
                     if($row['sPosition'] == "Secretary"){
                         echo '
-                        <strong style="font-size: 18px; margin-left: -400px;">HON.'.strtoupper($row['completeName']).'</strong><br>
-                        <hr style="border: 1px solid black; width: 50%; margin-left: -30px;margin-top: -15px;" />
+                        <strong style="font-size: 18px; margin-left: -440px;">HON.'.strtoupper($row['completeName']).'</strong><br>
+                        <hr style="border: 1px solid black; width: 20%; margin-left: 30px;margin-top: -15px;" />
                         <span style="margin-left: 85px;">Barangay Secretary</span>
                         ';
                     }
