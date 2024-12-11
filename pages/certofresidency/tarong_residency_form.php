@@ -199,8 +199,8 @@
                     $dateRecorded = $row['dateRecorded'];
                     echo "<span style='font-family: \"Courier New\", Courier, monospace; text-align: justify; font-size: 15px;'>
                         &nbsp;&nbsp;Done this " . date('j', strtotime($dateRecorded)) . "<sup>" . date('S', strtotime($dateRecorded)) . "</sup> day of 
-                        " . date('F', strtotime($dateRecorded)) . " " . date('Y', strtotime($dateRecorded)) . " 
-                        at Barangay " . $row['barangay'] . ", Madridejos Cebu.
+                        " . date('F', strtotime($dateRecorded)) . " " . date('Y', strtotime($dateRecorded)) . ", 
+                        at Barangay " . $row['barangay'] . ", Madridejos, Cebu.
                     </span>";
                 }
             ?>
