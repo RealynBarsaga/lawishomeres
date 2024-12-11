@@ -120,7 +120,8 @@
         // Loop through clearance details
         if ($row = mysqli_fetch_array($squery)) {
             echo "<p style='font-family: \"Courier New\", Courier, monospace; text-align: justify; font-size: 16px;margin: 10px 50px 10px 3px;'>
-                &nbsp;&nbsp;&nbsp;This is to certify that <strong>" . strtoupper($row['Name']) . "</strong>, " . $row['gender'] . ", <strong>" . $row['age'] . "</strong>, years old " . $row['civilstatus'] . ", presently residing at <strong>Purok " . $row['purok'] . ", " . $row['barangay'] . ", Madridejos, Cebu.</strong>
+                &nbsp;&nbsp;&nbsp;This is to certify that <strong>" . strtoupper($row['Name']) . "</strong>, of legal age, " . $row['gender'] . ", resident of 
+                Purok " . $row['purok'] . ", Barangay " . $row['barangay'] . ", Madridejos, Cebu, is personally known to the undersigned.It is acknowledged that he/she belongs to an INDIGENT FAMILY.</strong>
             </p>";
         }
         ?>
