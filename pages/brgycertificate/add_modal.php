@@ -37,17 +37,17 @@
                                 "Tabagak" => ["Lamon-Lamon", "Tangigue", "Lawihan", "Lower-Bangus", "Upper-Bangus"],
                                 "Bunakan" => ["Bilabid", "Helinggero", "Kamaisan", "Kalubian", "Samonite"],
                                 "Kodia" => ["Mahugany", "Tugas", "Lumboy", "Dita", "Magtalisay", "Kawayan", "Bakhaw", "La Kodia Village"],
-                                /* "Talangnan" => ["",], */
+                                "Talangnan" => ["Gawot", "Lawihan", "Danggit", "Helinguero", "Tangigue", "Nukos", "Gusaw", "Tabagak"],
                                 /*  "Poblacion" => ["",], */
                                 "Maalat" => ["Neem Tree", "Talisay", "Kabakhawan", "Mahogany", "Gmelina"],
                                 "Pili" => ["Malinawon", "Mahigugmaon", "Matinabangun", "Maabtikon", "Malipayon", "Mauswagon"],
-                                /* "Kaongkod" => ["Purok", "Puroks"], */
+                                "Kaongkod" => ["Kalubihan", "Kamanggahan", "Ipil-Ipil", "Pukotan 1", "Pukotan 2", "Bugsayan 1", "Bugsayan 2", "Kasagingan 1", "Kasagingan 2", "Maisan 1", "Maisan 2", "Maisan 3"],
                                 /* "Mancilang" => ["Purok", "Puroks"], */
-                                /* "Kangwayan" => ["Purok", "Puroks"], */
-                                /* "Kangwayan" => ["Purok", "Puroks"], */
-                                /* "Tugas" => ["Purok", "Puroks"], */
-                                /* "Malbago" => ["Purok", "Puroks"], */
+                                "Kangwayan" => ["Nangka", "Mangga", "Lutak", "Kulo"],
+                                "Tugas" => ["Bombil A", "Bombil B", "Roses A", "Roses B", "Gomamela A", "Gomamela B", "Kumintang A", "Kumintang B", "Santan", "GK-Tugas"],
+                                "Malbago" => ["Bolinao", "Tulingan", "Tangigue", "Nukos", "Danggit", "Bangus"],
                                 "Tarong" => ["Orchids", "Gumamela 1", "Gumamela 2", "Santan 1", "Santan 2", "Rose 1", "Rose 2", "Vietnam Rose", "Kumintang 1", "Kumintang 2", "Sunflower", "Daisy"],
+                                /* "San Agustin" => ["Purok", "Puroks"], */
                                 // Add purok options for other barangays
                             ];
                         ?>
