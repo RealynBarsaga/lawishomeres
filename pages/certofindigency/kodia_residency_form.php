@@ -155,6 +155,7 @@
                 }
             ?>
         </p>
+    </div>
     <br>
     <br>
     <br>
@@ -171,7 +172,7 @@
                 while($row = mysqli_fetch_array($qry)){
                     if($row['sPosition'] == "Secretary"){
                         echo '
-                        <strong style="font-size: 18px; margin-left: 85px;">HON.'.strtoupper($row['completeName']).'</strong><br>
+                        <strong style="font-size: 18px; margin-left: -85px;">HON.'.strtoupper($row['completeName']).'</strong><br>
                         <hr style="border: 1px solid black; width: 50%; margin: 1px auto;margin-top: -15px;" />
                         <span style="margin-left: 85px;">Barangay Secretary</span>
                         ';
@@ -179,7 +180,6 @@
                 }
             ?>
         </p>
-    </div>
     <div class="col-xs-offset-6 col-xs-5 col-md-offset-6 col-md-4" style="top: 280px;">
     <i>Approved by:</i>
     <br>
