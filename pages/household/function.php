@@ -8,8 +8,6 @@ if(isset($_POST['btn_add'])){
     $txt_purok = htmlspecialchars(strip_tags(trim($_POST['txt_purok'])), ENT_QUOTES, 'UTF-8');
     $txt_members = htmlspecialchars(strip_tags(trim($_POST['txt_members'])), ENT_QUOTES, 'UTF-8');
 
-    var_dump($_POST['txt_members']);
-
     $chkdup = mysqli_query($con, "SELECT * from tblhousehold where headoffamily = ".$txt_hof."");
     $rows = mysqli_num_rows($chkdup);
 
