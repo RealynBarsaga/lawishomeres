@@ -180,7 +180,7 @@
         </p>
         <br>
         <p>
-            <strong style="margin-left: 225px;">REMARKS:</strong> <hr style="border: 0.1px solid black; width: 30%; margin-left: 305px;margin-top: -15px;"/>
+            <strong style="margin-left: 225px;">REMARK:</strong> <hr style="border: 0.1px solid black; width: 30%; margin-left: 305px;margin-top: -15px;"/>
         </p>
         <br>
         <p style="margin-left: 220px; margin-right: 60px; font-family: 'Courier New', Courier; text-indent:15px; text-align: justify;">
@@ -191,8 +191,8 @@
                 if ($row = mysqli_fetch_array($squery)) {
                     $dateRecorded = $row['dateRecorded'];
                     echo "<span style='font-family: \"Courier New\", Courier, monospace; text-align: justify; font-size: 15px;'>
-                       &nbsp;&nbsp;Issued on this <strong>". date('j', strtotime($dateRecorded)) ."<sup>". date('S', strtotime($dateRecorded)) ."</sup></strong> day of 
-                       <strong>" . date('F', strtotime($dateRecorded)) . "</strong>, in the year of our Lord, <strong>" . date('Y', strtotime($dateRecorded)) . "</strong> 
+                       &nbsp;&nbsp;In witness, whereof, I have unto affixed my signature this ". date('j', strtotime($dateRecorded)) ."<sup>". date('S', strtotime($dateRecorded)) ."</sup> day of 
+                       " . date('F', strtotime($dateRecorded)) . " " . date('Y', strtotime($dateRecorded)) . "
                        at <strong>Barangay " . $row['barangay'] . ", Madridejos</strong><strong> Cebu, Philippines.</strong>
                     </span>";
                 }
