@@ -185,6 +185,18 @@
 
             if ($row = mysqli_fetch_array($squery)) {
                 echo "<p style='font-family: \"Courier New\", Courier, monospace; text-align: justify; font-size: 15px;margin-left: 220px;margin-right: 60px;'>
+                    &nbsp;&nbsp;&nbsp;Based on records of this office, he/she has been residing at <strong>".$row['purok'].", Barangay ".$row['barangay']." Madridejos Cebu.</strong></p>";
+            }
+            ?> 
+        </p>
+        <br>
+        <p>
+            <?php
+            $name = $_GET['resident'];
+            $squery = mysqli_query($con, "SELECT * FROM tblrecidency WHERE name = '$name' LIMIT 1");
+
+            if ($row = mysqli_fetch_array($squery)) {
+                echo "<p style='font-family: \"Courier New\", Courier, monospace; text-align: justify; font-size: 15px;margin-left: 220px;margin-right: 60px;'>
                     &nbsp;&nbsp;&nbsp;This certification is being issued upon the request of the interested person for " .  strtoupper($row['purpose']) . " purposes it may serve him/her best.</p>";
             }
             ?> 
