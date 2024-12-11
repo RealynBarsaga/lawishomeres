@@ -180,15 +180,7 @@
         </p>
         <br>
         <p>
-            <?php
-            $name = $_GET['resident'];
-            $squery = mysqli_query($con, "SELECT * FROM tblclearance WHERE name = '$name' LIMIT 1");
-
-            if ($row = mysqli_fetch_array($squery)) {
-                echo "<p style='font-family: \"Courier New\", Courier, monospace; text-align: justify; font-size: 15px;margin-left: 220px;margin-right: 60px;'>
-                    &nbsp;&nbsp;&nbsp;This certification is being issued upon the request of aboved-mentoioned person for <strong>" . $row['purpose'] . "</strong> purposes it may serve him/her best.</p>";
-            }
-            ?> 
+            <strong>REMARKS:</strong><hr style="border: 0.1px solid black; width: 69%; margin-left: 65px;margin-top: -15px;"/>
         </p>
         <br>
         <p style="margin-left: 220px; margin-right: 60px; font-family: 'Courier New', Courier; text-indent:15px; text-align: justify;">
