@@ -94,7 +94,7 @@ html, body {
                                             /* "Kaongkod" => "kaongkod_certificate_form", */
                                             /* "Mancilang" => "mancilang_certificate_form", */
                                             /* "Kangwayan" => "kangwayan_certificate_form", */
-                                            /* "Tugas" => "tugas_certificate_form", */
+                                            "Tugas" => "tugas_certificate_form",
                                             /* "Malbago" => "malbago_certificate_form", */
                                             "Tarong" => "tarong_certificate_form"
                                             /* "San Agustin" => "san_agustin_certificate_form" */
