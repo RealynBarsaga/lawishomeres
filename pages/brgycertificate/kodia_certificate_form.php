@@ -194,7 +194,7 @@
             // Loop through clearance details
             if ($row = mysqli_fetch_array($squery)) {
                 echo "<p style='font-family: \"Courier New\", Courier, monospace; text-align: justify; font-size: 15px;margin-left: 220px;margin-right: 60px;'>
-                &nbsp;&nbsp;&nbsp;This certification us being issued upon the request of the aforementioned individual for <strong>" . $row['purpose'] . "</strong> purposes and for whatever legal purpose it may serve him/her best.</p>";
+                &nbsp;&nbsp;This certification us being issued upon the request of the aforementioned individual for <strong>" . $row['purpose'] . "</strong> purposes and for whatever legal purpose it may serve him/her best.</p>";
             }
         ?>
         </p>
