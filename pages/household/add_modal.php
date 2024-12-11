@@ -26,7 +26,7 @@
                                     <!-- Family member names will be displayed here -->
                                 </div>
                                 <!-- Hidden input to store family member names -->
-                                <input id="txt_members" name="txt_members" type="hidden" readonly/>
+                                <input id="family_members_list" name="txt_members" type="hidden" readonly/>
                             </div>
                             <div class="form-group">
                                 <label>Total Household Members:</label>
