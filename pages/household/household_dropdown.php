@@ -54,7 +54,6 @@ if (isset($_POST['purok_id']) && isset($_POST['barangay'])) {
     }
 }
 
-// Fetch Family Members based on Head of Family
 if (isset($_POST['hof_id']) && isset($_POST['barangay'])) {
     $hof_id = sanitize_input($_POST['hof_id']);
     $barangay = sanitize_input($_POST['barangay']);
@@ -65,7 +64,7 @@ if (isset($_POST['hof_id']) && isset($_POST['barangay'])) {
     if ($query && mysqli_num_rows($query) > 0) {
         while ($row = mysqli_fetch_assoc($query)) {
             // Output each family member's name inside an input element
-            echo '<input type="text" class="form-control input-sm" value="' . htmlspecialchars($row['lname']) . ', ' . htmlspecialchars($row['fname']) . ' ' . htmlspecialchars($row['mname']) . '" readonly />';
+            echo '<input type="text" class="form-control input-sm hah"  value="' . htmlspecialchars($row['lname']) . ', ' . htmlspecialchars($row['fname']) . ' ' . htmlspecialchars($row['mname']) . '" readonly />';
         }
     } else {
         echo '<input type="text" class="form-control input-sm" value="No family members found" readonly />';

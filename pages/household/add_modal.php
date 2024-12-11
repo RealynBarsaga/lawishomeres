@@ -98,25 +98,30 @@ function show_family_members() {
                 // Clear any existing family member inputs
                 $('#family_members_list').html('');
 
-                // Populate the family members list with input fields
+                // Array to hold member names
                 var familyMembers = [];
+
+                // Parse the response and update the family members list
                 $(html).each(function() {
-                    // Insert each family member's name as an input field
                     var memberName = $(this).val(); // Get member name from each input
                     $('#family_members_list').append('<input type="text" class="form-control input-sm" value="' + memberName + '" readonly />');
 
-                    // Push member names to the array for storing in hidden input
+                    // Add each family member's name to the familyMembers array
                     familyMembers.push(memberName);
                 });
 
-                // Update the hidden input field with the family members
-                $('#txt_members').val(familyMembers.join(', ')); // Join names as a comma-separated string
+                // Join the family members into a comma-separated string
+                var membersString = familyMembers.join(', ');
 
-                // Update the visible input field (txt_members_list)
-                $('#txt_members_list').val(familyMembers.join(', ')); // Show family members in the visible field
+                // Update the hidden txt_members field with the comma-separated list
+                $('#txt_members').val(membersString);  // Set the value in the hidden input
+
+                // Update the visible family members list (optional, if you want to show it somewhere else)
+                $('#txt_members_list').val(membersString);  // Show family members in the visible field
+
                 updateTotalMembers(); // Update the total household members count
 
-                // Fetch Barangay and Purok information
+                // Fetch Barangay and Purok information (if needed)
                 fetchBarangayPurok(hofID);
             },
             error: function (xhr, status, error) {
