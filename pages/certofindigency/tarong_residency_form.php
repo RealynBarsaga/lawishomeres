@@ -171,9 +171,9 @@
             // Loop through clearance details
             if ($row = mysqli_fetch_array($squery)) {
                 echo "<p style='font-family: \"Courier New\", Courier, monospace; text-align: justify; font-size: 15px;margin-left: 220px;margin-right: 60px;'>
-                &nbsp;&nbsp;&nbsp;This is to certify that <strong>" . strtoupper($row['Name']) . "</strong>, " . $row['gender'] . ",
-                <strong>" . $row['age'] . "</strong> years old, " . $row['civilstatus'] . ", and a Filipino citizen, is a bonafide resident of <strong>Purok " . $row['purok'] . ", Barangay " . $row['barangay'] . ", 
-                Madridejos, Cebu.</strong></p>";
+                &nbsp;&nbsp;&nbsp;This is to certify that <strong>" . strtoupper($row['Name']) . "</strong>, " . $row['gender'] . "
+                " . $row['age'] . " years old. a Filipino Citizen, " . $row['civilstatus'] . " and a residence with postal address at Purok " . $row['purok'] . ", Barangay " . $row['barangay'] . ", 
+                Madridejos, Cebu. and the family of this aboved mentioned person had no sufficient income that will quality them as indigent.</p>";
             }
         ?>
         </p>
@@ -185,19 +185,7 @@
 
             if ($row = mysqli_fetch_array($squery)) {
                 echo "<p style='font-family: \"Courier New\", Courier, monospace; text-align: justify; font-size: 15px;margin-left: 220px;margin-right: 60px;'>
-                   &nbsp;&nbsp;&nbsp;This is to certify further  that the family had no sufficient income that would qualify him/her as indigent.</p>";
-            }
-            ?> 
-        </p>
-        <br>
-        <p>
-            <?php
-            $name = $_GET['resident'];
-            $squery = mysqli_query($con, "SELECT * FROM tblindigency WHERE name = '$name' LIMIT 1");
-
-            if ($row = mysqli_fetch_array($squery)) {
-                echo "<p style='font-family: \"Courier New\", Courier, monospace; text-align: justify; font-size: 15px;margin-left: 220px;margin-right: 60px;'>
-                    &nbsp;&nbsp;&nbsp;This certification is being issued upon the request of the name mentioned above for <strong>" .  strtoupper($row['purpose']) . "</strong> purposes it may serve him/her best.</p>";
+                    &nbsp;&nbsp;&nbsp;This certification is being issued upon the request of the above mentioned named for <strong>" .  strtoupper($row['purpose']) . "</strong> purposes it may serve him/her best.</p>";
             }
             ?> 
         </p>
