@@ -168,7 +168,7 @@
         // Submit data using AJAX
         $.ajax({
             type: 'POST',
-            url: 'your_submission_url.php',  // Change to your server-side submission URL
+            url: 'household_dropdown.php',  // Change to your server-side submission URL
             data: formData,
             success: function(response) {
                 alert('Household added successfully');
