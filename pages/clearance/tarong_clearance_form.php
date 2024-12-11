@@ -174,7 +174,7 @@
                 echo "<p style='font-family: \"Courier New\", Courier, monospace; text-align: justify; font-size: 15px;margin-left: 220px;margin-right: 60px;'>
                 &nbsp;&nbsp;&nbsp;This is to certify that <strong>" . strtoupper($row['Name']) . "</strong> a Filipino citizen of legal Age " . $row['civilstatus'] . " with a residence and address in Purok " . $row['purok'] . ", Barangay " . $row['barangay'] . ", 
                 Madridejos, Cebu is known to me personally to be a person of good moral character, Peaceful and a law-abiding citizen in this community.<br><br>
-                I further certify that he/she has no crimininal record filed with this Barangay nor has he/she ever been convicted or indicted if any offense and that he/she has no derogatory information or whatsoever legal papers maybe presented.</p>";
+                &nbsp;&nbsp;I further certify that he/she has no crimininal record filed with this Barangay nor has he/she ever been convicted or indicted if any offense and that he/she has no derogatory information or whatsoever legal papers maybe presented.</p>";
             }
         ?>
         </p>
@@ -193,7 +193,7 @@
                     echo "<span style='font-family: \"Courier New\", Courier, monospace; text-align: justify; font-size: 15px;'>
                        &nbsp;&nbsp;In witness, whereof, I have unto affixed my signature this ". date('j', strtotime($dateRecorded)) ."<sup>". date('S', strtotime($dateRecorded)) ."</sup> day of 
                        " . date('F', strtotime($dateRecorded)) . " " . date('Y', strtotime($dateRecorded)) . "
-                       at <strong>Barangay " . $row['barangay'] . ", Madridejos</strong><strong> Cebu, Philippines.</strong>
+                       at Barangay " . $row['barangay'] . ", Madridejos Cebu, Philippines.
                     </span>";
                 }
             ?>
