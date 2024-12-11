@@ -172,7 +172,7 @@
             if ($row = mysqli_fetch_array($squery)) {
                 echo "<p style='font-family: \"Courier New\", Courier, monospace; text-align: justify; font-size: 15px;margin-left: 220px;margin-right: 60px;'>
                 &nbsp;&nbsp;&nbsp;This is to certify that <strong>" . strtoupper($row['Name']) . "</strong>, <strong>" . $row['age'] . "</strong> years old, <strong>" . $row['civilstatus'] . "</strong> Filipino citizen, 
-                is a <strong>PERMANENT RESIDENT</strong> of this of Purok " . $row['purok'] . ", Barangay " . $row['barangay'] . ", 
+                is a <strong>PERMANENT RESIDENT</strong> of this Barangay " . $row['barangay'] . ", 
                 Madridejos, Cebu. and he/she is personally known to me and a law abiding citizen of this barangay.</p>";
             }
         ?>
@@ -219,7 +219,7 @@
                     if($row['sPosition'] == "Captain"){
                         echo '
                         <strong style="font-size: 17px; margin-left: 40px;">HON.'.strtoupper($row['completeName']).'</strong>
-                        <hr style="border: 0.1px solid black; width: 69%; margin-left: 65px;margin-top: -15px;"/>
+                        <hr style="border: 0.1px solid black; width: 80%; margin-left: 50px;margin-top: -15px;"/>
                         <p style="margin-left: 110px; margin-top: -20px;">Punong Barangay</p>
                         ';
                     }
