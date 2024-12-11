@@ -126,21 +126,6 @@
         }
         ?>
         </p>
-        <p>
-            <?php
-            $off_barangay = $_SESSION["barangay"] ?? ""; // Get barangay from session
-            $squery = mysqli_query($con, "SELECT * FROM tblindigency WHERE name = '$name' AND barangay = '$off_barangay' LIMIT 1");
-
-            if ($row = mysqli_fetch_array($squery)) {
-                echo "<p style='font-family: \"Courier New\", Courier, monospace; text-align: justify; font-size: 16px;margin: 10px 50px 10px 3px;'>
-                &nbsp;&nbsp;&nbsp;This is to certify further  that the family had no sufficient income that would qualify him/her as indigent.</p>";
-            }
-            ?> 
-            <br>
-            <p style="margin-left:-10px;font-size: 16px;font-family: 'Courier New', Courier;text-indent:40px; text-align: justify;margin: 10px 50px 10px 3px;">
-            The name started above has no sufficient income and considered as indigent of this barangay. 
-            </p>
-        </p>
         <br>
         <p>
             <?php
@@ -149,7 +134,7 @@
 
             if ($row = mysqli_fetch_array($squery)) {
                 echo "<p style='font-family: \"Courier New\", Courier, monospace; text-align: justify; font-size: 16px;margin: 10px 50px 10px 3px;'>
-                &nbsp;&nbsp;&nbsp;This certification is hereby issued upod the request of the above-name for <strong>" . $row['purpose'] . "</strong> purposes; it may serve him/her best.</p>";
+                &nbsp;&nbsp;&nbsp;This certification is issued upod the request of the above-name for <strong>" . $row['purpose'] . "</strong> purposes; it may serve him/her best.</p>";
             }
             ?> 
         </p>
@@ -163,9 +148,9 @@
                 if ($row = mysqli_fetch_array($squery)) {
                     $dateRecorded = $row['dateRecorded'];
                     echo "<span style='font-family: \"Courier New\", Courier, monospace; text-align: justify; font-size: 15px;'>
-                        Given this day <strong style='color: dodgerblue !important;'>". date('j', strtotime($dateRecorded)) ."<sup style='color: dodgerblue !important;'>". date('S', strtotime($dateRecorded)) ."</sup></strong> of 
-                        <strong style='color: dodgerblue !important;'>" . date('F', strtotime($dateRecorded)) . "</strong>, <strong style='color: dodgerblue !important;'>" . date('Y', strtotime($dateRecorded)) . "</strong> 
-                        at <strong style='color: dodgerblue !important;'>" . $row['barangay'] . ", Madridejos</strong><strong style='color: dodgerblue !important;'> Cebu, Philippines.</strong>
+                        Given this day <strong>". date('j', strtotime($dateRecorded)) ."<sup>". date('S', strtotime($dateRecorded)) ."</sup></strong> of 
+                        <strong>" . date('F', strtotime($dateRecorded)) . "</strong>, <strong>" . date('Y', strtotime($dateRecorded)) . "</strong> 
+                        at <strong>" . $row['barangay'] . ", Madridejos</strong><strong> Cebu, Philippines.</strong>
                     </span>";
                 }
             ?>
