@@ -150,7 +150,7 @@
                     echo "<span style='font-family: \"Courier New\", Courier, monospace; text-align: justify; font-size: 15px;'>
                         Given this day <strong>". date('j', strtotime($dateRecorded)) ."<sup>". date('S', strtotime($dateRecorded)) ."</sup></strong> of 
                         <strong>" . date('F', strtotime($dateRecorded)) . "</strong>, <strong>" . date('Y', strtotime($dateRecorded)) . "</strong> 
-                        at <strong>" . $row['barangay'] . ", Madridejos</strong><strong> Cebu, Philippines.</strong>
+                        at Barangay Hall <strong>" . $row['barangay'] . ", Madridejos</strong><strong> Cebu, Philippines.</strong>
                     </span>";
                 }
             ?>
