@@ -186,7 +186,7 @@
                         <strong  style='margin-left: 210px;'&nbsp;>&nbsp;Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {$fullName}</strong><br>
                         <strong style='margin-left: 210px;'>&nbsp;Address&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {$address}</strong><br>
                         <strong style='margin-left: 210px;'>&nbsp;Birth Date&nbsp;&nbsp;&nbsp;: {$formattedBirthDate}</strong><br>
-                        <strong style='margin-left: 210px;'>&nbsp;Birth Place&nbsp;&nbsp;: {$birthPlace}</strong><br>
+                        <strong style='margin-left: 210px;'>&nbsp;Birth Place&nbsp;&nbsp;: {$birthPlace},Madridejos,Cebu</strong><br>
                         <strong style='margin-left: 210px;'>&nbsp;Civil Status&nbsp;: {$civilStatus}</strong>
                       </p>";
             }
