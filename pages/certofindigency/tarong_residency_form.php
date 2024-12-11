@@ -200,11 +200,16 @@
                     echo "<span style='font-family: \"Courier New\", Courier, monospace; text-align: justify; font-size: 15px;'>
                         &nbsp;&nbsp;Issued this <strong>" . date('j', strtotime($dateRecorded)) . "<sup>" . date('S', strtotime($dateRecorded)) . "</sup></strong> day of 
                         <strong>" . date('F', strtotime($dateRecorded)) . "</strong> <strong>" . date('Y', strtotime($dateRecorded)) . "</strong> 
-                        at Barangay " . $row['barangay'] . ", Madridejos Cebu.
+                        in Barangay " . $row['barangay'] . ", Madridejos Cebu.
                     </span>";
                 }
             ?>
         </p>
+    </p>
+    <br>
+    <br>
+    <p>
+        <strong style="margin-left: 225px;">CERTIFIED BY:</strong>
     </p>
     </div> 
     <div class="col-xs-offset-6 col-xs-5 col-md-offset-6 col-md-4" style="top: 70px;">
