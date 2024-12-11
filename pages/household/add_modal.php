@@ -22,7 +22,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Family Members:</label>
-                                <div id="family_members_list" class="form-control input-sm" style="height: 100px; overflow-y: auto;" readonly>
+                                <div id="family_members_list" name="txt_members" class="form-control input-sm" style="height: 100px; overflow-y: auto;" readonly>
                                     <!-- Family member names will be dynamically inserted here as input fields -->
                                 </div>
                                 <!-- Hidden input to store family member names -->
