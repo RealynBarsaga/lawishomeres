@@ -232,7 +232,7 @@
 
           if ($row = mysqli_fetch_array($squery)) {
             echo '
-              <strong style="margin-top: -350px;font-size: 17px; margin-left: 370px;">'.strtoupper($row['Name']).'</strong><br>
+              <strong style="margin-top: -350px;font-size: 17px; margin-left: 390px;">'.strtoupper($row['Name']).'</strong><br>
               <hr style="border: 0.1px solid black; width: 27%; margin-left: 361px;margin-top: -15px;" />
               <p style="margin-left: 390px;margin-top: -20px;">Signature of Applicant</p>
             ';
