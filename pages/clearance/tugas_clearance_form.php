@@ -234,7 +234,7 @@
             echo '
               <strong style="margin-top: -350px;font-size: 17px; margin-left: 240px;">'.strtoupper($row['Name']).'</strong><br>
               <hr style="border: 0.1px solid black; width: 27%; margin-left: 231px;margin-top: -15px;" />
-              <p style="margin-left: 254px;margin-top: -20px;">Signature of Applicant</p>
+              <p style="margin-left: 257px;margin-top: -20px;">Signature of Applicant</p>
             ';
           }
         ?>
