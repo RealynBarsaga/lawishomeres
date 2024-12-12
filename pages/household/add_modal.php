@@ -114,7 +114,7 @@
     // Update total household members
     function updateTotalMembers() {
         var memberCount = $('#family_members_list div').length;
-        $('#txt_totalmembers').val(memberCount + 1);
+        $('#txt_totalmembers').val(memberCount);
     }
 
     // Fetch Barangay and Purok
