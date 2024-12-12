@@ -24,7 +24,9 @@ echo '<div id="editModal'.$row['pid'].'" class="modal fade">
 
                 <div class="form-group">
                     <label>Resident Name: </label>
-                    <input name="txt_edit_residentname" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" value="'.$row['Name'].'"/>
+                    <input name="txt_edit_residentname" class="form-control input-sm" type="text" value="'.$row['Name'].'"
+                    pattern="^(?!\s)(?!.*<script>)(?!.*<\/script>).*[\w\s]*$" 
+                    title="Spaces and <script></script> tags are not allowed."/>
                 </div>
 
                 <div class="form-group">
@@ -34,7 +36,9 @@ echo '<div id="editModal'.$row['pid'].'" class="modal fade">
 
                 <div class="form-group">
                     <label>Purpose : </label>
-                    <input name="txt_edit_purpose" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" value="'.$row['purpose'].'" />
+                    <input name="txt_edit_purpose" class="form-control input-sm" type="text" value="'.$row['purpose'].'" 
+                    pattern="^(?!\s)(?!.*<script>)(?!.*<\/script>).*[\w\s]*$" 
+                    title="Spaces and <script></script> tags are not allowed."/>
                 </div>
 
                 <div class="form-group">
@@ -46,12 +50,16 @@ echo '<div id="editModal'.$row['pid'].'" class="modal fade">
 
                 <div class="form-group">
                     <label class="control-label">Purok:</label>
-                    <input name="txt_edit_purok" class="form-control input-sm input-size" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" value="'.$row['purok'].'"/>
+                    <input name="txt_edit_purok" class="form-control input-sm input-size" type="text" value="'.$row['purok'].'"
+                    pattern="^(?!\s)(?!.*<script>)(?!.*<\/script>).*[\w\s]*$" 
+                    title="Spaces and <script></script> tags are not allowed."/>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label">Birth Place:</label>
-                    <input name="txt_edit_bplace" class="form-control input-sm input-size" pattern="^(?!\s*$)[A-Za-z\s.,]+$" type="text" value="'.$row['bplace'].'"/>
+                    <input name="txt_edit_bplace" class="form-control input-sm input-size" type="text" value="'.$row['bplace'].'"
+                    pattern="^(?!\s)(?!.*<script>)(?!.*<\/script>).*[\w\s]*$" 
+                    title="Spaces and <script></script> tags are not allowed."/>
                 </div>
 
                 <div class="form-group">
@@ -65,12 +73,16 @@ echo '<div id="editModal'.$row['pid'].'" class="modal fade">
                 
                 <div class="form-group">
                     <label>OR Number : </label>
-                    <input name="txt_edit_ornum" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" value="'.$row['orNo'].'" />
+                    <input name="txt_edit_ornum" class="form-control input-sm" type="text" value="'.$row['orNo'].'" 
+                    pattern="^(?!\s)(?!.*<script>)(?!.*<\/script>).*[\w\s]*$" 
+                    title="Spaces and <script></script> tags are not allowed."/>
                 </div>
                 
                 <div class="form-group">
                     <label>Amount : </label>
-                    <input name="txt_edit_amount" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" value="'.$row['samount'].'" />
+                    <input name="txt_edit_amount" class="form-control input-sm" type="text" value="'.$row['samount'].'" 
+                    pattern="^(?!\s)(?!.*<script>)(?!.*<\/script>).*[\w\s]*$" 
+                    title="Spaces and <script></script> tags are not allowed."/>
                 </div>
 
             </div>

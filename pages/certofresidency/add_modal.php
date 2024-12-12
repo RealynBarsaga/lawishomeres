@@ -13,11 +13,15 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label>Resident Name:</label>
-                        <input name="txt_name" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" placeholder="Name" required/>
+                        <input name="txt_name" class="form-control input-sm" type="text" placeholder="Name" required
+                        pattern="^(?!\s)(?!.*<script>)(?!.*<\/script>).*[\w\s]*$" 
+                        title="Spaces and <script></script> tags are not allowed."/>
                     </div>
                     <div class="form-group">
                         <label>Purpose:</label>
-                        <input name="txt_purpose" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" placeholder="Purpose" required/>
+                        <input name="txt_purpose" class="form-control input-sm" type="text" placeholder="Purpose" required
+                        pattern="^(?!\s)(?!.*<script>)(?!.*<\/script>).*[\w\s]*$" 
+                        title="Spaces and <script></script> tags are not allowed."/>
                     </div>
                     <!-- Age -->
                     <div class="form-group">

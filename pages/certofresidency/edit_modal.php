@@ -20,11 +20,15 @@
                 <input type="hidden" value="'.$row['id'].'" name="hidden_id" id="hidden_id"/>
                 <div class="form-group">
                     <label>Resident Name: </label>
-                    <input name="txt_edit_resident" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" value="'.$row['Name'].'"/>
+                    <input name="txt_edit_resident" class="form-control input-sm" type="text" value="'.$row['Name'].'"
+                    pattern="^(?!\s)(?!.*<script>)(?!.*<\/script>).*[\w\s]*$" 
+                    title="Spaces and <script></script> tags are not allowed."/>
                 </div>
                 <div class="form-group">
                     <label>Purpose : </label>
-                    <input name="txt_edit_purpose" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" value="'.$row['purpose'].'" />
+                    <input name="txt_edit_purpose" class="form-control input-sm" type="text" value="'.$row['purpose'].'" 
+                    pattern="^(?!\s)(?!.*<script>)(?!.*<\/script>).*[\w\s]*$" 
+                    title="Spaces and <script></script> tags are not allowed."/>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Age:</label>
@@ -34,7 +38,9 @@
                 </div>
                 <div class="form-group">
                     <label>Purok: </label>
-                    <input name="txt_edit_purok" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" value="'.$row['purok'].'" />
+                    <input name="txt_edit_purok" class="form-control input-sm" type="text" value="'.$row['purok'].'" 
+                    pattern="^(?!\s)(?!.*<script>)(?!.*<\/script>).*[\w\s]*$" 
+                    title="Spaces and <script></script> tags are not allowed."/>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Civil Status:</label>
