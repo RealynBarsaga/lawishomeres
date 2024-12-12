@@ -54,27 +54,24 @@ if (isset($_POST['purok_id']) && isset($_POST['barangay'])) {
     }
 }
 
-// Assuming this is a part of your PHP file that processes the AJAX request for fetching members.
-if (isset($_POST['headoffamily']) && isset($_POST['barangay'])) {
-    $headoffamily = $_POST['headoffamily'];
-    $barangay = $_POST['barangay'];
+if (isset($_POST['hof_id']) && isset($_POST['barangay'])) {
+    $hof_id = sanitize_input($_POST['hof_id']);
+    $barangay = sanitize_input($_POST['barangay']);
 
-    // SQL Query to fetch members
-    $stmt = $con->prepare("SELECT * FROM tbltabagak WHERE role = 'Members' AND headoffamily = ? AND barangay = ?");
-    $stmt->bind_param("ss", $headoffamily, $barangay);
-    $stmt->execute();
+    // Query to get family members excluding the head of family
+    $query = mysqli_query($con, "SELECT * FROM tbltabagak WHERE householdnum = (SELECT householdnum FROM tbltabagak WHERE id = '$hof_id') AND barangay = '$barangay' AND role != 'Head of Family'");
 
-    $result = $stmt->get_result();
-    $members = [];
-
-    while ($row = $result->fetch_assoc()) {
-        $members[] = [
-            'id' => $row['id'],
-            'fullName' => htmlspecialchars($row['lname'] . ', ' . $row['fname'] . ' ' . $row['mname'])
-        ];
+    if ($query && mysqli_num_rows($query) > 0) {
+        $familyMembers = [];
+        while ($row = mysqli_fetch_assoc($query)) {
+            // Store the member's name in an array
+            $familyMembers[] = htmlspecialchars($row['lname']) . ', ' . htmlspecialchars($row['fname']) . ' ' . htmlspecialchars($row['mname']);
+        }
+        // Send the family members as JSON
+        echo json_encode($familyMembers);
+    } else {
+        // Return a message if no members are found
+        echo json_encode(["No family members found"]);
     }
-
-    $stmt->close();
-    echo json_encode($members);
 }
 ?>
