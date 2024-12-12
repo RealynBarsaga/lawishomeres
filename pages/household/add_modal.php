@@ -95,35 +95,15 @@
                     brgy_id: totalID,
                     barangay: loggedInBarangay // Pass barangay as part of the POST data
                 },
-                success: function (html) {
-                    console.log('Barangay HTML:', html); // Debugging
-                    $('#txt_brgy').val(html); // Assuming html contains the Barangay value
-                },
-                error: function (xhr, status, error) {
-                    console.error('AJAX request failed:', status, error); // Debugging
-                }
-            });
-
-            // Fetch Purok value
-            $.ajax({
-                type: 'POST',
-                url: 'household_dropdown.php',
-                data: { 
-                    purok_id: totalID,
-                    barangay: loggedInBarangay // Pass barangay as part of the POST data
-                },
-                success: function (html) {
-                    console.log('Purok HTML:', html); // Debugging
-                    $('#txt_purok').val(html); // Assuming html contains the Purok value
-                },
-                error: function (xhr, status, error) {
-                    console.error('AJAX request failed:', status, error); // Debugging
-                }
-            });
-
-            // Fetch Members
-            fetchMembers(totalID);
-        }
+                success: function (html) ```javascript
+                console.log('Barangay HTML:', html); // Debugging
+                $('#txt_brgy').val(html); // Assuming the response contains the barangay name
+                fetchMembers(totalID); // Fetch family members for the selected Head of Family
+            },
+            error: function (xhr, status, error) {
+                console.error('AJAX request failed:', status, error); // Debugging
+            }
+        });
     }
 
     // Fetch and display members for a given Head of Family
@@ -139,20 +119,26 @@
                 },
                 success: function (response) {
                     console.log('Family Members Response:', response);  // Debugging
-                    var membersSelect = document.getElementById("txt_members");
-
-                    var members = JSON.parse(response);
-                    if (Array.isArray(members) && members.length > 0) {
-                        // Set the member names if there are members
-                        var memberNames = members.map(function(member) {
-                            return member.fullName;
-                        });
-                        membersSelect.value = memberNames.join(", ");
-                        $('#txt_totalmembers').val(members.length);
+                    if (response !== '') {
+                        try {
+                            var members = JSON.parse(response);
+                            if (Array.isArray(members) && members.length > 0) {
+                                // Set the member names if there are members
+                                var memberNames = members.map(function(member) {
+                                    return member.fullName;
+                                });
+                                $('#txt_members').val(memberNames.join(", "));
+                                $('#txt_totalmembers').val(members.length);
+                            } else {
+                                // If no members, set the appropriate value
+                                $('#txt_members').val("No Members Found");
+                                $('#txt_totalmembers').val(0);
+                            }
+                        } catch (e) {
+                            console.error('Error parsing JSON response:', e);
+                        }
                     } else {
-                        // If no members, set the appropriate value
-                        membersSelect.value = "No Members Found";
-                        $('#txt_totalmembers').val(0);
+                        console.error('Empty response from server');
                     }
                 },
                 error: function (xhr, status, error) {
@@ -161,12 +147,4 @@
             });
         }
     }
-
-    // When the modal is shown, reset all fields
-    $('#addModal').on('show.bs.modal', function () {
-        $('#txt_members').val('');  // Clear the members input field
-        $('#txt_totalmembers').val('');  // Clear the total members count
-        $('#txt_brgy').val('');  // Clear barangay field
-        $('#txt_purok').val('');  // Clear purok field
-    });
 </script>
