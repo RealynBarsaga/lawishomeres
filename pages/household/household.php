@@ -155,7 +155,6 @@ html, body {
                                          include "delete_modal.php";
                                      }
                                      ?>
-
                                     </tbody>
                                 </table>
                                 <?php include "../deleteModal.php"; ?>
