@@ -137,18 +137,4 @@
             }
         });
     }
-
-   /*  // Validate form before submission
-    $('form').on('submit', function(e) {
-        if (!$('#txt_householdno').val()) {
-            alert('Please enter a Household #');
-            e.preventDefault();
-        } else if (!$('#txt_hof').val()) {
-            alert('Please select a Head of Family.');
-            e.preventDefault();
-        } else if (!$('#txt_members').val()) {
-            alert('No family members were selected.');
-            e.preventDefault();
-        }
-    }); */
 </script>
