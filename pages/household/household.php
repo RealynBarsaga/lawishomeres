@@ -127,7 +127,7 @@ html, body {
                                             $formatted_names_output = implode('</br>', $formatted_names);
                                         } else {
                                            // Handle cases where no valid members are found
-                                          $formatted_names_output = !empty($row['membersname']) ? $row['membersname'] : "No family members available";
+                                          $formatted_names_output = !empty($row['membersname']) ? $row['membersname'] : "";
                                         }
                                         
                                      
