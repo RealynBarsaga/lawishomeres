@@ -22,9 +22,7 @@ echo '<div id="editModal' . $row['id'] . '" class="modal fade">
                             </div>
                             <div class="form-group">
                                 <label>Family Members:</label>
-                                <input id="txt_members" name="txt_members" class="form-control input-sm" 
-                                       value="' . htmlspecialchars($row['membersname'], ENT_QUOTES, 'UTF-8') . '" readonly
-                                       style="background-color: #f8f9fa; font-family: Arial, sans-serif; font-size: 14px; color: #333; border: 1px solid #ccc; padding: 10px;"/>
+                                <input  id="txt_members" name="txt_members" class="form-control input-sm" value="' . htmlspecialchars($row['membersname'], ENT_QUOTES, 'UTF-8') . '" readonly/>
                             </div>
                             <div class="form-group">
                                 <label>Total Household Members: </label>
