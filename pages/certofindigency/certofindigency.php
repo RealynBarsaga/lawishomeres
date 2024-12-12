@@ -97,8 +97,8 @@ html, body {
                                             /* "Kangwayan" => "kangwayan_residency_form", */
                                             "Tugas" => "tugas_residency_form",
                                             /* "Malbago" => "malbago_residency_form", */
-                                            "Tarong" => "tarong_residency_form"
-                                            /* "San Agustin" => "san_agustin_residency_form" */
+                                            "Tarong" => "tarong_residency_form",
+                                            "San Agustin" => "san_agustin_residency_form"
                                         ];
 
                                         $stmt = $con->prepare("SELECT Name, purpose, barangay, purok, id AS pid FROM tblindigency WHERE barangay = '$off_barangay'");

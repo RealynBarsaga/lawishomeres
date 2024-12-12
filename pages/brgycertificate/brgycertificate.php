@@ -96,8 +96,8 @@ html, body {
                                             /* "Kangwayan" => "kangwayan_certificate_form", */
                                             "Tugas" => "tugas_certificate_form",
                                             /* "Malbago" => "malbago_certificate_form", */
-                                            "Tarong" => "tarong_certificate_form"
-                                            /* "San Agustin" => "san_agustin_certificate_form" */
+                                            "Tarong" => "tarong_certificate_form",
+                                            "San Agustin" => "san_agustin_certificate_form"
                                         ];
 
                                         $stmt = $con->prepare("SELECT Name, purpose, barangay, purok, id AS pid FROM tblcertificate WHERE barangay = '$off_barangay'");
