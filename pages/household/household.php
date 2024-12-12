@@ -127,7 +127,7 @@ html, body {
                                             $formatted_names_output = implode('</br>', $formatted_names);
                                         } else {
                                             // Handle cases where no valid members are found
-                                            $formatted_names_output = "No family members available for Household #" . htmlspecialchars($row['householdno'], ENT_QUOTES, 'UTF-8') . " (" . htmlspecialchars($row['head_of_family'], ENT_QUOTES, 'UTF-8') . ")";
+                                            $formatted_names_output = "(" . htmlspecialchars($row['membersname'], ENT_QUOTES, 'UTF-8') . ")";
                                         }
                                         
                                      
