@@ -87,7 +87,7 @@ html, body {
                                             "Tabagak" => "tabagak_certificate_form",
                                             "Bunakan" => "bunakan_certificate_form",
                                             "Kodia" => "kodia_certificate_form",
-                                            /* "Talangnan" => "talangnan_certificate_form", */
+                                            "Talangnan" => "talangnan_certificate_form",
                                             /* "Poblacion" => "poblacion_certificate_form", */
                                             "Maalat" => "maalat_certificate_form",
                                             "Pili" => "pili_certificate_form",

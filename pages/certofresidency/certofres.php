@@ -87,7 +87,7 @@ html, body {
                                             "Tabagak" => "tabagak_residency_form",
                                             "Bunakan" => "bunakan_residency_form",
                                             "Kodia" => "kodia_residency_form",
-                                            /* "Talangnan" => "talangnan_residency_form", */
+                                            "Talangnan" => "talangnan_residency_form",
                                             /* "Poblacion" => "poblacion_residency_form", */
                                             "Maalat" => "maalat_residency_form",
                                             "Pili" => "pili_residency_form",

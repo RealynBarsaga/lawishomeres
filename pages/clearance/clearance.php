@@ -96,7 +96,7 @@ html, body {
                                                         "Tabagak" => "tabagak_clearance_form",
                                                         "Bunakan" => "bunakan_clearance_form",
                                                         "Kodia" => "kodia_clearance_form",
-                                                        /* "Talangnan" => "talangnan_clearance_form", */
+                                                        "Talangnan" => "talangnan_clearance_form",
                                                         /* "Poblacion" => "poblacion_clearance_form", */
                                                         "Maalat" => "maalat_clearance_form",
                                                         "Pili" => "pili_clearance_form",
