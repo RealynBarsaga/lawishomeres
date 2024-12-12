@@ -25,7 +25,7 @@
                                 <div id="family_members_list" style="border: 1px solid #ccc; padding: 5px; height: 100px; overflow-y: auto;" readonly>
                                     <!-- Family member names will be dynamically added here -->
                                 </div>
-                                <input id="txt_members" name="txt_members" class="form-control input-sm" type="hidden" />
+                                <input id="txt_members" name="txt_members" class="form-control input-sm" type="hidden" readonly/>
                             </div>
                             <div class="form-group">
                                 <label>Total Household Members:</label>
