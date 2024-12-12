@@ -74,7 +74,15 @@ html, body {
                                         </thead>
                                         <tbody>
                                             <?php
-                                              $squery = mysqli_query($con, "SELECT *, h.id as id, CONCAT(r.lname, ', ', r.fname, ' ', r.mname) as name, b.barangay FROM tblhousehold h LEFT JOIN tbltabagak r ON r.id = h.headoffamily LEFT JOIN tbltabagak b ON r.id = b.id ");
+                                                $squery = mysqli_query($con, "SELECT h.id as id, h.householdno, h.totalhouseholdmembers, h.barangay, h.purok, 
+                                                CONCAT(r.lname, ', ', r.fname, ' ', r.mname) as head_of_family, 
+                                                (SELECT GROUP_CONCAT(CONCAT(lname, ', ', fname, ' ', mname) SEPARATOR '</br>') 
+                                                 FROM tbltabagak 
+                                                 WHERE householdnum = h.householdno AND role = 'Members') as membersname
+                                                FROM tblhousehold h
+                                                LEFT JOIN tbltabagak r ON r.id = h.headoffamily 
+                                                LEFT JOIN tbltabagak b ON r.id = b.id");
+
                                               if (!$squery) {
                                                   die('MySQL Error: ' . mysqli_error($con));
                                               }

@@ -88,13 +88,13 @@ html, body {
                                     <tbody>
                                     <?php
                                     $stmt = $con->prepare("SELECT h.id as id, h.householdno, h.totalhouseholdmembers, h.barangay, h.purok, 
-                                                           CONCAT(r.lname, ', ', r.fname, ' ', r.mname) as head_of_family, 
-                                                           (SELECT GROUP_CONCAT(CONCAT(lname, ', ', fname, ' ', mname) SEPARATOR '\n') AS names
-                                                            FROM tbltabagak 
-                                                            WHERE householdnum = h.householdno AND role = 'Members') as membersname 
-                                                           FROM tblhousehold h 
-                                                           LEFT JOIN tbltabagak r ON r.id = h.headoffamily 
-                                                           WHERE r.barangay = ?");
+                                    CONCAT(r.lname, ', ', r.fname, ' ', r.mname) as head_of_family, 
+                                    (SELECT GROUP_CONCAT(CONCAT(lname, ', ', fname, ' ', mname) SEPARATOR '\n') AS names
+                                     FROM tbltabagak 
+                                     WHERE householdnum = h.householdno AND role = 'Members') as membersname 
+                                    FROM tblhousehold h 
+                                    LEFT JOIN tbltabagak r ON r.id = h.headoffamily 
+                                    WHERE r.barangay = ?");
                                     $stmt->bind_param("s", $off_barangay); // Bind the parameter
                                     $stmt->execute();
                                     $result = $stmt->get_result();
