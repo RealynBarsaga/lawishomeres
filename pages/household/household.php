@@ -87,50 +87,50 @@ html, body {
                                     </thead>
                                     <tbody>
                                     <?php
-                                     $stmt = $con->prepare("SELECT h.id as id, h.householdno, h.totalhouseholdmembers, h.barangay, h.purok, 
-                                     CONCAT(r.lname, ', ', r.fname, ' ', r.mname) as head_of_family, 
-                                     (SELECT GROUP_CONCAT(CONCAT(lname, ', ', fname, ' ', mname) SEPARATOR '\n') AS names
-                                      FROM tbltabagak 
-                                      WHERE householdnum = h.householdno AND role = 'Members') as membersname 
-                                     FROM tblhousehold h 
-                                     LEFT JOIN tbltabagak r ON r.id = h.headoffamily 
-                                     WHERE r.barangay = ?");
-               
-                                     
-                                     $stmt->bind_param("s", $off_barangay); // Bind the parameter
-                                     $stmt->execute();
-                                     $result = $stmt->get_result();
-                                     
-                                     // Fetch and display the results
-                                     while ($row = $result->fetch_assoc()) {
-                                         $deleteModalId = 'deleteModal' . $row['id'];
-                                     
-                                         $membersName = !empty($row['membersname']) ? $row['membersname'] : "No family members available";
+                                    $stmt = $con->prepare("SELECT h.id as id, h.householdno, h.totalhouseholdmembers, h.barangay, h.purok, 
+                                                           CONCAT(r.lname, ', ', r.fname, ' ', r.mname) as head_of_family, 
+                                                           (SELECT GROUP_CONCAT(CONCAT(lname, ', ', fname, ' ', mname) SEPARATOR '\n') AS names
+                                                            FROM tbltabagak 
+                                                            WHERE householdnum = h.householdno AND role = 'Members') as membersname 
+                                                           FROM tblhousehold h 
+                                                           LEFT JOIN tbltabagak r ON r.id = h.headoffamily 
+                                                           WHERE r.barangay = ?");
+                                    $stmt->bind_param("s", $off_barangay); // Bind the parameter
+                                    $stmt->execute();
+                                    $result = $stmt->get_result();
+                                    
+                                    // Fetch and display the results
+                                    while ($row = $result->fetch_assoc()) {
+                                        $deleteModalId = 'deleteModal' . $row['id'];
+                                    
+                                        // Ensure proper formatting for the member names
+                                        $membersName = !empty($row['membersname']) ? nl2br(htmlspecialchars($row['membersname'], ENT_QUOTES, 'UTF-8')) : "No family members available";
+                                    
+                                        echo '
+                                        <tr>
+                                            <td><input type="checkbox" name="chk_delete[]" class="chk_delete" value="' . htmlspecialchars($row['id'], ENT_QUOTES, 'UTF-8') . '" /></td>
+                                            <td><a href="../resident/resident.php?resident=' . htmlspecialchars($row['householdno'], ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($row['householdno'], ENT_QUOTES, 'UTF-8') . '</a></td>
+                                            <td>' . htmlspecialchars($row['totalhouseholdmembers'], ENT_QUOTES, 'UTF-8') . '</td>
+                                            <td>' . htmlspecialchars($row['head_of_family'], ENT_QUOTES, 'UTF-8') . '</td>
+                                            <td>' . htmlspecialchars($row['barangay'], ENT_QUOTES, 'UTF-8') . '</td>
+                                            <td>' . htmlspecialchars($row['purok'], ENT_QUOTES, 'UTF-8') . '</td>
+                                            <td>' . $membersName . '</td>
+                                            <td>
+                                                <button class="btn btn-primary btn-sm" data-target="#editModal' . htmlspecialchars($row['id'], ENT_QUOTES, 'UTF-8') . '" data-toggle="modal">
+                                                    <i class="fa fa-eye" aria-hidden="true"></i> View
+                                                </button>
+                                                <button class="btn btn-danger btn-sm" data-target="#' . $deleteModalId . '" data-toggle="modal" style="margin-left: 5px;color: #fff;background-color: #dc3545;border-color: #dc3545;">
+                                                    <i class="fa fa-trash" aria-hidden="true"></i> Delete
+                                                </button>
+                                            </td>
+                                        </tr>';
+                                        
+                                        // Include the edit and delete modals
+                                        include "edit_modal.php";
+                                        include "delete_modal.php";
+                                    }
+                                    ?>
 
-                                         echo '
-                                         <tr>
-                                             <td><input type="checkbox" name="chk_delete[]" class="chk_delete" value="' . htmlspecialchars($row['id'], ENT_QUOTES, 'UTF-8') . '" /></td>
-                                             <td><a href="../resident/resident.php?resident=' . htmlspecialchars($row['householdno'], ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($row['householdno'], ENT_QUOTES, 'UTF-8') . '</a></td>
-                                             <td>' . htmlspecialchars($row['totalhouseholdmembers'], ENT_QUOTES, 'UTF-8') . '</td>
-                                             <td>' . htmlspecialchars($row['head_of_family'], ENT_QUOTES, 'UTF-8') . '</td>
-                                             <td>' . htmlspecialchars($row['barangay'], ENT_QUOTES, 'UTF-8') . '</td>
-                                             <td>' . htmlspecialchars($row['purok'], ENT_QUOTES, 'UTF-8') . '</td>
-                                             <td>' . $membersName . '</td>
-                                             <td>
-                                                 <button class="btn btn-primary btn-sm" data-target="#editModal' . htmlspecialchars($row['id'], ENT_QUOTES, 'UTF-8') . '" data-toggle="modal">
-                                                     <i class="fa fa-eye" aria-hidden="true"></i> View
-                                                 </button>
-                                                 <button class="btn btn-danger btn-sm" data-target="#' . $deleteModalId . '" data-toggle="modal" style="margin-left: 5px;color: #fff;background-color: #dc3545;border-color: #dc3545;">
-                                                     <i class="fa fa-trash" aria-hidden="true"></i> Delete
-                                                 </button>
-                                             </td>
-                                         </tr>';
-                                         
-                                         // Include the edit and delete modals
-                                         include "edit_modal.php";
-                                         include "delete_modal.php";
-                                     }
-                                     ?>
                                     </tbody>
                                 </table>
                                 <?php include "../deleteModal.php"; ?>
