@@ -120,7 +120,7 @@ html, body {
                                                  <button class="btn btn-primary btn-sm" data-target="#editModal' . htmlspecialchars($row['id'], ENT_QUOTES, 'UTF-8') . '" data-toggle="modal">
                                                      <i class="fa fa-eye" aria-hidden="true"></i> View
                                                  </button>
-                                                 <button class="btn btn-danger btn-sm" data-target="#deleteModal' . htmlspecialchars($row['id'], ENT_QUOTES, 'UTF-8') . '" data-toggle="modal">
+                                                 <button class="btn btn-danger btn-sm" data-target="#' . $deleteModalId . '" data-toggle="modal" style="margin-left: 5px;color: #fff;background-color: #dc3545;border-color: #dc3545;">
                                                      <i class="fa fa-trash" aria-hidden="true"></i> Delete
                                                  </button>
                                              </td>
