@@ -26,7 +26,7 @@
                                     <label>Name: <span style="color:gray; font-size: 10px;">(Firstname Middlename, Lastname)</span></label>
                                     <input name="txt_cname" class="form-control input-sm" type="text" placeholder="Firstname Middlename, Lastname" 
                                         required 
-                                        pattern="^(?!.*<script>)(?!.*<\/script>).*[\w\s]*$" 
+                                        pattern="^(?!\s)(?!.*<script>)(?!.*<\/script>).*[\w\s]*$" 
                                         title="Spaces and <script></script> tags are not allowed."/>
                                 </div>
                                 <div class="form-group">
