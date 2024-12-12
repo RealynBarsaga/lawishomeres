@@ -105,8 +105,8 @@ html, body {
                                                         /* "Kangwayan" => "kangwayan_clearance_form", */
                                                         "Tugas" => "tugas_clearance_form",
                                                        /*  "Malbago" => "malbago_clearance_form", */
-                                                        "Tarong" => "tarong_clearance_form"
-                                                        /* "San Agustin" => "san_agustin_clearance_form" */
+                                                        "Tarong" => "tarong_clearance_form",
+                                                        "San Agustin" => "san_agustin_clearance_form"
                                                     ];
 
                                                     $stmt = $con->prepare("SELECT name, clearanceNo, purpose, orNo, samount, id AS pid FROM tblclearance WHERE barangay = '$off_barangay'");
