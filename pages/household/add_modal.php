@@ -78,7 +78,7 @@
 
     // Fetch and display Family Members, Barangay, and Purok
     function show_family_members() {
-        var hofID = $('#txt_hof').val(); // Get the selected Head of Family ID
+        var hofID = $('#txt_hof').val();
         if (hofID) {
             $.ajax({
                 type: 'POST',
@@ -88,24 +88,17 @@
                     barangay: loggedInBarangay
                 },
                 success: function(response) {
-                    // Parse response (assumes JSON format)
                     var familyMembers = JSON.parse(response);
-                    $('#family_members_list').html(''); // Clear existing inputs
-
+                    $('#family_members_list').html('');
+                    
                     if (familyMembers.length > 0 && familyMembers[0] !== "No family members found") {
-                        // Clear the list before adding new members
-                        $('#family_members_list').empty();
-                    
                         familyMembers.forEach(function(memberName) {
-                            $('#family_members_list').append('<input type="text" name="txt_members" class="form-control input-sm" value="' + memberName + '" readonly />');
+                            $('#family_members_list').append('<div>' + memberName + '</div>');
                         });
-                    
-                        // Set the combined value for the hidden text field
                         $('#txt_members').val(familyMembers.join(', '));
                     } else {
-                        // Clear the list and add a message for no members found
-                        $('#family_members_list').empty();
-                        $('#family_members_list').append('<input type="text" name="txt_members" class="form-control input-sm" value="No family members found" readonly />');
+                        $('#family_members_list').html('<div>No family members found</div>');
+                        $('#txt_members').val('');
                     }
 
                     updateTotalMembers();
@@ -120,18 +113,18 @@
 
     // Update total household members
     function updateTotalMembers() {
-        var memberCount = $('#family_members_list input').length;
-        $('#txt_totalmembers').val(memberCount);
+        var memberCount = $('#family_members_list div').length;
+        $('#txt_totalmembers').val(memberCount + 1);
     }
 
-    // Fetch Barangay and Purok (optional)
+    // Fetch Barangay and Purok
     function fetchBarangayPurok(hofID) {
         $.ajax({
             type: 'POST',
             url: 'household_dropdown.php',
             data: { brgy_id: hofID, barangay: loggedInBarangay },
             success: function(response) {
-                $('#txt_brgy').val(response);
+                $('#txt_brgy').val(response || 'Unknown');
             }
         });
 
@@ -140,8 +133,22 @@
             url: 'household_dropdown.php',
             data: { purok_id: hofID, barangay: loggedInBarangay },
             success: function(response) {
-                $('#txt_purok').val(response);
+                $('#txt_purok').val(response || 'Unknown');
             }
         });
     }
+
+    // Validate form before submission
+    $('form').on('submit', function(e) {
+        if (!$('#txt_householdno').val()) {
+            alert('Please enter a Household #');
+            e.preventDefault();
+        } else if (!$('#txt_hof').val()) {
+            alert('Please select a Head of Family.');
+            e.preventDefault();
+        } else if (!$('#txt_members').val()) {
+            alert('No family members were selected.');
+            e.preventDefault();
+        }
+    });
 </script>

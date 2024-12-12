@@ -8,6 +8,13 @@ if(isset($_POST['btn_add'])){
     $txt_purok = htmlspecialchars(strip_tags(trim($_POST['txt_purok'])), ENT_QUOTES, 'UTF-8');
     $txt_members = htmlspecialchars(strip_tags(trim($_POST['txt_members'])), ENT_QUOTES, 'UTF-8');
 
+    // Validate family members
+    if (empty($txt_members)) {
+        $_SESSION['error'] = "No family members were selected.";
+        header("location: " . $_SERVER['REQUEST_URI']);
+        exit();
+    }
+
     $chkdup = mysqli_query($con, "SELECT * from tblhousehold where headoffamily = ".$txt_hof."");
     $rows = mysqli_num_rows($chkdup);
 

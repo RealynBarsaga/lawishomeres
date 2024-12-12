@@ -58,20 +58,16 @@ if (isset($_POST['hof_id']) && isset($_POST['barangay'])) {
     $hof_id = sanitize_input($_POST['hof_id']);
     $barangay = sanitize_input($_POST['barangay']);
 
-    // Query to get family members excluding the head of family
-    $query = mysqli_query($con, "SELECT * FROM tbltabagak WHERE householdnum = (SELECT householdnum FROM tbltabagak WHERE id = '$hof_id') AND barangay = '$barangay' AND role != 'Head of Family'");
+    $query = mysqli_query($con, "SELECT lname, fname, mname FROM tbltabagak 
+        WHERE householdnum = (SELECT householdnum FROM tbltabagak WHERE id = '$hof_id') 
+        AND barangay = '$barangay' AND role != 'Head of Family'");
 
+    $familyMembers = [];
     if ($query && mysqli_num_rows($query) > 0) {
-        $familyMembers = [];
         while ($row = mysqli_fetch_assoc($query)) {
-            // Store the member's name in an array
             $familyMembers[] = htmlspecialchars($row['lname']) . ', ' . htmlspecialchars($row['fname']) . ' ' . htmlspecialchars($row['mname']);
         }
-        // Send the family members as JSON
-        echo json_encode($familyMembers);
-    } else {
-        // Return a message if no members are found
-        echo json_encode(["No family members found"]);
     }
+    echo json_encode($familyMembers);
 }
 ?>
