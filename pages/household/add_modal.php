@@ -94,7 +94,7 @@
 
                     if (familyMembers.length > 0 && familyMembers[0] !== "No family members found") {
                         familyMembers.forEach(function(memberName) {
-                            $('#family_members_list').append('<input type="text" class="form-control input-sm" value="' + memberName + '" readonly />');
+                            $('#family_members_list').append('<input type="text" class="form-control input-sm hah" value="' + memberName + '" readonly />');
                         });
                         $('#txt_members').val(familyMembers.join(', '));
                     } else {
