@@ -87,9 +87,15 @@ html, body {
                                     </thead>
                                     <tbody>
                                     <?php
-                                     $stmt = $con->prepare("SELECT *, h.id as id, CONCAT(r.lname, ', ', r.fname, ' ', r.mname) as head_of_family 
-                                         FROM tblhousehold h 
-                                         LEFT JOIN tbltabagak r ON r.id = h.headoffamily WHERE r.barangay = ?"); // Use ? as a placeholder
+                                     $stmt = $con->prepare("SELECT h.id as id, h.householdno, h.totalhouseholdmembers, h.barangay, h.purok, 
+                                     CONCAT(r.lname, ', ', r.fname, ' ', r.mname) as head_of_family, 
+                                     (SELECT GROUP_CONCAT(CONCAT(lname, ', ', fname, ' ', mname) SEPARATOR '</br>') 
+                                      FROM tbltabagak 
+                                      WHERE householdnum = h.householdno AND role = 'Members') as membersname 
+                                     FROM tblhousehold h 
+                                     LEFT JOIN tbltabagak r ON r.id = h.headoffamily 
+                                     WHERE r.barangay = ?");
+               
                                      
                                      $stmt->bind_param("s", $off_barangay); // Bind the parameter
                                      $stmt->execute();
@@ -99,38 +105,8 @@ html, body {
                                      while ($row = $result->fetch_assoc()) {
                                          $deleteModalId = 'deleteModal' . $row['id'];
                                      
-                                         // Format the membersName field
-                                         $membersName = htmlspecialchars($row['membersname'], ENT_QUOTES, 'UTF-8');
-                                         
-                                         // Initialize output variable
-                                         $formatted_names_output = '';
-                                     
-                                         // Check if the membersName field is not empty and contains valid data
-                                         if (!empty($membersName) && strpos($membersName, ',') !== false) {
-                                             // Split the names by commas and trim extra spaces
-                                             $names = array_map('trim', explode(',', $membersName));
-                                     
-                                             // Create an array to hold formatted names
-                                             $formatted_names = [];
-                                     
-                                             // Loop through the names and format each one
-                                             for ($i = 0; $i < count($names); $i += 2) {
-                                                 $last_name = $names[$i];
-                                                 $first_and_middle = isset($names[$i + 1]) ? $names[$i + 1] : '';
-                                     
-                                                 // Format the name as "Lastname, Firstname Middlename Initial"
-                                                 if (!empty($last_name) || !empty($first_and_middle)) {
-                                                     $formatted_names[] = $last_name . ', ' . $first_and_middle;
-                                                 }
-                                             }
-                                     
-                                             // Join the formatted names with line breaks
-                                             $formatted_names_output = implode('</br>', $formatted_names);
-                                         } else {
-                                             // Handle cases where no valid members are found
-                                             $formatted_names_output = "No family members available";
-                                         }
-                                     
+                                         $membersName = !empty($row['membersname']) ? $row['membersname'] : "No family members available";
+
                                          echo '
                                          <tr>
                                              <td><input type="checkbox" name="chk_delete[]" class="chk_delete" value="' . htmlspecialchars($row['id'], ENT_QUOTES, 'UTF-8') . '" /></td>
@@ -139,13 +115,13 @@ html, body {
                                              <td>' . htmlspecialchars($row['head_of_family'], ENT_QUOTES, 'UTF-8') . '</td>
                                              <td>' . htmlspecialchars($row['barangay'], ENT_QUOTES, 'UTF-8') . '</td>
                                              <td>' . htmlspecialchars($row['purok'], ENT_QUOTES, 'UTF-8') . '</td>
-                                             <td>' . $formatted_names_output . '</td>
+                                             <td>' . $membersName . '</td>
                                              <td>
                                                  <button class="btn btn-primary btn-sm" data-target="#editModal' . htmlspecialchars($row['id'], ENT_QUOTES, 'UTF-8') . '" data-toggle="modal">
-                                                       <i class="fa fa-eye" aria-hidden="true"></i> View
+                                                     <i class="fa fa-eye" aria-hidden="true"></i> View
                                                  </button>
-                                                 <button class="btn btn-danger btn-sm" data-target="#' . $deleteModalId . '" data-toggle="modal" style="margin-left: 5px;color: #fff;background-color: #dc3545;border-color: #dc3545;">
-                                                       <i class="fa fa-trash" aria-hidden="true"></i> Delete
+                                                 <button class="btn btn-danger btn-sm" data-target="#deleteModal' . htmlspecialchars($row['id'], ENT_QUOTES, 'UTF-8') . '" data-toggle="modal">
+                                                     <i class="fa fa-trash" aria-hidden="true"></i> Delete
                                                  </button>
                                              </td>
                                          </tr>';
