@@ -13,7 +13,7 @@ if (isset($_POST['hhold_id']) && isset($_POST['barangay'])) {
     $barangay = sanitize_input($_POST['barangay']);
 
     // Query to fetch the head of family
-    $query = mysqli_query($con, "SELECT *, id as resID FROM tbltabagak WHERE householdno = '$hhold_id' AND barangay = '$barangay' AND role = 'Head of Family'");
+    $query = mysqli_query($con, "SELECT *, id as resID FROM tbltabagak WHERE householdnum = '$hhold_id' AND barangay = '$barangay' AND role = 'Head of Family'");
 
     if ($query && mysqli_num_rows($query) > 0) {
         echo '<option value="" disabled selected>-- Select Head of Family --</option>';
