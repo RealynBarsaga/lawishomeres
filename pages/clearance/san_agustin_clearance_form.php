@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html id="clearance">
 <head>
-    <title>Madridejos Home Residence Management System</title>
-    <link rel="icon" type="x-icon" href="../../img/lg.png">
+<title>Madridejos Home Residence Management System</title>
+<link rel="icon" type="x-icon" href="../../img/lg.png">
     <style>
         /* Styles for print media */
         @media print {
@@ -23,18 +23,17 @@
 
         /* Margin for the header section */
         .header-section {
-            margin: 0 40px 30px 40px; /* Adds left and right margin */
+            margin-bottom: 30px; /* Adds margin below the header */
         }
 
         /* Main content margin */
         .main-content {
-            margin: 0 30px; /* Adds left and right margin */
+            margin-left: 30px;
+            margin-right: 30px;
         }
-
-        /* Styles for the footer section */
-        .footer-section {
-            margin-left: 40px; /* Add left margin for the footer */
-            margin-right: 40px; /* Add right margin for the footer */
+        .header-section{
+            margin-left: 40px;
+            margin-right: 40px;
         }
         /* Overlay Image Styles */
         .overlay-image {
@@ -61,6 +60,9 @@
     <?php
     session_start(); // Start session management
 
+    // Set timezone to Manila
+    date_default_timezone_set('Asia/Manila');
+
     // Redirect to login if the user role is not set
     if (!isset($_SESSION['role'])) {
         header("Location: ../../login.php");
@@ -68,82 +70,120 @@
     }
 
     ob_start(); // Start output buffering
+    $_SESSION['clr'] = $_GET['clearance']; // Store clearance ID in session
     include('../head_css.php'); // Include CSS file
     include "../connection.php"; // Include database connection
     ?>
     <!-- Header Section -->
-    <div class="header-section" style="background: white; padding: 20px 0;">
-        <div class="col-xs-4 col-sm-3 col-md-2" style="background: white; margin-right: -124px; padding: 10px;">
-            <img src="../../admin/staff/logo/<?= $_SESSION['logo'] ?>" style="width:70%; height:120px;" />
+    <div class="header-section" style="background: white; padding: 20px 0; margin-bottom: 30px;">
+    <div class="col-xs-4 col-sm-3 col-md-2" style="background: white; margin-right: -124px; padding: 10px;">
+        <img src="../../admin/staff/logo/<?= $_SESSION['logo'] ?>" style="width:70%; height:120px;" />
+    </div>
+    <div class="col-xs-7 col-sm-6 col-md-8" style="background: white; padding: 10px;">
+        <div class="pull-left" style="font-size: 16px; margin-left: 100px; font-family: 'Courier New', Courier;">
+            <center>
+                Republic of the Philippines<br>
+                Province of Cebu<br>
+                Municipality of Madridejos
+                <b>
+                    <p style="font-size: 22px; font-family: 'Courier New', Courier; text-transform: uppercase;">Barangay <?= $_SESSION['barangay'] ?></p>
+                </b>
+            </center>
+            <p style="font-weight: bold;margin-left:-5px;">OFFICE OF THE PUNONG BARANGAY</p>
+            <hr style="border: 1px solid black; width: 252%; margin: 1px auto; position: relative; right: 210px;" />
         </div>
-        <div class="col-xs-7 col-sm-6 col-md-8" style="background: white; padding: 10px;">
-            <div class="pull-left" style="font-size: 16px; margin-left: 100px; font-family: 'Courier New', Courier;">
-                <center>
-                    Republic of the Philippines<br>
-                    Province of Cebu<br>
-                    Municipality of Madridejos
-                    <b>
-                        <p style="font-size: 22px; font-family: 'Courier New', Courier; text-transform: uppercase;color: dodgerblue !important;">Barangay <?= $_SESSION['barangay'] ?></p>
-                    </b>
-                </center>
-                <p style="text-transform: uppercase;margin-left:-10px;">OFFICE OF THE BARANGAY <?= $_SESSION['barangay'] ?></p>
-                <hr style="border: 1px solid black; width: 245%; margin: 1px auto; position: relative; right: 220px;" />
-            </div>
+    </div>
+    <div class="col-xs-4 col-sm-3 col-md-2" style="background: white; margin-left: -82px; position: relative; left: 85px; padding: 10px;">
+        <img src="../../img/lg.png" style="width:70%; height:120px;" />
+    </div>
+    <!-- Overlay Image -->
+    <img src="../../admin/staff/logo/<?= $_SESSION['logo'] ?>" class="overlay-image" />
+    </div>
+    <div class="col-xs-4 col-sm-6 col-md-3" style="margin-top: -14px;background: white; margin-left:50px; border: 1px solid black;width: 200px;height:790px;">
+        <div style="margin-top:40px; text-align: center; word-wrap: break-word;font-size:15px;">
+            <p style="font-size:12px;font-weight: 600;">BARANGAY OFFECIAL</p>
+            <?php
+            $off_barangay = $_SESSION["barangay"] ?? "";
+
+                $qry = mysqli_query($con,"SELECT * from tblbrgyofficial WHERE barangay = '$off_barangay'");
+                while($row=mysqli_fetch_array($qry)){
+                    if($row['sPosition'] == "Captain"){
+                        echo '
+                            <p style="text-align: center;">
+                            <b style="font-size:10.5px;text-decoration: underline;">HON.'.strtoupper($row['completeName']).'</b>
+                            <span style="font-size:12px;">Barangay Captain</span><br>
+                            </p><br>
+                        ';
+                    echo '
+                    <p style="font-size:12px;font-weight: 600;">
+                    SANGGUNIANG BARANGAY MEMBERS
+                    </p>';
+                    }elseif($row['sPosition'] == "Kagawad"){
+                        echo '
+                        <p style="text-align: center;">
+                        <b style="font-size:10.5px;  text-decoration: underline;">HON.'.strtoupper($row['completeName']).'</b><br>
+                        <span style="font-size:12px;">&nbsp;&nbsp;&nbsp;Barangay Kagawad</span>
+                        </p>
+                        ';
+                    }elseif($row['sPosition'] == "SK"){
+                        echo '
+                        <div style="text-align: center;"><br>
+                            <b style="font-size:10.5px; text-decoration: underline;">'.strtoupper($row['completeName']).'</b><br>
+                            <span style="font-size:12px;">SK Chairman</span><br>
+                        </div>';
+                    }elseif($row['sPosition'] == "Secretary") {
+                        echo '
+                        <div style="text-align: center;"><br>
+                            <b style="font-size:10.5px; text-decoration: underline;">'.strtoupper($row['completeName']).'</b><br>
+                            <span style="font-size:12px;">Barangay Secretary</span><br>
+                        </div>';
+                    } elseif($row['sPosition'] == "Treasurer") {
+                        echo '
+                        <div style="text-align: center;">
+                            <b style="font-size:10.5px; text-decoration: underline;">'.strtoupper($row['completeName']).'</b><br>
+                            <span style="font-size:12px;">Barangay Treasurer</span><br>
+                        </div>';
+                    }
+                }
+            ?>
         </div>
-        <div class="col-xs-4 col-sm-3 col-md-2" style="background: white; margin-left: -82px; position: relative; left: 85px; padding: 10px;">
-            <img src="../../img/lg.png" style="width:70%; height:120px;" />
-        </div>
-        <!-- Overlay Image -->
-        <img src="../../admin/staff/logo/<?= $_SESSION['logo'] ?>" class="overlay-image" />
     </div>
     <!-- Main Content -->
     <div class="main-content col-xs-12 col-md-12">
-        <p class="text-center" style="font-size: 20px; font-weight: bold; margin-right: 40px;">
-            <b style="font-size: 28px;">CERTIFICATE OF RESIDENCY</b>
+        <br><br>
+        <p class="text-center" style="font-size: 20px; font-weight: bold; margin-left: 100px;margin-top:-800px;">
+            <b style="font-size: 23px;"><u>BARANGAY CLEARANCE</u></b>
         </p>
-        <br>
-        <p style="font-size: 12px; font-family: 'Courier New', Courier;">TO WHOM IT MAY CONCERN:</p>
-        <br>
+        <p style="margin-left: 220px;font-size: 12px; font-family: 'Courier New', Courier;">TO WHOM IT MAY CONCERN:</p>
         <p>
         <?php
-        // Get barangay from session
-        $off_barangay = $_SESSION["barangay"] ?? "";
-        // Get the resident's name from the URL parameter
-        $name = $_GET['resident'];
+            // Get barangay from session
+            $off_barangay = $_SESSION["barangay"] ?? "";
+            // Get the resident's name from the URL parameter
+            $name = $_GET['resident'];
 
-        // Ensure proper escaping to avoid SQL injection
-        $name = mysqli_real_escape_string($con, $name);
-        $off_barangay = mysqli_real_escape_string($con, $off_barangay);
+            // Ensure proper escaping to avoid SQL injection
+            $name = mysqli_real_escape_string($con, $name);
+            $off_barangay = mysqli_real_escape_string($con, $off_barangay);
 
-        // Query to select clearance details along with age, bdate, and purok from tbltabagak
-        $squery = mysqli_query($con, "SELECT * FROM tblclearance WHERE name = '$name' AND barangay = '$off_barangay' LIMIT 1");
-        
-        // Loop through clearance details
-        if ($row = mysqli_fetch_array($squery)) {
-            echo "<p style='font-family: \"Courier New\", Courier, monospace; text-align: justify; font-size: 16px; margin: 10px 50px 10px 3px;'>
-                &nbsp;&nbsp;&nbsp;This is to certify that <strong>" . strtoupper($row['Name']) . "</strong>, 
-                <strong>" . $row['age'] . " years old</strong>, Filipino Citizen, is a bonafide resident of 
-                <strong>Purok " . $row['purok'] . ", " . $row['barangay'] . ", Madridejos, Cebu</strong> and 
-                personally known to me as a good and law-abiding citizen of this barangay.
-            </p>";
-        }
+            // Query to select clearance details along with age, bdate, and purok from tbltabagak
+            $squery = mysqli_query($con, "SELECT * FROM tblclearance WHERE name = '$name' AND barangay = '$off_barangay' LIMIT 1");
+            
+            // Loop through clearance details
+            if ($row = mysqli_fetch_array($squery)) {
+                echo "<p style='font-family: \"Courier New\", Courier, monospace; text-align: justify; font-size: 15px;margin-left: 220px;margin-right: 60px;'>
+                &nbsp;&nbsp;&nbsp;This is to certify that <strong>" . strtoupper($row['Name']) . "</strong> a Filipino citizen of legal Age " . $row['civilstatus'] . " with a residence and address in Purok " . $row['purok'] . ", Barangay " . $row['barangay'] . ", 
+                Madridejos, Cebu is known to me personally to be a person of good moral character, Peaceful and a law-abiding citizen in this community.<br><br>
+                &nbsp;&nbsp;I further certify that he/she has no crimininal record filed with this Barangay nor has he/she ever been convicted or indicted if any offense and that he/she has no derogatory information or whatsoever legal papers maybe presented.</p>";
+            }
         ?>
         </p>
         <br>
-        <p style="text-indent:40px; text-align: justify;">
-            <?php
-            $off_barangay = $_SESSION["barangay"] ?? ""; // Get barangay from session
-            $squery = mysqli_query($con, "SELECT * FROM tblclearance WHERE name = '$name' AND barangay = '$off_barangay' LIMIT 1");
-
-            if ($row = mysqli_fetch_array($squery)) {
-                echo "<p style='font-family: \"Courier New\", Courier, monospace; text-align: justify; font-size: 16px; margin: 10px 50px 10px 3px;'>
-                &nbsp;&nbsp;&nbsp;This certification is being issued upon the request of above-named person for <strong>" .  strtoupper($row['purpose']) . "</strong> purposes it may serve him/her best.</p>";
-            }            
-            ?> 
+        <p>
+            <strong style="margin-left: 225px;">REMARK:</strong> <hr style="border: 0.1px solid black; width: 30%; margin-left: 305px;margin-top: -15px;"/>
         </p>
         <br>
-        <br>
-        <p style="margin-left:-12px; font-size: 16px; font-family: 'Courier New', Courier; text-indent:40px; text-align: justify;margin: 10px 50px 10px 3px;">
+        <p style="margin-left: 220px; margin-right: 60px; font-family: 'Courier New', Courier; text-indent:15px; text-align: justify;">
             <?php
                 $name = $_GET['resident'];
                 $squery = mysqli_query($con, "SELECT * FROM tblclearance WHERE name = '$name' LIMIT 1");
@@ -151,18 +191,16 @@
                 if ($row = mysqli_fetch_array($squery)) {
                     $dateRecorded = $row['dateRecorded'];
                     echo "<span style='font-family: \"Courier New\", Courier, monospace; text-align: justify; font-size: 15px;'>
-                        Given this day <strong style='color: dodgerblue !important;'>". date('j', strtotime($dateRecorded)) ."<sup style='color: dodgerblue !important;'>". date('S', strtotime($dateRecorded)) ."</sup></strong> of 
-                        <strong style='color: dodgerblue !important;'>" . date('F', strtotime($dateRecorded)) . "</strong>, <strong style='color: dodgerblue !important;'>" . date('Y', strtotime($dateRecorded)) . "</strong> 
-                        at <strong style='color: dodgerblue !important;'>" . $row['barangay'] . ", Madridejos</strong><strong style='color: dodgerblue !important;'> Cebu, Philippines.</strong>
+                       &nbsp;&nbsp;In witness, whereof, I have unto affixed my signature this ". date('j', strtotime($dateRecorded)) ."<sup>". date('S', strtotime($dateRecorded)) ."</sup> day of 
+                       " . date('F', strtotime($dateRecorded)) . " " . date('Y', strtotime($dateRecorded)) . "
+                       at Barangay " . $row['barangay'] . ", Madridejos Cebu, Philippines.
                     </span>";
                 }
             ?>
         </p>
+    </p>
     </div> 
-    <div class="footer-section col-xs-offset-6 col-xs-5 col-md-offset-6 col-md-4" style="top: 380px;">
-        <i>Approved by:</i>
-        <br>
-        <br>
+    <div class="col-xs-offset-6 col-xs-5 col-md-offset-6 col-md-4" style="top: 70px;">
         <p style="text-align: center;">
             <?php
                 // Assuming a session has already been started somewhere in your code
@@ -172,9 +210,9 @@
                 while($row = mysqli_fetch_array($qry)){
                     if($row['sPosition'] == "Captain"){
                         echo '
-                        <strong style="font-size: 18px; margin-right: 3px;">HON.'.strtoupper($row['completeName']).'</strong><br>
-                        <hr style="border: 1px solid black; width: 90%; margin: 1px auto;margin-top: -15px;" />
-                        <span style="margin-left: 85px;">Punong Barangay</span>
+                        <strong style="font-size: 17px; margin-left: 40px;">HON.'.strtoupper($row['completeName']).'</strong>
+                        <hr style="border: 0.1px solid black; width: 69%; margin-left: 65px;margin-top: -15px;"/>
+                        <p style="margin-left: 110px; margin-top: -20px;">Punong Barangay</p>
                         ';
                     }
                 }
