@@ -25,7 +25,7 @@
                                 <div id="family_members_list" class="form-control input-sm" style="border: 1px solid #ccc; padding: 5px; height: 100px; overflow-y: auto;" readonly>
                                     <!-- Family member names will be dynamically added here -->
                                 </div>
-                                <input id="txt_members" name="txt_members" class="form-control input-sm hah" type="hidden"/>
+                                <input id="txt_members" name="txt_members" class="form-control input-sm" type="hidden"/>
                             </div>
                             <div class="form-group">
                                 <label>Total Household Members:</label>
@@ -94,11 +94,11 @@
 
                     if (familyMembers.length > 0 && familyMembers[0] !== "No family members found") {
                         familyMembers.forEach(function(memberName) {
-                            $('#family_members_list').append('<input type="text" class="form-control input-sm" value="' + memberName + '" readonly />');
+                            $('#family_members_list').append('<input type="text" name="txt_members" class="form-control input-sm" value="' + memberName + '" readonly />');
                         });
                         $('#txt_members').val(familyMembers.join(', '));
                     } else {
-                        $('#family_members_list').append('<input type="text" class="form-control input-sm" value="No family members found" readonly />');
+                        $('#family_members_list').append('<input type="text" name="txt_members" class="form-control input-sm" value="No family members found" readonly />');
                     }
 
                     updateTotalMembers();
