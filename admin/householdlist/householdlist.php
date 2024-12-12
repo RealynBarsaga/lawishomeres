@@ -97,30 +97,13 @@ html, body {
                                                   // Format the membersname field
                                                   $membersName = !empty($row['membersname']) ? nl2br(htmlspecialchars($row['membersname'], ENT_QUOTES, 'UTF-8')) : "No family members available";
                                                   
-                                                  // Split the names by commas and trim extra spaces
-                                                  $names = array_map('trim', explode(',', $membersname));
-                                              
-                                                  // Create an array to hold formatted names
-                                                  $formatted_names = [];
-                                              
-                                                  // Loop through the names and format each one
-                                                  for ($i = 0; $i < count($names); $i += 2) {
-                                                      $last_name = $names[$i];
-                                                      $first_and_middle = isset($names[$i + 1]) ? $names[$i + 1] : '';
-                                              
-                                                      // Format the name as "Lastname, Firstname Middlename Initial"
-                                                      $formatted_names[] = $last_name . ', ' . $first_and_middle;
-                                                  }
-                                              
-                                                  // Join the formatted names with line breaks
-                                                  $formatted_names_output = implode('<br>', $formatted_names);
                                                   echo '
                                                   <tr>
                                                       <td>'.$row['id'].'</td>
                                                       <td>'.$row['householdno'].'</td>
                                                       <td>'.$row['name'].'</td>
                                                       <td>'.$row['totalhouseholdmembers'].'</td>
-                                                      <td>' . $formatted_names_output . '</td>
+                                                      <td>' . $membersName . '</td>
                                                       <td>'.$row['barangay'].'</td>
                                                   </tr>';
                                               }
