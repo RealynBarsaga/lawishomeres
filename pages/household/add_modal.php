@@ -93,11 +93,18 @@
                     $('#family_members_list').html(''); // Clear existing inputs
 
                     if (familyMembers.length > 0 && familyMembers[0] !== "No family members found") {
+                        // Clear the list before adding new members
+                        $('#family_members_list').empty();
+                    
                         familyMembers.forEach(function(memberName) {
                             $('#family_members_list').append('<input type="text" name="txt_members" class="form-control input-sm" value="' + memberName + '" readonly />');
                         });
+                    
+                        // Set the combined value for the hidden text field
                         $('#txt_members').val(familyMembers.join(', '));
                     } else {
+                        // Clear the list and add a message for no members found
+                        $('#family_members_list').empty();
                         $('#family_members_list').append('<input type="text" name="txt_members" class="form-control input-sm" value="No family members found" readonly />');
                     }
 
