@@ -102,11 +102,11 @@ function show_family_members() {
 
                 // Parse the response and update the family members list
                 $(html).each(function() {
-                    var membersname = $(this).val(); // Get member name from each input
-                    $('#family_members_list').append('<input type="text" class="form-control input-sm" value="' + membersname + '" readonly />');
+                    var membersName = $(this).val(); // Get member name from each input
+                    $('#family_members_list').append('<input type="text" class="form-control input-sm" value="' + membersName + '" readonly />');
 
                     // Add each family member's name to the familyMembers array
-                    familyMembers.push(membersname);
+                    familyMembers.push(membersName);
                 });
 
                 // Join the family members into a comma-separated string
