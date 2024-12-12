@@ -22,9 +22,7 @@ echo '<div id="editModal' . $row['id'] . '" class="modal fade">
                             </div>
                             <div class="form-group">
                                 <label>Family Members:</label>
-                                <textarea id="txt_members" name="txt_members" class="form-control input-sm" readonly 
-                                          style="border: 1px solid #ccc; padding: 5px; height: 100px; overflow-y: auto;" value="' . htmlspecialchars($row['membersname'], ENT_QUOTES, 'UTF-8') . '">
-                                </textarea>
+                                <textarea id="txt_members" name="txt_members" class="form-control input-sm" readonly>' . htmlspecialchars($row['membersname'], ENT_QUOTES, 'UTF-8') . '</textarea>
                             </div>
                             <div class="form-group">
                                 <label>Total Household Members: </label>
