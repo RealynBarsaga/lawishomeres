@@ -51,7 +51,6 @@
         </div>
     </form>
 </div>
-
 <script>
 // Assuming barangay information is passed in a hidden field or directly in JavaScript
 var loggedInBarangay = '<?= $_SESSION["barangay"] ?? ""; ?>'; // Pass PHP session variable to JS
