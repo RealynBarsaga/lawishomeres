@@ -81,7 +81,7 @@ html, body {
                                                  CONCAT(r.lname, ', ', r.fname, ' ', r.mname) as name, 
                                                  b.barangay,
                                                  (
-                                                     SELECT GROUP_CONCAT(CONCAT(lname, ', ', fname, ' ', mname) SEPARATOR '</br>') 
+                                                     SELECT GROUP_CONCAT(CONCAT(lname, ', ', fname, ' ', mname) SEPARATOR '\n') AS names
                                                      FROM tbltabagak 
                                                      WHERE householdnum = h.householdno AND role = 'Members'
                                                  ) as membersname
