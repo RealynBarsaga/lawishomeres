@@ -126,8 +126,8 @@ html, body {
                                             // Join the formatted names with line breaks
                                             $formatted_names_output = implode('</br>', $formatted_names);
                                         } else {
-                                            // Handle cases where no valid members are found
-                                            $formatted_names_output = "(" . htmlspecialchars($row['membersname'], ENT_QUOTES, 'UTF-8') . ")";
+                                           // Handle cases where no valid members are found
+                                          $formatted_names_output = !empty($row['membersname']) ? $row['membersname'] : "No family members available";
                                         }
                                         
                                      
