@@ -99,19 +99,37 @@ html, body {
                                      while ($row = $result->fetch_assoc()) {
                                          $deleteModalId = 'deleteModal' . $row['id'];
                                      
-                                        $membersName = htmlspecialchars($row['membersname'], ENT_QUOTES, 'UTF-8');
-
-                                        // Check for valid data
-                                        if (!empty($membersName) && strpos($membersName, ',') !== false) {
-                                            $names = array_map('trim', explode(',', $membersName));
-                                            $formatted_names = [];
-                                            for ($i = 0; $i < count($names); $i++) {
-                                                $formatted_names[] = $names[$i];
-                                            }
-                                            $formatted_names_output = implode('<br/>', $formatted_names);
-                                        } else {
-                                            $formatted_names_output = "No family members available";
-                                        }
+                                         // Format the membersName field
+                                         $membersName = htmlspecialchars($row['membersname'], ENT_QUOTES, 'UTF-8');
+                                         
+                                         // Initialize output variable
+                                         $formatted_names_output = '';
+                                     
+                                         // Check if the membersName field is not empty and contains valid data
+                                         if (!empty($membersName) && strpos($membersName, ',') !== false) {
+                                             // Split the names by commas and trim extra spaces
+                                             $names = array_map('trim', explode(',', $membersName));
+                                     
+                                             // Create an array to hold formatted names
+                                             $formatted_names = [];
+                                     
+                                             // Loop through the names and format each one
+                                             for ($i = 0; $i < count($names); $i += 2) {
+                                                 $last_name = $names[$i];
+                                                 $first_and_middle = isset($names[$i + 1]) ? $names[$i + 1] : '';
+                                     
+                                                 // Format the name as "Lastname, Firstname Middlename Initial"
+                                                 if (!empty($last_name) || !empty($first_and_middle)) {
+                                                     $formatted_names[] = $last_name . ', ' . $first_and_middle;
+                                                 }
+                                             }
+                                     
+                                             // Join the formatted names with line breaks
+                                             $formatted_names_output = implode('</br>', $formatted_names);
+                                         } else {
+                                             // Handle cases where no valid members are found
+                                             $formatted_names_output = "No family members available";
+                                         }
                                      
                                          echo '
                                          <tr>
