@@ -87,63 +87,75 @@ html, body {
                                     </thead>
                                     <tbody>
                                     <?php
-                                    $stmt = $con->prepare("SELECT *, h.id as id, CONCAT(r.lname, ', ', r.fname, ' ', r.mname) as head_of_family 
-                                    FROM tblhousehold h 
-                                    LEFT JOIN tbltabagak r ON r.id = h.headoffamily WHERE r.barangay = ? "); // Use ? as a placeholder
-                                    
-                                    $stmt->bind_param("s", $off_barangay); // Bind the parameter
-                                    $stmt->execute();
-                                    $result = $stmt->get_result();
-                                    
-                                    // Fetch and display the results
-                                    while ($row = $result->fetch_assoc()) {
-                                        $deleteModalId = 'deleteModal' . $row['id'];
+                                     $stmt = $con->prepare("SELECT *, h.id as id, CONCAT(r.lname, ', ', r.fname, ' ', r.mname) as head_of_family 
+                                         FROM tblhousehold h 
+                                         LEFT JOIN tbltabagak r ON r.id = h.headoffamily WHERE r.barangay = ?"); // Use ? as a placeholder
+                                     
+                                     $stmt->bind_param("s", $off_barangay); // Bind the parameter
+                                     $stmt->execute();
+                                     $result = $stmt->get_result();
+                                     
+                                     // Fetch and display the results
+                                     while ($row = $result->fetch_assoc()) {
+                                         $deleteModalId = 'deleteModal' . $row['id'];
+                                     
+                                         // Format the membersname field
+                                         $membersname = htmlspecialchars($row['membersname'], ENT_QUOTES, 'UTF-8');
+                                         
+                                         // Initialize output variable
+                                         $formatted_names_output = '';
+                                     
+                                         // Check if the membersname field is not empty and contains valid data
+                                         if (!empty($membersname) && strpos($membersname, ',') !== false) {
+                                             // Split the names by commas and trim extra spaces
+                                             $names = array_map('trim', explode(',', $membersname));
+                                     
+                                             // Create an array to hold formatted names
+                                             $formatted_names = [];
+                                     
+                                             // Loop through the names and format each one
+                                             for ($i = 0; $i < count($names); $i += 2) {
+                                                 $last_name = $names[$i];
+                                                 $first_and_middle = isset($names[$i + 1]) ? $names[$i + 1] : '';
+                                     
+                                                 // Format the name as "Lastname, Firstname Middlename Initial"
+                                                 if (!empty($last_name) || !empty($first_and_middle)) {
+                                                     $formatted_names[] = $last_name . ', ' . $first_and_middle;
+                                                 }
+                                             }
+                                     
+                                             // Join the formatted names with line breaks
+                                             $formatted_names_output = implode('</br>', $formatted_names);
+                                         } else {
+                                             // Handle cases where no valid members are found
+                                             $formatted_names_output = "No family members available";
+                                         }
+                                     
+                                         echo '
+                                         <tr>
+                                             <td><input type="checkbox" name="chk_delete[]" class="chk_delete" value="' . htmlspecialchars($row['id'], ENT_QUOTES, 'UTF-8') . '" /></td>
+                                             <td><a href="../resident/resident.php?resident=' . htmlspecialchars($row['householdno'], ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($row['householdno'], ENT_QUOTES, 'UTF-8') . '</a></td>
+                                             <td>' . htmlspecialchars($row['totalhouseholdmembers'], ENT_QUOTES, 'UTF-8') . '</td>
+                                             <td>' . htmlspecialchars($row['head_of_family'], ENT_QUOTES, 'UTF-8') . '</td>
+                                             <td>' . htmlspecialchars($row['barangay'], ENT_QUOTES, 'UTF-8') . '</td>
+                                             <td>' . htmlspecialchars($row['purok'], ENT_QUOTES, 'UTF-8') . '</td>
+                                             <td>' . $formatted_names_output . '</td>
+                                             <td>
+                                                 <button class="btn btn-primary btn-sm" data-target="#editModal' . htmlspecialchars($row['id'], ENT_QUOTES, 'UTF-8') . '" data-toggle="modal">
+                                                       <i class="fa fa-eye" aria-hidden="true"></i> View
+                                                 </button>
+                                                 <button class="btn btn-danger btn-sm" data-target="#' . $deleteModalId . '" data-toggle="modal" style="margin-left: 5px;color: #fff;background-color: #dc3545;border-color: #dc3545;">
+                                                       <i class="fa fa-trash" aria-hidden="true"></i> Delete
+                                                 </button>
+                                             </td>
+                                         </tr>';
+                                         
+                                         // Include the edit and delete modals
+                                         include "edit_modal.php";
+                                         include "delete_modal.php";
+                                     }
+                                     ?>
 
-                                        // Format the membersname field
-                                        $membersname = htmlspecialchars($row['membersname'], ENT_QUOTES, 'UTF-8');
-                                        
-                                        // Split the names by commas and trim extra spaces
-                                        $names = array_map('trim', explode(',', $membersname));
-                                    
-                                        // Create an array to hold formatted names
-                                        $formatted_names = [];
-                                    
-                                        // Loop through the names and format each one
-                                        for ($i = 0; $i < count($names); $i += 2) {
-                                            $last_name = $names[$i];
-                                            $first_and_middle = isset($names[$i + 1]) ? $names[$i + 1] : '';
-                                    
-                                            // Format the name as "Lastname, Firstname Middlename Initial"
-                                            $formatted_names[] = $last_name . ', ' . $first_and_middle;
-                                        }
-                                    
-                                        // Join the formatted names with line breaks
-                                        $formatted_names_output = implode('</br>', $formatted_names);
-                                    
-                                        echo '
-                                        <tr>
-                                            <td><input type="checkbox" name="chk_delete[]" class="chk_delete" value="' . htmlspecialchars($row['id'], ENT_QUOTES, 'UTF-8') . '" /></td>
-                                            <td><a href="../resident/resident.php?resident=' . htmlspecialchars($row['householdno'], ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($row['householdno'], ENT_QUOTES, 'UTF-8') . '</a></td>
-                                            <td>' . htmlspecialchars($row['totalhouseholdmembers'], ENT_QUOTES, 'UTF-8') . '</td>
-                                            <td>' . htmlspecialchars($row['head_of_family'], ENT_QUOTES, 'UTF-8') . '</td>
-                                            <td>' . htmlspecialchars($row['barangay'], ENT_QUOTES, 'UTF-8') . '</td>
-                                            <td>' . htmlspecialchars($row['purok'], ENT_QUOTES, 'UTF-8') . '</td>
-                                            <td>' . $formatted_names_output . '</td>
-                                            <td>
-                                                <button class="btn btn-primary btn-sm" data-target="#editModal' . htmlspecialchars($row['id'], ENT_QUOTES, 'UTF-8') . '" data-toggle="modal">
-                                                    <i class="fa fa-eye" aria-hidden="true"></i> View
-                                                </button>
-                                                <button class="btn btn-danger btn-sm" data-target="#' . $deleteModalId . '" data-toggle="modal" style="margin-left: 5px;color: #fff;background-color: #dc3545;border-color: #dc3545;">
-                                                    <i class="fa fa-trash" aria-hidden="true"></i> Delete
-                                                </button>
-                                            </td>
-                                        </tr>';
-                                    
-                                        // Include the edit modal
-                                        include "edit_modal.php";
-                                        include "delete_modal.php";
-                                    }
-                                    ?>
                                     </tbody>
                                 </table>
                                 <?php include "../deleteModal.php"; ?>
