@@ -39,13 +39,17 @@
 
                             <div class="form-group">
                                 <label>Username:</label>
-                                <input name="txt_uname" class="form-control input-sm" id="username" type="text" placeholder="Username" pattern="^(?!\s*$)[A-Za-z\s.,]+$" required/>
+                                <input name="txt_uname" class="form-control input-sm" id="username" type="text" placeholder="Username" required
+                                pattern="^(?!\s)(?!.*<script>)(?!.*<\/script>).*[\w\s]*$" 
+                                title="Spaces and <script></script> tags are not allowed."/>
                                 <label id="user_msg" class="text-danger"></label>
                             </div>
 
                             <div class="form-group">
                                 <label>Email:</label>
-                                <input name="txt_email" class="form-control input-sm" type="email" placeholder="Ex: juan@sample.com" required/>
+                                <input name="txt_email" class="form-control input-sm" type="email" placeholder="Ex: juan@sample.com" required
+                                pattern="^(?!\s)(?!.*<script>)(?!.*<\/script>).*[\w\s]*$" 
+                                title="Spaces and <script></script> tags are not allowed."/>
                             </div>
 
                             <div class="form-group">

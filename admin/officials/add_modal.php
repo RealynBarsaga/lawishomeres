@@ -22,7 +22,9 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Name: <span style="color:gray; font-size: 10px;">(Firstname Middlename, Lastname)</span></label>
-                                    <input name="txt_cname" class="form-control input-sm" type="text" placeholder="Firstname Middlename, Lastname" pattern="^(?!\s*$)[A-Za-z\s.,]+$" required/>
+                                    <input name="txt_cname" class="form-control input-sm" type="text" placeholder="Firstname Middlename, Lastname" required
+                                    pattern="^(?!\s)(?!.*<script>)(?!.*<\/script>).*[\w\s]*$" 
+                                    title="Spaces and <script></script> tags are not allowed."/>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Image:</label>
@@ -36,7 +38,9 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Address:</label>
-                                    <input name="txt_address" class="form-control input-sm" type="text" placeholder="Ex.Talangnan, Madridejos, Cebu" pattern="^(?!\s*$)[A-Za-z\s.,]+$" required/>
+                                    <input name="txt_address" class="form-control input-sm" type="text" placeholder="Ex.Talangnan, Madridejos, Cebu" required
+                                    pattern="^(?!\s)(?!.*<script>)(?!.*<\/script>).*[\w\s]*$" 
+                                    title="Spaces and <script></script> tags are not allowed."/>
                                 </div>
                                 <div class="form-group">
                                     <label>Start Term:</label>

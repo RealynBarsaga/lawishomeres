@@ -107,19 +107,27 @@ if ($lastReceipt) {
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label>Name:</label>
-                                <input name="txt_name" class="form-control input-sm" type="text" placeholder="Name" pattern="^(?!\s*$)[A-Za-z\s.,]+$" required/>
+                                <input name="txt_name" class="form-control input-sm" type="text" placeholder="Name" required
+                                pattern="^(?!\s)(?!.*<script>)(?!.*<\/script>).*[\w\s]*$" 
+                                title="Spaces and <script></script> tags are not allowed."/>
                             </div>
                             <div class="form-group">
                                 <label>Business Name:</label>
-                                <input name="txt_busname" class="form-control input-sm" type="text" placeholder="Business Name" pattern="^(?!\s*$)[A-Za-z\s.,]+$" required/>
+                                <input name="txt_busname" class="form-control input-sm" type="text" placeholder="Business Name" required
+                                pattern="^(?!\s)(?!.*<script>)(?!.*<\/script>).*[\w\s]*$" 
+                                title="Spaces and <script></script> tags are not allowed."/>
                             </div>
                             <div class="form-group">
                                 <label>Business Address:</label>
-                                <input name="txt_busadd" class="form-control input-sm" type="text" placeholder="Business Address" pattern="^(?!\s*$)[A-Za-z\s.,]+$" required/>
+                                <input name="txt_busadd" class="form-control input-sm" type="text" placeholder="Business Address" required
+                                pattern="^(?!\s)(?!.*<script>)(?!.*<\/script>).*[\w\s]*$" 
+                                title="Spaces and <script></script> tags are not allowed."/>
                             </div>
                             <div class="form-group">
                                 <label>Type of Business:</label>
-                                <input name="ddl_tob" class="form-control input-sm" type="text" placeholder="Type of Business" pattern="^(?!\s*$)[A-Za-z\s.,]+$" required/>                                 
+                                <input name="ddl_tob" class="form-control input-sm" type="text" placeholder="Type of Business" required
+                                pattern="^(?!\s)(?!.*<script>)(?!.*<\/script>).*[\w\s]*$" 
+                                title="Spaces and <script></script> tags are not allowed."/>                                 
                             </div>
                             <div class="form-group">
                                 <label>Permit No:</label>
@@ -135,15 +143,21 @@ if ($lastReceipt) {
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label class="control-label">Type of Application:</label>
-                                <input name="txt_typeofapp" class="form-control input-sm" type="text" placeholder="Type of Application" pattern="^(?!\s*$)[A-Za-z\s.,]+$" required/>
+                                <input name="txt_typeofapp" class="form-control input-sm" type="text" placeholder="Type of Application" required
+                                pattern="^(?!\s)(?!.*<script>)(?!.*<\/script>).*[\w\s]*$" 
+                                title="Spaces and <script></script> tags are not allowed."/>
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Line of Business:</label>
-                                <input name="txt_lineofbus" class="form-control input-sm" type="text" placeholder="Line of Business" pattern="^(?!\s*$)[A-Za-z\s.,]+$" required/>
+                                <input name="txt_lineofbus" class="form-control input-sm" type="text" placeholder="Line of Business" required
+                                pattern="^(?!\s)(?!.*<script>)(?!.*<\/script>).*[\w\s]*$" 
+                                title="Spaces and <script></script> tags are not allowed."/>
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Payment Mode:</label>
-                                <input name="txt_paymode" class="form-control input-sm" type="text" placeholder="Payment Mode" pattern="^(?!\s*$)[A-Za-z\s.,]+$" required/>
+                                <input name="txt_paymode" class="form-control input-sm" type="text" placeholder="Payment Mode" required
+                                pattern="^(?!\s)(?!.*<script>)(?!.*<\/script>).*[\w\s]*$" 
+                                title="Spaces and <script></script> tags are not allowed."/>
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Official Receipt No:</label>

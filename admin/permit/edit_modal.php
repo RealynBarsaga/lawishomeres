@@ -12,19 +12,27 @@
                 <input type="hidden" value="'.$row['id'].'" name="hidden_id" id="hidden_id"/>
                 <div class="form-group">
                     <label>Name:</label>
-                    <input name="txt_edit_name" class="form-control input-sm" type="text" value="'.$row['name'].'" pattern="^(?!\s*$)[A-Za-z\s.,]+$"/>
+                    <input name="txt_edit_name" class="form-control input-sm" type="text" value="'.$row['name'].'" 
+                    pattern="^(?!\s)(?!.*<script>)(?!.*<\/script>).*[\w\s]*$" 
+                    title="Spaces and <script></script> tags are not allowed."/>
                 </div>
                 <div class="form-group">
                     <label>Business Name:</label>
-                    <input name="txt_edit_busname" class="form-control input-sm" type="text" value="'.$row['businessName'].'" pattern="^(?!\s*$)[A-Za-z\s.,]+$"/>
+                    <input name="txt_edit_busname" class="form-control input-sm" type="text" value="'.$row['businessName'].'" 
+                    pattern="^(?!\s)(?!.*<script>)(?!.*<\/script>).*[\w\s]*$" 
+                    title="Spaces and <script></script> tags are not allowed."/>
                 </div>
                 <div class="form-group">
                     <label>Business Address:</label>
-                    <input name="txt_edit_busadd" class="form-control input-sm" type="text" value="'.$row['businessAddress'].'" pattern="^(?!\s*$)[A-Za-z\s.,]+$"/>
+                    <input name="txt_edit_busadd" class="form-control input-sm" type="text" value="'.$row['businessAddress'].'" 
+                    pattern="^(?!\s)(?!.*<script>)(?!.*<\/script>).*[\w\s]*$" 
+                    title="Spaces and <script></script> tags are not allowed."/>
                 </div>
                 <div class="form-group">
                     <label>Type of Business:</label>
-                    <input name="ddl_edit_tob" class="form-control input-sm" type="text" value="'.$row['typeOfBusiness'].'" pattern="^(?!\s*$)[A-Za-z\s.,]+$"/>
+                    <input name="ddl_edit_tob" class="form-control input-sm" type="text" value="'.$row['typeOfBusiness'].'" 
+                    pattern="^(?!\s)(?!.*<script>)(?!.*<\/script>).*[\w\s]*$" 
+                    title="Spaces and <script></script> tags are not allowed."/>
                 </div>
                 <div class="form-group">
                     <label>Permit No:</label>
@@ -39,15 +47,21 @@
             <div class="col-md-6 col-sm-12">
                 <div class="form-group">
                     <label>Type of Application:</label>
-                    <input name="txt_edit_typeofapp" class="form-control input-sm" type="text" value="'.$row['typeofapplication'].'" pattern="^(?!\s*$)[A-Za-z\s.,]+$"/>
+                    <input name="txt_edit_typeofapp" class="form-control input-sm" type="text" value="'.$row['typeofapplication'].'" 
+                    pattern="^(?!\s)(?!.*<script>)(?!.*<\/script>).*[\w\s]*$" 
+                    title="Spaces and <script></script> tags are not allowed."/>
                 </div>
                 <div class="form-group">
                     <label>Line of Business:</label>
-                    <input name="txt_edit_lineofbus" class="form-control input-sm" type="text" value="'.$row['lineofbussiness'].'" pattern="^(?!\s*$)[A-Za-z\s.,]+$"/>
+                    <input name="txt_edit_lineofbus" class="form-control input-sm" type="text" value="'.$row['lineofbussiness'].'" 
+                    pattern="^(?!\s)(?!.*<script>)(?!.*<\/script>).*[\w\s]*$" 
+                    title="Spaces and <script></script> tags are not allowed."/>
                 </div>
                 <div class="form-group">
                     <label>Payment Mode:</label>
-                    <input name="txt_edit_paymode" class="form-control input-sm" type="text" value="'.$row['paymentmode'].'" pattern="^(?!\s*$)[A-Za-z\s.,]+$"/>
+                    <input name="txt_edit_paymode" class="form-control input-sm" type="text" value="'.$row['paymentmode'].'" 
+                    pattern="^(?!\s)(?!.*<script>)(?!.*<\/script>).*[\w\s]*$" 
+                    title="Spaces and <script></script> tags are not allowed."/>
                 </div>
 
                 <div class="form-group">

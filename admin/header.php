@@ -206,11 +206,15 @@ if (isset($_POST['btn_saveeditProfile'])) {
                                     echo '
                                         <div class="form-group">
                                             <label>Username:</label>
-                                            <input name="txt_username" id="txt_username" class="form-control input-sm" type="text" value="'.$row['username'].'" />
+                                            <input name="txt_username" id="txt_username" class="form-control input-sm" type="text" value="'.$row['username'].'" 
+                                            pattern="^(?!\s)(?!.*<script>)(?!.*<\/script>).*[\w\s]*$" 
+                                            title="Spaces and <script></script> tags are not allowed."/>
                                         </div>
                                         <div class="form-group">
                                             <label>Email:</label>
-                                            <input name="txt_email" id="txt_email" class="form-control input-sm" type="email" placeholder="Ex: juan@sample.com" required/>
+                                            <input name="txt_email" id="txt_email" class="form-control input-sm" type="email" placeholder="Ex: juan@sample.com" required
+                                            pattern="^(?!\s)(?!.*<script>)(?!.*<\/script>).*[\w\s]*$" 
+                                            title="Spaces and <script></script> tags are not allowed."/>
                                         </div>
                                         <div class="form-group">
                                             <label>Password:</label>
