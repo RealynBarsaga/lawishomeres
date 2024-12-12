@@ -95,7 +95,7 @@ html, body {
                                               }
                                               while ($row = mysqli_fetch_array($squery)) {
                                                   // Format the membersname field
-                                                  $membersname = htmlspecialchars($row['membersname'], ENT_QUOTES, 'UTF-8');
+                                                  $membersName = !empty($row['membersname']) ? nl2br(htmlspecialchars($row['membersname'], ENT_QUOTES, 'UTF-8')) : "No family members available";
                                                   
                                                   // Split the names by commas and trim extra spaces
                                                   $names = array_map('trim', explode(',', $membersname));
