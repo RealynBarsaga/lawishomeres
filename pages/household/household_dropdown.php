@@ -59,7 +59,7 @@ if (isset($_POST['hof_id']) && isset($_POST['barangay'])) {
     $barangay = sanitize_input($_POST['barangay']);
 
     // Query to get family members excluding the head of family
-    $query = mysqli_query($con, "SELECT householdnum FROM tbltabagak WHERE id = '$hof_id' AND barangay = '$barangay' AND role != 'Head of Family'");
+    $query = mysqli_query($con, "SELECT * FROM tbltabagak WHERE householdnum = (SELECT householdnum FROM tbltabagak WHERE id = '$hof_id') AND barangay = '$barangay' AND role != 'Head of Family'");
 
     if ($query && mysqli_num_rows($query) > 0) {
         $familyMembers = [];
