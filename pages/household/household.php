@@ -99,16 +99,16 @@ html, body {
                                      while ($row = $result->fetch_assoc()) {
                                          $deleteModalId = 'deleteModal' . $row['id'];
                                      
-                                         // Format the membersname field
-                                         $membersname = htmlspecialchars($row['membersname'], ENT_QUOTES, 'UTF-8');
+                                         // Format the membersName field
+                                         $membersName = htmlspecialchars($row['membersname'], ENT_QUOTES, 'UTF-8');
                                          
                                          // Initialize output variable
                                          $formatted_names_output = '';
                                      
-                                         // Check if the membersname field is not empty and contains valid data
-                                         if (!empty($membersname) && strpos($membersname, ',') !== false) {
+                                         // Check if the membersName field is not empty and contains valid data
+                                         if (!empty($membersName) && strpos($membersName, ',') !== false) {
                                              // Split the names by commas and trim extra spaces
-                                             $names = array_map('trim', explode(',', $membersname));
+                                             $names = array_map('trim', explode(',', $membersName));
                                      
                                              // Create an array to hold formatted names
                                              $formatted_names = [];
