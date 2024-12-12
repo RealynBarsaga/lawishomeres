@@ -108,7 +108,7 @@ mysqli_stmt_close($stmt);
                                 "Tugas" => ["Bombil A", "Bombil B", "Roses A", "Roses B", "Gomamela A", "Gomamela B", "Kumintang A", "Kumintang B", "Santan", "GK-Tugas"],
                                 "Malbago" => ["Bolinao", "Tulingan", "Tangigue", "Nukos", "Danggit", "Bangus"],
                                 "Tarong" => ["Orchids", "Gumamela 1", "Gumamela 2", "Santan 1", "Santan 2", "Rose 1", "Rose 2", "Vietnam Rose", "Kumintang 1", "Kumintang 2", "Sunflower", "Daisy"],
-                                /* "San Agustin" => ["Purok", "Puroks"], */
+                                "San Agustin" => ["Proper", "Langob", "Tagaytay", "Mahayahay", "Baybay", "Desamperado"],
                                 // Add purok options for other barangays
                             ];
                         ?>

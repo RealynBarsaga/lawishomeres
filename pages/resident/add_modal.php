@@ -69,6 +69,7 @@
                                     "Kaongkod" => ["Kalubihan", "Kamanggahan", "Ipil-Ipil", "Pukotan 1", "Pukotan 2", "Bugsayan 1", "Bugsayan 2", "Kasagingan 1", "Kasagingan 2", "Maisan 1", "Maisan 2", "Maisan 3"],
                                     "Malbago" => ["Bolinao", "Tulingan", "Tangigue", "Nukos", "Danggit", "Bangus"],
                                     "Kangwayan" => ["Nangka", "Mangga", "Lutak", "Kulo"],
+                                    "San Agustin" => ["Proper", "Langob", "Tagaytay", "Mahayahay", "Baybay", "Desamperado"],
 
                                 ];
                                 ?>
