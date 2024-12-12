@@ -70,6 +70,8 @@
                                     "Malbago" => ["Bolinao", "Tulingan", "Tangigue", "Nukos", "Danggit", "Bangus"],
                                     "Kangwayan" => ["Nangka", "Mangga", "Lutak", "Kulo"],
                                     "San Agustin" => ["Proper", "Langob", "Tagaytay", "Mahayahay", "Baybay", "Desamperado"],
+                                    "Mancilang" => ["di mohatag saila information"],
+                                    "Poblacion" => ["di mohatag saila information"],
 
                                 ];
                                 ?>

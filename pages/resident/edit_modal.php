@@ -55,11 +55,11 @@ echo '<div id="editModal'.$row['id'].'" class="modal fade" role="dialog">
                                     "Bunakan" => ["Bilabid", "Helinggero", "Kamaisan", "Kalubian", "Samonite"],
                                     "Kodia" => ["Mahugany", "Tugas", "Lumboy", "Dita", "Magtalisay", "Kawayan", "Bakhaw", "La Kodia Village"],
                                     "Talangnan" => ["Gawot", "Lawihan", "Danggit", "Helinguero", "Tangigue", "Nukos", "Gusaw", "Tabagak"],
-                                    /*  "Poblacion" => ["",], */
+                                    "Poblacion" => ["di mohatag saila information"],
                                     "Maalat" => ["Neem Tree", "Talisay", "Kabakhawan", "Mahogany", "Gmelina"],
                                     "Pili" => ["Malinawon", "Mahigugmaon", "Matinabangun", "Maabtikon", "Malipayon", "Mauswagon"],
                                     "Kaongkod" => ["Kalubihan", "Kamanggahan", "Ipil-Ipil", "Pukotan 1", "Pukotan 2", "Bugsayan 1", "Bugsayan 2", "Kasagingan 1", "Kasagingan 2", "Maisan 1", "Maisan 2", "Maisan 3"],
-                                    /* "Mancilang" => ["Purok", "Puroks"], */
+                                    "Mancilang" => ["di mohatag saila information"],
                                     "Kangwayan" => ["Nangka", "Mangga", "Lutak", "Kulo"],
                                     "Tugas" => ["Bombil A", "Bombil B", "Roses A", "Roses B", "Gomamela A", "Gomamela B", "Kumintang A", "Kumintang B", "Santan", "GK-Tugas"],
                                     "Malbago" => ["Bolinao", "Tulingan", "Tangigue", "Nukos", "Danggit", "Bangus"],
@@ -211,16 +211,22 @@ document.addEventListener('DOMContentLoaded', function() {
         'Maalat': ['Neem Tree', 'Talisay', 'Kabakhawan', 'Mahogany', 'Gmelina'],
         'Pili': ['Malinawon', 'Mahigugmaon', 'Matinabangun', 'Maabtikon', 'Malipayon', 'Mauswagon'],
         'Tarong': ['Orchids', 'Gumamela', 'Santan', 'Rose', 'Vietnam Rose', 'Kumintang', 'Sunflower', 'Daisy'],
-        // You can uncomment and add more barangays and their corresponding puroks here
-        // 'Kodia': ["Purok X", "Purok Y", "Purok Z"],
-        // 'Talangnan': ["Purok A", "Purok B"],
-        // 'Poblacion': ["Purok 1", "Purok 2"],
-        // 'Kaongkod': ["Purok", "Puroks"],
-        // 'Mancilang': ["Purok", "Puroks"],
-        // 'Kangwayan': ["Purok", "Puroks"],
-        // 'Tugas': ["Purok", "Puroks"],
-        // 'Malbago': ["Purok", "Puroks"],
-        // 'San Agustin': ["Purok", "Puroks"],
+        'Kodia': ['Mahugany', 'Tugas', 'Lumboy', 'Dita', 'Magtalisay', 'Kawayan', 'Bakhaw', 'La Kodia Village'],
+        'Talangnan': ['Gawot', 'Lawihan', 'Danggit', 'Helinguero', 'Tangigue', 'Nukos', 'Gusaw', 'Tabagak'],
+        'Poblacion': ['di mohatag saila information'],
+        'Kaongkod': [
+            'Kalubihan', 'Kamanggahan', 'Ipil-Ipil', 'Pukotan 1', 'Pukotan 2',
+            'Bugsayan 1', 'Bugsayan 2', 'Kasagingan 1', 'Kasagingan 2',
+            'Maisan 1', 'Maisan 2', 'Maisan 3'
+        ],
+        'Mancilang': ['di mohatag saila information'],
+        'Kangwayan': ['Nangka', 'Mangga', 'Lutak', 'Kulo'],
+        'Tugas': [
+            'Bombil A', 'Bombil B', 'Roses A', 'Roses B', 'Gomamela A',
+            'Gomamela B', 'Kumintang A', 'Kumintang B', 'Santan', 'GK-Tugas'
+        ],
+        'Malbago': ['Bolinao', 'Tulingan', 'Tangigue', 'Nukos', 'Danggit', 'Bangus'],
+        'San Agustin': ['Proper', 'Langob', 'Tagaytay', 'Mahayahay', 'Baybay', 'Desamperado']
     };
     
     function updatePurokOptions() {

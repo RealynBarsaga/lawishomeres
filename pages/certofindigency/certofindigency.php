@@ -89,14 +89,14 @@ html, body {
                                             "Bunakan" => "bunakan_indigency_form",
                                             "Kodia" => "kodia_residency_form",
                                             "Talangnan" => "talangnan_residency_form",
-                                            /* "Poblacion" => "poblacion_residency_form", */
+                                            "Poblacion" => "poblacion_residency_form",
                                             "Maalat" => "maalat_residency_form",
                                             "Pili" => "pili_residency_form",
-                                            /* "Kaongkod" => "kaongkod_residency_form", */
-                                            /* "Mancilang" => "mancilang_residency_form", */
-                                            /* "Kangwayan" => "kangwayan_residency_form", */
+                                            "Kaongkod" => "kaongkod_residency_form",
+                                            "Mancilang" => "mancilang_residency_form",
+                                            "Kangwayan" => "kangwayan_residency_form",
                                             "Tugas" => "tugas_residency_form",
-                                            /* "Malbago" => "malbago_residency_form", */
+                                            "Malbago" => "malbago_residency_form",
                                             "Tarong" => "tarong_residency_form",
                                             "San Agustin" => "san_agustin_residency_form"
                                         ];
