@@ -88,42 +88,33 @@
                     barangay: loggedInBarangay
                 },
                 success: function(response) {
-                    try {
-                        // Parse response (assumes JSON format)
-                        var familyMembers = JSON.parse(response);            
+                    // Parse response (assumes JSON format)
+                    var familyMembers = JSON.parse(response);
+                    $('#family_members_list').html(''); // Clear existing inputs
 
-                        // Clear the existing list
-                        $('#family_members_list').empty();            
-
-                        if (familyMembers.length > 0 && familyMembers[0] !== "No family members found") {
-                            familyMembers.forEach(function(memberName, index) {
-                                // Append each family member with a unique ID
-                                $('#family_members_list').append(
-                                    '<input type="text" name="txt_members[]" id="txt_member_' + index + '" class="form-control input-sm" value="' + memberName + '" readonly />'
-                                );
-                            });            
-
-                            // Combine all member names into a hidden field
-                            $('#hidden_members').val(familyMembers.join(', '));
-                        } else {
-                            // Append a message if no family members are found
-                            $('#family_members_list').append(
-                                '<input type="text" name="txt_members[]" id="txt_member_0" class="form-control input-sm" value="No family members found" readonly />'
-                            );
-                        }            
-
-                        // Call additional functions if needed
-                        updateTotalMembers();
-                        fetchBarangayPurok(hofID);
-                    } catch (e) {
-                        console.error('Error parsing JSON response:', e);
+                    if (familyMembers.length > 0 && familyMembers[0] !== "No family members found") {
+                        // Clear the list before adding new members
+                        $('#family_members_list').empty();
+                    
+                        familyMembers.forEach(function(memberName) {
+                            $('#family_members_list').append('<input type="text" name="txt_members" class="form-control input-sm" value="' + memberName + '" readonly />');
+                        });
+                    
+                        // Set the combined value for the hidden text field
+                        $('#txt_members').val(familyMembers.join(', '));
+                    } else {
+                        // Clear the list and add a message for no members found
+                        $('#family_members_list').empty();
+                        $('#family_members_list').append('<input type="text" name="txt_members" class="form-control input-sm" value="No family members found" readonly />');
                     }
+
+                    updateTotalMembers();
+                    fetchBarangayPurok(hofID);
                 },
                 error: function(xhr, status, error) {
                     console.error('Error fetching Family Members:', error);
                 }
             });
-
         }
     }
 
