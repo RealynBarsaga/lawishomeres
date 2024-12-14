@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Madridejos Home Residence Management System</title>
+    <title>Madridejos Household Management System</title>
     <link rel="icon" type="x-icon" href="../../img/lg.png">
     <style>
         /* Styles for print media */

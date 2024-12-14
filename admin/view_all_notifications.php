@@ -49,7 +49,7 @@ while ($notif = mysqli_fetch_assoc($squery)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Madridejos Home Residence Management System</title>
+    <title>Madridejos Household Management System</title>
     <link rel="icon" type="x-icon" href="../img/lg.png">
     <style>
         body {

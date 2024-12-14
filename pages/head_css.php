@@ -1,6 +1,6 @@
 <head>
     <meta charset="UTF-8">
-    <title>Madridejos Home Residence Management System</title>
+    <title>Madridejos Household Management System</title>
     <link rel="icon" type="x-icon" href="../../img/lg.png">
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- bootstrap 3.0.2 -->

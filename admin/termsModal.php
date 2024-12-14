@@ -5,10 +5,10 @@
         <hr>
         <div class="terms-content">
             <h3>Terms And Conditions</h3>
-            <p>&nbsp;&nbsp;&nbsp;These Terms and Conditions govern your use of the Madridejos Home Residence Management System. By using this system, you accept these terms in full. If you disagree with any part of these terms, you must not use the system.</p>
+            <p>&nbsp;&nbsp;&nbsp;These Terms and Conditions govern your use of the Madridejos Household Management System. By using this system, you accept these terms in full. If you disagree with any part of these terms, you must not use the system.</p>
 
             <h3>Use License</h3>
-            <p>&nbsp;&nbsp;&nbsp;You are granted a limited license to use the Madridejos Home Residence Management System for personal, non-commercial purposes, subject to these terms and conditions.</p>
+            <p>&nbsp;&nbsp;&nbsp;You are granted a limited license to use the Madridejos Household Management System for personal, non-commercial purposes, subject to these terms and conditions.</p>
 
             <h3>Limitations</h3>
             <p>You must not:</p>
@@ -22,7 +22,7 @@
             <p>&nbsp;&nbsp;&nbsp;We may revise these terms from time to time. Please check this page regularly to ensure you are happy with any changes.</p>
             <hr>
             <h3>Privacy Policy</h3>
-            <p>&nbsp;&nbsp;&nbsp;At Madridejos Home Residence Management System, we are committed to protecting your privacy. This Privacy Policy explains how we collect, use, and disclose your information when you use our system.</p>
+            <p>&nbsp;&nbsp;&nbsp;At Madridejos Household Management System, we are committed to protecting your privacy. This Privacy Policy explains how we collect, use, and disclose your information when you use our system.</p>
 
             <h3>Information We Collect</h3>
             <p>We may collect personal information such as:</p>
@@ -37,7 +37,7 @@
             <h3>How We Use Your Information</h3>
             <p>The information we collect is used to:</p>
             <ul>
-                <li>Provide and manage the services of the Madridejos Home Residence Management System</li>
+                <li>Provide and manage the services of the Madridejos Household Management System</li>
                 <li>Improve the system and respond to feedback</li>
                 <li>Contact you for system-related notices and updates</li>
                 <li>Ensure security and compliance with legal obligations</li>

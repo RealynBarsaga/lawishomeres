@@ -130,7 +130,7 @@ if ($error || $error_attempts) {
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Madridejos Home Residence Management System</title>
+    <title>Madridejos Household Management System</title>
     <link rel="icon" type="x-icon" href="../img/lg.png">
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <meta http-equiv="Content-Security-Policy" content="
@@ -820,7 +820,7 @@ if(isset($_POST['submit']))
                     <img src="../img/lg.png" style="height:60px;"/>
                     <h3 class="panel-title">
                         <strong>
-                            Madridejos Home Residence Management System
+                            Madridejos Household Management System
                         </strong>
                     </h3>
                     <br>
