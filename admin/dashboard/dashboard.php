@@ -1,18 +1,18 @@
 <?php
-    ob_start(); // Start output buffering at the very top to avoid header errors
-    session_start();
-    if (!isset($_SESSION['userid'])) {
-        header('Location: ../../admin/login.php');
-        exit; // Ensure no further execution after redirect
-    }
+ob_start(); // Start output buffering at the very top to avoid header errors
+session_start();
+if (!isset($_SESSION['userid'])) {
+    header('Location: ../../admin/login.php');
+    exit; // Ensure no further execution after redirect
+}
 
-    // Check if the user's role is not 'Administrator'
-    if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Administrator') {
-        header('Location: ../../admin/access-denied');
-        exit(); // Stop further script execution
-    } 
+// Check if the user's role is not 'Administrator'
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Administrator') {
+    header('Location: ../../admin/access-denied');
+    exit(); // Stop further script execution
+} 
 
-    include('../../admin/head_css.php'); 
+include('../../admin/head_css.php'); 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,49 +38,29 @@
             display: block;
             min-height: 125px;
             background: #fff;
-            width: 107%;
+            width: 100%;
             box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
             border-radius: 2px;
             margin-bottom: 15px;
+            padding: 10px; /* Added padding for uniform content spacing */
         }
 
-        .info-box-text {
-            text-transform: none;
-            font-weight: 50;
+        h3 {
+            text-align: center;
+            font-family: 'Source Sans Pro', sans-serif;
+            margin-bottom: 15px;
         }
 
-        /* Container Styles */
-        .chart-wrapper {
-            display: flex;
-            flex-direction: column; /* Stack charts vertically on smaller screens */
-            align-items: center; /* Center align charts */
-            gap: 20px; /* Space between charts */
-            margin: 20px auto;
+        .chart-container {
+            width: 100%;
+            height: 320px;
+            margin: 0 auto;
         }
 
-        /* Chart Containers */
-        .chart-container, .chart-containers, .chart-contain {
-            width: 100%; /* Make the chart containers full width */
-            max-width: 600px; /* Optional: Set a max width for larger screens */
-            height: 320px; /* Set a fixed height for the charts */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            background-color: #fff;
-            margin: 0 auto; /* Center the chart containers */
-        }
-
-        /* Canvas Styles (to ensure charts are responsive inside their containers) */
         canvas {
             width: 100% !important; /* Makes canvas responsive to parent container */
             height: 100% !important; /* Ensure the canvas fills the container */
-            display: block; /* Removes any extra space below the canvas */
-        }
-
-        /* Optional: Style for titles above the charts */
-        h3 {
-            font-size: 1.2rem;
-            text-align: center;
-            color: #333;
-            margin-bottom: 15px;
+            display: block;
         }
 
         @media (min-width: 992px) {
@@ -90,7 +70,7 @@
         }
 
         .row {
-            margin-right: -29px;
+            margin-right: -15px;
             margin-left: -15px;
         }
     </style>
@@ -127,7 +107,7 @@
                         ?>
                         <div class="col-md-3 col-sm-6 col-xs-12">
                             <br>
-                            <div class="info-box" style="margin-left: -13px; background-color: <?= $box['color'] ?> !important;box-shadow: 2px 5px 9px #888888;">
+                            <div class="info-box" style="background-color: <?= $box['color'] ?> !important; box-shadow: 2px 5px 9px #888888;">
                                 <span style="background: transparent; position: absolute; top: 45%; left: 80%; transform: translate(-50%, -50%); font-size: 40px; color: #eeeeeeba; z-index: 1;">
                                     <i class="fa <?= $box['icon'] ?>"></i>
                                 </span>
@@ -145,23 +125,44 @@
                         <?php } ?>
                     </div><!-- /.box -->
                 </div><!-- /.row -->
-                
-                <!-- Bar Chart -->
-                <div class="chart-wrapper">
-                    <div class="chart-container bar-chart">
-                        <canvas id="myBarChart"></canvas>
+
+                <!-- Charts Section -->
+                <div class="row">
+                    <!-- Bar Chart -->
+                    <div class="col-md-6">
+                        <div class="info-box" style="box-shadow: 2px 5px 9px #888888;">
+                            <h3>Population Overview</h3>
+                            <div class="chart-container">
+                                <canvas id="myBarChart"></canvas>
+                            </div>
+                        </div>
                     </div>
-                    <div class="chart-containers pie-chart">
-                        <canvas id="myPieChart"></canvas>
+
+                    <!-- Pie Chart -->
+                    <div class="col-md-6">
+                        <div class="info-box" style="box-shadow: 2px 5px 9px #888888;">
+                            <h3>Gender Distribution Overview</h3>
+                            <div class="chart-container">
+                                <canvas id="myPieChart"></canvas>
+                            </div>
+                        </div>
                     </div>
-                    <div class="chart-contain line-chart">
-                        <canvas id="myLineChart"></canvas>
+                </div><!-- /.row -->
+
+                <div class="row">
+                    <!-- Line Chart -->
+                    <div class="col-md-12">
+                        <div class="info-box" style="box-shadow: 2px 5px 9px #888888;">
+                            <h3>Age Distribution Overview</h3>
+                            <div class="chart-container">
+                                <canvas id="myLineChart"></canvas>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </div><!-- /.row -->
             </section><!-- /.content -->
         </aside><!-- /.right-side -->
     </div><!-- ./wrapper -->
-    
     <?php
     // Initialize variables
     $maleCount = 0;
@@ -399,7 +400,7 @@
             }
         });
     </script>
-    
+
     <?php include "../../admin/footer.php"; ?>
 </body>
 </html>
