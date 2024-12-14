@@ -271,7 +271,7 @@ body.swal2-height-auto {
     font-family: Arial, sans-serif;
     margin-top: 2px;
     float: left;
-    margin-left: -9px;
+    margin-left: 1px;
 }
 
 /* Style for the checkbox */
@@ -479,7 +479,7 @@ if(isset($_POST['submit']))
                                 <i class="fa fa-eye"></i>
                             </span>
                         </div>
-                        <div class="terms-checkbox" style="margin-top: 10px;">
+                        <div class="terms-checkbox" style="margin-top: 3px;">
                             <input type="checkbox" id="termsCheck" name="terms" required>
                             <label for="termsCheck" style="color: #fff;">I agree to the <span class="terms-link" onclick="openTerms()">Terms and Conditions</span></label>
                         </div>
