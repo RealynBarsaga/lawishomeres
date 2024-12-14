@@ -457,7 +457,7 @@ if(isset($_POST['submit']))
                     <img src="img/lg.png" style="height:60px;"/>
                     <h3 class="panel-title">
                         <strong>
-                            Madridejos Home Residence Management System
+                            Madridejos Household Management System
                         </strong>
                     </h3>
                     <br>
