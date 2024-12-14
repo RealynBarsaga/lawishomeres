@@ -139,9 +139,6 @@ h3 {
     color: #333;
     margin-bottom: 15px;
 }
-.col-xs-12 {
-    width: 109%;
-}
 </style>
 <div class="row-offcanvas row-offcanvas-left">
 <?php include('../sidebar-left.php'); ?>
