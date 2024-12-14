@@ -210,7 +210,7 @@ html {
     background-image: url('../img/bg.jpg');
     border: none;
     color: #fff;
-    margin: 10px 0; /* Add vertical margin for spacing */
+    margin: 41px 0; /* Add vertical margin for spacing */
     padding: 0; /* Remove any padding to maintain height */
 }
 .forgot-password {
@@ -488,7 +488,7 @@ if(isset($_POST['submit']))
                     <button type="submit" id="btn_login" class="btns" name="btn_login">Login</button>
                 </form>
                <!-- Forgot password link -->
-               <div class="forgot-password" style="margin-top: -2.1px;margin-left: 84px;float: left;">
+               <div class="forgot-password" style="margin-top: -38.1px;margin-left: 3px;float: left;">
                     <a href="../admin/forgot_password_option">Forgot Password?</a>
                 </div>
                 
