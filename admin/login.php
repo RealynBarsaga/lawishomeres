@@ -146,186 +146,100 @@ if ($error || $error_attempts) {
     frame-ancestors 'self'; 
     base-uri 'self'; 
     form-action 'self';">
-    <!-- bootstrap 3.0.2 -->
     <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    <!-- Theme style -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script src="https://www.google.com/recaptcha/api.js?render=6Lcr3pIqAAAAANKAObEg1g-qulpuutPCFOB59t9A"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="script.js" defer></script>
+    <style>
+        body {
+            background-image: url('../img/received_1185064586170879.jpeg');
+            background-attachment: fixed;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            max-width: 1061px;
+            width: 90%; /* Make the container responsive */
+            padding: 15px;
+        }
+        .panel {
+            height: auto; /* Allow height to adjust based on content */
+            min-height: 370px;
+            width: 100%; /* Make the panel responsive */
+            max-width: 345px; /* Set a max width */
+            margin: 0 auto; /* Center the panel */
+            background-image: url('../img/bg.jpg');
+            background-attachment: fixed;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover; /* Cover the entire panel */
+            border-radius: 10px;
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        .form-control {
+            border-radius: 8px !important;
+            box-shadow: none;
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+        .btns {
+            width: 100%; /* Make button full width */
+            height: 40px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            background-image: url('../img/bg.jpg');
+            border: none;
+            color: #fff;
+        }
+        .forgot-password {
+            text-align: center; /* Center the forgot password link */
+        }
+        .error, .alert {
+            color: white;
+            font-size: 12px;
+        }
+        @media (max-width: 768px) {
+            .panel {
+                width: 90%; /* Make the panel take more width on smaller screens */
+                padding: 10px;
+            }
+            .btn {
+                width: 100%; /* Make buttons full width */
+            }
+        }
+    </style>
 </head>
-<style>
-body {
-    background-image: url('../img/received_1185064586170879.jpeg');
-    background-attachment: fixed;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover; /* Ensures the background image covers the entire container */
-    height: 100vh; /* Makes sure the body takes up the full height of the viewport */
-    margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: center; /* Vertically centers the content */
-    justify-content: center; /* Horizontally centers the content */
-}
-html {
-    height: 100%; /* Ensures the HTML covers the full height */
-}
-.container {
-    max-width: 1061px;
-    width: 100%; /* Make sure the container is responsive */
-    padding: 15px; /* Add padding to the container */
-}
-.panel {
-    height: 435px;
-    min-height: 370px;
-    width: 345px;
-    margin-left: 0px;
-    background-image: url('../img/bg.jpg');
-    background-attachment: fixed;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: 30% 100%; /* Ensures the background image covers the entire container */
-    border-radius: 10px;
-    background-color : rgba(0, 0, 0, 0.6); /* Optional: Add a dark overlay to improve readability */
-    padding: 20px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Add shadow for a modern look */
-}
-.panel-title {
-    color: white;
-    text-align: center;
-}
-.form-control {
-    border-radius: 8px !important;
-    box-shadow: none;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-.btns {
-    margin-left: -9px;
-    width: 300px;
-    height: 40px;
-    border-radius: 5px;
-    font-weight: 600;
-    cursor: pointer;
-    background-image: url('../img/bg.jpg');
-    border: none;
-    color: #fff;
-}
-.forgot-password {
-    margin-top: -89px;
-}
-.forgot-password a {
-    text-decoration: none;
-    color: #000000;
-}
-.forgot-password a:hover {
-    text-decoration: underline;
-}
-.error, .alert{
-    color: white;
-    font-size: 12px;
-}
-.alert {
-    position: relative;
-}
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    body {
-        background-size: cover; /* Keep background image filling the screen */
-    }
-
-    .btn {
-        margin-left: 0;
-        width: 109%;
-    }
-
-    .container {
-        padding: 10px;
-    }
-
-    .panel {
-        padding: 10px;
-        background-size: contain;
-        width: 100%;
-    }
-}
-body.swal2-height-auto {
-    height: 100vh !important;
-}
-</style>
-<?php 
-if(isset($_POST['submit']))
-{
-    $url = 'https://www.google.com/recaptcha/api/siteverify';
-    $secret = '6Lcr3pIqAAAAAFSR3T0EfH8uFxIj3jYiWf-Pl_ET';
-    $response = $_POST['token_generate'];
-    $remoteip = $_SERVER['REMOTE_ADDR'];
-
-    $request = file_get_contents($url.'?secret='.$secret.'&response='.$response);
-    $result = json_decode($request);
-
-    if($result->success == true)
-    { ?>
-      <script>
-        Swal.fire({
-          title: 'Success!',
-          text: 'Data saved successfully!',
-          icon: 'success',
-          confirmButtonText: 'OK'
-        });
-      </script>
-      <?php 
-    }
-    else {
-        ?>
-        <script>
-          Swal.fire({
-            title: 'Error!',
-            text: 'Data not saved.',
-            icon: 'error',
-            confirmButtonText: 'OK'
-          });
-        </script>
-       <?php
-    }
-}
-?>
 <body class="skin-black">
-<!-- Main Content -->
-<div class="container" style="margin-top: -5px;">
+<div class="container">
     <div class="col-md-4 col-md-offset-4">
         <div class="panel">
             <div class="panel-body">
-            <div style="text-align:center;margin-top:-20px;">
+                <div style="text-align:center;">
                     <img src="../img/lg.png" style="height:60px;"/>
                     <h3 class="panel-title">
-                        <strong>
-                            Madridejos Home Residence Management System
-                        </strong>
+                        <strong>Madridejos Home Residence Management System</strong>
                     </h3>
-                    <br>
-                    <center style="margin-top: 5px;">
-                       <h7 style="margin-bottom: -42px;font-family: Georgia, serif;font-size: 18px;text-align: center;margin-bottom: -42px; color: white;">ADMIN LOGIN</h7>
-                    </center>
+                    <h7 style="font-family: Georgia, serif; font-size: 18px; color: white;">ADMIN LOGIN</h7>
                 </div>
-                <form role="form" method="post"  onsubmit="return validateForm()">
-                    <div class="form-group" style="border-radius:1px; border: 25px;">
-                        <label for="txt_username" style="color:#fff;margin-left: -8px;font-weight: lighter;">Email</label>
-                        <input type="email" class="form-control" name="txt_username"
-                               placeholder="juan@sample.com" required value="<?php echo $username_or_email ?>" style="margin-top: -5px;width: 300px;margin-left: -11px;">
-    
-                        <label for="txt_password" style="color:#fff;margin-left: -8px;font-weight: lighter;">Password</label>
-                        <div style="position: relative; width: 300px; margin-left: -11px;">
-                            <input type="password" class="form-control" name="txt_password" id="txt_password"
-                                   placeholder="•••••••••••" required style="padding-right: 40px; margin-top: -4px; width: ```php
-100%;"
-                                   pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{10,}$"
-                                   title="Password must be at least 10 characters long, contain at least one uppercase letter, one number, and one special character.">
-                            
-                            <span class="input-group-text" onclick="togglePassword('txt_password', this)" 
-                                  style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; background-color: transparent; border: none;">
+                <form role="form" method="post" onsubmit="return validateForm()">
+                    <div class="form-group">
+                        <label for="txt_username" style="color:#fff;">Email</label>
+                        <input type="email" class="form-control" name="txt_username" placeholder="juan@sample.com" required value="<?php echo $username_or_email; ?>">
+                        <label for="txt_password" style="color:#fff;">Password</label>
+                        <div style="position: relative;">
+                            <input type="password" class="form-control" name="txt_password" id="txt_password" placeholder="•••••••••••" required pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{10,}$" title="Password must be at least 10 characters long, contain at least one uppercase letter, one number, and one special character.">
+                            <span class="input-group-text" onclick="togglePassword('txt_password', this)" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; background-color: transparent; border: none;">
                                 <i class="fa fa-eye"></i>
                             </span>
                         </div>
@@ -335,16 +249,13 @@ if(isset($_POST['submit']))
                         </div>
                     </div>
                     <input type="hidden" name="token_generate" id="token_generate">
-                    <button type="submit" id="btn_login" class="btns" name="btn_login" style="margin-left: -12px;font-size: 18px;margin-top: 26px;">Login</button>
+                    <button type="submit" id="btn_login" class="btns" name="btn_login">Login</button>
                 </form>
-               <!-- Forgot password link -->
-               <div class="forgot-password" style="margin-top: -2.1px;margin-left: 84px;float: left;">
+                <div class="forgot-password">
                     <a href="../admin/forgot_password_option">Forgot Password?</a>
                 </div>
-                <!-- Horizontal rule -->
-                <hr style="border: 1px solid gray; margin-top: 10px;margin-left: -9px;width: 292px;">
-                
-                <p style="font-size:12px;color:#ed4337;margin-top: -17px;margin-left: -9px;">
+                <hr style="border: 1px solid gray; margin-top: 10px;">
+                <p style="font-size:12px;color:#ed4337;">
                     <?php echo $error_attempts; ?>
                 </p>
                 <?php if ($error_attempts): ?>
@@ -376,7 +287,7 @@ if(isset($_POST['submit']))
                         confirmButtonText: 'OK'
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            window.location.href = '../admin/dashboard/dashboard';
+                            window .location.href = '../admin/dashboard/dashboard';
                         }
                     });
                 </script>
@@ -388,9 +299,8 @@ if(isset($_POST['submit']))
 <!-- Terms and Conditions Modal -->
 <?php include 'termsModal.php'; ?>
 <script>
-     // Handle the OK button for modal
+    // Handle the OK button for modal
     document.addEventListener("DOMContentLoaded", function() {
-        // Attach a click event to the OK button to redirect to the dashboard
         const okButton = document.getElementById("ok-button2");
         if (okButton) {
             okButton.addEventListener("click", function() {
@@ -406,9 +316,7 @@ if(isset($_POST['submit']))
   
     // Wait for the DOM to load
     document.addEventListener("DOMContentLoaded", function() {
-        // Attach a click event to the OK button
         document.getElementById("error-ok-button1").addEventListener("click", function() {
-            // Close the error modal when OK is clicked
             document.getElementById("error-modal1").style.display = 'none';
         });
     });
@@ -460,7 +368,6 @@ window.onclick = function(event) {
 <script>
   grecaptcha.ready(function() {
     grecaptcha.execute('6Lcr3pIqAAAAANKAObEg1g-qulpuutPCFOB59t9A', {action: 'submit'}).then(function(token) {
-        // Add your logic to submit to your backend server here.
         var response = document.getElementById('token_generate');
         response.value = token;
     });
