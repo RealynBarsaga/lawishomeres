@@ -62,7 +62,7 @@
         .chart-container, .chart-containers, .chart-contain {
             width: 100%; /* Make the chart containers full width */
             max-width: 1100px; /* Increased max width for larger screens */
-            height: 300px; /* Set a fixed height for the charts */
+            height: 350px; /* Set a fixed height for the charts */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             background-color: #fff;
             margin: 0 auto; /* Center the chart containers */
@@ -70,7 +70,7 @@
 
         /* Canvas Styles (to ensure charts are responsive inside their containers) */
         canvas {
-            width: 100% !important; /* Makes canvas responsive to parent container */
+            width: 97% !important; /* Makes canvas responsive to parent container */
             height: 100% !important; /* Ensure the canvas fills the container */
             display: block; /* Removes any extra space below the canvas */
         }
