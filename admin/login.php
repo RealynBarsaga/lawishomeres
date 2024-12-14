@@ -161,7 +161,7 @@ if ($error || $error_attempts) {
             min-height: 370px;
             width: 345px;
             margin-left: 0px;
-            background-image: url('img/bg.jpg');
+            background-image: url('../img/bg.jpg');
             background-attachment: fixed;
             background-position: center center;
             background-repeat: no-repeat;
