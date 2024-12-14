@@ -49,7 +49,7 @@ if (isset($_POST['btn_saveeditProfile'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Madridejos Home Residence</title>
+    <title>Madridejos Household Management System</title>
     <style>
         .footer {
             margin-top: -1px;
@@ -109,7 +109,7 @@ if (isset($_POST['btn_saveeditProfile'])) {
 <body>
 <header class="header">
     <a href="../../admin/dashboard/dashboard" class="logo" style="font-size: 13px; font-family: Source Sans Pro, sans-serif;">
-        Madridejos Home Residence
+        Madridejos Household Management System
     </a>
     <nav class="navbar navbar-static-top" role="navigation">
         <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
