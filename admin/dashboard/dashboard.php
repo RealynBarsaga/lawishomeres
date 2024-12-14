@@ -39,12 +39,12 @@
         .info-box-group {
             display: flex;
             flex-wrap: wrap; /* Allows boxes to wrap */
-            gap: 20px; /* Adds spacing between the boxes */
+            gap: 29px; /* Adds spacing between the boxes */
         }
 
         /* Adjust the box width for responsiveness */
         .info-box {
-            width: 23%; /* Set the width of each box to fit four in a row */
+            width: 125%; /* Set the width of each box to fit four in a row */
             margin-bottom: 15px;
             box-shadow: 2px 5px 9px #888888;
             border-radius: 2px;
