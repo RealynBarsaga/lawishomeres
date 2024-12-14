@@ -35,15 +35,20 @@ html, body {
     overflow: auto; /* Only this part is scrollable */
     max-height: calc(111vh - 120px); /* You already have this */
 }
-.info-box {
-    display: block;
-    min-height: 125px;
-    background: #fff;
-    width: 92%;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-    border-radius: 2px;
-    margin-bottom: 15px;
+.info-box-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between; /* Adjust spacing */
+    padding: 20px;
 }
+
+.info-box {
+    flex: 1 1 calc(19% - 10px); /* Five boxes in a row */
+    min-width: 200px; /* Ensure a minimum size for the boxes */
+    max-width: 240px; /* Set a maximum width to avoid stretching */
+}
+
 .info-box-text {
     text-transform: none;
     font-weight: 100;
