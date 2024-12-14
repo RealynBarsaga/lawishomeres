@@ -108,7 +108,7 @@ if (isset($_POST['btn_saveeditProfile'])) {
 </head>
 <body>
 <header class="header">
-    <a href="../../admin/dashboard/dashboard" class="logo" style="font-size: 13px; font-family: Source Sans Pro, sans-serif;">
+    <a href="../../admin/dashboard/dashboard" class="logo" style="font-size: 11px; font-family: Source Sans Pro, sans-serif;">
         Mad Household Management System
     </a>
     <nav class="navbar navbar-static-top" role="navigation">
