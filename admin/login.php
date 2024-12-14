@@ -156,8 +156,11 @@ if ($error || $error_attempts) {
             width: 90%; /* Make it responsive */
             padding: 15px;
         }
+        .form-group {
+            margin-bottom: 35px;
+        }
         .panel {
-            height: 390px;
+            height: 422px;
             background: linear-gradient(176deg, rgba(203,1,42,1) 23%, rgba(246,248,255,1) 69%);
             border-radius: 10px;
             padding: 20px;
