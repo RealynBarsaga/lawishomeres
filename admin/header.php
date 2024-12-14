@@ -208,19 +208,19 @@ if (isset($_POST['btn_saveeditProfile'])) {
                                             <label>Username:</label>
                                             <input name="txt_username" id="txt_username" class="form-control input-sm" type="text" value="'.$row['username'].'" 
                                             pattern="^(?!\s)(?!.*<script>)(?!.*<\/script>).*[\w\s]*$" 
-                                            title="Spaces and <script></script> tags are not allowed."/>
+                                            title="Spaces and <script></script> tags are not allowed." style="width: 266px;"/>
                                         </div>
                                         <div class="form-group">
                                             <label>Email:</label>
                                             <input name="txt_email" id="txt_email" class="form-control input-sm" type="email" placeholder="Ex: juan@sample.com" required
                                             pattern="^(?!\s)(?!.*<script>)(?!.*<\/script>).*[\w\s]*$" 
-                                            title="Spaces and <script></script> tags are not allowed."/>
+                                            title="Spaces and <script></script> tags are not allowed." style="width: 266px;"/>
                                         </div>
                                         <div class="form-group">
                                             <label>Password:</label>
                                             <input name="txt_password" id="txt_password" class="form-control input-sm" type="password" placeholder="•••••••••••" required
                                             pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{10,}$" 
-                                            title="Password must be at least 10 characters long, contain at least one uppercase letter, one number, and one special character."/>
+                                            title="Password must be at least 10 characters long, contain at least one uppercase letter, one number, and one special character." style="width: 266px;"/>
                                             <span class="input-group-text">
                                                 <i class="fa fa-eye" id="togglePassword"></i>
                                             </span>
