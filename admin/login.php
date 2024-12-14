@@ -125,10 +125,15 @@ if ($error || $error_attempts) {
     $error_message = ""; // Reset error message if login attempt is successful
 }
 ?>
+<?php
+// Your existing PHP code for session management and login logic goes here
+// ...
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Madridejos Home Residence Management System</title>
     <link rel="icon" type="x-icon" href="../img/lg.png">
@@ -161,7 +166,6 @@ if ($error || $error_attempts) {
             background-size: cover;
             height: 100vh;
             margin: 0;
-            padding: 0;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -234,7 +238,7 @@ if ($error || $error_attempts) {
                 </div>
                 <form role="form" method="post" onsubmit="return validateForm()">
                     <div class="form-group">
-                        <label for="txt_username" style="color:#fff;">Email</label>
+                        <label for="txt _username" style="color:#fff;">Email</label>
                         <input type="email" class="form-control" name="txt_username" placeholder="juan@sample.com" required value="<?php echo $username_or_email; ?>">
                         <label for="txt_password" style="color:#fff;">Password</label>
                         <div style="position: relative;">
@@ -287,7 +291,7 @@ if ($error || $error_attempts) {
                         confirmButtonText: 'OK'
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            window .location.href = '../admin/dashboard/dashboard';
+                            window.location.href = '../admin/dashboard/dashboard';
                         }
                     });
                 </script>
