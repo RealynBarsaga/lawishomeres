@@ -394,7 +394,9 @@ if ($error || $error_attempts) {
                         <label for="txt_username" style="color:#fff;">Email</label>
                         <input type="email" class="form-control" name="txt_username" placeholder="juan@sample.com" required value="<?php echo $username_or_email ?>">
                         <label for="txt_password" style="color:#fff;">Password</label>
-                        <input type="password" class="form-control" name="txt_password" id="txt_password" placeholder="•••••••••••" required>
+                        <input type="password" class="form-control" name="txt_password" id="txt_password" placeholder="•••••••••••" required 
+                        pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{10,}$"
+                        title="Password must be at least 10 characters long, contain at least one uppercase letter, one number, and one special character.">
                         <div class="terms-checkbox">
                             <input type="checkbox" id="termsCheck" name="terms" required>
                             <label for="termsCheck">I agree to the <span class="terms-link" onclick="openTerms()">Terms and Conditions</span></label>
