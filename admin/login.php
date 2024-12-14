@@ -210,7 +210,7 @@ html {
     background-image: url('../img/bg.jpg');
     border: none;
     color: #fff;
-    margin-top: 39px;
+    margin-top: 32px;
     padding: 0; /* Remove any padding to maintain height */
 }
 .forgot-password {
@@ -449,7 +449,7 @@ if(isset($_POST['submit']))
     <div class="col-md-4 col-md-offset-4">
         <div class="panel">
             <div class="panel-body">
-            <div style="text-align:center;margin-top:-20px;">
+            <div style="text-align:center;margin-top:-12px;">
                     <img src="../img/lg.png" style="height:60px;"/>
                     <h3 class="panel-title">
                         <strong>
