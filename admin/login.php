@@ -197,146 +197,6 @@ if ($error || $error_attempts) {
                 margin-top: 10px; /* Add some margin for smaller screens */
             }
         }
-        /* Style for the terms-checkbox container */
-.terms-checkbox {
-    display: flex;
-    align-items: center;
-    font-family: Arial, sans-serif;
-    margin-top: 2px;
-    float: left;
-}
-
-/* Style for the checkbox */
-.terms-checkbox input[type="checkbox"] {
-    margin-right: 5px;
-    width: 18px;
-    height: 13px;
-    cursor: pointer;
-    margin-top: -6px;
-}
-
-/* Style for the label text */
-.terms-checkbox label {
-    font-size: 12px;
-    color: #333;
-}
-
-/* Style for the terms link */
-.terms-checkbox .terms-link {
-    color: #0066cc;
-    cursor: pointer;
-    text-decoration: underline;
-}
-
-.terms-checkbox .terms-link:hover {
-    color: #004c99;
-}
-
-/* Style for the error message */
-.terms-checkbox .error-message {
-    display: none;
-    color: red;
-    font-size: 12px;
-    margin-left: 10px;
-}
-
-/* Style when error is displayed */
-.terms-checkbox .error-message.active {
-    display: inline;
-}
-/* Modal Styles */
-.modal4 {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    border-radius: 5px;
-    height: 100%; /* Full height */
-    background-color: rgba(0, 0, 0, 0.4); /* Black background with transparency */
-    overflow: auto; /* Enable scroll if needed */
-}
-
-/* Modal Content */
-.modal-content4 {
-    background-color: #fff;
-    margin: 10% auto; /* Center the modal */
-    padding: 20px;
-    border-radius: 8px;
-    width: 60%; /* Adjust as needed */
-    max-width: 450px; /* Maximum width */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Close Button */
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-/* Title */
-h2 {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 15px;
-}
-
-/* Content Section */
-.terms-content {
-    font-size: 16px;
-    line-height: 1.6;
-    color: #555;
-}
-
-h3 {
-    font-size: 20px;
-    margin-top: 15px;
-    color: #333;
-}
-
-/* Paragraph Styling */
-p {
-    margin: 10px 0;
-    font-size: 13px;
-}
-
-/* List Style */
-ul {
-    padding-left: 20px;
-}
-
-ul li {
-    margin-bottom: 8px;
-    font-size: 16px;
-    color: #555;
-}
-
-/* Responsive Design for Small Screens */
-@media screen and (max-width: 768px) {
-    .modal-content4 {
-        width: 70%; /* Full width for mobile */
-    }
-    h2 {
-        font-size: 20px;
-    }
-    h3 {
-        font-size: 18px;
-    }
-    p, ul li {
-        font-size: 14px;
-    }
-}
     </style>
 </head>
 <body class="skin-black">
@@ -353,7 +213,7 @@ ul li {
                 <form role="form" method="post" onsubmit="return validateForm()">
                     <div class="form-group">
                         <label for="txt_username" style="color:#fff;">Email</label>
-                        <input type="email" class="form-control" name="txt_username" placeholder="juan@sample.com" required value="<?php echo $username_or_email ?>">
+                        <input type="email" class=" form-control" name="txt_username" placeholder="juan@sample.com" required value="<?php echo $username_or_email ?>">
                         <label for="txt_password" style="color:#fff;">Password</label>
                         <input type="password" class="form-control" name="txt_password" id="txt_password" placeholder="•••••••••••" required>
                         <div class="terms-checkbox">
@@ -378,6 +238,8 @@ ul li {
             const error = <?php echo json_encode($error); ?>;
             const errorAttempts = <?php echo json_encode($error_attempts); ?>;
 
+            const form = document.querySelector('form');
+
             if (loginSuccess) {
                 Swal.fire({
                     title: 'Success!',
@@ -393,6 +255,8 @@ ul li {
                     text: 'Invalid account. Please try again.',
                     icon: 'error',
                     confirmButtonText: 'OK'
+                }).then(() => {
+                    form.elements['txt_username'].focus(); // Focus on the username field
                 });
             } else if (errorAttempts) {
                 Swal.fire({
@@ -400,8 +264,17 @@ ul li {
                     text: errorAttempts,
                     icon: 'error',
                     confirmButtonText: 'OK'
+                }).then(() => {
+                    form.elements['txt_username'].focus(); // Focus on the username field
                 });
             }
+
+            // Disable the form when the alert is shown
+            form.addEventListener('submit', function(event) {
+                if (loginSuccess || error || errorAttempts) {
+                    event.preventDefault(); // Prevent form submission
+                }
+            });
         });
 
         function openTerms() {
@@ -434,33 +307,5 @@ ul li {
             }
         }
     </script>
-    <script>
-function openTerms() {
-    document.getElementById("termsModal").style.display = "block";
-}
-
-function closeTerms() {
-    document.getElementById("termsModal").style.display = "none";
-}
-
-function validateForm() {
-    const termsCheck = document.getElementById("termsCheck");
-    const termsError = document.getElementById("termsError");
-    if (!termsCheck.checked) {
-        termsError.style.display = "block";
-        return false;
-    }
-    termsError.style.display = "none";
-    return true;
-}
-
-// Close modal when clicking outside of it
-window.onclick = function(event) {
-    const modal = document.getElementById("termsModal");
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-</script>
 </body>
 </html>
