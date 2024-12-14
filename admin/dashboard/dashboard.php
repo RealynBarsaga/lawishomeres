@@ -46,7 +46,7 @@ html, body {
 }
 .info-box-text {
     text-transform: none;
-    font-weight: 100;
+    font-weight: 50;
 }
 /* Container Styles */
 .chart-wrapper {
