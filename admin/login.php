@@ -90,7 +90,7 @@ if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) {
                     [
                         'expires' => time() + (86400 * 30),  // Expiration time (30 days)
                         'path' => '/',                       // Path
-                        'domain' => 'lawishomeresidences.com', // Domain
+                        'domain' => 'lawishomeresidences.com/admin/', // Domain
                         'secure' => true,                    // Secure (true for HTTPS)
                         'httponly' => true,                  // HttpOnly
                         'samesite' => 'Lax'                  // SameSite attribute
