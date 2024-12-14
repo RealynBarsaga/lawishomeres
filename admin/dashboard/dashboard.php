@@ -62,7 +62,7 @@
         .chart-container, .chart-containers, .chart-contain {
             width: 100%; /* Make the chart containers full width */
             max-width: 600px; /* Optional: Set a max width for larger screens */
-            height: 320px; /* Set a fixed height for the charts */
+            height: 400px; /* Set a fixed height for the charts */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             background-color: #fff;
             margin: 0 auto; /* Center the chart containers */
@@ -114,7 +114,7 @@
                         <!-- Info Boxes -->
                         <?php
                         $info_boxes = [
-                            ['label' => 'Madridejos Officials', 'icon' => 'fa-user', 'color' => '#00c0ef', 'query' => "SELECT * FROM tblmadofficial", 'link' => '../officials/officials'],
+                            ['label' => 'Madridejos Officials', 'icon' => 'fa-user', 'color' => '#00c0ef', 'query' => "SELECT * FROM tblmadofficial", 'link' => '../official s/officials'],
                             ['label' => 'Total Barangay', 'icon' => 'fa-university', 'color' => '#007256', 'query' => "SELECT * FROM tblstaff", 'link' => '../staff/staff'],
                             ['label' => 'Total Household', 'icon' => 'fa-users', 'color' => '#bd1e24', 'query' => "SELECT * FROM tblhousehold", 'link' => '../householdlist/householdlist'],
                             ['label' => 'Total Resident', 'icon' => 'fa-users', 'color' => '#e5c707', 'query' => "SELECT * FROM tbltabagak", 'link' => '../residentlist/residentlist'],
@@ -200,7 +200,7 @@
                 }]
             },
             options: {
-                responsive : true,
+                responsive: true,
                 maintainAspectRatio: false, // Allow height to be flexible
                 plugins: {
                     title: {
@@ -324,7 +324,7 @@
         '30-39' => 0,
         '40-49' => 0,
         '50-59' => 0,
-        '60+' => 0,
+        ' 60+' => 0,
     ];
 
     // Query to get age distribution
