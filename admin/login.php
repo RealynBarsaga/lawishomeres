@@ -194,6 +194,54 @@ if ($error || $error_attempts) {
                 margin-top: 10px; /* Add some margin for smaller screens */
             }
         }
+        /* Style for the terms-checkbox container */
+.terms-checkbox {
+    display: flex;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    margin-top: 2px;
+    float: left;
+    margin-left: -9px;
+}
+
+/* Style for the checkbox */
+.terms-checkbox input[type="checkbox"] {
+    margin-right: 5px;
+    width: 18px;
+    height: 13px;
+    cursor: pointer;
+    margin-top: -6px;
+}
+
+/* Style for the label text */
+.terms-checkbox label {
+    font-size: 12px;
+    color: #333;
+}
+
+/* Style for the terms link */
+.terms-checkbox .terms-link {
+    color: #0066cc;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.terms-checkbox .terms-link:hover {
+    color: #004c99;
+}
+
+/* Style for the error message */
+.terms-checkbox .error-message {
+    display: none;
+    color: red;
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+/* Style when error is displayed */
+.terms-checkbox .error-message.active {
+    display: inline;
+}
     </style>
 </head>
 <body class="skin-black">
