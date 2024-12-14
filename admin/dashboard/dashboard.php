@@ -21,108 +21,118 @@
 <head>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <style>
+        html, body {
+            overflow: hidden; 
+        }
+
+        .wrapper {
+            overflow: hidden; /* Prevents the wrapper from scrolling */
+        }
+
+        .right-side {
+            overflow: auto; /* Only this part is scrollable */
+            max-height: calc(111vh - 120px); /* You already have this */
+        }
+
+        /* Group the info boxes into a single container */
+        .info-box-group {
+            display: flex;
+            flex-wrap: wrap; /* Allows boxes to wrap */
+            gap: 20px; /* Adds spacing between the boxes */
+        }
+
+        /* Adjust the box width for responsiveness */
+        .info-box {
+            width: 23%; /* Set the width of each box to fit four in a row */
+            margin-bottom: 15px;
+            box-shadow: 2px 5px 9px #888888;
+            border-radius: 2px;
+            background-color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .info-box {
+                width: 20%; /* Two boxes per row on smaller screens */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .info-box {
+                width: 100%; /* One box per row on very small screens */
+            }
+        }
+
+        /* Specific chart container styles */
+        .chart-wrapper {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 20px auto;
+        }
+
+        .chart-container {
+            max-width: 492px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            height: 320px;
+            width: 506px;
+            margin-left: 9px;
+        }
+
+        .chart-containers {
+            width: 48%;
+            max-width: 600px;
+            padding: 6px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            height: 319px;
+            margin-right: 5px;
+        }
+
+        .chart-contain {
+            max-width: 492px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            height: 320px;
+            width: 506px;
+            margin-left: 9px;
+        }
+
+        canvas {
+            width: 100% !important;
+            height: 100% !important;
+            display: block;
+        }
+
+        /* Specific Styles for Bar Chart */
+        #myBarChart {
+            width: 98% !important;
+            height: 315px !important;
+        }
+
+        /* Specific Styles for Pie Chart */
+        #myPieChart {
+            margin-left: 74px;
+            width: 69% !important;
+            height: 329px !important;
+        }
+
+        /* Specific Styles for Line Chart */
+        #myLineChart {
+            width: 98% !important;
+            height: 273px !important;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            text-align: center;
+            color: #333;
+            margin-bottom: 15px;
+        }
+    </style>
 </head>
-<style>
-html, body {
-    overflow: hidden; 
-}
-
-.wrapper {
-    overflow: hidden; /* Prevents the wrapper from scrolling */
-}
-
-.right-side {
-    overflow: auto; /* Only this part is scrollable */
-    max-height: calc(111vh - 120px); /* You already have this */
-}
-.info-box {
-    display: block;
-    min-height: 125px;
-    background: #fff;
-    width: 92%;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-    border-radius: 2px;
-    margin-bottom: 15px;
-}
-.info-box-text {
-    text-transform: none;
-    font-weight: 100;
-}
-/* Container Styles */
-.chart-wrapper {
-    display: flex;
-    justify-content: space-between; /* Aligns children (charts) in a row */
-    flex-wrap: wrap; /* Allows wrapping of elements (so Line Chart can go under Bar Chart) */
-    gap: 20px; /* Space between charts */
-    margin: 20px auto;
-}
-
-/* Flex items */
-.chart-container {
-    max-width: 492px; /* Optional max-width */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-    height: 320px; /* Set a fixed height for the Bar Chart container */
-    width: 506px;
-    margin-left: 9px;
-}
-
-/* Specific style for Pie Chart container */
-.chart-containers {
-    width: 48%; /* Makes pie chart container take 48% of the available width */
-    max-width: 600px;
-    padding: 6px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-    height: 319px; /* Set a fixed height for the Pie Chart container */
-    margin-right: 5px;
-}
-
-/* Specific style for Line Chart container */
-.chart-contain {
-    max-width: 492px; /* Optional max-width */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-    height: 320px; /* Set a fixed height for the Bar Chart container */
-    width: 506px;
-    margin-left: 9px;
-}
-
-/* Canvas Styles (to ensure charts are responsive inside their containers) */
-canvas {
-    width: 100% !important; /* Makes canvas responsive to parent container */
-    height: 100% !important; /* Ensure the canvas fills the container */
-    display: block; /* Removes any extra space below the canvas */
-}
-
-
-/* Specific Styles for Bar Chart */
-#myBarChart {
-    width: 98% !important; /* Makes bar chart canvas responsive to parent container */
-    height: 315px !important; /* Set fixed height for Bar Chart */
-}
-
-/* Specific Styles for Pie Chart */
-#myPieChart {
-    margin-left: 74px;
-    width: 69% !important;
-    height: 329px !important;
-}
-
-/* Specific Styles for Line Chart */
-#myLineChart {
-    width: 98% !important; /* Makes line chart canvas responsive to parent container */
-    height: 273px !important; /* Set fixed height for Line Chart */
-}
-
-/* Optional: Style for titles above the charts */
-h3 {
-    font-size: 1.2rem;
-    text-align: center;
-    color: #333;
-    margin-bottom: 15px;
-}
-</style>
 <body class="skin-black">
     <?php
     include "../../admin/connection.php";
@@ -139,61 +149,64 @@ h3 {
             <section class="content">
                 <div class="row">
                     <div class="box">
-                        <!-- Info Boxes -->
-                        <?php
-                        $info_boxes = [
-                            ['label' => 'Madridejos Officials', 'icon' => 'fa-user', 'color' => '#00c0ef', 'query' => "SELECT * FROM tblmadofficial", 'link' => '../officials/officials'],
-                            ['label' => 'Total Barangay', 'icon' => 'fa-university', 'color' => '#007256', 'query' => "SELECT * FROM tblstaff", 'link' => '../staff/staff'],
-                            ['label' => 'Total Household', 'icon' => 'fa-users', 'color' => '#bd1e24', 'query' => "SELECT * FROM tblhousehold", 'link' => '../householdlist/householdlist'],
-                            ['label' => 'Total Resident', 'icon' => 'fa-users', 'color' => '#e5c707', 'query' => "SELECT * FROM tbltabagak", 'link' => '../residentlist/residentlist'],
-                            // New Info Box for Total Permit
-                            ['label' => 'Total Permit', 'icon' => 'fa-file', 'color' => '#f39c12', 'query' => "SELECT * FROM tblpermit", 'link' => '../permit/permit'],
-                        ];
-        
-                        foreach ($info_boxes as $box) {
-                            $q = mysqli_query($con, $box['query']);
-                            $num_rows = mysqli_num_rows($q);
-                        ?>
-                        <div class="col-md-3 col-sm-6 col-xs-12">
-                            <br>
-                            <div class="info-box" style="margin-left: 9px; background-color: <?= $box['color'] ?> !important;box-shadow: 2px 5px 9px #888888;">
-                                <span style="background: transparent; position: absolute; top: 47%; left: 77%; transform: translate(-50%, -50%); font-size: 40px; color: #eeeeeeba; z-index: 1;">
-                                    <i class="fa <?= $box['icon'] ?>"></i>
-                                </span>
-                                <span class="info-box-number" style="font-size: 30px; color: #fff; margin-left: 15px; font-family: 'Source Sans Pro', sans-serif; font-weight: bold;">
-                                    <?= $num_rows ?>
-                                    <span class="info-box-text"><?= $box['label'] ?></span>
-                                </span>
-                                <a href="<?= $box['link'] ?>" style="color: #fff; text-decoration: none; font-weight: 100; font-family: 'Source Sans Pro', sans-serif;">
-                                    <div class="info-box-footer" style="margin-top: 35px; text-align: center; background-color: rgba(0, 0, 0, 0.1); padding: 5px; cursor: pointer; z-index: 999; position: relative;">
-                                        More Info <i class="fa fa-arrow-circle-right"></i>
-                                    </div>
-                                </a>
+                        <!-- Info Boxes Grouped -->
+                        <div class="info-box-group">
+                            <?php
+                            $info_boxes = [
+                                ['label' => 'Madridejos Officials', 'icon' => 'fa-user', 'color' => '#00c0ef', 'query' => "SELECT * FROM tblmadofficial", 'link' => '../officials/officials'],
+                                ['label' => 'Total Barangay', 'icon' => 'fa-university', 'color' => '#007256', 'query' => "SELECT * FROM tblstaff", 'link' => '../staff/staff'],
+                                ['label' => 'Total Household', 'icon' => 'fa-users', 'color' => '#bd1e24', 'query' => "SELECT * FROM tblhousehold", 'link' => '../householdlist/householdlist'],
+                                ['label' => 'Total Resident', 'icon' => 'fa-users', 'color' => '#e5c707', 'query' => "SELECT * FROM tbltabagak", 'link' => '../residentlist/residentlist'],
+                                ['label' => 'Total Permit', 'icon' => 'fa-file', 'color' => '#f39c12', 'query' => "SELECT * FROM tblpermit", 'link' => '../permit/permit'],
+                            ];
+            
+                            foreach ($info_boxes as $box) {
+                                $q = mysqli_query($con, $box['query']);
+                                $num_rows = mysqli_num_rows($q);
+                            ?>
+                            <div class="col-md-3 col-sm-6 col-xs-12">
+                                <br>
+                                <div class="info-box" style="margin-left: 9px; background-color: <?= $box['color'] ?> !important;box-shadow: 2px 5px 9px #888888;">
+                                    <span style="background: transparent; position: absolute; top: 47%; left: 77%; transform: translate(-50%, -50%); font-size: 40px; color: #eeeeeeba; z-index: 1;">
+                                        <i class="fa <?= $box['icon'] ?>"></i>
+                                    </span>
+                                    <span class="info-box-number" style="font-size: 30px; color: #fff; margin-left: 15px; font-family: 'Source Sans Pro', sans-serif; font-weight: bold;">
+                                        <?= $num_rows ?>
+                                        <span class="info-box-text"><?= $box['label'] ?></span>
+                                    </span>
+                                    <a href="<?= $box['link'] ?>" style="color: #fff; text-decoration: none; font-weight: 100; font-family: 'Source Sans Pro', sans-serif;">
+                                        <div class="info-box-footer" style="margin-top: 35px; text-align: center; background-color: rgba(0, 0, 0, 0.1); padding: 5px; cursor: pointer; z-index: 999; position: relative;">
+                                            More Info <i class="fa fa-arrow-circle-right"></i>
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                        <?php } ?>
+                            <?php } ?>
+                        </div> <!-- End of Info Boxes Group -->
                     </div><!-- /.box -->
                 </div><!-- /.row -->
-                    <!-- Bar Chart -->
-                    <div class="chart-wrapper">
-                        <!-- Bar Chart (on the right) -->
-                        <div class="chart-container bar-chart">
-                            <canvas id="myBarChart"></canvas>  <!-- Removed width/height attributes -->
-                        </div>
-                         <!-- Pie Chart (on the left) -->
-                         <div class="chart-containers pie-chart">
-                            <canvas id="myPieChart"></canvas>  <!-- Removed width/height attributes -->
-                        </div>
+
+                <!-- Bar Chart -->
+                <div class="chart-wrapper">
+                    <!-- Bar Chart (on the right) -->
+                    <div class="chart-container bar-chart">
+                        <canvas id="myBarChart"></canvas>
                     </div>
-                    
-                    <!-- Line Chart (below the Bar Chart) -->
-                    <div class="chart-contain line-chart">
-                        <canvas id="myLineChart"></canvas> <!-- Removed width/height attributes -->
+                     <!-- Pie Chart (on the left) -->
+                     <div class="chart-containers pie-chart">
+                        <canvas id="myPieChart"></canvas>
                     </div>
+                </div>
+
+                <!-- Line Chart (below the Bar Chart) -->
+                <div class="chart-contain line-chart">
+                    <canvas id="myLineChart"></canvas>
+                </div>
             </section><!-- /.content -->
         </aside><!-- /.right-side -->
     </div><!-- ./wrapper -->
-<?php
+
+    <?php
 // Initialize variables
 $maleCount = 0;
 $femaleCount = 0;
