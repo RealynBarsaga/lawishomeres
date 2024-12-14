@@ -157,7 +157,7 @@ if ($error || $error_attempts) {
             padding: 15px;
         }
         .panel {
-            background: rgba(255, 255, 255, 0.9); /* Light background for better contrast */
+            background: linear-gradient(176deg, rgba(203,1,42,1) 23%, rgba(246,248,255,1) 69%);
             border-radius: 10px;
             padding: 20px;
             box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
