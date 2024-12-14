@@ -26,7 +26,7 @@
                                         title="Spaces and <script></script> tags are not allowed."/>
                                     </div>
                                     <div class="col-sm-4">
-                                        <input name="txt_mname" class="form-control input-sm" type="text" placeholder="Middlename" required
+                                        <input name="txt_mname" class="form-control input-sm" type="text" placeholder="Middlename"
                                         pattern="^(?!\s)(?!.*<script>)(?!.*<\/script>).*[\w\s]*$" 
                                         title="Spaces and <script></script> tags are not allowed."/>
                                     </div>
