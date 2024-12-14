@@ -91,11 +91,6 @@ include('../head_css.php');
 
         /* Media Queries for Smaller Screens */
         @media (max-width: 768px) {
-            .info-box {
-                flex-direction: row; /* Change to row for smaller screens */
-                align-items: center; /* Center items vertically */
-            }
-
             .chart-container, .chart-containers, .chart-contain {
                 height: 250px; /* Adjust height for smaller screens */
             }
