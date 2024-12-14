@@ -199,7 +199,7 @@
                     borderWidth: 1
                 }]
             },
-            options: {
+            options:
                 responsive : true,
                 maintainAspectRatio: false, // Allow height to be flexible
                 plugins: {
@@ -333,7 +333,7 @@
         $age = $row['age'];
         if ($age >= 0 && $age <= 9) {
             $ageGroups['0-9']++;
-        } elseif ($age >= 10 && $age <= 19) {
+        } elseif ($ age >= 10 && $age <= 19) {
             $ageGroups['10-19']++;
         } elseif ($age >= 20 && $age <= 29) {
             $ageGroups['20-29']++;
