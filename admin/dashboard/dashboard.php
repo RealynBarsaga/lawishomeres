@@ -127,6 +127,10 @@ h3 {
         width: 20%;
     }
 }
+.row {
+    margin-right: -22px;
+    margin-left: -15px;
+}
 </style>
 <body class="skin-black">
     <?php
