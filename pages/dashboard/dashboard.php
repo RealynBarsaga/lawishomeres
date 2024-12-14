@@ -56,20 +56,20 @@ html, body {
     display: block;
     min-height: 125px;
     background: #fff;
-    width: 101%;
+    width: 92%;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
     border-radius: 2px;
     margin-bottom: 15px;
 }
 .info-box-text {
     text-transform: none;
-    font-weight: 50;
+    font-weight: 100;
 }
 /* Container Styles */
 .chart-wrapper {
     display: flex;
-    justify-content: space-between; /* Aligns children (charts) in a row */
-    flex-wrap: wrap; /* Allows wrapping of elements (so Line Chart can go under Bar Chart) */
+    flex-direction: column; /* Stack charts vertically on smaller screens */
+    align-items: center; /* Center align charts */
     gap: 20px; /* Space between charts */
     margin: 20px auto;
 }
@@ -94,16 +94,6 @@ h3 {
     text-align: center;
     color: #333;
     margin-bottom: 15px;
-}
-@media (min-width: 992px) {
-    .col-md-3 {
-        width: 20%;
-    }
-}
-
-.row {
-    margin-right: -13px;
-    margin-left: -37px;
 }
 </style>
 <div class="row-offcanvas row-offcanvas-left">
@@ -135,7 +125,7 @@ h3 {
                         <div class="col-md-3 col-sm-6 col-xs-12">
                             <br>
                             <div class="info-box" style="margin-left: 9px; background-color: <?= $box['color'] ?> !important;box-shadow: 2px 5px 9px #888888;">
-                                <span style="background: transparent; position: absolute; top: 45%; left: 86%; transform: translate(-50%, -50%); font-size: 40px; color: #eeeeeeba; z-index: 1;">
+                                <span style="background: transparent; position: absolute; top: 47%; left: 77%; transform: translate(-50%, -50%); font-size: 40px; color: #eeeeeeba; z-index: 1;">
                                     <i class="fa <?= $box['icon'] ?>"></i>
                                 </span>
                                 <span class="info-box-number" style="font-size: 30px; color: #fff; margin-left: 15px; font-family: 'Source Sans Pro', sans-serif; font-weight: bold;">
