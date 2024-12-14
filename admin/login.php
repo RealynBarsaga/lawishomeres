@@ -244,6 +244,99 @@ if ($error || $error_attempts) {
 .terms-checkbox .error-message.active {
     display: inline;
 }
+/* Modal Styles */
+.modal4 {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    border-radius: 5px;
+    height: 100%; /* Full height */
+    background-color: rgba(0, 0, 0, 0.4); /* Black background with transparency */
+    overflow: auto; /* Enable scroll if needed */
+}
+
+/* Modal Content */
+.modal-content4 {
+    background-color: #fff;
+    margin: 10% auto; /* Center the modal */
+    padding: 20px;
+    border-radius: 8px;
+    width: 60%; /* Adjust as needed */
+    max-width: 450px; /* Maximum width */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Title */
+h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* Content Section */
+.terms-content {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555;
+}
+
+h3 {
+    font-size: 20px;
+    margin-top: 15px;
+    color: #333;
+}
+
+/* Paragraph Styling */
+p {
+    margin: 10px 0;
+    font-size: 13px;
+}
+
+/* List Style */
+ul {
+    padding-left: 20px;
+}
+
+ul li {
+    margin-bottom: 8px;
+    font-size: 16px;
+    color: #555;
+}
+
+/* Responsive Design for Small Screens */
+@media screen and (max-width: 768px) {
+    .modal-content4 {
+        width: 70%; /* Full width for mobile */
+    }
+    h2 {
+        font-size: 20px;
+    }
+    h3 {
+        font-size: 18px;
+    }
+    p, ul li {
+        font-size: 14px;
+    }
+}
     </style>
 </head>
 <body class="skin-black">
