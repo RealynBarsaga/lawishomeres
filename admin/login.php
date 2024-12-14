@@ -187,10 +187,9 @@ if ($error || $error_attempts) {
             border-radius: 5px;
             font-weight: bold;
             cursor: pointer;
-            background-color: #007bff; /* Bootstrap primary color */
+            background-image: url('../img/bg.jpg');
             border: none;
             color: #fff;
-            transition: background-color 0.3s; /* Smooth background color transition */
         }
         .btns:hover {
             background-color: #0056b3; /* Darker shade on hover */
