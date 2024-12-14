@@ -136,6 +136,7 @@ if ($error || $error_attempts) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Madridejos Household Management System</title>
     <link rel="icon" type="x-icon" href="../img/lg.png">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <meta http-equiv="Content-Security-Policy" content="
     default-src 'self'; 
