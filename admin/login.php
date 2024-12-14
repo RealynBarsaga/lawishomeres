@@ -47,6 +47,7 @@ if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) {
     if (isset($_SESSION['lockout_time']) && time() > $_SESSION['lockout_time']) {
         unset($_SESSION['login_attempts']);
         unset($_SESSION['lockout_time']);
+        $error_attempts = ""; // Reset error attempts message
     }
 
     // Process login attempt
