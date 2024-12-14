@@ -205,7 +205,7 @@
                 plugins: {
                     title: {
                         display: true,
-                        text: 'Gender Distribution Overview',
+                        text: '          Gender Distribution Overview',
                         font: {
                             size: 16 // Adjusted font size for the title
                         },
