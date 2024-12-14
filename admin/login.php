@@ -345,8 +345,6 @@ if(isset($_POST['submit']))
                <div class="forgot-password" style="margin-top: -2.1px;margin-left: 84px;float: left;">
                     <a href="../admin/forgot_password_option">Forgot Password?</a>
                 </div>
-                <!-- Horizontal rule -->
-                <hr style="border: 1px solid gray; margin-top: 10px;margin-left: -9px;width: 292px;">
                 
                 <p style="font-size:12px;color:#ed4337;margin-top: -17px;margin-left: -9px;">
                     <?php echo $error_attempts; ?>
