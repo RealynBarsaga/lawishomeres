@@ -285,12 +285,12 @@ if (isset($_POST['submit'])) {
                     <div class="form-group" style="border-radius:1px; border: 25px;">
                         <label for="txt_username" style="color:#fff;margin-left: -8px;font-weight: lighter;">Email</label>
                         <input type="email" class="form-control" name="txt_username"
-                               placeholder="juan@sample.com" required value="<?php echo $username_or_email ?>" style="margin-top: -5px;width: 300px;margin-left: -11px;">
+                               placeholder="juan@sample.com" required value="<?php echo $username_or_email ?>">
     
                         <label for="txt_password" style="color:#fff;margin-left: -8px;font-weight: lighter;">Password</label>
                         <div style="position: relative; width: 300px; margin-left: -11px;">
                             <input type="password" class="form-control" name="txt_password" id="txt_password"
-                                   placeholder="•••••••••••" required style="padding-right: 40px; margin-top: -4px; width: 100%;"
+                                   placeholder="•••••••••••" required
                                    pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{10,}$"
                                    title="Password must be at least 10 characters long, contain at least one uppercase letter, one number, and one special character.">
                             
@@ -305,7 +305,7 @@ if (isset($_POST['submit'])) {
                         </div>
                     </div>
                     <input type="hidden" name="token_generate" id="token_generate">
-                    <button type="submit" id="btn_login" class="btns" name="btn_login" style="margin-left: -12px;font-size: 18px;margin-top: 26px;">Login</button>
+                    <button type="submit" id="btn_login" class="btns" name="btn_login">Login</button>
                 </form>
                 <div class="forgot-password" style="margin-top: -2.1px;margin-left: 84px;float: left;">
                     <a href="../admin/forgot_password_option">Forgot Password?</a>
