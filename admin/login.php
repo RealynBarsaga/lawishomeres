@@ -63,7 +63,7 @@ if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) {
         }
 
         // Use prepared statements to prevent SQL injection
-        $stmt = $con->prepare("SELECT * FROM tbluser WHERE (username = ? OR email = ?) AND type = 'administrator'");
+        $stmt = $con->prepare("SELECT * FROM tbluser WHERE (username = ? OR email = ?) AND type = 'Administrator'");
         $stmt->bind_param('ss', $username_or_email, $username_or_email);
         $stmt->execute();
         $result = $stmt->get_result();
