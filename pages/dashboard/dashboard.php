@@ -168,7 +168,7 @@ h3 {
                     ?>
                         <div class="col-md-3 col-sm-6 col-xs-12">
                             <br>
-                            <div class="info-box" style="margin-left: -12px; background-color: <?= $box['color'] ?> !important;box-shadow: 2px 5px 9px #888888;">
+                            <div class="info-box" style="margin-left: 9px; background-color: <?= $box['color'] ?> !important;box-shadow: 2px 5px 9px #888888;">
                                 <span style="background: transparent; position: absolute; top: 47%; left: 77%; transform: translate(-50%, -50%); font-size: 40px; color: #eeeeeeba; z-index: 1;">
                                     <i class="fa <?= $box['icon'] ?>"></i>
                                 </span>
