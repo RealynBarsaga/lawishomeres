@@ -197,6 +197,9 @@ html {
     box-shadow: none;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+.panel-body {
+    padding: 6px;
+}
 .btns {
     width: 100%; /* Make the button take the full width of its container */
     max-width: 300px; /* Set a maximum width for larger screens */
