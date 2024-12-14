@@ -339,7 +339,7 @@ if(isset($_POST['submit']))
                         </div>
                     </div>
                     <input type="hidden" name="token_generate" id="token_generate">
-                    <button type="submit" id="btn_login" class="btns" name="btn_login" style="font-size: 18px; margin-top: 26px; width: 100%;">Login</button>
+                    <button type="submit" id="btn_login" class="btns" name="btn_login" style="font-size: 18px; margin-top: 26px;">Login</button>
                 </form>
                <!-- Forgot password link -->
                <div class="forgot-password" style="margin-top: -2.1px;margin-left: 84px;float: left;">
