@@ -210,13 +210,6 @@
                 <span class="option-desc">Receive a code via email</span>
             </div>
         </button>
-        <button onclick="showForm('sms')" class="reset-option">
-            <i class='fas fa-mobile-alt'></i>
-            <div class="option-text">
-                <span class="option-title">Reset via SMS</span>
-                <span class="option-desc">Receive a code via SMS</span>
-            </div>
-        </button>
     </div>
     
     <div class="button-container">
