@@ -212,7 +212,7 @@ if ($error || $error_attempts) {
             color: red; /* Error message color */
             font-size: 12px;
             text-align: left; /* Center error messages */
-            margin-top: 10px;
+            margin-top: 15px;
         }
         /* Responsive adjustments */
         @media (max-width: 768px) {
