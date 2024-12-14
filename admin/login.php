@@ -166,8 +166,7 @@ if ($error || $error_attempts) {
             justify-content: center; 
         }
         .panel {
-            background-image: url('../img/bg.jpg');
-            background-color: rgba(0, 0, 0, 0.6); 
+            background: linear-gradient(176deg, rgba(203,1,42,1) 23%, rgba(246,248,255,1) 69%);
             border-radius: 10px;
             padding: 20px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); 
