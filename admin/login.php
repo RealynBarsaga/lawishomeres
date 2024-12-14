@@ -97,7 +97,7 @@ if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) {
                     ]
                 );
             } else {
-                $_SESSION ['login_attempts']++;
+                $_SESSION[' login_attempts']++;
                 if ($_SESSION['login_attempts'] < $max_attempts) {
                     $error = true;
                 }
@@ -145,9 +145,7 @@ if ($error || $error_attempts) {
     frame-ancestors 'self'; 
     base-uri 'self'; 
     form-action 'self';">
-    <!-- bootstrap 3.0.2 -->
     <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    <!-- Theme style -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script src="https://www.google.com/recaptcha/api.js?render=6Lcr3pIqAAAAANKAObEg1g-qulpuutPCFOB59t9A"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -189,9 +187,9 @@ if ($error || $error_attempts) {
             border-radius: 8px !important;
             box-shadow: none;
             border: 1px solid #ccc; /* Light border */
-            transition: border-color 0. 3s; /* Smooth border color transition */
+            transition: border-color 0.3s; /* Smooth border color transition */
         }
-        .form-control:focus {
+        .form-control: focus {
             border-color: #007bff; /* Change border color on focus */
             box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add shadow on focus */
         }
@@ -352,8 +350,7 @@ if ($error || $error_attempts) {
         }
 
         /* Style for the error message */
-        .terms-checkbox .error-message
-        {
+        .terms-checkbox .error-message {
             display: none;
             color: red;
             font-size: 12px;
@@ -469,12 +466,11 @@ if ($error || $error_attempts) {
             document.getElementById("termsModal").style.display = "block";
         }
 
-        function closeTerms() {
+        function closeTerms () {
             document.getElementById("termsModal").style.display = "none";
         }
 
-        function validateForm()
-        {
+        function validateForm() {
             const termsCheck = document.getElementById("termsCheck");
             if (!termsCheck.checked) {
                 Swal.fire({
