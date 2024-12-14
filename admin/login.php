@@ -251,6 +251,9 @@ html {
         width: 100%;
     }
 }
+body.swal2-height-auto {
+    height: 100vh !important;
+}
 </style>
 <?php 
 if(isset($_POST['submit']))
