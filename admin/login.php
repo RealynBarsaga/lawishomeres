@@ -218,7 +218,7 @@ html {
 }
 .forgot-password a {
     text-decoration: none;
-    color: #097de1;
+    color: #000000;
 }
 .forgot-password a:hover {
     text-decoration: underline;
