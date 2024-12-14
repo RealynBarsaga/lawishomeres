@@ -62,7 +62,7 @@
         .chart-container, .chart-containers, .chart-contain {
             width: 100%; /* Make the chart containers full width */
             max-width: 1100px; /* Increased max width for larger screens */
-            height: 400px; /* Set a fixed height for the charts */
+            height: 300px; /* Set a fixed height for the charts */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             background-color: #fff;
             margin: 0 auto; /* Center the chart containers */
