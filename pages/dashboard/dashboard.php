@@ -85,7 +85,7 @@ html, body {
 /* Canvas Styles (to ensure charts are responsive inside their containers) */
 canvas {
     width: 99% !important; /* Makes canvas responsive to parent container */
-    height: 100% !important; /* Ensure the canvas fills the container */
+    height: 95% !important; /* Ensure the canvas fills the container */
     display: block; /* Removes any extra space below the canvas */
 }
 /* Optional: Style for titles above the charts */
