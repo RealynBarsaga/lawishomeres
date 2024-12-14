@@ -3,7 +3,7 @@
 session_set_cookie_params([
     'lifetime' => 0,              // Session cookie (expires when the browser is closed)
     'path' => '/',                // Available across the entire domain
-    'domain' => 'lawishomeresidences.com/admin/', // Change this to your domain
+    'domain' => 'lawishomeresidences.com', // Change this to your domain
     'secure' => true,             // Set to true if using HTTPS
     'httponly' => true,           // Prevent JavaScript access to the cookie
     'samesite' => 'Lax'          // Use 'Lax' or 'Strict' based on your needs
@@ -90,14 +90,14 @@ if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) {
                     [
                         'expires' => time() + (86400 * 30),  // Expiration time (30 days)
                         'path' => '/',                       // Path
-                        'domain' => 'lawishomeresidences.com/admin/', // Domain
+                        'domain' => 'lawishomeresidences.com', // Domain
                         'secure' => true,                    // Secure (true for HTTPS)
                         'httponly' => true,                  // HttpOnly
                         'samesite' => 'Lax'                  // SameSite attribute
                     ]
                 );
             } else {
-                $_SESSION['login_attempts']++;
+                $_ SESSION['login_attempts']++;
                 if ($_SESSION['login_attempts'] < $max_attempts) {
                     $error = true;
                 }
@@ -133,6 +133,8 @@ if ($error || $error_attempts) {
     <title>Madridejos Home Residence Management System</title>
     <link rel="icon" type="x-icon" href="../img/lg.png">
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
     <meta http-equiv="Content-Security-Policy" content="
     default-src 'self'; 
     script-src 'self' https://code.jquery.com https://cdn.jsdelivr.net https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/ 'unsafe-inline'; 
@@ -145,16 +147,13 @@ if ($error || $error_attempts) {
     frame-ancestors 'self'; 
     base-uri 'self'; 
     form-action 'self';">
-    <!-- bootstrap 3.0.2 -->
     <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    <!-- Theme style -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script src="https://www.google.com/recaptcha/api.js?render=6Lcr3pIqAAAAANKAObEg1g-qulpuutPCFOB59t9A"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="script.js" defer></script>
-
 </head>
 <style>
 body {
@@ -162,36 +161,35 @@ body {
     background-attachment: fixed;
     background-position: center center;
     background-repeat: no-repeat;
-    background-size: cover; /* Ensures the background image covers the entire container */
-    height: 100vh; /* Makes sure the body takes up the full height of the viewport */
+    background-size: cover; 
+    height: 100vh; 
     margin: 0;
     padding: 0;
     display: flex;
-    align-items: center; /* Vertically centers the content */
-    justify-content: center; /* Horizontally centers the content */
+    align-items: center; 
+    justify-content: center; 
 }
 html {
-    height: 100%; /* Ensures the HTML covers the full height */
+    height: 100%; 
 }
 .container {
     max-width: 1061px;
-    width: 100%; /* Make sure the container is responsive */
-    padding: 15px; /* Add padding to the container */
+    width: 100%; 
+    padding: 15px; 
 }
 .panel {
-    height: 435px;
-    min-height: 370px;
-    width: 345px;
-    margin-left: 0px;
+    max-width: 100%; 
+    width: 100%; 
+    margin: 0 auto; 
     background-image: url('../img/bg.jpg');
     background-attachment: fixed;
     background-position: center center;
     background-repeat: no-repeat;
-    background-size: 30% 100%; /* Ensures the background image covers the entire container */
+    background-size: cover; 
     border-radius: 10px;
-    background-color: rgba(0, 0, 0, 0.6); /* Optional: Add a dark overlay to improve readability */
+    background-color: rgba(0, 0, 0, 0.6); 
     padding: 20px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Add shadow for a modern look */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); 
 }
 .panel-title {
     color: white;
@@ -230,555 +228,21 @@ html {
 .alert {
     position: relative;
 }
-/* Responsive adjustments */
 @media (max-width: 768px) {
     body {
-        background-size: cover; /* Keep background image filling the screen */
+        background-size: cover; 
     }
-
     .btn {
         margin-left: 0;
         width: 109%;
     }
-
     .container {
         padding: 10px;
     }
-
     .panel {
-        padding: 10px;
-        background-size: contain;
-        width: 100%;
+        width: 90%; 
+        padding: 15px; 
     }
-}
- 
-
-/* Modal styles for "Too many failed attempts" */
-.modal {
-    position: fixed;
-    z-index: 1000; /* Ensure it's on top */
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Background overlay */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.modal-content {
-    background: linear-gradient(135deg, #ffcccb, #f7f7f7); /* Soft red gradient for warning */
-    padding: 30px; /* Same spacious padding */
-    border-radius: 15px; /* Same rounded corners */
-    text-align: center;
-    width: 350px; /* Same width */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Same shadow effect */
-    position: relative;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 166px;
-    animation: modalFadeIn 0.5s ease; /* Same smooth fade-in */
-}
-/* Fade-in animation */
-@keyframes modalFadeIn {
-    from {
-        opacity: 0;
-        transform: scale(0.95); /* Slight scaling for a zoom-in effect */
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-/* Add a subtle border */
-.modal-content {
-    border: 2px solid #e0e0e0;
-}
-.modal-title {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: #d9534f; /* Red color for warning */
-}
-.modal-content .btn-ok {
-    background-color: #f0ad4e; /* Orange for warning */
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 25px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-.modal-content .btn-ok:hover {
-    background-color: #ec971f;
-    transform: scale(1.05);
-}
-.modal p {
-    margin-bottom: 25px;
-    font-size: 16px;
-}
-/* Optional: Add a subtle footer */
-.modal-content::after {
-    content: "Powered by Madridejos HRMS";
-    display: block;
-    font-size: 12px;
-    color: #aaa;
-    margin-top: 20px;
-}
-
-
-
-
-/* Modal styles */
-.modal1 {
-    position: fixed;
-    z-index: 1000; /* Ensure it's on top */
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Background overlay */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.modal-content1 {
-    background: linear-gradient(135deg, #ffdddd, #f7f7f7); /* Soft red gradient for error */
-    padding: 30px; /* Same spacious padding */
-    border-radius: 15px; /* Same rounded corners */
-    text-align: center;
-    width: 350px; /* Same width */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Same shadow effect */
-    position: relative;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 166px;
-    animation: modalFadeIn 0.5s ease; /* Same smooth fade-in */
-}
-/* Fade-in animation */
-@keyframes modalFadeIn {
-    from {
-        opacity: 0;
-        transform: scale(0.95); /* Slight scaling for a zoom-in effect */
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-/* Add a subtle border */
-.modal-content1 {
-    border: 2px solid #e0e0e0; /* Soft border */
-}
-/* Optional: Close button */
-.modal-content1 .close-btn {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    background: transparent;
-    border: none;
-    font-size: 18px;
-    cursor: pointer;
-    color: #666;
-    transition: color 0.3s ease;
-}
-.modal-content1 .close-btn:hover {
-    color: #ff5c5c; /* Change color on hover */
-}
-/* Optional: Increase spacing between elements */
-.modal-content1 p {
-    margin-bottom: 25px; /* Increased margin for better spacing */
-    font-size: 16px; /* Slightly larger text */
-}
-.modal-content1 .btn-ok1 {
-    background-color: #d9534f; /* Red color for error */
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 25px; /* More rounded button */
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition for hover effects */
-}
-.modal-content1 .btn-ok1:hover {
-    background-color: #c9302c; /* Darker red on hover */
-    transform: scale(1.05); /* Slight zoom on hover */
-}
-/* Optional: Add a subtle footer */
-.modal-content1::after {
-    content: "Powered by Madridejos HRMS";
-    display: block;
-    font-size: 12px;
-    color: #aaa;
-    margin-top: 20px;
-}
-/* Error modal title */
-.modal-title1 {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: #d9534f; /* Red color for error */
-}
-.btn-ok1 {
-    background-color: #d9534f; /* Red color for error */
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 25px; /* More rounded button */
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-.btn-ok1:hover {
-    background-color: #c9302c;
-    transform: scale(1.05); /* Slight zoom on hover */
-}
-/* Add some space between the text and the button */
-.modal1 p {
-    margin-bottom: 25px;
-}
-
-
-/* Modal styles */
-.modal2 {
-    position: fixed;
-    z-index: 1000; /* Ensure it's on top */
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Background overlay */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.modal-content2 {
-    background: linear-gradient(135deg, #ffffff, #f7f7f7); /* Soft gradient background */
-    padding: 30px; /* Increased padding for a spacious look */
-    border-radius: 15px; /* Slightly more rounded corners */
-    text-align: center;
-    width: 350px; /* Slightly wider */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Deeper shadow for a more elevated effect */
-    position: relative; /* Allows for positioning of close button */
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 166px;
-    animation: modalFadeIn 0.5s ease; /* Smooth fade-in animation */
-}
-/* Fade-in animation */
-@keyframes modalFadeIn {
-    from {
-        opacity: 0;
-        transform: scale(0.95); /* Slight scaling for a zoom-in effect */
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-/* Add a subtle border */
-.modal-content2 {
-    border: 2px solid #e0e0e0; /* Soft border */
-}
-/* Optional: Close button */
-.modal-content2 .close-btn {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    background: transparent;
-    border: none;
-    font-size: 18px;
-    cursor: pointer;
-    color: #666;
-    transition: color 0.3s ease;
-} 
-.modal-content2 .close-btn:hover {
-    color: #ff5c5c; /* Change color on hover */
-}
-/* Optional: Increase spacing between elements */
-.modal-content2 p {
-    margin-bottom: 25px; /* Increased margin for better spacing */
-    font-size: 16px; /* Slightly larger text */
-}
-.modal-content2 .btn-ok2 {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 25px; /* More rounded button */
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition for hover effects */
-}  
-.modal-content2 .btn-ok2:hover {
-    background-color: #45a049;
-    transform: scale(1.05); /* Slight zoom on hover */
-} 
-/* Optional: Add a subtle footer */
-.modal-content2::after {
-    content: "Powered by Madridejos HRMS";
-    display: block;
-    font-size: 12px;
-    color: #aaa;
-    margin-top: 20px;
-}
-.modal-title2 {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-.btn-ok2 {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 10px;
-    transition: background-color 0.3s ease;
-}
-.btn-ok2:hover {
-    background-color: #45a049;
-}
-/* Add some space between the text and the button */
-.modal2 p {
-    margin-bottom: 20px;
-}
-.input-group {
-    position: relative; /* Make sure input-group has relative positioning */
-}
-.input-group .form-control {
-    padding-right: 40px; /* Add padding to the right for the input */
-}
-.input-group .input-group-text {
-    position: absolute; /* Position the eye icon absolutely */
-    right: 10px; /* Adjust the right position */
-    top: 50%; /* Center vertically */
-    transform: translateY(-50%); /* Adjust for centering */
-    background-color: transparent; /* Make background transparent */
-    border: none; /* Remove border */
-    cursor: pointer; /* Change cursor to pointer */
-}
-.input-group-text i {
-    opacity: 0.5; /* Set initial opacity */
-    transition: opacity 0.3s; /* Smooth transition */
-}  
-.input-group-text:hover i {
-    opacity: 1; /* Increase opacity on hover */
-}
-
-/* Style for the terms-checkbox container */
-.terms-checkbox {
-    display: flex;
-    align-items: center;
-    font-family: Arial, sans-serif;
-    margin-top: 2px;
-    float: left;
-    margin-left: -9px;
-}
-
-/* Style for the checkbox */
-.terms-checkbox input[type="checkbox"] {
-    margin-right: 5px;
-    width: 18px;
-    height: 13px;
-    cursor: pointer;
-    margin-top: -6px;
-}
-
-/* Style for the label text */
-.terms-checkbox label {
-    font-size: 12px;
-    color: #333;
-}
-
-/* Style for the terms link */
-.terms-checkbox .terms-link {
-    color: #0066cc;
-    cursor: pointer;
-    text-decoration: underline;
-}
-
-.terms-checkbox .terms-link:hover {
-    color: #004c99;
-}
-
-/* Style for the error message */
-.terms-checkbox .error-message {
-    display: none;
-    color: red;
-    font-size: 12px;
-    margin-left: 10px;
-}
-
-/* Style when error is displayed */
-.terms-checkbox .error-message.active {
-    display: inline;
-}
-/* Modal Styles */
-.modal4 {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    border-radius: 5px;
-    height: 100%; /* Full height */
-    background-color: rgba(0, 0, 0, 0.4); /* Black background with transparency */
-    overflow: auto; /* Enable scroll if needed */
-}
-
-/* Modal Content */
-.modal-content4 {
-    background-color: #fff;
-    margin: 10% auto; /* Center the modal */
-    padding: 20px;
-    border-radius: 8px;
-    width: 60%; /* Adjust as needed */
-    max-width: 450px; /* Maximum width */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Close Button */
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-/* Title */
-h2 {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 15px;
-}
-
-/* Content Section */
-.terms-content {
-    font-size: 16px;
-    line-height: 1.6;
-    color: #555;
-}
-
-h3 {
-    font-size: 20px;
-    margin-top: 15px;
-    color: #333;
-}
-
-/* Paragraph Styling */
-p {
-    margin: 10px 0;
-}
-
-/* List Style */
-ul {
-    padding-left: 20px;
-}
-
-ul li {
-    margin-bottom: 8px;
-    font-size: 16px;
-    color: #555;
-}
-
-/* Responsive Design for Small Screens */
-@media screen and (max-width: 768px) {
-    .modal-content4 {
-        width: 70%; /* Full width for mobile */
-    }
-    h2 {
-        font-size: 20px;
-    }
-    h3 {
-        font-size: 18px;
-    }
-    p, ul li {
-        font-size: 14px;
-    }
-}
-
-
-/* Cookie Consent Banner Styles */
-.wrapper {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: #333;
-    color: #fff;
-    padding: 15px 30px;
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 1000;
-}
-.cookie-message h3 {
-    margin: 0;
-    font-size: 18px;
-    font-weight: bold;
-}
-.cookie-message p {
-    margin: 5px 0 0;
-    font-size: 14px;
-    color: #ddd;
-}
-.buttons {
-    display: flex;
-    gap: 15px;
-}
-#acceptBtn {
-    padding: 10px 20px;
-    background-image: url('img/bg.jpg');
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-image 0.3s ease;
-}
-#acceptBtn:hover {
-    background-color: #0056b3;
-}
-#acceptBtn:focus {
-    outline: none;
-}
-#acceptBtn[disabled] {
-    background-color: #777;
-    cursor: not-allowed;
-}
-#rejectBtn {
-    padding: 10px 20px;
-    background-image: url('img/bg.jpg');
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-image 0.3s ease;
-}
-#rejectBtn:hover {
-    background-color: #0056b3;
-}
-#rejectBtn:focus {
-    outline: none;
-}
-#rejectBtn[disabled] {
-    background-color: #777;
-    cursor: not-allowed;
 }
 </style>
 <?php 
@@ -790,33 +254,25 @@ if(isset($_POST['submit']))
     $remoteip = $_SERVER['REMOTE_ADDR'];
 
     $request = file_get_contents($url.'?secret='.$secret.'&response='.$response);
-
     $result = json_decode($request);
 
-    if($result->success == true)
-    { ?>
+    if($result->success == true) { ?>
       <script>
-        alert("Data save successfuly");
+        swal("Success!", "Data saved successfully!", "success");
       </script>
-      <?php }
-      else {
-        ?>
-        <script>
-          alert("Data not saved");
-        </script>
-       <?php
-      }
-
-    }
+    <?php } else { ?>
+      <script>
+        swal("Error!", "Data not saved!", "error");
+      </script>
+    <?php }
+}
 ?>
 <body class="skin-black">
-
-<!-- Main Content -->
 <div class="container" style="margin-top: -5px;">
     <div class="col-md-4 col-md-offset-4">
         <div class="panel">
             <div class="panel-body">
-            <div style="text-align:center;margin-top:-20px;">
+                <div style="text-align:center;margin-top:-20px;">
                     <img src="../img/lg.png" style="height:60px;"/>
                     <h3 class="panel-title">
                         <strong>
@@ -854,76 +310,45 @@ if(isset($_POST['submit']))
                     <input type="hidden" name="token_generate" id="token_generate">
                     <button type="submit" id="btn_login" class="btns" name="btn_login" style="margin-left: -12px;font-size: 18px;margin-top: 26px;">Login</button>
                 </form>
-               <!-- Forgot password link -->
                <div class="forgot-password" style="margin-top: -2.1px;margin-left: 84px;float: left;">
                     <a href="../admin/forgot_password_option">Forgot Password?</a>
                 </div>
-                <!-- Horizontal rule -->
                 <hr style="border: 1px solid gray; margin-top: 10px;margin-left: -9px;width: 292px;">
                 
                 <p style="font-size:12px;color:#ed4337;margin-top: -17px;margin-left: -9px;">
                     <?php echo $error_attempts; ?>
                 </p>
                 <?php if ($error_attempts): ?>
-                <!-- Error Modal structure -->
-                <div id="error-modal" class="modal" style="display: block;">
-                    <div class="modal-content" style="margin-left:479px;">
-                        <span class="modal-title">Error</span>
-                        <p><?php echo $error_attempts; ?></p>
-                        <button id="error-ok-button" class="btn-ok">OK</button>
-                    </div>
-                </div>     
+                <script>
+                    swal("Error!", "<?php echo $error_attempts; ?>", "error");
+                </script>
                 <?php endif; ?>
-                <!-- Error message modal and JavaScript for dismiss -->
                 <?php if ($error): ?>
-                <!-- Error Modal structure -->
-                <div id="error-modal1" class="modal1" style="display: block;">
-                    <div class="modal-content1" style="margin-left:479px;">
-                        <span class="modal-title1">Error</span>
-                        <p>Invalid account. Please try again.</p>
-                        <button id="error-ok-button1" class="btn-ok1">OK</button>
-                    </div>
-                </div>
+                <script>
+                    swal("Error!", "Invalid account. Please try again.", "error");
+                </script>
                 <?php endif; ?>
-                <!-- Success message and JavaScript for redirection -->
                 <?php if ($login_success): ?>
-                <!-- Modal structure -->
-                <div id="success-modal2" class="modal2" style="display: block;">
-                    <div class="modal-content2" style="margin-left:479px;">
-                        <span class="modal-title2">Success</span>
-                        <p>Login Successfully!</p>
-                        <button id="ok-button2" class="btn-ok2">OK</button>
-                    </div>
-                </div>
+                <script>
+                    swal("Success!", "Login Successfully!", "success").then(() => {
+                        window.location.href = '../admin/dashboard/dashboard';
+                    });
+                </script>
                 <?php endif; ?>
             </div>
         </div>
     </div>
 </div>
-<!-- Terms and Conditions Modal -->
 <?php include 'termsModal.php'; ?>
 <script>
-     // Handle the OK button for modal
-    document.addEventListener("DOMContentLoaded", function() {
-        // Attach a click event to the OK button to redirect to the dashboard
-        const okButton = document.getElementById("ok-button2");
-        if (okButton) {
-            okButton.addEventListener("click", function() {
-                window.location.href = '../admin/dashboard/dashboard';
-            });
-        }
-    });
     document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("error-ok-button").addEventListener("click", function() {
             document.getElementById("error-modal").style.display = 'none';
         });
     });
   
-    // Wait for the DOM to load
     document.addEventListener("DOMContentLoaded", function() {
-        // Attach a click event to the OK button
         document.getElementById("error-ok-button1").addEventListener("click", function() {
-            // Close the error modal when OK is clicked
             document.getElementById("error-modal1").style.display = 'none';
         });
     });
@@ -948,7 +373,6 @@ function validateForm() {
     return true;
 }
 
-// Close modal when clicking outside of it
 window.onclick = function(event) {
     const modal = document.getElementById("termsModal");
     if (event.target == modal) {
@@ -975,7 +399,6 @@ window.onclick = function(event) {
 <script>
   grecaptcha.ready(function() {
     grecaptcha.execute('6Lcr3pIqAAAAANKAObEg1g-qulpuutPCFOB59t9A', {action: 'submit'}).then(function(token) {
-        // Add your logic to submit to your backend server here.
         var response = document.getElementById('token_generate');
         response.value = token;
     });
