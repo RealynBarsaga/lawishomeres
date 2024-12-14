@@ -373,9 +373,6 @@ if ($error || $error_attempts) {
         body.swal2-height-auto {
             height: 100vh !important; /* Maintain fixed height */
         }
-        .main-content.no-pointer-events {
-            pointer-events: none;
-        }
     </style>
 </head>
 <body class="skin-black">
@@ -394,7 +391,7 @@ if ($error || $error_attempts) {
                         <label for="txt_username" style="color:#fff;">Email</label>
                         <input type="email" class="form-control" name="txt_username" placeholder="juan@sample.com" required value="<?php echo $username_or_email ?>">
                         <label for="txt_password" style="color:#fff;">Password</label>
-                        <input type="password" class="form-control" name="txt_password" id="txt_password" placeholder="•••••••••••" required 
+                        <input type="password" class="form-control" name="txt_password" id="txt_password" placeholder="•••••••••••" required
                         pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{10,}$"
                         title="Password must be at least 10 characters long, contain at least one uppercase letter, one number, and one special character.">
                         <div class="terms-checkbox">
@@ -458,11 +455,6 @@ if ($error || $error_attempts) {
                     event.preventDefault(); // Prevent form submission
                 }
             });
-
-            const mainContent = document.querySelector('.main-content'); // Replace with the class or ID of your main content wrapper
-            if (error || errorAttempts) {
-                mainContent.classList.add('no-pointer-events');
-            }
         });
 
         function openTerms() {
