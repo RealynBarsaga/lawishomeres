@@ -358,7 +358,7 @@ ul li {
                 <div style="text-align:center;">
                     <img src="../img/lg.png" style="height:60px;"/>
                     <h3 class="panel-title">
-                        <strong style="color: white;">Madridejos Household Management System</strong>
+                        <strong style="color: white;margin-top: -14px;">Madridejos Household Management System</strong>
                     </h3>
                     <h7 style="color: white;">ADMIN LOGIN</h7>
                 </div>
