@@ -449,6 +449,11 @@ if ($error || $error_attempts) {
                     form.elements['txt_username'].focus(); // Focus on the username field
                 });
             }
+
+            // Add a class to the body to disable pointer events when the alert is shown
+            if (error || errorAttempts) {
+                body.classList.add('no-pointer-events');
+            }
         });
 
         function openTerms() {
