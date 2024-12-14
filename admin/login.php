@@ -158,7 +158,7 @@ if ($error || $error_attempts) {
         }
         .panel {
             background: rgb(252,0,51);
-            background: radial-gradient(circle, rgba(252,0,51,1) 0%, rgba(246,248,255,1) 94%);
+            background: linear-gradient(90deg, rgba(252,0,51,1) 0%, rgba(246,248,255,1) 83%);
             border-radius: 10px;
             padding: 20px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
