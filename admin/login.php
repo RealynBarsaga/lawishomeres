@@ -373,6 +373,9 @@ if ($error || $error_attempts) {
         body.swal2-height-auto {
             height: 100vh !important; /* Maintain fixed height */
         }
+        .main-content.no-pointer-events {
+            pointer-events: none;
+        }
     </style>
 </head>
 <body class="skin-black">
@@ -454,9 +457,9 @@ if ($error || $error_attempts) {
                 }
             });
 
-            // Add a class to the body to disable pointer events when the alert is shown
+            const mainContent = document.querySelector('.main-content'); // Replace with the class or ID of your main content wrapper
             if (error || errorAttempts) {
-                body.classList.add('no-pointer-events');
+                mainContent.classList.add('no-pointer-events');
             }
         });
 
