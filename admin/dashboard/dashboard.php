@@ -131,42 +131,6 @@ h3 {
     margin-right: -29px;
     margin-left: -15px;
 }
-/* General Container Styles for Responsiveness */
-.chart-wrapper {
-    display: flex;
-    flex-wrap: wrap; /* Ensure charts wrap when needed */
-    gap: 20px; /* Maintain spacing between charts */
-    justify-content: center; /* Center charts in smaller screens */
-    margin: 20px auto;
-}
-
-/* Flex items */
-.chart-container, .chart-containers, .chart-contain {
-    flex: 1 1 100%; /* Make charts occupy full width by default */
-    max-width: 600px; /* Optional max-width */
-    min-width: 300px; /* Set a minimum width */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-    height: auto; /* Adjust height dynamically */
-    margin: 10px; /* Add margin between charts */
-}
-
-/* Specific for Pie Chart */
-.chart-containers {
-    flex: 1 1 100%; /* Adjust to full width by default */
-}
-
-/* Specific for Bar Chart */
-.chart-container {
-    flex: 1 1 100%; /* Adjust to full width by default */
-}
-
-/* Canvas Styles */
-canvas {
-    width: 100% !important;
-    height: auto !important;
-    display: block;
-}
 </style>
 <body class="skin-black">
     <?php
@@ -276,7 +240,6 @@ $femalePercentage = $totalCount > 0 ? ($femaleCount / $totalCount) * 100 : 0;
         },
         options: {
             responsive: true,
-            maintainAspectRatio: false,
             plugins: {
                 title: {
                     display: true,
@@ -361,7 +324,6 @@ $femalePercentage = $totalCount > 0 ? ($femaleCount / $totalCount) * 100 : 0;
         },
         options: {
             responsive: true,
-            maintainAspectRatio: false,
             plugins: {
                 title: {
                     display: true,
@@ -444,7 +406,6 @@ $ageCounts = array_values($ageGroups);
         },
         options: {
             responsive: true,
-            maintainAspectRatio: false,
             plugins: {
                 title: {
                     display: true,
