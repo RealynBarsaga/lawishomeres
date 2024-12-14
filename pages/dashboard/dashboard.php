@@ -56,14 +56,14 @@ html, body {
     display: block;
     min-height: 125px;
     background: #fff;
-    width: 92%;
+    width: 107%;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
     border-radius: 2px;
     margin-bottom: 15px;
 }
 .info-box-text {
     text-transform: none;
-    font-weight: 100;
+    font-weight: 50;
 }
 /* Container Styles */
 .chart-wrapper {
@@ -95,6 +95,16 @@ h3 {
     color: #333;
     margin-bottom: 15px;
 }
+@media (min-width: 992px) {
+            .col-md-3 {
+                width: 20%;
+            }
+        }
+
+        .row {
+            margin-right: -29px;
+            margin-left: -15px;
+        }
 </style>
 <div class="row-offcanvas row-offcanvas-left">
 <?php include('../sidebar-left.php'); ?>
