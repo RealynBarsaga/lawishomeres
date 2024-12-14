@@ -198,8 +198,8 @@ html {
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 .btns {
-    margin-left: -9px;
-    width: 300px;
+    width: 100%; /* Make the button take the full width of its container */
+    max-width: 300px; /* Set a maximum width for larger screens */
     height: 40px;
     border-radius: 5px;
     font-weight: 600;
@@ -207,6 +207,8 @@ html {
     background-image: url('../img/bg.jpg');
     border: none;
     color: #fff;
+    margin: 10px 0; /* Add vertical margin for spacing */
+    padding: 0; /* Remove any padding to maintain height */
 }
 .forgot-password {
     margin-top: -89px;
