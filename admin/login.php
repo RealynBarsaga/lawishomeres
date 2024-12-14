@@ -157,7 +157,19 @@ if ($error || $error_attempts) {
             padding: 15px;
         }
         .panel {
-            background-image: url('../img/bg.jpg');
+            height: 435px;
+            min-height: 370px;
+            width: 345px;
+            margin-left: 0px;
+            background-image: url('img/bg.jpg');
+            background-attachment: fixed;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: 30% 100%; /* Ensures the background image covers the entire container */
+            border-radius: 10px;
+            background-color: rgba(0, 0, 0, 0.6); /* Optional: Add a dark overlay to improve readability */
+            padding: 20px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Add shadow for a modern look */
             border-radius: 10px;
             padding: 20px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
