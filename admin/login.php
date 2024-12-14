@@ -3,7 +3,7 @@
 session_set_cookie_params([
     'lifetime' => 0,              // Session cookie (expires when the browser is closed)
     'path' => '/',                // Available across the entire domain
-    'domain' => 'lawishomeresidences.com/admin/', // Change this to your domain
+    'domain' => 'lawishomeresidences.com', // Change this to your domain
     'secure' => true,             // Set to true if using HTTPS
     'httponly' => true,           // Prevent JavaScript access to the cookie
     'samesite' => 'Lax'          // Use 'Lax' or 'Strict' based on your needs
@@ -18,7 +18,7 @@ header("X-Frame-Options: DENY");
 header("X-Content-Type-Options: nosniff");
 header("Referrer-Policy: strict-origin-when-cross-origin");
 header("Strict-Transport-Security: max-age=63072000; includeSubDomains; preload");
-header("Access-Control-Allow-Origin: https://lawishomeresidences.com/admin/"); // Change to your domain
+header("Access-Control-Allow-Origin: https://lawishomeresidences.com"); // Change to your domain
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Cross-Origin-Opener-Policy: same-origin");
@@ -27,11 +27,10 @@ header("Cross-Origin-Resource-Policy: same-site");
 header("Permissions-Policy: geolocation=(), camera=(), microphone=(), interest-cohort=()");
 header("X-DNS-Prefetch-Control: off");
 
-// Rest of your PHP script goes here
+// Initialize variables
 $error = false;
 $login_success = false;
 $error_attempts = false;
-
 $username_or_email = "";
 
 // Set a limit for the number of allowed attempts and lockout time (in seconds)
@@ -90,15 +89,15 @@ if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) {
                     [
                         'expires' => time() + (86400 * 30),  // Expiration time (30 days)
                         'path' => '/',                       // Path
-                        'domain' => 'lawishomeresidences.com/admin/', // Domain
+                        'domain' => 'lawishomeresidences.com', // Domain
                         'secure' => true,                    // Secure (true for HTTPS)
                         'httponly' => true,                  // HttpOnly
                         'samesite' => 'Lax'                  // SameSite attribute
                     ]
                 );
             } else {
-                $_ SESSION['login_attempts']++;
-                if ($_SESSION['login_attempts'] < $max_attempts) {
+                $_SESSION['login_attempts']++;
+                if ($_SESSION[' login_attempts'] < $max_attempts) {
                     $error = true;
                 }
             }
@@ -152,7 +151,6 @@ if ($error || $error_attempts) {
     <script src="https://www.google.com/recaptcha/api.js?render=6Lcr3pIqAAAAANKAObEg1g-qulpuutPCFOB59t9A"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="script.js" defer></script>
 </head>
 <style>
@@ -197,7 +195,7 @@ html {
 }
 .form-control {
     border-radius: 8px !important;
-    box-shadow: none;
+    box-shadow: none ;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 .btns {
@@ -221,7 +219,7 @@ html {
 .forgot-password a:hover {
     text-decoration: underline;
 }
-.error, .alert{
+.error, .alert {
     color: white;
     font-size: 12px;
 }
@@ -246,24 +244,23 @@ html {
 }
 </style>
 <?php 
-if(isset($_POST['submit']))
-{
+if (isset($_POST['submit'])) {
     $url = 'https://www.google.com/recaptcha/api/siteverify';
     $secret = '6Lcr3pIqAAAAAFSR3T0EfH8uFxIj3jYiWf-Pl_ET';
     $response = $_POST['token_generate'];
     $remoteip = $_SERVER['REMOTE_ADDR'];
 
-    $request = file_get_contents($url.'?secret='.$secret.'&response='.$response);
+    $request = file_get_contents($url . '?secret=' . $secret . '&response=' . $response);
     $result = json_decode($request);
 
-    if($result->success == true) { ?>
-      <script>
-        swal("Success!", "Data saved successfully!", "success");
-      </script>
+    if ($result->success == true) { ?>
+        <script>
+            swal("Success!", "Data saved successfully!", "success");
+        </script>
     <?php } else { ?>
-      <script>
-        swal("Error!", "Data not saved!", "error");
-      </script>
+        <script>
+            swal("Error!", "Data not saved!", "error");
+        </script>
     <?php }
 }
 ?>
@@ -284,7 +281,7 @@ if(isset($_POST['submit']))
                        <h7 style="margin-bottom: -42px;font-family: Georgia, serif;font-size: 18px;text-align: center;margin-bottom: -42px; color: white;">ADMIN LOGIN</h7>
                     </center>
                 </div>
-                <form role="form" method="post"  onsubmit="return validateForm()">
+                <form role="form" method="post" onsubmit="return validateForm()">
                     <div class="form-group" style="border-radius:1px; border: 25px;">
                         <label for="txt_username" style="color:#fff;margin-left: -8px;font-weight: lighter;">Email</label>
                         <input type="email" class="form-control" name="txt_username"
@@ -310,7 +307,7 @@ if(isset($_POST['submit']))
                     <input type="hidden" name="token_generate" id="token_generate">
                     <button type="submit" id="btn_login" class="btns" name="btn_login" style="margin-left: -12px;font-size: 18px;margin-top: 26px;">Login</button>
                 </form>
-               <div class="forgot-password" style="margin-top: -2.1px;margin-left: 84px;float: left;">
+                <div class="forgot-password" style="margin-top: -2.1px;margin-left: 84px;float: left;">
                     <a href="../admin/forgot_password_option">Forgot Password?</a>
                 </div>
                 <hr style="border: 1px solid gray; margin-top: 10px;margin-left: -9px;width: 292px;">
@@ -381,28 +378,28 @@ window.onclick = function(event) {
 }
 </script>
 <script>
-  function togglePassword(inputId, icon) {
-        const input = document.getElementById(inputId);
-        const iconElement = icon.querySelector('i');
-        
-        if (input.type === 'password') {
-            input.type = 'text';
-            iconElement.classList.remove('fa-eye');
-            iconElement.classList.add('fa-eye-slash');
-        } else {
-            input.type = 'password';
-            iconElement.classList.remove('fa-eye-slash');
-            iconElement.classList.add('fa-eye');
-        }
+function togglePassword(inputId, icon) {
+    const input = document.getElementById(inputId);
+    const iconElement = icon.querySelector('i');
+    
+    if (input.type === 'password') {
+        input.type = 'text';
+        iconElement.classList.remove('fa-eye');
+        iconElement.classList.add('fa-eye-slash');
+    } else {
+        input.type = 'password';
+        iconElement.classList.remove('fa-eye-slash');
+        iconElement.classList.add('fa-eye');
     }
+}
 </script>
 <script>
-  grecaptcha.ready(function() {
+grecaptcha.ready(function() {
     grecaptcha.execute('6Lcr3pIqAAAAANKAObEg1g-qulpuutPCFOB59t9A', {action: 'submit'}).then(function(token) {
         var response = document.getElementById('token_generate');
         response.value = token;
     });
-  });
+});
 </script>
 </body>
 </html>
