@@ -448,13 +448,6 @@ if ($error || $error_attempts) {
                     form.elements['txt_username'].focus(); // Focus on the username field
                 });
             }
-
-            // Disable the form when the alert is shown
-            form.addEventListener('submit', function(event) {
-                if (loginSuccess || error || errorAttempts) {
-                    event.preventDefault(); // Prevent form submission
-                }
-            });
         });
 
         function openTerms() {
