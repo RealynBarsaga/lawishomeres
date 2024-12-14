@@ -371,8 +371,9 @@ if ($error || $error_attempts) {
         .swal2-container {
             z-index: 9999; /* Ensure SweetAlert is above other elements */
         }
+        /* Prevent SweetAlert from changing body height */
         body.swal2-height-auto {
-            height: 100% !important;
+            height: 100vh !important; /* Maintain fixed height */
         }
     </style>
 </head>
