@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
 <?php
 // Set cookie parameters before starting the session
 session_set_cookie_params([
@@ -131,8 +129,10 @@ if ($error || $error_attempts) {
     $error_message = ""; // Reset error message if login attempt is successful
 }
 ?>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Madridejos Household Management System</title>
     <link rel="icon" type="x-icon" href="../img/lg.png">
@@ -172,15 +172,9 @@ body {
     display: flex;
     align-items: center; /* Vertically centers the content */
     justify-content: center; /* Horizontally centers the content */
-    transition: all 0.3s ease-in-out;
 }
 html {
     height: 100%; /* Ensures the HTML covers the full height */
-}
-.container {
-    max-width: 1061px;
-    width: 100%; /* Make sure the container is responsive */
-    padding: 15px; /* Add padding to the container */
 }
 .panel {
     height: 435px;
@@ -193,7 +187,7 @@ html {
     background-repeat: no-repeat;
     background-size: 30% 100%; /* Ensures the background image covers the entire container */
     border-radius: 10px;
-    background-color: rgba(0, 0, 0, 0.6); /* Optional: Add a dark overlay to improve readability */
+    background-color : rgba(0, 0, 0, 0.6); /* Optional: Add a dark overlay to improve readability */
     padding: 20px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Add shadow for a modern look */
 }
@@ -206,23 +200,28 @@ html {
     box-shadow: none;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+.panel-body {
+    padding: 6px;
+}
 .btns {
-    margin-left: -9px;
-    width: 300px;
+    width: 100%; /* Make the button take the full width of its container */
+    max-width: 346px; /* Set a maximum width for larger screens */
     height: 40px;
     border-radius: 5px;
     font-weight: 600;
     cursor: pointer;
-    background-image: url('img/bg.jpg');
+    background-image: url('../img/bg.jpg');
     border: none;
     color: #fff;
+    margin-top: 39px;
+    padding: 0; /* Remove any padding to maintain height */
 }
 .forgot-password {
     margin-top: -89px;
 }
 .forgot-password a {
     text-decoration: none;
-    color: #000000;
+    color: #337ab7;
 }
 .forgot-password a:hover {
     text-decoration: underline;
@@ -255,319 +254,18 @@ html {
         width: 100%;
     }
 }
-
-/* Modal styles for "Too many failed attempts" */
-.modal {
-    position: fixed;
-    z-index: 1000; /* Ensure it's on top */
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Background overlay */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+body.swal2-height-auto {
+    height: 100vh !important;
 }
-.modal-content {
-    background: linear-gradient(135deg, #ffcccb, #f7f7f7); /* Soft red gradient for warning */
-    padding: 30px; /* Same spacious padding */
-    border-radius: 15px; /* Same rounded corners */
-    text-align: center;
-    width: 350px; /* Same width */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Same shadow effect */
-    position: relative;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 166px;
-    animation: modalFadeIn 0.5s ease; /* Same smooth fade-in */
-}
-/* Fade-in animation */
-@keyframes modalFadeIn {
-    from {
-        opacity: 0;
-        transform: scale(0.95); /* Slight scaling for a zoom-in effect */
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-/* Add a subtle border */
-.modal-content {
-    border: 2px solid #e0e0e0;
-}
-.modal-title {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: #d9534f; /* Red color for warning */
-}
-.modal-content .btn-ok {
-    background-color: #f0ad4e; /* Orange for warning */
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 25px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-.modal-content .btn-ok:hover {
-    background-color: #ec971f;
-    transform: scale(1.05);
-}
-.modal p {
-    margin-bottom: 25px;
-    font-size: 16px;
-}
-/* Optional: Add a subtle footer */
-.modal-content::after {
-    content: "Powered by Madridejos HRMS";
-    display: block;
-    font-size: 12px;
-    color: #aaa;
-    margin-top: 20px;
+.form-group {
+    margin-bottom: 15px; /* Add some space between form elements */
 }
 
-
-/* Modal styles */
-.modal1 {
-    position: fixed;
-    z-index: 1000; /* Ensure it's on top */
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Background overlay */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.modal-content1 {
-    background: linear-gradient(135deg, #ffdddd, #f7f7f7); /* Soft red gradient for error */
-    padding: 30px; /* Same spacious padding */
-    border-radius: 15px; /* Same rounded corners */
-    text-align: center;
-    width: 350px; /* Same width */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Same shadow effect */
-    position: relative;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 166px;
-    animation: modalFadeIn 0.5s ease; /* Same smooth fade-in */
-}
-/* Fade-in animation */
-@keyframes modalFadeIn {
-    from {
-        opacity: 0;
-        transform: scale(0.95); /* Slight scaling for a zoom-in effect */
+@media (max-width: 768px) {
+    .form-group {
+        margin-left: 0; /* Reset margin for smaller screens */
+        margin-right: 0; /* Reset margin for smaller screens */
     }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-/* Add a subtle border */
-.modal-content1 {
-    border: 2px solid #e0e0e0; /* Soft border */
-}
-/* Optional: Close button */
-.modal-content1 .close-btn {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    background: transparent;
-    border: none;
-    font-size: 18px;
-    cursor: pointer;
-    color: #666;
-    transition: color 0.3s ease;
-}
-.modal-content1 .close-btn:hover {
-    color: #ff5c5c; /* Change color on hover */
-}
-/* Optional: Increase spacing between elements */
-.modal-content1 p {
-    margin-bottom: 25px; /* Increased margin for better spacing */
-    font-size: 16px; /* Slightly larger text */
-}
-.modal-content1 .btn-ok1 {
-    background-color: #d9534f; /* Red color for error */
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 25px; /* More rounded button */
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition for hover effects */
-}
-.modal-content1 .btn-ok1:hover {
-    background-color: #c9302c; /* Darker red on hover */
-    transform: scale(1.05); /* Slight zoom on hover */
-}
-/* Optional: Add a subtle footer */
-.modal-content1::after {
-    content: "Powered by Madridejos HRMS";
-    display: block;
-    font-size: 12px;
-    color: #aaa;
-    margin-top: 20px;
-}
-/* Error modal title */
-.modal-title1 {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: #d9534f; /* Red color for error */
-}
-.btn-ok1 {
-    background-color: #d9534f; /* Red color for error */
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 25px; /* More rounded button */
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-.btn-ok1:hover {
-    background-color: #c9302c;
-    transform: scale(1.05); /* Slight zoom on hover */
-}
-/* Add some space between the text and the button */
-.modal1 p {
-    margin-bottom: 25px;
-}
-
-
-/* Modal styles */
-.modal2 {
-    position: fixed;
-    z-index: 1000; /* Ensure it's on top */
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Background overlay */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.modal-content2 {
-    background: linear-gradient(135deg, #ffffff, #f7f7f7); /* Soft gradient background */
-    padding: 30px; /* Increased padding for a spacious look */
-    border-radius: 15px; /* Slightly more rounded corners */
-    text-align: center;
-    width: 350px; /* Slightly wider */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Deeper shadow for a more elevated effect */
-    position: relative; /* Allows for positioning of close button */
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 166px;
-    animation: modalFadeIn 0.5s ease; /* Smooth fade-in animation */
-}
-/* Fade-in animation */
-@keyframes modalFadeIn {
-    from {
-        opacity: 0;
-        transform: scale(0.95); /* Slight scaling for a zoom-in effect */
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-/* Add a subtle border */
-.modal-content2 {
-    border: 2px solid #e0e0e0; /* Soft border */
-}
-/* Optional: Close button */
-.modal-content2 .close-btn {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    background: transparent;
-    border: none;
-    font-size: 18px;
-    cursor: pointer;
-    color: #666;
-    transition: color 0.3s ease;
-} 
-.modal-content2 .close-btn:hover {
-    color: #ff5c5c; /* Change color on hover */
-}
-/* Optional: Increase spacing between elements */
-.modal-content2 p {
-    margin-bottom: 25px; /* Increased margin for better spacing */
-    font-size: 16px; /* Slightly larger text */
-}
-.modal-content2 .btn-ok2 {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 25px; /* More rounded button */
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition for hover effects */
-}  
-.modal-content2 .btn-ok2:hover {
-    background-color: #45a049;
-    transform: scale(1.05); /* Slight zoom on hover */
-} 
-/* Optional: Add a subtle footer */
-.modal-content2::after {
-    content: "Powered by Madridejos HRMS";
-    display: block;
-    font-size: 12px;
-    color: #aaa;
-    margin-top: 20px;
-}
-.modal-title2 {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-.btn-ok2 {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 10px;
-    transition: background-color 0.3s ease;
-}
-.btn-ok2:hover {
-    background-color: #45a049;
-}
-/* Add some space between the text and the button */
-.modal2 p {
-    margin-bottom: 20px;
-}
-.input-group {
-    position: relative; /* Make sure input-group has relative positioning */
-}
-.input-group .form-control {
-    padding-right: 40px; /* Add padding to the right for the input */
-}
-.input-group .input-group-text {
-    position: absolute; /* Position the eye icon absolutely */
-    right: 10px; /* Adjust the right position */
-    top: 50%; /* Center vertically */
-    transform: translateY(-50%); /* Adjust for centering */
-    background-color: transparent; /* Make background transparent */
-    border: none; /* Remove border */
-    cursor: pointer; /* Change cursor to pointer */
-}
-.input-group-text i {
-    opacity: 0.5; /* Set initial opacity */
-    transition: opacity 0.3s; /* Smooth transition */
-}  
-.input-group-text:hover i {
-    opacity: 1; /* Increase opacity on hover */
 }
 /* Style for the terms-checkbox container */
 .terms-checkbox {
@@ -576,7 +274,7 @@ html {
     font-family: Arial, sans-serif;
     margin-top: 2px;
     float: left;
-    margin-left: -9px;
+    margin-left: 1px;
 }
 
 /* Style for the checkbox */
@@ -710,60 +408,6 @@ ul li {
         font-size: 14px;
     }
 }
-
-.wrapper {
-    position: fixed;
-    bottom: 10px;
-    left: 8px;
-    width: auto; /* Change to fit content */
-    max-width: 400px; /* Optional: Limit width */
-    background-color: #333;
-    color: #fff;
-    padding: 15px 20px;
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column; /* Stack content vertically */
-    align-items: flex-start; /* Align content to the left */
-    z-index: 1000;
-}
-.cookie-message {
-    margin-bottom: 10px; /* Add space between message and buttons */
-}
-.cookie-message h3 {
-    margin: 0;
-    font-size: 18px;
-    font-weight: bold;
-}
-.cookie-message p {
-    margin: 5px 0 0;
-    font-size: 14px;
-    color: #ddd;
-}
-.buttons {
-    display: flex;
-    gap: 10px; /* Adjust spacing between buttons */
-    margin-left: 191px;
-}
-#acceptBtn, #rejectBtn {
-    padding: 10px 20px;
-    background-color: #444; /* Replace background image */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease;
-}
-#acceptBtn:hover, #rejectBtn:hover {
-    background-image: url('img/bg.jpg');
-}
-#acceptBtn:focus, #rejectBtn:focus {
-    outline: none;
-}
-#acceptBtn[disabled], #rejectBtn[disabled] {
-    background-color: #777;
-    cursor: not-allowed;
-}
 </style>
 <?php 
 if(isset($_POST['submit']))
@@ -774,27 +418,35 @@ if(isset($_POST['submit']))
     $remoteip = $_SERVER['REMOTE_ADDR'];
 
     $request = file_get_contents($url.'?secret='.$secret.'&response='.$response);
-
     $result = json_decode($request);
 
     if($result->success == true)
     { ?>
       <script>
-        alert("Data save successfuly");
+        Swal.fire({
+          title: 'Success!',
+          text: 'Data saved successfully!',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
       </script>
-      <?php }
-      else {
+      <?php 
+    }
+    else {
         ?>
         <script>
-          alert("Data not saved");
+          Swal.fire({
+            title: 'Error!',
+            text: 'Data not saved.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+          });
         </script>
        <?php
-      }
-
     }
+}
 ?>
 <body class="skin-black">
-
 <!-- Main Content -->
 <div class="container" style="margin-top: -5px;">
     <div class="col-md-4 col-md-offset-4">
@@ -804,90 +456,81 @@ if(isset($_POST['submit']))
                     <img src="img/lg.png" style="height:60px;"/>
                     <h3 class="panel-title">
                         <strong>
-                            Madridejos Household Management System
+                            Madridejos Home Residence Management System
                         </strong>
                     </h3>
                     <br>
                     <center style="margin-top: 5px;">
-                        <h7 style="margin-bottom: -42px;font-family: Georgia, serif;font-size: 18px;text-align: center;margin-bottom: -42px; color: white;">USER LOGIN</h7>
+                       <h7 style="margin-bottom: -42px;font-family: Georgia, serif;font-size: 18px;text-align: center;margin-bottom: -42px; color: white;">USER LOGIN</h7>
                     </center>
                 </div>
                 <form role="form" method="post" onsubmit="return validateForm()">
-                    <div class="form-group" style="border-radius:1px; border: 25px;">
-                        <label for="txt_username" style="color:#fff;margin-left: -8px;font-weight: lighter;">Email</label>
+                    <div class="form-group">
+                        <label for="txt_username" style="color:#fff; font-weight: lighter;">Email</label>
                         <input type="email" class="form-control" name="txt_username"
-                               placeholder="juan@sample.com" required value="<?php echo $username_or_email ?>" style="margin-top: -5px;width: 300px;margin-left: -11px;">
-
-                        <label for="txt_password" style="color:#fff;margin-left: -8px;font-weight: lighter;">Password</label>
-                        <div style="position: relative; width: 300px; margin-left: -11px;">
+                               placeholder="juan@sample.com" required value="<?php echo $username_or_email; ?>" style="margin-top: -5px;">
+                
+                        <label for="txt_password" style="color:#fff; font-weight: lighter;">Password</label>
+                        <div style="position: relative;">
                             <input type="password" class="form-control" name="txt_password" id="txt_password"
-                                   placeholder="•••••••••••" required style="padding-right: 40px; margin-top: -4px; width: 100%;"
+                                   placeholder="•••••••••••" required style="padding-right: 40px; margin-top: -4px;"
                                    pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{10,}$"
                                    title="Password must be at least 10 characters long, contain at least one uppercase letter, one number, and one special character.">
-                            
+                
                             <span class="input-group-text" onclick="togglePassword('txt_password', this)" 
                                   style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; background-color: transparent; border: none;">
                                 <i class="fa fa-eye"></i>
                             </span>
                         </div>
-                        <div class="terms-checkbox">
+                        <div class="terms-checkbox" style="margin-top: 3px;">
                             <input type="checkbox" id="termsCheck" name="terms" required>
-                            <label for="termsCheck">I agree to the <span class="terms-link" onclick="openTerms()">Terms and Conditions</span></label>
+                            <label for="termsCheck" style="color: #fff;">I agree to the <span class="terms-link" onclick="openTerms()">Terms and Conditions</span></label>
                         </div>
                     </div>
                     <input type="hidden" name="token_generate" id="token_generate">
-                    <button type="submit" id="btn_login" class="btns" name="btn_login" style="margin-left: -12px;font-size: 18px;margin-top: 26px;">Login</button>
+                    <button type="submit" id="btn_login" class="btns" name="btn_login">Login</button>
                 </form>
                 <!-- Forgot password link -->
                 <div class="forgot-password" style="margin-top: -2.1px;margin-left: 84px;float: left;">
                     <a href="../forgot_password_option">Forgot Password?</a>
                 </div>
-            
-
-                <!-- Horizontal rule -->
-                <hr style="border: 1px solid gray; margin-top: 10px;margin-left: -9px;width: 292px;">
                 
-                
-                <!-- Error attempts message -->
-                <p id="termsError" style="font-size:12px;margin-top: -17px;margin-left: -8px;color:#ed4337;display: none;">
-                    Please accept the terms and conditions to continue
-                </p>
-                <p style="font-size:12px;color:#ed4337;margin-top: -20px;margin-left: -10px;">
+                <p style="font-size:12px;color:#ed4337;margin-top: -17px;margin-left: -9px;">
                     <?php echo $error_attempts; ?>
                 </p>
-              
-
                 <?php if ($error_attempts): ?>
-                <!-- Error Modal structure -->
-                <div id="error-modal" class="modal" style="display: block;">
-                    <div class="modal-content" style="margin-left:479px;">
-                        <span class="modal-title">Error</span>
-                        <p><?php echo $error_attempts; ?></p>
-                        <button id="error-ok-button" class="btn-ok">OK</button>
-                    </div>
-                </div>  
+                <script>
+                    Swal.fire({
+                        title: 'Error!',
+                        text: '<?php echo $error_attempts; ?>',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+                </script>
                 <?php endif; ?>
-                <!-- Error message modal and JavaScript for dismiss -->
                 <?php if ($error): ?>
-                <!-- Error Modal structure -->
-                <div id="error-modal1" class="modal1" style="display: block;">
-                    <div class="modal-content1" style="margin-left:479px;">
-                        <span class="modal-title1">Error</span>
-                        <p>Invalid account. Please try again.</p>
-                        <button id="error-ok-button1" class="btn-ok1">OK</button>
-                    </div>
-                </div>
+                <script>
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'Invalid account. Please try again.',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+                </script>
                 <?php endif; ?>
-                <!-- Success message and JavaScript for redirection -->
                 <?php if ($login_success): ?>
-                <!-- Modal structure -->
-                <div id="success-modal2" class="modal2" style="display: block;">
-                    <div class="modal-content2" style="margin-left:479px;">
-                        <span class="modal-title2">Success</span>
-                        <p>Login Successfully!</p>
-                        <button id="ok-button2" class="btn-ok2">OK</button>
-                    </div>
-                </div>
+                <script>
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Login Successfully!',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = 'pages/dashboard/dashboard';
+                        }
+                    });
+                </script>
                 <?php endif; ?>
             </div>
         </div>
@@ -897,7 +540,7 @@ if(isset($_POST['submit']))
 <?php include 'termsModal.php'; ?>
 <script>
      // Handle the OK button for modal
-     document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function() {
         // Attach a click event to the OK button to redirect to the dashboard
         const okButton = document.getElementById("ok-button2");
         if (okButton) {
@@ -906,21 +549,20 @@ if(isset($_POST['submit']))
             });
         }
     });
-    
     document.addEventListener("DOMContentLoaded", function() {
-      document.getElementById("error-ok-button").addEventListener("click", function() {
-          document.getElementById("error-modal").style.display = 'none';
-      });
-  });
-
-  // Wait for the DOM to load
-  document.addEventListener("DOMContentLoaded", function() {
-      // Attach a click event to the OK button
-      document.getElementById("error-ok-button1").addEventListener("click", function() {
-          // Close the error modal when OK is clicked
-          document.getElementById("error-modal1").style.display = 'none';
-      });
-  });
+        document.getElementById("error-ok-button").addEventListener("click", function() {
+            document.getElementById("error-modal").style.display = 'none';
+        });
+    });
+  
+    // Wait for the DOM to load
+    document.addEventListener("DOMContentLoaded", function() {
+        // Attach a click event to the OK button
+        document.getElementById("error-ok-button1").addEventListener("click", function() {
+            // Close the error modal when OK is clicked
+            document.getElementById("error-modal1").style.display = 'none';
+        });
+    });
 </script>
 <script>
 function openTerms() {
@@ -951,11 +593,6 @@ window.onclick = function(event) {
 }
 </script>
 <script>
-   $(document).on('click', '#btn_login', function(){
-       var response = g-recaptcha.getResponse();
-       alert(response);
-   })  
-   
   function togglePassword(inputId, icon) {
         const input = document.getElementById(inputId);
         const iconElement = icon.querySelector('i');
