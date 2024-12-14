@@ -156,23 +156,30 @@ if ($error || $error_attempts) {
             width: 90%; /* Make it responsive */
             padding: 15px;
         }
-        .form-group {
-            margin-bottom: 35px;
-        }
         .panel {
-            height: 422px;
-            background: linear-gradient(176deg, rgba(203,1,42,1) 23%, rgba(246,248,255,1) 69%);
+            background: rgba(255, 255, 255, 0.9); /* Light background for better contrast */
             border-radius: 10px;
             padding: 20px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s; /* Smooth hover effect */
+        }
+        .panel:hover {
+            transform: translateY(-5px); /* Lift effect on hover */
         }
         .panel-title {
-            color: white;
+            color: #333; /* Darker title color */
             text-align: center;
+            margin-bottom: 15px;
         }
         .form-control {
             border-radius: 8px !important;
             box-shadow: none;
+            border: 1px solid #ccc; /* Light border */
+            transition: border-color 0.3s; /* Smooth border color transition */
+        }
+        .form-control:focus {
+            border-color: #007bff; /* Change border color on focus */
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add shadow on focus */
         }
         .btns {
             width: 100%; /* Make button full width */
@@ -180,13 +187,18 @@ if ($error || $error_attempts) {
             border-radius: 5px;
             font-weight: bold;
             cursor: pointer;
-            background-image: url('../img/bg.jpg');
+            background-color: #007bff; /* Bootstrap primary color */
             border: none;
             color: #fff;
+            transition: background-color 0.3s; /* Smooth background color transition */
+        }
+        .btns:hover {
+            background-color: #0056b3; /* Darker shade on hover */
         }
         .error, .alert {
-            color: white;
+            color: red; /* Error message color */
             font-size: 12px;
+            text-align: center; /* Center error messages */
         }
         /* Responsive adjustments */
         @media (max-width: 768px) {
@@ -213,7 +225,7 @@ if ($error || $error_attempts) {
                 <form role="form" method="post" onsubmit="return validateForm()">
                     <div class="form-group">
                         <label for="txt_username" style="color:#fff;">Email</label>
-                        <input type="email" class=" form-control" name="txt_username" placeholder="juan@sample.com" required value="<?php echo $username_or_email ?>">
+                        <input type="email" class="form-control" name="txt_username" placeholder="juan@sample.com" required value="<?php echo $username_or_email ?>">
                         <label for="txt_password" style="color:#fff;">Password</label>
                         <input type="password" class="form-control" name="txt_password" id="txt_password" placeholder="•••••••••••" required>
                         <div class="terms-checkbox">
@@ -239,6 +251,7 @@ if ($error || $error_attempts) {
             const errorAttempts = <?php echo json_encode($error_attempts); ?>;
 
             const form = document.querySelector('form');
+            const body = document.body; // Reference to the body element
 
             if (loginSuccess) {
                 Swal.fire({
@@ -256,6 +269,7 @@ if ($error || $error_attempts) {
                     icon: 'error',
                     confirmButtonText: 'OK'
                 }).then(() => {
+                    body.classList.remove('no-pointer-events'); // Re-enable pointer events
                     form.elements['txt_username'].focus(); // Focus on the username field
                 });
             } else if (errorAttempts) {
@@ -265,6 +279,7 @@ if ($error || $error_attempts) {
                     icon: 'error',
                     confirmButtonText: 'OK'
                 }).then(() => {
+                    body.classList.remove('no-pointer-events'); // Re-enable pointer events
                     form.elements['txt_username'].focus(); // Focus on the username field
                 });
             }
@@ -275,6 +290,11 @@ if ($error || $error_attempts) {
                     event.preventDefault(); // Prevent form submission
                 }
             });
+
+            // Add a class to the body to disable pointer events when the alert is shown
+            if (error || errorAttempts) {
+                body.classList.add('no-pointer-events');
+            }
         });
 
         function openTerms() {
