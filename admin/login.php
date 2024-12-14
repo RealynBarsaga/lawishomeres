@@ -210,6 +210,7 @@ html {
     background-image: url('../img/bg.jpg');
     border: none;
     color: #fff;
+    margin-top: 39px;
     margin: 10px 0; /* Add vertical margin for spacing */
     padding: 0; /* Remove any padding to maintain height */
 }
