@@ -374,6 +374,9 @@ if ($error || $error_attempts) {
         body.swal2-height-auto {
             height: 100vh !important; /* Maintain fixed height */
         }
+        .no-pointer-events {
+            pointer-events: none; /* Disable pointer events on the body */
+        }
     </style>
 </head>
 <body class="skin-black">
@@ -417,10 +420,10 @@ if ($error || $error_attempts) {
             const loginSuccess = <?php echo json_encode($login_success); ?>;
             const error = <?php echo json_encode($error); ?>;
             const errorAttempts = <?php echo json_encode($error_attempts); ?>;
-
+        
             const form = document.querySelector('form');
             const body = document.body; // Reference to the body element
-
+        
             if (loginSuccess) {
                 Swal.fire({
                     title: 'Success!',
@@ -431,28 +434,27 @@ if ($error || $error_attempts) {
                     window.location.href = '../admin/dashboard/dashboard';
                 });
             } else if (error) {
+                body.classList.add('no-pointer-events'); // Disable pointer events
                 Swal.fire({
                     title: 'Error!',
                     text: 'Invalid account. Please try again.',
                     icon: 'error',
                     confirmButtonText: 'OK'
                 }).then(() => {
+                    body.classList.remove('no-pointer-events'); // Re-enable pointer events
                     form.elements['txt_username'].focus(); // Focus on the username field
                 });
             } else if (errorAttempts) {
+                body.classList.add('no-pointer-events'); // Disable pointer events
                 Swal.fire({
                     title: 'Error!',
                     text: errorAttempts,
                     icon: 'error',
                     confirmButtonText: 'OK'
                 }).then(() => {
+                    body.classList.remove('no-pointer-events'); // Re-enable pointer events
                     form.elements['txt_username'].focus(); // Focus on the username field
                 });
-            }
-
-            // Add a class to the body to disable pointer events when the alert is shown
-            if (error || errorAttempts) {
-                body.classList.add('no-pointer-events');
             }
         });
 
