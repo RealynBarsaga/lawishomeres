@@ -105,10 +105,6 @@ include('../head_css.php');
             .chart-container, .chart-containers, .chart-contain {
                 height: 200px; /* Further adjust height for very small screens */
             }
-
-            .info-box {
-                flex-direction: column; /* Stack elements vertically again */
-            }
         }
 
         /* Optional: Style for titles above the charts */
