@@ -201,7 +201,6 @@ if ($error || $error_attempts) {
     font-family: Arial, sans-serif;
     margin-top: 2px;
     float: left;
-    margin-left: -9px;
 }
 
 /* Style for the checkbox */
@@ -210,6 +209,7 @@ if ($error || $error_attempts) {
     width: 18px;
     height: 13px;
     cursor: pointer;
+    margin-top: -6px;
 }
 
 /* Style for the label text */
