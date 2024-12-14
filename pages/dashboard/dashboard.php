@@ -68,70 +68,26 @@ html, body {
 /* Container Styles */
 .chart-wrapper {
     display: flex;
-    justify-content: space-between; /* Aligns children (charts) in a row */
-    flex-wrap: wrap; /* Allows wrapping of elements (so Line Chart can go under Bar Chart) */
+    flex-direction: column; /* Stack charts vertically on smaller screens */
+    align-items: center; /* Center align charts */
     gap: 20px; /* Space between charts */
     margin: 20px auto;
 }
-
-/* Flex items */
-.chart-container {
-    max-width: 492px; /* Optional max-width */
+/* Chart Containers */
+.chart-container, .chart-containers, .chart-contain {
+    width: 100%; /* Make the chart containers full width */
+    max-width: 1100px; /* Increased max width for larger screens */
+    height: 350px; /* Set a fixed height for the charts */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: #fff;
-    height: 320px; /* Set a fixed height for the Bar Chart container */
-    width: 506px;
-    margin-left: 9px;
+    margin: 0 auto; /* Center the chart containers */
 }
-
-/* Specific style for Pie Chart container */
-.chart-containers {
-    width: 48%; /* Makes pie chart container take 48% of the available width */
-    max-width: 600px;
-    padding: 6px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-    height: 319px; /* Set a fixed height for the Pie Chart container */
-    margin-right: 5px;
-}
-
-/* Specific style for Line Chart container */
-.chart-contain {
-    max-width: 492px; /* Optional max-width */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-    height: 320px; /* Set a fixed height for the Bar Chart container */
-    width: 506px;
-    margin-left: 9px;
-}
-
 /* Canvas Styles (to ensure charts are responsive inside their containers) */
 canvas {
-    width: 100% !important; /* Makes canvas responsive to parent container */
+    width: 97% !important; /* Makes canvas responsive to parent container */
     height: 100% !important; /* Ensure the canvas fills the container */
     display: block; /* Removes any extra space below the canvas */
 }
-
-
-/* Specific Styles for Bar Chart */
-#myBarChart {
-    width: 98% !important; /* Makes bar chart canvas responsive to parent container */
-    height: 315px !important; /* Set fixed height for Bar Chart */
-}
-
-/* Specific Styles for Pie Chart */
-#myPieChart {
-    margin-left: 74px;
-    width: 69% !important;
-    height: 329px !important;
-}
-
-/* Specific Styles for Line Chart */
-#myLineChart {
-    width: 98% !important; /* Makes line chart canvas responsive to parent container */
-    height: 273px !important; /* Set fixed height for Line Chart */
-}
-
 /* Optional: Style for titles above the charts */
 h3 {
     font-size: 1.2rem;
@@ -186,21 +142,17 @@ h3 {
                     <?php } ?>
                 </div><!-- /.box -->
             </div><!-- /.row -->
-            <!-- Bar Chart -->
-            <div class="chart-wrapper">
-                <!-- Bar Chart (on the right) -->
+           <!-- Bar Chart -->
+           <div class="chart-wrapper">
                 <div class="chart-container bar-chart">
-                    <canvas id="myBarChart"></canvas>  <!-- Removed width/height attributes -->
+                    <canvas id="myBarChart"></canvas>
                 </div>
-                 <!-- Pie Chart (on the left) -->
-                 <div class="chart-containers pie-chart">
-                    <canvas id="myPieChart"></canvas>  <!-- Removed width/height attributes -->
+                <div class="chart-containers pie-chart">
+                    <canvas id="myPieChart"></canvas>
                 </div>
-            </div>
-            
-            <!-- Line Chart (below the Bar Chart) -->
-            <div class="chart-contain line-chart">
-                <canvas id="myLineChart"></canvas> <!-- Removed width/height attributes -->
+                <div class="chart-contain line-chart">
+                    <canvas id="myLineChart"></canvas>
+                </div>
             </div>
         </section><!-- /.content -->
     </aside><!-- /.right-side -->
@@ -249,6 +201,7 @@ const myBarChart = new Chart(barCtx, {
     },
     options: {
         responsive: true,
+        maintainAspectRatio: false, // Allow height to be flexible
         plugins: {
             title: {
                 display: true,
@@ -321,6 +274,7 @@ $femalePercentage = $totalCount > 0 ? ($femaleCount / $totalCount) * 100 : 0;
         },
         options: {
             responsive: true,
+            maintainAspectRatio: false, // Allow height to be flexible
             plugins: {
                 title: {
                     display: true,
@@ -428,6 +382,7 @@ const myLineChart = new Chart(lineCtx, {
     },
     options: {
         responsive: true,
+        maintainAspectRatio: false, // Allow height to be flexible
         plugins: {
             title: {
                 display: true,
