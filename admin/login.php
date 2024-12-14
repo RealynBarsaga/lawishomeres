@@ -277,6 +277,8 @@ if ($error || $error_attempts) {
             </div>
         </div>
     </div>
+    <!-- Terms and Conditions Modal -->
+    <?php include 'termsModal.php'; ?>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const loginSuccess = <?php echo json_encode($login_success); ?>;
