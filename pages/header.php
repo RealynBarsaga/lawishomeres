@@ -31,7 +31,7 @@ ob_start();
 <body>
 <header class="header">
     <a href="../dashboard/dashboard" class="logo" style="font-size: 13px; font-family: Source Sans Pro, sans-serif;">
-        Madridejos Household Management System
+        Mad Household Management System
     </a>
     <nav class="navbar navbar-static-top" role="navigation">
         <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
