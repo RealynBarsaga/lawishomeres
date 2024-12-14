@@ -434,6 +434,7 @@ if ($error || $error_attempts) {
                     icon: 'error',
                     confirmButtonText: 'OK'
                 }).then(() => {
+                    console.log("After SweetAlert");
                     body.classList.remove('no-pointer-events'); // Re-enable pointer events
                     form.elements['txt_username'].focus(); // Focus on the username field
                 });
@@ -444,6 +445,7 @@ if ($error || $error_attempts) {
                     icon: 'error',
                     confirmButtonText: 'OK'
                 }).then(() => {
+                    console.log("After SweetAlert");
                     body.classList.remove('no-pointer-events'); // Re-enable pointer events
                     form.elements['txt_username'].focus(); // Focus on the username field
                 });
