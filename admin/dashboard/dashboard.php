@@ -64,7 +64,6 @@
             max-width: 600px; /* Optional: Set a max width for larger screens */
             height: 320px; /* Set a fixed height for the charts */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            background-color: #fff;
             margin: 0 auto; /* Center the chart containers */
         }
 
