@@ -492,7 +492,7 @@ if(isset($_POST['submit']))
                     <a href="../admin/forgot_password_option">Forgot Password?</a> 
                 </div>
                 
-                <p style="font-size:12px;color:#ed4337;margin-top: -17px;margin-left: -9px;">
+                <p style="font-size:12px;color:#ed4337;margin-top: 32px;margin-left: 1px;">
                     <?php echo $error_attempts; ?>
                 </p>
                 <?php if ($error_attempts): ?>
