@@ -428,6 +428,7 @@ if ($error || $error_attempts) {
                     window.location.href = '../admin/dashboard/dashboard';
                 });
             } else if (error) {
+                console.log("Before SweetAlert");
                 Swal.fire({
                     title: 'Error!',
                     text: 'Invalid account. Please try again.',
@@ -439,6 +440,7 @@ if ($error || $error_attempts) {
                     form.elements['txt_username'].focus(); // Focus on the username field
                 });
             } else if (errorAttempts) {
+                console.log("Before SweetAlert");
                 Swal.fire({
                     title: 'Error!',
                     text: errorAttempts,
