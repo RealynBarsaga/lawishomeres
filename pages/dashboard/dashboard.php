@@ -139,15 +139,6 @@ h3 {
     color: #333;
     margin-bottom: 15px;
 }
-@media (min-width: 992px) {
-    .col-md-3 {
-        width: 20%;
-    }
-}
-.row {
-    margin-right: -29px;
-    margin-left: -15px;
-}
 </style>
 <div class="row-offcanvas row-offcanvas-left">
 <?php include('../sidebar-left.php'); ?>
