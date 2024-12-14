@@ -179,10 +179,6 @@ if ($error || $error_attempts) {
             border-radius: 10px;
             padding: 20px;
             box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s; /* Smooth hover effect */
-        }
-        .panel:hover {
-            transform: translateY(-5px); /* Lift effect on hover */
         }
         .panel-title {
             color: #333; /* Darker title color */
