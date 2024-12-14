@@ -68,8 +68,8 @@ html, body {
 /* Container Styles */
 .chart-wrapper {
     display: flex;
-    flex-direction: column; /* Stack charts vertically on smaller screens */
-    align-items: center; /* Center align charts */
+    justify-content: space-between; /* Aligns children (charts) in a row */
+    flex-wrap: wrap; /* Allows wrapping of elements (so Line Chart can go under Bar Chart) */
     gap: 20px; /* Space between charts */
     margin: 20px auto;
 }
