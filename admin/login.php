@@ -205,7 +205,7 @@ if ($error || $error_attempts) {
                 padding: 10px;
             }
             .btns {
-                margin-top: 10px; /* Add some margin for smaller screens */
+                margin-top: 26px; /* Add some margin for smaller screens */
             }
         }
         /* Modal Styles */
