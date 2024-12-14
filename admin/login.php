@@ -173,11 +173,6 @@ body {
 html {
     height: 100%; /* Ensures the HTML covers the full height */
 }
-.container {
-    max-width: 1061px;
-    width: 100%; /* Make sure the container is responsive */
-    padding: 15px; /* Add padding to the container */
-}
 .panel {
     height: 435px;
     min-height: 370px;
