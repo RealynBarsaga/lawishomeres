@@ -128,7 +128,7 @@ h3 {
     }
 }
 .row {
-    margin-right: -22px;
+    margin-right: -29px;
     margin-left: -15px;
 }
 </style>
