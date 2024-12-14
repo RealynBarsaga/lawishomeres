@@ -210,7 +210,6 @@ if ($error || $error_attempts) {
     width: 18px;
     height: 13px;
     cursor: pointer;
-    margin-top: -6px;
 }
 
 /* Style for the label text */
