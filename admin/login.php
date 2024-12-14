@@ -202,7 +202,7 @@ html {
 }
 .btns {
     width: 100%; /* Make the button take the full width of its container */
-    max-width: 300px; /* Set a maximum width for larger screens */
+    max-width: 346px; /* Set a maximum width for larger screens */
     height: 40px;
     border-radius: 5px;
     font-weight: 600;
@@ -211,7 +211,6 @@ html {
     border: none;
     color: #fff;
     margin-top: 39px;
-    margin: 10px 0; /* Add vertical margin for spacing */
     padding: 0; /* Remove any padding to maintain height */
 }
 .forgot-password {
