@@ -363,7 +363,7 @@ ul li {
                     <h7 style="color: white;">ADMIN LOGIN</h7>
                 </div>
                 <form role="form" method="post" onsubmit="return validateForm()">
-                    <div class="form-group">
+                    <div class="form-group" style="margin-bottom: 72px;">
                         <label for="txt_username" style="color:#fff;">Email</label>
                         <input type="email" class="form-control" name="txt_username" placeholder="juan@sample.com" required value="<?php echo $username_or_email ?>">
                         <label for="txt_password" style="color:#fff;">Password</label>
