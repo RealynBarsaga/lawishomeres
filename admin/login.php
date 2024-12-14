@@ -249,6 +249,16 @@ html {
 body.swal2-height-auto {
     height: 100vh !important;
 }
+.form-group {
+    margin-bottom: 15px; /* Add some space between form elements */
+}
+
+@media (max-width: 768px) {
+    .form-group {
+        margin-left: 0; /* Reset margin for smaller screens */
+        margin-right: 0; /* Reset margin for smaller screens */
+    }
+}
 </style>
 <?php 
 if(isset($_POST['submit']))
@@ -305,32 +315,31 @@ if(isset($_POST['submit']))
                        <h7 style="margin-bottom: -42px;font-family: Georgia, serif;font-size: 18px;text-align: center;margin-bottom: -42px; color: white;">ADMIN LOGIN</h7>
                     </center>
                 </div>
-                <form role="form" method="post"  onsubmit="return validateForm()">
-                    <div class="form-group" style="border-radius:1px; border: 25px;">
-                        <label for="txt_username" style="color:#fff;margin-left: -8px;font-weight: lighter;">Email</label>
+                <form role="form" method="post" onsubmit="return validateForm()">
+                    <div class="form-group">
+                        <label for="txt_username" style="color:#fff; font-weight: lighter;">Email</label>
                         <input type="email" class="form-control" name="txt_username"
-                               placeholder="juan@sample.com" required value="<?php echo $username_or_email ?>" style="margin-top: -5px;width: 300px;margin-left: -11px;">
-    
-                        <label for="txt_password" style="color:#fff;margin-left: -8px;font-weight: lighter;">Password</label>
-                        <div style="position: relative; width: 300px; margin-left: -11px;">
+                               placeholder="juan@sample.com" required value="<?php echo $username_or_email; ?>" style="margin-top: -5px;">
+                
+                        <label for="txt_password" style="color:#fff; font-weight: lighter;">Password</label>
+                        <div style="position: relative;">
                             <input type="password" class="form-control" name="txt_password" id="txt_password"
-                                   placeholder="•••••••••••" required style="padding-right: 40px; margin-top: -4px; width: ```php
-100%;"
+                                   placeholder="•••••••••••" required style="padding-right: 40px; margin-top: -4px;"
                                    pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{10,}$"
                                    title="Password must be at least 10 characters long, contain at least one uppercase letter, one number, and one special character.">
-                            
+                
                             <span class="input-group-text" onclick="togglePassword('txt_password', this)" 
                                   style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; background-color: transparent; border: none;">
                                 <i class="fa fa-eye"></i>
                             </span>
                         </div>
-                        <div class="terms-checkbox">
+                        <div class="terms-checkbox" style="margin-top: 10px;">
                             <input type="checkbox" id="termsCheck" name="terms" required>
-                            <label for="termsCheck">I agree to the <span class="terms-link" onclick="openTerms()">Terms and Conditions</span></label>
+                            <label for="termsCheck" style="color: #fff;">I agree to the <span class="terms-link" onclick="openTerms()">Terms and Conditions</span></label>
                         </div>
                     </div>
                     <input type="hidden" name="token_generate" id="token_generate">
-                    <button type="submit" id="btn_login" class="btns" name="btn_login" style="margin-left: -12px;font-size: 18px;margin-top: 26px;">Login</button>
+                    <button type="submit" id="btn_login" class="btns" name="btn_login" style="font-size: 18px; margin-top: 26px; width: 100%;">Login</button>
                 </form>
                <!-- Forgot password link -->
                <div class="forgot-password" style="margin-top: -2.1px;margin-left: 84px;float: left;">
