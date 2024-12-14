@@ -97,7 +97,7 @@ if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) {
                     ]
                 );
             } else {
-                $_SESSION['login_attempts']++;
+                $_SESSION ['login_attempts']++;
                 if ($_SESSION['login_attempts'] < $max_attempts) {
                     $error = true;
                 }
@@ -189,7 +189,7 @@ if ($error || $error_attempts) {
             border-radius: 8px !important;
             box-shadow: none;
             border: 1px solid #ccc; /* Light border */
-            transition: border-color 0.3s; /* Smooth border color transition */
+            transition: border-color 0. 3s; /* Smooth border color transition */
         }
         .form-control:focus {
             border-color: #007bff; /* Change border color on focus */
@@ -223,145 +223,154 @@ if ($error || $error_attempts) {
             }
         }
         /* Modal Styles */
-.modal4 {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    border-radius: 5px;
-    height: 100%; /* Full height */
-    background-color: rgba(0, 0, 0, 0.4); /* Black background with transparency */
-    overflow: auto; /* Enable scroll if needed */
-}
+        .modal4 {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            border-radius: 5px;
+            height: 100%; /* Full height */
+            background-color: rgba(0, 0, 0, 0.4); /* Black background with transparency */
+            overflow: auto; /* Enable scroll if needed */
+        }
 
-/* Modal Content */
-.modal-content4 {
-    background-color: #fff;
-    margin: 10% auto; /* Center the modal */
-    padding: 20px;
-    border-radius: 8px;
-    width: 60%; /* Adjust as needed */
-    max-width: 450px; /* Maximum width */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+        /* Modal Content */
+        .modal-content4 {
+            background-color: #fff;
+            margin: 10% auto; /* Center the modal */
+            padding: 20px;
+            border-radius: 8px;
+            width: 60%; /* Adjust as needed */
+            max-width: 450px; /* Maximum width */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
 
-/* Close Button */
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-}
+        /* Close Button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
 
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
 
-/* Title */
-h2 {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 15px;
-}
+        /* Title */
+        h2 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 15px;
+        }
 
-/* Content Section */
-.terms-content {
-    font-size: 16px;
-    line-height: 1.6;
-    color: #555;
-}
+        /* Content Section */
+        .terms-content {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #555;
+        }
 
-h3 {
-    font-size: 20px;
-    margin-top: 15px;
-    color: #333;
-}
+        h3 {
+            font-size: 20px;
+            margin-top: 15px;
+            color: #333;
+        }
 
-/* Paragraph Styling */
-p {
-    margin: 10px 0;
-    font-size: 13px;
-}
+        /* Paragraph Styling */
+        p {
+            margin: 10px 0;
+            font-size: 13px;
+        }
 
-/* List Style */
-ul {
-    padding-left: 20px;
-}
+        /* List Style */
+        ul {
+            padding-left: 20px;
+        }
 
-ul li {
-    margin-bottom: 8px;
-    font-size: 16px;
-    color: #555;
-}
+        ul li {
+            margin-bottom: 8px;
+            font-size: 16px;
+            color: #555;
+        }
 
-/* Responsive Design for Small Screens */
-@media screen and (max-width: 768px) {
-    .modal-content4 {
-        width: 70%; /* Full width for mobile */
-    }
-    h2 {
-        font-size: 20px;
-    }
-    h3 {
-        font-size: 18px;
-    }
-    p, ul li {
-        font-size: 14px;
-    }
-}
-/* Style for the terms-checkbox container */
-.terms-checkbox {
-    display: flex;
-    align-items: center;
-    font-family: Arial, sans-serif;
-    margin-top: 2px;
-    float: left;
-}
+        /* Responsive Design for Small Screens */
+        @media screen and (max-width: 768px) {
+            .modal-content4 {
+                width: 70%; /* Full width for mobile */
+            }
+            h2 {
+                font-size: 20px;
+            }
+            h3 {
+                font-size: 18px;
+            }
+            p, ul li {
+                font-size: 14px;
+            }
+        }
+        /* Style for the terms-checkbox container */
+        .terms-checkbox {
+            display: flex;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            margin-top: 2px;
+            float: left;
+        }
 
-/* Style for the checkbox */
-.terms-checkbox input[type="checkbox"] {
-    margin-right: 5px;
-    width: 18px;
-    height: 13px;
-    cursor: pointer;
-    margin-top: -6px;
-}
+        /* Style for the checkbox */
+        .terms-checkbox input[type="checkbox"] {
+            margin-right: 5px;
+            width: 18px;
+            height: 13px;
+            cursor: pointer;
+            margin-top: -6px;
+        }
 
-/* Style for the label text */
-.terms-checkbox label {
-    font-size: 12px;
-    color: #333;
-}
+        /* Style for the label text */
+        .terms-checkbox label {
+            font-size: 12px;
+            color: #333;
+        }
 
-/* Style for the terms link */
-.terms-checkbox .terms-link {
-    color: #0066cc;
-    cursor: pointer;
-    text-decoration: underline;
-}
+        /* Style for the terms link */
+        .terms-checkbox .terms-link {
+            color: #0066cc;
+            cursor: pointer;
+            text-decoration: underline;
+        }
 
-.terms-checkbox .terms-link:hover {
-    color: #004c99;
-}
+        .terms-checkbox .terms-link:hover {
+            color: #004c99;
+        }
 
-/* Style for the error message */
-.terms-checkbox .error-message {
-    display: none;
-    color: red;
-    font-size: 12px;
-    margin-left: 10px;
-}
+        /* Style for the error message */
+        .terms-checkbox .error-message
+        {
+            display: none;
+            color: red;
+            font-size: 12px;
+            margin-left: 10px;
+        }
 
-/* Style when error is displayed */
-.terms-checkbox .error-message.active {
-    display: inline;
-}
+        /* Style when error is displayed */
+        .terms-checkbox .error-message.active {
+            display: inline;
+        }
+
+        body.no-pointer-events {
+            pointer-events: none; /* Disable pointer events on the body */
+        }
+
+        .swal2-container {
+            z-index: 9999; /* Ensure SweetAlert is above other elements */
+        }
     </style>
 </head>
 <body class="skin-black">
@@ -459,7 +468,8 @@ ul li {
             document.getElementById("termsModal").style.display = "none";
         }
 
-        function validateForm() {
+        function validateForm()
+        {
             const termsCheck = document.getElementById("termsCheck");
             if (!termsCheck.checked) {
                 Swal.fire({
@@ -482,13 +492,13 @@ ul li {
         }
     </script>
     <script>
-  grecaptcha.ready(function() {
-    grecaptcha.execute('6Lcr3pIqAAAAANKAObEg1g-qulpuutPCFOB59t9A', {action: 'submit'}).then(function(token) {
-        // Add your logic to submit to your backend server here.
-        var response = document.getElementById('token_generate');
-        response.value = token;
-    });
-  });
-</script>
+        grecaptcha.ready(function() {
+            grecaptcha.execute('6Lcr3pIqAAAAANKAObEg1g-qulpuutPCFOB59t9A', {action: 'submit'}).then(function(token) {
+                // Add your logic to submit to your backend server here.
+                var response = document.getElementById('token_generate');
+                response.value = token;
+            });
+        });
+    </script>
 </body>
 </html>
