@@ -1,61 +1,47 @@
-<?php if(isset($_SESSION['duplicate'])){
-    echo '<script>$(document).ready(function (){duplicate();});</script>';
+<!-- Include SweetAlert CSS and JS in your HTML file -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+
+<?php
+// Duplicate record alert
+if (isset($_SESSION['duplicate'])) {
+    echo '<script>$(document).ready(function (){swal("Duplicate record!", "", "error");});</script>';
     unset($_SESSION['duplicate']);
-    } 
-echo '<div class="alert alert-duplicate alert-autocloseable-duplicate" style="background: #d9534f; position: fixed; top: 1em; right: 1em; z-index: 9999; display: none;">
-     Duplicate record !
-</div>';
-?>
+}
 
-<?php if(isset($_SESSION['duplicateuser'])){
-    echo '<script>$(document).ready(function (){duplicateuser();});</script>';
+// Username already exists alert
+if (isset($_SESSION['duplicateuser'])) {
+    echo '<script>$(document).ready(function (){swal("Username Already Exists!", "", "error");});</script>';
     unset($_SESSION['duplicateuser']);
-    } 
-echo '<div class="alert alert-duplicateuser alert-autocloseable-duplicateuser" style="background: #d9534f; position: fixed; top: 1em; right: 1em; z-index: 9999; display: none;">
-     Username Already Exists !
-</div>';
-?>
+}
 
-<?php if(isset($_SESSION['end'])){
-    echo '<script>$(document).ready(function (){end();});</script>';
+// End term successfully alert
+if (isset($_SESSION['end'])) {
+    echo '<script>$(document).ready(function (){swal("End Term Successfully!", "", "success");});</script>';
     unset($_SESSION['end']);
-    } 
-echo '<div class="alert alert-end alert-autocloseable-end" style="background: #dff0d8; position: fixed; top: 1em; right: 1em; z-index: 9999; display: none;">
-     End Term Successfully !
-</div>';
-?>
+}
 
-<?php if(isset($_SESSION['start'])){
-    echo '<script>$(document).ready(function (){start();});</script>';
+// Start term successfully alert
+if (isset($_SESSION['start'])) {
+    echo '<script>$(document).ready(function (){swal("Start Term Successfully!", "", "success");});</script>';
     unset($_SESSION['start']);
-    } 
-echo '<div class="alert alert-start alert-autocloseable-start" style="background: #dff0d8; position: fixed; top: 1em; right: 1em; z-index: 9999; display: none;">
-     Start Term Successfully !
-</div>';
-?>
+}
 
-<?php if(isset($_SESSION['delete'])){
-    echo '<script>$(document).ready(function (){deleted();});</script>';
+// Deleted successfully alert
+if (isset($_SESSION['delete'])) {
+    echo '<script>$(document).ready(function (){swal("Deleted Successfully!", "", "success");});</script>';
     unset($_SESSION['delete']);
-    } ?>
-<div class="alert alert-danger alert-autocloseable-danger" style="position: fixed; top: 1em; right: 1em; z-index: 9999; display: none;">
-     Deleted Successfully !
-</div>
+}
 
-<?php if(isset($_SESSION['filesize'])){
-    echo '<script>$(document).ready(function (){filesize();});</script>';
+// File size error alert
+if (isset($_SESSION['filesize'])) {
+    echo '<script>$(document).ready(function (){swal("File size is greater than 2mb or Invalid Format!", "", "error");});</script>';
     unset($_SESSION['filesize']);
-    } 
-echo '<div class="alert alert-filesize alert-autocloseable-filesize" style="background: #d9534f; position: fixed; top: 1em; right: 1em; z-index: 9999; display: none;">
-     File size is greater than 2mb or Invalid Format !
-</div>';
-?>
+}
 
-<?php if(isset($_SESSION['blotter'])){
-    echo '<script>$(document).ready(function (){blotter();});</script>';
+// Blotter case unresolved alert
+if (isset($_SESSION['blotter'])) {
+    echo '<script>$(document).ready(function (){swal("Blotter case was not been resolved!", "", "warning");});</script>';
     unset($_SESSION['blotter']);
-    } 
-echo '<div class="alert alert-blotter alert-autocloseable-blotter" style="background: #f0ad4e; position: fixed; top: 1em; right: 1em; z-index: 9999; display: none;">
-     Blotter case was not been resolved !
-</div>';
+}
 ?>
