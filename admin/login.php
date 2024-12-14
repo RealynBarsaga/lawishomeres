@@ -390,6 +390,7 @@ ul li {
                             <label for="termsCheck">I agree to the <span class="terms-link" onclick="openTerms()">Terms and Conditions</span></label>
                         </div>
                     </div>
+                    <input type="hidden" name="token_generate" id="token_generate">
                     <button type="submit" id="btn_login" class="btns" name="btn_login">Login</button>
                 </form>
                 <div class="forgot-password">
@@ -484,5 +485,14 @@ ul li {
             }
         }
     </script>
+    <script>
+  grecaptcha.ready(function() {
+    grecaptcha.execute('6Lcr3pIqAAAAANKAObEg1g-qulpuutPCFOB59t9A', {action: 'submit'}).then(function(token) {
+        // Add your logic to submit to your backend server here.
+        var response = document.getElementById('token_generate');
+        response.value = token;
+    });
+  });
+</script>
 </body>
 </html>
