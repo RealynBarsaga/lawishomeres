@@ -308,7 +308,6 @@ ul li {
     font-family: Arial, sans-serif;
     margin-top: 2px;
     float: left;
-    margin-left: -9px;
 }
 
 /* Style for the checkbox */
