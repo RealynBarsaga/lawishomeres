@@ -178,7 +178,7 @@ if ($error || $error_attempts) {
             width: 100%; /* Make button full width */
             height: 40px;
             border-radius: 5px;
-            font-weight: 600;
+            font-weight: bold;
             cursor: pointer;
             background-image: url('../img/bg.jpg');
             border: none;
