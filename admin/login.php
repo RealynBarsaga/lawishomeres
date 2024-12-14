@@ -339,5 +339,33 @@ if ($error || $error_attempts) {
             }
         }
     </script>
+    <script>
+function openTerms() {
+    document.getElementById("termsModal").style.display = "block";
+}
+
+function closeTerms() {
+    document.getElementById("termsModal").style.display = "none";
+}
+
+function validateForm() {
+    const termsCheck = document.getElementById("termsCheck");
+    const termsError = document.getElementById("termsError");
+    if (!termsCheck.checked) {
+        termsError.style.display = "block";
+        return false;
+    }
+    termsError.style.display = "none";
+    return true;
+}
+
+// Close modal when clicking outside of it
+window.onclick = function(event) {
+    const modal = document.getElementById("termsModal");
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
 </body>
 </html>
