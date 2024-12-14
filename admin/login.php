@@ -211,7 +211,7 @@ if ($error || $error_attempts) {
         .error, .alert {
             color: red; /* Error message color */
             font-size: 12px;
-            text-align: center; /* Center error messages */
+            text-align: left; /* Center error messages */
         }
         /* Responsive adjustments */
         @media (max-width: 768px) {
