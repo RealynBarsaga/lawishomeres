@@ -96,7 +96,7 @@ if (isset($_POST['btn_saveeditProfile'])) {
         .input-group-text {
             position: absolute;
             top: 70%;
-            right: 10px; /* Adjust as needed */
+            right: 28px; /* Adjust as needed */
             transform: translateY(-50%);
             background: transparent;
             border: none;
