@@ -95,7 +95,6 @@ canvas {
     display: block; /* Removes any extra space below the canvas */
 }
 
-
 /* Specific Styles for Bar Chart */
 #myBarChart {
     width: 98% !important; /* Makes bar chart canvas responsive to parent container */
@@ -234,7 +233,7 @@ $femalePercentage = $totalCount > 0 ? ($femaleCount / $totalCount) * 100 : 0;
             plugins: {
                 title: {
                     display: true,
-                    text: '          Gender Distribution Overview',
+                    text: 'Gender Distribution Overview',
                     font: {
                         size: 16 // Adjusted font size for the title
                     },
@@ -284,33 +283,117 @@ $femalePercentage = $totalCount > 0 ? ($femaleCount / $totalCount) * 100 : 0;
         plugins: [ChartDataLabels] // Register the plugin
     });
 </script>
-    <?php
-    // Query to count data for each barangay
-    $barangays = ['Tabagak', 'Bunakan', 'Kodia', 'Talangnan', 'Poblacion', 'Maalat', 'Pili', 'Kaongkod', 'Mancilang', 'Kangwayan', 'Tugas', 'Malbago', 'Tarong', 'San Agustin'];
-    $counts = [];
+<?php
+// Query to count data for each barangay
+$barangays = ['Tabagak', 'Bunakan', 'Kodia', 'Talangnan', 'Poblacion', 'Maalat', 'Pili', 'Kaongkod', 'Mancilang', 'Kangwayan', 'Tugas', 'Malbago', 'Tarong', 'San Agustin'];
+$counts = [];
 
-    foreach ($barangays as $barangay) {
-        $q = mysqli_query($con, "SELECT * FROM tbltabagak WHERE barangay = '$barangay'");
-        $counts[] = mysqli_num_rows($q);
+foreach ($barangays as $barangay) {
+    $q = mysqli_query($con, "SELECT * FROM tbltabagak WHERE barangay = '$barangay'");
+    $counts[] = mysqli_num_rows($q);
+}
+?>
+
+<script>
+const barCtx = document.getElementById('myBarChart').getContext('2d');
+const myBarChart = new Chart(barCtx, {
+    type: 'bar',
+    data: {
+        labels: <?= json_encode($barangays) ?>,
+        datasets: [{
+            label: 'Count',
+            data: <?= json_encode($counts) ?>,
+            backgroundColor: [
+                '#4CB5F5',
+            ],
+            borderColor: [
+                '#4CB5F5',
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            title: {
+                display: true,
+                text: 'Population Overview',
+                font: {
+                    size: 14 // Adjusted font size for the title
+                },
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                ticks: {
+                    stepSize: 1,
+                    font: {
+                        size: 9 // Adjusted font size for the y-axis labels
+                    }
+                }
+            },
+            x: {
+                ticks: {
+                    font: {
+                        size: 9 // Adjusted font size for the x-axis labels
+                    }
+                }
+            }
+        },
     }
-    ?>
+});
+</script>
+<?php
+// Initialize variables for age distribution
+$ageGroups = [
+    '0-9' => 0,
+    '10-19' => 0,
+    '20-29' => 0,
+    '30-39' => 0,
+    '40-49' => 0,
+    '50-59' => 0,
+    '60-69' => 0,
+    '70+' => 0,
+];
 
-    <script>
-    const barCtx = document.getElementById('myBarChart').getContext('2d');
-    const myBarChart = new Chart(barCtx, {
-        type: 'bar',
+$q = mysqli_query($con, "SELECT * FROM tbltabagak");
+
+while ($row = mysqli_fetch_assoc($q)) {
+    $age = $row['age'];
+    
+    if ($age >= 0 && $age <= 9) {
+        $ageGroups['0-9']++;
+    } elseif ($age >= 10 && $age <= 19) {
+        $ageGroups['10-19']++;
+    } elseif ($age >= 20 && $age <= 29) {
+        $ageGroups['20-29']++;
+    } elseif ($age >= 30 && $age <= 39) {
+        $ageGroups['30-39']++;
+    } elseif ($age >= 40 && $age <= 49) {
+        $ageGroups['40-49']++;
+    } elseif ($age >= 50 && $age <= 59) {
+        $ageGroups['50-59']++;
+    } elseif ($age >= 60 && $age <= 69) {
+        $ageGroups['60-69']++;
+    } elseif ($age >= 70) {
+        $ageGroups['70+']++;
+    }
+}
+?>
+
+<script>
+    const lineCtx = document.getElementById('myLineChart').getContext('2d');
+    const myLineChart = new Chart(lineCtx, {
+        type: 'line',
         data: {
-            labels: <?= json_encode($barangays) ?>,
+            labels: ['0-9', '10-19', '20-29', '30-39', '40-49', '50-59', '60-69', '70+'],
             datasets: [{
-                label: 'Count',
-                data: <?= json_encode($counts) ?>,
-                backgroundColor: [
-                    '#4CB5F5',
-                ],
-                borderColor: [
-                    '#4CB5F5',
-                ],
-                borderWidth: 1
+                label: 'Age Distribution',
+                data: <?= json_encode(array_values($ageGroups)) ?>,
+                borderColor: '#FF6384',
+                fill: false,
+                tension: 0.1
             }]
         },
         options: {
@@ -318,10 +401,10 @@ $femalePercentage = $totalCount > 0 ? ($femaleCount / $totalCount) * 100 : 0;
             plugins: {
                 title: {
                     display: true,
-                    text: 'Population Overview',
+                    text: 'Age Distribution Overview',
                     font: {
                         size: 14 // Adjusted font size for the title
-                    },
+                    }
                 }
             },
             scales: {
@@ -341,92 +424,12 @@ $femalePercentage = $totalCount > 0 ? ($femaleCount / $totalCount) * 100 : 0;
                         }
                     }
                 }
-            },
-        }
-    });
-</script>
-<?php
-// Initialize variables for age distribution
-$ageGroups = [
-    '0-9' => 0,
-    '10-19' => 0,
-    '20-29' => 0,
-    '30-39' => 0,
-    '40-49' => 0,
-    '50-59' => 0,
-    '60+' => 0,
-];
-
-// Query to get age distribution
-$ageQuery = mysqli_query($con, "SELECT age FROM tbltabagak");
-while ($row = mysqli_fetch_assoc($ageQuery)) {
-    $age = $row['age'];
-    if ($age >= 0 && $age <= 9) {
-        $ageGroups['0-9']++;
-    } elseif ($age >= 10 && $age <= 19) {
-        $ageGroups['10-19']++;
-    } elseif ($age >= 20 && $age <= 29) {
-        $ageGroups['20-29']++;
-    } elseif ($age >= 30 && $age <= 39) {
-        $ageGroups['30-39']++;
-    } elseif ($age >= 40 && $age <= 49) {
-        $ageGroups['40-49']++;
-    } elseif ($age >= 50 && $age <= 59) {
-        $ageGroups['50-59']++;
-    } else {
-        $ageGroups['60+']++;
-    }
-}
-
-$ageLabels = array_keys($ageGroups);
-$ageCounts = array_values($ageGroups);
-?>
-<script>
-     const lineCtx = document.getElementById('myLineChart').getContext('2d');
-    const myLineChart = new Chart(lineCtx, {
-        type: 'line',
-        data: {
-            labels: <?= json_encode($ageLabels) ?>,
-            datasets: [{
-                label: 'Age Distribution',
-                data: <?= json_encode($ageCounts) ?>,
-                backgroundColor: 'rgba(76, 181, 245, 0.2)',
-                borderColor: '#4CB5F5',
-                borderWidth: 1,
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Age Distribution Overview',
-                    font: {
-                        size: 14 // Reduced title font size
-                    },
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        stepSize: 1,
-                        font: {
-                            size: 9 // Reduced font size for the y-axis labels
-                        }
-                    }
-                },
-                x: {
-                    ticks: {
-                        font: {
-                            size: 9 // Reduced font size for the x-axis labels
-                        }
-                    }
-                }
             }
         }
     });
 </script>
-<?php include "../../admin/footer.php"; ?>
-</body>
-</html>
+
+<?php
+include('../../admin/footer.php');
+ob_end_flush();
+?>
