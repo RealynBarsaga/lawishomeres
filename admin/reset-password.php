@@ -220,6 +220,21 @@ if (isset($_GET['code'])) {
     </div>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+        function togglePassword(inputId, icon) {
+            const input = document.getElementById(inputId);
+            const iconElement = icon.querySelector('i');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                iconElement.classList.remove('fa-eye');
+                iconElement.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                iconElement.classList.remove('fa-eye-slash');
+                iconElement.classList.add('fa-eye');
+            }
+        }
+        
         document.addEventListener("DOMContentLoaded", function() {
             <?php if (!empty($success_message)): ?>
                 Swal.fire({
@@ -243,21 +258,6 @@ if (isset($_GET['code'])) {
                 });
             <?php endif; ?>
         });
-
-        function togglePassword(inputId, icon) {
-            const input = document.getElementById(inputId);
-            const iconElement = icon.querySelector('i');
-            
-            if (input.type === 'password') {
-                input.type = 'text';
-                iconElement.classList.remove('fa-eye');
-                iconElement.classList.add('fa-eye-slash');
-            } else {
-                input.type = 'password';
-                iconElement.classList.remove('fa-eye-slash');
-                iconElement.classList.add('fa-eye');
-            }
-        }
 
         function checkPassword() {
             const password = document.getElementById('new_password').value;
