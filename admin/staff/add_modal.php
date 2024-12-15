@@ -1,3 +1,11 @@
+<style>
+    .valid {
+        color: green; /* Color for valid messages */
+    }
+    .invalid {
+        color: red; /* Color for invalid messages */
+    }
+</style>
 <!-- ========================= MODAL ======================= -->
 <div id="addModal" class="modal fade">
     <form method="post" enctype="multipart/form-data">
