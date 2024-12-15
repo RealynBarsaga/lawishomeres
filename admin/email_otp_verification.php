@@ -285,17 +285,32 @@ h2 {
         </div>
     </div>
 
+    
+
     <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        <?php if (!empty($error_message)): ?>
-            swal("Error", "<?php echo $error_message; ?>", "error");
-        <?php elseif (!empty($success_message)): ?>
-            swal("Success", "<?php echo $success_message; ?>", "success").then(() => {
-                console.log("Redirecting to reset password page..."); // Debugging line
-                window.location.href = '../admin/reset_password_otp';
-            });
-        <?php endif; ?>
-    });
+        document.addEventListener("DOMContentLoaded", function() {
+            <?php if (!empty($success_message)): ?>
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: '<?php echo $success_message; ?>',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = '../admin/reset_password_otp';
+                    }
+                });
+            <?php endif; ?>
+
+            <?php if (!empty($error_message )): ?>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: '<?php echo $error_message; ?>',
+                    confirmButtonText: 'OK'
+                });
+            <?php endif; ?>
+        });
 </script>
 </body>
 </html>
