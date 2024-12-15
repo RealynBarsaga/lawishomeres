@@ -70,6 +70,7 @@ html, body {
                                                 <th>Total Members</th>
                                                 <th>Family Members</th>
                                                 <th>Barangay</th>
+                                                <th>option</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -105,7 +106,13 @@ html, body {
                                                       <td>'.$row['totalhouseholdmembers'].'</td>
                                                       <td>' . $membersName . '</td>
                                                       <td>'.$row['barangay'].'</td>
+                                                      <td>
+                                                            <button class="btn btn-danger btn-sm" data-target="#deleteModals' . htmlspecialchars($row['id']) . '" data-toggle="modal" style="margin-left: 1px;color: #fff;background-color: #dc3545;border-color: #dc3545;">
+                                                                <i class="fa fa-trash" aria-hidden="true"></i> Delete
+                                                            </button>
+                                                      </td>
                                                   </tr>';
+                                                  include "delete_modal.php";
                                               }
                                             ?>
                                         </tbody>
@@ -113,6 +120,7 @@ html, body {
                                     </form>
                                 </div><!-- /.box-body -->
                             </div><!-- /.box -->
+                            <?php include "function.php"; ?>
                     </div>   <!-- /.row -->
                 </section><!-- /.content -->
             </aside><!-- /.right-side -->
