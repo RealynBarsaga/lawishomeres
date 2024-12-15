@@ -191,15 +191,29 @@ background: #fff;
     }
 }
 .password-checklist {
-    text-align: left;
-    margin-top: 10px;
-}
-.invalid {
-    color: red;
-}
-.valid {
-    color: green;
-}
+            margin-top: 10px;
+            display: none; /* Initially hidden */
+            font-size: 13px;
+        }
+
+        .password-checklist div {
+            margin: 5px 0;
+        }
+
+        .valid {
+            color: green;
+        }
+
+        .invalid {
+            color: red;
+        }
+
+        /* Media Queries for responsiveness */
+        @media (max-width: 767px) {
+            .container {
+                padding: 10px;
+            }
+        }
 </style>
 </head>
 <body>
