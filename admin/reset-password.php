@@ -222,6 +222,22 @@ px;
             </div>
         </div>
     </div>
+    <script>
+         function togglePassword(inputId, icon) {
+            const input = document.getElementById(inputId);
+            const iconElement = icon.querySelector('i');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                iconElement.classList.remove('fa-eye');
+                iconElement.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                iconElement.classList.remove('fa-eye-slash');
+                iconElement.classList.add('fa-eye');
+            }
+        }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -247,21 +263,6 @@ px;
                 });
             <?php endif; ?>
         });
-
-        function togglePassword(inputId, icon) {
-            const input = document.getElementById(inputId);
-            const iconElement = icon.querySelector('i');
-            
-            if (input.type === 'password') {
-                input.type = 'text';
-                iconElement.classList.remove('fa-eye');
-                iconElement.classList.add('fa-eye-slash');
-            } else {
-                input.type = 'password';
-                iconElement.classList.remove('fa-eye-slash');
-                iconElement.classList.add('fa-eye');
-            }
-        }
 
         function checkPassword() {
             const password = document.getElementById('new_password').value;
