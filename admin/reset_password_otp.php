@@ -31,7 +31,7 @@ if (isset($_POST['reset_password'])) {
         // Hash the new password
         $hashed_password = password_hash($new_password, PASSWORD_ARGON2ID);
 
-        // Database credentials
+        // Database credentials (consider using environment variables)
         $MySQL_username = "u510162695_db_barangay";
         $Password = "1Db_barangay";    
         $MySQL_database_name = "u510162695_db_barangay";
@@ -44,14 +44,9 @@ if (isset($_POST['reset_password'])) {
             die("Connection failed: " . mysqli_connect_error());
         }
         
-        // Setting the default timezone
-        date_default_timezone_set("Asia/Manila");
-
-        if ($con->connect_error) {
-            $error_message = 'Database connection failed: ' . $con->connect_error;
-        } else {
-            // Prepare the SQL query to update the user's password
-            $stmt = $con->prepare("UPDATE tbluser SET password = ? WHERE email = ?");
+        // Prepare the SQL query to update the user's password
+        $stmt = $con->prepare("UPDATE tbluser SET password = ? WHERE email = ?");
+        if ($stmt) {
             $stmt->bind_param("ss", $hashed_password, $email);
 
             if ($stmt->execute()) {
@@ -63,8 +58,10 @@ if (isset($_POST['reset_password'])) {
             }
 
             $stmt->close();
-            $con->close();
+        } else {
+            $error_message = 'Failed to prepare the SQL statement.';
         }
+        $con->close();
     }
 }
 ?>
@@ -80,166 +77,176 @@ if (isset($_POST['reset_password'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
     <style>
-@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+        @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
 
-html, body {
-    background-image: url('../img/received_1185064586170879.jpeg');
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 100vh;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: Arial, sans-serif;
-    transition: all 0.3s ease-in-out;
-}
+        html, body {
+            background-image: url('../img/received_1185064586170879.jpeg');
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+            transition: all 0.3s ease-in-out;
+        }
 
-.container {
-    padding: 40px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    max-width: 500px;
-    width: 100%;
-    box-sizing: border-box;
-}
+        .container {
+            padding: 40px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 500px;
+            width: 100%;
+            box-sizing: border-box;
+        }
 
-.form {
-background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
+        .form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
 
-.btns {
-    background-image: url('../img/bg.jpg');
-    border: none;
-    color: #fff;
-    width: 100%;
-    border-radius: 5px;
-    padding: 10px;
-    font-size: 16px;
-    cursor: pointer;
-}
+        .btns {
+            background-image: url('../img/bg.jpg');
+            border: none;
+            color: #fff;
+            width: 100%;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
 
-.btns:hover {
-    border: none;
-    color: #fff;
-    cursor: pointer;
-}
+        .btns:hover {
+            border: none;
+            color: #fff;
+            cursor: pointer;
+        }
 
-.form-group {
-    margin-bottom: 0.5rem;
-}
+        .form-group {
+            margin-bottom: 0.5rem;
+        }
 
-.input-group {
-    position: relative;
-}
+        .input-group {
+            position: relative;
+        }
 
-.input-group .form-control {
-    padding-right: 40px; /* Space for the icon */
-}
+        .input-group .form-control {
+            padding-right: 40px; /* Space for the icon */
+        }
 
-.input-group .input-group-text {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    z-index: 10; /* Ensure the icon is on top */
-}
+        .input-group .input-group-text {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 10; /* Ensure the icon is on top */
+        }
 
-.input-group-text i {
-    opacity: 0.5;
-    transition: opacity 0.3s;
-}
+        .input-group-text i {
+            opacity: 0.5;
+            transition: opacity 0.3s;
+        }
 
-.input-group-text:hover i {
-    opacity: 1;
-}
-/* Media Queries for Responsiveness */
-@media (max-width: 768px) {
-    .container {
-        padding: 10px;
-    }
+        .input-group-text:hover i {
+            opacity: 1;
+        }
 
-    .form {
-        width: 100%;
-        padding: 15px;
-    }
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
 
-    .btns {
-        font-size: 14px;
-    }
+            .form {
+                width: 100%;
+                padding: 15px;
+            }
 
-    .input-group .form-control {
-        width: 100%;
-    }
+            .btns {
+                font-size: 14px;
+            }
 
-    .input-group-text {
-        padding: 0;
-    }
-}
-.password-checklist {
-    margin-top: 10px; /* Space above the checklist */
-    display: none; /* Initially hidden */
-    font-size: 13px;
-    float: left; /* Float the checklist to the left */
-    width: 100%; /* Ensure it takes the full width of the container */
-    text-align: left; /* Align text to the left */
-}
-.password-checklist div {
-    margin: 5px 0;
-}
-.valid {
-    color: green;
-}
-.invalid {
-    color: red;
-}
-</style>
+            .input-group .form-control {
+                width: 100%;
+            }
+
+            .input-group-text {
+                padding: 0;
+            }
+        }
+
+        .password-checklist {
+            margin-top: 10px; /* Space above the checklist */
+            display: none; /* Initially hidden */
+            font-size: 13px;
+            float: left; /* Float the checklist to the left */
+            width: 100%; /* Ensure it takes the full width of the container */
+            text-align: left; /* Align text to the left */
+        }
+
+        .password-checklist div {
+            margin: 5px 0;
+        }
+
+        .valid {
+            color: green;
+        }
+
+        .invalid {
+            color: red;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h2 style="font-size: 22px;font-weight: bold;">Reset Your Password</h2>
-        <form action="" method="POST" autocomplete="off">
-            <div class="form-group">
-                <label for="new_password">New Password</label>
-                <div class="input-group">
-                    <input type="password" name="new_password" id="new_password" class="form-control" placeholder="•••••••••••" required oninput="checkPassword()">
-                    <span class="input-group-text" onclick="togglePassword('new_password', this)">
-                        <i class="fa fa-eye"></i>
-                    </span>
-                </div>
+        <div class="row">
+            <div class="col-md-12 form">
+                <h2 class="text-center" style="font-size:25px;">Reset Your Password</h2>
+                <br>
+                <form action="" method="POST" autocomplete="off">
+                    <div class="form-group">
+                        <label for="new_password">New Password</label>
+                        <div class="input-group">
+                            <input type="password" name="new_password" id="new_password" class="form-control" placeholder="•••••••••••" required oninput="checkPassword()">
+                            <span class="input-group-text" onclick="togglePassword('new_password', this)">
+                                <i class="fa fa-eye"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="password-checklist" id="password-checklist">
+                        <h5>Password Requirements:</h5>
+                        <div id="length" class="invalid" style="display: none;">❌ At least 10 characters</div>
+                        <div id="uppercase" class="invalid" style="display: none;">❌ At least one uppercase letter</div>
+                        <div id="number" class="invalid" style="display: none;">❌ At least one number</div>
+                        <div id="special" class="invalid" style="display: none;">❌ At least one special character (!@#$%^&*)</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm_password">Confirm Password</label ```html
+                        <div class="input-group">
+                            <input type="password" name="confirm_password" id="confirm_password" class="form-control" placeholder="•••••••••••" required>
+                            <span class="input-group-text" onclick="togglePassword('confirm_password', this)">
+                                <i class="fa fa-eye"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <button type="submit" name="reset_password" class="btns">Reset Password</button>
+                </form>
             </div>
-             <div class="password-checklist" id="password-checklist">
-                <h5>Password Requirements:</h5>
-                <div id="length" class="invalid" style="display: none;">❌ At least 10 characters</div>
-                <div id="uppercase" class="invalid" style="display: none;">❌ At least one uppercase letter</div>
-                <div id="number" class="invalid" style="display: none;">❌ At least one number</div>
-                <div id="special" class="invalid" style="display: none;">❌ At least one special character (!@#$%^&*)</div>
-            </div>
-            <div class="form-group">
-                <label for="confirm_password">Confirm Password</label>
-                <div class="input-group">
-                    <input type="password" name="confirm_password" id="confirm_password" class="form-control" placeholder="•••••••••••" required>
-                    <span class="input-group-text" onclick="togglePassword('confirm_password', this)">
-                        <i class="fa fa-eye"></i>
-                    </span>
-                </div>
-            </div>
-            <button type="submit" name="reset_password" class="btns">Reset Password</button>
-        </form>
+        </div>
     </div>
 
     <script>
@@ -270,13 +277,12 @@ background: #fff;
         }
 
         function checkPassword() {
-        const passwordInput = document.getElementById('new_password');
-        const lengthRequirement = document.getElementById('length');
-        const uppercaseRequirement = document.getElementById('uppercase');
-        const numberRequirement = document.getElementById('number');
-        const specialRequirement = document.getElementById('special');
+            const passwordInput = document.getElementById('new_password');
+            const lengthRequirement = document.getElementById('length');
+            const uppercaseRequirement = document.getElementById('uppercase');
+            const numberRequirement = document.getElementById('number');
+            const specialRequirement = document.getElementById('special');
 
-        passwordInput.addEventListener('input', function() {
             const password = passwordInput.value;
 
             // Check length
@@ -330,8 +336,7 @@ background: #fff;
                 specialRequirement.style.display = 'block';
                 specialRequirement.textContent = '❌ At least one special character (!@#$%^&*)';
             }
-        });
-    }
+        }
     </script>
 </body>
 </html>
