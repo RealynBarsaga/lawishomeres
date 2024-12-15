@@ -111,7 +111,8 @@ html, body {
                                                                 <i class="fa fa-trash" aria-hidden="true"></i> Delete
                                                             </button>
                                                       </td>
-                                                  </tr>';
+                                                  </tr>
+                                                  ';
                                                   include "delete_modal.php";
                                               }
                                             ?>
