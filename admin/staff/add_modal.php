@@ -58,7 +58,7 @@
                                     <input name="txt_pass" class="form-control input-sm" id="txt_pass" type="password" placeholder="•••••••••••" required 
                                         pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{10,}$"
                                         title="Password must be at least 10 characters long, contain at least one uppercase letter, one number, and one special character." 
-                                        oninput="validatePassword()" />
+                                        oninput="validatePassword(); showChecklist()" />
                                     <span class="input-group-addon eye-icon" id="togglePassword1" onclick="togglePassword('txt_pass', 'togglePassword1')">
                                         <i class="fa fa-eye" aria-hidden="true"></i>
                                     </span>
@@ -71,7 +71,7 @@
                                     <input name="txt_compass" class="form-control input-sm" type="password" id="txt_compass" placeholder ="•••••••••••" required 
                                         pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{10,}$" 
                                         title="Password must be at least 10 characters long, contain at least one uppercase letter, one number, and one special character." 
-                                        oninput="validatePassword()" />
+                                        oninput="validatePassword(); showChecklist()" />
                                     <span class="input-group-addon eye-icon" id="togglePassword2" onclick="togglePassword('txt_compass', 'togglePassword2')">
                                         <i class="fa fa-eye" aria-hidden="true"></i>
                                     </span>
@@ -79,14 +79,12 @@
                             </div>
                             <div id="password_error" class="text-danger"></div> <!-- Error message -->
 
-                            <div class="password-checklist">
+                            <div class="password-checklist" style="display: none;">
                                 <h5>Password Requirements:</h5>
-                                <ul>
-                                    <li id="length" class="invalid">❌ At least 10 characters</li>
-                                    <li id="uppercase" class="invalid">❌ At least one uppercase letter</li>
-                                    <li id="number" class="invalid">❌ At least one number</li>
-                                    <li id="special" class="invalid">❌ At least one special character (!@#$%^&*)</li>
-                                </ul>
+                                <div id="length" class="invalid" style="display: none;">❌ At least 10 characters</div>
+                                <div id="uppercase" class="invalid" style="display: none;">❌ At least one uppercase letter</div>
+                                <div id="number" class="invalid" style="display: none;">❌ At least one number</div>
+                                <div id="special" class="invalid" style="display: none;">❌ At least one special character (!@#$%^&*)</div>
                             </div>
                         </div>
                     </div>
@@ -114,10 +112,12 @@ function validatePassword() {
         lengthCheck.classList.remove('invalid');
         lengthCheck.classList.add('valid');
         lengthCheck.innerHTML = '✔️ At least 10 characters';
+        lengthCheck.style.display = 'block';
     } else {
         lengthCheck.classList.remove('valid');
         lengthCheck.classList.add('invalid');
         lengthCheck.innerHTML = '❌ At least 10 characters';
+        lengthCheck.style.display = 'block';
     }
 
     // Check for uppercase letter
@@ -125,10 +125,12 @@ function validatePassword() {
         uppercaseCheck.classList.remove('invalid');
         uppercaseCheck.classList.add('valid');
         uppercaseCheck.innerHTML = '✔️ At least one uppercase letter';
+        uppercaseCheck.style.display = 'block';
     } else {
         uppercaseCheck.classList.remove('valid');
         uppercaseCheck.classList.add('invalid');
         uppercaseCheck.innerHTML = '❌ At least one uppercase letter';
+        uppercaseCheck.style.display = 'block';
     }
 
     // Check for number
@@ -136,10 +138,12 @@ function validatePassword() {
         numberCheck.classList.remove('invalid');
         numberCheck.classList.add('valid');
         numberCheck.innerHTML = '✔️ At least one number';
+        numberCheck.style.display = 'block';
     } else {
         numberCheck.classList.remove('valid');
         numberCheck.classList.add('invalid');
         numberCheck.innerHTML = '❌ At least one number';
+        numberCheck.style.display = 'block';
     }
 
     // Check for special character
@@ -147,38 +151,17 @@ function validatePassword() {
         specialCheck.classList.remove('invalid');
         specialCheck.classList.add('valid');
         specialCheck.innerHTML = '✔️ At least one special character';
+        specialCheck.style.display = 'block';
     } else {
         specialCheck.classList.remove('valid');
         specialCheck.classList.add('invalid');
         specialCheck.innerHTML = '❌ At least one special character';
+        specialCheck.style.display = 'block';
     }
 }
 
-function togglePassword(inputId, toggleId) {
-    const input = document.getElementById(inputId);
-    const toggle = document.getElementById(toggleId).getElementsByTagName('i')[0];
-    if (input.type === "password") {
-        input.type = "text";
-        toggle.classList.remove('fa-eye');
-        toggle.classList.add('fa-eye-slash');
-    } else {
-        input.type = "password";
-        toggle.classList.remove('fa-eye-slash');
-        toggle.classList.add('fa-eye');
-    }
+function showChecklist() {
+    const checklist = document.querySelector('.password-checklist');
+    checklist.style.display = 'block';
 }
 </script>
-
-<style>
-.password-checklist {
-    margin-top: 10px;
-}
-
-.invalid {
-    color: red;
-}
-
-.valid {
-    color: green;
-}
-</style>
