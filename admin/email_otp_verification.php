@@ -53,7 +53,6 @@ if (isset($_POST['verify_otp'])) {
             if (trim((string)$otp) === trim((string)$entered_otp)) {
                 $current_time = date('Y-m-d H:i:s');
                 if ($current_time <= $otp_expiry) {
-                    $_SESSION['email_for_reset'] = $email; // Store email in session for password reset
                     $success_message = 'OTP is valid and not expired, you may now reset your password.';
                 } else {
                     $error_message = 'The OTP has expired. Please request a new OTP.';
