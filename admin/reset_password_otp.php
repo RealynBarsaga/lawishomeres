@@ -191,18 +191,17 @@ background: #fff;
     }
 }
 .password-checklist {
-            text-align: left;
-            margin-top: 10px;
-        }
-
-        .invalid {
-            color: red;
-        }
-
-        .valid {
-            color: green;
-        }
-    </style>
+    text-align: left;
+    display: none; /* Initially hidden */
+    margin-top: 10px;
+}
+.invalid {
+    color: red;
+}
+.valid {
+    color: green;
+}
+</style>
 </head>
 <body>
     <div class="container">
