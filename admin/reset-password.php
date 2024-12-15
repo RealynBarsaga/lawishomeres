@@ -221,7 +221,7 @@ if (isset($_GET['code'])) {
                         </div>
                     </div>
                     <div class="password-checklist" id="password-checklist">
-                        <h5>Password Requirements:</h5>
+                        <h5 style="display: none;">Password Requirements:</h5>
                         <div id="length" class="invalid" style="display: none;">❌ At least 10 characters</div>
                         <div id="uppercase" class="invalid" style="display: none;">❌ At least one uppercase letter</div>
                         <div id="number" class="invalid" style="display: none;">❌ At least one number</div>
