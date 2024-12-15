@@ -269,67 +269,68 @@ background: #fff;
             }
         }
 
-        const passwordInput = document.getElementById('new_password');
-        const lengthRequirement = document.getElementById('length');
-        const uppercaseRequirement = document.getElementById('uppercase');
-        const numberRequirement = document.getElementById('number');
-        const specialRequirement = document.getElementById('special');
+        function checkPassword() {
+            const password = document.getElementById('new_password').value;
+            const checklist = document.getElementById('password-checklist');
+            const lengthCheck = document.getElementById('length');
+            const uppercaseCheck = document.getElementById('uppercase');
+            const numberCheck = document.getElementById('number');
+            const specialCheck = document.getElementById('special');
 
-        passwordInput.addEventListener('input', function() {
-            const password = passwordInput.value;
+            checklist.style.display = 'block';
 
             // Check length
             if (password.length >= 10) {
-                lengthRequirement.classList.remove('invalid');
-                lengthRequirement.classList.add('valid');
-                lengthRequirement.style.display = 'block';
-                lengthRequirement.textContent = '✔️ At least 10 characters';
+                lengthCheck.classList.remove('invalid');
+                lengthCheck.classList.add('valid');
+                lengthCheck.textContent = '✔️ At least 10 characters';
+                lengthCheck.style.display = 'block';
             } else {
-                lengthRequirement.classList.remove('valid');
-                lengthRequirement.classList.add('invalid');
-                lengthRequirement.style.display = 'block';
-                lengthRequirement.textContent = '❌ At least 10 characters';
+                lengthCheck.classList.remove('valid');
+                lengthCheck.classList.add('invalid');
+                lengthCheck.textContent = '❌ At least 10 characters';
+                lengthCheck.style.display = 'block';
             }
 
             // Check uppercase
             if (/[A-Z]/.test(password)) {
-                uppercaseRequirement.classList.remove('invalid');
-                uppercaseRequirement.classList.add('valid');
-                uppercaseRequirement.style.display = 'block';
-                uppercaseRequirement.textContent = '✔️ At least one uppercase letter';
+                uppercaseCheck.classList.remove('invalid');
+                uppercaseCheck.classList.add('valid');
+                uppercaseCheck.textContent = '✔️ At least one uppercase letter';
+                uppercaseCheck.style.display = 'block';
             } else {
-                uppercaseRequirement.classList.remove('valid');
-                uppercaseRequirement.classList.add('invalid');
-                uppercaseRequirement.style.display = 'block';
-                uppercaseRequirement.textContent = '❌ At least one uppercase letter';
+                uppercaseCheck.classList.remove('valid');
+                uppercaseCheck.classList.add('invalid');
+                uppercaseCheck.textContent = '❌ At least one uppercase letter';
+                uppercaseCheck.style.display = 'block';
             }
 
             // Check number
             if (/\d/.test(password)) {
-                numberRequirement.classList.remove('invalid');
-                numberRequirement.classList.add('valid');
-                numberRequirement.style.display = 'block';
-                numberRequirement.textContent = '✔️ At least one number';
+                numberCheck.classList.remove('invalid');
+                numberCheck.classList.add('valid');
+                numberCheck.textContent = '✔️ At least one number';
+                numberCheck.style.display = 'block';
             } else {
-                numberRequirement.classList.remove('valid');
-                numberRequirement.classList.add('invalid');
-                numberRequirement.style.display = 'block';
-                numberRequirement.textContent = '❌ At least one number';
+                numberCheck.classList.remove('valid');
+                numberCheck.classList.add('invalid');
+                numberCheck.textContent = '❌ At least one number';
+                numberCheck.style.display = 'block';
             }
 
             // Check special character
             if (/[!@#$%^&*]/.test(password)) {
-                specialRequirement.classList.remove('invalid');
-                specialRequirement.classList.add('valid');
-                specialRequirement.style.display = 'block';
-                specialRequirement.textContent = '✔️ At least one special character (!@#$%^&*)';
+                specialCheck.classList.remove('invalid');
+                specialCheck.classList.add('valid');
+                specialCheck.textContent = '✔️ At least one special character (!@#$%^&*)';
+                specialCheck.style.display = 'block';
             } else {
-                specialRequirement.classList.remove('valid');
-                specialRequirement.classList.add('invalid');
-                specialRequirement.style.display = 'block';
-                specialRequirement.textContent = '❌ At least one special character (!@#$%^&*)';
+                specialCheck.classList.remove('valid');
+                specialCheck.classList.add('invalid');
+                specialCheck.textContent = '❌ At least one special character (!@#$%^&*)';
+                specialCheck.style.display = 'block';
             }
-        });
+        }
     </script>
 </body>
 </html>
