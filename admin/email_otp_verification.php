@@ -112,7 +112,7 @@ html, body {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
-    max-width: 90%; /* Make it responsive */
+    max-width: 140%; /* Make it responsive */
     width: 400px; /* Set a max width */
     box-sizing: border-box;
 }
