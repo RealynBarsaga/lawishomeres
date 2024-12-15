@@ -211,6 +211,8 @@ if (isset($_POST['reset_password'])) {
 </head>
 <body>
     <div class="container">
+      <div class="row">
+       <div class="col-md-12 form">
         <h2 style="font-size: 22px;font-weight: bold;">Reset Your Password</h2>
         <form action="" method="POST" autocomplete="off">
             <div class="form-group">
@@ -240,6 +242,8 @@ if (isset($_POST['reset_password'])) {
             </div>
             <button type="submit" name="reset_password" class="btns">Reset Password</button>
         </form>
+        </div>
+        </div>
     </div>
 
     <script>
