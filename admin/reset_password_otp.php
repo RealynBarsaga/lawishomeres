@@ -56,7 +56,7 @@ if (isset($_POST['reset_password'])) {
 
             if ($stmt->execute()) {
                 // Password successfully updated
-                $success_message = 'Your password has been reset successfully reset. You may now log in.';
+                $success_message = 'Your password has been reset successfully. You may now log in.';
                 unset($_SESSION['email_for_reset']); // Clear the email session variable after successful reset
             } else {
                 $error_message = 'Failed to reset password. Please try again later.';
@@ -77,6 +77,8 @@ if (isset($_POST['reset_password'])) {
     <link rel="icon" type="x-icon" href="../img/lg.png">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
 
@@ -111,7 +113,7 @@ if (isset($_POST['reset_password'])) {
         }
 
         .form {
-            background: #fff;
+ background: #fff;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -188,100 +190,45 @@ if (isset($_POST['reset_password'])) {
                 padding: 0;
             }
         }
-        /* Success Modal Styles */
-        .modal {
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .password-checklist {
+            margin-top: 10px;
+            display: none; /* Initially hidden */
+            font-size: 13px;
         }
 
-        .modal-content {
-            background: linear-gradient(135deg, #d4edda, #f7f7f7);
-            padding: 30px;
-            border-radius: 15px;
-            text-align: center;
-            width: 419px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-            position: relative;
-            margin-left: 440px;
-            margin-top: 160px;
-            animation: modalFadeIn 0.5s ease;
+        .password-checklist div {
+            margin: 5px 0;
         }
 
-        @keyframes modalFadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+        .valid {
+            color: green;
         }
 
-        .modal-title {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #28a745;
+        .invalid {
+            color: red;
         }
 
-        .modal-content .btn-ok {
-            background-color: #5cb85c;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 25px;
-            cursor: pointer;
-            margin: auto;
-            width: 100px;
-            font-size: 16px;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-
-        .modal-content .btn-ok:hover {
-            background-color: #4cae4c;
-            transform: scale(1.05);
-        }
-
-        .modal p {
-            margin-bottom: 25px;
-            font-size: 16px;
-        }
-
-        .modal-content::after {
-            content: "Powered by Madridejos HRMS";
-            display: block;
-            font-size: 12px;
-            color: #aaa;
-            margin-top: 20px;
-        }
     </style>
 </head>
 <body>
     <div class="container">
         <h2 style="font-size: 22px;font-weight: bold;">Reset Your Password</h2>
-        <?php if (!empty($error_message)): ?>
-            <div class="alert alert-danger">
-                <?php echo $error_message; ?>
-            </div>
-        <?php endif; ?>
         <form action="" method="POST" autocomplete="off">
             <div class="form-group">
                 <label for="new_password" style="float: left;">New Password</label>
                 <div class="input-group">
-                    <input type="password" name="new_password" id="new_password" class="form-control" placeholder="•••••••••••" required pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{10,}$" title="Password must be at least 10 characters long, contain at least one uppercase letter, one number, and one special character.">
+                    <input type="password" name="new_password" id="new_password" class="form-control" placeholder="•••••••••••" required oninput="checkPassword()">
                     <span class="input-group-text" onclick="togglePassword('new_password', this)" style="cursor: pointer; background-color: transparent; border: none;">
                         <i class="fa fa-eye"></i>
                     </span>
                 </div>
+            </div>
+            <div class="password-checklist" id="password-checklist">
+                <h5>Password Requirements:</h5>
+                <div id="length" class="invalid" style="display: none;">❌ At least 10 characters</div>
+                <div id="uppercase" class="invalid" style="display: none;">❌ At least one uppercase letter</div>
+                <div id="number" class="invalid" style="display: none;">❌ At least one number</div>
+                <div id="special" class="invalid" style="display: none;">❌ At least one special character (!@#$%^&*)</div>
             </div>
             <div class="form-group">
                 <label for="confirm_password" style="float: left;">Confirm Password</label>
@@ -296,38 +243,95 @@ if (isset($_POST['reset_password'])) {
         </form>
     </div>
 
-    <?php if (!empty($success_message)): ?>
-        <!-- Success Modal structure -->
-        <div id="success-modal" class="modal" style="display: block;">
-            <div class="modal-content">
-                <span class="modal-title">Success</span>
-                <p><?php echo $success_message; ?></p>
-                <button id="success-ok-button" class="btn-ok">OK</button>
-            </div>
-        </div>  
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                document.getElementById("success-ok-button").addEventListener("click", function() {
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            <?php if (!empty($error_message)): ?>
+                swal("Error", "<?php echo $error_message; ?>", "error");
+            <?php endif; ?>
+            <?php if (!empty($success_message)): ?>
+                swal("Success", "<?php echo $success_message; ?>", "success").then(() => {
                     window.location.href = 'login.php';
                 });
-            });
-        </script>
-    <?php endif; ?>
-<script>
-    function togglePassword(inputId, icon) {
-        const input = document.getElementById(inputId);
-        const iconElement = icon.querySelector('i');
-        
-        if (input.type === 'password') {
-            input.type = 'text';
-            iconElement.classList.remove('fa-eye');
-            iconElement.classList.add('fa-eye-slash');
-        } else {
-            input.type = 'password';
-            iconElement.classList.remove('fa-eye-slash');
-            iconElement.classList.add('fa-eye');
+            <?php endif; ?>
+        });
+
+        function togglePassword(inputId, icon) {
+            const input = document.getElementById(inputId);
+            const iconElement = icon.querySelector(' i');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                iconElement.classList.remove('fa-eye');
+                iconElement.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                iconElement.classList.remove('fa-eye-slash');
+                iconElement.classList.add('fa-eye');
+            }
         }
-    }
-</script>
+
+        function checkPassword() {
+            const password = document.getElementById('new_password').value;
+            const checklist = document.getElementById('password-checklist');
+            const lengthCheck = document.getElementById('length');
+            const uppercaseCheck = document.getElementById('uppercase');
+            const numberCheck = document.getElementById('number');
+            const specialCheck = document.getElementById('special');
+
+            checklist.style.display = 'block';
+
+            // Check length
+            if (password.length >= 10) {
+                lengthCheck.classList.remove('invalid');
+                lengthCheck.classList.add('valid');
+                lengthCheck.textContent = '✔️ At least 10 characters';
+                lengthCheck.style.display = 'block';
+            } else {
+                lengthCheck.classList.remove('valid');
+                lengthCheck.classList.add('invalid');
+                lengthCheck.textContent = '❌ At least 10 characters';
+                lengthCheck.style.display = 'block';
+            }
+
+            // Check uppercase
+            if (/[A-Z]/.test(password)) {
+                uppercaseCheck.classList.remove('invalid');
+                uppercaseCheck.classList.add('valid');
+                uppercaseCheck.textContent = '✔️ At least one uppercase letter';
+                uppercaseCheck.style.display = 'block';
+            } else {
+                uppercaseCheck.classList.remove('valid');
+                uppercaseCheck.classList.add('invalid');
+                uppercaseCheck.textContent = '❌ At least one uppercase letter';
+                uppercaseCheck.style.display = 'block';
+            }
+
+            // Check number
+            if (/\d/.test(password)) {
+                numberCheck.classList.remove('invalid');
+                numberCheck.classList.add('valid');
+                numberCheck.textContent = '✔️ At least one number';
+                numberCheck.style.display = 'block';
+            } else {
+                numberCheck.classList.remove('valid');
+                numberCheck.classList.add('invalid');
+                numberCheck.textContent = '❌ At least one number';
+                numberCheck.style.display = 'block';
+            }
+
+            // Check special character
+            if (/[!@#$%^&*]/.test(password)) {
+                specialCheck.classList.remove('invalid');
+                specialCheck.classList.add('valid');
+                specialCheck.textContent = '✔️ At least one special character (!@#$%^&*)';
+                specialCheck.style.display = 'block';
+            } else {
+                specialCheck.classList.remove('valid');
+                specialCheck.classList.add('invalid');
+                specialCheck.textContent = '❌ At least one special character (!@#$%^&*)';
+                specialCheck.style.display = 'block';
+            }
+        }
+    </script>
 </body>
 </html>
