@@ -148,12 +148,12 @@ function validatePassword() {
     if (/[!@#$%^&*]/.test(password)) {
         specialCheck.classList.remove('invalid');
         specialCheck.classList.add('valid');
-        specialCheck.innerHTML = '✔️ At least one special character';
+        specialCheck.innerHTML = '✔️ At least one special character (!@#$%^&*)';
         specialCheck.style.display = 'block';
     } else {
         specialCheck.classList.remove('valid');
         specialCheck.classList.add('invalid');
-        specialCheck.innerHTML = '❌ At least one special character';
+        specialCheck.innerHTML = '❌ At least one special character (!@#$%^&*)';
         specialCheck.style.display = 'block';
     }
 }
