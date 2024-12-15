@@ -56,7 +56,6 @@ if (isset($_POST['verify_otp'])) {
                 if (trim((string)$otp) === trim((string)$entered_otp)) {
                     $current_time = date('Y-m-d H:i:s');
                     if ($current_time <= $otp_expiry) {
-
                         $_SESSION['email_for_reset'] = $email; // Store email in session for password reset
                         $success_message = 'OTP is valid and not expired, you may now reset your password.';
                     } else {
@@ -82,6 +81,10 @@ if (isset($_POST['verify_otp'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Madridejos Household Management System</title>
     <link rel="icon" type="x-icon" href="../img/lg.png">
+    <!-- SweetAlert CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+    <!-- SweetAlert JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
     <style>
         /* General Reset and Styling */
         * {
@@ -263,81 +266,6 @@ if (isset($_POST['verify_otp'])) {
                 padding: 8px 16px;
             }
         }
-        /* Success Modal Styles */
-        .modal {
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background: linear-gradient(135deg, #d4edda, #f7f7f7);
-            padding: 30px;
-            border-radius: 15px;
-            text-align: center;
-            width: 419px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-            position: relative;
-            margin-left: 440px;
-            margin-top: 160px;
-            animation: modalFadeIn 0.5s ease;
-        }
-
-        @keyframes modalFadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .modal-title {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #28a745;
-        }
-
-        .modal-content .btn-ok {
-            background-color: #5cb85c;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 25px;
-            cursor: pointer;
-            margin: auto;
-            width: 100px;
-            font-size: 16px;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-
-        .modal-content .btn-ok:hover {
-            background-color: #4cae4c;
-            transform: scale(1.05);
-        }
-
-        .modal p {
-            margin-bottom: 25px;
-            font-size: 16px;
-        }
-
-        .modal-content::after {
-            content: "Powered by Madridejos HRMS";
-            display: block;
-            font-size: 12px;
-            color: #aaa;
-            margin-top: 20px;
-        }
     </style>
 </head>
 <body>
@@ -345,15 +273,10 @@ if (isset($_POST['verify_otp'])) {
     <div class="container">
         <h2>OTP Verification</h2>
 
-        <?php if (!empty($error_message)): ?>
-            <div class="error"><?php echo $error_message; ?></div>
-        <?php endif; ?>
-
         <form method="POST" action="">
             <div class="form-group">
                 <input type="text" name="otp" class="form-control" placeholder="Enter OTP" required>
-            </div>
-            <div class="form-group">
+            </div <div class="form-group">
                 <button type="submit" name="verify_otp" class="btn">Verify OTP</button>
             </div>
         </form>
@@ -364,22 +287,17 @@ if (isset($_POST['verify_otp'])) {
             </a>
         </div>
     </div>
-    <?php if (!empty($success_message)): ?>
-        <!-- Success Modal structure -->
-        <div id="success-modal" class="modal" style="display: block;">
-            <div class="modal-content">
-                <span class="modal-title">Success</span>
-                <p><?php echo $success_message; ?></p>
-                <button id="success-ok-button" class="btn-ok">OK</button>
-            </div>
-        </div>  
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                document.getElementById("success-ok-button").addEventListener("click", function() {
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            <?php if (!empty($error_message)): ?>
+                swal("Error", "<?php echo $error_message; ?>", "error");
+            <?php elseif (!empty($success_message)): ?>
+                swal("Success", "<?php echo $success_message; ?>", "success").then(() => {
                     window.location.href = '../admin/reset_password_otp';
                 });
-            });
-        </script>
-    <?php endif; ?>
+            <?php endif; ?>
+        });
+    </script>
 </body>
 </html>
