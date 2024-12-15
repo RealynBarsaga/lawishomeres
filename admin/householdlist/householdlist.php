@@ -70,7 +70,6 @@ html, body {
                                                 <th>Total Members</th>
                                                 <th>Family Members</th>
                                                 <th>Barangay</th>
-                                                <th>option</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -106,28 +105,14 @@ html, body {
                                                       <td>'.$row['totalhouseholdmembers'].'</td>
                                                       <td>' . $membersName . '</td>
                                                       <td>'.$row['barangay'].'</td>
-                                                      <td>
-                                                            <button class="btn btn-danger btn-sm" data-target="#deleteModals' . htmlspecialchars($row['id']) . '" data-toggle="modal" style="margin-left: 1px;color: #fff;background-color: #dc3545;border-color: #dc3545;">
-                                                                <i class="fa fa-trash" aria-hidden="true"></i> Delete
-                                                            </button>
-                                                      </td>
-                                                  </tr>
-                                                  ';
+                                                  </tr>';
                                               }
                                             ?>
                                         </tbody>
                                     </table>
-                                    <?php include "delete_modal.php"; ?>
-                                    <?php include "../deleteModal.php"; ?>
                                     </form>
                                 </div><!-- /.box-body -->
                             </div><!-- /.box -->
-                            <?php include "../edit_notif.php"; ?>
-                    <?php include "../added_notif.php"; ?>
-                    <?php include "../delete_notif.php"; ?>
-                    <?php include "../duplicate_error.php"; ?>
-                    <?php include "add_modal.php"; ?>
-                    <?php include "function.php"; ?>
                     </div>   <!-- /.row -->
                 </section><!-- /.content -->
             </aside><!-- /.right-side -->
