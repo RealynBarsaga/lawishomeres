@@ -58,7 +58,7 @@
                                     <input name="txt_pass" class="form-control input-sm" id="txt_pass" type="password" placeholder="•••••••••••" required 
                                         pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{10,}$"
                                         title="Password must be at least 10 characters long, contain at least one uppercase letter, one number, and one special character." 
-                                        oninput="validatePassword()" />
+                                        oninput="validatePassword(); showChecklist()" />
                                     <span class="input-group-addon eye-icon" id="togglePassword1" onclick="togglePassword('txt_pass', 'togglePassword1')">
                                         <i class="fa fa-eye" aria-hidden="true"></i>
                                     </span>
@@ -71,7 +71,7 @@
                                     <input name="txt_compass" class="form-control input-sm" type="password" id="txt_compass" placeholder ="•••••••••••" required 
                                         pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{10,}$" 
                                         title="Password must be at least 10 characters long, contain at least one uppercase letter, one number, and one special character." 
-                                        oninput="validatePassword()" />
+                                        oninput="validatePassword(); showChecklist()" />
                                     <span class="input-group-addon eye-icon" id="togglePassword2" onclick="togglePassword('txt_compass', 'togglePassword2')">
                                         <i class="fa fa-eye" aria-hidden="true"></i>
                                     </span>
@@ -79,7 +79,7 @@
                             </div>
                             <div id="password_error" class="text-danger"></div> <!-- Error message -->
 
-                            <div class="password-checklist">
+                            <div class="password-checklist" style="display: none;">
                                 <h5>Password Requirements:</h5>
                                 <ul>
                                     <li id="length" class="invalid">❌ At least 10 characters</li>
@@ -154,12 +154,17 @@ function validatePassword() {
     }
 }
 
+function showChecklist() {
+    const checklist = document.querySelector('.password-checklist');
+    checklist.style.display = 'block';
+}
+
 function togglePassword(inputId, toggleId) {
     const input = document.getElementById(inputId);
     const toggle = document.getElementById(toggleId).getElementsByTagName('i')[0];
     if (input.type === "password") {
         input.type = "text";
-        toggle.classList.remove('fa-eye');
+        toggle.class List.remove('fa-eye');
         toggle.classList.add('fa-eye-slash');
     } else {
         input.type = "password";
