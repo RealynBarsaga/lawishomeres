@@ -155,6 +155,29 @@ if (isset($_GET['code'])) {
         .input-group-text:hover i {
             opacity: 1;
         }
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .form {
+                width: 100%;
+                padding: 15px;
+            }
+
+            .btns {
+                font-size: 14px;
+            }
+
+            .input-group .form-control {
+                width: 100%;
+            }
+
+            .input-group-text {
+                padding: 0;
+            }
+        }
         .password-checklist {
             margin-top: 10px;
             display: none; /* Initially hidden */
