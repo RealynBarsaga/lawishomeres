@@ -13,7 +13,7 @@
                             <div class="form-group">
                                 <label>Barangay Logo:</label>
                                 <input name="logo" id="txt_image" class="form-control input-sm" type="file" accept=".jpg, .jpeg, .png" required/>
-                                <small id="fileError" style="color: red; display: none;">File size is greater than 2mb or Invalid Format !</small>
+                                <small id="fileError" style="color: red; display: none;">File size is greater than 2mb or Invalid Format!</small>
                             </div>
 
                             <div class="form-group">
@@ -68,7 +68,7 @@
                             <div class="form-group">
                                 <label>Confirm Password:</label>
                                 <div class="input-group">
-                                    <input name="txt_compass" class="form-control input-sm" type="password" id="txt_compass" placeholder="•••••••••••" required 
+                                    <input name="txt_compass" class="form-control input-sm" type="password" id="txt_compass" placeholder ="•••••••••••" required 
                                         pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{10,}$" 
                                         title="Password must be at least 10 characters long, contain at least one uppercase letter, one number, and one special character." 
                                         oninput="validatePassword()" />
@@ -82,10 +82,10 @@
                             <div class="password-checklist">
                                 <h5>Password Requirements:</h5>
                                 <ul>
-                                    <li id="length" class="invalid">At least 10 characters</li>
-                                    <li id="uppercase" class="invalid">At least one uppercase letter</li>
-                                    <li id="number" class="invalid">At least one number</li>
-                                    <li id="special" class="invalid">At least one special character (!@#$%^&*)</li>
+                                    <li id="length" class="invalid">❌ At least 10 characters</li>
+                                    <li id="uppercase" class="invalid">❌ At least one uppercase letter</li>
+                                    <li id="number" class="invalid">❌ At least one number</li>
+                                    <li id="special" class="invalid">❌ At least one special character (!@#$%^&*)</li>
                                 </ul>
                             </div>
                         </div>
@@ -113,36 +113,44 @@ function validatePassword() {
     if (password.length >= 10) {
         lengthCheck.classList.remove('invalid');
         lengthCheck.classList.add('valid');
+        lengthCheck.innerHTML = '✔️ At least 10 characters';
     } else {
         lengthCheck.classList.remove('valid');
         lengthCheck.classList.add('invalid');
+        lengthCheck.innerHTML = '❌ At least 10 characters';
     }
 
     // Check for uppercase letter
     if (/[A-Z]/.test(password)) {
         uppercaseCheck.classList.remove('invalid');
         uppercaseCheck.classList.add('valid');
+        uppercaseCheck.innerHTML = '✔️ At least one uppercase letter';
     } else {
         uppercaseCheck.classList.remove('valid');
         uppercaseCheck.classList.add('invalid');
+        uppercaseCheck.innerHTML = '❌ At least one uppercase letter';
     }
 
     // Check for number
     if (/\d/.test(password)) {
         numberCheck.classList.remove('invalid');
         numberCheck.classList.add('valid');
+        numberCheck.innerHTML = '✔️ At least one number';
     } else {
         numberCheck.classList.remove('valid');
         numberCheck.classList.add('invalid');
+        numberCheck.innerHTML = '❌ At least one number';
     }
 
     // Check for special character
     if (/[!@#$%^&*]/.test(password)) {
         specialCheck.classList.remove('invalid');
         specialCheck.classList.add('valid');
+        specialCheck.innerHTML = '✔️ At least one special character';
     } else {
         specialCheck.classList.remove('valid');
         specialCheck.classList.add('invalid');
+        specialCheck.innerHTML = '❌ At least one special character';
     }
 }
 
