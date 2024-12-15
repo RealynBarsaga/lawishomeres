@@ -231,7 +231,7 @@ html, body {
                         <div id="special" class="invalid" style="display: none;">❌ At least one special character (!@#$%^&*)</div>
                     </div>
                     <div class="form-group">
-                        <label for="confirm_password">Confirm Password</label ```html
+                        <label for="confirm_password">Confirm Password</label>
                         <div class="input-group">
                             <input type="password" name="confirm_password" id="confirm_password" class="form-control" placeholder="•••••••••••" required>
                             <span class="input-group-text" onclick="togglePassword('confirm_password', this)">
