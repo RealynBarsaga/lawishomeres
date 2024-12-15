@@ -207,13 +207,6 @@ background: #fff;
         .invalid {
             color: red;
         }
-
-        /* Media Queries for responsiveness */
-        @media (max-width: 767px) {
-            .container {
-                padding: 10px;
-            }
-        }
 </style>
 </head>
 <body>
