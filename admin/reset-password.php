@@ -122,210 +122,118 @@ if (isset($_GET['code'])) {
         margin-top: 10px;
     }
 
-    .invalid {
-        color: red;
+    .symbol {
+        font-size: 20px;
     }
 
-    .valid {
-        color: green;
- }
-
     .modal {
-        position: fixed;
-        z-index: 1000; /* Ensure it's on top */
+        position: fixed top: 0;
         left: 0;
-        top: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.5); /* Background overlay */
-        display: flex;
+        background: rgba(0, 0, 0, 0.5);
+        display: none;
         justify-content: center;
         align-items: center;
     }
 
     .modal-content {
-        background: linear-gradient(135deg, #d4edda, #f7f7f7); /* Soft green for success */
-        padding: 30px;
-        border-radius: 15px;
-        text-align: center;
-        width: 350px;
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-        position: relative;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 160px;
-        animation: modalFadeIn 0.5s ease;
-    }
-
-    @keyframes modalFadeIn {
-        from {
-            opacity: 0;
-            transform: scale(0.95);
-        }
-        to {
-            opacity: 1;
-            transform: scale(1);
-        }
-    }
-
-    .modal-title {
-        font-size: 18px;
-        font-weight: bold;
-        margin-bottom: 10px;
-        color: #28a745; /* Green for success */
-    }
-
-    .modal-content .btn-ok {
-        background-color: #5cb85c; /* Success button */
-        color: white;
-        border: none;
-        padding: 12px 25px;
-        border-radius: 25px;
-        cursor: pointer;
-        font-size: 16px;
-        transition: background-color 0.3s ease, transform 0.2s ease;
-    }
-
-    .modal-content .btn-ok:hover {
-        background-color: #4cae4c;
-        transform: scale(1.05);
-    }
-
-    .modal p {
-        margin-bottom: 25px;
-        font-size: 16px;
-    }
-
-    .modal-content::after {
-        content: "Powered by Madridejos HRMS";
-        display: block;
-        font-size: 12px;
-        color: #aaa;
-        margin-top: 20px;
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 </style>
 <body>
     <div class="container">
-        <div class="row">
-            <div class="col-md-4 offset-md-4 form">
-                <h2 class="text-center" style="font-size:25px;">Reset Your Password</h2>
-                <br>
-                <?php if (!empty($error_message)): ?>
-                    <div class="alert alert-danger">
-                        <?php echo $error_message; ?>
-                    </div>
-                <?php endif; ?>
-                <form action="" method="POST" autocomplete="off">
+        <div class="form">
+            <h2>Password Reset</h2>
+            <?php if ($error_message): ?>
+                <div class="alert alert-danger"><?php echo $error_message; ?></div>
+            <?php endif; ?>
+            <?php if ($success_message): ?>
+                <div class="alert alert-success"><?php echo $success_message; ?></div>
+            <?php endif; ?>
+            <form method="POST" action="">
                 <div class="form-group">
                     <label for="new_password">New Password</label>
-                    <div class="input-group">
-                        <div class="input-group-append">
-                        <input type="password" name="new_password" id="new_password" class="form-control" placeholder="•••••••••••" required pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{10,}$" title="Password must be at least 10 characters long, contain at least one uppercase letter, one number, and one special character." style="width: 388px;" oninput="validatePassword()">
-                            <span class="input-group-text" onclick="togglePassword('new_password', this)" style="cursor: pointer; background-color: transparent; border: none;">
-                                <i class="fa fa-eye"></i>
-                            </span>
-                        </div>
-                    </div>
+                    <input type="password" id="new_password" name="new_password" class="form-control" placeholder="Enter your new password" oninput="validatePassword()" required>
                 </div>
                 <div class="form-group">
                     <label for="con_password">Confirm Password</label>
-                    <div class="input-group">
-                        <div class="input-group-append">
-                        <input type="password" name="con_password" id="con_password" class="form-control" placeholder="•••••••••••" required pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{10,}$" title="Password must be at least 10 characters long, contain at least one uppercase letter, one number, and one special character." style="width: 388px;" oninput="validatePassword()">
-                            <span class="input-group-text" onclick="togglePassword('con_password', this)" style="cursor: pointer ; background-color: transparent; border: none;">
-                                <i class="fa fa-eye"></i>
-                            </span>
-                        </div>
-                    </div>
+                    <input type="password" id="con_password" name="con_password" class="form-control" placeholder="Confirm your new password" required>
                 </div>
                 <div class="password-checklist">
                     <h5>Password Requirements:</h5>
                     <ul>
-                        <li id="length" class="invalid">At least 10 characters</li>
-                        <li id="uppercase" class="invalid">At least one uppercase letter</li>
-                        <li id="number" class="invalid">At least one number</li>
-                        <li id="special" class="invalid">At least one special character (!@#$%^&*)</li>
+                        <li id="length" class="invalid">At least 10 characters <span class="symbol" id="length-symbol">❌</span></li>
+                        <li id="uppercase" class="invalid">At least one uppercase letter <span class="symbol" id="uppercase-symbol">❌</span></li>
+                        <li id="number" class="invalid">At least one number <span class="symbol" id="number-symbol">❌</span></li>
+                        <li id="special" class="invalid">At least one special character (!@#$%^&*) <span class="symbol" id="special-symbol">❌</span></li>
                     </ul>
                 </div>
-                <button type="submit" name="change" class="btns">Reset Password</button>
-                </form>
-            </div>
+                <button type="submit" name="change" class="btns">Change Password</button>
+            </form>
         </div>
     </div>
-    <?php if (!empty($success_message)): ?>
-        <div id="success-modal" class="modal" style="display: block;">
-            <div class="modal-content" style="margin-left: 465px;">
-                <span class="modal-title">Success</span>
-                <p><?php echo $success_message; ?></p>
-                <button id="success-ok-button" class="btn-ok">OK</button>
-            </div>
-        </div>  
-    <?php endif; ?>
-<script>
-    function togglePassword(inputId, icon) {
-        const input = document.getElementById(inputId);
-        const iconElement = icon.querySelector('i');
-        
-        if (input.type === 'password') {
-            input.type = 'text';
-            iconElement.classList.remove('fa-eye');
-            iconElement.classList.add('fa-eye-slash');
-        } else {
-            input.type = 'password';
-            iconElement.classList.remove('fa-eye-slash');
-            iconElement.classList.add('fa-eye');
+
+    <script>
+        function validatePassword() {
+            const password = document.getElementById('new_password').value;
+            const lengthCheck = document.getElementById('length');
+            const uppercaseCheck = document.getElementById('uppercase');
+            const numberCheck = document.getElementById('number');
+            const specialCheck = document.getElementById('special');
+
+            const lengthSymbol = document.getElementById('length-symbol');
+            const uppercaseSymbol = document.getElementById('uppercase-symbol');
+            const numberSymbol = document.getElementById('number-symbol');
+            const specialSymbol = document.getElementById('special-symbol');
+
+            // Check length
+            if (password.length >= 10) {
+                lengthCheck.classList.remove('invalid');
+                lengthCheck.classList.add('valid');
+                lengthSymbol.textContent = '✔️';
+            } else {
+                lengthCheck.classList.remove('valid');
+                lengthCheck.classList.add('invalid');
+                lengthSymbol.textContent = '❌';
+            }
+
+            // Check for uppercase letter
+            if (/[A-Z]/.test(password)) {
+                uppercaseCheck.classList.remove('invalid');
+                uppercaseCheck.classList.add('valid');
+                uppercaseSymbol.textContent = '✔️';
+            } else {
+                uppercaseCheck.classList.remove('valid');
+                uppercaseCheck.classList.add('invalid');
+                uppercaseSymbol.textContent = '❌';
+            }
+
+            // Check for number
+            if (/\d/.test(password)) {
+                numberCheck.classList.remove('invalid');
+                numberCheck.classList.add('valid');
+                numberSymbol.textContent = '✔️';
+            } else {
+                numberCheck.classList.remove('valid');
+                numberCheck.classList.add('invalid');
+                numberSymbol.textContent = '❌';
+            }
+
+            // Check for special character
+            if (/[!@#$%^&*]/.test(password)) {
+                specialCheck.classList.remove('invalid');
+                specialCheck.classList.add('valid');
+                specialSymbol.textContent = '✔️';
+            } else {
+                specialCheck.classList.remove('valid');
+                specialCheck.classList.add('invalid');
+                specialSymbol.textContent = '❌';
+            }
         }
-    }
-
-    function validatePassword() {
-        const password = document.getElementById('new_password').value;
-        const lengthCheck = document.getElementById('length');
-        const uppercaseCheck = document.getElementById('uppercase');
-        const numberCheck = document.getElementById('number');
-        const specialCheck = document.getElementById('special');
-
-        // Check length
-        if (password.length >= 10) {
-            lengthCheck.classList.remove('invalid');
-            lengthCheck.classList.add('valid');
-        } else {
-            lengthCheck.classList.remove('valid');
-            lengthCheck.classList.add('invalid');
-        }
-
-        // Check for uppercase letter
-        if (/[A-Z]/.test(password)) {
-            uppercaseCheck.classList.remove('invalid');
-            uppercaseCheck.classList.add('valid');
-        } else {
-            uppercaseCheck.classList.remove('valid');
-            uppercaseCheck.classList.add('invalid');
-        }
-
-        // Check for number
-        if (/\d/.test(password)) {
-            numberCheck.classList.remove('invalid');
-            numberCheck.classList.add('valid');
-        } else {
-            numberCheck.classList.remove('valid');
-            numberCheck.classList.add('invalid');
-        }
-
-        // Check for special character
-        if (/[!@#$%^&*]/.test(password)) {
-            specialCheck.classList.remove('invalid');
-            specialCheck.classList.add('valid');
-        } else {
-            specialCheck.classList.remove('valid');
-            specialCheck.classList.add('invalid');
-        }
-    }
-
-    document.addEventListener("DOMContentLoaded", function() {
-        document.getElementById("success-ok-button").addEventListener("click", function() {
-            window.location.href = '../admin/login.php';
-        });
-    });
-</script>
+    </script>
 </body>
 </html>
