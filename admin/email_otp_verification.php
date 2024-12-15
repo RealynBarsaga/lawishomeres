@@ -111,7 +111,7 @@ if (isset($_POST['verify_otp'])) {
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            <?php if (!empty(($success_message)): ?>
+            <?php if (!empty($success_message)): ?>
                 swal("Error", "<?php echo $error_message; ?>", "error");
             <?php elseif (!empty($success_message)): ?>
                 swal("Success", "<?php echo $success_message; ?>", "success").then(() => {
