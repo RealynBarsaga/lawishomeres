@@ -181,7 +181,7 @@ if (isset($_GET['code'])) {
         .password-checklist {
             margin-top: 10px;
             display: none; /* Initially hidden */
-            font-size: 13px;
+            font-size: 11px;
         }
 
         .password-checklist div {

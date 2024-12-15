@@ -64,7 +64,7 @@
                                     </span>
                                 </div>
                             </div>
-                            <div class="password-checklist" style="display: none;">
+                            <div class="password-checklist" style="display: none;font-size: 11px;">
                                 <h5>Password Requirements:</h5>
                                 <div id="length" class="invalid" style="display: none;">❌ At least 10 characters</div>
                                 <div id="uppercase" class="invalid" style="display: none;">❌ At least one uppercase letter</div>
