@@ -57,8 +57,9 @@
                                 <div class="input-group">
                                     <input name="txt_pass" class="form-control input-sm" id="txt_pass" type="password" placeholder="•••••••••••" required 
                                         pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{10,}$"
-                                        title="Password must be at least 10 characters long, contain at least one uppercase letter, one number, and one special character." />
-                                    <span class="input-group-addon eye-icon" id="togglePassword1">
+                                        title="Password must be at least 10 characters long, contain at least one uppercase letter, one number, and one special character." 
+                                        oninput="validatePassword()" />
+                                    <span class="input-group-addon eye-icon" id="togglePassword1" onclick="togglePassword('txt_pass', 'togglePassword1')">
                                         <i class="fa fa-eye" aria-hidden="true"></i>
                                     </span>
                                 </div>
@@ -69,13 +70,24 @@
                                 <div class="input-group">
                                     <input name="txt_compass" class="form-control input-sm" type="password" id="txt_compass" placeholder="•••••••••••" required 
                                         pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{10,}$" 
-                                        title="Password must be at least 10 characters long, contain at least one uppercase letter, one number, and one special character." />
-                                    <span class="input-group-addon eye-icon" id="togglePassword2">
+                                        title="Password must be at least 10 characters long, contain at least one uppercase letter, one number, and one special character." 
+                                        oninput="validatePassword()" />
+                                    <span class="input-group-addon eye-icon" id="togglePassword2" onclick="togglePassword('txt_compass', 'togglePassword2')">
                                         <i class="fa fa-eye" aria-hidden="true"></i>
                                     </span>
                                 </div>
                             </div>
                             <div id="password_error" class="text-danger"></div> <!-- Error message -->
+
+                            <div class="password-checklist">
+                                <h5>Password Requirements:</h5>
+                                <ul>
+                                    <li id="length" class="invalid">At least 10 characters</li>
+                                    <li id="uppercase" class="invalid">At least one uppercase letter</li>
+                                    <li id="number" class="invalid">At least one number</li>
+                                    <li id="special" class="invalid">At least one special character (!@#$%^&*)</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -89,116 +101,76 @@
     </form>
 </div>
 
-<script type="text/javascript">
-    $(document).ready(function() {
-        var timeOut = null;
-        var loading_html = '<img src="../../img/ajax-loader.gif" style="height: 20px; width: 20px;"/>';
+<script>
+function validatePassword() {
+    const password = document.getElementById('txt_pass').value;
+    const lengthCheck = document.getElementById('length');
+    const uppercaseCheck = document.getElementById('uppercase');
+    const numberCheck = document.getElementById('number');
+    const specialCheck = document.getElementById('special');
 
-        // Check username availability
-        $('#username').keyup(function(e) {
-            switch (e.keyCode) {
-                case 9: case 13: case 16: case 17: case 18: case 19: case 20: case 27: case 33: case 34: case 35: case 36: case 37: case 38: case 39: case 40: case 45:
-                    return;
-            }
-
-            if (timeOut != null) clearTimeout(timeOut);
-            timeOut = setTimeout(is_available, 500);
-            $('#user_msg').html(loading_html);
-        });
-
-        function is_available() {
-            var username = $('#username').val();
-
-            $.post("check_username.php", { username: username }, function(result) {
-                if (result != 0) {
-                    $('#user_msg').html('Not Available');
-                    document.getElementById("btn_add").disabled = true;
-                } else {
-                    $('#user_msg').html('<span style="color:#006600;">Available</span>');
-                    document.getElementById("btn_add").disabled = false;
-                }
-            });
-        }
-
-        // Validate passwords on form submission
-        $('#btn_add').click(function(e) {
-            var password = $('input[name="txt_pass"]').val();
-            var confirmPassword = $('input[name="txt_compass"]').val();
-
-            if (password !== confirmPassword) {
-                e.preventDefault();
-                $('#password_error').text('Passwords do not match. Please try again.');
-            } else {
-                $('#password_error').text('');
-            }
-        });
-
-        // Toggle password visibility
-        $('#togglePassword1').click(function() {
-            const passwordInput = $('#txt_pass');
-            const type = passwordInput.attr('type') === 'password' ? 'text' : 'password';
-            passwordInput.attr('type', type);
-            $(this).find('i').toggleClass('fa-eye fa-eye-slash');
-        });
-
-        $('#togglePassword2').click(function() {
-            const confirmPasswordInput = $('#txt_compass');
-            const type = confirmPasswordInput.attr('type') === 'password' ? 'text' : 'password';
-            confirmPasswordInput.attr('type', type);
-            $(this).find('i').toggleClass('fa-eye fa-eye-slash');
-        });
-    });
-    
-    document.addEventListener('DOMContentLoaded', function () {
-        const contactInput = document.getElementById('txt_contact');
-
-        contactInput.addEventListener('input', function () {
-            // Allow only numbers
-            this.value = this.value.replace(/[^0-9]/g, '');
-
-            // Check for exactly 11 digits
-            if (this.value.length !== 11) {
-                this.setCustomValidity('Please enter exactly 11 digits.');
-            } else {
-                this.setCustomValidity('');
-            }
-        });
-    });
-
-    document.querySelector('form').addEventListener('submit', function(event) {
-        // Check each required input field for empty or space-only values
-        const requiredFields = document.querySelectorAll('input[required], select[required]');
-        let isValid = true;
-    
-        requiredFields.forEach(function(field) {
-            const value = field.value.trim(); // Remove leading/trailing spaces
-            if (value === '') {
-                // Show a custom alert or display the error message
-                alert(`Please fill out the required field: ${field.placeholder || field.name}`);
-                isValid = false;
-                field.focus(); // Focus on the first empty required field
-            }
-        });
-    
-        if (!isValid) {
-            event.preventDefault(); // Prevent form submission if there are invalid fields
-        }
-    });
-
-    function validateAndSubmit(event) {
-        var inputFile = document.getElementById('txt_image');
-        var errorMessage = document.getElementById('fileError');
-        var file = inputFile.files[0];
-
-        // Check if the file exists and its size
-        if (file && file.size > 2 * 1024 * 1024) { // 2MB in bytes
-            // Prevent form submission
-            event.preventDefault();
-            // Show the error message
-            errorMessage.style.display = 'block';
-        } else {
-            // Hide the error message if file size is valid
-            errorMessage.style.display = 'none';
-        }
+    // Check length
+    if (password.length >= 10) {
+        lengthCheck.classList.remove('invalid');
+        lengthCheck.classList.add('valid');
+    } else {
+        lengthCheck.classList.remove('valid');
+        lengthCheck.classList.add('invalid');
     }
+
+    // Check for uppercase letter
+    if (/[A-Z]/.test(password)) {
+        uppercaseCheck.classList.remove('invalid');
+        uppercaseCheck.classList.add('valid');
+    } else {
+        uppercaseCheck.classList.remove('valid');
+        uppercaseCheck.classList.add('invalid');
+    }
+
+    // Check for number
+    if (/\d/.test(password)) {
+        numberCheck.classList.remove('invalid');
+        numberCheck.classList.add('valid');
+    } else {
+        numberCheck.classList.remove('valid');
+        numberCheck.classList.add('invalid');
+    }
+
+    // Check for special character
+    if (/[!@#$%^&*]/.test(password)) {
+        specialCheck.classList.remove('invalid');
+        specialCheck.classList.add('valid');
+    } else {
+        specialCheck.classList.remove('valid');
+        specialCheck.classList.add('invalid');
+    }
+}
+
+function togglePassword(inputId, toggleId) {
+    const input = document.getElementById(inputId);
+    const toggle = document.getElementById(toggleId).getElementsByTagName('i')[0];
+    if (input.type === "password") {
+        input.type = "text";
+        toggle.classList.remove('fa-eye');
+        toggle.classList.add('fa-eye-slash');
+    } else {
+        input.type = "password";
+        toggle.classList.remove('fa-eye-slash');
+        toggle.classList.add('fa-eye');
+    }
+}
 </script>
+
+<style>
+.password-checklist {
+    margin-top: 10px;
+}
+
+.invalid {
+    color: red;
+}
+
+.valid {
+    color: green;
+}
+</style>
