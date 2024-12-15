@@ -217,7 +217,7 @@ background: #fff;
                 <label for="new_password">New Password</label>
                 <div class="input-group">
                     <input type="password" name="new_password" id="new_password" class="form-control" placeholder="•••••••••••" required oninput="checkPassword()">
-                    <span class="input-group-text" onclick="togglePassword('new_password', this)" style="cursor: pointer; background-color: transparent; border: none;">
+                    <span class="input-group-text" onclick="togglePassword('new_password', this)">
                         <i class="fa fa-eye"></i>
                     </span>
                 </div>
@@ -232,8 +232,8 @@ background: #fff;
             <div class="form-group">
                 <label for="confirm_password">Confirm Password</label>
                 <div class="input-group">
-                    <input type="password" name="confirm_password" id="confirm_password" class="form-control" placeholder="•••••••••••" required pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{10,}$" title="Password must be at least 10 characters long, contain at least one uppercase letter, one number, and one special character.">
-                    <span class="input-group-text" onclick="togglePassword('confirm_password', this)" style="cursor: pointer; background-color: transparent; border: none;">
+                    <input type="password" name="confirm_password" id="confirm_password" class="form-control" placeholder="•••••••••••" required>
+                    <span class="input-group-text" onclick="togglePassword('confirm_password', this)">
                         <i class="fa fa-eye"></i>
                     </span>
                 </div>
