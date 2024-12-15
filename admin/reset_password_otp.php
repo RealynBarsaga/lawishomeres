@@ -179,31 +179,6 @@ if (isset($_POST['reset_password'])) {
         .valid {
             color: green;
         }
-
-        /* Media Queries for Responsiveness */
-        @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-
-            .form {
-                width: 100%;
-                padding: 15px;
-            }
-
-            .btns {
-                font-size: 14px;
-            }
-
-            .input-group .form-control {
-                width: 100%;
-            }
-
-            .input-group-text {
-                padding: 0;
-            }
-        }
-        
     </style>
 </head>
 <body>
@@ -219,6 +194,13 @@ if (isset($_POST['reset_password'])) {
                     </span>
                 </div>
             </div>
+            <div class="password-checklist" id="password-checklist">
+                <h5>Password Requirements:</h5>
+                <div id="length" class="invalid" style="display: none;">❌ At least 10 characters</div>
+                <div id="uppercase" class="invalid" style="display: none;">❌ At least one uppercase letter</div>
+                <div id="number" class="invalid" style="display: none;">❌ At least one number</div>
+                <div id="special" class="invalid" style="display: none;">❌ At least one special character (!@#$%^&*)</div>
+            </div>
             <div class="form-group">
                 <label for="confirm_password" style="float: left;">Confirm Password</label>
                 <div class="input-group">
@@ -227,13 +209,6 @@ if (isset($_POST['reset_password'])) {
                         <i class="fa fa-eye"></i>
                     </span>
                 </div>
-            </div>
-            <div class="password-checklist" id="password-checklist">
-                <h5>Password Requirements:</h5>
-                <div id="length" class="invalid" style="display: none;">❌ At least 10 characters</div>
-                <div id="uppercase" class="invalid" style="display: none;">❌ At least one uppercase letter</div>
-                <div id="number" class="invalid" style="display: none;">❌ At least one number</div>
-                <div id="special" class="invalid" style="display: none;">❌ At least one special character (!@#$%^&*)</div>
             </div>
             <button type="submit" name="reset_password" class="btns">Reset Password</button>
         </form>
