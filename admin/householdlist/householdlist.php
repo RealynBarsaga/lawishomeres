@@ -107,7 +107,7 @@ html, body {
                                                       <td>' . $membersName . '</td>
                                                       <td>'.$row['barangay'].'</td>
                                                       <td>
-                                                            <button class="btn btn-danger btn-sm" data-target="#deleteModals' . htmlspecialchars($row['id']) . '" data-toggle="modal" style="margin-left: 1px;color: #fff;background-color: #dc3545;border-color: #dc3545;">
+                                                            <button class="btn btn-danger btn-sm" data-target="#deleteModals" data-toggle="modal" style="margin-left: 1px;color: #fff;background-color: #dc3545;border-color: #dc3545;">
                                                                 <i class="fa fa-trash" aria-hidden="true"></i> Delete
                                                             </button>
                                                       </td>
