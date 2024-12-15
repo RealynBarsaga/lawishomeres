@@ -92,11 +92,7 @@ if (isset($_GET['code'])) {
     }
 
     .container {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        max-width: 1243%;
+        max-width: 500px; /* Set a max width for the form */
         width: 100%;
         padding: 15px;
     }
@@ -115,8 +111,7 @@ if (isset($_GET['code'])) {
         width: 100%;
         border-radius: 5px;
         padding: 10px;
-        font-size: 16 ```php
-px;
+        font-size: 16px;
         cursor: pointer;
     }
 
@@ -184,39 +179,35 @@ px;
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-md-4 offset-md-4 form">
+            <div class="col-md-12 form">
                 <h2 class="text-center" style="font-size:25px;">Reset Your Password</h2>
                 <br>
                 <form action="" method="POST" autocomplete="off">
-                <div class="form-group">
-                    <label for="new_password">New Password</label>
-                    <div class="input-group">
-                        <div class="input-group-append">
-                        <input type="password" name="new_password" id="new_password" class="form-control" placeholder="•••••••••••" required oninput="checkPassword()" style="width: 388px;">
-                            <span class="input-group-text" onclick="togglePassword('new_password', this)" style="cursor: pointer; background-color: transparent; border: none;">
+                    <div class="form-group">
+                        <label for="new_password">New Password</label>
+                        <div class="input-group">
+                            <input type="password" name="new_password" id="new_password" class="form-control" placeholder="•••••••••••" required oninput="checkPassword()">
+                            <span class="input-group-text" onclick="togglePassword('new_password', this)">
                                 <i class="fa fa-eye"></i>
                             </span>
                         </div>
                     </div>
-                </div>
-                <div class="password-checklist" style="display: none;">
-                    <h5>Password Requirements:</h5>
-                    <div id="length" class="invalid" style="display: none;">❌ At least 10 characters</div>
-                    <div id="uppercase" class="invalid" style="display: none;">❌ At least one uppercase letter</div>
-                    <div id="number" class="invalid" style="display: none;">❌ At least one number</div>
-                    <div id="special" class="invalid" style="display: none;">❌ At least one special character (!@#$%^&*)</div>
-                </div>
-                <div class="form-group">
-                    <label for="con_password">Confirm Password</label>
-                    <div class="input-group">
-                        <div class="input-group-append">
-                        <input type="password" name="con_password" id="con_password" class="form-control" placeholder="•••••••••••" required style="width: 388px;">
-                            <span class="input-group-text" onclick="togglePassword('con_password', this)" style="cursor: pointer; background-color: transparent; border: none;">
+                    <div class="form-group">
+                        <label for="con_password">Confirm Password</label>
+                        <div class="input-group">
+                            <input type="password" name="con_password" id="con_password" class="form-control" placeholder="•••••••••••" required>
+                            <span class="input-group-text" onclick="togglePassword('con_password', this)">
                                 <i class="fa fa-eye"></i>
                             </span>
                         </div>
                     </div>
-                </div>
+                    <div class="password-checklist" id="password-checklist">
+                        <h5>Password Requirements:</h5>
+                        <div id="length" class="invalid" style="display: none;">❌ At least 10 characters</div>
+                        <div id="uppercase" class="invalid" style="display: none;">❌ At least one uppercase letter</div>
+                        <div id="number" class="invalid" style="display: none;">❌ At least one number</div>
+                        <div id="special" class="invalid" style="display: none;">❌ At least one special character (!@#$%^&*)</div>
+                    </div>
                     <button type="submit" name="change" class="btns">Reset Password</button>
                 </form>
             </div>
@@ -242,7 +233,7 @@ px;
                 Swal.fire({
                     icon: 'error',
                     title : 'Error',
-                    text: '<?php echo $error_message; ?>',
+                    text: '<?php echo $ error_message; ?>',
                     confirmButtonText: 'OK'
                 });
             <?php endif; ?>
