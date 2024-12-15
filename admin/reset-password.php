@@ -125,37 +125,36 @@ if (isset($_GET['code'])) {
         }
 
         .form-group {
-    margin-bottom: 0.5rem;
-}
+            margin-bottom: 0.5rem;
+        }
 
-.input-group {
-    position: relative;
-}
-
-.input-group .form-control {
-    padding-right: 40px; /* Add padding to the right for the input */
-}
-
-.input-group .input-group-text {
-    position: absolute; /* Position the eye icon absolutely */
-    right: 10px; /* Adjust the right position */
-    top: 50%; /* Center vertically */
-    transform: translateY(-50%); /* Adjust for centering */
-    background-color: transparent; /* Make background transparent */
-    border: none; /* Remove border */
-    cursor: pointer; /* Change cursor to pointer */
-}
-
-.input-group-text i {
-    opacity: 0.5; /* Set initial opacity */
-    transition: opacity 0.3s; /* Smooth transition */
-}
-
-.input-group-text:hover i {
-    opacity: 1; /* Increase opacity on hover */
-}
-
-
+        .input-group {
+            position: relative;
+        }
+        
+        .input-group .form-control {
+            padding-right: 40px; /* Space for the icon */
+        }
+        
+        .input-group .input-group-text {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 10; /* Ensure the icon is on top */
+        }
+        
+        .input-group-text i {
+            opacity: 0.5;
+            transition: opacity 0.3s;
+        }
+        
+        .input-group-text:hover i {
+            opacity: 1;
+        }
         .password-checklist {
             margin-top: 10px;
             display: none; /* Initially hidden */
