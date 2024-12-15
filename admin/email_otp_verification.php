@@ -39,33 +39,39 @@ if (isset($_POST['verify_otp'])) {
         // Setting the default timezone
         date_default_timezone_set("Asia/Manila");
 
-        // Query to check if the OTP exists and is valid
-        $stmt = $con->prepare("SELECT otp, otp_expiry FROM tbluser WHERE email = ?");
-        $stmt->bind_param("s", $email);
-        $stmt->execute();
-        $stmt->store_result();
+        if ($con->connect_error) {
+            $error_message = 'Database connection failed: ' . $con->connect_error;
+        } else {
+            // Query to check if the OTP exists and is valid
+            $stmt = $con->prepare("SELECT otp, otp_expiry FROM tbluser WHERE email = ?");
+            $stmt->bind_param("s", $email);
+            $stmt->execute();
+            $stmt->store_result();
 
-        if ($stmt->num_rows > 0) {
-            $stmt->bind_result($otp, $otp_expiry);
-            $stmt->fetch();
+            if ($stmt->num_rows > 0) {
+                $stmt->bind_result($otp, $otp_expiry);
+                $stmt->fetch();
 
-            // Check if the OTP matches and is not expired
-            if (trim((string)$otp) === trim((string)$entered_otp)) {
-                $current_time = date('Y-m-d H:i:s');
-                if ($current_time <= $otp_expiry) {
-                    $success_message = 'OTP is valid and not expired, you may now reset your password.';
+                // Check if the OTP matches and is not expired
+                if (trim((string)$otp) === trim((string)$entered_otp)) {
+                    $current_time = date('Y-m-d H:i:s');
+                    if ($current_time <= $otp_expiry) {
+
+                        $_SESSION['email_for_reset'] = $email; // Store email in session for password reset
+                        $success_message = 'OTP is valid and not expired, you may now reset your password.';
+                    } else {
+                        $error_message = 'The OTP has expired. Please request a new OTP.';
+                    }
                 } else {
-                    $error_message = 'The OTP has expired. Please request a new OTP.';
+                    $error_message = 'Invalid OTP entered. Please try again.';
                 }
             } else {
-                $error_message = 'Invalid OTP entered. Please try again.';
+                $error_message = 'Email not found. Please check your email.';
             }
-        } else {
-            $error_message = 'Email not found. Please check your email.';
-        }
 
-        $stmt->close();
-        $con->close();
+            $stmt->close();
+            $con->close();
+        }
     }
 }
 ?>
@@ -76,57 +82,261 @@ if (isset($_POST['verify_otp'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Madridejos Household Management System</title>
     <link rel="icon" type="x-icon" href="../img/lg.png">
-    <!-- SweetAlert CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
-    <!-- SweetAlert JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+        /* General Reset and Styling */
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
+
+        html, body {
+            height: 100%;
+            font-family: 'Poppins', sans-serif;
+            background-image: url('../img/received_1185064586170879.jpeg');
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
         .container {
-            max-width: 400px;
-            margin: 50px auto;
-            padding: 20px;
-            background: white;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 500px;
+            width: 100%;
+            box-sizing: border-box;
         }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
+
         .form-control {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
+            font-size: 16px;
             border: 1px solid #ccc;
             border-radius: 5px;
+            background-color: #f9f9f9;
+            box-sizing: border-box;
         }
+
         .btn {
             width: 100%;
-            padding: 10px;
-            background-color: #5cb85c;
-            color: white;
+            padding: 12px;
+            background-image: url('../img/bg.jpg');
             border: none;
-            border-radius: 5 px;
+            color: #fff;
+            border-radius: 5px;
+            font-size: 16px;
             cursor: pointer;
         }
+
         .btn:hover {
-            background-color: #4cae4c;
+            background-color: #0056b3;
         }
+
+        .error {
+            color: red;
+            margin-bottom: 10px;
+        }
+
+        .success {
+            color: green;
+            margin-bottom: 10px;
+        }
+
         .back-link {
             text-align: center;
-            margin-top: 15px;
+            margin-top: -17px;
         }
-        @media (max-width: 600px) {
+
+        .back-link a {
+            display: inline-block;
+            padding: 12px 20px;
+            background-color: #f0f2f5;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+            width: 100%;
+            max-width: 500px;
+            margin: 10px auto;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .back-link a:hover {
+            background-color: #e1e4e8;
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px;
+                width: 100%;
+            }
+
+            h2 {
+                font-size: 22px;
+            }
+
+            .form-control {
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            .btn {
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            .back-link a {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+
+            .form-control {
+                font-size: 14px;
+                padding: 8px;
+            }
+
+            .btn {
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            .back-link a {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+        }
+
+        @media (max-width: 320px) {
             .container {
                 padding: 15px;
             }
-            .btn {
+
+            h2 {
+                font-size: 18px;
+            }
+
+            .form-control {
+                font-size: 14px;
                 padding: 8px;
             }
+
+            .btn {
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            .back-link a {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+        }
+        /* Success Modal Styles */
+        .modal {
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #d4edda, #f7f7f7);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            width: 419px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            position: relative;
+            margin-left: 440px;
+            margin-top: 160px;
+            animation: modalFadeIn 0.5s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #28a745;
+        }
+
+        .modal-content .btn-ok {
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            margin: auto;
+            width: 100px;
+            font-size: 16px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .modal-content .btn-ok:hover {
+            background-color: #4cae4c;
+            transform: scale(1.05);
+        }
+
+        .modal p {
+            margin-bottom: 25px;
+            font-size: 16px;
+        }
+
+        .modal-content::after {
+            content: "Powered by Madridejos HRMS";
+            display: block;
+            font-size: 12px;
+            color: #aaa;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -134,6 +344,10 @@ if (isset($_POST['verify_otp'])) {
 
     <div class="container">
         <h2>OTP Verification</h2>
+
+        <?php if (!empty($error_message)): ?>
+            <div class="error"><?php echo $error_message; ?></div>
+        <?php endif; ?>
 
         <form method="POST" action="">
             <div class="form-group">
@@ -150,17 +364,22 @@ if (isset($_POST['verify_otp'])) {
             </a>
         </div>
     </div>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            <?php if (!empty($success_message)): ?>
-                swal("Success", "<?php echo $success_message; ?>", "success").then(() => {
+    <?php if (!empty($success_message)): ?>
+        <!-- Success Modal structure -->
+        <div id="success-modal" class="modal" style="display: block;">
+            <div class="modal-content">
+                <span class="modal-title">Success</span>
+                <p><?php echo $success_message; ?></p>
+                <button id="success-ok-button" class="btn-ok">OK</button>
+            </div>
+        </div>  
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                document.getElementById("success-ok-button").addEventListener("click", function() {
                     window.location.href = '../admin/reset_password_otp';
                 });
-            <?php elseif (!empty($error_message)): ?>
-                swal("Error", "<?php echo $error_message; ?>", "error");
-            <?php endif; ?>
-        });
-    </script>
+            });
+        </script>
+    <?php endif; ?>
 </body>
 </html>
