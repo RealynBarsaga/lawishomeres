@@ -285,6 +285,7 @@ $email = '';
                 font-size: 12px; /* Adjust modal text font size */
             }
         }
+    </style>
 <body>
     <div class="container">
         <div class="row">
