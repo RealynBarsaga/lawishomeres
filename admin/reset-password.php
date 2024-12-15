@@ -192,6 +192,13 @@ if (isset($_GET['code'])) {
                             </span>
                         </div>
                     </div>
+                    <div class="password-checklist" id="password-checklist">
+                        <h5>Password Requirements:</h5>
+                        <div id="length" class="invalid" style="display: none;">❌ At least 10 characters</div>
+                        <div id="uppercase" class="invalid" style="display: none;">❌ At least one uppercase letter</div>
+                        <div id="number" class="invalid" style="display: none;">❌ At least one number</div>
+                        <div id="special" class="invalid" style="display: none;">❌ At least one special character (!@#$%^&*)</div>
+                    </div>
                     <div class="form-group">
                         <label for="con_password">Confirm Password</label>
                         <div class="input-group">
@@ -200,13 +207,6 @@ if (isset($_GET['code'])) {
                                 <i class="fa fa-eye"></i>
                             </span>
                         </div>
-                    </div>
-                    <div class="password-checklist" id="password-checklist">
-                        <h5>Password Requirements:</h5>
-                        <div id="length" class="invalid" style="display: none;">❌ At least 10 characters</div>
-                        <div id="uppercase" class="invalid" style="display: none;">❌ At least one uppercase letter</div>
-                        <div id="number" class="invalid" style="display: none;">❌ At least one number</div>
-                        <div id="special" class="invalid" style="display: none;">❌ At least one special character (!@#$%^&*)</div>
                     </div>
                     <button type="submit" name="change" class="btns">Reset Password</button>
                 </form>
