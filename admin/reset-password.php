@@ -51,7 +51,7 @@ if (isset($_GET['code'])) {
             $updateQuery->bind_param("ss", $hashed_password, $code);
 
             if ($updateQuery->execute()) {
-                $success_message = "Your password has been reset successfully reset. You may now log in.";
+                $success_message = "Your password has been reset successfully. You may now log in.";
             } else {
                 $error_message = "Failed to update the password. Please try again.";
             }
@@ -90,26 +90,6 @@ if (isset($_GET['code'])) {
         font-family: 'Poppins', sans-serif;
     }
 
-    /* Styling for the header */
-    .res {
-        font-size: 20px;
-        font-weight: bold;
-        color: #333;
-        margin-top: 20px;
-        margin-bottom: 10px;
-        text-align: center;
-    }
-
-    /* Styling for the paragraph */
-    p.text-center {
-        font-size: 15px;
-        color: #333;
-        line-height: 1.5;
-        margin-top: 0;
-        margin-bottom: 30px;
-        text-align: center;
-    }
-
     .container {
         position: absolute;
         top: 50%;
@@ -138,67 +118,18 @@ if (isset($_GET['code'])) {
         cursor: pointer;
     }
 
-    .btns:hover {
-        border: none;
-        color: #fff;
-        cursor: pointer;
+    .password-checklist {
+        margin-top: 10px;
     }
 
-    .form-group {
-        margin-bottom: 0.5rem;
+    .invalid {
+        color: red;
     }
 
-    .input-group {
-        position: relative;
-    }
+    .valid {
+        color: green;
+ }
 
-    .input-group .form-control {
-        padding-right: 40px; /* Add padding to the right for the input */
-    }
-
-    .input-group .input-group-text {
-        position: absolute; /* Position the eye icon absolutely */
-        right: 10px; /* Adjust the right position */
-        top: 50%; /* Center vertically */
-        transform: translateY(-50%); /* Adjust for centering */
-        background-color: transparent; /* Make background transparent */
-        border: none; /* Remove border */
-        cursor: pointer; /* Change cursor to pointer */
-    }
-
-    .input-group-text i {
-        opacity: 0.5; /* Set initial opacity */
-        transition: opacity 0.3s; /* Smooth transition */
-    }
-
-    .input-group-text:hover i {
-        opacity: 1; /* Increase opacity on hover */
-    }
-
-    /* Media Queries for responsiveness */
-    @media (max-width: 767px) {
-        .container {
-            padding: 10px;
-        }
-
-        .res {
-            font-size: 18px;
-        }
-
-        .form-group {
-            width: 100%;
-        }
-
-        .btns {
-            font-size: 14px;
-        }
-
-        .input-group .form-control {
-            width: 100%; /* Make inputs 100% width */
-        }
-    }
-
-    /* Success Modal styles */
     .modal {
         position: fixed;
         z-index: 1000; /* Ensure it's on top */
@@ -289,7 +220,7 @@ if (isset($_GET['code'])) {
                     <label for="new_password">New Password</label>
                     <div class="input-group">
                         <div class="input-group-append">
-                        <input type="password" name="new_password" id="new_password" class="form-control" placeholder="•••••••••••" required pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{10,}$" title="Password must be at least 10 characters long, contain at least one uppercase letter, one number, and one special character." style="width: 388px;">
+                        <input type="password" name="new_password" id="new_password" class="form-control" placeholder="•••••••••••" required pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{10,}$" title="Password must be at least 10 characters long, contain at least one uppercase letter, one number, and one special character." style="width: 388px;" oninput="validatePassword()">
                             <span class="input-group-text" onclick="togglePassword('new_password', this)" style="cursor: pointer; background-color: transparent; border: none;">
                                 <i class="fa fa-eye"></i>
                             </span>
@@ -300,20 +231,28 @@ if (isset($_GET['code'])) {
                     <label for="con_password">Confirm Password</label>
                     <div class="input-group">
                         <div class="input-group-append">
-                        <input type="password" name="con_password" id="con_password" class="form-control" placeholder="•••••••••••" required pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{10,}$" title="Password must be at least 10 characters long, contain at least one uppercase letter, one number, and one special character." style="width: 388px;">
-                            <span class="input-group-text" onclick="togglePassword('con_password', this)" style="cursor: pointer; background-color: transparent; border: none;">
+                        <input type="password" name="con_password" id="con_password" class="form-control" placeholder="•••••••••••" required pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{10,}$" title="Password must be at least 10 characters long, contain at least one uppercase letter, one number, and one special character." style="width: 388px;" oninput="validatePassword()">
+                            <span class="input-group-text" onclick="togglePassword('con_password', this)" style="cursor: pointer ; background-color: transparent; border: none;">
                                 <i class="fa fa-eye"></i>
                             </span>
                         </div>
                     </div>
                 </div>
-                    <button type="submit" name="change" class="btns">Reset Password</button>
+                <div class="password-checklist">
+                    <h5>Password Requirements:</h5>
+                    <ul>
+                        <li id="length" class="invalid">At least 10 characters</li>
+                        <li id="uppercase" class="invalid">At least one uppercase letter</li>
+                        <li id="number" class="invalid">At least one number</li>
+                        <li id="special" class="invalid">At least one special character (!@#$%^&*)</li>
+                    </ul>
+                </div>
+                <button type="submit" name="change" class="btns">Reset Password</button>
                 </form>
             </div>
         </div>
     </div>
     <?php if (!empty($success_message)): ?>
-        <!-- Success Modal structure -->
         <div id="success-modal" class="modal" style="display: block;">
             <div class="modal-content" style="margin-left: 465px;">
                 <span class="modal-title">Success</span>
@@ -321,82 +260,6 @@ if (isset($_GET['code'])) {
                 <button id="success-ok-button" class="btn-ok">OK</button>
             </div>
         </div>  
-        <!-- Add the modal styles -->
-        <style>
-            .modal {
-                position: fixed;
-                z-index: 1000; /* Ensure it's on top */
-                left: 0;
-                top: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, 0.5); /* Background overlay */
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-            .modal-content {
-                background: linear-gradient(135deg, #d4edda, #f7f7f7); /* Soft green for success */
-                padding: 30px;
-                border-radius: 15px;
-                text-align: center;
-                width: 350px;
-                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-                position: relative;
-                margin-left: auto;
-                margin-right: auto;
-                margin-top: 160px;
-                animation: modalFadeIn 0.5s ease;
-            }
-            @keyframes modalFadeIn {
-                from {
-                    opacity: 0;
-                    transform: scale(0.95);
-                }
-                to {
-                    opacity: 1;
-                    transform: scale(1);
-                }
-            }
-            .modal-title {
-                font-size: 18px;
-                font-weight: bold;
-                margin-bottom: 10px;
-                color: #28a745; /* Green for success */
-            }
-            .modal-content .btn-ok {
-                background-color: #5cb85c; /* Success button */
-                color: white;
-                border: none;
-                padding: 12px 25px;
-                border-radius: 25px;
-                cursor: pointer;
-                font-size: 16px;
-                transition: background-color 0.3s ease, transform 0.2s ease;
-            }
-            .modal-content .btn-ok:hover {
-                background-color: #4cae4c;
-                transform: scale(1.05);
-            }
-            .modal p {
-                margin-bottom: 25px;
-                font-size: 16px;
-            }
-            .modal-content::after {
-                content: "Powered by Madridejos HRMS";
-                display: block;
-                font-size: 12px;
-                color: #aaa;
-                margin-top: 20px;
-            }
-        </style>
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                document.getElementById("success-ok-button").addEventListener("click", function() {
-                    window.location.href = '../admin/login.php';
-                });
-            });
-        </script>
     <?php endif; ?>
 <script>
     function togglePassword(inputId, icon) {
@@ -413,6 +276,56 @@ if (isset($_GET['code'])) {
             iconElement.classList.add('fa-eye');
         }
     }
+
+    function validatePassword() {
+        const password = document.getElementById('new_password').value;
+        const lengthCheck = document.getElementById('length');
+        const uppercaseCheck = document.getElementById('uppercase');
+        const numberCheck = document.getElementById('number');
+        const specialCheck = document.getElementById('special');
+
+        // Check length
+        if (password.length >= 10) {
+            lengthCheck.classList.remove('invalid');
+            lengthCheck.classList.add('valid');
+        } else {
+            lengthCheck.classList.remove('valid');
+            lengthCheck.classList.add('invalid');
+        }
+
+        // Check for uppercase letter
+        if (/[A-Z]/.test(password)) {
+            uppercaseCheck.classList.remove('invalid');
+            uppercaseCheck.classList.add('valid');
+        } else {
+            uppercaseCheck.classList.remove('valid');
+            uppercaseCheck.classList.add('invalid');
+        }
+
+        // Check for number
+        if (/\d/.test(password)) {
+            numberCheck.classList.remove('invalid');
+            numberCheck.classList.add('valid');
+        } else {
+            numberCheck.classList.remove('valid');
+            numberCheck.classList.add('invalid');
+        }
+
+        // Check for special character
+        if (/[!@#$%^&*]/.test(password)) {
+            specialCheck.classList.remove('invalid');
+            specialCheck.classList.add('valid');
+        } else {
+            specialCheck.classList.remove('valid');
+            specialCheck.classList.add('invalid');
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("success-ok-button").addEventListener("click", function() {
+            window.location.href = '../admin/login.php';
+        });
+    });
 </script>
 </body>
 </html>
