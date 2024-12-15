@@ -11,6 +11,8 @@ $email = '';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Madridejos Household Management System</title>
     <link rel="icon" type="x-icon" href="../img/lg.png">
+    <!-- SweetAlert CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
 </head>
 <style>
         @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
@@ -283,20 +285,14 @@ $email = '';
                 font-size: 12px; /* Adjust modal text font size */
             }
         }
-    </style>
 <body>
     <div class="container">
         <div class="row">
             <div class="col-md-4 offset-md-4 form">
                 <form action="email_link_process" method="post" autocomplete="off">
                     <p class="res">Reset Password via Email</p>
-                    <p class="text-center">Enter the email address associated with your account and we will send you a link to reset your password.</p>
+                    <p class="text-center"> Enter the email address associated with your account and we will send you a link to reset your password.</p>
                     <br>
-                    <?php if (!empty($error_message)): ?>
-                        <div class="alert alert-danger" style="color: #a94442;">
-                            <?php echo $error_message; ?>
-                        </div>
-                    <?php endif; ?>
                     <div class="form-group">
                         <input type="email" name="email" class="form-control" placeholder="Enter your email" required value="<?php echo htmlspecialchars($email); ?>">
                     </div>
@@ -312,24 +308,23 @@ $email = '';
             </div>
         </div>
     </div> 
-    <?php if (!empty($success_message)): ?>
-        <!-- Success Modal structure -->
-        <div id="success-modal" class="modal" style="display: block;">
-            <div class="modal-content">
-                <span class="modal-title">Success</span>
-                <p><?php echo $success_message; ?></p>
-                <button id="success-ok-button" class="btn-ok">OK</button>
-            </div>
-        </div>  
-        <!-- Add the script to handle redirection -->
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                document.getElementById("success-ok-button").addEventListener("click", function() {
+
+    <!-- SweetAlert JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            <?php if (!empty($error_message)): ?>
+                swal("Error!", "<?php echo addslashes($error_message); ?>", "error");
+            <?php endif; ?>
+
+            <?php if (!empty($success_message)): ?>
+                swal("Success!", "<?php echo addslashes($success_message); ?>", "success").then(() => {
                     window.location.href = '../admin/email_link_form';
                 });
-            });
-        </script>
-    <?php endif; ?>
+            <?php endif; ?>
+        });
+    </script>
 </body>
 </html>
 <?php
