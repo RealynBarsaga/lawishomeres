@@ -112,15 +112,21 @@ html, body {
                                                             </button>
                                                       </td>
                                                   </tr>';
-                                                  include "delete_modal.php";
                                               }
                                             ?>
                                         </tbody>
                                     </table>
+                                    <?php include "delete_modal.php"; ?>
+                                    <?php include "../deleteModal.php"; ?>
                                     </form>
                                 </div><!-- /.box-body -->
                             </div><!-- /.box -->
-                            <?php include "function.php"; ?>
+                            <?php include "../edit_notif.php"; ?>
+                    <?php include "../added_notif.php"; ?>
+                    <?php include "../delete_notif.php"; ?>
+                    <?php include "../duplicate_error.php"; ?>
+                    <?php include "add_modal.php"; ?>
+                    <?php include "function.php"; ?>
                     </div>   <!-- /.row -->
                 </section><!-- /.content -->
             </aside><!-- /.right-side -->
