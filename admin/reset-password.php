@@ -72,6 +72,7 @@ if (isset($_GET['code'])) {
     <link rel="icon" type="x-icon" href="../img/lg.png">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 </head>
 <style>
     @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
@@ -114,124 +115,206 @@ if (isset($_GET['code'])) {
         width: 100%;
         border-radius: 5px;
         padding: 10px;
-        font-size: 16px;
+        font-size: 16 ```php
+px;
         cursor: pointer;
+    }
+
+    .btns:hover {
+        border: none;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    .form-group {
+        margin-bottom: 0.5rem;
+    }
+
+    .input-group {
+        position: relative;
+    }
+
+    .input-group .form-control {
+        padding-right: 40px; /* Add padding to the right for the input */
+    }
+
+    .input-group .input-group-text {
+        position: absolute; /* Position the eye icon absolutely */
+        right: 10px; /* Adjust the right position */
+        top: 50%; /* Center vertically */
+        transform: translateY(-50%); /* Adjust for centering */
+        background-color: transparent; /* Make background transparent */
+        border: none; /* Remove border */
+        cursor: pointer; /* Change cursor to pointer */
+    }
+
+    .input-group-text i {
+        opacity: 0.5; /* Set initial opacity */
+        transition: opacity 0.3s; /* Smooth transition */
+    }
+
+    .input-group-text:hover i {
+        opacity: 1; /* Increase opacity on hover */
     }
 
     .password-checklist {
         margin-top: 10px;
+        display: none; /* Initially hidden */
     }
 
-    .symbol {
-        font-size: 20px;
+    .password-checklist div {
+        margin: 5px 0;
     }
 
-    .modal {
-        position: fixed top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        display: none;
-        justify-content: center;
-        align-items: center;
+    .valid {
+        color: green;
     }
 
-    .modal-content {
-        background: #fff;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    .invalid {
+        color: red;
+    }
+
+    /* Media Queries for responsiveness */
+    @media (max-width: 767px) {
+        .container {
+            padding: 10px;
+        }
     }
 </style>
 <body>
     <div class="container">
-        <div class="form">
-            <h2>Password Reset</h2>
-            <?php if ($error_message): ?>
-                <div class="alert alert-danger"><?php echo $error_message; ?></div>
-            <?php endif; ?>
-            <?php if ($success_message): ?>
-                <div class="alert alert-success"><?php echo $success_message; ?></div>
-            <?php endif; ?>
-            <form method="POST" action="">
+        <div class="row">
+            <div class="col-md-4 offset-md-4 form">
+                <h2 class="text-center" style="font-size:25px;">Reset Your Password</h2>
+                <br>
+                <form action="" method="POST" autocomplete="off">
                 <div class="form-group">
                     <label for="new_password">New Password</label>
-                    <input type="password" id="new_password" name="new_password" class="form-control" placeholder="Enter your new password" oninput="validatePassword()" required>
+                    <div class="input-group">
+                        <div class="input-group-append">
+                        <input type="password" name="new_password" id="new_password" class="form-control" placeholder="•••••••••••" required oninput="checkPassword()" style="width: 388px;">
+                            <span class="input-group-text" onclick="togglePassword('new_password', this)" style="cursor: pointer; background-color: transparent; border: none;">
+                                <i class="fa fa-eye"></i>
+                            </span>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="con_password">Confirm Password</label>
-                    <input type="password" id="con_password" name="con_password" class="form-control" placeholder="Confirm your new password" required>
+                    <div class="input-group">
+                        <div class="input-group-append">
+                        <input type="password" name="con_password" id="con_password" class="form-control" placeholder="•••••••••••" required style="width: 388px;">
+                            <span class="input-group-text" onclick="togglePassword('con_password', this)" style="cursor: pointer; background-color: transparent; border: none;">
+                                <i class="fa fa-eye"></i>
+                            </span>
+                        </div>
+                    </div>
                 </div>
-                <div class="password-checklist">
+                <div class="password-checklist" style="display: none;">
                     <h5>Password Requirements:</h5>
-                    <ul>
-                        <li id="length" class="invalid">At least 10 characters <span class="symbol" id="length-symbol">❌</span></li>
-                        <li id="uppercase" class="invalid">At least one uppercase letter <span class="symbol" id="uppercase-symbol">❌</span></li>
-                        <li id="number" class="invalid">At least one number <span class="symbol" id="number-symbol">❌</span></li>
-                        <li id="special" class="invalid">At least one special character (!@#$%^&*) <span class="symbol" id="special-symbol">❌</span></li>
-                    </ul>
+                    <div id="length" class="invalid" style="display: none;">❌ At least 10 characters</div>
+                    <div id="uppercase" class="invalid" style="display: none;">❌ At least one uppercase letter</div>
+                    <div id="number" class="invalid" style="display: none;">❌ At least one number</div>
+                    <div id="special" class="invalid" style="display: none;">❌ At least one special character (!@#$%^&*)</div>
                 </div>
-                <button type="submit" name="change" class="btns">Change Password</button>
-            </form>
+                    <button type="submit" name="change" class="btns">Reset Password</button>
+                </form>
+            </div>
         </div>
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        function validatePassword() {
+        document.addEventListener("DOMContentLoaded", function() {
+            <?php if (!empty($success_message)): ?>
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: '<?php echo $success_message; ?>',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = '../admin/login.php';
+                    }
+                });
+            <?php endif; ?>
+
+            <?php if (!empty($error_message)): ?>
+                Swal.fire({
+                    icon: 'error',
+                    title : 'Error',
+                    text: '<?php echo $error_message; ?>',
+                    confirmButtonText: 'OK'
+                });
+            <?php endif; ?>
+        });
+
+        function togglePassword(inputId, icon) {
+            const input = document.getElementById(inputId);
+            const iconElement = icon.querySelector('i');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                iconElement.classList.remove('fa-eye');
+                iconElement.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                iconElement.classList.remove('fa-eye-slash');
+                iconElement.classList.add('fa-eye');
+            }
+        }
+
+        function checkPassword() {
             const password = document.getElementById('new_password').value;
+            const checklist = document.getElementById('password-checklist');
             const lengthCheck = document.getElementById('length');
             const uppercaseCheck = document.getElementById('uppercase');
             const numberCheck = document.getElementById('number');
             const specialCheck = document.getElementById('special');
 
-            const lengthSymbol = document.getElementById('length-symbol');
-            const uppercaseSymbol = document.getElementById('uppercase-symbol');
-            const numberSymbol = document.getElementById('number-symbol');
-            const specialSymbol = document.getElementById('special-symbol');
+            checklist.style.display = 'block';
 
             // Check length
             if (password.length >= 10) {
                 lengthCheck.classList.remove('invalid');
                 lengthCheck.classList.add('valid');
-                lengthSymbol.textContent = '✔️';
+                lengthCheck.textContent = '✔️ At least 10 characters';
             } else {
                 lengthCheck.classList.remove('valid');
                 lengthCheck.classList.add('invalid');
-                lengthSymbol.textContent = '❌';
+                lengthCheck.textContent = '❌ At least 10 characters';
             }
 
-            // Check for uppercase letter
+            // Check uppercase
             if (/[A-Z]/.test(password)) {
                 uppercaseCheck.classList.remove('invalid');
                 uppercaseCheck.classList.add('valid');
-                uppercaseSymbol.textContent = '✔️';
+                uppercaseCheck.textContent = '✔️ At least one uppercase letter';
             } else {
                 uppercaseCheck.classList.remove('valid');
                 uppercaseCheck.classList.add('invalid');
-                uppercaseSymbol.textContent = '❌';
+                uppercaseCheck.textContent = '❌ At least one uppercase letter';
             }
 
-            // Check for number
+            // Check number
             if (/\d/.test(password)) {
                 numberCheck.classList.remove('invalid');
                 numberCheck.classList.add('valid');
-                numberSymbol.textContent = '✔️';
+                numberCheck.textContent = '✔️ At least one number';
             } else {
                 numberCheck.classList.remove('valid');
                 numberCheck.classList.add('invalid');
-                numberSymbol.textContent = '❌';
+                numberCheck.textContent = '❌ At least one number';
             }
 
-            // Check for special character
+            // Check special character
             if (/[!@#$%^&*]/.test(password)) {
                 specialCheck.classList.remove('invalid');
                 specialCheck.classList.add('valid');
-                specialSymbol.textContent = '✔️';
+                specialCheck.textContent = '✔️ At least one special character (!@#$%^&*)';
             } else {
                 specialCheck.classList.remove('valid');
                 specialCheck.classList.add('invalid');
-                specialSymbol.textContent = '❌';
+                specialCheck.textContent = '❌ At least one special character (!@#$%^&*)';
             }
         }
     </script>
