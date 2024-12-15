@@ -191,22 +191,22 @@ background: #fff;
     }
 }
 .password-checklist {
-            margin-top: 10px;
-            display: none; /* Initially hidden */
-            font-size: 13px;
-        }
-
-        .password-checklist div {
-            margin: 5px 0;
-        }
-
-        .valid {
-            color: green;
-        }
-
-        .invalid {
-            color: red;
-        }
+    margin-top: 10px; /* Space above the checklist */
+    display: none; /* Initially hidden */
+    font-size: 13px;
+    float: left; /* Float the checklist to the left */
+    width: 100%; /* Ensure it takes the full width of the container */
+    text-align: left; /* Align text to the left */
+}
+.password-checklist div {
+    margin: 5px 0;
+}
+.valid {
+    color: green;
+}
+.invalid {
+    color: red;
+}
 </style>
 </head>
 <body>
@@ -214,7 +214,7 @@ background: #fff;
         <h2 style="font-size: 22px;font-weight: bold;">Reset Your Password</h2>
         <form action="" method="POST" autocomplete="off">
             <div class="form-group">
-                <label for="new_password" style="float: left;">New Password</label>
+                <label for="new_password">New Password</label>
                 <div class="input-group">
                     <input type="password" name="new_password" id="new_password" class="form-control" placeholder="•••••••••••" required oninput="checkPassword()">
                     <span class="input-group-text" onclick="togglePassword('new_password', this)" style="cursor: pointer; background-color: transparent; border: none;">
@@ -230,7 +230,7 @@ background: #fff;
                 <div id="special" class="invalid" style="display: none;">❌ At least one special character (!@#$%^&*)</div>
             </div>
             <div class="form-group">
-                <label for="confirm_password" style="float: left;">Confirm Password</label>
+                <label for="confirm_password">Confirm Password</label>
                 <div class="input-group">
                     <input type="password" name="confirm_password" id="confirm_password" class="form-control" placeholder="•••••••••••" required pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{10,}$" title="Password must be at least 10 characters long, contain at least one uppercase letter, one number, and one special character.">
                     <span class="input-group-text" onclick="togglePassword('confirm_password', this)" style="cursor: pointer; background-color: transparent; border: none;">
@@ -270,67 +270,68 @@ background: #fff;
         }
 
         function checkPassword() {
-            const password = document.getElementById('new_password').value;
-            const checklist = document.getElementById('password-checklist');
-            const lengthCheck = document.getElementById('length');
-            const uppercaseCheck = document.getElementById('uppercase');
-            const numberCheck = document.getElementById('number');
-            const specialCheck = document.getElementById('special');
+        const passwordInput = document.getElementById('new_password');
+        const lengthRequirement = document.getElementById('length');
+        const uppercaseRequirement = document.getElementById('uppercase');
+        const numberRequirement = document.getElementById('number');
+        const specialRequirement = document.getElementById('special');
 
-            checklist.style.display = 'block';
+        passwordInput.addEventListener('input', function() {
+            const password = passwordInput.value;
 
             // Check length
             if (password.length >= 10) {
-                lengthCheck.classList.remove('invalid');
-                lengthCheck.classList.add('valid');
-                lengthCheck.textContent = '✔️ At least 10 characters';
-                lengthCheck.style.display = 'block';
+                lengthRequirement.classList.remove('invalid');
+                lengthRequirement.classList.add('valid');
+                lengthRequirement.style.display = 'block';
+                lengthRequirement.textContent = '✔️ At least 10 characters';
             } else {
-                lengthCheck.classList.remove('valid');
-                lengthCheck.classList.add('invalid');
-                lengthCheck.textContent = '❌ At least 10 characters';
-                lengthCheck.style.display = 'block';
+                lengthRequirement.classList.remove('valid');
+                lengthRequirement.classList.add('invalid');
+                lengthRequirement.style.display = 'block';
+                lengthRequirement.textContent = '❌ At least 10 characters';
             }
 
             // Check uppercase
             if (/[A-Z]/.test(password)) {
-                uppercaseCheck.classList.remove('invalid');
-                uppercaseCheck.classList.add('valid');
-                uppercaseCheck.textContent = '✔️ At least one uppercase letter';
-                uppercaseCheck.style.display = 'block';
+                uppercaseRequirement.classList.remove('invalid');
+                uppercaseRequirement.classList.add('valid');
+                uppercaseRequirement.style.display = 'block';
+                uppercaseRequirement.textContent = '✔️ At least one uppercase letter';
             } else {
-                uppercaseCheck.classList.remove('valid');
-                uppercaseCheck.classList.add('invalid');
-                uppercaseCheck.textContent = '❌ At least one uppercase letter';
-                uppercaseCheck.style.display = 'block';
+                uppercaseRequirement.classList.remove('valid');
+                uppercaseRequirement.classList.add('invalid');
+                uppercaseRequirement.style.display = 'block';
+                uppercaseRequirement.textContent = '❌ At least one uppercase letter';
             }
 
             // Check number
             if (/\d/.test(password)) {
-                numberCheck.classList.remove('invalid');
-                numberCheck.classList.add('valid');
-                numberCheck.textContent = '✔️ At least one number';
-                numberCheck.style.display = 'block';
+                numberRequirement.classList.remove('invalid');
+                numberRequirement.classList.add('valid');
+                numberRequirement.style.display = 'block';
+                numberRequirement.textContent = '✔️ At least one number';
             } else {
-                numberCheck.classList.remove('valid');
-                numberCheck.classList.add('invalid');
-                numberCheck.textContent = '❌ At least one number';
-                numberCheck.style.display = 'block';
+                numberRequirement.classList.remove('valid');
+                numberRequirement.classList.add('invalid');
+                numberRequirement.style.display = 'block';
+                numberRequirement.textContent = '❌ At least one number';
             }
 
             // Check special character
             if (/[!@#$%^&*]/.test(password)) {
-                specialCheck.classList.remove('invalid');
-                specialCheck.classList.add('valid');
-                specialCheck.textContent = '✔️ At least one special character (!@#$%^&*)';
-                specialCheck.style.display = 'block';
+                specialRequirement.classList.remove('invalid');
+                specialRequirement.classList.add('valid');
+                specialRequirement.style.display = 'block';
+                specialRequirement.textContent = '✔️ At least one special character (!@#$%^&*)';
             } else {
-                specialCheck.classList.remove('valid');
-                specialCheck.classList.add('invalid');
-                specialCheck.textContent = '❌ At least one special character (!@#$%^&*)';
-                specialCheck.style.display = 'block';
+                specialRequirement.classList.remove('valid');
+                specialRequirement.classList.add('invalid');
+                specialRequirement.style.display = 'block';
+                specialRequirement.textContent = '❌ At least one special character (!@#$%^&*)';
             }
-        }
+        });
+    }
     </script>
 </body>
 </html>
