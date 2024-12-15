@@ -286,15 +286,16 @@ h2 {
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            <?php if (!empty($error_message)): ?>
-                swal("Error", "<?php echo $error_message; ?>", "error");
-            <?php elseif (!empty($success_message)): ?>
-                swal("Success", "<?php echo $success_message; ?>", "success").then(() => {
-                    window.location.href = '../admin/reset_password_otp';
-                });
-            <?php endif; ?>
-        });
-    </script>
+    document.addEventListener("DOMContentLoaded", function() {
+        <?php if (!empty($error_message)): ?>
+            swal("Error", "<?php echo $error_message; ?>", "error");
+        <?php elseif (!empty($success_message)): ?>
+            swal("Success", "<?php echo $success_message; ?>", "success").then(() => {
+                console.log("Redirecting to reset password page..."); // Debugging line
+                window.location.href = '../admin/reset_password_otp';
+            });
+        <?php endif; ?>
+    });
+</script>
 </body>
 </html>
