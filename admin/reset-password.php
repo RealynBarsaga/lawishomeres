@@ -199,6 +199,13 @@ px;
                         </div>
                     </div>
                 </div>
+                <div class="password-checklist" style="display: none;">
+                    <h5>Password Requirements:</h5>
+                    <div id="length" class="invalid" style="display: none;">❌ At least 10 characters</div>
+                    <div id="uppercase" class="invalid" style="display: none;">❌ At least one uppercase letter</div>
+                    <div id="number" class="invalid" style="display: none;">❌ At least one number</div>
+                    <div id="special" class="invalid" style="display: none;">❌ At least one special character (!@#$%^&*)</div>
+                </div>
                 <div class="form-group">
                     <label for="con_password">Confirm Password</label>
                     <div class="input-group">
@@ -209,13 +216,6 @@ px;
                             </span>
                         </div>
                     </div>
-                </div>
-                <div class="password-checklist" style="display: none;">
-                    <h5>Password Requirements:</h5>
-                    <div id="length" class="invalid" style="display: none;">❌ At least 10 characters</div>
-                    <div id="uppercase" class="invalid" style="display: none;">❌ At least one uppercase letter</div>
-                    <div id="number" class="invalid" style="display: none;">❌ At least one number</div>
-                    <div id="special" class="invalid" style="display: none;">❌ At least one special character (!@#$%^&*)</div>
                 </div>
                     <button type="submit" name="change" class="btns">Reset Password</button>
                 </form>
