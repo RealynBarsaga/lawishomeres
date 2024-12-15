@@ -39,38 +39,34 @@ if (isset($_POST['verify_otp'])) {
         // Setting the default timezone
         date_default_timezone_set("Asia/Manila");
 
-        if ($con->connect_error) {
-            $error_message = 'Database connection failed: ' . $con->connect_error;
-        } else {
-            // Query to check if the OTP exists and is valid
-            $stmt = $con->prepare("SELECT otp, otp_expiry FROM tbluser WHERE email = ?");
-            $stmt->bind_param("s", $email);
-            $stmt->execute();
-            $stmt->store_result();
+        // Query to check if the OTP exists and is valid
+        $stmt = $con->prepare("SELECT otp, otp_expiry FROM tbluser WHERE email = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $stmt->store_result();
 
-            if ($stmt->num_rows > 0) {
-                $stmt->bind_result($otp, $otp_expiry);
-                $stmt->fetch();
+        if ($stmt->num_rows > 0) {
+            $stmt->bind_result($otp, $otp_expiry);
+            $stmt->fetch();
 
-                // Check if the OTP matches and is not expired
-                if (trim((string)$otp) === trim((string)$entered_otp)) {
-                    $current_time = date('Y-m-d H:i:s');
-                    if ($current_time <= $otp_expiry) {
-                        $_SESSION['email_for_reset'] = $email; // Store email in session for password reset
-                        $success_message = 'OTP is valid and not expired, you may now reset your password.';
-                    } else {
-                        $error_message = 'The OTP has expired. Please request a new OTP.';
-                    }
+            // Check if the OTP matches and is not expired
+            if (trim((string)$otp) === trim((string)$entered_otp)) {
+                $current_time = date('Y-m-d H:i:s');
+                if ($current_time <= $otp_expiry) {
+                    $_SESSION['email_for_reset'] = $email; // Store email in session for password reset
+                    $success_message = 'OTP is valid and not expired, you may now reset your password.';
                 } else {
-                    $error_message = 'Invalid OTP entered. Please try again.';
+                    $error_message = 'The OTP has expired. Please request a new OTP.';
                 }
             } else {
-                $error_message = 'Email not found. Please check your email.';
+                $error_message = 'Invalid OTP entered. Please try again.';
             }
-
-            $stmt->close();
-            $con->close();
+        } else {
+            $error_message = 'Email not found. Please check your email.';
         }
+
+        $stmt->close();
+        $con->close();
     }
 }
 ?>
@@ -86,7 +82,53 @@ if (isset($_POST['verify_otp'])) {
     <!-- SweetAlert JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
     <style>
-        /* Your existing styles here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            border-radius: 5 px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #4cae4c;
+        }
+        .back-link {
+            text-align: center;
+            margin-top: 15px;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            .btn {
+                padding: 8px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -97,7 +139,8 @@ if (isset($_POST['verify_otp'])) {
         <form method="POST" action="">
             <div class="form-group">
                 <input type="text" name="otp" class="form-control" placeholder="Enter OTP" required>
-            </div <div class="form-group">
+            </div>
+            <div class="form-group">
                 <button type="submit" name="verify_otp" class="btn">Verify OTP</button>
             </div>
         </form>
