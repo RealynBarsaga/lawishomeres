@@ -192,7 +192,6 @@ background: #fff;
 }
 .password-checklist {
     text-align: left;
-    display: none; /* Initially hidden */
     margin-top: 10px;
 }
 .invalid {
