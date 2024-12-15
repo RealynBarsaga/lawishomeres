@@ -80,94 +80,117 @@ if (isset($_POST['reset_password'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
 
-        html, body {
-            background-image: url('../img/received_1185064586170879.jpeg');
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            height: 100vh;
-            margin: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: Arial, sans-serif;
-            transition: all 0.3s ease-in-out;
-        }
+html, body {
+    background-image: url('../img/received_1185064586170879.jpeg');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    transition: all 0.3s ease-in-out;
+}
 
-        .container {
-            padding: 40px;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            max-width: 500px width: 100%;
-            box-sizing: border-box;
-        }
+.container {
+    padding: 40px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 500px;
+    width: 100%;
+    box-sizing: border-box;
+}
 
-        .form {
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
+.form {
+background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 
-        .btns {
-            background-image: url('../img/bg.jpg');
-            border: none;
-            color: #fff;
-            width: 100%;
-            border-radius: 5px;
-            padding: 10px;
-            font-size: 16px;
-            cursor: pointer;
-        }
+.btns {
+    background-image: url('../img/bg.jpg');
+    border: none;
+    color: #fff;
+    width: 100%;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
 
-        .btns:hover {
-            border: none;
-            color: #fff;
-            cursor: pointer;
-        }
+.btns:hover {
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}
 
-        .form-group {
-            margin-bottom: 0.5rem;
-        }
+.form-group {
+    margin-bottom: 0.5rem;
+}
 
-        .input-group {
-            position: relative;
-        }
-        
-        .input-group .form-control {
-            padding-right: 40px; /* Space for the icon */
-        }
-        
-        .input-group .input-group-text {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-            z-index: 10; /* Ensure the icon is on top */
-        }
-        
-        .input-group-text i {
-            opacity: 0.5;
-            transition: opacity 0.3s;
-        }
-        
-        .input-group-text:hover i {
-            opacity: 1;
-        }
+.input-group {
+    position: relative;
+}
 
-        .password-checklist {
+.input-group .form-control {
+    padding-right: 40px; /* Space for the icon */
+}
+
+.input-group .input-group-text {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 10; /* Ensure the icon is on top */
+}
+
+.input-group-text i {
+    opacity: 0.5;
+    transition: opacity 0.3s;
+}
+
+.input-group-text:hover i {
+    opacity: 1;
+}
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .form {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .btns {
+        font-size: 14px;
+    }
+
+    .input-group .form-control {
+        width: 100%;
+    }
+
+    .input-group-text {
+        padding: 0;
+    }
+}
+.password-checklist {
             text-align: left;
             margin-top: 10px;
         }
@@ -194,7 +217,7 @@ if (isset($_POST['reset_password'])) {
                     </span>
                 </div>
             </div>
-            <div class="password-checklist" id="password-checklist">
+             <div class="password-checklist" id="password-checklist">
                 <h5>Password Requirements:</h5>
                 <div id="length" class="invalid" style="display: none;">❌ At least 10 characters</div>
                 <div id="uppercase" class="invalid" style="display: none;">❌ At least one uppercase letter</div>
