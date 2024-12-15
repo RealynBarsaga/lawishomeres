@@ -96,7 +96,8 @@ if (isset($_POST['verify_otp'])) {
         <form method="POST" action="">
             <div class="form-group">
                 <input type="text" name="otp" class="form-control" placeholder="Enter OTP" required>
-            </div <div class="form-group">
+            </div>
+             <div class="form-group">
                 <button type="submit" name="verify_otp" class="btn">Verify OTP</button>
             </div>
         </form>
