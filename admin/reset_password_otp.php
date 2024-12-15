@@ -108,12 +108,12 @@ if (isset($_POST['reset_password'])) {
             left: 50%;
             transform: translate(-50%, -50%);
             max-width: 500px;
-            width: 100%;
+            width: 100 %;
             box-sizing: border-box;
         }
 
         .form {
- background: #fff;
+            background: #fff;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -167,6 +167,7 @@ if (isset($_POST['reset_password'])) {
         .input-group-text:hover i {
             opacity: 1;
         }
+        
         /* Media Queries for Responsiveness */
         @media (max-width: 768px) {
             .container {
@@ -190,10 +191,13 @@ if (isset($_POST['reset_password'])) {
                 padding: 0;
             }
         }
+
         .password-checklist {
             margin-top: 10px;
             display: none; /* Initially hidden */
             font-size: 13px;
+            text-align: left; /* Align text to the left */
+            padding-left: 15px; /* Optional: Add padding to the left */
         }
 
         .password-checklist div {
@@ -223,11 +227,11 @@ if (isset($_POST['reset_password'])) {
                 </div>
             </div>
             <div class="password-checklist" id="password-checklist">
-                <h5>Password Requirements:</h5>
-                <div id="length" class="invalid" style="display: none;">❌ At least 10 characters</div>
-                <div id="uppercase" class="invalid" style="display: none;">❌ At least one uppercase letter</div>
-                <div id="number" class="invalid" style="display: none;">❌ At least one number</div>
-                <div id="special" class="invalid" style="display: none;">❌ At least one special character (!@#$%^&*)</div>
+                <h5 style="float: left;">Password Requirements:</h5>
+                <div id="length" class="invalid" style="display: none;float: left;">❌ At least 10 characters</div>
+                <div id="uppercase" class="invalid" style="display: none;float: left;">❌ At least one uppercase letter</div>
+                <div id="number" class="invalid" style="display: none;float: left;">❌ At least one number</div>
+                <div id="special" class="invalid" style="display: none;float: left;">❌ At least one special character (!@#$%^&*)</div>
             </div>
             <div class="form-group">
                 <label for="confirm_password" style="float: left;">Confirm Password</label>
@@ -256,7 +260,7 @@ if (isset($_POST['reset_password'])) {
 
         function togglePassword(inputId, icon) {
             const input = document.getElementById(inputId);
-            const iconElement = icon.querySelector(' i');
+            const iconElement = icon.querySelector('i');
             
             if (input.type === 'password') {
                 input.type = 'text';
