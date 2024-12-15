@@ -207,7 +207,6 @@ if (isset($_POST['reset_password'])) {
         .invalid {
             color: red;
         }
-
     </style>
 </head>
 <body>
