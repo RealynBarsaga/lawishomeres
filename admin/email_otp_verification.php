@@ -56,6 +56,7 @@ if (isset($_POST['verify_otp'])) {
                 if (trim((string)$otp) === trim((string)$entered_otp)) {
                     $current_time = date('Y-m-d H:i:s');
                     if ($current_time <= $otp_expiry) {
+                        $_SESSION['email_for_reset'] = $email; // Store email in session for password reset
                         $success_message = 'OTP is valid and not expired, you may now reset your password.';
                     } else {
                         $error_message = 'The OTP has expired. Please request a new OTP.';
@@ -80,191 +81,184 @@ if (isset($_POST['verify_otp'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Madridejos Household Management System</title>
     <link rel="icon" type="x-icon" href="../img/lg.png">
-    <!-- SweetAlert CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
-    <!-- SweetAlert JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+
+    <!-- Include SweetAlert Library -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <style>
-/* General Reset and Styling */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+        /* General Reset and Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-html, body {
-    height: 100%;
-    font-family: 'Poppins', sans-serif;
-    background-image: url('../img/received_1185064586170879.jpeg');
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+        html, body {
+            height: 100%;
+            font-family: 'Poppins', sans-serif;
+            background-image: url('../img/received_1185064586170879.jpeg');
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-.container {
-    padding: 40px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    max-width: 140%; /* Make it responsive */
-    width: 400px; /* Set a max width */
-    box-sizing: border-box;
-}
+        .container {
+            padding: 40px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 500px;
+            width: 100%;
+            box-sizing: border-box;
+        }
 
-h2 {
-    color: #333;
-    margin-bottom: 20px;
-    font-size: 24px;
-}
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
 
-.form-group {
-    margin-bottom: 20px;
-}
+        .form-group {
+            margin-bottom: 20px;
+        }
 
-.form-control {
-    width: 100%;
-    padding: 12px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    box-sizing: border-box;
-}
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            box-sizing: border-box;
+        }
 
-.btn {
-    width: 100%;
-    padding: 12px;
-    background-image: url('../img/bg.jpg');
-    border: none;
-    color: #fff;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-}
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background-image: url('../img/bg.jpg');
+            border: none;
+            color: #fff;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
 
-.btn:hover {
-    background-color: #0056b3;
-}
+        .btn:hover {
+            background-color: #0056b3;
+        }
 
-.error {
-    color: red;
-    margin-bottom: 10px;
-}
+        .back-link {
+            text-align: center;
+            margin-top: -17px;
+        }
 
-.success {
-    color: green;
-    margin-bottom: 10px;
-}
+        .back-link a {
+            display: inline-block;
+            padding: 12px 20px;
+            background-color: #f0f2f5;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+            width: 100%;
+            max-width: 500px;
+            margin: 10px auto;
+            cursor: pointer;
+            text-align: center;
+        }
 
-.back-link {
-    text-align: center;
-    margin-top: -17px;
-}
+        .back-link a:hover {
+            background-color: #e1e4e8;
+        }
 
-.back-link a {
-    display: inline-block;
-    padding: 12px 20px;
-    background-color: #f0f2f5;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    text-decoration: none;
-    color: #333;
-    font-size: 16px;
-    width: 100%;
-    max-width: 400px; /* Set a max width */
-    margin: 10px auto;
-    cursor: pointer;
-    text-align: center;
-}
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px;
+                width: 100%;
+            }
 
-.back-link a:hover {
-    background-color: #e1e4e8;
-}
+            h2 {
+                font-size: 22px;
+            }
 
-/* Media Queries for Responsiveness */
-@media (max-width: 768px) {
-    .container {
-        padding: 30px;
-        width: 90%; /* Make it more fluid */
-    }
+            .form-control {
+                font-size: 14px;
+                padding: 10px;
+            }
 
-    h2 {
-        font-size: 22px;
-    }
+            .btn {
+                font-size: 14px;
+                padding: 10px;
+            }
 
-    .form-control {
-        font-size: 14px;
-        padding: 10px;
-    }
+            .back-link a {
+                font-size: 14px;
+            }
+        }
 
-    .btn {
-        font-size: 14px;
-        padding: 10px;
-    }
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
 
-    .back-link a {
-        font-size: 14px;
-    }
-}
+            h2 {
+                font-size: 20px;
+            }
 
-@media (max-width: 480px) {
-    .container {
-        padding: 20px;
-    }
+            .form-control {
+                font-size: 14px;
+                padding: 8px;
+            }
 
-    h2 {
-        font-size: 20px;
-    }
+            .btn {
+                font-size: 14px;
+                padding: 10px;
+            }
 
-    .form-control {
-        font-size: 14px;
-        padding: 8px;
-    }
+            .back-link a {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+        }
 
-    .btn {
-        font-size: 14px;
-        padding: 10px;
-    }
+        @media (max-width: 320px) {
+            .container {
+                padding: 15px;
+            }
 
-    .back-link a {
-        font-size: 14px;
-        padding: 8px 16px;
-    }
-}
+            h2 {
+                font-size: 18px;
+            }
 
-@media (max-width: 320px) {
-    .container {
-        padding: 15px;
-    }
+            .form-control {
+                font-size: 14px;
+                padding: 8px;
+            }
 
-    h2 {
-        font-size: 18px;
-    }
+            .btn {
+                font-size: 14px;
+                padding: 10px;
+            }
 
-    .form-control {
-        font-size: 14px;
-        padding: 8px;
-    }
-
-    .btn {
-        font-size: 14px;
-        padding: 10px;
-    }
-
-    .back-link a {
-        font-size: 14px;
-        padding: 8px 16px;
-    }
-}
+            .back-link a {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+        }
     </style>
 </head>
 <body>
-
     <div class="container">
         <h2>OTP Verification</h2>
 
@@ -284,32 +278,28 @@ h2 {
         </div>
     </div>
 
-    
+    <!-- Display SweetAlert Messages -->
+    <?php if (!empty($error_message)): ?>
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: '<?php echo $error_message; ?>',
+            });
+        </script>
+    <?php endif; ?>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            <?php if (!empty($success_message)): ?>
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Success',
-                    text: '<?php echo $success_message; ?>',
-                    confirmButtonText: 'OK'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = '../admin/reset_password_otp';
-                    }
-                });
-            <?php endif; ?>
-
-            <?php if (!empty($error_message )): ?>
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: '<?php echo $error_message; ?>',
-                    confirmButtonText: 'OK'
-                });
-            <?php endif; ?>
-        });
-</script>
+    <?php if (!empty($success_message)): ?>
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: '<?php echo $success_message; ?>',
+                confirmButtonText: 'OK'
+            }).then(() => {
+                window.location.href = '../admin/reset_password_otp';
+            });
+        </script>
+    <?php endif; ?>
 </body>
 </html>
