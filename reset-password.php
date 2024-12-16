@@ -75,190 +75,132 @@ if (isset($_GET['code'])) {
     <style>
         @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
 
-        html, body {
-            background-image: url('img/received_1185064586170879.jpeg');
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            height: 100vh;
-            margin: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: Arial, sans-serif;
-            transition: all 0.3s ease-in-out;
-        }
+html, body {
+    background-image: url('../img/received_1185064586170879.jpeg');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+}
 
-        .container {
-            padding: 40px;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            max-width: 500px;
-            width: 100%;
-            box-sizing: border-box;
-        }
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 400px;
+    width: 100%;
+    padding: 15px;
+}
 
-        .form {
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
+.container .form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,  0, 0, 0.2);
+}
 
-        .btns {
-            background-image: url('img/bg.jpg');
-            border: none;
-            color: #fff;
-            width: 100%;
-            border-radius: 5px;
-            padding: 10px;
-            font-size: 16px;
-            cursor: pointer;
-        }
+.btns {
+    background-image: url('../img/bg.jpg');
+    border: none;
+    color: #fff;
+    width: 100%;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
 
-        .btns:hover {
-            border: none;
-            color: #fff;
-            cursor: pointer;
-        }
+.btns:hover {
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}
 
-        .form-group {
-            margin-bottom: 0.5rem;
-        }
+.form-group {
+    margin-bottom: 0.5rem;
+}
 
-        .input-group {
-            position: relative;
-        }
-        
-        .input-group .form-control {
-            padding-right: 40px; /* Space for the icon */
-        }
-        
-        .input-group .input-group-text {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-            z-index: 10; /* Ensure the icon is on top */
-        }
-        
-        .input-group-text i {
-            opacity: 0.5;
-            transition: opacity 0.3s;
-        }
-        
-        .input-group-text:hover i {
-            opacity: 1;
-        }
-        /* Media Queries for Responsiveness */
-        @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
+.input-group {
+    position: relative;
+}
 
-            .form {
-                width: 100%;
-                padding: 15px;
-            }
+.input-group .form-control {
+    padding-right: 40px; /* Space for the icon */
+}
 
-            .btns {
-                font-size: 14px;
-            }
+.input-group .input-group-text {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 10; /* Ensure the icon is on top */
+}
 
-            .input-group .form-control {
-                width: 100%;
-            }
+.input-group-text i {
+    opacity: 0.5;
+    transition: opacity 0.3s;
+}
 
-            .input-group-text {
-                padding: 0;
-            }
-        }
+.input-group-text:hover i {
+    opacity: 1;
+}
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
 
- /* Success Modal Styles */
- .modal {
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+    .form {
+        width: 100%;
+        padding: 15px;
+    }
 
-        .modal-content {
-            background: linear-gradient(135deg, #d4edda, #f7f7f7);
-            padding: 30px;
-            border-radius: 15px;
-            text-align: center;
-            width: 419px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-            position: relative;
-            margin-left: 440px;
-            margin-top: 160px;
-            animation: modalFadeIn 0.5s ease;
-        }
+    .btns {
+        font-size: 14px;
+    }
 
-        @keyframes modalFadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
+    .input-group .form-control {
+        width: 100%;
+    }
 
-        .modal-title {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #28a745;
-        }
+    .input-group-text {
+        padding: 0;
+    }
+}
+.password-checklist {
+    margin-top: 10px;
+    display: none; /* Initially hidden */
+    font-size: 11px;
+}
 
-        .modal-content .btn-ok {
-            background-color: #5cb85c;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 25px;
-            cursor: pointer;
-            margin: auto;
-            width: 100px;
-            font-size: 16px;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
+.password-checklist div {
+    margin: 5px 0;
+}
 
-        .modal-content .btn-ok:hover {
-            background-color: #4cae4c;
-            transform: scale(1.05);
-        }
+.valid {
+    color: green;
+}
 
-        .modal p {
-            margin-bottom: 25px;
-            font-size: 16px;
-        }
+.invalid {
+    color: red;
+}
 
-        .modal-content::after {
-            content: "Powered by Madridejos HRMS";
-            display: block;
-            font-size: 12px;
-            color: #aaa;
-            margin-top: 20px;
-        }
+/* Media Queries for responsiveness */
+@media (max-width: 767px) {
+    .container {
+        padding: 10px;
+    }
+}
     </style>
 </head>
 <body>
