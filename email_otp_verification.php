@@ -87,8 +87,8 @@ if ($error_message) {
     <!-- Include SweetAlert Library -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
-         /* General Reset and Styling */
-         * {
+        /* General Reset and Styling */
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -97,7 +97,7 @@ if ($error_message) {
         html, body {
             height: 100%;
             font-family: 'Poppins', sans-serif;
-            background-image: url('../img/received_1185064586170879.jpeg');
+            background-image: url('img/received_1185064586170879.jpeg');
             background-attachment: fixed;
             background-position: center;
             background-repeat: no-repeat;
@@ -145,7 +145,7 @@ if ($error_message) {
         .btn {
             width: 100%;
             padding: 12px;
-            background-image: url('../img/bg.jpg');
+            background-image: url('img/bg.jpg');
             border: none;
             color: #fff;
             border-radius: 5px;
@@ -155,6 +155,16 @@ if ($error_message) {
 
         .btn:hover {
             background-color: #0056b3;
+        }
+
+        .error {
+            color: red;
+            margin-bottom: 10px;
+        }
+
+        .success {
+            color: green;
+            margin-bottom: 10px;
         }
 
         .back-link {
