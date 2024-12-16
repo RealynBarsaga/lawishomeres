@@ -205,33 +205,33 @@ html, body {
 </head>
 <body>
     <div class="container">
-    <h2 style="font-size: 22px;font-weight: bold;">Reset Your Password</h2>
-        <?php if (!empty($error_message)): ?>
-            <div class="alert alert-danger">
-                <?php echo $error_message; ?>
+        <div class="row">
+            <div class="col-md-12 form">
+                <h2 class="text-center" style="font-size:25px;">Reset Your Password</h2>
+                <br>
+                <form action="" method="POST" autocomplete="off">
+                    <div class="form-group">
+                        <label for="new_password" style="float: left;">New Password</label>
+                        <div class="input-group">
+                            <input type="password" name="new_password" id="new_password" class="form-control" placeholder="•••••••••••" required pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{10,}$" title="Password must be at least 10 characters long, contain at least one uppercase letter, one number, and one special character.">
+                            <span class="input-group-text" onclick="togglePassword('new_password', this)" style="cursor: pointer; background-color: transparent; border: none;">
+                                <i class="fa fa-eye"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="con_password" style="float: left;">Confirm Password</label>
+                        <div class="input-group">
+                            <input type="password" name="con_password" id="con_password" class="form-control" placeholder="•••••••••••" required pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{10,}$" title="Password must be at least 10 characters long, contain at least one uppercase letter, one number, and one special character.">
+                            <span class="input-group-text" onclick="togglePassword('con_password', this)" style="cursor: pointer; background-color: transparent; border: none;">
+                                <i class="fa fa-eye"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <button type="submit" name="change" class="btns">Reset Password</button>
+                </form>
             </div>
-        <?php endif; ?>
-        <form action="" method="POST" autocomplete="off">
-            <div class="form-group">
-                <label for="new_password" style="float: left;">New Password</label>
-                <div class="input-group">
-                    <input type="password" name="new_password" id="new_password" class="form-control" placeholder="•••••••••••" required pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{10,}$" title="Password must be at least 10 characters long, contain at least one uppercase letter, one number, and one special character.">
-                    <span class="input-group-text" onclick="togglePassword('new_password', this)" style="cursor: pointer; background-color: transparent; border: none;">
-                        <i class="fa fa-eye"></i>
-                    </span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="con_password" style="float: left;">Confirm Password</label>
-                <div class="input-group">
-                    <input type="password" name="con_password" id="con_password" class="form-control" placeholder="•••••••••••" required pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{10,}$" title="Password must be at least 10 characters long, contain at least one uppercase letter, one number, and one special character.">
-                    <span class="input-group-text" onclick="togglePassword('con_password', this)" style="cursor: pointer; background-color: transparent; border: none;">
-                        <i class="fa fa-eye"></i>
-                    </span>
-                </div>
-            </div>
-            <button type="submit" name="change" class="btns">Reset Password</button>
-        </form>
+        </div>
     </div>
 
     <?php if (!empty($success_message)): ?>
