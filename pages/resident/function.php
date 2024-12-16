@@ -109,6 +109,7 @@ if (isset($_POST['btn_save'])) {
     $lname = htmlspecialchars(strip_tags(trim($_POST['txt_edit_lname'])), ENT_QUOTES, 'UTF-8');
     $fname = htmlspecialchars(strip_tags(trim($_POST['txt_edit_fname'])), ENT_QUOTES, 'UTF-8');
     $mname = htmlspecialchars(strip_tags(trim($_POST['txt_edit_mname'])), ENT_QUOTES, 'UTF-8');
+    $exname = htmlspecialchars(strip_tags(trim($_POST['txt_edit_exname'])), ENT_QUOTES, 'UTF-8');
     $age = (int) $_POST['txt_edit_age']; // cast age to an integer
     $bdate = htmlspecialchars(strip_tags(trim($_POST['txt_edit_bdate'])), ENT_QUOTES, 'UTF-8');
     $barangay = htmlspecialchars(strip_tags(trim($_POST['txt_edit_brgy'])), ENT_QUOTES, 'UTF-8');
@@ -160,6 +161,7 @@ if (isset($_POST['btn_save'])) {
               lname = '$lname', 
               fname = '$fname', 
               mname = '$mname', 
+              exname = '$exname', 
               age = '$age',
               bdate = '$bdate', 
               barangay = '$barangay',
