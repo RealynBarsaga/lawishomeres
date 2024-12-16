@@ -28,7 +28,7 @@
                                     <div class="col-sm-4">
                                         <input name="txt_mname" class="form-control input-sm" type="text" placeholder="Middlename"
                                         pattern="^(?!\s)(?!.*<script>)(?!.*<\/script>).*[\w\s]*$" 
-                                        title="Spaces and <script></script> tags are not allowed." style="margin-left: -64px;width: 93px;"/>
+                                        title="Spaces and <script></script> tags are not allowed." style="margin-left: -62px;width: 93px;"/>
 
                                         <input name="txt_exname" class="form-control input-sm" type="text" placeholder="Extensionname"
                                         pattern="^(?!\s)(?!.*<script>)(?!.*<\/script>).*[\w\s]*$" 
