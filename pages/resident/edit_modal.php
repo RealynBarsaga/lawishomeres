@@ -33,10 +33,10 @@ echo '<div id="editModal'.$row['id'].'" class="modal fade" role="dialog">
                                 <input name="txt_edit_fname" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" value="'.$erow['fname'].'" style="margin-left: -39px;"/>
                             </div> 
                             <div class="col-sm-4">
-                                <input name="txt_edit_mname" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" value="'.$erow['mname'].'" style="margin-left: -62px;width: 93px;"/>
+                                <input name="txt_edit_mname" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" value="'.$erow['mname'].'" style="margin-left: -59px;width: 93px;"/>
                                
                                 <div class="col-sm-4">
-                                    <input name="txt_edit_exname" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" value="'.$erow['exname'].'" style="width: 76px;margin-left: 38px;margin-top: -29px;"/>
+                                    <input name="txt_edit_exname" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" value="'.$erow['exname'].'" style="width: 76px;margin-left: 28px;margin-top: -29px;"/>
                                 </div>
                             </div>
                         </div>
