@@ -11,6 +11,8 @@ $email = '';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Madridejos Household Management System</title>
     <link rel="icon" type="x-icon" href="img/lg.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
         html, body {
@@ -213,11 +215,6 @@ $email = '';
                     <p class="res">Reset via Email OTP</p>
                     <p class="text-center">Enter the email associated with your account and we will send you a code to reset your password.</p>
                     <br>
-                    <?php if (!empty($error_message)): ?>
-                        <div class="alert alert-danger" style="color: #a94442;">
-                            <?php echo $error_message; ?>
-                        </div>
-                    <?php endif; ?>
                     <!-- OTP Sending Form -->
                     <div class="form-group">
                         <input type="email" name="email" class="form-control" placeholder="Enter your email" required value="<?php echo htmlspecialchars($email); ?>">
@@ -235,25 +232,19 @@ $email = '';
         </div>
     </div>
 
-    <?php if (!empty($success_message)): ?>
-        <!-- Success Modal structure -->
-        <div id="success-modal" class="modal" style="display: block;">
-            <div class="modal-content">
-                <span class="modal-title">Success</span>
-                <p><?php echo $success_message; ?></p>
-                <button id="success-ok-button" class="btn-ok">OK</button>
-            </div>
-        </div>  
-    <?php endif; ?>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        if(document.getElementById("success-ok-button")) {
-            document.getElementById("success-ok-button").addEventListener("click", function() {
-                window.location.href = '../email_otp_form'; // Redirect after success
-            });
-        }
-    });
-</script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            <?php if (!empty($error_message)): ?>
+                swal("Error", "<?php echo addslashes($error_message); ?>", "error");
+            <?php endif; ?>
+
+            <?php if (!empty($success_message)): ?>
+                swal("Success", "<?php echo addslashes($success_message); ?>", "success").then(() => {
+                    window.location.href = '../email_otp_form'; // Redirect after success
+                });
+            <?php endif; ?>
+        });
+    </script>
 </body>
 </html>
 <?php
