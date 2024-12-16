@@ -25,7 +25,7 @@ echo '<div id="editModal'.$row['id'].'" class="modal fade" role="dialog">
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group">
                             <input type="hidden" value="'.$erow['id'].'" name="hidden_id" id="hidden_id"/>
-                            <label class="control-label">Name: <span style="color:gray; font-size: 10px;">(Lastname Firstname, Middlename)</span></label><br>
+                            <label class="control-label">Name: <span style="color:gray; font-size: 10px;">(Lastname Firstname, Middlinitial ,Extensionname (Jr.,Sr.,I.,II) )</span></label><br>
                             <div class="col-sm-4">
                                 <input name="txt_edit_lname" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" value="'.$erow['lname'].'"/>
                             </div> 
@@ -34,6 +34,9 @@ echo '<div id="editModal'.$row['id'].'" class="modal fade" role="dialog">
                             </div> 
                             <div class="col-sm-4">
                                 <input name="txt_edit_mname" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" value="'.$erow['mname'].'"/>
+                            </div>
+                            <div class="col-sm-4">
+                                <input name="txt_edit_exname" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" value="'.$erow['exname'].'"/>
                             </div>
                         </div>
 
