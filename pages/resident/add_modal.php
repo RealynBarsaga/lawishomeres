@@ -14,7 +14,7 @@
 
                                 <!-- Name -->
                                 <div class="form-group">
-                                    <label class="control-label">Name: <span style="color:gray; font-size: 10px;">(Lastname Firstname, Middlinitial ,Extensionname)</span></label><br>
+                                    <label class="control-label">Name: <span style="color:gray; font-size: 10px;">(Lastname Firstname, Middlinitial ,Extensionname (Jr.,Sr.,I.,II) )</span></label><br>
                                     <div class="col-sm-4">
                                         <input name="txt_lname" class="form-control input-sm" type="text" placeholder="Lastname" required
                                         pattern="^(?!\s)(?!.*<script>)(?!.*<\/script>).*[\w\s]*$" 
