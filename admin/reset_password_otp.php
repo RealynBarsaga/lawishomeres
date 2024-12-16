@@ -290,6 +290,7 @@ if (isset($_POST['reset_password'])) {
             const checklist = document.getElementById('password-checklist');
             const lengthCheck = document.getElementById('length');
             const uppercaseCheck = document.getElementById('uppercase');
+            const lowerCheck = document.getElementById('lowercase');
             const numberCheck = document.getElementById('number');
             const specialCheck = document.getElementById('special');
 
