@@ -14,7 +14,7 @@
 
                                 <!-- Name -->
                                 <div class="form-group">
-                                    <label class="control-label">Name: <span style="color:gray; font-size: 10px;">(Lastname Firstname, Middlename ,Extension Name ( Jr., Sr., I., II))</span></label><br>
+                                    <label class="control-label">Name: <span style="color:gray; font-size: 10px;">(Lastname Firstname, Middlename ,Extensionname(Jr.,Sr.,I.,II))</span></label><br>
                                     <div class="col-sm-4">
                                         <input name="txt_lname" class="form-control input-sm" type="text" placeholder="Lastname" required
                                         pattern="^(?!\s)(?!.*<script>)(?!.*<\/script>).*[\w\s]*$" 
@@ -27,6 +27,11 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <input name="txt_mname" class="form-control input-sm" type="text" placeholder="Middlename"
+                                        pattern="^(?!\s)(?!.*<script>)(?!.*<\/script>).*[\w\s]*$" 
+                                        title="Spaces and <script></script> tags are not allowed."/>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input name="txt_exname" class="form-control input-sm" type="text" placeholder="Extensionname"
                                         pattern="^(?!\s)(?!.*<script>)(?!.*<\/script>).*[\w\s]*$" 
                                         title="Spaces and <script></script> tags are not allowed."/>
                                     </div>
