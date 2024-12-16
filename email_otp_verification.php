@@ -83,6 +83,9 @@ if ($error_message) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Madridejos Household Management System</title>
     <link rel="icon" type="x-icon" href="img/lg.png">
+
+    <!-- Include SweetAlert Library -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         /* General Reset and Styling */
         * {
@@ -264,91 +267,12 @@ if ($error_message) {
                 padding: 8px 16px;
             }
         }
-         /* Success Modal Styles */
-         .modal {
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background: linear-gradient(135deg, #d4edda, #f7f7f7);
-            padding: 30px;
-            border-radius: 15px;
-            text-align: center;
-            width: 419px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-            position: relative;
-            margin-left: 440px;
-            margin-top: 160px;
-            animation: modalFadeIn 0.5s ease;
-        }
-
-        @keyframes modalFadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .modal-title {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #28a745;
-        }
-
-        .modal-content .btn-ok {
-            background-color: #5cb85c;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 25px;
-            cursor: pointer;
-            margin: auto;
-            width: 100px;
-            font-size: 16px;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-
-        .modal-content .btn-ok:hover {
-            background-color: #4cae4c;
-            transform: scale(1.05);
-        }
-
-        .modal p {
-            margin-bottom: 25px;
-            font-size: 16px;
-        }
-
-        .modal-content::after {
-            content: "Powered by Madridejos HRMS";
-            display: block;
-            font-size: 12px;
-            color: #aaa;
-            margin-top: 20px;
-        }
     </style>
 </head>
 <body>
 
     <div class="container">
         <h2>OTP Verification</h2>
-
-        <?php if (!empty($error_message)): ?>
-            <div class="error"><?php echo $error_message; ?></div>
-        <?php endif; ?>
 
         <form method="POST" action="">
             <div class="form-group">
@@ -365,20 +289,26 @@ if ($error_message) {
             </a>
         </div>
     </div>
-    <?php if (!empty($success_message)): ?>
-        <!-- Success Modal structure -->
-        <div id="success-modal" class="modal" style="display: block;">
-            <div class="modal-content">
-                <span class="modal-title">Success</span>
-                <p><?php echo $success_message; ?></p>
-                <button id="success-ok-button" class="btn-ok">OK</button>
-            </div>
-        </div>  
+   <!-- Display SweetAlert Messages -->
+    <?php if (!empty($error_message)): ?>
         <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                document.getElementById("success-ok-button").addEventListener("click", function() {
-                    window.location.href = '../reset_password_otp';
-                });
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: '<?php echo $error_message; ?>',
+            });
+        </script>
+    <?php endif; ?>
+
+    <?php if (!empty($success_message)): ?>
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: '<?php echo $success_message; ?>',
+                confirmButtonText: 'OK'
+            }).then(() => {
+                window.location.href = '../reset_password_otp';
             });
         </script>
     <?php endif; ?>
