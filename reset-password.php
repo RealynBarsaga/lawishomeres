@@ -72,6 +72,7 @@ if (isset($_GET['code'])) {
     <link rel="icon" type="x-icon" href="img/lg.png">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
 
@@ -241,7 +242,8 @@ html, body {
             </div>
         </div>
     </div>
-<script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
     function togglePassword(inputId, icon) {
         const input = document.getElementById(inputId);
         const iconElement = icon.querySelector('i');
@@ -357,6 +359,6 @@ html, body {
                 specialCheck.style.display = 'block';
             }
         }
-</script>
+        </script>
 </body>
 </html>
