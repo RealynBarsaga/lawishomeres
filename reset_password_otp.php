@@ -219,7 +219,7 @@ html, body {
                     <div class="form-group">
                         <label for="new_password" style="float: left;">New password</label>
                         <div class="input-group">
-                            <input type="password" name="new_password" id="new_password" class="form-control" placeholder="•••••••••••" required>
+                            <input type="password" name="new_password" id="new_password" class="form-control" placeholder="•••••••••••" required oninput="checkPassword()">
                             <span class="input-group-text" onclick="togglePassword('new_password', this)">
                                 <i class="fa fa-eye"></i>
                             </span>
