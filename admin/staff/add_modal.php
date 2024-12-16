@@ -73,11 +73,12 @@
                                 </div>
                             </div>
                             <div class="password-checklist" style="display: none;font-size: 11px;">
-                                <h5 style="font-size: 16px;">Password Requirements:</h5>
-                                <div id="length" class="invalid" style="display: none;">❌ At least 10 characters</div>
-                                <div id="uppercase" class="invalid" style="display: none;">❌ At least one uppercase letter</div>
-                                <div id="number" class="invalid" style="display: none;">❌ At least one number</div>
-                                <div id="special" class="invalid" style="display: none;">❌ At least one special character (!@#$%^&*)</div>
+                                <h5 style="font-size: 11px;">Your password must contain:</h5>
+                                <div id="length" class="invalid" style="display: none;">❌ 8-32 characters</div>
+                                <div id="uppercase" class="invalid" style="display: none;">❌ At least 1 uppercase characters (A-Z)</div>
+                                <div id="lowercase" class="invalid" style="display: none;">❌ At least 1 lowercase characters (a-z)</div>
+                                <div id="number" class="invalid" style="display: none;">❌ At least 1 number</div>
+                                <div id="special" class="invalid" style="display: none;">❌ At least 1 special character e.g. ! @ # $ %</div>
                             </div>
                             <div class="form-group">
                                 <label>Confirm Password:</label>
@@ -110,19 +111,20 @@ function validatePassword() {
     const password = document.getElementById('txt_pass').value;
     const lengthCheck = document.getElementById('length');
     const uppercaseCheck = document.getElementById('uppercase');
+    const lowercaseCheck = document.getElementById('lowercase');
     const numberCheck = document.getElementById('number');
     const specialCheck = document.getElementById('special');
 
     // Check length
-    if (password.length >= 10) {
+    if (password.length >= 8-32) {
         lengthCheck.classList.remove('invalid');
         lengthCheck.classList.add('valid');
-        lengthCheck.innerHTML = '✔️ At least 10 characters';
+        lengthCheck.innerHTML = '✔️ 8-32 characters';
         lengthCheck.style.display = 'block';
     } else {
         lengthCheck.classList.remove('valid');
         lengthCheck.classList.add('invalid');
-        lengthCheck.innerHTML = '❌ At least 10 characters';
+        lengthCheck.innerHTML = '❌ 8-32 characters';
         lengthCheck.style.display = 'block';
     }
 
@@ -130,25 +132,38 @@ function validatePassword() {
     if (/[A-Z]/.test(password)) {
         uppercaseCheck.classList.remove('invalid');
         uppercaseCheck.classList.add('valid');
-        uppercaseCheck.innerHTML = '✔️ At least one uppercase letter';
+        uppercaseCheck.innerHTML = '✔️ At least 1 uppercase characters (A-Z)';
         uppercaseCheck.style.display = 'block';
     } else {
         uppercaseCheck.classList.remove('valid');
         uppercaseCheck.classList.add('invalid');
-        uppercaseCheck.innerHTML = '❌ At least one uppercase letter';
+        uppercaseCheck.innerHTML = '❌ At least 1 uppercase characters (A-Z)';
         uppercaseCheck.style.display = 'block';
+    }
+
+    // Check for lowercase letter
+    if (/[a-z]/.test(password)) {
+        lowercaseCheck.classList.remove('invalid');
+        lowercaseCheck.classList.add('valid');
+        lowercaseCheck.innerHTML = '✔️ At least 1 lowercase characters (a-z)';
+        lowercaseCheck.style.display = 'block';
+    } else {
+        lowercaseCheck.classList.remove('valid');
+        lowercaseCheck.classList.add('invalid');
+        lowercaseCheck.innerHTML = '❌ At least 1 lowercase characters (a-z)';
+        lowercaseCheck.style.display = 'block';
     }
 
     // Check for number
     if (/\d/.test(password)) {
         numberCheck.classList.remove('invalid');
         numberCheck.classList.add('valid');
-        numberCheck.innerHTML = '✔️ At least one number';
+        numberCheck.innerHTML = '✔️ At least 1 number';
         numberCheck.style.display = 'block';
     } else {
         numberCheck.classList.remove('valid');
         numberCheck.classList.add('invalid');
-        numberCheck.innerHTML = '❌ At least one number';
+        numberCheck.innerHTML = '❌ At least 1 number';
         numberCheck.style.display = 'block';
     }
 
@@ -156,12 +171,12 @@ function validatePassword() {
     if (/[!@#$%^&*]/.test(password)) {
         specialCheck.classList.remove('invalid');
         specialCheck.classList.add('valid');
-        specialCheck.innerHTML = '✔️ At least one special character (!@#$%^&*)';
+        specialCheck.innerHTML = '✔️ At least 1 special character e.g. ! @ # $ %';
         specialCheck.style.display = 'block';
     } else {
         specialCheck.classList.remove('valid');
         specialCheck.classList.add('invalid');
-        specialCheck.innerHTML = '❌ At least one special character (!@#$%^&*)';
+        specialCheck.innerHTML = '❌ At least 1 special character e.g. ! @ # $ %';
         specialCheck.style.display = 'block';
     }
 }
