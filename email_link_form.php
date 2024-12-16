@@ -293,11 +293,6 @@ $email = '';
                     <p class="res">Reset via Email Link</p>
                     <p class="text-center"> Enter the email address associated with your account and we will send you a link to reset your password.</p>
                     <br>
-                    <?php if (!empty($_SESSION['error_message'])): ?>
-                        <script>
-                            swal("Error", "<?php echo addslashes($_SESSION['error_message']); ?>", "error");
-                        </script>
-                    <?php endif; ?>
                     <div class="form-group">
                         <input type="email" name="email" class="form-control" placeholder="Enter your email" required value="<?php echo htmlspecialchars($email); ?>">
                     </div>
@@ -314,15 +309,22 @@ $email = '';
         </div>
     </div>
 
-    <?php if (!empty($_SESSION['success_message'])): ?>
-        <script>
-            swal("Success", "<?php echo addslashes($_SESSION['success_message']); ?>", "success").then(() => {
-                window.location.href = '../email_link_form'; // Redirect on success
-            });
-        </script>
-    <?php endif; ?>
+     <!-- SweetAlert JS -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            <?php if (!empty($error_message)): ?>
+                swal("Error!", "<?php echo addslashes($error_message); ?>", "error");
+            <?php endif; ?>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+            <?php if (!empty($success_message)): ?>
+                swal("Success!", "<?php echo addslashes($success_message); ?>", "success").then(() => {
+                    window.location.href = '../email_link_form';
+                });
+            <?php endif; ?>
+        });
+    </script>
 </body>
 </html>
 <?php
