@@ -323,7 +323,7 @@ if (isset($_POST['reset_password'])) {
             }
 
             // Check lowercase
-            if (/[A-Z]/.test(password)) {
+            if (/[a-z]/.test(password)) {
                 lowercaseCheck.classList.remove('invalid');
                 lowercaseCheck.classList.add('valid');
                 lowercaseCheck.textContent = '✔️ At least 1 lowercase characters (a-z)';
