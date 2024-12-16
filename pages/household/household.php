@@ -88,8 +88,8 @@ html, body {
                                     <tbody>
                                     <?php
                                     $stmt = $con->prepare("SELECT h.id as id, h.householdno, h.totalhouseholdmembers, h.barangay, h.purok, 
-                                    CONCAT(r.lname, ', ', r.fname, ' ', r.mname) as head_of_family, 
-                                    (SELECT GROUP_CONCAT(CONCAT(lname, ', ', fname, ' ', mname) SEPARATOR '\n') AS names
+                                    CONCAT(r.lname, ', ', r.fname, ' ', r.mname, ' ', r.exname) as head_of_family, 
+                                    (SELECT GROUP_CONCAT(CONCAT(lname, ', ', fname, ' ', mname, ' ', exname) SEPARATOR '\n') AS names
                                      FROM tbltabagak 
                                      WHERE householdnum = h.householdno AND role = 'Members') as membersname 
                                     FROM tblhousehold h 

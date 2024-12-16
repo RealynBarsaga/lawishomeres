@@ -5,6 +5,7 @@ if (isset($_POST['btn_add'])) {
     $txt_lname = htmlspecialchars(strip_tags(trim($_POST['txt_lname'])), ENT_QUOTES, 'UTF-8');
     $txt_fname = htmlspecialchars(strip_tags(trim($_POST['txt_fname'])), ENT_QUOTES, 'UTF-8');
     $txt_mname = htmlspecialchars(strip_tags(trim($_POST['txt_mname'])), ENT_QUOTES, 'UTF-8');
+    $txt_exname = htmlspecialchars(strip_tags(trim($_POST['txt_exname'])), ENT_QUOTES, 'UTF-8');
     $ddl_gender = htmlspecialchars(strip_tags(trim($_POST['ddl_gender'])), ENT_QUOTES, 'UTF-8');
     $txt_bdate = htmlspecialchars(strip_tags(trim($_POST['txt_bdate'])), ENT_QUOTES, 'UTF-8');
     $txt_bplace = htmlspecialchars(strip_tags(trim($_POST['txt_bplace'])), ENT_QUOTES, 'UTF-8');
@@ -43,7 +44,7 @@ if (isset($_POST['btn_add'])) {
     $txt_image = $milliseconds . '_' . $name;
 
 
-    $su = mysqli_query($con, "SELECT * FROM tbltabagak WHERE lname='$txt_lname' AND fname='$txt_fname' AND mname='$txt_mname'");
+    $su = mysqli_query($con, "SELECT * FROM tbltabagak WHERE lname='$txt_lname' AND fname='$txt_fname' AND mname='$txt_mname' AND exname='$txt_exname'");
     $ct = mysqli_num_rows($su);
 
     if ($ct == 0) {
@@ -52,11 +53,11 @@ if (isset($_POST['btn_add'])) {
                 if (move_uploaded_file($temp, 'image/' . $txt_image)) {
                     // Insert resident's data
                     $query = mysqli_query($con, "INSERT INTO tbltabagak (
-                        lname, fname, mname, bdate, bplace, age, barangay, purok, 
+                        lname, fname, mname, exname, bdate, bplace, age, barangay, purok, 
                         civilstatus, householdnum, religion, nationality, 
                         gender, houseOwnershipStatus, landOwnershipStatus, lightningFacilities, 
                         formerAddress, image, role, headoffamily) VALUES (
-                        '$txt_lname', '$txt_fname', '$txt_mname', '$txt_bdate', '$txt_bplace', 
+                        '$txt_lname', '$txt_fname', '$txt_mname', '$txt_exname', '$txt_bdate', '$txt_bplace', 
                         '$txt_age', '$txt_brgy', '$txt_purok', 
                         '$txt_cstatus', '$txt_householdnum', '$txt_religion', '$txt_national', 
                         '$ddl_gender', '$ddl_hos', '$ddl_los', '$txt_lightning', '$txt_faddress', 
@@ -72,11 +73,11 @@ if (isset($_POST['btn_add'])) {
             $txt_image = 'default.png';
             // Insert resident's data without image
             $query = mysqli_query($con, "INSERT INTO tbltabagak (
-                lname, fname, mname, bdate, bplace, age, barangay, purok, 
+                lname, fname, mname, exname, bdate, bplace, age, barangay, purok, 
                 civilstatus, householdnum, religion, nationality, 
                 gender, houseOwnershipStatus, landOwnershipStatus, lightningFacilities, 
                 formerAddress, image, role, headoffamily) VALUES (
-                '$txt_lname', '$txt_fname', '$txt_mname', '$txt_bdate', '$txt_bplace', 
+                '$txt_lname', '$txt_fname', '$txt_mname', '$txt_exname', '$txt_bdate', '$txt_bplace', 
                 '$txt_age', '$txt_brgy', '$txt_purok', 
                 '$txt_cstatus', '$txt_householdnum', '$txt_religion', '$txt_national', 
                 '$ddl_gender', '$ddl_hos', '$ddl_los', '$txt_lightning', '$txt_faddress', 

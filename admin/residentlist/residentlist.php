@@ -76,7 +76,7 @@ html, body {
                                         <?php
                                         // Ensure you have the correct database connection
                                         $squery = mysqli_query($con, "SELECT id, 
-                                        CONCAT(lname, ', ', fname, ' ', mname) as 
+                                        CONCAT(lname, ', ', fname, ' ', mname, ' ', exname) as 
                                         cname, 
                                         age, 
                                         gender, 

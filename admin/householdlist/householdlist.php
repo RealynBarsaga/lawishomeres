@@ -78,10 +78,10 @@ html, body {
                                              SELECT 
                                                  h.*, 
                                                  h.id as id, 
-                                                 CONCAT(r.lname, ', ', r.fname, ' ', r.mname) as name, 
+                                                 CONCAT(r.lname, ', ', r.fname, ' ', r.mname, ' ', r.exname) as name, 
                                                  b.barangay,
                                                  (
-                                                     SELECT GROUP_CONCAT(CONCAT(lname, ', ', fname, ' ', mname) SEPARATOR '\n') AS names
+                                                     SELECT GROUP_CONCAT(CONCAT(lname, ', ', fname, ' ', mname, ' ', exname) SEPARATOR '\n') AS names
                                                      FROM tbltabagak 
                                                      WHERE householdnum = h.householdno AND role = 'Members'
                                                  ) as membersname
