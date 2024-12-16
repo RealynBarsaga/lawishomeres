@@ -349,7 +349,7 @@ if (isset($_POST['reset_password'])) {
             }
 
             // Check special character
-            if (/[!@#$%^&*]/.test(password)) {
+            if (/[!@#$%]/.test(password)) {
                 specialCheck.classList.remove('invalid');
                 specialCheck.classList.add('valid');
                 specialCheck.textContent = '✔️ At least 1 special character e.g. ! @ # $ %';
