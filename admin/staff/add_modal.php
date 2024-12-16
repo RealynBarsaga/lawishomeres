@@ -116,7 +116,7 @@ function validatePassword() {
     const specialCheck = document.getElementById('special');
 
     // Check length
-    if (password.length >= 8-32) {
+    if (password.length >= 8 && password.length <= 32) {
         lengthCheck.classList.remove('invalid');
         lengthCheck.classList.add('valid');
         lengthCheck.innerHTML = '✔️ 8-32 characters';
