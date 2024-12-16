@@ -14,25 +14,25 @@
 
                                 <!-- Name -->
                                 <div class="form-group">
-                                    <label class="control-label">Name: <span style="color:gray; font-size: 10px;">(Lastname Firstname, Middlename ,Extensionname(Jr.,Sr.,I.,II))</span></label><br>
+                                    <label class="control-label">Name: <span style="color:gray; font-size: 10px;">(Lastname Firstname, Middlename ,Extensionname(Jr.,Sr.,I.,II) )</span></label><br>
                                     <div class="col-sm-4">
                                         <input name="txt_lname" class="form-control input-sm" type="text" placeholder="Lastname" required
                                         pattern="^(?!\s)(?!.*<script>)(?!.*<\/script>).*[\w\s]*$" 
-                                        title="Spaces and <script></script> tags are not allowed."/>
+                                        title="Spaces and <script></script> tags are not allowed." style="margin-left: -17px;"/>
                                     </div>
                                     <div class="col-sm-4">
                                         <input name="txt_fname" class="form-control input-sm" type="text" placeholder="Firstname" required
                                         pattern="^(?!\s)(?!.*<script>)(?!.*<\/script>).*[\w\s]*$" 
-                                        title="Spaces and <script></script> tags are not allowed."/>
+                                        title="Spaces and <script></script> tags are not allowed." style="margin-left: -39px;"/>
                                     </div>
                                     <div class="col-sm-4">
                                         <input name="txt_mname" class="form-control input-sm" type="text" placeholder="Middlename"
                                         pattern="^(?!\s)(?!.*<script>)(?!.*<\/script>).*[\w\s]*$" 
-                                        title="Spaces and <script></script> tags are not allowed."/>
+                                        title="Spaces and <script></script> tags are not allowed." style="margin-left: -64px;width: 93px;"/>
 
                                         <input name="txt_exname" class="form-control input-sm" type="text" placeholder="Extensionname"
                                         pattern="^(?!\s)(?!.*<script>)(?!.*<\/script>).*[\w\s]*$" 
-                                        title="Spaces and <script></script> tags are not allowed."/>
+                                        title="Spaces and <script></script> tags are not allowed." style="width: 76px;margin-left: 38px;margin-top: -29px;"/>
                                     </div>
                                 </div>
 
