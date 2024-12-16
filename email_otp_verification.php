@@ -361,7 +361,7 @@ if ($error_message) {
 
         <div class="back-link">
             <a href="../forgot_password_option">
-                Back
+                Back to Forgot Password Options
             </a>
         </div>
     </div>
