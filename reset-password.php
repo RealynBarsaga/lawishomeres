@@ -76,7 +76,7 @@ if (isset($_GET['code'])) {
         @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
 
 html, body {
-    background-image: url('../img/received_1185064586170879.jpeg');
+    background-image: url('img/received_1185064586170879.jpeg');
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
@@ -107,7 +107,7 @@ html, body {
 }
 
 .btns {
-    background-image: url('../img/bg.jpg');
+    background-image: url('img/bg.jpg');
     border: none;
     color: #fff;
     width: 100%;
