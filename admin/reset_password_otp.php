@@ -296,15 +296,15 @@ if (isset($_POST['reset_password'])) {
             checklist.style.display = 'block';
 
             // Check length
-            if (password.length >= 10) {
+            if (password.length >= 8 && password.length <= 32) {
                 lengthCheck.classList.remove('invalid');
                 lengthCheck.classList.add('valid');
-                lengthCheck.textContent = '✔️ At least 10 characters';
+                lengthCheck.innerHTML = '✔️ 8-32 characters';
                 lengthCheck.style.display = 'block';
             } else {
                 lengthCheck.classList.remove('valid');
                 lengthCheck.classList.add('invalid');
-                lengthCheck.textContent = '❌ At least 10 characters';
+                lengthCheck.innerHTML = '❌ 8-32 characters';
                 lengthCheck.style.display = 'block';
             }
 
