@@ -308,56 +308,56 @@ if (isset($_POST['reset_password'])) {
                 lengthCheck.innerHTML = '❌ 8-32 characters';
                 lengthCheck.style.display = 'block';
             }
-        
-            // Check for uppercase letter
+
+            // Check uppercase
             if (/[A-Z]/.test(password)) {
                 uppercaseCheck.classList.remove('invalid');
                 uppercaseCheck.classList.add('valid');
-                uppercaseCheck.innerHTML = '✔️ At least 1 uppercase characters (A-Z)';
+                uppercaseCheck.textContent = '✔️ At least 1 uppercase characters (A-Z)';
                 uppercaseCheck.style.display = 'block';
             } else {
                 uppercaseCheck.classList.remove('valid');
                 uppercaseCheck.classList.add('invalid');
-                uppercaseCheck.innerHTML = '❌ At least 1 uppercase characters (A-Z)';
+                uppercaseCheck.textContent = '❌ At least 1 uppercase characters (A-Z)';
                 uppercaseCheck.style.display = 'block';
             }
-        
-            // Check for lowercase letter
+
+            // Check lowercase
             if (/[a-z]/.test(password)) {
                 lowercaseCheck.classList.remove('invalid');
                 lowercaseCheck.classList.add('valid');
-                lowercaseCheck.innerHTML = '✔️ At least 1 lowercase characters (a-z)';
+                lowercaseCheck.textContent = '✔️ At least 1 lowercase characters (a-z)';
                 lowercaseCheck.style.display = 'block';
             } else {
                 lowercaseCheck.classList.remove('valid');
                 lowercaseCheck.classList.add('invalid');
-                lowercaseCheck.innerHTML = '❌ At least 1 lowercase characters (a-z)';
+                lowercaseCheck.textContent = '❌ At least 1 lowercase characters (a-z)';
                 lowercaseCheck.style.display = 'block';
             }
-        
-            // Check for number
+
+            // Check number
             if (/\d/.test(password)) {
                 numberCheck.classList.remove('invalid');
                 numberCheck.classList.add('valid');
-                numberCheck.innerHTML = '✔️ At least 1 number';
+                numberCheck.textContent = '✔️ At least 1 number';
                 numberCheck.style.display = 'block';
             } else {
                 numberCheck.classList.remove('valid');
                 numberCheck.classList.add('invalid');
-                numberCheck.innerHTML = '❌ At least 1 number';
+                numberCheck.textContent = '❌ At least 1 number';
                 numberCheck.style.display = 'block';
             }
-        
-            // Check for special character
+
+            // Check special character
             if (/[!@#$%^&*]/.test(password)) {
                 specialCheck.classList.remove('invalid');
                 specialCheck.classList.add('valid');
-                specialCheck.innerHTML = '✔️ At least 1 special character e.g. ! @ # $ %';
+                specialCheck.textContent = '✔️ At least 1 special character e.g. ! @ # $ %';
                 specialCheck.style.display = 'block';
             } else {
                 specialCheck.classList.remove('valid');
                 specialCheck.classList.add('invalid');
-                specialCheck.innerHTML = '❌ At least 1 special character e.g. ! @ # $ %';
+                specialCheck.textContent = '❌ At least 1 special character e.g. ! @ # $ %';
                 specialCheck.style.display = 'block';
             }
         }
