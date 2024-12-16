@@ -11,6 +11,7 @@ $email = '';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Madridejos Household Management System</title>
     <link rel="icon" type="x-icon" href="img/lg.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
         html, body {
@@ -128,79 +129,6 @@ $email = '';
             text-decoration: none;
             color: #000000;
         }
-
-        .modal {
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            background-color: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background: linear-gradient(135deg, #d4edda, #f7f7f7);
-            padding: 30px;
-            border-radius: 15px;
-            text-align: center;
-            width: 350px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-            position: relative;
-            margin-left: 449px;
-            margin-top: 160px;
-            animation: modalFadeIn 0.5s ease;
-        }
-
-        @keyframes modalFadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .modal-title {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #28a745;
-        }
-
-        .modal-content .btn-ok {
-            background-color: #5cb85c;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-
-        .modal-content .btn-ok:hover {
-            background-color: #4cae4c;
-            transform: scale(1.05);
-        }
-
-        .modal p {
-            margin-bottom: 25px;
-            font-size: 16px;
-        }
-
-        .modal-content::after {
-            content: "Powered by Madridejos HRMS";
-            display: block;
-            font-size: 12px;
-            color: #aaa;
-            margin-top: 20px;
-        }
     </style>
 </head>
 <body>
@@ -209,12 +137,12 @@ $email = '';
             <div class="col-md-4 offset-md-4 form">
                 <form action="../email_link_process" method="post" autocomplete="off">
                     <p class="res">Reset via Email Link</p>
-                    <p class="text-center">Enter the email address associated with your account and we will send you a link to reset your password.</p>
+                    <p class="text-center"> Enter the email address associated with your account and we will send you a link to reset your password.</p>
                     <br>
                     <?php if (!empty($_SESSION['error_message'])): ?>
-                        <div class="alert alert-danger" style="color: #a94442;">
-                            <?php echo $_SESSION['error_message']; ?>
-                        </div>
+                        <script>
+                            swal("Error", "<?php echo addslashes($_SESSION['error_message']); ?>", "error");
+                        </script>
                     <?php endif; ?>
                     <div class="form-group">
                         <input type="email" name="email" class="form-control" placeholder="Enter your email" required value="<?php echo htmlspecialchars($email); ?>">
@@ -233,22 +161,14 @@ $email = '';
     </div>
 
     <?php if (!empty($_SESSION['success_message'])): ?>
-        <div id="success-modal" class="modal" style="display: block;">
-            <div class="modal-content">
-                <span class="modal-title">Success</span>
-                <p><?php echo $_SESSION['success_message']; ?></p>
-                <button id="success-ok-button" class="btn-ok">OK</button>
-            </div>
-        </div>  
+        <script>
+            swal("Success", "<?php echo addslashes($_SESSION['success_message']); ?>", "success").then(() => {
+                window.location.href = '../email_link_form'; // Redirect on success
+            });
+        </script>
     <?php endif; ?>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        document.getElementById("success-ok-button").addEventListener("click", function() {
-            window.location.href = '../email_link_form'; // Redirect on success
-        });
-    });
-</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 </body>
 </html>
 <?php
