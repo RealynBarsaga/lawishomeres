@@ -290,22 +290,21 @@ if (isset($_POST['reset_password'])) {
             const checklist = document.getElementById('password-checklist');
             const lengthCheck = document.getElementById('length');
             const uppercaseCheck = document.getElementById('uppercase');
-            const lowerCheck = document.getElementById('lowercase');
             const numberCheck = document.getElementById('number');
             const specialCheck = document.getElementById('special');
 
             checklist.style.display = 'block';
 
             // Check length
-            if (password.length >= 8 && password.length <= 32) {
+            if (password.length >= 10) {
                 lengthCheck.classList.remove('invalid');
                 lengthCheck.classList.add('valid');
-                lengthCheck.innerHTML = '✔️ 8-32 characters';
+                lengthCheck.textContent = '✔️ At least 10 characters';
                 lengthCheck.style.display = 'block';
             } else {
                 lengthCheck.classList.remove('valid');
                 lengthCheck.classList.add('invalid');
-                lengthCheck.innerHTML = '❌ 8-32 characters';
+                lengthCheck.textContent = '❌ At least 10 characters';
                 lengthCheck.style.display = 'block';
             }
 
@@ -313,51 +312,38 @@ if (isset($_POST['reset_password'])) {
             if (/[A-Z]/.test(password)) {
                 uppercaseCheck.classList.remove('invalid');
                 uppercaseCheck.classList.add('valid');
-                uppercaseCheck.textContent = '✔️ At least 1 uppercase characters (A-Z)';
+                uppercaseCheck.textContent = '✔️ At least one uppercase letter';
                 uppercaseCheck.style.display = 'block';
             } else {
                 uppercaseCheck.classList.remove('valid');
                 uppercaseCheck.classList.add('invalid');
-                uppercaseCheck.textContent = '❌ At least 1 uppercase characters (A-Z)';
+                uppercaseCheck.textContent = '❌ At least one uppercase letter';
                 uppercaseCheck.style.display = 'block';
-            }
-
-            // Check lowercase
-            if (/[a-z]/.test(password)) {
-                lowercaseCheck.classList.remove('invalid');
-                lowercaseCheck.classList.add('valid');
-                lowercaseCheck.textContent = '✔️ At least 1 lowercase characters (a-z)';
-                lowercaseCheck.style.display = 'block';
-            } else {
-                lowercaseCheck.classList.remove('valid');
-                lowercaseCheck.classList.add('invalid');
-                lowercaseCheck.textContent = '❌ At least 1 lowercase characters (a-z)';
-                lowercaseCheck.style.display = 'block';
             }
 
             // Check number
             if (/\d/.test(password)) {
                 numberCheck.classList.remove('invalid');
                 numberCheck.classList.add('valid');
-                numberCheck.textContent = '✔️ At least 1 number';
+                numberCheck.textContent = '✔️ At least one number';
                 numberCheck.style.display = 'block';
             } else {
                 numberCheck.classList.remove('valid');
                 numberCheck.classList.add('invalid');
-                numberCheck.textContent = '❌ At least 1 number';
+                numberCheck.textContent = '❌ At least one number';
                 numberCheck.style.display = 'block';
             }
 
             // Check special character
-            if (/[!@#$%]/.test(password)) {
+            if (/[!@#$%^&*]/.test(password)) {
                 specialCheck.classList.remove('invalid');
                 specialCheck.classList.add('valid');
-                specialCheck.textContent = '✔️ At least 1 special character e.g. ! @ # $ %';
+                specialCheck.textContent = '✔️ At least one special character (!@#$%^&*)';
                 specialCheck.style.display = 'block';
             } else {
                 specialCheck.classList.remove('valid');
                 specialCheck.classList.add('invalid');
-                specialCheck.textContent = '❌ At least 1 special character e.g. ! @ # $ %';
+                specialCheck.textContent = '❌ At least one special character (!@#$%^&*)';
                 specialCheck.style.display = 'block';
             }
         }
