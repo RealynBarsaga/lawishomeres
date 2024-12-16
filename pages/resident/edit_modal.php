@@ -27,16 +27,16 @@ echo '<div id="editModal'.$row['id'].'" class="modal fade" role="dialog">
                             <input type="hidden" value="'.$erow['id'].'" name="hidden_id" id="hidden_id"/>
                             <label class="control-label">Name: <span style="color:gray; font-size: 10px;">(Lastname Firstname, Middlinitial ,Extensionname (Jr.,Sr.,I.,II) )</span></label><br>
                             <div class="col-sm-4">
-                                <input name="txt_edit_lname" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" value="'.$erow['lname'].'"/>
+                                <input name="txt_edit_lname" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" value="'.$erow['lname'].'" style="margin-left: -17px;"/>
                             </div> 
                             <div class="col-sm-4">
-                                <input name="txt_edit_fname" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" value="'.$erow['fname'].'"/>
+                                <input name="txt_edit_fname" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" value="'.$erow['fname'].'" style="margin-left: -39px;"/>
                             </div> 
                             <div class="col-sm-4">
-                                <input name="txt_edit_mname" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" value="'.$erow['mname'].'"/>
+                                <input name="txt_edit_mname" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" value="'.$erow['mname'].'" style="margin-left: -62px;width: 93px;"/>
                             </div>
                             <div class="col-sm-4">
-                                <input name="txt_edit_exname" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" value="'.$erow['exname'].'"/>
+                                <input name="txt_edit_exname" class="form-control input-sm" type="text" pattern="^(?!\s*$)[A-Za-z\s.,]+$" value="'.$erow['exname'].'" style="width: 76px;margin-left: 38px;margin-top: -29px;"/>
                             </div>
                         </div>
 
