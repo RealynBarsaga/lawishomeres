@@ -213,17 +213,25 @@ html, body {
                     <div class="form-group">
                         <label for="new_password" style="float: left;">New password</label>
                         <div class="input-group">
-                            <input type="password" name="new_password" id="new_password" class="form-control" placeholder="•••••••••••" required pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{10,}$" title="Password must be at least 10 characters long, contain at least one uppercase letter, one number, and one special character.">
-                            <span class="input-group-text" onclick="togglePassword('new_password', this)" style="cursor: pointer; background-color: transparent; border: none;">
+                            <input type="password" name="new_password" id="new_password" class="form-control" placeholder="•••••••••••" required oninput="checkPassword()">
+                            <span class="input-group-text" onclick="togglePassword('new_password', this)">
                                 <i class="fa fa-eye"></i>
                             </span>
                         </div>
                     </div>
+                    <div class="password-checklist" id="password-checklist">
+                        <h5 style="font-size: 11px;">Your password must contain:</h5>
+                        <div id="length" class="invalid" style="display: none;">❌ 8-32 characters</div>
+                        <div id="uppercase" class="invalid" style="display: none;">❌ At least 1 uppercase characters (A-Z)</div>
+                        <div id="lowercase" class="invalid" style="display: none;">❌ At least 1 lowercase characters (a-z)</div>
+                        <div id="number" class="invalid" style="display: none;">❌ At least 1 number</div>
+                        <div id="special" class="invalid" style="display: none;">❌ At least 1 special character e.g. ! @ # $ %</div>
+                    </div>
                     <div class="form-group">
                         <label for="con_password" style="float: left;">Confirm new password</label>
                         <div class="input-group">
-                            <input type="password" name="con_password" id="con_password" class="form-control" placeholder="•••••••••••" required pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{10,}$" title="Password must be at least 10 characters long, contain at least one uppercase letter, one number, and one special character.">
-                            <span class="input-group-text" onclick="togglePassword('con_password', this)" style="cursor: pointer; background-color: transparent; border: none;">
+                            <input type="password" name="con_password" id="con_password" class="form-control" placeholder="•••••••••••" required>
+                            <span class="input-group-text" onclick="togglePassword('con_password', this)">
                                 <i class="fa fa-eye"></i>
                             </span>
                         </div>
@@ -233,24 +241,6 @@ html, body {
             </div>
         </div>
     </div>
-
-    <?php if (!empty($success_message)): ?>
-        <!-- Success Modal structure -->
-        <div id="success-modal" class="modal" style="display: block;">
-            <div class="modal-content">
-                <span class="modal-title">Success</span>
-                <p><?php echo $success_message; ?></p>
-                <button id="success-ok-button" class="btn-ok">OK</button>
-            </div>
-        </div>  
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                document.getElementById("success-ok-button").addEventListener("click", function() {
-                    window.location.href = 'login.php';
-                });
-            });
-        </script>
-    <?php endif; ?>
 <script>
     function togglePassword(inputId, icon) {
         const input = document.getElementById(inputId);
@@ -266,6 +256,107 @@ html, body {
             iconElement.classList.add('fa-eye');
         }
     }
+
+    document.addEventListener("DOMContentLoaded", function() {
+            <?php if (!empty($success_message)): ?>
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: '<?php echo $success_message; ?>',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = 'login.php';
+                    }
+                });
+            <?php endif; ?>
+
+            <?php if (!empty($error_message )): ?>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: '<?php echo $error_message; ?>',
+                    confirmButtonText: 'OK'
+                });
+            <?php endif; ?>
+        });
+
+        function checkPassword() {
+            const password = document.getElementById('new_password').value;
+            const checklist = document.getElementById('password-checklist');
+            const lengthCheck = document.getElementById('length');
+            const uppercaseCheck = document.getElementById('uppercase');
+            const lowercaseCheck = document.getElementById('lowercase');
+            const numberCheck = document.getElementById('number');
+            const specialCheck = document.getElementById('special');
+
+            checklist.style.display = 'block';
+
+            // Check length
+            if (password.length >= 8 && password.length <= 32) {
+                lengthCheck.classList.remove('invalid');
+                lengthCheck.classList.add('valid');
+                lengthCheck.innerHTML = '✔️ 8-32 characters';
+                lengthCheck.style.display = 'block';
+            } else {
+                lengthCheck.classList.remove('valid');
+                lengthCheck.classList.add('invalid');
+                lengthCheck.innerHTML = '❌ 8-32 characters';
+                lengthCheck.style.display = 'block';
+            }
+
+            // Check uppercase
+            if (/[A-Z]/.test(password)) {
+                uppercaseCheck.classList.remove('invalid');
+                uppercaseCheck.classList.add('valid');
+                uppercaseCheck.textContent = '✔️ At least 1 uppercase characters (A-Z)';
+                uppercaseCheck.style.display = 'block';
+            } else {
+                uppercaseCheck.classList.remove('valid');
+                uppercaseCheck.classList.add('invalid');
+                uppercaseCheck.textContent = '❌ At least 1 uppercase characters (A-Z)';
+                uppercaseCheck.style.display = 'block';
+            }
+
+            // Check lowercase
+            if (/[a-z]/.test(password)) {
+                lowercaseCheck.classList.remove('invalid');
+                lowercaseCheck.classList.add('valid');
+                lowercaseCheck.textContent = '✔️ At least 1 lowercase characters (a-z)';
+                lowercaseCheck.style.display = 'block';
+            } else {
+                lowercaseCheck.classList.remove('valid');
+                lowercaseCheck.classList.add('invalid');
+                lowercaseCheck.textContent = '❌ At least 1 lowercase characters (a-z)';
+                lowercaseCheck.style.display = 'block';
+            }
+
+            // Check number
+            if (/\d/.test(password)) {
+                numberCheck.classList.remove('invalid');
+                numberCheck.classList.add('valid');
+                numberCheck.textContent = '✔️ At least 1 number';
+                numberCheck.style.display = 'block';
+            } else {
+                numberCheck.classList.remove('valid');
+                numberCheck.classList.add('invalid');
+                numberCheck.textContent = '❌ At least 1 number';
+                numberCheck.style.display = 'block';
+            }
+
+            // Check special character
+            if (/[!@#$%]/.test(password)) {
+                specialCheck.classList.remove('invalid');
+                specialCheck.classList.add('valid');
+                specialCheck.textContent = '✔️ At least 1 special character e.g. ! @ # $ %';
+                specialCheck.style.display = 'block';
+            } else {
+                specialCheck.classList.remove('valid');
+                specialCheck.classList.add('invalid');
+                specialCheck.textContent = '❌ At least 1 special character e.g. ! @ # $ %';
+                specialCheck.style.display = 'block';
+            }
+        }
 </script>
 </body>
 </html>
