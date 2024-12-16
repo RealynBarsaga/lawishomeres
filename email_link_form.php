@@ -13,7 +13,7 @@ $email = '';
     <link rel="icon" type="x-icon" href="img/lg.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+ @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
         html, body {
             background-image: url('img/received_1185064586170879.jpeg');
             background-attachment: fixed;
@@ -28,6 +28,7 @@ $email = '';
             font-family: 'Poppins', sans-serif;
         }
 
+        /* Styling for the header */
         .res {
             font-size: 20px;
             font-weight: bold;
@@ -37,6 +38,7 @@ $email = '';
             text-align: center;
         }
 
+        /* Styling for the paragraph */
         p.text-center {
             font-size: 15px;
             color: #333;
@@ -128,6 +130,158 @@ $email = '';
         .back-link a:hover {
             text-decoration: none;
             color: #000000;
+        }
+
+        /* Success Modal styles */
+        .modal {
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #d4edda, #f7f7f7);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            width: 350px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            position: relative;
+            margin-left: 449px;
+            margin-top: 160px;
+            animation: modalFadeIn 0.5s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #28a745;
+        }
+
+        .modal-content .btn-ok {
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .modal-content .btn-ok:hover {
+            background-color: #4cae4c;
+            transform: scale(1.05);
+        }
+
+        .modal p {
+            margin-bottom: 25px;
+            font-size: 16px;
+        }
+
+        .modal-content::after {
+            content: "Powered by Madridejos HRMS";
+            display: block;
+            font-size: 12px;
+            color: #aaa;
+            margin-top: 20px;
+        }
+
+        /* Media Queries for responsiveness */
+        @media screen and (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .form {
+                padding: 25px;
+            }
+
+            .res {
+                font-size: 18px;
+            }
+
+            p.text-center {
+                font-size: 14px;
+                margin-bottom: 20px;
+            }
+
+            .form-control {
+                font-size: 14px;
+                padding: 8px 12px;
+            }
+
+            .btn {
+                font-size: 14px;
+                padding: 8px 12px;
+            }
+
+            .back-link button {
+                font-size: 14px;
+                padding: 8px;
+            }
+
+            .modal-content {
+                width: 80%; /* Adjust modal width for smaller screens */
+                padding: 20px;
+            }
+
+            .modal-title {
+                font-size: 16px; /* Adjust modal title font size */
+            }
+
+            .modal-content .btn-ok {
+                font-size: 14px;
+                padding: 10px 20px;
+            }
+
+            .modal p {
+                font-size: 14px; /* Adjust modal text font size */
+            }
+        }
+
+        @media screen and (max-width: 470px) {
+            .container {
+                width: 90%;
+            }
+
+            .modal-content {
+                left: 457px;
+                width: 85%; /* Adjust modal width even more for very small screens */
+                padding: 15px;
+            }
+
+            .modal-title {
+                font-size: 14px; /* Adjust modal title font size */
+            }
+
+            .modal-content .btn-ok {
+                font-size: 14px;
+                padding: 10px 20px;
+            }
+
+            .modal p {
+                font-size: 12px; /* Adjust modal text font size */
+            }
         }
     </style>
 </head>
