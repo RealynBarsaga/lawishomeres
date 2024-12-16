@@ -231,7 +231,7 @@ if (isset($_POST['reset_password'])) {
                         <div id="special" class="invalid" style="display: none;">❌ At least 1 special character e.g. ! @ # $ %</div>
                     </div>
                     <div class="form-group">
-                        <label for="confirm_password">Confirm Password</label>
+                        <label for="confirm_password">Confirm New Password</label>
                         <div class="input-group">
                             <input type="password" name="confirm_password" id="confirm_password" class="form-control" placeholder="•••••••••••" required>
                             <span class="input-group-text" onclick="togglePassword('confirm_password', this)">
