@@ -61,6 +61,17 @@ html, body {
     border-radius: 2px;
     margin-bottom: 15px;
 }
+
+.info_boxes_2 {
+    display: block;
+    min-height: 125px;
+    background: #fff;
+    width: 95%;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+    margin-bottom: 15px;
+}
+
 .info-box-text {
     text-transform: none;
     font-weight: 100;
@@ -100,7 +111,7 @@ h3 {
         width: 25%; /* For the first set of info boxes */
     }
     .col-md-4 {
-        width: 33%; /* For the second set of info boxes */
+        width: 366px; /* For the second set of info boxes */
     }
 }
 </style>
@@ -164,7 +175,7 @@ h3 {
                     ?>
                         <div class="col-md-4 col-sm-6 col-xs-12"> <!-- Use col-md-4 for the second set -->
                             <br>
-                            <div class="info-box" style="margin-left: 9px; background-color: <?= $box['color'] ?> !important;box-shadow: 2px 5px 9px #888888;">
+                            <div class="info_boxes_2" style="margin-left: 9px; background-color: <?= $box['color'] ?> !important;box-shadow: 2px 5px 9px #888888;">
                                 <span style="background: transparent; position: absolute; top: 47%; left: 77%; transform: translate(-50%, -50%); font-size: 40px; color: #eeeeeeba ; z-index: 1;">
                                     <i class="fa <?= $box['icon'] ?>"></i>
                                 </span>
