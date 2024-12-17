@@ -168,7 +168,15 @@ $puroks = [
     "Maalat" => ["Neem Tree", "Talisay", "Kabakhawan", "Mahogany", "Gmelina"],
     "Pili" => ["Malinawon", "Mahigugmaon", "Matinabangun", "Maabtikon", "Malipayon", "Mauswagon"],
     "Tarong" => ["Orchids", "Gumamela 1", "Gumamela 2", "Santan 1", "Santan 2", "Rose 1", "Rose 2", "Vietnam Rose", "Kumintang 1", "Kumintang 2", "Sunflower", "Daisy"],
-    // Add other barangays and their corresponding puroks as needed
+    "Kodia" => ["Mahugany", "Tugas", "Lumboy", "Dita", "Magtalisay", "Kawayan", "Bakhaw", "La Kodia Village"],
+    "Tugas" => ["Bombil A", "Bombil B", "Roses A", "Roses B", "Gomamela A", "Gomamela B", "Kumintang A", "Kumintang B", "Santan", "GK-Tugas"],
+    "Talangnan" => ["Gawot", "Lawihan", "Danggit", "Helinguero", "Tangigue", "Nukos", "Gusaw", "Tabagak"],
+    "Kaongkod" => ["Kalubihan", "Kamanggahan", "Ipil-Ipil", "Pukotan 1", "Pukotan 2", "Bugsayan 1", "Bugsayan 2", "Kasagingan 1", "Kasagingan 2", "Maisan 1", "Maisan 2", "Maisan 3"],
+    "Malbago" => ["Bolinao", "Tulingan", "Tangigue", "Nukos", "Danggit", "Bangus"],
+    "Kangwayan" => ["Nangka", "Mangga", "Lutak", "Kulo"],
+    "San Agustin" => ["Proper", "Langob", "Tagaytay", "Mahayahay", "Baybay", "Desamperado"],
+    "Mancilang" => ["di mohatag saila information"],
+    "Poblacion" => ["di mohatag saila information"],
 ];
 
 // Get puroks for the current barangay
