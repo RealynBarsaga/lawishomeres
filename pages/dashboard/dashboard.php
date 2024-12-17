@@ -111,7 +111,7 @@ h3 {
         width: 25%; /* For the first set of info boxes */
     }
     .col-md-4 {
-        width: 366px; /* For the second set of info boxes */
+        width: 350px; /* For the second set of info boxes */
     }
 }
 </style>
