@@ -66,7 +66,7 @@ html, body {
     display: block;
     min-height: 125px;
     background: #fff;
-    width: 94%;
+    width: 93%;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
     border-radius: 2px;
     margin-bottom: 15px;
