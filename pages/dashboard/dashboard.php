@@ -114,6 +114,9 @@ h3 {
         width: 366px; /* For the second set of info boxes */
     }
 }
+.col-xs-13 {
+    width: 100%;
+}
 </style>
 <div class="row-offcanvas row-offcanvas-left">
 <?php include('../sidebar-left.php'); ?>
@@ -173,7 +176,7 @@ h3 {
                         $q = mysqli_query($con, $box['query']);
                         $num_rows = mysqli_num_rows($q);
                     ?>
-                        <div class="col-md-4 col-sm-6 col-xs-12"> <!-- Use col-md-4 for the second set -->
+                        <div class="col-md-4 col-sm-6 col-xs-13"> <!-- Use col-md-4 for the second set -->
                             <br>
                             <div class="info_boxes_2" style="margin-left: 9px; background-color: <?= $box['color'] ?> !important;box-shadow: 2px 5px 9px #888888;">
                                 <span style="background: transparent; position: absolute; top: 47%; left: 77%; transform: translate(-50%, -50%); font-size: 40px; color: #eeeeeeba ; z-index: 1;">
