@@ -118,7 +118,7 @@ h3 {
                         ['label' => 'Total Indigency', 'icon' => 'fa-file', 'color' => '#d9534f', 'query' => "SELECT * FROM tblindigency WHERE barangay = '$off_barangay'", 'link' => '../certofindigency/certofindigency'],
                         ['label' => 'Total Brgy Certificate', 'icon' => 'fa-file', 'color' => '#5bc0de', 'query' => "SELECT * FROM tblcertificate WHERE barangay = '$off_barangay'", 'link' => '../brgycertificate/brgycertificate'],
                         // New Info Box for Total Purok
-                        ['label' => 'Total Purok', 'icon' => 'fa-users', 'color' => '#ff851b', 'query' => "SELECT * FROM tbltabagak WHERE purok = '$purok' AND barangay = '$off_barangay'", 'link' => '../resident/resident'],
+                        ['label' => 'Total Purok', 'icon' => 'fa-users', 'color' => '#ff851b', 'query' => "SELECT * FROM tbltabagak WHERE purok = '$purok'", 'link' => '../resident/resident'],
                     ];
                     
                     foreach ($info_boxes as $box) {
