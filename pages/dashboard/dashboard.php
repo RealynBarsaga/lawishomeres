@@ -108,27 +108,6 @@ h3 {
                     <!-- Info Boxes -->
                     <?php
                     $off_barangay = $_SESSION['barangay'];
-
-                    $puroks = [
-                        "Tabagak" => ["Lamon-Lamon", "Tangigue", "Lawihan", "Lower-Bangus", "Upper-Bangus"],
-                        "Bunakan" => ["Bilabid", "Helinggero", "Kamaisan", "Kalubian", "Samonite"],
-                        "Maalat" => ["Neem Tree", "Talisay", "Kabakhawan", "Mahogany", "Gmelina"],
-                        "Pili" => ["Malinawon", "Mahigugmaon", "Matinabangun", "Maabtikon", "Malipayon", "Mauswagon"],
-                        "Tarong" => ["Orchids", "Gumamela 1", "Gumamela 2", "Santan 1", "Santan 2", "Rose 1", "Rose 2", "Vietnam Rose", "Kumintang 1", "Kumintang 2", "Sunflower", "Daisy"],
-                        "Kodia" => ["Mahugany", "Tugas", "Lumboy", "Dita", "Magtalisay", "Kawayan", "Bakhaw", "La Kodia Village"],
-                        "Tugas" => ["Bombil A", "Bombil B", "Roses A", "Roses B", "Gomamela A", "Gomamela B", "Kumintang A", "Kumintang B", "Santan", "GK-Tugas"],
-                        "Talangnan" => ["Gawot", "Lawihan", "Danggit", "Helinguero", "Tangigue", "Nukos", "Gusaw", "Tabagak"],
-                        "Kaongkod" => ["Kalubihan", "Kamanggahan", "Ipil-Ipil", "Pukotan 1", "Pukotan 2", "Bugsayan 1", "Bugsayan 2", "Kasagingan 1", "Kasagingan 2", "Maisan 1", "Maisan 2", "Maisan 3"],
-                        "Malbago" => ["Bolinao", "Tulingan", "Tangigue", "Nukos", "Danggit", "Bangus"],
-                        "Kangwayan" => ["Nangka", "Mangga", "Lutak", "Kulo"],
-                        "San Agustin" => ["Proper", "Langob", "Tagaytay", "Mahayahay", "Baybay", "Desamperado"],
-                        "Mancilang" => ["di mohatag saila information"],
-                        "Poblacion" => ["di mohatag saila information"],
-                    ];
-                    
-                    // Count the number of puroks for the selected barangay
-                    $total_purok = isset($puroks[$off_barangay]) ? count($puroks[$off_barangay]) : 0;
-                    
                     $info_boxes = [
                         ['label' => 'Barangay Officials', 'icon' => 'fa-user', 'color' => '#00c0ef', 'query' => "SELECT * FROM tblbrgyofficial WHERE barangay = '$off_barangay'", 'link' => '../officials/officials'],
                         ['label' => 'Total Household', 'icon' => 'fa-users', 'color' => '#007256', 'query' => "SELECT * FROM tblhousehold h LEFT JOIN tbltabagak r ON r.id = h.headoffamily WHERE r.barangay = '$off_barangay'", 'link' => '../household/household'],
@@ -137,8 +116,8 @@ h3 {
                         ['label' => 'Total Residency', 'icon' => 'fa-file', 'color' => '#f39c12', 'query' => "SELECT * FROM tblrecidency WHERE barangay = '$off_barangay'", 'link' => '../certofresidency/certofres'],
                         ['label' => 'Total Indigency', 'icon' => 'fa-file', 'color' => '#d9534f', 'query' => "SELECT * FROM tblindigency WHERE barangay = '$off_barangay'", 'link' => '../certofindigency/certofindigency'],
                         ['label' => 'Total Brgy Certificate', 'icon' => 'fa-file', 'color' => '#5bc0de', 'query' => "SELECT * FROM tblcertificate WHERE barangay = '$off_barangay'", 'link' => '../brgycertificate/brgycertificate'],
-                        // Updated Info Box for Total Purok with count
-                        ['label' => 'Total Purok', 'icon' => 'fa-users', 'color' => '#ff851b', 'count' => $total_purok, 'link' => '../purok/purok'],
+                        // New Info Box for Total Purok
+                        ['label' => 'Total Purok', 'icon' => 'fa-users', 'color' => '#ff851b', 'query' => "SELECT purok FROM tbltabagak WHERE barangay = '$off_barangay'", 'link' => '../resident/resident'],
                     ];
                     
                     foreach ($info_boxes as $box) {
