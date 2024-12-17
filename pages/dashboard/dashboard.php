@@ -97,7 +97,7 @@ h3 {
 }
 @media (min-width: 992px) {
     .col-md-3 {
-        width: 14%;
+        width: 33%;
     }
 }
 </style>
