@@ -95,6 +95,25 @@ h3 {
     color: #333;
     margin-bottom: 15px;
 }
+.info-box-row {
+    display: flex;
+    justify-content: space-between; /* Adjusts spacing between boxes */
+    margin-bottom: 20px; /* Space between rows */
+}
+
+.info-box {
+    flex: 1; /* Each box takes equal space */
+    margin: 0 10px; /* Space between boxes */
+    padding: 20px; /* Padding inside each box */
+    border-radius: 5px; /* Rounded corners */
+    color: white; /* Text color */
+    box-sizing: border-box; /* Ensures padding is included in width */
+}
+
+/* Specific width for the second row */
+.second-row .info-box {
+    width: calc(33.33% - 20px); /* Adjust width for three boxes */
+}
 </style>
 <div class="row-offcanvas row-offcanvas-left">
 <?php include('../sidebar-left.php'); ?>
@@ -114,9 +133,9 @@ h3 {
                         ['label' => 'Total Household', 'icon' => 'fa-users', 'color' => '#007256', 'query' => "SELECT * FROM tblhousehold h LEFT JOIN tbltabagak r ON r.id = h.headoffamily WHERE r.barangay = '$off_barangay'", 'link' => '../household/household'],
                         ['label' => 'Total Resident', 'icon' => 'fa-users', 'color' => '#bd1e24', 'query' => "SELECT * FROM tbltabagak WHERE barangay = '$off_barangay'", 'link' => '../resident/resident'],
                         ['label' => 'Total Clearance', 'icon' => 'fa-file', 'color' => '#e5c707', 'query' => "SELECT * FROM tblclearance WHERE barangay = '$off_barangay'", 'link' => '../clearance/clearance'],
-                        ['label' => 'Total Residency', 'icon' => 'fa-file', 'color' => '#f39c12', 'width' => '120%', 'query' => "SELECT * FROM tblrecidency WHERE barangay = '$off_barangay'", 'link' => '../certofresidency/certofres'],
-                        ['label' => 'Total Indigency', 'icon' => 'fa-file', 'color' => '#d9534f', 'query' => "SELECT * FROM tblindigency WHERE barangay = '$off_barangay'", 'link' => '../certofindigency/certofindigency', 'width' => '120%'],
-                        ['label' => 'Total Brgy Certificate', 'icon' => 'fa-file', 'color' => '#5bc0de', 'query' => "SELECT * FROM tblcertificate WHERE barangay = '$off_barangay'", 'link' => '../brgycertificate/brgycertificate', 'width' => '120%'],
+                        ['label' => 'Total Residency', 'icon' => 'fa-file', 'color' => '#f39c12', 'query' => "SELECT * FROM tblrecidency WHERE barangay = '$off_barangay'", 'link' => '../certofresidency/certofres'],
+                        ['label' => 'Total Indigency', 'icon' => 'fa-file', 'color' => '#d9534f', 'query' => "SELECT * FROM tblindigency WHERE barangay = '$off_barangay'", 'link' => '../certofindigency/certofindigency'],
+                        ['label' => 'Total Brgy Certificate', 'icon' => 'fa-file', 'color' => '#5bc0de', 'query' => "SELECT * FROM tblcertificate WHERE barangay = '$off_barangay'", 'link' => '../brgycertificate/brgycertificate'],
                     ];
                     
                     foreach ($info_boxes as $box) {
