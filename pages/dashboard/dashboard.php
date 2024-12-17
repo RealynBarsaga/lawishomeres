@@ -118,7 +118,7 @@ h3 {
                         ['label' => 'Total Indigency', 'icon' => 'fa-file', 'color' => '#d9534f', 'query' => "SELECT * FROM tblindigency WHERE barangay = '$off_barangay'", 'link' => '../certofindigency/certofindigency'],
                         ['label' => 'Total Brgy Certificate', 'icon' => 'fa-file', 'color' => '#5bc0de', 'query' => "SELECT * FROM tblcertificate WHERE barangay = '$off_barangay'", 'link' => '../brgycertificate/brgycertificate'],
                       // New box for summing the amounts
-    ['label' => 'Total Amount of Clearances', 'icon' => 'fa-file', 'color' => '#f39c12', 'query' => "SELECT samount FROM tblclearance WHERE barangay = '$off_barangay'", 'link' => '../clearance/clearance_amount'],
+    ['label' => 'Total Amount of Clearances', 'icon' => 'fa-file', 'color' => '#f39c12', 'query' => "SELECT COUNT(samount) FROM tblclearance WHERE barangay = '$off_barangay'", 'link' => '../clearance/clearance_amount'],
                     ];
                     
                     foreach ($info_boxes as $box) {
