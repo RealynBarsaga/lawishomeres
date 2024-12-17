@@ -105,26 +105,31 @@ h3 {
         <section class="content">
             <div class="row">
                 <div class="box">
-                    <!-- Info Boxes -->
-                    <?php
-                    $off_barangay = $_SESSION['barangay'];
-                    
-                    $info_boxes = [
-                        ['label' => 'Barangay Officials', 'icon' => 'fa-user', 'color' => '#00c0ef', 'query' => "SELECT * FROM tblbrgyofficial WHERE barangay = '$off_barangay'", 'link' => '../officials/officials'],
-                        ['label' => 'Total Household', 'icon' => 'fa-users', 'color' => '#007256', 'query' => "SELECT * FROM tblhousehold h LEFT JOIN tbltabagak r ON r.id = h.headoffamily WHERE r.barangay = '$off_barangay'", 'link' => '../household/household'],
-                        ['label' => 'Total Resident', 'icon' => 'fa-users', 'color' => '#bd1e24', 'query' => "SELECT * FROM tbltabagak WHERE barangay = '$off_barangay'", 'link' => '../resident/resident'],
-                        ['label' => 'Total Clearance', 'icon' => 'fa-file', 'color' => '#e5c707', 'query' => "SELECT * FROM tblclearance WHERE barangay = '$off_barangay'", 'link' => '../clearance/clearance'],
-                        ['label' => 'Total Residency', 'icon' => 'fa-file', 'color' => '#f39c12', 'query' => "SELECT * FROM tblrecidency WHERE barangay = '$off_barangay'", 'link' => '../certofresidency/certofres'],
-                        ['label' => 'Total Indigency', 'icon' => 'fa-file', 'color' => '#d9534f', 'query' => "SELECT * FROM tblindigency WHERE barangay = '$off_barangay'", 'link' => '../certofindigency/certofindigency'],
-                        ['label' => 'Total Brgy Certificate', 'icon' => 'fa-file', 'color' => '#5bc0de', 'query' => "SELECT * FROM tblcertificate WHERE barangay = '$off_barangay'", 'link' => '../brgycertificate/brgycertificate'],
-                      // New box for summing the amounts
-    ['label' => 'Total Amount of Clearances', 'icon' => 'fa-file', 'color' => '#f39c12', 'query' => "SELECT COALESCE(SUM(samount), 0) FROM tblclearance WHERE barangay = '$off_barangay'", 'link' => '../clearance/clearance_amount'],
-                    ];
-                    
-                    foreach ($info_boxes as $box) {
-                        $q = mysqli_query($con, $box['query']);
-                        $num_rows = mysqli_num_rows($q);
-                    ?>
+                <?php
+$off_barangay = $_SESSION['barangay'];
+
+$info_boxes = [
+    ['label' => 'Barangay Officials', 'icon' => 'fa-user', 'color' => '#00c0ef', 'query' => "SELECT COUNT(*) as count FROM tblbrgyofficial WHERE barangay = '$off_barangay'", 'link' => '../officials/officials'],
+    ['label' => 'Total Household', 'icon' => 'fa-users', 'color' => '#007256', 'query' => "SELECT COUNT(*) as count FROM tblhousehold h LEFT JOIN tbltabagak r ON r.id = h.headoffamily WHERE r.barangay = '$off_barangay'", 'link' => '../household/household'],
+    ['label' => 'Total Resident', 'icon' => 'fa-users', 'color' => '#bd1e24', 'query' => "SELECT COUNT(*) as count FROM tbltabagak WHERE barangay = '$off_barangay'", 'link' => '../resident/resident'],
+    ['label' => 'Total Clearance', 'icon' => 'fa-file', 'color' => '#e5c707', 'query' => "SELECT COUNT(*) as count FROM tblclearance WHERE barangay = '$off_barangay'", 'link' => '../clearance/clearance'],
+    ['label' => 'Total Residency', 'icon' => 'fa-file', 'color' => '#f39c12', 'query' => "SELECT COUNT(*) as count FROM tblrecidency WHERE barangay = '$off_barangay'", 'link' => '../certofresidency/certofres'],
+    ['label' => 'Total Indigency', 'icon' => 'fa-file', 'color' => '#d9534f', 'query' => "SELECT COUNT(*) as count FROM tblindigency WHERE barangay = '$off_barangay'", 'link' => '../certofindigency/certofindigency'],
+    ['label' => 'Total Brgy Certificate', 'icon' => 'fa-file', 'color' => '#5bc0de', 'query' => "SELECT COUNT(*) as count FROM tblcertificate WHERE barangay = '$off_barangay'", 'link' => '../brgycertificate/brgycertificate'],
+    // New box for summing the amounts
+    ['label' => 'Total Amount of Clearances', 'icon' => 'fa-file', 'color' => '#f39c12', 'query' => "SELECT COALESCE(SUM(samount), 0) as total_amount FROM tblclearance WHERE barangay = '$off_barangay'", 'link' => '../clearance/clearance_amount'],
+];
+
+foreach ($info_boxes as $box) {
+    $q = mysqli_query($con, $box['query']);
+    
+    if ($q) {
+        $result = mysqli_fetch_assoc($q);
+        $value = isset($result['count']) ? $result['count'] : (isset($result['total_amount']) ? $result['total_amount'] : 0);
+    } else {
+        $value = 0; // Handle query failure
+    }
+    ?>
                         <div class="col-md-3 col-sm-6 col-xs-12">
                             <br>
                             <div class="info-box" style="margin-left: 9px; background-color: <?= $box['color'] ?> !important;box-shadow: 2px 5px 9px #888888;">
