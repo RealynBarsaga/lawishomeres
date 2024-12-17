@@ -139,7 +139,7 @@ $info_boxes = [
     ['label' => 'Total Residency', 'icon' => 'fa-file', 'color' => '#f39c12', 'query' => "SELECT * FROM tblrecidency WHERE barangay = '$off_barangay'", 'link' => '../certofresidency/certofres'],
     ['label' => 'Total Indigency', 'icon' => 'fa-file', 'color' => '#d9534f', 'query' => "SELECT * FROM tblindigency WHERE barangay = '$off_barangay'", 'link' => '../certofindigency/certofindigency'],
     ['label' => 'Total Brgy Certificate', 'icon' => 'fa-file', 'color' => '#5bc0de', 'query' => "SELECT * FROM tblcertificate WHERE barangay = '$off_barangay'", 'link' => '../brgycertificate/brgycertificate'],
-    ['label' => 'Total Puroks', 'icon' => 'fa-map-marker', 'color' => '#5bc0de', 'query' => "Total Puroks: $total_puroks", 'link' => '../resident/resident'],
+    ['label' => 'Total Puroks', 'icon' => 'fa-map-marker', 'color' => '#5bc0de', 'query' => "SELECT * FROM tbltabagak WHERE barangay = '$off_barangay' AND purok = '$purok'", 'link' => '../resident/resident'],
 ];
 
 foreach ($info_boxes as $box) {
