@@ -97,7 +97,10 @@ h3 {
 }
 @media (min-width: 992px) {
     .col-md-3 {
-        width: 25%;
+        width: 25%; /* For the first set of info boxes */
+    }
+    .col-md-4 {
+        width: 33%; /* For the second set of info boxes */
     }
 }
 </style>
@@ -110,28 +113,59 @@ h3 {
         <section class="content">
             <div class="row">
                 <div class="box">
-                    <!-- Info Boxes -->
-                    <?php
+                     <!-- Info Boxes -->
+                     <?php
                     $off_barangay = $_SESSION['barangay'];
                     
+                    // First Set of Info Boxes
                     $info_boxes = [
                         ['label' => 'Barangay Officials', 'icon' => 'fa-user', 'color' => '#00c0ef', 'query' => "SELECT * FROM tblbrgyofficial WHERE barangay = '$off_barangay'", 'link' => '../officials/officials'],
                         ['label' => 'Total Household', 'icon' => 'fa-users', 'color' => '#007256', 'query' => "SELECT * FROM tblhousehold h LEFT JOIN tbltabagak r ON r.id = h.headoffamily WHERE r.barangay = '$off_barangay'", 'link' => '../household/household'],
                         ['label' => 'Total Resident', 'icon' => 'fa-users', 'color' => '#bd1e24', 'query' => "SELECT * FROM tbltabagak WHERE barangay = '$off_barangay'", 'link' => '../resident/resident'],
                         ['label' => 'Total Clearance', 'icon' => 'fa-file', 'color' => '#e5c707', 'query' => "SELECT * FROM tblclearance WHERE barangay = '$off_barangay'", 'link' => '../clearance/clearance'],
+                    ];
+
+                    // Second Set of Info Boxes
+                    $info_boxes_2 = [
                         ['label' => 'Total Residency', 'icon' => 'fa-file', 'color' => '#f39c12', 'query' => "SELECT * FROM tblrecidency WHERE barangay = '$off_barangay'", 'link' => '../certofresidency/certofres'],
                         ['label' => 'Total Indigency', 'icon' => 'fa-file', 'color' => '#d9534f', 'query' => "SELECT * FROM tblindigency WHERE barangay = '$off_barangay'", 'link' => '../certofindigency/certofindigency'],
                         ['label' => 'Total Brgy Certificate', 'icon' => 'fa-file', 'color' => '#5bc0de', 'query' => "SELECT * FROM tblcertificate WHERE barangay = '$off_barangay'", 'link' => '../brgycertificate/brgycertificate'],
                     ];
-                    
+
+                    // First Set of Info Boxes Loop
                     foreach ($info_boxes as $box) {
                         $q = mysqli_query($con, $box['query']);
                         $num_rows = mysqli_num_rows($q);
                     ?>
-                        <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="col-md-3 col-sm-6 col-xs-12"> <!-- Use col-md-3 for the first set -->
                             <br>
                             <div class="info-box" style="margin-left: 9px; background-color: <?= $box['color'] ?> !important;box-shadow: 2px 5px 9px #888888;">
                                 <span style="background: transparent; position: absolute; top: 47%; left: 77%; transform: translate(-50%, -50%); font-size: 40px; color: #eeeeeeba; z-index: 1;">
+                                    <i class="fa <?= $box['icon'] ?>"></i>
+                                </span>
+                                <span class="info-box-number" style="font-size: 30px; color: #fff; margin-left: 15px; font-family: 'Source Sans Pro', sans-serif; font-weight: bold;">
+                                    <?= $num_rows ?>
+                                    <span class="info-box-text"><?= $box['label'] ?></span>
+                                </span>
+                                <a href="<?= $box['link'] ?>" style="color: #fff; text-decoration: none; font-weight: 100; font-family: 'Source Sans Pro', sans-serif;">
+                                    <div class="info-box-footer" style="margin-top: 35px; text-align: center; background-color: rgba(0, 0, 0, 0.1); padding: 5px; cursor: pointer; z-index: 999; position: relative;">
+                                        More Info <i class="fa fa-arrow-circle-right"></i>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    <?php } ?>
+
+                    <!-- Second Set of Info Boxes Loop -->
+                    <?php
+                    foreach ($info_boxes_2 as $box) {
+                        $q = mysqli_query($con, $box['query']);
+                        $num_rows = mysqli_num_rows($q);
+                    ?>
+                        <div class="col-md-4 col-sm-6 col-xs-12"> <!-- Use col-md-4 for the second set -->
+                            <br>
+                            <div class="info-box" style="margin-left: 9px; background-color: <?= $box['color'] ?> !important;box-shadow: 2px 5px 9px #888888;">
+                                <span style="background: transparent; position: absolute; top: 47%; left: 77%; transform: translate(-50%, -50%); font-size: 40px; color: #eeeeeeba ; z-index: 1;">
                                     <i class="fa <?= $box['icon'] ?>"></i>
                                 </span>
                                 <span class="info-box-number" style="font-size: 30px; color: #fff; margin-left: 15px; font-family: 'Source Sans Pro', sans-serif; font-weight: bold;">
