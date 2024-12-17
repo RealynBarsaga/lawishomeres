@@ -108,6 +108,27 @@ h3 {
                     <!-- Info Boxes -->
                     <?php
                     $off_barangay = $_SESSION['barangay'];
+
+                    // Purok options for each barangay
+                    $puroks = [
+                        "Tabagak" => ["Lamon-Lamon", "Tangigue", "Lawihan", "Lower-Bangus", "Upper-Bangus"],
+                        "Bunakan" => ["Bilabid", "Helinggero", "Kamaisan", "Kalubian", "Samonite"],
+                        "Maalat" => ["Neem Tree", "Talisay", "Kabakhawan", "Mahogany", "Gmelina"],
+                        "Pili" => ["Malinawon", "Mahigugmaon", "Matinabangun", "Maabtikon", "Malipayon", "Mauswagon"],
+                        "Tarong" => ["Orchids", "Gumamela 1", "Gumamela 2", "Santan 1", "Santan 2", "Rose 1", "Rose 2", "Vietnam Rose", "Kumintang 1", "Kumintang 2", "Sunflower", "Daisy"],
+                        "Kodia" => ["Mahugany", "Tugas", "Lumboy", "Dita", "Magtalisay", "Kawayan", "Bakhaw", "La Kodia Village"],
+                        "Tugas" => ["Bombil A", "Bombil B", "Roses A", "Roses B", "Gomamela A", "Gomamela B", "Kumintang A", "Kumintang B", "Santan", "GK-Tugas"],
+                        "Talangnan" => ["Gawot", "Lawihan", "Danggit", "Helinguero", "Tangigue", "Nukos", "Gusaw", "Tabagak"],
+                        "Kaongkod" => ["Kalubihan", "Kamanggahan", "Ipil-Ipil", "Pukotan 1", "Pukotan 2", "Bugsayan 1", "Bugsayan 2", "Kasagingan 1", "Kasagingan 2", "Maisan 1", "Maisan 2", "Maisan 3"],
+                        "Malbago" => ["Bolinao", "Tulingan", "Tangigue", "Nukos", "Danggit", "Bangus"],
+                        "Kangwayan" => ["Nangka", "Mangga", "Lutak", "Kulo"],
+                        "San Agustin" => ["Proper", "Langob", "Tagaytay", "Mahayahay", "Baybay", "Desamperado"],
+                        "Mancilang" => ["di mohatag saila information"],
+                        "Poblacion" => ["di mohatag saila information"],
+                    ];
+
+
+
                     $info_boxes = [
                         ['label' => 'Barangay Officials', 'icon' => 'fa-user', 'color' => '#00c0ef', 'query' => "SELECT * FROM tblbrgyofficial WHERE barangay = '$off_barangay'", 'link' => '../officials/officials'],
                         ['label' => 'Total Household', 'icon' => 'fa-users', 'color' => '#007256', 'query' => "SELECT * FROM tblhousehold h LEFT JOIN tbltabagak r ON r.id = h.headoffamily WHERE r.barangay = '$off_barangay'", 'link' => '../household/household'],
