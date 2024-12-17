@@ -95,25 +95,6 @@ h3 {
     color: #333;
     margin-bottom: 15px;
 }
-.info-box-row {
-    display: flex;
-    justify-content: space-between; /* Adjusts spacing between boxes */
-    margin-bottom: 20px; /* Space between rows */
-}
-
-.info-box {
-    flex: 1; /* Each box takes equal space */
-    margin: 0 10px; /* Space between boxes */
-    padding: 20px; /* Padding inside each box */
-    border-radius: 5px; /* Rounded corners */
-    color: white; /* Text color */
-    box-sizing: border-box; /* Ensures padding is included in width */
-}
-
-/* Specific width for the second row */
-.second-row .info-box {
-    width: calc(33.33% - 20px); /* Adjust width for three boxes */
-}
 </style>
 <div class="row-offcanvas row-offcanvas-left">
 <?php include('../sidebar-left.php'); ?>
