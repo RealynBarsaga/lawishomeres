@@ -175,7 +175,7 @@ h3 {
                     ?>
                         <div class="col-md-4 col-sm-6 col-xs-12"> <!-- Use col-md-4 for the second set -->
                             <br>
-                            <div class="info_boxes_2" style="margin-left: 14px; background-color: <?= $box['color'] ?> !important;box-shadow: 2px 5px 9px #888888;">
+                            <div class="info_boxes_2" style="margin-left: 10px; background-color: <?= $box['color'] ?> !important;box-shadow: 2px 5px 9px #888888;">
                                 <span style="background: transparent; position: absolute; top: 47%; left: 77%; transform: translate(-50%, -50%); font-size: 40px; color: #eeeeeeba ; z-index: 1;">
                                     <i class="fa <?= $box['icon'] ?>"></i>
                                 </span>
