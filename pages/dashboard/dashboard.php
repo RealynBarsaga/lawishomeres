@@ -107,23 +107,55 @@ h3 {
                 <div class="box">
                     <!-- Info Boxes -->
                     <?php
-                    $off_barangay = $_SESSION['barangay'];
-                    
-                    $info_boxes = [
-                        ['label' => 'Barangay Officials', 'icon' => 'fa-user', 'color' => '#00c0ef', 'query' => "SELECT * FROM tblbrgyofficial WHERE barangay = '$off_barangay'", 'link' => '../officials/officials'],
-                        ['label' => 'Total Household', 'icon' => 'fa-users', 'color' => '#007256', 'query' => "SELECT * FROM tblhousehold h LEFT JOIN tbltabagak r ON r.id = h.headoffamily WHERE r.barangay = '$off_barangay'", 'link' => '../household/household'],
-                        ['label' => 'Total Resident', 'icon' => 'fa-users', 'color' => '#bd1e24', 'query' => "SELECT * FROM tbltabagak WHERE barangay = '$off_barangay'", 'link' => '../resident/resident'],
-                        ['label' => 'Total Clearance', 'icon' => 'fa-file', 'color' => '#e5c707', 'query' => "SELECT * FROM tblclearance WHERE barangay = '$off_barangay'", 'link' => '../clearance/clearance'],
-                        ['label' => 'Total Residency', 'icon' => 'fa-file', 'color' => '#f39c12', 'query' => "SELECT * FROM tblrecidency WHERE barangay = '$off_barangay'", 'link' => '../certofresidency/certofres'],
-                        ['label' => 'Total Indigency', 'icon' => 'fa-file', 'color' => '#d9534f', 'query' => "SELECT * FROM tblindigency WHERE barangay = '$off_barangay'", 'link' => '../certofindigency/certofindigency'],
-                        ['label' => 'Total Brgy Certificate', 'icon' => 'fa-file', 'color' => '#5bc0de', 'query' => "SELECT * FROM tblcertificate WHERE barangay = '$off_barangay'", 'link' => '../brgycertificate/brgycertificate'],
-                         ['label' => 'Total Puroks', 'icon' => 'fa-map-marker', 'color' => '#5bc0de', 'query' => "SELECT * FROM tbltabagak WHERE barangay = '$off_barangay' AND purok = '$purok'", 'link' => '../resident/resident'],
-                    ];
-                    
-                    foreach ($info_boxes as $box) {
-                        $q = mysqli_query($con, $box['query']);
-                        $num_rows = mysqli_num_rows($q);
-                    ?>
+$off_barangay = $_SESSION['barangay'];
+
+// Assuming $con is your database connection
+$info_boxes = [
+    ['label' => 'Barangay Officials', 'icon' => 'fa-user', 'color' => '#00c0ef', 'query' => "SELECT * FROM tblbrgyofficial WHERE barangay = ?", 'link' => '../officials/officials'],
+    ['label' => 'Total Household', 'icon' => 'fa-users', 'color' => '#007256', 'query' => "SELECT * FROM tblhousehold h LEFT JOIN tbltabagak r ON r.id = h.headoffamily WHERE r.barangay = ?", 'link' => '../household/household'],
+    ['label' => 'Total Resident', 'icon' => 'fa-users', 'color' => '#bd1e24', 'query' => "SELECT * FROM tbltabagak WHERE barangay = ?", 'link' => '../resident/resident'],
+    ['label' => 'Total Clearance', 'icon' => 'fa-file', 'color' => '#e5c707', 'query' => "SELECT * FROM tblclearance WHERE barangay = ?", 'link' => '../clearance/clearance'],
+    ['label' => 'Total Residency', 'icon' => 'fa-file', 'color' => '#f39c12', 'query' => "SELECT * FROM tblrecidency WHERE barangay = ?", 'link' => '../certofresidency/certofres'],
+    ['label' => 'Total Indigency', 'icon' => 'fa-file', 'color' => '#d9534f', 'query' => "SELECT * FROM tblindigency WHERE barangay = ?", 'link' => '../certofindigency/certofindigency'],
+    ['label' => 'Total Brgy Certificate', 'icon' => 'fa-file', 'color' => '#5bc0de', 'query' => "SELECT * FROM tblcertificate WHERE barangay = ?", 'link' => '../brgycertificate/brgycertificate'],
+    ['label' => 'Total Puroks', 'icon' => 'fa-map-marker', 'color' => '#5bc0de', 'query' => "SELECT * FROM tbltabagak WHERE barangay = ? AND purok = ?", 'link' => '../resident/resident'],
+];
+
+// Assuming $purok is defined somewhere in your code
+$purok = isset($_SESSION['purok']) ? $_SESSION['purok'] : ''; // Example of getting purok from session
+
+foreach ($info_boxes as $box) {
+    // Prepare the statement
+    $stmt = $con->prepare($box['query']);
+    
+    // Bind parameters
+    if ($box['label'] === 'Total Puroks') {
+        $stmt->bind_param('ss', $off_barangay, $purok); // Assuming both are strings
+    } else {
+        $stmt->bind_param('s', $off_barangay);
+    }
+    
+    // Execute the statement
+    $stmt->execute();
+    
+    // Get the result
+    $result = $stmt->get_result();
+    $num_rows = $result->num_rows;
+
+    // Output the info box
+    echo '<div class="info-box" style="background-color: ' . $box['color'] . ';">';
+    echo '<span class="info-box-icon"><i class="fa ' . $box['icon'] . '"></i></span>';
+    echo '<div class="info-box-content">';
+    echo '<span class="info-box-text">' . $box['label'] . '</span>';
+    echo '<span class="info-box-number">' . $num_rows . '</span>';
+    echo '<a href="' . $box['link'] . '" class="info-box-link">View More</a>';
+    echo '</div>'; // .info-box-content
+    echo '</div>'; // .info-box
+
+    // Close the statement
+    $stmt->close();
+}
+?>
                         <div class="col-md-3 col-sm-6 col-xs-12">
                             <br>
                             <div class="info-box" style="margin-left: 9px; background-color: <?= $box['color'] ?> !important;box-shadow: 2px 5px 9px #888888;">
